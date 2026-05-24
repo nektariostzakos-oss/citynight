@@ -1,0 +1,207 @@
+{
+  "id": "ChIJc802QD8VoBQRgTziChtQv2w",
+  "types": [
+    "bar",
+    "cafe",
+    "food",
+    "point_of_interest",
+    "establishment"
+  ],
+  "nationalPhoneNumber": "2744 026882",
+  "internationalPhoneNumber": "+30 2744 026882",
+  "formattedAddress": "Papanikoli 8, Loutraki 203 00, Greece",
+  "location": {
+    "latitude": 37.974753,
+    "longitude": 22.976083
+  },
+  "rating": 4.4,
+  "regularOpeningHours": {
+    "openNow": true,
+    "periods": [
+      {
+        "open": {
+          "day": 0,
+          "hour": 9,
+          "minute": 0
+        },
+        "close": {
+          "day": 1,
+          "hour": 1,
+          "minute": 0
+        }
+      },
+      {
+        "open": {
+          "day": 6,
+          "hour": 9,
+          "minute": 0
+        },
+        "close": {
+          "day": 0,
+          "hour": 2,
+          "minute": 0
+        }
+      }
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: Closed",
+      "Thursday: Closed",
+      "Friday: Closed",
+      "Saturday: 9:00 AM – 2:00 AM",
+      "Sunday: 9:00 AM – 1:00 AM"
+    ],
+    "nextCloseTime": "2026-05-24T22:00:00Z"
+  },
+  "businessStatus": "OPERATIONAL",
+  "priceLevel": "PRICE_LEVEL_MODERATE",
+  "userRatingCount": 1820,
+  "displayName": {
+    "text": "FNK MNK BAR",
+    "languageCode": "en"
+  },
+  "primaryType": "bar",
+  "photos": [
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-tbD-VOsqr7NYD_NRAi4OJ9JQyzCgzIyD4fPhzIoi00J7zeHt5KPj5AdG0UbhSxow9B0404-z2aecZ8w6you9kb2PT04lYByhh3PSpXWce-hnO0d5fMnCjvZnN-CnspMo9aKK07-6rQql4i-dKp5eF_NvQIy6zsxJ8q-s2PaFMzDi2uOeemU24HGPT7P-vMuO2NkfEr7g3JDv3r6-VuI398RuZ9_BI5LnPKcfsvbIuOlzO62LSDMNDQjEe1nuaBdx8z_C62p6X_zugOLTD_mUM54SvFUSo8NCGI4hFUgWAcCw",
+      "widthPx": 4096,
+      "heightPx": 2610,
+      "authorAttributions": [
+        {
+          "displayName": "FNK MNK BAR",
+          "uri": "https://maps.google.com/maps/contrib/117222683292081814306",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVb3eviCxmu3gTEisyzOtTGy5FhW4ekWJPh_P3oxnfBLRbBRhMO=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipOVsnz2JNQTbbzs2Bsgg4GIw5kIfoH1jxCYXmyS&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipOVsnz2JNQTbbzs2Bsgg4GIw5kIfoH1jxCYXmyS!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-vt8dH_m7UFaqiVr4zasy_mn6mMyXu71aP_CJ3TegTxcbhZ-wuIYkkcOGAspYZjdE-mZ7XaPGh94hN95_1lqHs0N9EmSg8fkmy-yim3m-s8YXgbBX0Bt5I7opQPm2pzgHeN7tLmoc57wR14yoPlv1-y5izdIswJ2d9HrKT0r4F8zXjg29tZR_jIVGHBmXUqIxcbOzlenIPdNihWNKb_-V90w19hbwAXEIrN7rMm7qM2XVqCoVbW3Hwu2SJdoZvaqlw_UNWhDHI59mjjs_4_Lxz9o9ECbIFd9h16OMt1TIb0g9Zsy3p35i-ADT-gAxlC9cdkDTAqlZDcxLhm14HqvCt-OPXS64qOTd10HPajj7XIuXahgFrKtA7Z8seO12qbd3Ui-f4s6EwSEXU_ARCAPZI1F0enf0_swtahkic-C0anXEYm1ay6kCNE5B-OZbXI",
+      "widthPx": 1080,
+      "heightPx": 1440,
+      "authorAttributions": [
+        {
+          "displayName": "Emma Baker",
+          "uri": "https://maps.google.com/maps/contrib/107336827041213430244",
+          "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocIaS34LlCSoR1l_NfE0s1vDA1jobWY8fXfgaweBlxdn-846=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhCcVIBoj10ju1nDrr-YiHaM&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhCcVIBoj10ju1nDrr-YiHaM!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-sETa4_L-etZHN3vtXGsGFHafaUSc6pcQc2-_RBA4eLRGjU321Vy6OcYTYI53KVwfPKBOiRiuGH5CkbwItkqIOFDgU2rz1VkSzcr2HdOgd79giNcJQrXXB_NWbvrCr7saotjQseCZ8NTr5FpwAe6r85F_uo_9etD-p0ND_mCYOigmsakRKaaNnRFkY-WvVftUzMzkQSF7a571NAVuheOUZSHtv918H0TAGUSwqllwQUzrDgzvPrRLs36NerD3NqXrAMd2kQWycYkfrblbYd5GifnEraWullrxWnquu1Xi1C3A",
+      "widthPx": 1197,
+      "heightPx": 1596,
+      "authorAttributions": [
+        {
+          "displayName": "FNK MNK BAR",
+          "uri": "https://maps.google.com/maps/contrib/117222683292081814306",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVb3eviCxmu3gTEisyzOtTGy5FhW4ekWJPh_P3oxnfBLRbBRhMO=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipOoUDbFyGhPvMAotPOlzA7-7zSwQReZNjiS1jBr&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipOoUDbFyGhPvMAotPOlzA7-7zSwQReZNjiS1jBr!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-tWYQ7KlIwWFnbic4OaCwljgK1zQgUWzb4KH7cGBUByM-O3TfQwQZ-99kiccjp2aYpGI_bZ_jD5tUbrBTepZv9c3VG6zycq1wDtIjyf8iZyOujzbrSN8HEdrwqRqxwVUxkQlRP6uyLhFXr-4dP4hHixLIu8frZVirrg1Qd8OpTboh67dgBRhhQaEfOBgkKy4ltlwDqc9k4Yv6qEaONMdG19ts2pR8h59T_3sfEjXdCDzq6dgmoMzatLfcb4x8Mha-bupCHmUiDriioms2xDtGOPyGHVhUTTr7P9Xq0537-0h8xb87kkGg7eHZM_p_G_LQdvxG-vWa5H948c99z-lz1j95VHr0nMXm5Cy8ANnxqn4KmiHoZTwEkOc5t2jROw4zx_dD9SaDp4TBz4LPucDVCIDI3CrJhrM0b-wUgTMr1pWSc",
+      "widthPx": 4160,
+      "heightPx": 3120,
+      "authorAttributions": [
+        {
+          "displayName": "Frank R.",
+          "uri": "https://maps.google.com/maps/contrib/113449736234164233213",
+          "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKQ1pPaU702ettJy6eR7syfQkszNTt4x60gn0xn7P1A9ti6lA=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDEr7XaiQE&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDEr7XaiQE!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-vJgZnjo7DsFa3XaYOSo2-kKXh6FAqdtLzTSUoHoDBlzv7mZDME17OAa59kcgiBqouMN6p44SEVZw9YoSdGiqVq2UIiQP6MgoFfwffDLm0Mtc2Wwa-uS4akdC_UA3qcRe-9MuBn8mNlVXJa-5ob_rovdlDBeUmx79M63ut4z4Z7TkLcUK2C61lwSQaRXIktgUpa0UsoSIU5bSJi5Sf5dSr-ZBhsdMAlMaOlThc22NYw0QJdYBA_rELQguwTqLpT43TrNi_6QEY4MFJGD-nVLvgUvdegviTivhI_gWmfCopscGMIqlI7qhVEW1mc3dkN3izwao1lCUzCxEhEjzLVlgwMcVmoLCV1os_6ynLxhepTnEQQ0yAac2Z3ntJRV_LKL4Cc31UMhua5NnAYtis8OTtL4gzh8XUbcRpCo2U9VjXGaPYD",
+      "widthPx": 3000,
+      "heightPx": 4000,
+      "authorAttributions": [
+        {
+          "displayName": "Vivi Panag",
+          "uri": "https://maps.google.com/maps/contrib/112408455303300277900",
+          "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocLiuhdjzQ1Nm-3pnlXeafogYhWl6FsAYtp4u2230gt7htVk6A=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgMDIodmpyQE&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgMDIodmpyQE!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-t8nax7ndrrNfP4OGMoL18GkSzzQiXt-D3d6V_X5r1vENmooSMI8K9VBj7weLkTkLk1aefiwYQHPgVp_mY1X12QFWIcLjXmAaa7vZFas8pBcsVzwWTs6DslFRPts-Gs0jV8AJZQIv6GYSw6T6OkzonAzusJuACtjDkLrflOseea8-cuQ8GZ6WiCmnXGo_wZ53Cm2aanl7mUPSXgdF9XqBKadMeXgkyqlxT3Sbg5Tdi5YTkqSPEQZ3-RXKT9IfDjX-Enom7x-JFSDppsk1YZFYK0ev8uqZ98xYoRaX4MGyvQADfxUxAb_s3gIR6WA_gFdydzCtKhV82oL6eiouN91TEyDrRejZu087uEIL4YTZcgeab531d1u33i61ejDchLKyd7gGgTi3KLYUTvVF1hLzSOtkwUIhbTWQdrcgl5O23kQA",
+      "widthPx": 3432,
+      "heightPx": 4587,
+      "authorAttributions": [
+        {
+          "displayName": "Μενέλαος",
+          "uri": "https://maps.google.com/maps/contrib/102756976643847520249",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUMnT7h_ij_wOyGQg3o_tLKoSHAzJgSACmyksZJ4n7Vc6nzTnDa=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICZm8nWSQ&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICZm8nWSQ!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-ubZJO-BW9LKewsItWWOBHynNn7IXIiwDzmwtyuGgJ4BVhpU5mPUSiKuq_G3wh2sJgT-dKa8XxqDSDufHV4TgKSbDXRhH-z59GWceoAUNz4bl2zBotl-DMXkZ3mx3KQpZqngho666FJ7hh7AtNmrDH8tkQkHt_5XuS_FN2UNFJmNxvhhff9BVktf26KJEmRdfs6krZ8FMf4ltlZx6rntQOpk5EibyQi_gBb_ZZElpWNK1aNFS8gxQ5BjbvQuIbamlt0Mub9shwZD4nmSXt0H_PS2gu56uYajxs-Hff4jVtNcXRCpdx21Efr22B2t25Nj_vOyCX3f5olzQp_kx6eo9YjEnzwDHDZBq8m6ImW9WsHyzKrcAVtAopmCQ2mzqR8bprX6KcrgBwCQqVNWAcJebk1jyfQ3SbaGfFqoKvsEPP5WrjP",
+      "widthPx": 4535,
+      "heightPx": 3393,
+      "authorAttributions": [
+        {
+          "displayName": "Μενέλαος",
+          "uri": "https://maps.google.com/maps/contrib/102756976643847520249",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUMnT7h_ij_wOyGQg3o_tLKoSHAzJgSACmyksZJ4n7Vc6nzTnDa=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICZm8nWyQE&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICZm8nWyQE!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-tZ-t-9PcrzvH4-rn0vuFNvLYRcKotKtigi8_E3gacNrDXYC62t1G0zyVaOuogDPrC-NYA7U3lqrfffvxkJA6TOgQday7006hapDJcKLIU9LFnXfns3okIQdAXOnWWvh6wkqI5vJsCsGhGZMlSXBLUh2rzQy83nRttAM21nAFDMLC_c0ErQrGQIN61SY1UGexBSVga9Z6zmB9BCBUjCLJDVxs4RcjxdNmOkTTxYMYbSroH_pb_oLdqw4g_R-HCbUxveRS8bsn6K7oRuX2p9uhdOtqSkV5ZFfU6MPDbJdsRZvd9MVmHSeMmuHusfC6gwsSdPIj2qEO0jTGbVn_NSjrytk04XDa3d1CFAfo5K0B2wyhAWGK9yr994qK8qtqgrWrtbx4SPi778Ap8yTqZ-b2IpLpgI4gjB6IR537oALrEolssrKE_cEkO3gjtQoZjU",
+      "widthPx": 2701,
+      "heightPx": 4800,
+      "authorAttributions": [
+        {
+          "displayName": "George Makrydakis",
+          "uri": "https://maps.google.com/maps/contrib/117034968078639283346",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUB0wBFQR5A5wM4j9fMEQwRleXzI9VD8AraE14VrPPWThlVfgxu=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDfk8-l5Wz1fZ3kRXNxyi3W&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDfk8-l5Wz1fZ3kRXNxyi3W!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-tgX5KFOOb5qRdY23s3gwqcQsgS-DD3dxDcsWDsg1NS_vBtba5G0Rt46vJpIi2KsJ87GuUo4l4AYa2sr4KqDXUETvJPyAu5WoQfAHqbctxd8znj-Y3tEoBEFwCNinbDe1Lc7_XE0UDAmXIimtYeSgBL0ZeCzAlBlxHYVbdda__lZ8_RErhrbhp-_B-QhudWwBZTg3hpmbM5KbcStU1PY4gunZyqSdGme37uiDudWWzFqQb80goox9mEPdIRpOYc1XiQIPN-cnPFO6M6J27Ub4kvA4KMoq8FFml1WqFk5VcfFSFR6YrlSRiaJRhdPVgmsL_uGiqeBrrOIJlRl37u0XZo8Lv2DSiVARUxWgz0AILjBOYT1lkbubXuqUJhnZCrJqAb2oLDxY8gBWCzTUSidWOjaE7IhVj8GWAcpY3fFX2TtV8g-YMCNxcwVw-iYo7h",
+      "widthPx": 3000,
+      "heightPx": 4000,
+      "authorAttributions": [
+        {
+          "displayName": "Rozaliya Gramatikova",
+          "uri": "https://maps.google.com/maps/contrib/114265174683555304599",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWgnMpItC4K1gImyauwnUEB3dHwJbih9nnyqdDZR4pSsI6S8t0xNg=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhADZw00geScZ-U6ifUFQv5A&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhADZw00geScZ-U6ifUFQv5A!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    },
+    {
+      "name": "places/ChIJc802QD8VoBQRgTziChtQv2w/photos/Ab43m-uvWf_8GadxFabJ6IVXsy7E2KYU__oc49bJu4cPXSYVTGbPG--0-1Bz8DZw2v3JP6deHKpUO_adW-B7CQX7unCekUn8FSnBvIjpZMkzU04xFHeoBh1dpNlwsbrS7pMPW5SGqK_NClCMmYlowZ5pYLpcrM_8KlDrzjDoA4f6G7i2Jl8dnEN55JdbEa-pcTYP1broWz6_O9jv0kVsaDD0HTmjS8X4rAeV7r8MLesseWKHi52YhPrMN0cj8yVsgArgtpgsGzbnN_Bq4Y9gX41G07CFloEFhf6_umgngkjggoT15RS_9lWawklwyFWtG8Y0QwmaGvtj3f-ZqTDgl8TEo35gWZ7tclcC3pHY06Oqu-cDFmUiDGWNZ6FMI5Y4Al_Iue1byhT4E_H_xkOtS_GYT2jXCN5LH-R1F4HeP3_2bETUd_E2",
+      "widthPx": 4032,
+      "heightPx": 3024,
+      "authorAttributions": [
+        {
+          "displayName": "Constantinos Constantaras",
+          "uri": "https://maps.google.com/maps/contrib/112976976374421008308",
+          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXcMe0JWXbJTWmPTBkxdRpZzJ_Dd4UKy-KglDDWDL9hw5gYXabs4w=s100-p-k-no-mo"
+        }
+      ],
+      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICMqOimkwE&hl=en-US",
+      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICMqOimkwE!2e10!4m2!3m1!1s0x14a0153f4036cd73:0x6cbf501b0ae23c81"
+    }
+  ]
+}

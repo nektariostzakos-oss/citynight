@@ -1,0 +1,104 @@
+{
+  "slug": "corfu",
+  "dbId": "city_corfu",
+  "season": "May to October",
+  "bestFor": {
+    "en": ["Venetian Old Town bars", "Beach club strip in Kavos", "Sunset cocktails in Liston arcade", "Live Greek music in Corfu Town", "All-night clubbing for under-25s"],
+    "el": ["Μπαρ στην Παλιά Πόλη (UNESCO)", "Beach club strip στον Κάβο", "Sunset cocktails στο Λιστόν", "Live ελληνική μουσική στην Κέρκυρα", "All-night clubbing για κάτω των 25"],
+    "de": ["Bars in der venezianischen Altstadt", "Beachclub-Strip in Kavos", "Sunset-Cocktails in der Liston-Arkade", "Live griechische Musik in Korfu-Stadt", "Durchtanzte Clubnächte für unter 25"],
+    "fr": ["Bars de la vieille ville vénitienne", "Strip de beach clubs à Kavos", "Cocktails au coucher du soleil sous les arcades du Liston", "Musique grecque live à Corfou", "Clubs jusqu'au matin pour moins de 25 ans"],
+    "it": ["Bar della città vecchia veneziana", "Strip dei beach club a Kavos", "Cocktail al tramonto sotto i portici del Liston", "Musica greca dal vivo a Corfù", "Club fino al mattino per under 25"]
+  },
+  "intro": {
+    "en": "Corfu's nightlife splits into two unrecognisable worlds. In Corfu Town (UNESCO old town) the scene is grown-up: cocktails under the French-built Liston arcades, jazz at small cellar bars in the Venetian alleys, late drinks on Spianada square. Then there's Kavos, 47 km south — a half-kilometre strip of British-package mega-clubs that runs nightly from June to September, the closest Greek equivalent to Magaluf. In between, Sidari, Kassiopi and Acharavi run quieter resort-bar scenes for couples and families. Pick your village before you book — they don't mix.",
+    "el": "Η νυχτερινή ζωή στην Κέρκυρα έχει δύο εντελώς διαφορετικούς κόσμους. Στην Πόλη της Κέρκυρας (UNESCO Παλιά Πόλη) η σκηνή είναι ενηλίκων: cocktails κάτω από τις γαλλικές καμάρες του Λιστόν, jazz σε μικρά μπαρ-υπόγεια στα ενετικά στενά, ποτά αργά στη Σπιανάδα. Από την άλλη ο Κάβος, 47 χλμ νότια — μισό χιλιόμετρο βρετανικού mega-club strip, κάθε βράδυ Ιούνιο-Σεπτέμβριο, ό,τι πιο κοντινό σε Magaluf έχει η Ελλάδα. Ανάμεσα, Σιδάρι, Κασσιόπη και Αχαράβη: πιο ήσυχα resort μπαρ, ζευγάρια και οικογένειες. Διάλεξε χωριό πριν κλείσεις — δεν αναμειγνύονται.",
+    "de": "Korfus Nachtleben spaltet sich in zwei kaum vergleichbare Welten. In Korfu-Stadt (UNESCO-Altstadt) ist die Szene erwachsen: Cocktails unter den französischen Liston-Arkaden, Jazz in kleinen Kellerbars in venezianischen Gassen, späte Drinks auf der Spianada. Dann gibt es Kavos, 47 km im Süden — ein halber Kilometer britische Pauschal-Megaclubs, jede Nacht Juni bis September, das griechische Pendant zu Magaluf. Dazwischen halten Sidari, Kassiopi und Acharavi ruhigere Resort-Bar-Szenen für Paare und Familien. Wählen Sie das Dorf, bevor Sie buchen — sie mischen sich nicht.",
+    "fr": "La vie nocturne à Corfou se sépare en deux mondes méconnaissables. En vieille ville de Corfou (UNESCO) la scène est adulte : cocktails sous les arcades françaises du Liston, jazz dans des bars en cave des ruelles vénitiennes, derniers verres sur la place Spianada. Et puis il y a Kavos, à 47 km au sud — un demi-kilomètre de méga-clubs britanniques en package, tous les soirs de juin à septembre, l'équivalent grec le plus proche de Magaluf. Entre les deux, Sidari, Kassiopi et Acharavi tiennent des scènes de bars de station plus calmes, couples et familles. Choisissez le village avant de réserver — ils ne se mélangent pas.",
+    "it": "La vita notturna a Corfù si divide in due mondi quasi opposti. Nella città vecchia di Corfù (UNESCO) la scena è adulta: cocktail sotto i portici francesi del Liston, jazz nei piccoli bar in cantina dei vicoli veneziani, ultimi drink in piazza Spianada. Poi c'è Kavos, 47 km a sud — mezzo chilometro di mega-club inglesi a pacchetto, ogni sera da giugno a settembre, l'equivalente greco di Magaluf. In mezzo, Sidari, Kassiopi e Acharavi tengono scene di resort-bar più tranquille per coppie e famiglie. Scegli il paese prima di prenotare — non si mescolano."
+  },
+  "neighborhoods": [
+    {
+      "slug": "corfu-town",
+      "name": { "en": "Corfu Town (Kerkyra)", "el": "Πόλη Κέρκυρας", "de": "Korfu-Stadt", "fr": "Ville de Corfou", "it": "Città di Corfù" },
+      "blurb": {
+        "en": "UNESCO old town. Liston arcade for sunset cocktails, the Venetian alleys behind it for late wine bars and small clubs.",
+        "el": "UNESCO Παλιά Πόλη. Λιστόν για sunset cocktails, ενετικά στενά πίσω για late wine bars και μικρά κλαμπ.",
+        "de": "UNESCO-Altstadt. Liston-Arkade für Sunset-Cocktails, die venezianischen Gassen dahinter für späte Weinbars und kleine Clubs.",
+        "fr": "Vieille ville UNESCO. Arcades du Liston pour les cocktails au coucher du soleil, ruelles vénitiennes derrière pour bars à vin et petits clubs.",
+        "it": "Città vecchia UNESCO. Portici del Liston per i cocktail al tramonto, vicoli veneziani dietro per wine bar e piccoli club."
+      }
+    },
+    {
+      "slug": "kavos",
+      "name": { "en": "Kavos", "el": "Κάβος", "de": "Kavos", "fr": "Kavos", "it": "Kavos" },
+      "blurb": {
+        "en": "The south-coast party strip. UK-targeted mega-clubs along one road. Loud, cheap, young, every night in season.",
+        "el": "Το party strip στη νότια ακτή. Mega-club για Βρετανούς πάνω σε έναν δρόμο. Δυνατά, φθηνά, νεανικά, κάθε βράδυ της σεζόν.",
+        "de": "Der Party-Streifen an der Südküste. Auf Briten ausgerichtete Megaclubs an einer Straße. Laut, günstig, jung, jede Nacht in der Saison.",
+        "fr": "Le strip festif au sud. Méga-clubs ciblant les Britanniques le long d'une seule rue. Bruyant, bon marché, jeune, tous les soirs en saison.",
+        "it": "La strip festaiola della costa sud. Mega-club rivolti ai britannici lungo una sola strada. Forte, economico, giovane, ogni sera in stagione."
+      }
+    },
+    {
+      "slug": "sidari",
+      "name": { "en": "Sidari", "el": "Σιδάρι", "de": "Sidari", "fr": "Sidari", "it": "Sidari" },
+      "blurb": {
+        "en": "North-coast resort. Family-friendly by day, lively but not crazy by night — bars, gyros joints, a couple of clubs.",
+        "el": "Resort στη βόρεια ακτή. Οικογενειακό την ημέρα, ζωηρό αλλά όχι τρελό το βράδυ — μπαρ, σουβλατζίδικα, ένα-δυο κλαμπ.",
+        "de": "Resort an der Nordküste. Tagsüber familienfreundlich, abends lebhaft aber nicht wild — Bars, Gyros-Buden, ein, zwei Clubs.",
+        "fr": "Station de la côte nord. Familial le jour, animé sans être fou le soir — bars, gyros, un ou deux clubs.",
+        "it": "Resort sulla costa nord. Familiare di giorno, vivace ma non folle di sera — bar, gyros, un paio di club."
+      }
+    },
+    {
+      "slug": "kassiopi",
+      "name": { "en": "Kassiopi", "el": "Κασσιόπη", "de": "Kassiopi", "fr": "Kassiopi", "it": "Kassiopi" },
+      "blurb": {
+        "en": "Postcard fishing harbour on the north-east. Cocktail bars overlooking the boats — upscale, couples-leaning.",
+        "el": "Καρτ-ποστάλ ψαρολίμανο στα βορειοανατολικά. Cocktail bars με θέα τα καΐκια — πιο high-end, για ζευγάρια.",
+        "de": "Postkarten-Fischerhafen im Nordosten. Cocktailbars mit Blick auf die Boote — gehoben, eher für Paare.",
+        "fr": "Port de pêche carte postale au nord-est. Bars à cocktails avec vue sur les bateaux — plutôt haut de gamme, pour couples.",
+        "it": "Porticciolo da cartolina nel nord-est. Cocktail bar affacciati sui caicchi — fascia alta, per coppie."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Corfiot Venetian-influenced cuisine", "Pastitsada and sofrito", "Bourdeto fish stew tavernas", "Liston cafés", "Olive-oil-led mountain villages"],
+      "el": ["Κερκυραϊκή κουζίνα με βενετσιάνικες επιρροές", "Παστιτσάδα και σοφρίτο", "Ψαροταβέρνες με μπουρδέτο", "Καφέ στο Λιστόν", "Ορεινά χωριά με ελαιόλαδο"],
+      "de": ["Korfiotische Küche mit venezianischen Einflüssen", "Pastitsada und Sofrito", "Bourdeto-Fischsuppen-Tavernen", "Cafés am Liston", "Bergdörfer mit Olivenöl-Schwerpunkt"],
+      "fr": ["Cuisine corfiote d'influence vénitienne", "Pastitsada et sofrito", "Tavernes à bourdeto", "Cafés du Liston", "Villages de montagne et leur huile d'olive"],
+      "it": ["Cucina corfiota di matrice veneziana", "Pastitsada e sofrito", "Taverne di bourdeto", "Caffè del Liston", "Borghi montani e olio d'oliva"]
+    },
+    "intro": {
+      "en": "Four centuries of Venetian rule (no Ottoman interruption) made Corfiot cooking unique in Greece: pastitsada (rooster in tomato-cinnamon sauce over thick pasta), sofrito (sliced beef in white-wine-garlic-parsley), bourdeto (fish in spicy red sauce), and the use of butter where the rest of the country uses olive oil — all served with a glass of local Robola. The Liston cafés are the see-and-be-seen breakfast/lunch stage; serious dinners hide in the alleys behind it. For the real thing, drive 30 minutes into the olive-covered hill villages — Old Perithia, Doukades, Pelekas — where lunch is what the family was already cooking.",
+      "el": "Τέσσερις αιώνες βενετικής κυριαρχίας (χωρίς οθωμανική παρένθεση) έκαναν την κερκυραϊκή κουζίνα μοναδική στην Ελλάδα: παστιτσάδα (κόκορας σε σάλτσα ντομάτας-κανέλας πάνω σε χοντρά μακαρόνια), σοφρίτο (μοσχάρι σε λευκό κρασί-σκόρδο-μαϊντανό), μπουρδέτο (ψάρι σε καυτερή κόκκινη σάλτσα), και χρήση βουτύρου αντί ελαιόλαδου — όλα με ένα ποτήρι ντόπιο Ρομπόλα. Τα καφέ του Λιστόν είναι η σκηνή του πρωινού/μεσημεριανού· τα σοβαρά δείπνα κρύβονται στα στενά πίσω. Για το αυθεντικό, 30 λεπτά στα ορεινά χωριά μέσα στους ελαιώνες — Παλιά Περίθεια, Δουκάδες, Πέλεκας.",
+      "de": "Vier Jahrhunderte venezianischer Herrschaft (ohne osmanische Unterbrechung) machten die Küche Korfus einzigartig in Griechenland: Pastitsada (Hahn in Tomaten-Zimt-Sauce auf dicken Nudeln), Sofrito (Rindfleischscheiben in Weißwein-Knoblauch-Petersilie), Bourdeto (Fisch in scharfer roter Sauce), Butter statt Olivenöl — alles mit lokalem Robola. Die Cafés am Liston sind die Frühstücks-/Mittags-Bühne; ernsthafte Dinner verstecken sich in den Gassen dahinter. Für das Echte 30 Minuten in die Olivenhain-Bergdörfer fahren — Old Perithia, Doukades, Pelekas.",
+      "fr": "Quatre siècles vénitiens (sans parenthèse ottomane) ont rendu la cuisine corfiote unique en Grèce : pastitsada (coq en sauce tomate-cannelle sur pâtes épaisses), sofrito (tranches de bœuf au vin blanc-ail-persil), bourdeto (poisson en sauce rouge épicée), et l'usage du beurre là où le reste du pays utilise l'huile d'olive — le tout avec un verre de Robola local. Les cafés du Liston tiennent la scène du petit-déjeuner et du déjeuner ; les vrais dîners se cachent dans les ruelles derrière. Pour l'authentique, 30 minutes vers les villages de l'arrière-pays oléicole — Old Perithia, Doukades, Pelekas.",
+      "it": "Quattro secoli di dominio veneziano (senza parentesi ottomana) hanno reso la cucina corfiota unica in Grecia: pastitsada (gallo in salsa di pomodoro e cannella su pasta grossa), sofrito (fettine di manzo in vino bianco-aglio-prezzemolo), bourdeto (pesce in salsa rossa piccante), e l'uso del burro al posto dell'olio d'oliva — tutto con un calice di Robola locale. I caffè del Liston sono la scena di colazione e pranzo; le cene serie si nascondono nei vicoli dietro. Per il vero, 30 minuti nei paesi montani in mezzo agli uliveti — Old Perithia, Doukades, Pelekas."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Boutique stays in Corfu Town", "Five-star resorts in the north (Kommeno, Dassia)", "Family resorts in Sidari and Acharavi", "Adults-only villas in Paleokastritsa", "Cheap apartments in Kavos for partygoers"],
+      "el": ["Boutique στην Πόλη της Κέρκυρας", "Πέντε αστέρες resorts στα βόρεια (Κομμένο, Δασιά)", "Οικογενειακά resorts σε Σιδάρι και Αχαράβη", "Adults-only βίλες στην Παλαιοκαστρίτσα", "Φθηνά διαμερίσματα στον Κάβο για party-goers"],
+      "de": ["Boutique-Hotels in Korfu-Stadt", "Fünf-Sterne-Resorts im Norden (Kommeno, Dassia)", "Familienresorts in Sidari und Acharavi", "Adults-Only-Villen in Paleokastritsa", "Günstige Apartments in Kavos für Partyfans"],
+      "fr": ["Boutiques en ville de Corfou", "Resorts cinq étoiles au nord (Kommeno, Dassia)", "Resorts famille à Sidari et Acharavi", "Villas adults-only à Paleokastritsa", "Appartements pas chers à Kavos pour la fête"],
+      "it": ["Boutique nella città di Corfù", "Resort cinque stelle a nord (Kommeno, Dassia)", "Resort famiglia a Sidari e Acharavi", "Ville adults-only a Paleokastritsa", "Appartamenti economici a Kavos per i festaioli"]
+    },
+    "intro": {
+      "en": "Corfu hotels follow nightlife geography. Choose Corfu Town for culture, walkable bars and a base from which to day-trip the rest of the island. The Kommeno peninsula and Dassia hold the five-star resort cluster — private beaches, full-service, transfer to town. North-coast Sidari and Acharavi are mid-range family-resort country. The west coast (Paleokastritsa, Glyfada beach, Pelekas) has the most dramatic scenery and a growing crop of design villas. Kavos in the south is purely a party base — book here only if you intend to be in the clubs every night.",
+      "el": "Τα ξενοδοχεία ακολουθούν τη γεωγραφία της νύχτας. Πόλη της Κέρκυρας για πολιτισμό, περπατήσιμα μπαρ, βάση για day trips. Κομμένο και Δασιά: cluster πέντε αστέρων — ιδιωτικές παραλίες, full-service, transfer στην πόλη. Σιδάρι και Αχαράβη βόρεια: mid-range οικογενειακά resorts. Δυτική ακτή (Παλαιοκαστρίτσα, Γλυφάδα, Πέλεκας): το πιο εντυπωσιακό τοπίο και νέες design βίλες. Ο Κάβος είναι αμιγώς party — μόνο αν σκοπεύεις κάθε βράδυ στα κλαμπ.",
+      "de": "Korfus Hotels folgen der Nachtleben-Geografie. Korfu-Stadt für Kultur, fußläufige Bars und Basis für Tagesausflüge. Halbinsel Kommeno und Dassia: das Fünf-Sterne-Cluster — Privatstrände, Vollservice, Transfer zur Stadt. Sidari und Acharavi im Norden: Mittelklasse-Familienresorts. Westküste (Paleokastritsa, Glyfada, Pelekas): die dramatischste Landschaft und immer mehr Design-Villen. Kavos im Süden ist reiner Party-Standort — nur, wenn man wirklich jeden Abend in Clubs will.",
+      "fr": "Les hôtels de Corfou suivent la géographie de la nuit. Ville de Corfou pour la culture, les bars à pied et une base pour les excursions. La péninsule de Kommeno et Dassia regroupent les cinq étoiles — plages privées, tout service, navette vers la ville. Sidari et Acharavi au nord : resorts familiaux milieu de gamme. Côte ouest (Paleokastritsa, Glyfada, Pelekas) : paysages les plus spectaculaires et villas de design en hausse. Kavos au sud est purement festif — n'y dormez que si vous comptez sortir tous les soirs.",
+      "it": "Gli hotel di Corfù seguono la geografia della notte. Città di Corfù per cultura, bar a piedi e base per le gite. La penisola di Kommeno e Dassia raccolgono il cluster cinque stelle — spiagge private, full-service, navetta in città. Sidari e Acharavi a nord: resort familiari di fascia media. Costa ovest (Paleokastritsa, Glyfada, Pelekas): paesaggi più spettacolari e ville di design in aumento. Kavos a sud è puramente festaiolo — solo se intendi essere nei club ogni sera."
+    }
+  },
+  "heroQueries": {
+    "hero": "Corfu old town venetian fortress aerial sea",
+    "nightlife": "Corfu Liston arcade evening empty",
+    "food": "Greek Corfiot pastitsada rooster pasta plate",
+    "stay": "Corfu boutique hotel courtyard venetian architecture"
+  },
+  "unsplashQuery": "Corfu old town venetian fortress"
+}

@@ -1,0 +1,104 @@
+{
+  "slug": "heraklion",
+  "dbId": "city_heraklion",
+  "season": "year-round",
+  "bestFor": {
+    "en": ["Korai and Agiou Titou street bars", "Lions Square late nights", "Cretan rakomelo and live lyra", "Year-round local scene", "Stadiou street clubs"],
+    "el": ["Μπαρ σε Κοραή και Αγίου Τίτου", "Λιοντάρια αργά το βράδυ", "Κρητικό ρακόμελο και live λύρα", "Ντόπια σκηνή όλο τον χρόνο", "Κλαμπ στην οδό Σταδίου"],
+    "de": ["Bars in den Straßen Korai und Agiou Titou", "Späte Nächte an der Löwenfontäne", "Kretischer Rakomelo und Live-Lyra", "Lokale Szene ganzjährig", "Clubs in der Stadiou-Straße"],
+    "fr": ["Bars des rues Korai et Agiou Titou", "Nuits tardives place des Lions", "Rakomelo crétois et lyra live", "Scène locale toute l'année", "Clubs rue Stadiou"],
+    "it": ["Bar nelle vie Korai e Agiou Titou", "Notti tarde in piazza dei Leoni", "Rakomelo cretese e lyra live", "Scena locale tutto l'anno", "Club in via Stadiou"]
+  },
+  "intro": {
+    "en": "Heraklion is the largest city in Crete and runs on its own students-and-locals rhythm rather than the tourist clock. The action concentrates in three pedestrian streets just south of the Venetian harbour — Korai, Perdikari and Agiou Titou — where dozens of small bars line the cobbles. Lions Square (Liontaria) is the all-night meeting point. Late clubs cluster on Stadiou street and around the Chania Gate. Music is a real thing here: live Cretan lyra plays at rakadika (raki bars) most weekends, and the rakomelo (raki-and-honey) flows year-round. The big resort party scene is in Hersonissos and Malia, 25 km east.",
+    "el": "Το Ηράκλειο είναι η μεγαλύτερη πόλη της Κρήτης και κινείται στον ρυθμό των φοιτητών και των ντόπιων, όχι των τουριστών. Η σκηνή σε τρεις πεζοδρομημένες οδούς νότια του ενετικού λιμανιού — Κοραή, Περδικάρη, Αγίου Τίτου — δεκάδες μικρά μπαρ στα καλντερίμια. Τα Λιοντάρια είναι το νυχτερινό μitting point. Τα late κλαμπ μαζεύονται στην οδό Σταδίου και γύρω από την Πύλη Χανίων. Η μουσική είναι αληθινή υπόθεση: ζωντανή κρητική λύρα στα ρακάδικα τα Σαββατοκύριακα, και το ρακόμελο τρέχει όλο τον χρόνο. Το party-resort σκηνικό είναι σε Χερσόνησο και Μάλια, 25 χλμ ανατολικά.",
+    "de": "Heraklion ist die größte Stadt Kretas und tickt im Rhythmus von Studenten und Einheimischen, nicht im Touristen-Takt. Die Action konzentriert sich auf drei Fußgängerstraßen südlich des venezianischen Hafens — Korai, Perdikari und Agiou Titou — Dutzende kleiner Bars auf dem Kopfsteinpflaster. Die Löwenfontäne (Liontaria) ist der nächtliche Treffpunkt. Späte Clubs liegen in der Stadiou-Straße und am Chania-Tor. Musik ist hier echt: Live-Kretische-Lyra in den Rakádika (Raki-Bars) an Wochenenden, Rakomelo das ganze Jahr. Das Resort-Party-Szenario ist in Hersonissos und Malia, 25 km östlich.",
+    "fr": "Héraklion est la plus grande ville de Crète et vit au rythme des étudiants et des locaux, pas du calendrier touristique. L'action se concentre dans trois rues piétonnes au sud du port vénitien — Korai, Perdikari et Agiou Titou — des dizaines de petits bars sur les pavés. La place des Lions (Liontaria) est le point de ralliement nocturne. Les clubs tardifs se trouvent rue Stadiou et autour de la porte de La Canée. La musique est sérieuse ici : lyra crétoise live dans les rakadika les week-ends, rakomelo toute l'année. La scène festive resort est à Hersonissos et Malia, 25 km à l'est.",
+    "it": "Iraklio è la città più grande di Creta e va al ritmo di studenti e locali, non del calendario turistico. L'azione si concentra in tre vie pedonali a sud del porto veneziano — Korai, Perdikari e Agiou Titou — decine di piccoli bar sui ciottoli. La piazza dei Leoni (Liontaria) è il punto d'incontro notturno. I club tardi sono in via Stadiou e attorno alla Porta di Chania. La musica è una cosa seria qui: lyra cretese live nei rakadika nei weekend, rakomelo tutto l'anno. La scena festaiola da resort è a Hersonissos e Malia, 25 km a est."
+  },
+  "neighborhoods": [
+    {
+      "slug": "korai-perdikari",
+      "name": { "en": "Korai & Perdikari", "el": "Κοραή & Περδικάρη", "de": "Korai & Perdikari", "fr": "Korai & Perdikari", "it": "Korai e Perdikari" },
+      "blurb": {
+        "en": "Two pedestrian streets jammed shoulder-to-shoulder with bars. Where Heraklion drinks Tuesday to Saturday.",
+        "el": "Δύο πεζόδρομοι ώμο με ώμο γεμάτοι μπαρ. Εδώ πίνει το Ηράκλειο Τρίτη με Σάββατο.",
+        "de": "Zwei Fußgängerstraßen, Schulter an Schulter voller Bars. Hier trinkt Heraklion Dienstag bis Samstag.",
+        "fr": "Deux rues piétonnes serrées épaule contre épaule de bars. C'est ici qu'Héraklion boit du mardi au samedi.",
+        "it": "Due vie pedonali strette spalla a spalla di bar. Qui Iraklio beve da martedì a sabato."
+      }
+    },
+    {
+      "slug": "liontaria",
+      "name": { "en": "Lions Square (Liontaria)", "el": "Λιοντάρια", "de": "Löwenfontäne", "fr": "Place des Lions", "it": "Piazza dei Leoni" },
+      "blurb": {
+        "en": "Central square with the Morosini fountain. Late-night meeting point, surrounded by cafés and tavernas open until 3am.",
+        "el": "Κεντρική πλατεία με τη Μοροζίνι. Νυχτερινό σημείο συνάντησης, καφέ και ταβέρνες ανοιχτά μέχρι τις 3.",
+        "de": "Zentraler Platz mit der Morosini-Fontäne. Nächtlicher Treffpunkt, ringsum Cafés und Tavernen bis 3 Uhr offen.",
+        "fr": "Place centrale avec la fontaine Morosini. Point de ralliement nocturne, cafés et tavernes ouverts jusqu'à 3h.",
+        "it": "Piazza centrale con la fontana Morosini. Punto d'incontro notturno, caffè e taverne aperti fino alle 3."
+      }
+    },
+    {
+      "slug": "venetian-harbour",
+      "name": { "en": "Venetian Harbour", "el": "Ενετικό Λιμάνι", "de": "Venezianischer Hafen", "fr": "Port vénitien", "it": "Porto Veneziano" },
+      "blurb": {
+        "en": "Cocktail bars and late-night tavernas along the harbour wall, with the Koules fortress lit up across the water.",
+        "el": "Cocktail bar και νυχτερινές ταβέρνες στον μώλο του λιμανιού, με τον Κούλε φωτισμένο απέναντι.",
+        "de": "Cocktailbars und Spät-Tavernen entlang der Hafenmauer, mit der beleuchteten Koules-Festung gegenüber.",
+        "fr": "Bars à cocktails et tavernes tardives le long du môle, avec la forteresse Koules illuminée en face.",
+        "it": "Cocktail bar e taverne notturne lungo il molo, con la fortezza Koules illuminata di fronte."
+      }
+    },
+    {
+      "slug": "hersonissos-malia",
+      "name": { "en": "Hersonissos & Malia (25 km east)", "el": "Χερσόνησος & Μάλια (25 χλμ ανατολικά)", "de": "Hersonissos & Malia (25 km östlich)", "fr": "Hersonissos & Malia (25 km à l'est)", "it": "Hersonissos e Malia (25 km a est)" },
+      "blurb": {
+        "en": "The resort party strips. Mega-clubs, UK-package crowd, foam parties — the same template as Kavos or Laganas, on Crete.",
+        "el": "Τα resort party strips. Mega-club, βρετανικό package κοινό, foam parties — ίδιο template με Κάβο/Λαγανά, στην Κρήτη.",
+        "de": "Die Resort-Partymeilen. Megaclubs, britisches Pauschalpublikum, Schaumpartys — selbes Muster wie Kavos oder Laganas, in Kreta.",
+        "fr": "Les strips festifs des stations. Méga-clubs, public anglais en package, foam parties — même formule que Kavos ou Laganas, en Crète.",
+        "it": "Le strip festaiole dei resort. Mega-club, pubblico inglese a pacchetto, foam party — stessa formula di Kavos o Laganas, a Creta."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Cretan dakos and apaki", "Lakkos quarter mezedopoleia", "Heraklion central market", "Modern Cretan tasting menus", "Snails, antikristo and raw mountain greens"],
+      "el": ["Κρητικός ντάκος και απάκι", "Μεζεδοπωλεία στον Λάκκο", "Κεντρική αγορά Ηρακλείου", "Σύγχρονη κρητική κουζίνα", "Χοχλιοί, αντικριστό, χόρτα βουνού"],
+      "de": ["Kretischer Dakos und Apaki", "Mezedopoleia im Lakkos-Viertel", "Zentralmarkt Heraklion", "Moderne kretische Tasting-Menüs", "Schnecken, Antikristo und wilde Bergkräuter"],
+      "fr": ["Dakos crétois et apaki", "Mezedopoleia du quartier de Lakkos", "Marché central d'Héraklion", "Menus dégustation crétois modernes", "Escargots, antikristo et herbes sauvages"],
+      "it": ["Dakos cretese e apaki", "Mezedopoleia del quartiere Lakkos", "Mercato centrale di Iraklio", "Menu degustazione cretesi moderni", "Lumache, antikristo ed erbe selvatiche di montagna"]
+    },
+    "intro": {
+      "en": "The Cretan diet is the famous one — olive oil, wild greens, mountain cheeses, slow-roasted goat and lamb (antikristo), and the omnipresent dakos (barley rusk topped with grated tomato, mizithra and oil). In Heraklion the food story splits between the rougher Lakkos quarter (the working-class district with cheap, late, generations-old mezedopoleia), the central market on 1866 street, and a small but serious modern-Cretan fine dining tier (Peskesi, Ippokampos, Karavidaki). Lunch is a slow event; dinner is just as slow but starts at 9.",
+      "el": "Η κρητική διατροφή είναι η περίφημη — ελαιόλαδο, άγρια χόρτα, ορεινά τυριά, αργοψημένο κατσίκι και αρνί (αντικριστό), και ο πανταχού παρών ντάκος. Στο Ηράκλειο η ιστορία του φαγητού χωρίζεται ανάμεσα στον τραχύ Λάκκο (λαϊκή συνοικία με φθηνά, αργά, πολυετή μεζεδοπωλεία), την κεντρική αγορά στην 1866, και μια μικρή αλλά σοβαρή σκηνή σύγχρονης κρητικής (Peskesi, Ιππόκαμπος, Καραβιδάκη). Το μεσημέρι αργό, το βράδυ ξεκινάει στις 9.",
+      "de": "Die kretische Ernährung ist die berühmte — Olivenöl, wildes Grün, Bergkäse, langsam gegartes Ziegen- und Lammfleisch (Antikristo), der allgegenwärtige Dakos (Gerstenzwieback mit geriebener Tomate, Mizithra, Öl). In Heraklion verteilt sich das Esserlebnis zwischen dem rauen Lakkos-Viertel (Arbeiterviertel mit günstigen, späten, generationenalten Mezedopoleia), dem Zentralmarkt in der Straße 1866 und einer kleinen, ernsthaften modernen Krete-Feinküche (Peskesi, Ippokampos, Karavidaki). Mittag dauert; Abendessen dauert ebenso, beginnt aber um 21 Uhr.",
+      "fr": "Le régime crétois — huile d'olive, herbes sauvages, fromages de montagne, chèvre et agneau cuits lentement (antikristo), et le dakos omniprésent (biscotte d'orge garnie de tomate râpée, mizithra et huile). À Héraklion, l'expérience se partage entre le quartier rude de Lakkos (populaire, mezedopoleia anciens et bon marché), le marché central de la rue 1866 et une petite scène crétoise moderne sérieuse (Peskesi, Ippokampos, Karavidaki). Le déjeuner est long, le dîner aussi mais démarre à 21h.",
+      "it": "La dieta cretese — olio d'oliva, erbe selvatiche, formaggi di montagna, capra e agnello arrosto lento (antikristo), e l'onnipresente dakos (frisella d'orzo con pomodoro grattugiato, mizithra e olio). A Iraklio l'esperienza si divide tra il quartiere ruvido di Lakkos (popolare, mezedopoleia storici a basso costo), il mercato centrale di via 1866 e una piccola scena cretese moderna seria (Peskesi, Ippokampos, Karavidaki). Pranzo lento, cena altrettanto ma inizia alle 21."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Central business hotels near Lions Square", "Boutique stays in the old town", "Beach hotels in Ammoudara (5 km west)", "Mega-resorts in Hersonissos", "Budget apartments near the port for ferry travellers"],
+      "el": ["Κεντρικά business κοντά στα Λιοντάρια", "Boutique στην παλιά πόλη", "Παραλιακά ξενοδοχεία στην Αμμουδάρα", "Mega-resorts στη Χερσόνησο", "Οικονομικά διαμερίσματα κοντά στο λιμάνι"],
+      "de": ["Zentrale Business-Hotels nahe Liontaria", "Boutiques in der Altstadt", "Strandhotels in Ammoudara (5 km westlich)", "Megaresorts in Hersonissos", "Günstige Apartments am Hafen für Fährreisende"],
+      "fr": ["Hôtels business centraux près de la place des Lions", "Boutiques en vieille ville", "Hôtels de plage à Ammoudara (5 km à l'ouest)", "Méga-resorts à Hersonissos", "Appartements pas chers près du port pour les ferries"],
+      "it": ["Hotel business centrali vicino ai Leoni", "Boutique in città vecchia", "Hotel di spiaggia ad Ammoudara (5 km a ovest)", "Mega-resort a Hersonissos", "Appartamenti economici vicino al porto per i traghetti"]
+    },
+    "intro": {
+      "en": "Heraklion is the entry point to Crete (largest airport, ferry to Piraeus) — many travellers spend just one or two nights here before driving on. For those nights, stay inside the old Venetian walls: walking distance to Lions Square, Korai bars, the market, the archaeological museum, and Knossos buses. If beach matters more than city, Ammoudara (5 km west) has the long-sand strip with mid-range hotels and easy car-park access into town. Hersonissos and Malia are for resort-package travellers who'll only see Heraklion on a day trip; the ferry-traveller crowd grabs cheap stays near the port.",
+      "el": "Το Ηράκλειο είναι η πύλη της Κρήτης (αεροδρόμιο, καράβι για Πειραιά) — πολλοί μένουν μόνο 1-2 βράδια πριν φύγουν προς άλλα μέρη. Για αυτά τα βράδια, εντός των ενετικών τειχών: με τα πόδια στα Λιοντάρια, Κοραή, αγορά, Αρχαιολογικό, λεωφορεία για Κνωσσό. Αν προτεραιότητα η παραλία, στην Αμμουδάρα (5 χλμ δυτικά) — μεγάλη παραλία, mid-range ξενοδοχεία, εύκολο πάρκινγκ. Χερσόνησος και Μάλια για όσους έρχονται με πακέτο που δεν θα δουν το Ηράκλειο παρά για ημερήσια εκδρομή· οι ferry-travellers πιάνουν φθηνά κοντά στο λιμάνι.",
+      "de": "Heraklion ist Kretas Eingangstor (größter Flughafen, Fähre nach Piräus) — viele bleiben nur ein, zwei Nächte. Für diese Nächte innerhalb der venezianischen Mauern wohnen: zu Fuß zur Liontaria, zu den Korai-Bars, zum Markt, zum Archäologischen Museum und zum Knossos-Bus. Wer Strand priorisiert: Ammoudara (5 km westlich) hat den langen Sandstrand mit Mittelklassehotels und einfacher Anbindung ins Zentrum. Hersonissos und Malia sind für Pauschalurlauber, die Heraklion höchstens als Tagesausflug sehen; Fähre-Reisende greifen günstige Optionen am Hafen.",
+      "fr": "Héraklion est la porte d'entrée de la Crète (plus grand aéroport, ferry vers Le Pirée) — beaucoup n'y passent qu'une ou deux nuits avant de partir. Pour ces nuits-là, dormir à l'intérieur des murs vénitiens : à pied de la place des Lions, des bars de Korai, du marché, du musée archéologique, des bus pour Knossos. Si la plage prime, Ammoudara (5 km à l'ouest) offre la longue plage de sable avec hôtels milieu de gamme et accès facile au centre. Hersonissos et Malia s'adressent aux package tours qui ne verront Héraklion qu'en excursion ; les voyageurs en ferry prennent des chambres pas chères près du port.",
+      "it": "Iraklio è la porta di Creta (aeroporto principale, traghetto per il Pireo) — molti restano solo una o due notti prima di partire. Per queste notti, all'interno delle mura veneziane: a piedi dalla piazza dei Leoni, dai bar di Korai, dal mercato, dal Museo Archeologico e dai bus per Knossos. Se la priorità è la spiaggia, Ammoudara (5 km a ovest) offre la lunga spiaggia di sabbia con hotel di fascia media e facile accesso al centro. Hersonissos e Malia sono per i pacchetti che vedranno Iraklio solo in escursione; chi viaggia in traghetto prende soluzioni economiche vicino al porto."
+    }
+  },
+  "heroQueries": {
+    "hero": "Heraklion Venetian harbour Koules fortress sunset",
+    "nightlife": "Heraklion old town cobblestone pedestrian street evening",
+    "food": "Cretan dakos olive oil tomato mizithra plate",
+    "stay": "Crete boutique hotel courtyard stone walls"
+  },
+  "unsplashQuery": "Heraklion Crete Venetian harbour Koules"
+}

@@ -1,0 +1,319 @@
+{
+  "details": {
+    "id": "ChIJU5T20j8VoBQRLsBYr3iDpTw",
+    "types": [
+      "cafe",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "nationalPhoneNumber": "2744 067755",
+    "formattedAddress": "Ποσειδώνος 47 και, Matsi, Loutraki 203 00, Greece",
+    "location": {
+      "latitude": 37.9715049,
+      "longitude": 22.9746701
+    },
+    "rating": 4.5,
+    "regularOpeningHours": {
+      "openNow": true,
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 3,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 3,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 3,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 3,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 3,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 4,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 9,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 4,
+            "minute": 0
+          }
+        }
+      ],
+      "weekdayDescriptions": [
+        "Monday: 9:00 AM – 3:00 AM",
+        "Tuesday: 9:00 AM – 3:00 AM",
+        "Wednesday: 9:00 AM – 3:00 AM",
+        "Thursday: 9:00 AM – 3:00 AM",
+        "Friday: 9:00 AM – 4:00 AM",
+        "Saturday: 9:00 AM – 4:00 AM",
+        "Sunday: 9:00 AM – 3:00 AM"
+      ],
+      "nextCloseTime": "2026-05-25T00:00:00Z"
+    },
+    "businessStatus": "OPERATIONAL",
+    "priceLevel": "PRICE_LEVEL_MODERATE",
+    "userRatingCount": 1872,
+    "displayName": {
+      "text": "El Niño cafe - bar Loutraki",
+      "languageCode": "en"
+    },
+    "primaryType": "cafe",
+    "photos": [
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-t6V9Lfqle0IihooDcbfCJ3Fp9_gPEBWNla0uv_XgSCHvGEbERf3bxgKaj0UBiUSI91XxedO-W7wWq39sLzZR40ud0zrIGTzykM9db6jbq24tSXL0sMyadgzm9Sf4JAW7Xo1BE6ZnRYFz98gRnAflJMZW1L3miCfcuKaw_TMiq-4A36luhPo0VjfSmtLDju6C1LNA3rupg1POzqU5OTyFZiEj60LIcf8_5bEXDOeilEra6u2INSuW66GPu0sFAl_eh9jY-RwwjfKCXGX6rU93-GdAo2XSM0A2B3DG_jAU_Y7w",
+        "widthPx": 1200,
+        "heightPx": 674,
+        "authorAttributions": [
+          {
+            "displayName": "El Niño Cafe-bar Loutraki",
+            "uri": "https://maps.google.com/maps/contrib/116860915021637130158",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW7S4NnydPt5cJ4x5DoFeQCNaOtYp12zM42kq6adEmgw14DwNY=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipPlqH3EnQB68K0l-OSOOVFgihfDqMm4OSCiLGs9&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipPlqH3EnQB68K0l-OSOOVFgihfDqMm4OSCiLGs9!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-vgGEcGzz4jYuQJgAOvjIXSVsPpfgQjUwtsOFXNHbQJn9_tTkpVp8fa2ux_UlEvin6TEKR1iTuFNXLhHbZH1mH6-UBrwsFELH-zDCYLZgVh0XrA1TSxWj3us3fUJOmTiIGHmr36lFcUh3wCte6GTg3V3QBpnTIGTXbvRLIVIfJO0bOtDfwLaU9zALfpAmuBZW4UhSBu4j1YTbJA9NggvxzRftnhpuU8rSLfMN47vwjarVIqm1YD3yPTdwx8u3qfKC5jn8AtU4KD-ImrQPCPQMMwkTpfZ_zIiC1guYJJ2vhc1Q",
+        "widthPx": 1365,
+        "heightPx": 2048,
+        "authorAttributions": [
+          {
+            "displayName": "El Niño Cafe-bar Loutraki",
+            "uri": "https://maps.google.com/maps/contrib/116860915021637130158",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW7S4NnydPt5cJ4x5DoFeQCNaOtYp12zM42kq6adEmgw14DwNY=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipP5VrgQh0YvpBR-p_cU0TsiJiC50Kq8WbUga5Xa&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipP5VrgQh0YvpBR-p_cU0TsiJiC50Kq8WbUga5Xa!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-ulGyJG9R-rnoIlJRP-uJxKckYcjZf7etsQzSHFMJrbGqCZ4SuUuez2P8ZQRAOCrh8KRk4JcFYwzCwYi8E0s9AOBQ58V8FqV8XuAiA6mhcQ295IQKTKOelLxw6ZVhbuTIEVRCwPPm9QkAicdA1JdtiGB9avQSxSb11iquQD7QY7DJjoIQaAKlh_O_GAEluy6dED76dHpUlSkL7CHrvgX_WkD3TYjMCztFXm8iD9q9FvaxOL2frzmgmflBBuJj6m-AHTNXUkS33QF92JusTU5E1Xr9goY9z-VZC1zgsE1nYvICr48FhKv8woH07xc7LuGS6hnmN2DgnG8vGZU6AwNZdfMXO5ipr_xYwcAAoKeP1IArPrmuzrTLuljkvrmwVdzKjfhmSVgW-Mc-SHy8Ph9bJd4l_KWSzzkWKtx_Uo3gQSpQ",
+        "widthPx": 4505,
+        "heightPx": 3371,
+        "authorAttributions": [
+          {
+            "displayName": "Μενέλαος",
+            "uri": "https://maps.google.com/maps/contrib/102756976643847520249",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUMnT7h_ij_wOyGQg3o_tLKoSHAzJgSACmyksZJ4n7Vc6nzTnDa=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgID1xIfDKA&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgID1xIfDKA!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-spa79Jqg511eU8WuIaXzvhPHHTWQbLSgwEx1ft7K-uaWaC4nGhgkNgXzT0HGmh7pI_cu7IxWxzKeGttLt2FCzGbpVcx_q6zZMOh6H0OWAPSRLumNx7zVqckhO-gVVbAsA6Q8wFcW7K5RuKrk4_KwZZKnZyhP9lEqA0Wd2DQEEIAX2ApoeHOctDzi1zt0TMeUjn4qUa98_grAFpfl8KMA6z2tWK4591VtUMfAljPBajZOdrVyStLIZj5oQmgAd2nu-qz0xLbYJI2L40pAOb4jx4cDzqFGUY1flEnDa6n6JFGqNC16tbFJHU1AA6FWneo1s_08aQptaUXbhQXvhgRi4sEV22vA9P108kg1PSwMJ_QYghgb695HypR_gmP48XnIPmKfJxziKCXJfOAAzR-joBd8_kloSpHJo24KtLQ4k",
+        "widthPx": 3599,
+        "heightPx": 4800,
+        "authorAttributions": [
+          {
+            "displayName": "Σωτήρης Παπαγεωργίου",
+            "uri": "https://maps.google.com/maps/contrib/101874256303977558425",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUiTr9yfdrjnUAOoitokHmaKU7KRi5dRPZ0fTOxHOkJmhSzO4HkVA=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDG7tKIUw&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDG7tKIUw!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-scOz2HUlL7nuOs2SRG3ZIZljrqlijXFdfEEL8KHrlQ1Y7iffGM75tgAjpJognt6eL3YEbmpZzV89-0K0xVsM-fR4NoEhEYPE53iGE1i-7jSfO5YKTKut8od7FRaK_TwKhJgzVVQS8C5RD9K4yzEOIB4aXQ9PN8MOjZ5qLQcgFK1HTvIlJAvg5nHJ2zMqM2IhTWeWHZ6lQ-I0qZ5hmQX3D5RH7QF-WSMw9xMK_w34axgn5IjzSSriNG9i6kbztg9biwoi-9S6ZUA-ZJfSgCBmekP3OGWpC8WGPHkd18SQvOtIO0nVbN6Q59ZOFQjX60kU5gD6QeQiT-sU0Kpi9L99dt0utBL-oyf1RvwKXk8uYx_ppARfgT0QUS6zsRr0UC6dllF-s8w3xjJ_vsoMe5VM28DaY_gNd_0HBwQaS1KWLKff-Sw8sHB_pyYwndabQx",
+        "widthPx": 2712,
+        "heightPx": 2022,
+        "authorAttributions": [
+          {
+            "displayName": "Snezana Stevic",
+            "uri": "https://maps.google.com/maps/contrib/113489490483946006913",
+            "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKwnvs_tTcIl1ffkxYmDac-QyQPVQikegY3tBze5FK2pqUxRWI=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhDFIH-QoDqBV3aMKj7iLlD1&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhDFIH-QoDqBV3aMKj7iLlD1!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-toBBWIyx8YrpP-NWLTNCIU68d75KSaVMHXLpqHscCRkQxH4noJFqaGjw6pmy-2CzL60eKWwRRY7asKeyuev7xmyC1GoVJRvvvdFIuT7Q_OZbqmxgwX_kmvMxXzB1_JqHZd_BuMBasDRkkSaGsSYZQRBSXlrBy7aPYGgUG5uJsNRCSKvu9kCoFp07EdJ8E1nJDQ7NZkxX-UcMmGAG9SZJsAWhnbEc9AFcaCkrKWhhOBSc_oDEHWbg8-6eECbIx1nGwlB-nSAo_vdUFCiWh4XlQ6q2ZrNginR-VgBAvKMe2C2Fj-Xw2bDHkJt9y0LbdP6umdzmMXpD9r6Xw62PcxnlVoaO6KJPzbVSvSC_AQsdzv2G2lunrWJKv-xQXJ2799FNL3UopDK3BadCPmyrLLQ1JBSfrxj16JXlb0X4XUIY51KCZTDsCPnqshit9biQ",
+        "widthPx": 3072,
+        "heightPx": 4080,
+        "authorAttributions": [
+          {
+            "displayName": "Ροδούλα Μπαμπάτσικου",
+            "uri": "https://maps.google.com/maps/contrib/103156868821828702254",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXpSuoiIM8iLDuX89OBpW8wglRT57GF2aQSk13DGbVv-tnC8yZOLw=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhC6o1b1KUmMl8ZLcztpvKFh&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhC6o1b1KUmMl8ZLcztpvKFh!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-slIJqJzbhILb_CwZn64P9WrgzOHPaZzK8tCKlAjkoq-cT3G1AivqhduOC5UNmegElXqngmLfDZ9StELU-E17gzhw3935MKPbTHG62dHScxbFqizGcrRaCIE-cG7Y55meZB9bzhmepOfK4vDifr9FU-bRS9Ht-I7nWXKSyQtW71V3XRTQEfJqe6JxNwQsGGEDTlbHj-fKTPpVQWq9i3UIuaCwjQQJZvQgfBMDqiB4fuIBgCEducJ3r0Oe7s4lsgII-7EcdcsR7zftVx0lBVEO9g26sO1im5P5fEgRMT7fy5DIQ0DgS-XLCSWqEf1A2B8scprQ_LXKUlGIP0kjo0QrdfpfK9OYsMdG_AD2jm-X6OqEnEwwodSktPflPvgl1cfVWN81lEPMz8xkCtmV4_46-zKJxIm0FBDZ9rzmH6XOaxSg",
+        "widthPx": 3024,
+        "heightPx": 4032,
+        "authorAttributions": [
+          {
+            "displayName": "Manos Karanikolas",
+            "uri": "https://maps.google.com/maps/contrib/118215981989073899833",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUt4iABDDWkiuT1G5f3mGwTnYc7oIaNv_keoQQ6N1gDnVrcgMEA=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICR1JfzJg&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICR1JfzJg!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-uZyeEVTfaIk0dP9OdFiWl5AXpIEP7BVahb0sEM-qlKFR9-INBzaouN3MNBOXu2hAsZBVoNOXBmHVKEB9X6ZptHYechuhhvaTHOT7nPwdwfpQ7zoREKpYooSyLqdlCH0oOd00VVY2a7bw58Gz7PdFWAjopOiubVRcFzbIYstwvBUjTs6OBdpHc0NdL_NJXFlq1cGO8hfuUSX1KyyoIq6Wyjr7TKk5QjPaFRs3k9J1Xi047HkFj4PH3sLgGhiXxaMKDSMQtHazICRf8zOwjVCQSkcjKkjIk4ObygaVnGFhn0KVfdiZ4veRvLgaL155Ktnx_nGrGRPJcJXA8ubCM9NoqiYqIowhfeMdkHQgf3oWtHr_fgKGgqpqaA4dSZZniqHHPS5-SLlYywWZwH9qor8hhfaSmszhkzIxHCTxF2h8Qtc4tB",
+        "widthPx": 4080,
+        "heightPx": 3072,
+        "authorAttributions": [
+          {
+            "displayName": "Giorgio Alfredo Spedicato",
+            "uri": "https://maps.google.com/maps/contrib/112822760501142666847",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVQAALMDo9EY70Xo3XqQ8pokK5tQVg9TuWt4890jTT2QsdhRKPjNw=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDFpqGgowE&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDFpqGgowE!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-s5RM5O3HC7PyNdoxqC8r0786_qPJe9-WnZPF5Lb38Lvfw4V3p0k0LO1qIcDeuSMNyvJL1-Ib92GorTVelV-d1rWy99zPaWJhzGfmHy_LIeRO54EMLlhNre3kfjSL755T41h4oaCJiGfkvjOM4j157hU7PYKlsaeoySObdfLP_sW1Sh5XdkBRp_2uC-YoyvOwrivlcqQXXEnfX-OBkoaaSOh856AoGtAKVCzdlH34xzh_OybU31TmMl4ZturZ2uOxn38S3NQDG3aBA5C_FyJ1hT_-L9r5nzhNl-7NaiQN0VFA",
+        "widthPx": 2048,
+        "heightPx": 1365,
+        "authorAttributions": [
+          {
+            "displayName": "El Niño Cafe-bar Loutraki",
+            "uri": "https://maps.google.com/maps/contrib/116860915021637130158",
+            "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW7S4NnydPt5cJ4x5DoFeQCNaOtYp12zM42kq6adEmgw14DwNY=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipOYxTQtkCH9Gjx9rZOZ9o7DLIez9kZZCOQAahAf&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipOYxTQtkCH9Gjx9rZOZ9o7DLIez9kZZCOQAahAf!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      },
+      {
+        "name": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-t3ziiZ5OEginUrSO0GobJr1laHLGuOrC4LzdNBF8pm1wTI4nJWmZorpmHgMjQcPb4ww7FbzdMraaDGDjQr0j6g2vgGaROHwS0hPcBwihlrwxdvCSafhxxyjB3CMc1VepZvXo7V6U9wJ5qBrxkzxChK6bSjntQvg6xi7eQ2zhddTcMg4msr25jgma9rVvA1efdkkLCRR8s8nYfrw8WWT3Sd6-7ibQJaZUg-VU3oBTYUWJuI0FqNpzds9phOjNOu8Qic1WBecStHhMeSsG2X3OIw9kio90twpw3zyA9WjTaODkLHj3tuycVIXg5bH75p2YY6zy1qLb0BmBsH8h_ToWhYZwIVpgVK2YWbr49683bf6S9ITeeQnEUaGYcA94mTJLtklxDDgX2MySxqMoJFF0jaTKUvWRj6IDQPmUPgUn-z20DaUYwrV_Hel0S52OA6",
+        "widthPx": 3024,
+        "heightPx": 4032,
+        "authorAttributions": [
+          {
+            "displayName": "Наталья Скоромная",
+            "uri": "https://maps.google.com/maps/contrib/113035046922753541312",
+            "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJfsPSLCo9teBhAXcGxBs-7jv4YGkuOfNCaPgA1tJVpgEWmXQ=s100-p-k-no-mo"
+          }
+        ],
+        "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhAUG2iAkRbJHt7HjpatXDE2&hl=en-US",
+        "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhAUG2iAkRbJHt7HjpatXDE2!2e10!4m2!3m1!1s0x14a0153fd2f69453:0x3ca58378af58c02e"
+      }
+    ]
+  },
+  "photos": [
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-t6V9Lfqle0IihooDcbfCJ3Fp9_gPEBWNla0uv_XgSCHvGEbERf3bxgKaj0UBiUSI91XxedO-W7wWq39sLzZR40ud0zrIGTzykM9db6jbq24tSXL0sMyadgzm9Sf4JAW7Xo1BE6ZnRYFz98gRnAflJMZW1L3miCfcuKaw_TMiq-4A36luhPo0VjfSmtLDju6C1LNA3rupg1POzqU5OTyFZiEj60LIcf8_5bEXDOeilEra6u2INSuW66GPu0sFAl_eh9jY-RwwjfKCXGX6rU93-GdAo2XSM0A2B3DG_jAU_Y7w",
+      "photoUri": "https://lh3.googleusercontent.com/places/ANXAkqGnbGHkKL5UiFLnmhu3kfj52uoWl6rrAQqheSEDKClMwsUoC4OQeCZ49_7Kxbb2k7xczkTjxK5o2Y7wwgmAC1nWHJ9xKXmGmVM=s4800-w1200",
+      "authors": "El Niño Cafe-bar Loutraki"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-vgGEcGzz4jYuQJgAOvjIXSVsPpfgQjUwtsOFXNHbQJn9_tTkpVp8fa2ux_UlEvin6TEKR1iTuFNXLhHbZH1mH6-UBrwsFELH-zDCYLZgVh0XrA1TSxWj3us3fUJOmTiIGHmr36lFcUh3wCte6GTg3V3QBpnTIGTXbvRLIVIfJO0bOtDfwLaU9zALfpAmuBZW4UhSBu4j1YTbJA9NggvxzRftnhpuU8rSLfMN47vwjarVIqm1YD3yPTdwx8u3qfKC5jn8AtU4KD-ImrQPCPQMMwkTpfZ_zIiC1guYJJ2vhc1Q",
+      "photoUri": "https://lh3.googleusercontent.com/places/ANXAkqFPEWqHQ8pyXBrKTk9zWQdM0Isg5XAeoY9lLc02Hm9uIGYvymVA2UOb3ssV_teyHSlmE3my5K97AMQgJ_MLVjEppiexPgZwW8U=s4800-w1365",
+      "authors": "El Niño Cafe-bar Loutraki"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-ulGyJG9R-rnoIlJRP-uJxKckYcjZf7etsQzSHFMJrbGqCZ4SuUuez2P8ZQRAOCrh8KRk4JcFYwzCwYi8E0s9AOBQ58V8FqV8XuAiA6mhcQ295IQKTKOelLxw6ZVhbuTIEVRCwPPm9QkAicdA1JdtiGB9avQSxSb11iquQD7QY7DJjoIQaAKlh_O_GAEluy6dED76dHpUlSkL7CHrvgX_WkD3TYjMCztFXm8iD9q9FvaxOL2frzmgmflBBuJj6m-AHTNXUkS33QF92JusTU5E1Xr9goY9z-VZC1zgsE1nYvICr48FhKv8woH07xc7LuGS6hnmN2DgnG8vGZU6AwNZdfMXO5ipr_xYwcAAoKeP1IArPrmuzrTLuljkvrmwVdzKjfhmSVgW-Mc-SHy8Ph9bJd4l_KWSzzkWKtx_Uo3gQSpQ",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZMUpA9ioyNVaNwtiZLVib8VCteg_9Ny5IYdEYBp1NGjOdkmFXn5PhSH-2Bfb1RCvJ2GzJFzbaILWesXxGFSmHGHEfG4HRtkqryolmuMK9ipTrdlGog-kKlgK77c6ze08iMUU4k3ndXyWk2Mqg=s4800-w1600",
+      "authors": "Μενέλαος"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-spa79Jqg511eU8WuIaXzvhPHHTWQbLSgwEx1ft7K-uaWaC4nGhgkNgXzT0HGmh7pI_cu7IxWxzKeGttLt2FCzGbpVcx_q6zZMOh6H0OWAPSRLumNx7zVqckhO-gVVbAsA6Q8wFcW7K5RuKrk4_KwZZKnZyhP9lEqA0Wd2DQEEIAX2ApoeHOctDzi1zt0TMeUjn4qUa98_grAFpfl8KMA6z2tWK4591VtUMfAljPBajZOdrVyStLIZj5oQmgAd2nu-qz0xLbYJI2L40pAOb4jx4cDzqFGUY1flEnDa6n6JFGqNC16tbFJHU1AA6FWneo1s_08aQptaUXbhQXvhgRi4sEV22vA9P108kg1PSwMJ_QYghgb695HypR_gmP48XnIPmKfJxziKCXJfOAAzR-joBd8_kloSpHJo24KtLQ4k",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZMRfvUzg-PNcGogaJb5IM1b8Z8LBeN2fN9JDlIhToMozS9bypqQcIX3LjjPmQeKktqNyGzHRC2eeXwPsIo8reBbf5qMBAsZYe-_JvM8EOCCjVewWksPKfTO1qDwPUWoLZPPd4SWDTosYaiY=s4800-w1600",
+      "authors": "Σωτήρης Παπαγεωργίου"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-scOz2HUlL7nuOs2SRG3ZIZljrqlijXFdfEEL8KHrlQ1Y7iffGM75tgAjpJognt6eL3YEbmpZzV89-0K0xVsM-fR4NoEhEYPE53iGE1i-7jSfO5YKTKut8od7FRaK_TwKhJgzVVQS8C5RD9K4yzEOIB4aXQ9PN8MOjZ5qLQcgFK1HTvIlJAvg5nHJ2zMqM2IhTWeWHZ6lQ-I0qZ5hmQX3D5RH7QF-WSMw9xMK_w34axgn5IjzSSriNG9i6kbztg9biwoi-9S6ZUA-ZJfSgCBmekP3OGWpC8WGPHkd18SQvOtIO0nVbN6Q59ZOFQjX60kU5gD6QeQiT-sU0Kpi9L99dt0utBL-oyf1RvwKXk8uYx_ppARfgT0QUS6zsRr0UC6dllF-s8w3xjJ_vsoMe5VM28DaY_gNd_0HBwQaS1KWLKff-Sw8sHB_pyYwndabQx",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZOFHf_YZwLHhOmtPqVXLQwsMWh4Ja7IYH9xEV-yoIa89ODADK3OtcwDsheCI3lJk2apD9Qsyxf06FEqryLRXjYSXxPUEqupwLi-FzQ9SfR2ZeuKXC9_e5Qr0XlqOi-PbLlg_sifoyf1QschAdm8NigJig=s4800-w1600",
+      "authors": "Snezana Stevic"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-toBBWIyx8YrpP-NWLTNCIU68d75KSaVMHXLpqHscCRkQxH4noJFqaGjw6pmy-2CzL60eKWwRRY7asKeyuev7xmyC1GoVJRvvvdFIuT7Q_OZbqmxgwX_kmvMxXzB1_JqHZd_BuMBasDRkkSaGsSYZQRBSXlrBy7aPYGgUG5uJsNRCSKvu9kCoFp07EdJ8E1nJDQ7NZkxX-UcMmGAG9SZJsAWhnbEc9AFcaCkrKWhhOBSc_oDEHWbg8-6eECbIx1nGwlB-nSAo_vdUFCiWh4XlQ6q2ZrNginR-VgBAvKMe2C2Fj-Xw2bDHkJt9y0LbdP6umdzmMXpD9r6Xw62PcxnlVoaO6KJPzbVSvSC_AQsdzv2G2lunrWJKv-xQXJ2799FNL3UopDK3BadCPmyrLLQ1JBSfrxj16JXlb0X4XUIY51KCZTDsCPnqshit9biQ",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZPT9nNWcgfeR_Sih-uNyBAXo541et3n_EQEb59FwRT7AlXAhDE3oFek0ZEPSeZSOcr-C3MRl0iG77ScxLUBY2pKXPF99eXiqhQq6BdnE4bVgD8kvUcSqw6-G2vIxqnHSoYWD2aaORxFaKfniULXEI0m=s4800-w1600",
+      "authors": "Ροδούλα Μπαμπάτσικου"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-slIJqJzbhILb_CwZn64P9WrgzOHPaZzK8tCKlAjkoq-cT3G1AivqhduOC5UNmegElXqngmLfDZ9StELU-E17gzhw3935MKPbTHG62dHScxbFqizGcrRaCIE-cG7Y55meZB9bzhmepOfK4vDifr9FU-bRS9Ht-I7nWXKSyQtW71V3XRTQEfJqe6JxNwQsGGEDTlbHj-fKTPpVQWq9i3UIuaCwjQQJZvQgfBMDqiB4fuIBgCEducJ3r0Oe7s4lsgII-7EcdcsR7zftVx0lBVEO9g26sO1im5P5fEgRMT7fy5DIQ0DgS-XLCSWqEf1A2B8scprQ_LXKUlGIP0kjo0QrdfpfK9OYsMdG_AD2jm-X6OqEnEwwodSktPflPvgl1cfVWN81lEPMz8xkCtmV4_46-zKJxIm0FBDZ9rzmH6XOaxSg",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZN2qrnxlah1AcD-u0NmVYDHElx2WeuCGKCSPpMEyPKH3iHK7hjFT4OxVNXyvNECJ8GpGz5pfcqtJZQRzlEIqQMkakipBMaZxTYl9EGh1zYrSFk7qgQUStzsqYpliJchKADpEBBzUlB4-CgKXw=s4800-w1600",
+      "authors": "Manos Karanikolas"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-uZyeEVTfaIk0dP9OdFiWl5AXpIEP7BVahb0sEM-qlKFR9-INBzaouN3MNBOXu2hAsZBVoNOXBmHVKEB9X6ZptHYechuhhvaTHOT7nPwdwfpQ7zoREKpYooSyLqdlCH0oOd00VVY2a7bw58Gz7PdFWAjopOiubVRcFzbIYstwvBUjTs6OBdpHc0NdL_NJXFlq1cGO8hfuUSX1KyyoIq6Wyjr7TKk5QjPaFRs3k9J1Xi047HkFj4PH3sLgGhiXxaMKDSMQtHazICRf8zOwjVCQSkcjKkjIk4ObygaVnGFhn0KVfdiZ4veRvLgaL155Ktnx_nGrGRPJcJXA8ubCM9NoqiYqIowhfeMdkHQgf3oWtHr_fgKGgqpqaA4dSZZniqHHPS5-SLlYywWZwH9qor8hhfaSmszhkzIxHCTxF2h8Qtc4tB",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZOQo2dnttxLGQcWDtokCopVy7WgMzjhUJBQA0jDOEAal_zEdehZcOp4YBKMZZUnbE5jA0O0oSzGoof_soV_dHlwNczpN0lc8xLgOgQbcoUf9-I7jTfbstjm4uWS3aid19giNcwjw5zl8NbqPHg=s4800-w1600",
+      "authors": "Giorgio Alfredo Spedicato"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-s5RM5O3HC7PyNdoxqC8r0786_qPJe9-WnZPF5Lb38Lvfw4V3p0k0LO1qIcDeuSMNyvJL1-Ib92GorTVelV-d1rWy99zPaWJhzGfmHy_LIeRO54EMLlhNre3kfjSL755T41h4oaCJiGfkvjOM4j157hU7PYKlsaeoySObdfLP_sW1Sh5XdkBRp_2uC-YoyvOwrivlcqQXXEnfX-OBkoaaSOh856AoGtAKVCzdlH34xzh_OybU31TmMl4ZturZ2uOxn38S3NQDG3aBA5C_FyJ1hT_-L9r5nzhNl-7NaiQN0VFA",
+      "photoUri": "https://lh3.googleusercontent.com/places/ANXAkqHCxW6Iv8xrMM2hwWIYkhBCza_fBPaKoDDYRfQCftkbVhKPriiMWe9yjKMi3Tpeff_XkDMgMbMRPQtJD2_VBE13gQv1ZmgrPZY=s4800-w1600",
+      "authors": "El Niño Cafe-bar Loutraki"
+    },
+    {
+      "refName": "places/ChIJU5T20j8VoBQRLsBYr3iDpTw/photos/Ab43m-t3ziiZ5OEginUrSO0GobJr1laHLGuOrC4LzdNBF8pm1wTI4nJWmZorpmHgMjQcPb4ww7FbzdMraaDGDjQr0j6g2vgGaROHwS0hPcBwihlrwxdvCSafhxxyjB3CMc1VepZvXo7V6U9wJ5qBrxkzxChK6bSjntQvg6xi7eQ2zhddTcMg4msr25jgma9rVvA1efdkkLCRR8s8nYfrw8WWT3Sd6-7ibQJaZUg-VU3oBTYUWJuI0FqNpzds9phOjNOu8Qic1WBecStHhMeSsG2X3OIw9kio90twpw3zyA9WjTaODkLHj3tuycVIXg5bH75p2YY6zy1qLb0BmBsH8h_ToWhYZwIVpgVK2YWbr49683bf6S9ITeeQnEUaGYcA94mTJLtklxDDgX2MySxqMoJFF0jaTKUvWRj6IDQPmUPgUn-z20DaUYwrV_Hel0S52OA6",
+      "photoUri": "https://lh3.googleusercontent.com/place-photos/AJRVUZOV8wMzt2lkkeMC6PJ-Z-oWZA0d1oEV-wNJfXFdX5mNKc061pCpuluhNGZneMS64ya0wrdCpEtFXesr_KLBcwysY_wNkbqq0jzF4jD0GGAedIuG5NXYhisa2W_mLxwRBG3u2qnX2oK0mJfmj3sXkXonCg=s4800-w1600",
+      "authors": "Наталья Скоромная"
+    }
+  ]
+}

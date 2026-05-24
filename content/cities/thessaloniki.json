@@ -1,0 +1,104 @@
+{
+  "slug": "thessaloniki",
+  "dbId": "city_thessaloniki",
+  "season": "year-round",
+  "bestFor": {
+    "en": ["Year-round student nightlife", "Waterfront bars", "Live rebetiko and bouzoukia", "Cheap-and-good cocktails", "Late-night tavernas"],
+    "el": ["Φοιτητική νυχτερινή ζωή όλο τον χρόνο", "Μπαρ στην παραλία", "Live ρεμπέτικο και μπουζούκια", "Καλά cocktails σε λογικές τιμές", "Late-night ταβέρνες"],
+    "de": ["Ganzjähriges Studenten-Nightlife", "Bars an der Uferpromenade", "Live-Rebetiko und Bouzoukia", "Günstige, gute Cocktails", "Späte Tavernen"],
+    "fr": ["Vie nocturne étudiante toute l'année", "Bars en bord de mer", "Rebetiko et bouzoukia live", "Cocktails de qualité à prix doux", "Tavernes tard le soir"],
+    "it": ["Vita notturna studentesca tutto l'anno", "Bar sul lungomare", "Rebetiko e bouzoukia live", "Cocktail di qualità a prezzi onesti", "Taverne fino a tardi"]
+  },
+  "intro": {
+    "en": "Thessaloniki is Greece's second city and arguably its first for actual local nightlife — 80,000 students keep it loud Tuesday through Saturday, eleven months of the year. The action concentrates in three walkable zones: Valaoritou for warehouse bars and underground clubs, Ladadika for the bar crawl through restored 19th-century houses, and Bit Bazaar for cheap drinks among antique stalls. The waterfront (Nea Paralia) is the long all-ages promenade for sunset and pre-game drinks. Bouzoukia clubs sit out by the airport road — these are the real deal, not the tourist version. Prices are noticeably lower than Athens.",
+    "el": "Η Θεσσαλονίκη είναι η δεύτερη πόλη της Ελλάδας — και σχεδόν η πρώτη σε πραγματική νυχτερινή ζωή. 80.000 φοιτητές την κρατάνε ζωντανή Τρίτη με Σάββατο, έντεκα μήνες τον χρόνο. Η σκηνή σε τρεις περπατήσιμες ζώνες: Βαλαωρίτου για warehouse μπαρ και underground κλαμπ, Λαδάδικα για bar crawl σε αναπαλαιωμένα κτίρια του 19ου αιώνα, και Bit Bazaar για φθηνά ποτά ανάμεσα σε παλαιοπωλεία. Η Νέα Παραλία είναι η μεγάλη promenade για ηλιοβασίλεμα και pre-game. Τα μπουζούκια είναι έξω από την πόλη, στο δρόμο του αεροδρομίου — τα κανονικά, όχι τα τουριστικά. Οι τιμές αισθητά κάτω από Αθήνα.",
+    "de": "Thessaloniki ist Griechenlands zweite Stadt — und in Sachen echtes lokales Nachtleben fast die erste. 80.000 Studenten halten die Stadt von Dienstag bis Samstag, elf Monate im Jahr, in Bewegung. Die Action konzentriert sich in drei zu Fuß erreichbaren Zonen: Valaoritou für Lagerhaus-Bars und Underground-Clubs, Ladadika für den Bar-Crawl durch sanierte Häuser aus dem 19. Jahrhundert, und Bit Bazaar für günstige Drinks zwischen Antiquitätenständen. Die Uferpromenade (Nea Paralia) ist die lange Allmenge-Promenade für Sonnenuntergang und Pre-Game-Drinks. Bouzoukia-Clubs liegen draußen Richtung Flughafen — das echte Programm, nicht die Touri-Version. Preise spürbar unter Athen.",
+    "fr": "Thessalonique est la deuxième ville de Grèce — et probablement la première pour la vraie vie nocturne locale. 80 000 étudiants la font vivre du mardi au samedi, onze mois sur douze. L'action se concentre dans trois zones piétonnes : Valaoritou pour les bars d'entrepôt et clubs underground, Ladadika pour le bar crawl dans des maisons du XIXᵉ restaurées, et le Bit Bazaar pour les verres pas chers entre étals d'antiquités. La Nea Paralia est la longue promenade tous-publics pour le coucher de soleil et l'apéro. Les bouzoukia sont à l'extérieur, vers l'aéroport — la vraie chose, pas la version touristique. Les prix sont nettement plus bas qu'à Athènes.",
+    "it": "Salonicco è la seconda città della Grecia — e probabilmente la prima per vera vita notturna locale. 80.000 studenti la tengono accesa da martedì a sabato, undici mesi l'anno. L'azione si concentra in tre zone pedonali: Valaoritou per i bar in capannoni e i club underground, Ladadika per il bar crawl tra case ottocentesche ristrutturate, e il Bit Bazaar per drink economici tra banchi d'antiquariato. Il lungomare (Nea Paralia) è la grande promenade per tutti per il tramonto e l'aperitivo. I bouzoukia sono fuori città, verso l'aeroporto — quelli veri, non la versione turistica. I prezzi sono molto più bassi di Atene."
+  },
+  "neighborhoods": [
+    {
+      "slug": "ladadika",
+      "name": { "en": "Ladadika", "el": "Λαδάδικα", "de": "Ladadika", "fr": "Ladadika", "it": "Ladadika" },
+      "blurb": {
+        "en": "Restored 19th-century warehouse district by the port. Cobbled lanes packed with bars, tavernas and mezedopoleia. Best starting point.",
+        "el": "Αναπαλαιωμένη συνοικία αποθηκών του 19ου αιώνα, δίπλα στο λιμάνι. Καλντερίμια γεμάτα μπαρ, ταβέρνες και μεζεδοπωλεία. Ιδανικό σημείο εκκίνησης.",
+        "de": "Saniertes Lagerhausviertel aus dem 19. Jahrhundert am Hafen. Gepflasterte Gassen voller Bars, Tavernen und Mezedopoleia. Bester Startpunkt.",
+        "fr": "Quartier d'entrepôts du XIXᵉ siècle restauré près du port. Ruelles pavées remplies de bars, tavernes et mezedopoleia. Le point de départ.",
+        "it": "Quartiere ottocentesco di magazzini ristrutturati vicino al porto. Vicoli lastricati pieni di bar, taverne e mezedopoleia. Il punto di partenza."
+      }
+    },
+    {
+      "slug": "valaoritou",
+      "name": { "en": "Valaoritou", "el": "Βαλαωρίτου", "de": "Valaoritou", "fr": "Valaoritou", "it": "Valaoritou" },
+      "blurb": {
+        "en": "Loft bars, basement clubs, underground electronic scene. Late hours, younger crowd, the real Thessaloniki nightlife.",
+        "el": "Loft μπαρ, υπόγεια κλαμπ, underground electronic σκηνή. Πολύ αργά, νεανικό κοινό — η πραγματική νυχτερινή Θεσσαλονίκη.",
+        "de": "Loft-Bars, Kellerclubs, Underground-Elektronik. Späte Stunden, jüngeres Publikum — das echte Thessaloniki-Nachtleben.",
+        "fr": "Bars en loft, clubs en sous-sol, scène électronique underground. Heures tardives, public jeune — la vraie nuit thessalonicienne.",
+        "it": "Bar in loft, club nei seminterrati, scena elettronica underground. Orari tardi, pubblico giovane — la vera notte di Salonicco."
+      }
+    },
+    {
+      "slug": "nea-paralia",
+      "name": { "en": "Nea Paralia", "el": "Νέα Παραλία", "de": "Nea Paralia", "fr": "Nea Paralia", "it": "Nea Paralia" },
+      "blurb": {
+        "en": "The new waterfront promenade. Cocktail bars from Aristotelous square south to the White Tower — sunset views over the Thermaic Gulf.",
+        "el": "Η νέα παραλιακή promenade. Cocktail bar από την Αριστοτέλους νότια ως τον Λευκό Πύργο — ηλιοβασίλεμα στον Θερμαϊκό.",
+        "de": "Die neue Uferpromenade. Cocktailbars von der Aristotelous nach Süden bis zum Weißen Turm — Sonnenuntergang über dem Thermaischen Golf.",
+        "fr": "La nouvelle promenade côtière. Bars à cocktails de la place Aristotelous au sud jusqu'à la Tour Blanche — couchers de soleil sur le golfe Thermaïque.",
+        "it": "Il nuovo lungomare. Cocktail bar dalla piazza Aristotelous a sud fino alla Torre Bianca — tramonti sul Golfo Termaico."
+      }
+    },
+    {
+      "slug": "ano-poli",
+      "name": { "en": "Ano Poli (Upper Town)", "el": "Άνω Πόλη", "de": "Ano Poli (Oberstadt)", "fr": "Ano Poli (Ville Haute)", "it": "Ano Poli (Città Alta)" },
+      "blurb": {
+        "en": "Old Ottoman quarter on the hill. Wine bars and tavernas with city-and-sea views, quieter and more romantic.",
+        "el": "Παλιά οθωμανική συνοικία στον λόφο. Wine bars και ταβέρνες με θέα στην πόλη και τη θάλασσα. Πιο ήσυχη, πιο ρομαντική.",
+        "de": "Altes osmanisches Viertel auf dem Hügel. Weinbars und Tavernen mit Stadt- und Meerblick — ruhiger und romantischer.",
+        "fr": "Vieux quartier ottoman sur la colline. Bars à vin et tavernes avec vue sur la ville et la mer — plus calme et romantique.",
+        "it": "Vecchio quartiere ottomano sulla collina. Wine bar e taverne con vista città-mare — più tranquillo e romantico."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Modon-Sephardic food heritage", "Bougatsa and koulouri breakfasts", "Modiano Market mezedopoleia", "Pontian and Eastern Mediterranean dishes", "Late-night souvlaki"],
+      "el": ["Σεφαραδίτικη κληρονομιά γεύσεων", "Πρωινό με μπουγάτσα και κουλούρι", "Μεζεδοπωλεία στο Μοδιάνο", "Ποντιακή και ανατολική κουζίνα", "Late-night σουβλάκι"],
+      "de": ["Sephardische Esskultur", "Frühstück mit Bougatsa und Koulouri", "Mezedopoleia in der Modiano-Halle", "Pontische und östlich-mediterrane Küche", "Spät-Souvláki"],
+      "fr": ["Héritage culinaire séfarade", "Petit-déj' bougatsa et koulouri", "Mezedopoleia du marché Modiano", "Cuisines pontique et levantine", "Souvlaki de fin de soirée"],
+      "it": ["Eredità sefardita in cucina", "Colazione con bougatsa e koulouri", "Mezedopoleia al mercato Modiano", "Cucina pontica e mediterraneo-orientale", "Souvláki di fine serata"]
+    },
+    "intro": {
+      "en": "Greeks routinely call Thessaloniki their food capital — and they're right. Centuries of Sephardic Jewish, Pontian, Anatolian and Balkan influence built a kitchen distinctly richer and spicier than southern Greece. Breakfast is bougatsa (sweet or savoury phyllo pies) and a koulouri sesame ring from a street vendor. Lunch lives in the Kapani and Modiano markets — mezedopoleia spilling out among the fish and spice stalls. Dinner runs from late-night gyros at Derlicatessen on Tsimiski to refined Cretan-meets-Macedonian tasting menus around Valaoritou. Eating well here is cheap and easy.",
+      "el": "Οι Έλληνες λένε ότι η Θεσσαλονίκη είναι η γαστρονομική πρωτεύουσα — και έχουν δίκιο. Αιώνες σεφαραδίτικων, ποντιακών, ανατολίτικων και βαλκανικών επιρροών έχτισαν μια κουζίνα πιο πλούσια και πιο μπαχαρένια από τη νότια Ελλάδα. Πρωινό: μπουγάτσα και κουλούρι από καρότσι. Μεσημέρι: Καπάνι και Μοδιάνο — μεζεδοπωλεία ανάμεσα στους πάγκους ψαριών και μπαχαρικών. Βράδυ: από late-night γύρο στο Ντερλικατέσεν στην Τσιμισκή μέχρι ραφινάτα tasting menu γύρω από Βαλαωρίτου. Το να φας καλά εδώ είναι φθηνό και εύκολο.",
+      "de": "Griechen nennen Thessaloniki gerne die kulinarische Hauptstadt — und sie haben recht. Jahrhunderte sephardisch-jüdischer, pontischer, anatolischer und balkanischer Einflüsse haben eine Küche entstehen lassen, die deutlich reicher und würziger ist als die südgriechische. Frühstück: Bougatsa und ein Sesam-Koulouri vom Straßenverkäufer. Mittag in den Markthallen Kapani und Modiano — Mezedopoleia zwischen Fisch- und Gewürzständen. Abendessen reicht vom späten Gyros bei Derlicatessen in der Tsimiski bis zu verfeinerten kretisch-makedonischen Tasting-Menüs rund um Valaoritou. Gut essen ist hier günstig und einfach.",
+      "fr": "Les Grecs disent volontiers que Thessalonique est la capitale gastronomique — et ils ont raison. Des siècles d'influences séfarades, pontiques, anatoliennes et balkaniques ont bâti une cuisine nettement plus riche et plus épicée qu'au sud. Petit-déj' : bougatsa et un koulouri au sésame chez un marchand ambulant. Le midi vit dans les marchés Kapani et Modiano — les mezedopoleia débordent entre étals de poissons et d'épices. Le dîner va du gyros tardif au Derlicatessen, sur Tsimiski, aux menus dégustation crétois-macédoniens raffinés autour de Valaoritou. Bien manger ici est facile et bon marché.",
+      "it": "I greci la chiamano la capitale gastronomica — e hanno ragione. Secoli di influssi sefarditi, pontici, anatolici e balcanici hanno costruito una cucina decisamente più ricca e speziata di quella del sud. Colazione: bougatsa e un koulouri al sesamo da un venditore ambulante. Pranzo nei mercati Kapani e Modiano — i mezedopoleia traboccano tra i banchi di pesce e spezie. Cena dal gyros notturno al Derlicatessen, in Tsimiski, fino ai raffinati menu degustazione cretese-macedoni intorno a Valaoritou. Mangiare bene qui è facile ed economico."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Boutique stays around Aristotelous", "Seafront hotels on Leoforos Nikis", "Ladadika nightlife-walkable hotels", "Design hotels by the Rotunda", "Budget central stays for students and weekenders"],
+      "el": ["Boutique ξενοδοχεία γύρω από την Αριστοτέλους", "Παραλιακά ξενοδοχεία στη Λεωφόρο Νίκης", "Ξενοδοχεία περπατήσιμα από Λαδάδικα", "Design ξενοδοχεία στη Ροτόντα", "Κεντρικά οικονομικά για φοιτητές και weekenders"],
+      "de": ["Boutique-Hotels rund um die Aristotelous", "Strandhotels an der Leoforos Nikis", "Hotels fußläufig zu Ladadika-Nachtleben", "Designhotels bei der Rotunda", "Günstige zentrale Optionen für Studenten und Wochenendgäste"],
+      "fr": ["Boutiques autour d'Aristotelous", "Hôtels en front de mer sur la Leoforos Nikis", "Hôtels proches du quartier nocturne de Ladadika", "Hôtels de design près de la Rotonde", "Centres économiques pour étudiants et week-ends"],
+      "it": ["Boutique attorno ad Aristotelous", "Hotel sul lungomare di Leoforos Nikis", "Hotel a piedi dalla movida di Ladadika", "Hotel di design vicino alla Rotonda", "Soluzioni economiche centrali per studenti e weekend"]
+    },
+    "intro": {
+      "en": "Thessaloniki is compact — you can walk from the train station to the White Tower in 25 minutes — so almost any central stay works. The most convenient base is the rectangle bounded by Egnatia, Tsimiski, Aristotelous and Leoforos Nikis: walking distance to Ladadika nightlife, the waterfront, all the Roman/Byzantine landmarks, and the markets. Hotels on Leoforos Nikis get the sea view; hotels on Aristotelous get the city pulse. Ano Poli is romantic and quieter but uphill and taxi-dependent at night. The big international chains cluster around the airport — skip them unless you're connecting through.",
+      "el": "Η Θεσσαλονίκη είναι συμπαγής — από τον σταθμό ως τον Λευκό Πύργο 25 λεπτά με τα πόδια — οπότε σχεδόν κάθε κεντρικό ξενοδοχείο δουλεύει. Πιο βολικό: το τετράγωνο Εγνατία – Τσιμισκή – Αριστοτέλους – Λεωφόρος Νίκης. Με τα πόδια σε Λαδάδικα, παραλία, ρωμαϊκά/βυζαντινά μνημεία, αγορές. Λεωφόρος Νίκης = θέα θάλασσα. Αριστοτέλους = παλμός πόλης. Η Άνω Πόλη είναι ρομαντική αλλά ανηφορική και θέλει ταξί τη νύχτα. Οι μεγάλες αλυσίδες είναι στο αεροδρόμιο — άφησέ τες, εκτός αν κάνεις σύνδεση.",
+      "de": "Thessaloniki ist kompakt — vom Bahnhof zum Weißen Turm 25 Gehminuten — fast jede zentrale Unterkunft funktioniert. Am praktischsten: das Rechteck Egnatia – Tsimiski – Aristotelous – Leoforos Nikis. Zu Fuß zu Ladadika, Promenade, römisch/byzantinischen Denkmälern, Märkten. Leoforos Nikis = Meerblick. Aristotelous = Stadtpuls. Ano Poli ist romantisch, aber bergauf und nachts auf Taxi angewiesen. Die internationalen Ketten liegen am Flughafen — nur bei Anschlussflug sinnvoll.",
+      "fr": "Thessalonique est compacte — 25 minutes à pied de la gare à la Tour Blanche — presque tout hôtel central convient. Le plus pratique : le rectangle Egnatia – Tsimiski – Aristotelous – Leoforos Nikis. À pied de Ladadika, du front de mer, des monuments romains/byzantins, des marchés. Leoforos Nikis = vue mer. Aristotelous = pouls de la ville. Ano Poli est romantique mais en pente et taxi-obligatoire le soir. Les grandes chaînes se trouvent près de l'aéroport — à éviter sauf escale.",
+      "it": "Salonicco è compatta — 25 minuti a piedi dalla stazione alla Torre Bianca — quasi qualsiasi hotel centrale va bene. Più pratico: il rettangolo Egnatia – Tsimiski – Aristotelous – Leoforos Nikis. A piedi da Ladadika, lungomare, monumenti romani/bizantini, mercati. Leoforos Nikis = vista mare. Aristotelous = polso della città. Ano Poli è romantica ma in salita e taxi-dipendente di notte. Le grandi catene sono vicino all'aeroporto — saltarle se non in scalo."
+    }
+  },
+  "heroQueries": {
+    "hero": "Thessaloniki White Tower waterfront panorama",
+    "nightlife": "Thessaloniki Ladadika cobblestone street evening lights",
+    "food": "Greek bougatsa phyllo pastry market Thessaloniki",
+    "stay": "Thessaloniki boutique hotel sea view balcony"
+  },
+  "unsplashQuery": "Thessaloniki White Tower waterfront"
+}

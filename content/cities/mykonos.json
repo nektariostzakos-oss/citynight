@@ -1,0 +1,115 @@
+{
+  "slug": "mykonos",
+  "dbId": "city_mykonos",
+  "season": "May to October",
+  "bestFor": {
+    "en": ["Beach clubs", "Big-name DJs", "All-day parties", "Sunset bars", "Late-night clubs"],
+    "el": ["Beach club", "Μεγάλα ονόματα DJs", "All-day parties", "Sunset μπαρ", "Late-night κλαμπ"],
+    "de": ["Beachclubs", "Internationale DJs", "All-Day-Partys", "Sunset-Bars", "Late-Night-Clubs"],
+    "fr": ["Beach clubs", "DJs internationaux", "Soirées all-day", "Bars sunset", "Clubs late-night"],
+    "it": ["Beach club", "DJ internazionali", "Feste tutto il giorno", "Bar al tramonto", "Club fino al mattino"]
+  },
+  "intro": {
+    "en": "Mykonos is the loudest island in the Cyclades and the only Greek destination where the nightlife actually starts at noon. Paradise and Super Paradise beach clubs run all-day parties from late May through September; Mykonos Town (Chora) handles the post-sunset bar crawl in Little Venice and the narrow Matogianni streets; and Cavo Paradiso opens at 1am for the headliner DJ sets that go until sunrise. It's expensive, it's busy, and from late July through August it's the densest party week-on-week of any Greek destination — book the table or skip the table.",
+    "el": "Η Μύκονος είναι το πιο δυνατό νησί των Κυκλάδων και ο μοναδικός ελληνικός προορισμός όπου η νυχτερινή ζωή ξεκινάει στη μία το μεσημέρι. Paradise και Super Paradise τρέχουν all-day parties από τέλη Μαΐου μέχρι Σεπτέμβρη, η Χώρα κρατάει το post-sunset bar crawl στη Μικρή Βενετία και στα στενά της Ματογιάννη, και το Cavo Paradiso ανοίγει στη μία τη νύχτα για τα headliner DJ sets μέχρι το ξημέρωμα. Είναι ακριβή, είναι γεμάτη, και από τέλη Ιουλίου μέχρι Αύγουστο είναι η πιο πυκνή party εβδομάδα σε όλη την Ελλάδα — κράτηση τραπεζιού ή καθόλου τραπέζι.",
+    "de": "Mykonos ist die lauteste Insel der Kykladen und das einzige griechische Reiseziel, an dem die Nightlife wirklich mittags startet. Paradise und Super Paradise Beach Clubs fahren von Ende Mai bis September All-Day-Partys; Mykonos-Stadt (Chora) übernimmt den Bar-Crawl nach Sonnenuntergang in Little Venice und den engen Matogianni-Gassen; und das Cavo Paradiso öffnet um 1 Uhr für die Headliner-DJ-Sets bis zum Sonnenaufgang. Es ist teuer, es ist voll, und von Ende Juli bis August die dichteste Partywoche Griechenlands — Tisch reservieren oder ohne Tisch kommen.",
+    "fr": "Mykonos est l'île la plus bruyante des Cyclades et la seule destination grecque où la nuit commence à midi. Paradise et Super Paradise enchaînent les all-day parties de fin mai à septembre ; la vieille ville (Chora) tient le bar crawl post-coucher de soleil dans la Petite Venise et les ruelles de Matogianni ; et Cavo Paradiso ouvre à 1h pour les DJ sets headliner jusqu'au lever du soleil. C'est cher, c'est plein, et de fin juillet à août c'est la semaine de fête la plus dense de Grèce — table réservée ou pas de table.",
+    "it": "Mykonos è l'isola più rumorosa delle Cicladi e l'unica destinazione greca dove la vita notturna parte davvero a mezzogiorno. Paradise e Super Paradise fanno feste all-day da fine maggio a settembre; la vecchia Chora gestisce il bar crawl post-tramonto nella Piccola Venezia e nei vicoli di Matogianni; e il Cavo Paradiso apre all'1 di notte per i DJ set headliner fino all'alba. È cara, è piena, e da fine luglio ad agosto è la settimana di festa più densa di tutta la Grecia — tavolo prenotato o niente tavolo."
+  },
+  "neighborhoods": [
+    {
+      "slug": "chora",
+      "name": { "en": "Mykonos Town (Chora)", "el": "Χώρα", "de": "Mykonos-Stadt (Chora)", "fr": "Chora (vieille ville)", "it": "Chora (centro storico)" },
+      "blurb": {
+        "en": "Little Venice for sunset cocktails, Matogianni Street for the bar crawl. Walk everywhere.",
+        "el": "Μικρή Βενετία για ηλιοβασίλεμα-cocktail, Ματογιάννη για bar crawl. Όλα με τα πόδια.",
+        "de": "Little Venice für Sunset-Cocktails, Matogianni-Straße für den Bar-Crawl. Alles zu Fuß.",
+        "fr": "Petite Venise pour les cocktails au coucher du soleil, rue Matogianni pour le bar crawl. Tout à pied.",
+        "it": "Piccola Venezia per i cocktail al tramonto, via Matogianni per il bar crawl. Tutto a piedi."
+      }
+    },
+    {
+      "slug": "paradise-beach",
+      "name": { "en": "Paradise Beach", "el": "Paradise Beach", "de": "Paradise Beach", "fr": "Paradise Beach", "it": "Paradise Beach" },
+      "blurb": {
+        "en": "All-day beach club + nighttime club at the same venue. Loud from noon, packed after 4pm.",
+        "el": "All-day beach club + νυχτερινό κλαμπ στον ίδιο χώρο. Δυνατά από το μεσημέρι, γεμάτο μετά τις 4.",
+        "de": "All-Day-Beachclub + Nachtclub am selben Ort. Laut ab Mittag, voll ab 16 Uhr.",
+        "fr": "Beach club all-day + club nocturne au même endroit. Bruyant dès midi, plein après 16h.",
+        "it": "Beach club tutto il giorno + club di notte nello stesso posto. Rumoroso da mezzogiorno, pieno dopo le 16."
+      }
+    },
+    {
+      "slug": "super-paradise",
+      "name": { "en": "Super Paradise", "el": "Super Paradise", "de": "Super Paradise", "fr": "Super Paradise", "it": "Super Paradise" },
+      "blurb": {
+        "en": "Smaller cove next to Paradise, slightly more upscale, daytime party crowd, big names regularly.",
+        "el": "Μικρότερος κόλπος δίπλα στο Paradise, λίγο πιο high-end, daytime party, τακτικά μεγάλα ονόματα.",
+        "de": "Kleinere Bucht neben Paradise, etwas gehobener, Daytime-Crowd, regelmäßig große Namen.",
+        "fr": "Crique plus petite à côté de Paradise, un peu plus chic, foule de jour, gros noms régulièrement.",
+        "it": "Cala più piccola accanto a Paradise, leggermente più chic, folla diurna, nomi grossi regolarmente."
+      }
+    },
+    {
+      "slug": "psarou",
+      "name": { "en": "Psarou", "el": "Ψαρού", "de": "Psarou", "fr": "Psarou", "it": "Psarou" },
+      "blurb": {
+        "en": "The expensive beach. Nammos lives here. Champagne, tables, the celebrity scene.",
+        "el": "Η ακριβή παραλία. Το Nammos είναι εδώ. Σαμπάνιες, τραπέζια, celebrity scene.",
+        "de": "Der teure Strand. Hier liegt Nammos. Champagner, Tische, Promi-Szene.",
+        "fr": "La plage chère. C'est ici qu'est Nammos. Champagne, tables, scène people.",
+        "it": "La spiaggia costosa. Qui c'è Nammos. Champagne, tavoli, scena celebrity."
+      }
+    },
+    {
+      "slug": "cavo-paradiso",
+      "name": { "en": "Cavo Paradiso", "el": "Cavo Paradiso", "de": "Cavo Paradiso", "fr": "Cavo Paradiso", "it": "Cavo Paradiso" },
+      "blurb": {
+        "en": "Cliff-top mega-club above Paradise. Opens 1am, closes when the sun is up. Headliner DJ shows all season.",
+        "el": "Mega-club στον γκρεμό πάνω από το Paradise. Ανοίγει στη μία, κλείνει με τον ήλιο. Headliner DJs όλη τη σεζόν.",
+        "de": "Mega-Club auf der Klippe über Paradise. Öffnet um 1 Uhr, schließt wenn die Sonne aufgeht. Headliner-DJs die ganze Saison.",
+        "fr": "Méga-club perché au-dessus de Paradise. Ouvre à 1h, ferme au lever du soleil. DJs headliner toute la saison.",
+        "it": "Mega-club sulla scogliera sopra Paradise. Apre all'1, chiude all'alba. DJ headliner per tutta la stagione."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Beachfront seafood", "Celebrity-table restaurants", "Sushi on the sand", "Greek tavernas in Ano Mera", "Long lunches with rosé"],
+      "el": ["Θαλασσινά στην παραλία", "Εστιατόρια με celebrity τραπέζια", "Sushi στην άμμο", "Ελληνικές ταβέρνες στην Άνω Μερά", "Long lunches με rosé"],
+      "de": ["Meeresfrüchte am Strand", "Promi-Restaurants", "Sushi am Sand", "Griechische Tavernen in Ano Mera", "Lange Lunches mit Rosé"],
+      "fr": ["Fruits de mer en bord de mer", "Restaurants des célébrités", "Sushi sur le sable", "Tavernes grecques à Ano Mera", "Long lunches au rosé"],
+      "it": ["Pesce in spiaggia", "Ristoranti delle celebrity", "Sushi sulla sabbia", "Taverne greche ad Ano Mera", "Lunghi pranzi con rosé"]
+    },
+    "intro": {
+      "en": "Mykonos eating happens in two very different worlds. On the beach side (Psarou, Nammos; Scorpios on Paraga; Spilia by the rocks) lunch starts at 2pm, runs until sunset, costs as much as dinner anywhere else, and the wine list opens at Whispering Angel. In the back-island village of Ano Mera and the lanes of Chora, family-run tavernas serve the actual Cycladic kitchen — louza, kopanisti cheese, fresh fish off the morning boats — at a fraction of the price. Reserve everything beachside; everything else, walk in by 9pm.",
+      "el": "Το φαγητό στη Μύκονο γίνεται σε δύο πολύ διαφορετικούς κόσμους. Στις παραλίες (Ψαρού, Nammos· Scorpios στην Παράγκα· Σπηλιά στα βράχια) το γεύμα ξεκινάει στις 2 το μεσημέρι, κρατάει μέχρι το ηλιοβασίλεμα, κοστίζει όσο ένα δείπνο αλλού, και η λίστα κρασιών ανοίγει με Whispering Angel. Στην Άνω Μερά και στα στενά της Χώρας, οικογενειακές ταβέρνες σερβίρουν την πραγματική κουζίνα των Κυκλάδων — λούζα, κοπανιστή, φρέσκο ψάρι από τα βραδινά καΐκια — σε κλάσμα της τιμής. Κλείσε τα παραλιακά· τα υπόλοιπα, πέρνα μέχρι τις 9.",
+      "de": "Essen auf Mykonos passiert in zwei sehr unterschiedlichen Welten. Strandseitig (Psarou, Nammos; Scorpios in Paraga; Spilia an den Felsen) beginnt das Mittagessen um 14 Uhr, läuft bis Sonnenuntergang, kostet so viel wie ein Abendessen anderswo, und die Weinkarte startet bei Whispering Angel. Im Hinterlanddorf Ano Mera und in den Gassen der Chora servieren familiengeführte Tavernen die eigentliche Kykladenküche — Louza, Kopanisti-Käse, frischen Fisch vom Morgenboot — zum Bruchteil des Preises. Strandseitig alles reservieren; alles andere bis 21 Uhr reinspazieren.",
+      "fr": "Manger à Mykonos se passe dans deux mondes très différents. Côté plage (Psarou, Nammos ; Scorpios à Paraga ; Spilia sur les rochers), le déjeuner commence à 14h, dure jusqu'au coucher du soleil, coûte le prix d'un dîner ailleurs, et la carte des vins ouvre sur du Whispering Angel. À Ano Mera, à l'intérieur, et dans les ruelles de Chora, des tavernes familiales servent la vraie cuisine cycladique — louza, fromage kopanisti, poisson frais du matin — à une fraction du prix. Réservez tout côté plage ; le reste, entrez avant 21h.",
+      "it": "Mangiare a Mykonos accade in due mondi molto diversi. Sul lato spiaggia (Psarou, Nammos; Scorpios a Paraga; Spilia sugli scogli) il pranzo inizia alle 14, dura fino al tramonto, costa quanto una cena altrove, e la carta dei vini apre con Whispering Angel. Nel paese interno di Ano Mera e nei vicoli di Chora, taverne familiari servono la vera cucina cicladica — louza, formaggio kopanisti, pesce fresco dei caicchi del mattino — a una frazione del prezzo. Prenota tutto lato spiaggia; il resto, entra entro le 21."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Five-star Cycladic resorts", "Adults-only luxury hotels", "Private villas with pools", "Boutique stays in Chora", "Beachfront suites"],
+      "el": ["Πέντε αστέρες Κυκλαδίτικα resorts", "Adults-only luxury ξενοδοχεία", "Ιδιωτικές βίλες με πισίνα", "Boutique stays στη Χώρα", "Suites μπροστά στη θάλασσα"],
+      "de": ["Fünf-Sterne-Kykladenresorts", "Adults-Only-Luxushotels", "Private Villen mit Pool", "Boutique-Unterkünfte in Chora", "Strandsuiten"],
+      "fr": ["Resorts cinq étoiles cycladiques", "Hôtels de luxe adults-only", "Villas privées avec piscine", "Boutiques en Chora", "Suites en bord de mer"],
+      "it": ["Resort cinque stelle cicladici", "Hotel di lusso adults-only", "Ville private con piscina", "Boutique a Chora", "Suite fronte mare"]
+    },
+    "intro": {
+      "en": "Where you sleep on Mykonos decides whether your trip is about the beach, the town, or the party. Chora puts you walking distance from Little Venice and the bars but means a taxi to every beach. Platis Gialos, Ornos and Psarou are the resort beaches — full-service hotels, shuttle to town, swim before breakfast. Elia and Kalo Livadi are quieter and more design-led. Paradise and Super Paradise are for people who plan to be at the beach club anyway. Taxis are scarce and surge in August — agree the fare before getting in, or pre-book transfers.",
+      "el": "Πού θα μείνεις στη Μύκονο καθορίζει αν το ταξίδι αφορά την παραλία, τη Χώρα ή το party. Η Χώρα σε αφήνει με τα πόδια στη Μικρή Βενετία και τα μπαρ, αλλά ταξί για κάθε παραλία. Πλατύς Γιαλός, Όρνος και Ψαρού είναι οι resort παραλίες — full-service ξενοδοχεία, shuttle στη Χώρα, μπάνιο πριν το πρωινό. Ελιά και Καλό Λιβάδι πιο ήσυχα και πιο design. Paradise και Super Paradise μόνο αν είσαι ήδη για beach club. Τα ταξί είναι σπάνια και ακριβαίνουν τον Αύγουστο — συμφώνησε ναύλο πριν μπεις, ή προ-κράτησε.",
+      "de": "Wo Sie auf Mykonos schlafen, entscheidet, ob es um den Strand, die Stadt oder die Party geht. Chora ist zu Fuß bei Little Venice und den Bars, aber zu jedem Strand braucht es ein Taxi. Platis Gialos, Ornos und Psarou sind die Resort-Strände — Vollservicehotels, Shuttle in die Stadt, Schwimmen vor dem Frühstück. Elia und Kalo Livadi sind ruhiger und designorientierter. Paradise und Super Paradise nur, wenn Sie ohnehin im Beachclub sind. Taxis sind selten und im August teuer — Preis vor dem Einsteigen vereinbaren oder vorab buchen.",
+      "fr": "Où vous dormez à Mykonos décide si le voyage tourne autour de la plage, de la ville ou de la fête. Chora vous met à pied de la Petite Venise et des bars, mais en taxi pour chaque plage. Platis Gialos, Ornos et Psarou sont les plages-resorts — hôtels tout-service, navette vers la ville, baignade avant le petit-déj. Elia et Kalo Livadi, plus calmes, plus design. Paradise et Super Paradise seulement si vous comptez aller au beach club de toute façon. Les taxis sont rares et chers en août — fixez le prix avant ou réservez à l'avance.",
+      "it": "Dove dormi a Mykonos decide se il viaggio è per la spiaggia, la città o la festa. Chora ti mette a piedi dalla Piccola Venezia e dai bar, ma in taxi per ogni spiaggia. Platis Gialos, Ornos e Psarou sono le spiagge-resort — hotel full-service, navetta per la città, bagno prima di colazione. Elia e Kalo Livadi più tranquilli e più design. Paradise e Super Paradise solo se sei già diretto al beach club. I taxi sono rari e cari ad agosto — concorda la tariffa prima di salire o prenota in anticipo."
+    }
+  },
+  "heroQueries": {
+    "hero": "Mykonos windmills white houses landscape",
+    "nightlife": "Mykonos Little Venice waterfront evening lights",
+    "food": "Greek seafood plate beachside Cyclades",
+    "stay": "Mykonos white cycladic boutique hotel pool sea view"
+  },
+  "unsplashQuery": "Mykonos windmills white houses landscape"
+}

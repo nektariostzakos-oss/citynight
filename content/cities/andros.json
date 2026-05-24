@@ -1,0 +1,64 @@
+{
+  "slug": "andros",
+  "dbId": "city_andros",
+  "season": "May to September",
+  "bestFor": {
+    "en": ["Chora boutique cocktail bars", "Batsi harbour summer scene", "Hiking-and-dinner culture", "Athens shipowner weekenders", "Adults-only romantic island"],
+    "el": ["Boutique cocktail bars στη Χώρα", "Καλοκαιρινή σκηνή στο λιμάνι του Μπατσίου", "Πεζοπορία-και-δείπνο", "Αθηναϊκοί εφοπλιστές weekenders", "Adults-only ρομαντικό νησί"],
+    "de": ["Boutique-Cocktailbars in Chora", "Sommerszene am Hafen von Batsi", "Wandern-und-Dinner-Kultur", "Athener Reederfamilien-Wochenendgäste", "Adults-Only-romantische Insel"],
+    "fr": ["Bars cocktails boutique à Chora", "Scène estivale au port de Batsi", "Culture randonnée-et-dîner", "Week-enders des armateurs athéniens", "Île romantique adults-only"],
+    "it": ["Cocktail bar boutique a Chora", "Scena estiva al porto di Batsi", "Cultura trekking-e-cena", "Weekend di armatori ateniesi", "Isola romantica adults-only"]
+  },
+  "intro": {
+    "en": "Andros is the second-largest Cycladic island and the closest to Athens (2 hours by ferry from Rafina) — historically the Athens shipowners' weekend retreat. Chora, on the east coast, has a small but stylish bar street built along a neoclassical-mansion seafront. Batsi on the west coast is the summer harbour-bar scene — touristier, livelier. The real Andros experience is the 100+ km of marked hiking trails through villages like Apoikia and Stenies, finishing at a riverside taverna with a glass of cold local kanela liqueur. No clubs, no foam parties — Andros is for the over-30 crowd.",
+    "el": "Η Άνδρος είναι το δεύτερο μεγαλύτερο νησί των Κυκλάδων και το πιο κοντινό στην Αθήνα (2 ώρες ferry από Ραφήνα) — ιστορικά καταφύγιο εφοπλιστών για το weekend. Η Χώρα στα ανατολικά έχει μικρό αλλά κομψό bar street πάνω σε νεοκλασικά. Το Μπατσί στα δυτικά κρατάει την καλοκαιρινή σκηνή στο λιμάνι — πιο τουριστική, πιο ζωντανή. Η πραγματική εμπειρία Άνδρου είναι τα 100+ χλμ σηματοδοτημένων μονοπατιών μέσα από χωριά (Αποίκια, Στενιές), με τελικό σταθμό κάποια ταβέρνα ποταμού και ένα παγωμένο κανέλο. Χωρίς κλαμπ, χωρίς αφρό — Άνδρος είναι για 30+.",
+    "de": "Andros ist die zweitgrößte Kykladeninsel und die nächste zu Athen (2 Stunden Fähre von Rafina) — historisch das Wochenend-Rückzugsgebiet der Athener Reeder. Chora an der Ostküste hat eine kleine, aber stilvolle Bar-Straße entlang einer klassizistischen Strandfront. Batsi an der Westküste trägt die sommerliche Hafenbar-Szene — touristischer, lebhafter. Das echte Andros-Erlebnis sind die 100+ km markierten Wanderwege durch Dörfer wie Apoikia und Stenies, mit Abschluss in einer Fluss-Taverne bei einem Glas kaltem lokalen Kanela-Likör. Keine Clubs, kein Schaum — Andros ist für 30+.",
+    "fr": "Andros est la deuxième plus grande Cyclade et la plus proche d'Athènes (2 heures de ferry de Rafina) — historiquement le refuge week-end des armateurs athéniens. Chora à l'est a une petite mais élégante rue de bars sur un front de mer néoclassique. Batsi à l'ouest tient la scène festive estivale du port — plus touristique, plus animée. La vraie expérience Andros, ce sont les 100+ km de sentiers balisés à travers les villages (Apoikia, Stenies), avec arrêt final dans une taverne au bord d'une rivière, un verre de kanela glacé local. Pas de clubs, pas de foam — Andros, c'est pour les 30+.",
+    "it": "Andros è la seconda cicladica per dimensione e la più vicina ad Atene (2 ore di traghetto da Rafina) — storicamente il rifugio weekend degli armatori ateniesi. Chora sulla costa est ha una piccola ma elegante via di bar lungo un fronte mare neoclassico. Batsi sulla costa ovest tiene la scena estiva del porto — più turistica, più vivace. La vera esperienza Andros sono i 100+ km di sentieri segnati attraverso i borghi (Apoikia, Stenies), con tappa finale in una taverna sul fiume e un bicchiere di kanela ghiacciato locale. Niente club, niente foam — Andros è per i 30+."
+  },
+  "neighborhoods": [
+    { "slug": "chora", "name": { "en": "Chora", "el": "Χώρα", "de": "Chora", "fr": "Chora", "it": "Chora" }, "blurb": { "en": "Neoclassical capital on a marble-paved peninsula. Walkable cocktail bars and museums.", "el": "Νεοκλασική πρωτεύουσα σε μαρμάρινη χερσόνησο. Περπατήσιμα cocktail bar και μουσεία.", "de": "Klassizistische Hauptstadt auf einer Marmorhalbinsel. Cocktailbars und Museen zu Fuß.", "fr": "Capitale néoclassique sur une péninsule pavée de marbre. Bars cocktails et musées à pied.", "it": "Capoluogo neoclassico su una penisola lastricata di marmo. Cocktail bar e musei a piedi." } },
+    { "slug": "batsi", "name": { "en": "Batsi", "el": "Μπατσί", "de": "Batsi", "fr": "Batsi", "it": "Batsi" }, "blurb": { "en": "West-coast summer port. The lively beach-bar choice with mid-range hotels.", "el": "Καλοκαιρινό λιμάνι στα δυτικά. Η ζωντανή επιλογή με beach bars και mid-range ξενοδοχεία.", "de": "Sommerhafen Westküste. Die lebhafte Wahl mit Beachbars und Mittelklassehotels.", "fr": "Port estival côte ouest. Choix animé avec beach bars et hôtels milieu de gamme.", "it": "Porto estivo costa ovest. La scelta vivace con beach bar e hotel di fascia media." } },
+    { "slug": "gavrio", "name": { "en": "Gavrio", "el": "Γαύριο", "de": "Gavrio", "fr": "Gavrio", "it": "Gavrio" }, "blurb": { "en": "Ferry port. A couple of waterfront tavernas — first stop off the boat.", "el": "Λιμάνι ferry. Δυο παραλιακές ταβέρνες — πρώτη στάση από το καράβι.", "de": "Fährhafen. Ein paar Strandtavernen — erste Station nach dem Boot.", "fr": "Port des ferries. Quelques tavernes du quai — première étape après le bateau.", "it": "Porto traghetti. Un paio di taverne sul lungomare — prima tappa dalla barca." } },
+    { "slug": "apoikia-stenies", "name": { "en": "Apoikia & Stenies (inland)", "el": "Αποίκια & Στενιές", "de": "Apoikia & Stenies (Inland)", "fr": "Apoikia & Stenies (intérieur)", "it": "Apoikia e Stenies (entroterra)" }, "blurb": { "en": "Stone villages above Chora. River tavernas with platanos shade and cold mountain spring water.", "el": "Πέτρινα χωριά πάνω από τη Χώρα. Ποταμίσιες ταβέρνες με σκιά πλατάνου και κρύο νερό.", "de": "Steindörfer oberhalb von Chora. Fluss-Tavernen unter Platanen, kaltes Quellwasser.", "fr": "Villages de pierre au-dessus de Chora. Tavernes au bord de la rivière sous les platanes, eau de source fraîche.", "it": "Borghi di pietra sopra Chora. Taverne sul fiume all'ombra dei platani, acqua di sorgente fresca." } }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Fourtalia (Andros village omelette)", "Local kopanisti cheese", "Riverside village tavernas in Pithara", "Sea-urchin lunches at Korthi", "Andros kanela cinnamon liqueur"],
+      "el": ["Φουρτάλια", "Ντόπια κοπανιστή", "Ποταμίσιες ταβέρνες στα Πιθάρα", "Αχινοί στο Κόρθι", "Κανέλο Άνδρου"],
+      "de": ["Fourtalia (Andros-Omelett)", "Lokale Kopanisti", "Fluss-Tavernen in Pithara", "Seeigel-Lunch in Korthi", "Andros-Kanela-Likör"],
+      "fr": ["Fourtalia (omelette du village d'Andros)", "Kopanisti local", "Tavernes au bord de rivière à Pithara", "Déjeuners d'oursins à Korthi", "Liqueur de cannelle d'Andros"],
+      "it": ["Fourtalia (frittata di Andros)", "Kopanisti locale", "Taverne fluviali a Pithara", "Pranzi di ricci a Korthi", "Liquore alla cannella di Andros"]
+    },
+    "intro": {
+      "en": "Andros eats with two clear specialties — fourtalia (a thick country omelette with local sausage, potatoes and herbs that no other Greek island makes) and the kanela cinnamon liqueur poured ice-cold after dinner. The river-valley tavernas at Pithara and the Stenies are the slow lunch experience the island is built for. Sea-urchin (ahini) is the speciality in the harbour at Ormos Korthiou on the south coast. Chora has the modern Greek small-plates tier (Stamatis, Pinkos).",
+      "el": "Η Άνδρος έχει δύο σαφείς σπεσιαλιτέ — φουρτάλια (χοντρή χωριάτικη ομελέτα με λουκάνικο, πατάτες, βότανα — μόνο εδώ) και το κανέλο που σερβίρεται πάγος μετά το δείπνο. Οι ταβέρνες-ποταμού στα Πιθάρα και τις Στενιές είναι η αργή εμπειρία μεσημεριανού για την οποία υπάρχει το νησί. Αχινοί στον Όρμο Κορθίου νότια. Η Χώρα έχει σύγχρονη ελληνική σε μικρά πιάτα (Σταμάτης, Pinkos).",
+      "de": "Andros isst zwei klare Spezialitäten — Fourtalia (dickes Bauernomelette mit lokaler Wurst, Kartoffeln und Kräutern — gibt es nur hier) und Kanela-Likör eiskalt nach dem Dinner. Die Fluss-Tavernen in Pithara und den Stenies sind die langsame Mittagslogik der Insel. Seeigel-Spezialität im Hafen von Ormos Korthiou im Süden. Chora hat moderne griechische Small Plates (Stamatis, Pinkos).",
+      "fr": "Andros mange deux spécialités claires — fourtalia (omelette épaisse paysanne avec saucisse, pommes de terre, herbes — unique à l'île) et kanela servi glacé après dîner. Les tavernes fluviales de Pithara et des Stenies sont la lente expérience-midi pour laquelle l'île existe. Oursins au port d'Ormos Korthiou au sud. Chora a la scène grec moderne petits plats (Stamatis, Pinkos).",
+      "it": "Andros mangia due specialità chiare — fourtalia (frittata rustica spessa con salsiccia, patate, erbe — unica dell'isola) e kanela servito ghiacciato dopo cena. Le taverne fluviali di Pithara e degli Stenies sono la lenta esperienza-pranzo per cui l'isola esiste. Ricci di mare al porto di Ormos Korthiou a sud. Chora ha la scena greca moderna piccoli piatti (Stamatis, Pinkos)."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Boutique mansion hotels in Chora", "Beach hotels in Batsi and Golden Beach", "Adults-only retreats above Korthi", "Stone-house guesthouses inland", "Cheap pensions in Gavrio for ferries"],
+      "el": ["Boutique σε αρχοντικά της Χώρας", "Παραλιακά σε Μπατσί και Χρυσή Ακτή", "Adults-only retreats πάνω από Κόρθι", "Πέτρινοι ξενώνες στα ορεινά", "Φθηνά πενσιόν στο Γαύριο για ferries"],
+      "de": ["Boutique-Stadthäuser in Chora", "Strandhotels in Batsi und Golden Beach", "Adults-Only-Retreats über Korthi", "Steinhaus-Gästehäuser im Inland", "Günstige Pensionen in Gavrio für Fähren"],
+      "fr": ["Boutiques en demeures à Chora", "Hôtels plage à Batsi et Golden Beach", "Retraites adults-only au-dessus de Korthi", "Maisons de pierre à l'intérieur", "Pensions pas chères à Gavrio pour les ferries"],
+      "it": ["Boutique nelle dimore di Chora", "Hotel di spiaggia a Batsi e Golden Beach", "Retreat adults-only sopra Korthi", "Case in pietra nell'entroterra", "Pensioni economiche a Gavrio per i traghetti"]
+    },
+    "intro": {
+      "en": "Chora gets you walkable nightlife and the museums but is 30 minutes from any decent beach. Batsi is the resort base — walking distance to harbour-front bars and a long sand-pebble beach. Korthi in the south-east is the surfer-and-retreat option with adults-only design hotels above the bay. Inland villages (Apoikia, Stenies, Pithara) have stone-house guesthouses for hikers with rental cars. Gavrio is the ferry port — cheap pensions for the budget option.",
+      "el": "Η Χώρα σε δίνει περπατήσιμη νύχτα και μουσεία αλλά 30 λεπτά από αξιοπρεπή παραλία. Το Μπατσί η resort βάση — με τα πόδια στο λιμάνι και σε αμμώδη-βότσαλο παραλία. Το Κόρθι ΝΑ: surfer-και-retreat με adults-only design πάνω από τον κόλπο. Ορεινά χωριά (Αποίκια, Στενιές, Πιθάρα) πέτρινοι ξενώνες για πεζοπόρους με αμάξι. Γαύριο = ferry, φθηνά πενσιόν.",
+      "de": "Chora bietet fußläufiges Nachtleben und Museen, aber 30 Minuten zum guten Strand. Batsi ist die Resort-Basis — zu Fuß zu Hafenbars und Sand-Kies-Strand. Korthi im Südosten ist die Surfer-und-Retreat-Option mit Adults-Only-Designhotels über der Bucht. Bergdörfer (Apoikia, Stenies, Pithara) Steinhaus-Gästehäuser für Wanderer mit Mietwagen. Gavrio = Fährhafen, günstige Pensionen.",
+      "fr": "Chora pour la vie nocturne à pied et les musées mais 30 min de toute bonne plage. Batsi base resort — à pied des bars du port et plage sable-galets. Korthi au sud-est : option surfer-et-retraite avec hôtels design adults-only au-dessus de la baie. Villages de l'intérieur (Apoikia, Stenies, Pithara) maisons de pierre pour randonneurs en voiture. Gavrio = port ferries, pensions pas chères.",
+      "it": "Chora per vita notturna a piedi e musei ma 30 min da qualsiasi spiaggia decente. Batsi base resort — a piedi dai bar del porto e spiaggia sabbia-ciottoli. Korthi a sud-est: opzione surfer-e-retreat con hotel design adults-only sopra la baia. Borghi interni (Apoikia, Stenies, Pithara) case in pietra per escursionisti con auto. Gavrio = porto traghetti, pensioni economiche."
+    }
+  },
+  "heroQueries": {
+    "hero": "Andros Cyclades neoclassical chora aerial sea",
+    "nightlife": "Andros chora harbour evening neoclassical lights",
+    "food": "Greek fourtalia omelette taverna plate Andros",
+    "stay": "Andros stone mansion boutique hotel Cycladic"
+  },
+  "unsplashQuery": "Andros Cyclades neoclassical chora sea"
+}

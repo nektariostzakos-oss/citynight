@@ -1,0 +1,104 @@
+{
+  "slug": "santorini",
+  "dbId": "city_santorini",
+  "season": "April to October",
+  "bestFor": {
+    "en": ["Sunset bars", "Cocktail terraces", "Caldera-view lounges", "Date nights", "Wine bars"],
+    "el": ["Sunset μπαρ", "Cocktail ταράτσες", "Lounge με θέα στην καλντέρα", "Date nights", "Wine bars"],
+    "de": ["Sunset-Bars", "Cocktail-Terrassen", "Caldera-Lounges", "Date Nights", "Weinbars"],
+    "fr": ["Bars sunset", "Terrasses cocktails", "Lounges vue caldeira", "Soirées en couple", "Bars à vin"],
+    "it": ["Bar al tramonto", "Terrazze cocktail", "Lounge con vista caldera", "Serate di coppia", "Wine bar"]
+  },
+  "intro": {
+    "en": "Santorini's nightlife is built around the caldera view, not the dancefloor. The default night is sunset cocktails on a cliff terrace in Oia or Fira, followed by dinner with the view, then late drinks at a handful of small clubs in Fira. There is no Mykonos-scale club scene here — and that's the point. Couples, slow nights, and a bar list that leans into Santorini's own Assyrtiko wines. Things wind down by 3am most nights; if you want until-sunrise dancing, take the ferry to Ios.",
+    "el": "Η νυχτερινή ζωή στη Σαντορίνη είναι χτισμένη γύρω από τη θέα στην καλντέρα, όχι γύρω από την πίστα. Η τυπική βραδιά: sunset cocktail σε ταράτσα στην Οία ή τα Φηρά, δείπνο με θέα, και late ποτά σε ένα-δυο μικρά κλαμπ στα Φηρά. Δεν υπάρχει σκηνή κλαμπ κλίμακας Μυκόνου — και αυτό είναι το νόημα. Ζευγάρια, αργές βραδιές, και μια ποτο-κάρτα που στηρίζεται στο τοπικό Ασύρτικο. Τα περισσότερα μαγαζιά κλείνουν περί τις 3· για χορό μέχρι τον ήλιο, καράβι για Ίο.",
+    "de": "Santorinis Nachtleben dreht sich um den Caldera-Blick, nicht um die Tanzfläche. Die typische Nacht: Sunset-Cocktails auf einer Klippenterrasse in Oia oder Fira, Dinner mit Aussicht, dann späte Drinks in einer Handvoll kleiner Clubs in Fira. Eine Club-Szene wie auf Mykonos gibt es hier nicht — und genau das ist der Punkt. Paare, langsame Nächte, und eine Getränkekarte, die auf den lokalen Assyrtiko-Wein setzt. Die meisten Lokale schließen gegen 3 Uhr; wer bis Sonnenaufgang tanzen will, nimmt die Fähre nach Ios.",
+    "fr": "La vie nocturne à Santorin est construite autour de la vue sur la caldeira, pas autour de la piste. La soirée type : cocktails au coucher du soleil sur une terrasse en falaise à Oia ou Fira, dîner avec vue, puis verres tardifs dans une poignée de petits clubs à Fira. Il n'y a pas de scène club à l'échelle de Mykonos — et c'est tout l'intérêt. Couples, soirées lentes, et une carte qui mise sur l'Assyrtiko local. La plupart des lieux ferment vers 3h ; pour danser jusqu'au lever du soleil, prenez le ferry pour Ios.",
+    "it": "La vita notturna a Santorini ruota attorno alla vista sulla caldera, non attorno alla pista. La serata tipo: cocktail al tramonto su una terrazza a strapiombo a Oia o Fira, cena con vista, poi drink tardi in uno dei pochi club a Fira. Non c'è una scena club in stile Mykonos — ed è proprio il punto. Coppie, serate lente, e una carta che punta sull'Assyrtiko locale. La maggior parte dei locali chiude verso le 3; per ballare fino all'alba, traghetto per Ios."
+  },
+  "neighborhoods": [
+    {
+      "slug": "oia",
+      "name": { "en": "Oia", "el": "Οία", "de": "Oia", "fr": "Oia", "it": "Oia" },
+      "blurb": {
+        "en": "The sunset village. Cliff terraces, wine bars, no clubs. Arrive at least an hour before sunset for a seat.",
+        "el": "Το χωριό του ηλιοβασιλέματος. Ταράτσες γκρεμού, wine bar, χωρίς κλαμπ. Έλα μία ώρα πριν για θέση.",
+        "de": "Das Sonnenuntergangsdorf. Klippenterrassen, Weinbars, keine Clubs. Mindestens eine Stunde vor Sonnenuntergang da sein.",
+        "fr": "Le village du coucher de soleil. Terrasses en falaise, bars à vin, pas de clubs. Arriver au moins 1h avant le coucher.",
+        "it": "Il villaggio del tramonto. Terrazze a strapiombo, wine bar, niente club. Arrivare almeno un'ora prima."
+      }
+    },
+    {
+      "slug": "fira",
+      "name": { "en": "Fira", "el": "Φηρά", "de": "Fira", "fr": "Fira", "it": "Fira" },
+      "blurb": {
+        "en": "The island's nightlife centre. Erythrou Stavrou street has the small clubs that stay open latest.",
+        "el": "Το κέντρο της νυχτερινής ζωής. Η οδός Ερυθρού Σταυρού έχει τα μικρά κλαμπ που κλείνουν τελευταία.",
+        "de": "Das Nightlife-Zentrum der Insel. Die Erythrou-Stavrou-Straße hat die kleinen Clubs, die am längsten offen sind.",
+        "fr": "Le centre nocturne de l'île. La rue Erythrou Stavrou concentre les petits clubs qui ferment le plus tard.",
+        "it": "Il centro della vita notturna dell'isola. Via Erythrou Stavrou ha i piccoli club che chiudono più tardi."
+      }
+    },
+    {
+      "slug": "imerovigli",
+      "name": { "en": "Imerovigli", "el": "Ημεροβίγλι", "de": "Imerovigli", "fr": "Imerovigli", "it": "Imerovigli" },
+      "blurb": {
+        "en": "Quieter, higher up, premium hotel bars with the same caldera view but less crowd than Oia.",
+        "el": "Πιο ήσυχα, πιο ψηλά, μπαρ premium ξενοδοχείων με την ίδια θέα αλλά λιγότερο κόσμο από την Οία.",
+        "de": "Ruhiger, höher gelegen, Premium-Hotelbars mit demselben Caldera-Blick, aber weniger Andrang als Oia.",
+        "fr": "Plus calme, plus haut, bars d'hôtels premium avec la même vue mais moins de monde qu'à Oia.",
+        "it": "Più tranquillo, più in alto, bar di hotel premium con la stessa vista ma meno folla rispetto a Oia."
+      }
+    },
+    {
+      "slug": "perissa",
+      "name": { "en": "Perissa", "el": "Περίσσα", "de": "Perissa", "fr": "Perissa", "it": "Perissa" },
+      "blurb": {
+        "en": "Black-sand beach. A handful of beach bars and the closest thing to a daytime party scene Santorini has.",
+        "el": "Παραλία με μαύρη άμμο. Λίγα beach bar, και ό,τι πιο κοντινό σε daytime party scene έχει η Σαντορίνη.",
+        "de": "Schwarzer Sandstrand. Eine Handvoll Beach-Bars und das Nächste, was Santorini einer Daytime-Party-Szene hat.",
+        "fr": "Plage de sable noir. Quelques beach bars et ce qui s'approche le plus d'une scène de jour à Santorin.",
+        "it": "Spiaggia di sabbia nera. Qualche beach bar e ciò che più si avvicina a una scena di giorno a Santorini."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Caldera-view fine dining", "Assyrtiko wine pairings", "Local Santorinian cuisine", "Seafood tavernas in Ammoudi", "Volcanic tomato keftedes"],
+      "el": ["Fine dining με θέα καλντέρα", "Pairings με Ασύρτικο", "Σαντορινιά κουζίνα", "Ψαροταβέρνες στο Αμμούδι", "Ντοματοκεφτέδες"],
+      "de": ["Feinküche mit Caldera-Blick", "Assyrtiko-Weinbegleitung", "Santorinische Küche", "Fischtavernen in Ammoudi", "Tomatenkeftedes"],
+      "fr": ["Fine dining vue caldeira", "Accords avec l'Assyrtiko", "Cuisine santorinienne", "Tavernes de poisson à Ammoudi", "Keftedes de tomates"],
+      "it": ["Fine dining vista caldera", "Abbinamenti con l'Assyrtiko", "Cucina santorinese", "Taverne di pesce ad Ammoudi", "Keftedes di pomodoro"]
+    },
+    "intro": {
+      "en": "Santorini cooks with what survives on volcanic rock: cherry tomatoes, white aubergines, fava (yellow split peas), capers, and the islands' wild Assyrtiko grape. The two distinct food experiences are caldera-view fine dining in Oia, Imerovigli and Firostefani — where the bill matches the view — and the fishing tavernas at the bottom of the Ammoudi cliff stairs, where the catch comes off the boats and you eat with your feet almost in the water. Skip the inland tourist-zone tavernas; everything good is either on the caldera, in Ammoudi, or in tiny inland villages like Megalochori.",
+      "el": "Η Σαντορίνη μαγειρεύει με όσα αντέχουν στον ηφαιστειακό βράχο: ντοματίνια, λευκή μελιτζάνα, φάβα, κάππαρη, και το άγριο Ασύρτικο. Οι δύο σαφείς γαστρονομικές εμπειρίες: fine dining με θέα καλντέρα σε Οία, Ημεροβίγλι, Φηροστεφάνι — όπου ο λογαριασμός ταιριάζει με τη θέα — και οι ψαροταβέρνες στα σκαλιά του Αμμουδιού, όπου η ψαριά βγαίνει από τα καΐκια και τρως με τα πόδια σχεδόν στη θάλασσα. Αποφύγετε τις τουριστικές ταβέρνες της μέσης· ό,τι αξίζει είναι στην καλντέρα, στο Αμμούδι, ή σε μικρά χωριά όπως το Μεγαλοχώρι.",
+      "de": "Santorini kocht mit dem, was auf dem Vulkangestein überlebt: Kirschtomaten, weiße Aubergine, Fava (Schälerbsen), Kapern und die wilde Assyrtiko-Traube. Zwei klare Esserlebnisse: Caldera-Blick-Fine-Dining in Oia, Imerovigli und Firostefani — wo die Rechnung zur Aussicht passt — und die Fischtavernen unten an der Ammoudi-Treppe, wo der Fang direkt vom Boot kommt und man fast mit den Füßen im Wasser sitzt. Touristische Tavernen im Landesinneren meiden; alles Gute ist an der Caldera, in Ammoudi oder in winzigen Dörfern wie Megalochori.",
+      "fr": "Santorin cuisine avec ce qui survit sur la roche volcanique : tomates cerises, aubergine blanche, fava (purée de pois cassés jaunes), câpres et le cépage sauvage Assyrtiko. Deux expériences distinctes : la haute cuisine vue caldeira à Oia, Imerovigli et Firostefani — où l'addition est à la hauteur de la vue — et les tavernes de poisson au pied des escaliers d'Ammoudi, où la pêche sort des barques et vous mangez les pieds presque dans l'eau. Évitez les tavernes touristiques de l'intérieur ; ce qui vaut le coup est sur la caldeira, à Ammoudi ou dans de petits villages comme Megalochori.",
+      "it": "Santorini cucina con quello che sopravvive sulla roccia vulcanica: pomodorini, melanzana bianca, fava (purè di piselli gialli), capperi e il vitigno selvatico Assyrtiko. Due esperienze distinte: fine dining con vista caldera a Oia, Imerovigli e Firostefani — dove il conto è all'altezza della vista — e le taverne di pesce ai piedi della scalinata di Ammoudi, dove il pescato arriva dalle barche e si mangia con i piedi quasi in acqua. Evita le taverne turistiche dell'entroterra; il buono è sulla caldera, ad Ammoudi o nei piccoli paesi come Megalochori."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Caldera-view cave suites", "Adults-only honeymoon hotels", "Private plunge-pool villas", "Quieter stays in Imerovigli", "Beachfront resorts in Perissa and Kamari"],
+      "el": ["Cave suites με θέα καλντέρα", "Adults-only honeymoon ξενοδοχεία", "Βίλες με ιδιωτική πισίνα", "Πιο ήσυχα στο Ημεροβίγλι", "Beachfront resorts σε Περίσσα και Καμάρι"],
+      "de": ["Höhlensuiten mit Caldera-Blick", "Adults-Only-Honeymoon-Hotels", "Villen mit privatem Plunge-Pool", "Ruhigere Unterkünfte in Imerovigli", "Strandresorts in Perissa und Kamari"],
+      "fr": ["Suites troglodytes vue caldeira", "Hôtels adults-only honeymoon", "Villas avec piscine privée", "Séjours plus calmes à Imerovigli", "Resorts en bord de mer à Perissa et Kamari"],
+      "it": ["Cave suite vista caldera", "Hotel honeymoon adults-only", "Ville con piscina privata", "Soggiorni più tranquilli a Imerovigli", "Resort fronte mare a Perissa e Kamari"]
+    },
+    "intro": {
+      "en": "Santorini is the most price-stratified Greek island for hotels. Oia and Imerovigli are where the caldera-view cave suites and infinity pools cluster — wildly photogenic, wildly priced, mostly adults-only and honeymoon-targeted. Firostefani sits between the two: same view, smaller hotels, slightly lower bills. Fira is the busiest, has the cheaper view rooms and the only real walkable nightlife. For families and beach-first stays, drop south to Kamari (black sand, calmer) or Perissa (livelier). Cave hotels in Oia book up six months out; cheaper inland stays in Pyrgos and Megalochori survive on rental cars.",
+      "el": "Η Σαντορίνη είναι το πιο διαστρωματωμένο σε τιμές ελληνικό νησί για ξενοδοχεία. Οία και Ημεροβίγλι: εδώ μαζεύονται τα cave suites με θέα καλντέρα και οι infinity pools — εξωφρενικά φωτογενή, εξωφρενικά ακριβά, κυρίως adults-only/honeymoon. Το Φηροστεφάνι ανάμεσα: ίδια θέα, μικρότερα ξενοδοχεία, λίγο πιο χαμηλός λογαριασμός. Τα Φηρά είναι τα πιο πολυσύχναστα, έχουν τα φθηνότερα δωμάτια με θέα και τη μόνη περπατήσιμη νυχτερινή ζωή. Για οικογένειες και beach-first, νότια στο Καμάρι (μαύρη άμμος, ήσυχο) ή την Περίσσα (πιο ζωηρή). Τα cave της Οίας κλείνουν 6 μήνες πριν· τα φθηνότερα ενδοχώρας σε Πύργο και Μεγαλοχώρι θέλουν αμάξι.",
+      "de": "Santorini ist die preislich am stärksten gespreizte griechische Hotelinsel. Oia und Imerovigli: hier ballen sich die Höhlensuiten mit Caldera-Blick und Infinity-Pools — extrem fotogen, extrem teuer, meist Adults-Only und Honeymoon-orientiert. Firostefani liegt dazwischen: gleiche Aussicht, kleinere Häuser, etwas niedrigere Rechnung. Fira ist am vollsten, hat die günstigeren Zimmer mit Blick und das einzige zu Fuß erreichbare Nachtleben. Für Familien und Strandgäste südwärts nach Kamari (schwarzer Sand, ruhiger) oder Perissa (lebhafter). Höhlenhotels in Oia sind sechs Monate im Voraus weg; günstigere Stays im Inland (Pyrgos, Megalochori) brauchen einen Mietwagen.",
+      "fr": "Santorin est l'île grecque la plus stratifiée en prix d'hôtel. Oia et Imerovigli concentrent les cave suites vue caldeira et les piscines à débordement — extrêmement photogéniques, extrêmement chers, surtout adults-only et lune de miel. Firostefani est au milieu : même vue, hôtels plus petits, addition un peu plus douce. Fira est la plus animée, propose les chambres vue les moins chères et la seule vie nocturne accessible à pied. Pour les familles et un séjour plage, descendez au sud à Kamari (sable noir, calme) ou Perissa (plus vivante). Les cave hôtels d'Oia se réservent 6 mois à l'avance ; les options moins chères de l'intérieur (Pyrgos, Megalochori) demandent une voiture.",
+      "it": "Santorini è l'isola greca con la maggior stratificazione di prezzi alberghieri. Oia e Imerovigli concentrano le cave suite vista caldera e le infinity pool — incredibilmente fotogeniche, incredibilmente care, in gran parte adults-only e per lune di miele. Firostefani sta nel mezzo: stessa vista, hotel più piccoli, conto un po' più basso. Fira è la più animata, ha le camere vista più economiche e l'unica vita notturna a piedi. Per famiglie e soggiorni mare, scendi a sud a Kamari (sabbia nera, tranquilla) o Perissa (più vivace). Le cave hotel di Oia si prenotano 6 mesi prima; gli alloggi più economici nell'entroterra (Pyrgos, Megalochori) richiedono auto."
+    }
+  },
+  "heroQueries": {
+    "hero": "Santorini Oia white houses blue domes caldera",
+    "nightlife": "Santorini caldera terrace evening blue hour",
+    "food": "Greek fava capers tomato keftedes Santorini taverna",
+    "stay": "Santorini cave suite infinity pool caldera view"
+  },
+  "unsplashQuery": "Santorini Oia caldera blue domes"
+}

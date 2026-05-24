@@ -1,0 +1,104 @@
+{
+  "slug": "rhodes",
+  "dbId": "city_rhodes",
+  "season": "April to October",
+  "bestFor": {
+    "en": ["Medieval Old Town bars", "Faliraki Bar Street mega-clubs", "Lindos rooftop and beach lounges", "Mandraki marina cocktails", "New Town Greek bouzoukia"],
+    "el": ["Μπαρ στη μεσαιωνική Παλιά Πόλη", "Mega-clubs στο Bar Street του Φαληρακίου", "Rooftop και beach lounges στη Λίνδο", "Cocktails στη Μαντράκι μαρίνα", "Ελληνικά μπουζούκια στη Νέα Πόλη"],
+    "de": ["Bars in der mittelalterlichen Altstadt", "Megaclubs in der Bar Street von Faliraki", "Rooftop- und Beachlounges in Lindos", "Cocktails an der Mandraki-Marina", "Griechische Bouzoukia in der Neustadt"],
+    "fr": ["Bars de la vieille ville médiévale", "Méga-clubs de la Bar Street à Faliraki", "Rooftops et beach lounges à Lindos", "Cocktails à la marina de Mandraki", "Bouzoukia grecs en ville nouvelle"],
+    "it": ["Bar nella città vecchia medievale", "Mega-club della Bar Street a Faliraki", "Rooftop e beach lounge a Lindos", "Cocktail al porto di Mandraki", "Bouzoukia greci nella città nuova"]
+  },
+  "intro": {
+    "en": "Rhodes splits cleanly into three nightlife tribes. The UNESCO medieval Old Town keeps cellar bars and live-music tavernas inside Knights-of-St-John walls — atmospheric, slow, mostly couples. Faliraki, 15 km south, runs Greece's longest-standing British-package club zone — the famous Bar Street has a club every 20 metres, foam parties and £3 vodkas, June-September. Lindos, 50 km south, is the upscale alternative — whitewashed rooftop bars under the Acropolis lit at night. The New Town (Mandraki, Akti Miaouli) is where local Rhodians actually drink year-round — proper Greek bouzoukia and rakadika.",
+    "el": "Η Ρόδος χωρίζεται καθαρά σε τρεις φυλές νυχτερινής ζωής. Η μεσαιωνική Παλιά Πόλη (UNESCO) κρατάει υπόγεια μπαρ και live ταβέρνες μέσα στα τείχη των Ιπποτών — ατμοσφαιρικά, αργά, κυρίως ζευγάρια. Το Φαληράκι, 15 χλμ νότια, τρέχει την πιο μακροχρόνια βρετανική package club zone της Ελλάδας — το θρυλικό Bar Street έχει club κάθε 20 μέτρα, foam parties και βότκα £3, Ιούνιο-Σεπτέμβριο. Η Λίνδος, 50 χλμ νότια, είναι η high-end εκδοχή — λευκασμένα rooftop μπαρ κάτω από την Ακρόπολη φωτισμένη το βράδυ. Η Νέα Πόλη (Μανδράκι, Ακτή Μιαούλη) είναι εκεί που πίνουν οι ντόπιοι όλο τον χρόνο — πραγματικά μπουζούκια και ρακάδικα.",
+    "de": "Rhodos teilt sich klar in drei Nachtleben-Stämme. Die mittelalterliche UNESCO-Altstadt bewahrt Kellerbars und Live-Musik-Tavernen innerhalb der Johanniter-Mauern — stimmungsvoll, langsam, eher Paare. Faliraki, 15 km südlich, fährt Griechenlands langlebigste britische Pauschal-Clubzone — die berühmte Bar Street hat alle 20 Meter einen Club, Schaumpartys und 3-£-Wodka, Juni-September. Lindos, 50 km südlich, ist die gehobene Variante — weiß getünchte Rooftop-Bars unter der nachts beleuchteten Akropolis. Die Neustadt (Mandraki, Akti Miaouli) ist, wo die Rhodier ganzjährig wirklich trinken — echte griechische Bouzoukia und Rakádika.",
+    "fr": "Rhodes se sépare nettement en trois tribus de nuit. La vieille ville médiévale UNESCO garde des bars en cave et des tavernes-concerts dans les murs des Chevaliers — atmosphérique, lent, surtout des couples. Faliraki, 15 km au sud, fait tourner la plus ancienne zone clubs en package britannique de Grèce — la fameuse Bar Street aligne un club tous les 20 mètres, foam parties et vodkas à 3 £, juin à septembre. Lindos, 50 km au sud, en est la version chic — rooftops blanchis sous l'Acropole illuminée la nuit. La nouvelle ville (Mandraki, Akti Miaouli) est où boivent les Rhodiens à l'année — vrais bouzoukia grecs et rakadika.",
+    "it": "Rodi si divide nettamente in tre tribù notturne. La città vecchia medievale UNESCO mantiene bar in cantina e taverne con musica dal vivo dentro le mura dei Cavalieri di San Giovanni — atmosferica, lenta, soprattutto coppie. Faliraki, 15 km a sud, gestisce la più antica zona di club a pacchetto inglese della Grecia — la celebre Bar Street allinea un club ogni 20 metri, foam party e vodka a 3 £, da giugno a settembre. Lindos, 50 km a sud, è la versione chic — rooftop imbiancati sotto l'Acropoli illuminata di notte. La città nuova (Mandraki, Akti Miaouli) è dove i rodiesi bevono tutto l'anno — veri bouzoukia greci e rakadika."
+  },
+  "neighborhoods": [
+    {
+      "slug": "old-town",
+      "name": { "en": "Old Town (UNESCO)", "el": "Παλιά Πόλη", "de": "Altstadt", "fr": "Vieille ville", "it": "Città vecchia" },
+      "blurb": {
+        "en": "Cobbled medieval lanes inside the Knights' walls. Cellar bars, live Greek tavernas, no clubs — closes early.",
+        "el": "Καλντερίμια στα μεσαιωνικά τείχη των Ιπποτών. Υπόγεια μπαρ, live ελληνικές ταβέρνες, χωρίς κλαμπ — κλείνει νωρίς.",
+        "de": "Kopfsteinpflastergassen in den Mauern der Johanniter. Kellerbars, Live-Tavernen, keine Clubs — schließt früh.",
+        "fr": "Ruelles pavées dans les murs des Chevaliers. Bars en cave, tavernes live, pas de clubs — ferme tôt.",
+        "it": "Vicoli lastricati dentro le mura dei Cavalieri. Bar in cantina, taverne live, niente club — chiude presto."
+      }
+    },
+    {
+      "slug": "faliraki",
+      "name": { "en": "Faliraki Bar Street", "el": "Bar Street Φαληρακίου", "de": "Faliraki Bar Street", "fr": "Bar Street de Faliraki", "it": "Bar Street di Faliraki" },
+      "blurb": {
+        "en": "The party strip. Mega-clubs, foam parties, drink-deal bars — the Greek answer to Ayia Napa.",
+        "el": "Το party strip. Mega-club, foam parties, μπαρ με προσφορές — η ελληνική εκδοχή της Άγια Νάπα.",
+        "de": "Die Party-Meile. Megaclubs, Schaumpartys, Sonderangebot-Bars — die griechische Antwort auf Ayia Napa.",
+        "fr": "Le strip festif. Méga-clubs, foam parties, bars à promos — la réponse grecque à Ayia Napa.",
+        "it": "La strip festaiola. Mega-club, foam party, bar a sconto — la risposta greca ad Ayia Napa."
+      }
+    },
+    {
+      "slug": "lindos",
+      "name": { "en": "Lindos", "el": "Λίνδος", "de": "Lindos", "fr": "Lindos", "it": "Lindos" },
+      "blurb": {
+        "en": "Whitewashed cliff village under the ancient acropolis. Rooftop cocktail bars overlooking St Paul's Bay — couples and upscale crowd.",
+        "el": "Λευκασμένο χωριό στον γκρεμό κάτω από την αρχαία ακρόπολη. Rooftop μπαρ με θέα στον Άγιο Παύλο — ζευγάρια και high-end κοινό.",
+        "de": "Weißes Klippendorf unter der antiken Akropolis. Rooftop-Cocktailbars über der St-Pauls-Bucht — Paare und gehobenes Publikum.",
+        "fr": "Village blanchi en falaise sous l'acropole antique. Bars cocktail en rooftop face à la baie de Saint-Paul — couples et public haut de gamme.",
+        "it": "Borgo bianco a strapiombo sotto l'antica acropoli. Cocktail bar in rooftop affacciati sulla baia di San Paolo — coppie e pubblico alto di gamma."
+      }
+    },
+    {
+      "slug": "mandraki",
+      "name": { "en": "Mandraki & New Town", "el": "Μανδράκι & Νέα Πόλη", "de": "Mandraki & Neustadt", "fr": "Mandraki & Ville Nouvelle", "it": "Mandraki e Città Nuova" },
+      "blurb": {
+        "en": "Marina-side cocktail bars, casino, and the year-round local nightlife — bouzoukia clubs on the airport road.",
+        "el": "Cocktail bar στη μαρίνα, καζίνο, και η ολόχρονη ντόπια νυχτερινή ζωή — μπουζούκια στον δρόμο του αεροδρομίου.",
+        "de": "Marina-Cocktailbars, Casino, das ganzjährige lokale Nachtleben — Bouzoukia-Clubs an der Flughafenstraße.",
+        "fr": "Bars à cocktails côté marina, casino, vie nocturne locale à l'année — bouzoukia sur la route de l'aéroport.",
+        "it": "Cocktail bar sul porto turistico, casinò, e la vita notturna locale tutto l'anno — bouzoukia sulla strada dell'aeroporto."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Dodecanese mezedopoleia", "Pitaroudia (chickpea fritters) and melekouni", "Old Town courtyard restaurants", "Mandraki marina seafood", "Lindos cliff-edge fine dining"],
+      "el": ["Δωδεκανησιακά μεζεδοπωλεία", "Πιταρούδια και μελεκούνι", "Εστιατόρια σε αυλές στην Παλιά Πόλη", "Θαλασσινά στη μαρίνα Μανδρακίου", "Fine dining στον γκρεμό της Λίνδου"],
+      "de": ["Mezedopoleia des Dodekanes", "Pitaroudia (Kichererbsen-Bratlinge) und Melekouni", "Innenhof-Restaurants in der Altstadt", "Meeresfrüchte an der Mandraki-Marina", "Klippen-Feinküche in Lindos"],
+      "fr": ["Mezedopoleia du Dodécanèse", "Pitaroudia (galettes de pois chiches) et melekouni", "Restaurants en cour dans la vieille ville", "Fruits de mer à la marina de Mandraki", "Fine dining en falaise à Lindos"],
+      "it": ["Mezedopoleia del Dodecaneso", "Pitaroudia (frittelle di ceci) e melekouni", "Ristoranti nei cortili della città vecchia", "Pesce alla marina di Mandraki", "Fine dining a strapiombo a Lindos"]
+    },
+    "intro": {
+      "en": "Rhodian cooking belongs to the Dodecanese family — chickpea fritters (pitaroudia), goat stewed with chickpeas, melekouni (sesame-honey wedding bars), and the Italian-era legacy of fresh pasta still showing up in old-town kitchens. The Old Town is full of pretty courtyard restaurants in tourist mode — the locals' picks are smaller mezedopoleia tucked off the main streets (look around Sokratous' side alleys). Lindos has a serious fine-dining cluster with sea-view terraces. Mandraki marina is for fresh seafood. Inland Rhodes (Embonas, Apollona) is where the wine and lamb roasts are honest and cheap.",
+      "el": "Η ροδίτικη κουζίνα ανήκει στην οικογένεια της Δωδεκανήσου — πιταρούδια (κεφτεδάκια ρεβιθιού), κατσίκι με ρεβίθια, μελεκούνι (γαμήλιο σουσαμοζύμη με μέλι), και κατάλοιπα της ιταλικής περιόδου με φρέσκα ζυμαρικά στις παλιές κουζίνες. Η Παλιά Πόλη γεμάτη όμορφα εστιατόρια σε αυλές, αλλά τουριστικά — οι ντόπιοι ψάχνουν μικρότερα μεζεδοπωλεία στα στενά πίσω από τη Σωκράτους. Η Λίνδος έχει σοβαρό fine-dining cluster με θέα. Η μαρίνα Μανδρακίου για φρέσκα θαλασσινά. Η ορεινή Ρόδος (Έμπωνας, Απόλλωνα) για ντόπιο κρασί και αρνί.",
+      "de": "Die rhodische Küche gehört zur Dodekanes-Familie — Kichererbsenbratlinge (Pitaroudia), Ziege mit Kichererbsen, Melekouni (Sesam-Honig-Hochzeitsriegel), und das italienische Erbe frischer Pasta zeigt sich noch in alten Stadtküchen. Die Altstadt ist voll hübscher Innenhofrestaurants im Touri-Modus — die Tipps der Locals sind kleinere Mezedopoleia in den Seitengassen der Sokratous. Lindos hat ein ernsthaftes Fine-Dining-Cluster mit Meerblick. Die Mandraki-Marina für frische Meeresfrüchte. Das Hinterland (Embonas, Apollona) für ehrlichen Wein und Lammbraten.",
+      "fr": "La cuisine rhodienne appartient à la famille du Dodécanèse — pitaroudia (galettes de pois chiches), chèvre mijotée aux pois chiches, melekouni (barre de mariage sésame-miel), et l'héritage italien des pâtes fraîches encore présent dans les vieilles cuisines. La vieille ville regorge de restaurants en cour, en mode touristique — les locaux choisissent les petits mezedopoleia dans les ruelles latérales de Sokratous. Lindos a un vrai cluster de fine dining avec vue mer. La marina de Mandraki pour les fruits de mer. L'intérieur (Embonas, Apollona) pour le vin et l'agneau, honnêtes et bon marché.",
+      "it": "La cucina rodiota appartiene alla famiglia del Dodecaneso — pitaroudia (frittelle di ceci), capra stufata con ceci, melekouni (barrette nuziali sesamo-miele), e l'eredità italiana della pasta fresca ancora visibile nelle vecchie cucine. La città vecchia è piena di bei ristoranti nei cortili, in modalità turistica — i locali scelgono mezedopoleia più piccoli nei vicoli laterali di Sokratous. Lindos ha un vero cluster di fine dining con vista mare. La marina di Mandraki per il pesce. L'entroterra (Embonas, Apollona) per vino e agnello, sinceri ed economici."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Boutique hotels inside the Old Town walls", "All-inclusive resorts in Ixia and Ialysos", "Adults-only design hotels in Lindos", "Family resorts in Kolymbia and Afandou", "Cheap pool hotels in Faliraki"],
+      "el": ["Boutique μέσα στα τείχη της Παλιάς Πόλης", "All-inclusive resorts σε Ιξιά και Ιαλυσό", "Adults-only design στη Λίνδο", "Οικογενειακά resorts σε Κολύμπια και Αφάντου", "Φθηνά με πισίνα στο Φαληράκι"],
+      "de": ["Boutique-Hotels in den Altstadtmauern", "All-Inclusive-Resorts in Ixia und Ialysos", "Adults-Only-Designhotels in Lindos", "Familienresorts in Kolymbia und Afandou", "Günstige Pool-Hotels in Faliraki"],
+      "fr": ["Boutiques dans les murs de la vieille ville", "Resorts all-inclusive à Ixia et Ialyssos", "Design adults-only à Lindos", "Resorts famille à Kolymbia et Afandou", "Hôtels avec piscine pas chers à Faliraki"],
+      "it": ["Boutique dentro le mura della città vecchia", "Resort all-inclusive a Ixia e Ialysos", "Design adults-only a Lindos", "Resort famiglia a Kolymbia e Afandou", "Hotel con piscina economici a Faliraki"]
+    },
+    "intro": {
+      "en": "Rhodes is the easiest Greek island to match a hotel to a holiday style. For history-and-culture trips, stay inside the Old Town walls — small boutique hotels in restored Knights-era houses, walking distance to everything inside the medieval city and a short taxi to Mandraki. The west coast (Ixia, Ialysos) is the all-inclusive belt — windy beaches, good for kitesurfers and families on a budget. Faliraki is for clubbers. Lindos and the south-east (Tsambika, Pefkos) are for couples wanting design hotels and quiet beaches. The far south (Prasonisi) is for kite/windsurfers and travellers who want empty road.",
+    "el": "Η Ρόδος είναι το πιο εύκολο ελληνικό νησί στο να ταιριάξεις ξενοδοχείο με στιλ διακοπών. Για ιστορία-και-πολιτισμό, μέσα στα τείχη της Παλιάς Πόλης — μικρά boutique σε αναπαλαιωμένα αρχοντικά Ιπποτών, με τα πόδια παντού εντός μεσαιωνικής, και ταξί στο Μανδράκι. Η δυτική ακτή (Ιξιά, Ιαλυσός) είναι η ζώνη all-inclusive — αέρας, καλό για kitesurf και οικογένειες με budget. Το Φαληράκι για clubbers. Η Λίνδος και τα νοτιοανατολικά (Τσαμπίκα, Πεύκος) για ζευγάρια σε design με ήσυχες παραλίες. Το νότιο άκρο (Πρασονήσι) για kite/windsurf και άδειους δρόμους.",
+    "de": "Rhodos ist die einfachste griechische Insel, um Hotelstil zu Urlaubsstil zu matchen. Für Kultur in den Altstadtmauern bleiben — kleine Boutiques in restaurierten Johanniter-Häusern, alles zu Fuß in der mittelalterlichen Stadt, Taxi nach Mandraki. Die Westküste (Ixia, Ialysos) ist die All-Inclusive-Zone — windig, gut für Kitesurfer und Budget-Familien. Faliraki für Clubber. Lindos und der Südosten (Tsambika, Pefkos) für Paare in Design-Hotels mit ruhigen Stränden. Der äußerste Süden (Prasonisi) für Kite-/Windsurfer und leere Straßen.",
+    "fr": "Rhodes est l'île grecque la plus facile pour aligner hôtel et style de séjour. Pour l'histoire-et-culture, dormez dans les murs de la vieille ville — petits boutiques dans des demeures restaurées des Chevaliers, tout à pied dans la cité médiévale, taxi pour Mandraki. La côte ouest (Ixia, Ialyssos) est la ceinture all-inclusive — venteuse, idéale pour le kitesurf et les familles à budget. Faliraki pour les clubbers. Lindos et le sud-est (Tsambika, Pefkos) pour les couples en hôtels de design et plages calmes. L'extrême sud (Prasonisi) pour le kite/windsurf et la route vide.",
+    "it": "Rodi è l'isola greca più facile per abbinare hotel allo stile di vacanza. Per storia-e-cultura, dentro le mura della città vecchia — piccoli boutique in dimore restaurate dei Cavalieri, tutto a piedi nella città medievale, taxi per Mandraki. La costa ovest (Ixia, Ialysos) è la cintura all-inclusive — ventosa, buona per kitesurf e famiglie con budget. Faliraki per i clubber. Lindos e il sud-est (Tsambika, Pefkos) per coppie in hotel di design e spiagge tranquille. L'estremo sud (Prasonisi) per kite/windsurf e strade vuote."
+    }
+  },
+  "heroQueries": {
+    "hero": "Rhodes Lindos acropolis whitewashed village sea",
+    "nightlife": "Rhodes Old Town medieval cobblestone street evening",
+    "food": "Greek meze plates rustic taverna table",
+    "stay": "Lindos white cubic boutique hotel sea view"
+  },
+  "unsplashQuery": "Rhodes Lindos acropolis village sea"
+}

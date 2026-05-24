@@ -1,0 +1,104 @@
+{
+  "slug": "ios",
+  "dbId": "city_ios",
+  "season": "June to early September",
+  "bestFor": {
+    "en": ["Chora bar-village party", "Mylopotas beach club days", "Until-sunrise dancing", "Young backpacker scene", "Cheap drinks and hostels"],
+    "el": ["Party στη Χώρα", "Beach club στον Μυλοπότα", "Χορός μέχρι το ξημέρωμα", "Νεανική backpacker σκηνή", "Φθηνά ποτά και hostels"],
+    "de": ["Partydorf Chora", "Beachclub-Tage in Mylopotas", "Tanzen bis Sonnenaufgang", "Junges Backpacker-Publikum", "Günstige Drinks und Hostels"],
+    "fr": ["Village-festif de Chora", "Beach club à Mylopotas", "Danse jusqu'au lever du soleil", "Scène backpacker jeune", "Verres et auberges pas chers"],
+    "it": ["Villaggio-festa di Chora", "Beach club a Mylopotas", "Ballo fino all'alba", "Scena backpacker giovane", "Drink e ostelli economici"]
+  },
+  "intro": {
+    "en": "Ios is the Cycladic island that turned itself into a party destination — and committed. The entire whitewashed Chora is the nightlife venue: 30 bars in 200 metres, each with a different sound from rock to reggaeton, the whole hilltop dancing on the stairs until 5am from late June to early September. Mylopotas beach below runs an all-day beach club scene that flips straight into Chora at dark. The crowd is young (early 20s, gap-year, backpacker), the drinks are cheap by Greek standards, and the season is short and intense. Off-season Ios is a different island — almost everything shuts.",
+    "el": "Η Ίος είναι το κυκλαδίτικο νησί που έγινε προορισμός πάρτι — και το πάει μέχρι το τέλος. Όλη η λευκασμένη Χώρα είναι το μαγαζί: 30 μπαρ σε 200 μέτρα, καθένα με διαφορετικό ήχο από rock μέχρι reggaeton, όλος ο λόφος χορεύει στα σκαλιά μέχρι τις 5 από τέλη Ιουνίου ως αρχές Σεπτεμβρίου. Η παραλία Μυλοπότας από κάτω τρέχει σκηνή beach club όλη την ημέρα που γυρίζει κατευθείαν στη Χώρα όταν σκοτεινιάσει. Νεανικό κοινό (κάτω 25, gap-year, backpacker), φθηνά ποτά για ελληνικά δεδομένα, σύντομη και έντονη σεζόν. Εκτός σεζόν είναι άλλο νησί — σχεδόν τα πάντα κλείνουν.",
+    "de": "Ios ist die kykladische Insel, die sich zum Partyziel gemacht hat — und es ernst meint. Die ganze weiß getünchte Chora ist die Location: 30 Bars auf 200 Metern, jede mit einem anderen Sound von Rock bis Reggaeton, der ganze Hügel tanzt von Ende Juni bis Anfang September bis 5 Uhr auf den Treppen. Der Mylopotas-Strand darunter läuft tagsüber als Beachclub-Szene, die nach Einbruch der Dunkelheit nahtlos nach Chora kippt. Junges Publikum (Anfang 20, Gap-Year, Backpacker), nach griechischen Maßstäben günstige Drinks, kurze und intensive Saison. Außerhalb der Saison ist Ios eine andere Insel — fast alles schließt.",
+    "fr": "Ios est l'île des Cyclades qui s'est transformée en destination festive — et qui assume. Toute la Chora blanchie est le club : 30 bars en 200 mètres, chacun avec un son différent du rock au reggaeton, toute la colline danse dans les escaliers jusqu'à 5h, de fin juin à début septembre. La plage de Mylopotas, en contrebas, fonctionne toute la journée en beach club qui bascule directement vers Chora à la nuit tombée. Public jeune (début 20, année sabbatique, backpackers), verres bon marché pour des prix grecs, saison courte et intense. Hors saison, Ios est une autre île — presque tout ferme.",
+    "it": "Ios è l'isola cicladica che si è trasformata in destinazione festaiola — fino in fondo. Tutta la Chora imbiancata è il locale: 30 bar in 200 metri, ognuno con un sound diverso dal rock al reggaeton, tutta la collina balla sulle scalinate fino alle 5, da fine giugno a inizio settembre. La spiaggia di Mylopotas sotto va tutto il giorno come beach club che vira direttamente verso Chora al buio. Pubblico giovane (sui 20, anno sabbatico, backpacker), drink economici per gli standard greci, stagione breve e intensa. Fuori stagione Ios è un'altra isola — quasi tutto chiude."
+  },
+  "neighborhoods": [
+    {
+      "slug": "chora",
+      "name": { "en": "Chora", "el": "Χώρα", "de": "Chora", "fr": "Chora", "it": "Chora" },
+      "blurb": {
+        "en": "The hilltop village. The entire warren of stepped lanes is a single open-air club for ten weeks a year. Plan to walk a lot uphill.",
+        "el": "Το χωριό στον λόφο. Όλο το δαιδαλώδες λευκό σκηνικό είναι ένα ενιαίο open-air club για 10 εβδομάδες τον χρόνο. Πολύ ανηφορικό περπάτημα.",
+        "de": "Das Dorf auf dem Hügel. Das ganze weiße Gassengewirr ist zehn Wochen im Jahr ein einziger Open-Air-Club. Viel Bergaufgehen einplanen.",
+        "fr": "Le village sur la colline. Tout le labyrinthe de ruelles en escalier est un seul club à ciel ouvert dix semaines par an. Beaucoup de marche en montée.",
+        "it": "Il villaggio sulla collina. Tutto il dedalo di vicoli a scale è un unico club a cielo aperto per dieci settimane l'anno. Molti passi in salita."
+      }
+    },
+    {
+      "slug": "mylopotas",
+      "name": { "en": "Mylopotas", "el": "Μυλοπότας", "de": "Mylopotas", "fr": "Mylopotas", "it": "Mylopotas" },
+      "blurb": {
+        "en": "Long sandy beach with daytime beach clubs (Far Out, Mylopotas Beach Bar). DJ from noon, peak crowd by 5pm, dinner before Chora opens.",
+        "el": "Μεγάλη αμμώδης παραλία με daytime beach club (Far Out, Mylopotas Beach Bar). DJ από το μεσημέρι, κορύφωση 5μμ, δείπνο πριν ανοίξει η Χώρα.",
+        "de": "Lange Sandstrand mit Tages-Beachclubs (Far Out, Mylopotas Beach Bar). DJ ab Mittag, Höhepunkt 17 Uhr, Dinner bevor Chora öffnet.",
+        "fr": "Longue plage de sable avec beach clubs de jour (Far Out, Mylopotas Beach Bar). DJ dès midi, pic vers 17h, dîner avant l'ouverture de Chora.",
+        "it": "Lunga spiaggia di sabbia con beach club diurni (Far Out, Mylopotas Beach Bar). DJ da mezzogiorno, picco alle 17, cena prima che Chora apra."
+      }
+    },
+    {
+      "slug": "port-yialos",
+      "name": { "en": "Port (Yialos)", "el": "Λιμάνι (Γιαλός)", "de": "Hafen (Yialos)", "fr": "Port (Yialos)", "it": "Porto (Yialos)" },
+      "blurb": {
+        "en": "Where the ferries land. A handful of waterfront tavernas and bars — pre-dinner mood before the bus up to Chora.",
+        "el": "Εκεί που πιάνει το καράβι. Λίγες παραλιακές ταβέρνες και μπαρ — προ-δείπνου διάθεση πριν το λεωφορείο για Χώρα.",
+        "de": "Wo die Fähren anlegen. Eine Handvoll Strandtavernen und Bars — Vor-Dinner-Stimmung vor dem Bus nach Chora.",
+        "fr": "Où arrivent les ferries. Quelques tavernes et bars sur le quai — humeur pré-dîner avant le bus pour Chora.",
+        "it": "Dove arrivano i traghetti. Qualche taverna e bar sul molo — clima pre-cena prima del bus per Chora."
+      }
+    },
+    {
+      "slug": "manganari",
+      "name": { "en": "Manganari (south)", "el": "Μαγγανάρι (νότια)", "de": "Manganari (Süden)", "fr": "Manganari (sud)", "it": "Manganari (sud)" },
+      "blurb": {
+        "en": "Quiet beach on the far southern tip. No nightlife — for the daytime recovery between Chora nights.",
+        "el": "Ήσυχη παραλία στο νότιο άκρο. Χωρίς νυχτερινή ζωή — για ανάρρωση μέρας ανάμεσα σε βραδιές Χώρας.",
+        "de": "Ruhiger Strand an der Südspitze. Kein Nachtleben — für die Erholung tagsüber zwischen Chora-Nächten.",
+        "fr": "Plage tranquille à la pointe sud. Pas de vie nocturne — pour la récupération de jour entre deux nuits à Chora.",
+        "it": "Spiaggia tranquilla all'estremità sud. Niente vita notturna — per il recupero diurno tra le notti a Chora."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Chora taverna dinners before the bars open", "Cheap gyros and souvlaki for post-club hunger", "Beachfront fish lunches at Mylopotas", "Skarkofagia (Iotan goat-and-pasta dish)", "Brunch hangover cures"],
+      "el": ["Δείπνο στη Χώρα πριν ανοίξουν τα μπαρ", "Φθηνός γύρος μετά τα κλαμπ", "Ψάρι στην παραλία στον Μυλοπότα", "Σκαρκοφάγια (κατσίκι με ζυμαρικά)", "Brunch για το hangover"],
+      "de": ["Taverna-Dinner in Chora bevor die Bars öffnen", "Günstiger Gyros nach dem Club", "Fisch am Strand in Mylopotas", "Skarkofagia (Ios-Ziegen-Nudelgericht)", "Brunch gegen den Kater"],
+      "fr": ["Dîners de taverne à Chora avant l'ouverture des bars", "Gyros pas cher après le club", "Poisson en bord de mer à Mylopotas", "Skarkofagia (chèvre et pâtes d'Ios)", "Brunch anti-gueule de bois"],
+      "it": ["Cene in taverna a Chora prima dell'apertura dei bar", "Gyros economico dopo i club", "Pesce sulla spiaggia a Mylopotas", "Skarkofagia (capra con pasta di Ios)", "Brunch contro la sbornia"]
+    },
+    "intro": {
+      "en": "Ios food is built around the party clock. Dinner before 10pm is the play — Chora's tavernas (Lord Byron, Katogi, Drakos) do solid Cycladic plates before everyone migrates to the bars. Beach lunches at Mylopotas are simple Greek classics with sun loungers under you. Late at night, every street corner has a gyros stall for the post-bar refuel. The island has its own dish — skarkofagia, a goat-and-handmade-pasta stew — which only a couple of tavernas still cook, worth tracking down. Brunch became a real category here in the last five years thanks to the backpacker tide.",
+      "el": "Το φαγητό της Ίου ακολουθεί τη βραδιά. Δείπνο πριν τις 10 — οι ταβέρνες της Χώρας (Lord Byron, Κατώι, Δράκος) σερβίρουν στέρεα κυκλαδίτικα πιάτα πριν όλοι μεταναστεύσουν στα μπαρ. Μεσημεριανό στην παραλία στον Μυλοπότα = απλά ελληνικά κλασικά με ξαπλώστρα κάτω. Αργά τη νύχτα, σε κάθε γωνία γύρος για ανεφοδιασμό. Το νησί έχει δικό του πιάτο — σκαρκοφάγια, κατσίκι με χειροποίητα ζυμαρικά — που μόνο δυο ταβέρνες ακόμη μαγειρεύουν. Το brunch έγινε κανονική κατηγορία τα τελευταία 5 χρόνια χάρη στους backpackers.",
+      "de": "Ios-Essen folgt der Partyuhr. Dinner vor 22 Uhr — Choras Tavernen (Lord Byron, Katogi, Drakos) servieren solide kykladische Teller, bevor alle in die Bars wandern. Strandlunch in Mylopotas = einfache griechische Klassiker, Liege darunter. Spät nachts gibt es an jeder Ecke einen Gyros-Stand zur Nachversorgung. Die Insel hat ein eigenes Gericht — Skarkofagia, Ziegen-Hausnudel-Eintopf — das nur noch zwei Tavernen kochen. Brunch ist hier in den letzten fünf Jahren dank der Backpacker-Welle eine echte Kategorie geworden.",
+      "fr": "La cuisine d'Ios suit la pendule de la fête. Dîner avant 22h — les tavernes de Chora (Lord Byron, Katogi, Drakos) servent de solides plats cycladiques avant que tout le monde migre vers les bars. Déjeuner à Mylopotas = classiques grecs simples, transat sous vous. Tard la nuit, à chaque coin de rue un gyros pour le ravitaillement post-bar. L'île a son plat propre — skarkofagia, ragoût de chèvre et pâtes maison — que seules deux tavernes cuisinent encore. Le brunch est devenu une vraie catégorie ici ces cinq dernières années grâce à la vague backpacker.",
+      "it": "La cucina di Ios segue l'orologio della festa. Cena prima delle 22 — le taverne di Chora (Lord Byron, Katogi, Drakos) servono solidi piatti cicladici prima che tutti migrino ai bar. Pranzo in spiaggia a Mylopotas = classici greci semplici, lettino sotto. A notte fonda, a ogni angolo c'è un gyros per il rifornimento post-bar. L'isola ha un suo piatto — skarkofagia, stufato di capra con pasta fatta in casa — che solo un paio di taverne ancora cucinano. Il brunch è diventato qui una vera categoria negli ultimi 5 anni grazie all'ondata backpacker."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Hostels in Chora and Mylopotas for partygoers", "Mid-range beachfront hotels on Mylopotas", "Quieter boutique stays in Yialos", "Adults-only retreats above Manganari", "Cheap-and-cheerful pensions"],
+      "el": ["Hostels στη Χώρα και τον Μυλοπότα για party-goers", "Mid-range στην παραλία Μυλοπότα", "Πιο ήσυχα boutique στον Γιαλό", "Adults-only retreats πάνω από Μαγγανάρι", "Φθηνά πενσιόν"],
+      "de": ["Hostels in Chora und Mylopotas für Partyfans", "Mittelklasse-Strandhotels in Mylopotas", "Ruhigere Boutiques in Yialos", "Adults-Only-Retreats über Manganari", "Günstige Pensionen"],
+      "fr": ["Auberges à Chora et Mylopotas pour la fête", "Hôtels de plage milieu de gamme à Mylopotas", "Boutiques plus calmes à Yialos", "Retraites adults-only au-dessus de Manganari", "Pensions pas chères"],
+      "it": ["Ostelli a Chora e Mylopotas per i festaioli", "Hotel di fascia media in spiaggia a Mylopotas", "Boutique più tranquilli a Yialos", "Retreat adults-only sopra Manganari", "Pensioni economiche"]
+    },
+    "intro": {
+      "en": "Ios stays mostly fall into three brackets. The hostels and budget rooms in Chora and Mylopotas are for the core party crowd — cheap, social, often loud. The mid-range hotels on Mylopotas beach are the comfortable backpacker upgrade — pool, breakfast, walking distance to the daytime beach clubs and a 5-min taxi up to Chora. The boutique boom of the last decade has put a handful of design hotels and adults-only retreats up on the slopes south of Mylopotas and around Manganari — well away from the noise, requiring a car. Yialos (the port) is a quieter pick for travellers who want the island but not the volume.",
+      "el": "Τα stays της Ίου χωρίζονται σε τρεις κατηγορίες. Hostels και φθηνά δωμάτια σε Χώρα και Μυλοπότα για τον σκληρό πυρήνα — φθηνά, κοινωνικά, συχνά θορυβώδη. Mid-range στην παραλία Μυλοπότα = comfort upgrade — πισίνα, πρωινό, με τα πόδια στα daytime beach club, 5 λεπτά ταξί στη Χώρα. Το boutique boom της τελευταίας δεκαετίας έβαλε design ξενοδοχεία και adults-only retreats νότια του Μυλοπότα και γύρω από Μαγγανάρι — μακριά από τον θόρυβο, χρειάζονται αμάξι. Ο Γιαλός είναι πιο ήσυχη επιλογή για όσους θέλουν το νησί χωρίς την ένταση.",
+      "de": "Ios-Unterkünfte fallen in drei Schubladen. Hostels und Budgetzimmer in Chora und Mylopotas für den Partykern — günstig, sozial, oft laut. Mittelklassehotels am Mylopotas-Strand sind das bequeme Upgrade — Pool, Frühstück, zu Fuß zu den Tages-Beachclubs, 5 Minuten Taxi nach Chora. Der Boutique-Boom der letzten Dekade hat ein paar Designhotels und Adults-Only-Retreats südlich von Mylopotas und um Manganari hervorgebracht — weg vom Lärm, Auto nötig. Yialos (Hafen) ist die ruhigere Wahl für Reisende, die die Insel wollen, aber nicht die Lautstärke.",
+      "fr": "Dormir à Ios se divise en trois catégories. Auberges et chambres pas chères à Chora et Mylopotas pour le noyau festif — pas cher, social, souvent bruyant. Hôtels milieu de gamme sur la plage de Mylopotas = montée en gamme confort — piscine, petit-déjeuner, à pied des beach clubs de jour, 5 min en taxi de Chora. Le boom boutique de la décennie a posé quelques hôtels de design et retraites adults-only au sud de Mylopotas et autour de Manganari — loin du bruit, voiture nécessaire. Yialos (le port) est le choix plus tranquille pour ceux qui veulent l'île sans le volume.",
+      "it": "Dormire a Ios si divide in tre categorie. Ostelli e camere economiche a Chora e Mylopotas per il nucleo festaiolo — economici, sociali, spesso rumorosi. Hotel di fascia media sulla spiaggia di Mylopotas = upgrade comfort — piscina, colazione, a piedi dai beach club diurni, 5 minuti in taxi per Chora. Il boom boutique dell'ultimo decennio ha messo qualche design hotel e retreat adults-only a sud di Mylopotas e attorno a Manganari — lontano dal rumore, serve auto. Yialos (porto) è la scelta più tranquilla per chi vuole l'isola senza il volume."
+    }
+  },
+  "heroQueries": {
+    "hero": "Ios Chora white village hilltop Cyclades sea",
+    "nightlife": "Ios Chora stepped alley evening blue hour",
+    "food": "Greek gyros taverna street food simple plate",
+    "stay": "Ios Mylopotas beach hotel pool sea view"
+  },
+  "unsplashQuery": "Ios Chora hilltop white village Cyclades"
+}

@@ -1,0 +1,104 @@
+{
+  "slug": "zakynthos",
+  "dbId": "city_zakynthos",
+  "season": "May to October",
+  "bestFor": {
+    "en": ["Laganas party strip", "Beach bars on Tsilivi", "Sunset cocktails at Cape Keri", "Boat-party day events", "UK package nightlife"],
+    "el": ["Party strip στον Λαγανά", "Beach bar στο Τσιλιβί", "Sunset cocktails στο Ακρωτήρι Κερί", "Boat-party ημερήσιες", "UK package νυχτερινή ζωή"],
+    "de": ["Partymeile in Laganas", "Beachbars in Tsilivi", "Sunset-Cocktails am Kap Keri", "Boots-Partys tagsüber", "Britisches Pauschal-Nachtleben"],
+    "fr": ["Strip festif de Laganas", "Beach bars à Tsilivi", "Cocktails au coucher du soleil au cap Keri", "Boat parties en journée", "Vie nocturne britannique en package"],
+    "it": ["Strip festaiolo di Laganas", "Beach bar a Tsilivi", "Cocktail al tramonto a Capo Keri", "Boat party diurne", "Vita notturna inglese a pacchetto"]
+  },
+  "intro": {
+    "en": "Zakynthos (Zante) is the southern Ionian island that the UK package crowd colonised — for better and worse. Laganas, on the south coast, is the engine: a 2 km strip of British-owned mega-clubs and bars that runs end-to-end from June to mid-September, peaking with weekly boat-party day events at Cameo Island and Marathonissi. Tsilivi on the east coast is the family-and-couples answer — same beachfront drinking, half the volume. Zakynthos Town is sleepy after dark, mostly Greek locals at waterfront cafés. The famous shipwreck beach (Navagio) has no nightlife at all — it's a daytime photo stop reached by boat.",
+    "el": "Η Ζάκυνθος είναι το νότιο νησί του Ιονίου που κατοίκησαν οι Βρετανοί παραθεριστές — με τα καλά και τα κακά. Ο Λαγανάς στη νότια ακτή είναι η μηχανή: 2 χλμ strip με βρετανικής ιδιοκτησίας mega-club και bar, ασταμάτητα από Ιούνιο μέχρι μέσα Σεπτεμβρίου, με peak τα boat-party στο Κάμεο και το Μαραθονήσι. Το Τσιλιβί στα ανατολικά είναι η οικογενειακή/ζευγαριών απάντηση — ίδιο beachfront ποτό, μισή ένταση. Η Χώρα της Ζακύνθου το βράδυ είναι νυσταγμένη, κυρίως ντόπιοι στα παραλιακά καφέ. Το Ναυάγιο δεν έχει νυχτερινή ζωή — είναι ημερήσιο photo stop με καραβάκι.",
+    "de": "Zakynthos (Zante) ist die südliche ionische Insel, die das britische Pauschalreise-Publikum kolonisiert hat — mit allen Vor- und Nachteilen. Laganas an der Südküste ist der Motor: ein 2 km langer Streifen mit britisch betriebenen Megaclubs und Bars, der von Juni bis Mitte September durchläuft, mit wöchentlichen Boots-Partys an Cameo Island und Marathonissi als Höhepunkt. Tsilivi an der Ostküste ist die Familien-/Pärchen-Antwort — gleiche Strandpromenade, halbe Lautstärke. Zakynthos-Stadt ist nach Einbruch der Dunkelheit verschlafen, vor allem Einheimische an Hafencafés. Die berühmte Schiffswrack-Bucht (Navagio) hat kein Nachtleben — tagsüber per Boot.",
+    "fr": "Zakynthos (Zante) est l'île ionienne du sud que la clientèle anglaise en package a colonisée — pour le meilleur et le pire. Laganas, au sud, est le moteur : un strip de 2 km de méga-clubs et bars sous gestion britannique, ouvert de juin à mi-septembre, avec des boat parties hebdomadaires à Cameo Island et Marathonissi en apothéose. Tsilivi, à l'est, est la réponse familles/couples — même bord de plage, moitié moins fort. Zakynthos-ville, le soir, est endormie, surtout des locaux aux cafés du port. La fameuse plage du naufrage (Navagio) n'a aucune vie nocturne — c'est un arrêt photo de jour en bateau.",
+    "it": "Zante (Zakynthos) è l'isola ionica meridionale colonizzata dai pacchetti turistici britannici — nel bene e nel male. Laganas, sulla costa sud, è il motore: una strip di 2 km di mega-club e bar a gestione inglese, attiva da giugno a metà settembre, con boat party settimanali a Cameo Island e Marathonissi come apice. Tsilivi, a est, è la risposta famiglie/coppie — stesso lungomare di drink, metà del volume. La città di Zante è sonnacchiosa dopo il tramonto, soprattutto greci nei caffè del porto. La famosa spiaggia del relitto (Navagio) non ha vita notturna — è una sosta fotografica diurna in barca."
+  },
+  "neighborhoods": [
+    {
+      "slug": "laganas",
+      "name": { "en": "Laganas", "el": "Λαγανάς", "de": "Laganas", "fr": "Laganas", "it": "Laganas" },
+      "blurb": {
+        "en": "The 2 km party strip. Mega-clubs, foam parties, boat-party meet points. The clubbing reason most travellers come here.",
+        "el": "Το 2 χλμ party strip. Mega-club, foam parties, σημεία αναχώρησης για boat-party. Ο λόγος που έρχονται οι περισσότεροι.",
+        "de": "Der 2 km lange Partystreifen. Megaclubs, Schaumpartys, Treffpunkte für Boot-Partys. Der Grund, warum die meisten kommen.",
+        "fr": "Le strip festif de 2 km. Méga-clubs, foam parties, points de départ des boat parties. La raison qu'ont les voyageurs de venir.",
+        "it": "La strip festaiola di 2 km. Mega-club, foam party, punti d'imbarco per i boat party. Il motivo per cui la maggior parte arriva qui."
+      }
+    },
+    {
+      "slug": "tsilivi",
+      "name": { "en": "Tsilivi", "el": "Τσιλιβί", "de": "Tsilivi", "fr": "Tsilivi", "it": "Tsilivi" },
+      "blurb": {
+        "en": "East-coast family/couples resort. Beach bars by day, mid-tempo cocktail bars by night, no mega-clubs.",
+        "el": "Resort οικογενειών/ζευγαριών στα ανατολικά. Beach bar την ημέρα, cocktail bar μέσης έντασης το βράδυ. Χωρίς mega-club.",
+        "de": "Familien- und Pärchenresort an der Ostküste. Beach-Bars tagsüber, ruhige Cocktailbars abends, keine Megaclubs.",
+        "fr": "Station famille/couples sur la côte est. Beach bars le jour, bars à cocktails au tempo moyen le soir, pas de méga-clubs.",
+        "it": "Resort famiglie/coppie sulla costa est. Beach bar di giorno, cocktail bar a tempo medio di sera, niente mega-club."
+      }
+    },
+    {
+      "slug": "argassi",
+      "name": { "en": "Argassi", "el": "Αργάσι", "de": "Argassi", "fr": "Argassi", "it": "Argassi" },
+      "blurb": {
+        "en": "Halfway between Laganas energy and Tsilivi calm. Strip of bars and small clubs along the main road, closest party zone to the airport.",
+        "el": "Στη μέση: ανάμεσα στην ένταση του Λαγανά και την ησυχία του Τσιλιβί. Strip με μπαρ και μικρά κλαμπ στον κεντρικό δρόμο, πιο κοντά στο αεροδρόμιο.",
+        "de": "Genau zwischen Laganas-Tempo und Tsilivi-Ruhe. Bar- und Kleinclub-Strip an der Hauptstraße, am nächsten zum Flughafen.",
+        "fr": "À mi-chemin entre l'énergie de Laganas et le calme de Tsilivi. Strip de bars et petits clubs sur la route principale, la zone festive la plus proche de l'aéroport.",
+        "it": "A metà tra l'energia di Laganas e la calma di Tsilivi. Strip di bar e piccoli club lungo la strada principale, la zona festaiola più vicina all'aeroporto."
+      }
+    },
+    {
+      "slug": "zakynthos-town",
+      "name": { "en": "Zakynthos Town", "el": "Πόλη Ζακύνθου", "de": "Zakynthos-Stadt", "fr": "Ville de Zakynthos", "it": "Città di Zante" },
+      "blurb": {
+        "en": "Venetian-style port capital. Quieter nights, waterfront cafés, where locals drink. Not where tourists party.",
+        "el": "Βενετσιάνικη πρωτεύουσα-λιμάνι. Πιο ήσυχες βραδιές, παραλιακά καφέ, εκεί πίνουν οι ντόπιοι. Δεν είναι τουριστικό party.",
+        "de": "Venezianisch geprägte Hafenhauptstadt. Ruhigere Abende, Hafencafés, hier trinken die Einheimischen. Kein Touristen-Partyort.",
+        "fr": "Capitale-port de style vénitien. Soirées plus calmes, cafés du port, là où boivent les locaux. Pas la zone touristique festive.",
+        "it": "Capoluogo portuale d'impronta veneziana. Serate più tranquille, caffè sul porto, dove bevono i locali. Non è la zona festaiola turistica."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Sartsa and skordostoumbi", "Cape Keri seafood tavernas", "Ladotyri cheese and Verdea wine", "British-pub-meets-Greek-taverna in Laganas", "Cliff-top sunset dining"],
+      "el": ["Σάρτσα και σκορδοστούμπι", "Ψαροταβέρνες στο Κερί", "Λαδοτύρι και Βερντέα", "Βρετανικό pub + ελληνική ταβέρνα στον Λαγανά", "Δείπνο στον γκρεμό με ηλιοβασίλεμα"],
+      "de": ["Sartsa und Skordostoumbi", "Fischtavernen am Kap Keri", "Ladotyri-Käse und Verdea-Wein", "British-Pub-trifft-griechische-Taverne in Laganas", "Klippen-Dinner zum Sonnenuntergang"],
+      "fr": ["Sartsa et skordostoumbi", "Tavernes de poisson au cap Keri", "Fromage ladotyri et vin verdea", "Pub anglais croisé taverne grecque à Laganas", "Dîners au coucher de soleil en falaise"],
+      "it": ["Sartsa e skordostoumbi", "Taverne di pesce a Capo Keri", "Formaggio ladotyri e vino Verdea", "Pub inglese incrociato con taverna greca a Laganas", "Cene al tramonto sulla scogliera"]
+    },
+    "intro": {
+      "en": "Zakynthian cooking shares Corfu's Venetian fingerprint but leans more rustic — sartsa (slow-braised rabbit in red wine), skordostoumbi (garlic-stewed aubergines), and the island's own Verdea white wine. The best traditional food is at Cape Keri at the southern tip — tavernas perched over the cliffs serving fresh fish with a full Ionian sunset thrown in. In Laganas the food scene mostly reflects tourist demand (pub roasts, English breakfasts, Greek classics dumbed down) — for the genuine kitchen drive 15 minutes inland to villages like Maries, Volimes or Kiliomeno.",
+      "el": "Η ζακυνθινή κουζίνα μοιράζεται το βενετσιάνικο αποτύπωμα της Κέρκυρας αλλά είναι πιο χωριάτικη — σάρτσα (κουνέλι σιγομαγειρεμένο σε κόκκινο κρασί), σκορδοστούμπι (μελιτζάνες με σκόρδο), και η ζακυνθινή Βερντέα. Το καλύτερο παραδοσιακό φαγητό στο Κερί στο νότιο άκρο — ταβέρνες πάνω από τους γκρεμούς, φρέσκο ψάρι με Ιόνιο sunset δωρεάν. Στον Λαγανά το φαγητό ακολουθεί τουριστική ζήτηση (pub roasts, English breakfasts, ελληνικά classics εξευγενισμένα) — για αυθεντική κουζίνα 15 λεπτά στα ορεινά χωριά Μαριές, Βολίμες, Κοιλιωμένο.",
+      "de": "Die zakynthische Küche teilt Korfus venezianische Spur, ist aber rustikaler — Sartsa (langgeschmortes Kaninchen in Rotwein), Skordostoumbi (in Knoblauch geschmorte Auberginen), der inseleigene Verdea-Weißwein. Das beste traditionelle Essen am Kap Keri an der Südspitze — Tavernen auf der Klippe servieren frischen Fisch mit gratis ionischem Sonnenuntergang. In Laganas folgt die Küche der Touristennachfrage (Pub-Roasts, English Breakfasts, abgemilderte Klassiker) — für das Echte 15 Minuten ins Hinterland nach Maries, Volimes, Kiliomeno.",
+      "fr": "La cuisine zakynthienne partage l'empreinte vénitienne de Corfou mais reste plus rustique — sartsa (lapin mijoté longuement au vin rouge), skordostoumbi (aubergines à l'ail), et le verdea blanc local. Le meilleur traditionnel se trouve au cap Keri, à la pointe sud — tavernes en surplomb de falaise, poisson frais et coucher de soleil ionien offert. À Laganas, la cuisine suit la demande touristique (rôtis de pub, English breakfasts, classiques grecs édulcorés) — pour l'authentique, 15 minutes vers les villages de l'intérieur : Maries, Volimes, Kiliomeno.",
+      "it": "La cucina zantiota condivide l'impronta veneziana di Corfù ma è più rustica — sartsa (coniglio brasato a lungo nel vino rosso), skordostoumbi (melanzane all'aglio), il bianco locale Verdea. Il miglior tradizionale è a Capo Keri, all'estremo sud — taverne a strapiombo, pesce fresco e tramonto ionico in omaggio. A Laganas la cucina segue la domanda turistica (arrosti da pub, English breakfast, classici greci addomesticati) — per il vero, 15 minuti nell'entroterra a Maries, Volimes, Kiliomeno."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Laganas package hotels for partygoers", "Tsilivi family resorts", "Adults-only boutique in Vasilikos", "Cliff-edge villas in Keri", "Quiet stays in Bochali above the town"],
+      "el": ["Πακέτα στον Λαγανά για party", "Οικογενειακά resorts στο Τσιλιβί", "Adults-only boutique στον Βασιλικό", "Βίλες στον γκρεμό στο Κερί", "Ήσυχα stays στο Μπόχαλη πάνω από την πόλη"],
+      "de": ["Pauschal-Hotels in Laganas für Partyfans", "Familienresorts in Tsilivi", "Adults-Only-Boutique in Vasilikos", "Klippenvillen in Keri", "Ruhige Unterkünfte in Bochali oberhalb der Stadt"],
+      "fr": ["Hôtels package à Laganas pour la fête", "Resorts famille à Tsilivi", "Boutiques adults-only à Vasilikos", "Villas en falaise à Keri", "Séjours calmes à Bochali, au-dessus de la ville"],
+      "it": ["Hotel a pacchetto a Laganas per la festa", "Resort famiglia a Tsilivi", "Boutique adults-only a Vasilikos", "Ville a strapiombo a Keri", "Soggiorni tranquilli a Bochali, sopra la città"]
+    },
+    "intro": {
+      "en": "Zakynthos stays are heavily zoned. Laganas hotels are package-tour, walking distance to the strip, expect noise until 4am. Tsilivi and Alikanas (east coast, north of town) are mid-range family resorts — beach in front, calm at night. Vasilikos peninsula in the south-east is where the adults-only boutiques and design villas cluster, well away from the noise. Keri at the southern tip offers cliffside villas with the sunset view. For the actual island life, stay in Bochali on the hill above Zakynthos Town — small hotels, locals, and a 10-minute walk down to the port.",
+      "el": "Τα ξενοδοχεία της Ζακύνθου είναι σαφώς ζωνοποιημένα. Λαγανάς: πακέτα, με τα πόδια στο strip, θόρυβος μέχρι τις 4. Τσιλιβί και Αλικανάς (ανατολικά, βόρεια της πόλης): mid-range οικογενειακά resorts — παραλία μπροστά, ήσυχα τη νύχτα. Χερσόνησος Βασιλικού νοτιοανατολικά: adults-only boutique και design βίλες, μακριά από τον θόρυβο. Κερί στο νότιο άκρο: βίλες πάνω από γκρεμό με ηλιοβασίλεμα. Για την πραγματική ζωή του νησιού, Μπόχαλη πάνω από την πόλη — μικρά ξενοδοχεία, ντόπιοι, 10 λεπτά κάτω στο λιμάνι.",
+      "de": "Zakynthos-Unterkünfte sind klar zoniert. Laganas: Pauschalhotels, fußläufig zum Strip, Lärm bis 4 Uhr. Tsilivi und Alikanas (Ostküste, nördlich der Stadt): mittlere Familienresorts — Strand davor, ruhige Nächte. Halbinsel Vasilikos im Südosten: Adults-Only-Boutiques und Design-Villen, weit weg vom Lärm. Keri an der Südspitze: Klippenvillen mit Sonnenuntergang. Für das echte Inselleben in Bochali oberhalb von Zakynthos-Stadt wohnen — kleine Hotels, Einheimische, 10 Gehminuten runter zum Hafen.",
+      "fr": "L'hébergement à Zakynthos est très zoné. Laganas : hôtels de package, à pied du strip, bruit jusqu'à 4h. Tsilivi et Alikanas (est, au nord de la ville) : resorts familiaux moyenne gamme — plage devant, calme la nuit. Péninsule de Vasilikos au sud-est : boutiques adults-only et villas de design, loin du bruit. Keri à la pointe sud : villas en falaise vue coucher de soleil. Pour la vraie vie de l'île, dormez à Bochali, sur la colline au-dessus de Zakynthos-ville — petits hôtels, locaux, 10 minutes à pied jusqu'au port.",
+      "it": "Gli hotel di Zante sono molto zonati. Laganas: hotel a pacchetto, a piedi dalla strip, rumore fino alle 4. Tsilivi e Alikanas (est, a nord della città): resort famiglia di fascia media — spiaggia davanti, calmi di notte. Penisola di Vasilikos a sud-est: boutique adults-only e ville di design, lontano dal rumore. Keri all'estremo sud: ville a strapiombo con vista tramonto. Per la vera vita dell'isola, dormi a Bochali, sulla collina sopra la città di Zante — piccoli hotel, locali, 10 minuti a piedi giù al porto."
+    }
+  },
+  "heroQueries": {
+    "hero": "Zakynthos Navagio shipwreck beach cliff aerial",
+    "nightlife": "Zakynthos Laganas beach evening boats sea",
+    "food": "Greek taverna Ionian island fish meze plates",
+    "stay": "Zakynthos cliffside villa pool sea view sunset"
+  },
+  "unsplashQuery": "Zakynthos Navagio shipwreck beach aerial"
+}

@@ -1,0 +1,653 @@
+{
+  "glyfada": {
+    "id": 35249504,
+    "photographer": "Efrem  Efre",
+    "alt": "Stunning aerial shot of Glyfada Beach, Greece showcasing turquoise waters and rocky coastline.",
+    "q": "Glyfada Greece",
+    "strict": true
+  },
+  "vouliagmeni": {
+    "id": 32996880,
+    "photographer": "Ivan Petrov",
+    "alt": "Discover the stunning beaches and vibrant sea of Sithonia, Halkidiki, Greece from above.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "piraeus": {
+    "id": 35154967,
+    "photographer": "Valeria Drozdova",
+    "alt": "Picturesque scene at Piraeus Marina, Athens showing boats and vibrant city architecture.",
+    "q": "Piraeus Greece night",
+    "strict": true
+  },
+  "sounion": {
+    "id": 4980511,
+    "photographer": "Spiros Kakos",
+    "alt": "Explore the ancient ruins of the Temple of Poseidon in Sounion, Greece, captured at sunset.",
+    "q": "Sounion Greece night",
+    "strict": true
+  },
+  "poros": {
+    "id": 9658689,
+    "photographer": "Eleni Marina  Kostopoulou",
+    "alt": "Coastal townscape at sunset featuring moored boats and hillside backdrop.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kythira": {
+    "id": 5406378,
+    "photographer": "Julia Sakelli",
+    "alt": "A breathtaking view of the starry night sky over Kythira, Greece, with lush greenery.",
+    "q": "Kythira Greece night",
+    "strict": true
+  },
+  "korinthos": {
+    "id": 32153261,
+    "photographer": "Daciana  Cristina  Visan",
+    "alt": "Explore the ancient ruins of the Temple of Apollo in Corinth, Greece, bathed in sunlight.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kalamata": {
+    "id": 32418724,
+    "photographer": "Zoi Gaitanarou",
+    "alt": "Tranquil sunset view over a rocky beach in Greece, capturing vibrant sky colors and gentle sea waves.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "olympia": {
+    "id": 37603284,
+    "photographer": "Kostas Dimopoulos",
+    "alt": "Scenic view of ancient ruins and lush greenery at Olympia, Greece, under a bright blue sky.",
+    "q": "Olympia Greece night",
+    "strict": true
+  },
+  "sparta": {
+    "id": 28271997,
+    "photographer": "Norbert Paglia",
+    "alt": "Explore the ancient ruins of the Mistra Monastery in Greece, a site of Gothic architecture.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "monemvasia": {
+    "id": 32224798,
+    "photographer": "Adrien Olichon",
+    "alt": "Discover the stunning aerial view of Monemvasia's historic architecture framed by the serene Mediterranean Sea.",
+    "q": "Monemvasia Greece night",
+    "strict": true
+  },
+  "methoni": {
+    "id": 15665588,
+    "photographer": "Valentinos Loucaides",
+    "alt": "A stunning aerial view of Methoni Castle at sunset over the serene sea in Greece.",
+    "q": "Methoni Greece night",
+    "strict": true
+  },
+  "koroni": {
+    "id": 10121074,
+    "photographer": "Guillaume Hankenne",
+    "alt": "Dramatic sunset over Koroni, Greece with coastal views and traditional architecture.",
+    "q": "Koroni Greece night",
+    "strict": true
+  },
+  "pylos": {
+    "id": 14467986,
+    "photographer": "Klaidi Gkini",
+    "alt": "A stunning aerial view of Navarino Bay in Greece, featuring a scenic coastline and vibrant blue waters.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "gythio": {
+    "id": 15175711,
+    "photographer": "TonyNojmanSK",
+    "alt": "A vibrant aerial view of Parga, Greece, showcasing colorful rooftops and bustling seaside cafes.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "tripoli": {
+    "id": 6343904,
+    "photographer": "Tom D'Arby",
+    "alt": "Stunning panoramic view of the ancient Epidaurus theater surrounded by lush greenery.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "areopoli": {
+    "id": 32900250,
+    "photographer": "Lydia Griva",
+    "alt": "Charming stone house in Mani, Greece, showcasing traditional architecture with a bright blue sky backdrop.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "mystras": {
+    "id": 28271997,
+    "photographer": "Norbert Paglia",
+    "alt": "Explore the ancient ruins of the Mistra Monastery in Greece, a site of Gothic architecture.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "nemea": {
+    "id": 33250866,
+    "photographer": "Lydia Griva",
+    "alt": "Stone ruins of an ancient Greek temple in Nemea, under a clear blue sky, showcasing classic architecture.",
+    "q": "Nemea Greece night",
+    "strict": true
+  },
+  "delphi": {
+    "id": 5819282,
+    "photographer": "Lachcim Kejarko",
+    "alt": "Explore the ancient ruins of Delphi, Greece, set against a stunning mountain landscape under a vibrant blue sky.",
+    "q": "Delphi Greece night",
+    "strict": true
+  },
+  "arachova": {
+    "id": 28724529,
+    "photographer": "Greece-China  News",
+    "alt": "Discover a charming Mediterranean village with red-tiled roofs nestled in the mountains.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "galaxidi": {
+    "id": 365668,
+    "photographer": "Daniela Elena Tentis",
+    "alt": "Beautiful coastal view of a charming Greek town against a mountainous backdrop, ideal for travel and vacation imagery.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "karpenisi": {
+    "id": 31553753,
+    "photographer": "Angelos Lamprakopoulos",
+    "alt": "Stunning snowy landscape of Karpenissi, Greece, showcasing serene winter beauty.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "chalkida": {
+    "id": 27126980,
+    "photographer": "Alex Ravvas",
+    "alt": "Stunning view of Chalkida's waterfront with buildings reflecting in the calm sea.",
+    "q": "Chalkida Greece night",
+    "strict": true
+  },
+  "karystos": {
+    "id": 12925562,
+    "photographer": "Lazar Krstić",
+    "alt": "Stunning aerial view of Skopelos' coastal village with red-tiled roofs and clear blue waters.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "eretria": {
+    "id": 20820394,
+    "photographer": "Dima Cekal",
+    "alt": "Aerial view of a coastal town with buildings and beach at sunset.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "loutra-edipsou": {
+    "id": 20820394,
+    "photographer": "Dima Cekal",
+    "alt": "Aerial view of a coastal town with buildings and beach at sunset.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "lamia": {
+    "id": 36621601,
+    "photographer": "Mert Ocak",
+    "alt": "An outdoor cafe features vibrant art mural on stone wall, blue tables, empty chairs, and leafy plants.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "volos": {
+    "id": 30099906,
+    "photographer": "Markos Torpillas",
+    "alt": "Colorful balloons rising over Volos waterfront at night, creating a vibrant and festive atmosphere near the sea.",
+    "q": "Volos Greece night",
+    "strict": true
+  },
+  "larissa": {
+    "id": 20820394,
+    "photographer": "Dima Cekal",
+    "alt": "Aerial view of a coastal town with buildings and beach at sunset.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "trikala": {
+    "id": 20350229,
+    "photographer": "Randerisphotos",
+    "alt": "Explore the stunning rock formations and historic monasteries of Meteora in Trikala, Greece.",
+    "q": "Trikala Greece",
+    "strict": true
+  },
+  "kalambaka": {
+    "id": 17190651,
+    "photographer": "Rainer Eck",
+    "alt": "A stunning aerial view of the Kalambaka landscape, emphasizing its natural beauty and architecture.",
+    "q": "Kalambaka Greece night",
+    "strict": true
+  },
+  "meteora": {
+    "id": 28277455,
+    "photographer": "Sergey Guk",
+    "alt": "Breathtaking view of Meteora Monastery in Kalabaka, Greece during a vibrant sunset.",
+    "q": "Meteora Greece night",
+    "strict": true
+  },
+  "pelion": {
+    "id": 5333372,
+    "photographer": "Chavdar Lungov",
+    "alt": "Aerial view of the lush green coastline of Pelion meeting the vibrant blue Aegean Sea under a cloudy sky.",
+    "q": "Pelion Greece night",
+    "strict": true
+  },
+  "portaria": {
+    "id": 14754006,
+    "photographer": "Alex Does Pictures",
+    "alt": "Stunning aerial view of Athens showing a vibrant cityscape with autumn colors.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "skopelos": {
+    "id": 12925563,
+    "photographer": "Lazar Krstić",
+    "alt": "Drone shot capturing the scenic beauty of Skopelos Island's harbor and hillside.",
+    "q": "Skopelos Greece night",
+    "strict": true
+  },
+  "alonissos": {
+    "id": 32996880,
+    "photographer": "Ivan Petrov",
+    "alt": "Discover the stunning beaches and vibrant sea of Sithonia, Halkidiki, Greece from above.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "skyros": {
+    "id": 13085470,
+    "photographer": "TonyNojmanSK",
+    "alt": "Breathtaking view of cliffs and clear sea along a Greek coastline.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "parga": {
+    "id": 977926,
+    "photographer": "GEORGE DESIPRIS",
+    "alt": "Beautiful nighttime cityscape of Parga, Greece with illuminated buildings reflecting on calm waters.",
+    "q": "Parga Greece night",
+    "strict": true
+  },
+  "preveza": {
+    "id": 20320144,
+    "photographer": "IOANNIS SAKKOS",
+    "alt": "Scenic view of Corfu's old fortress and sailboats under a blue sky.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "sivota": {
+    "id": 32471407,
+    "photographer": "Barry Whelan",
+    "alt": "Tourists enjoying a boat ride on the vibrant blue waters of Paxos, Greece.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "arta": {
+    "id": 10207544,
+    "photographer": "Teo Doulke",
+    "alt": "Aerial night view of Edessa, Greece, showcasing city lights and architecture.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "zagori": {
+    "id": 9963323,
+    "photographer": "Daniel Liberman",
+    "alt": "Scenic view of the historic Plakidas Bridge surrounded by greenery in Greece.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "metsovo": {
+    "id": 35893920,
+    "photographer": "John  Kostopoulos",
+    "alt": "Charming winter view of Metsovo village with snowy rooftops and traditional architecture.",
+    "q": "Metsovo Greece night",
+    "strict": true
+  },
+  "igoumenitsa": {
+    "id": 15468138,
+    "photographer": "ΧΡΗΣΤΟΣ ΜΙΧΑΛΑΙΝΑΣ",
+    "alt": "A breathtaking aerial view of Skiathos Island, showcasing its lush forests and tranquil coastline.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "edessa": {
+    "id": 10207544,
+    "photographer": "Teo Doulke",
+    "alt": "Aerial night view of Edessa, Greece, showcasing city lights and architecture.",
+    "q": "Edessa Greece night",
+    "strict": true
+  },
+  "veria": {
+    "id": 20820394,
+    "photographer": "Dima Cekal",
+    "alt": "Aerial view of a coastal town with buildings and beach at sunset.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "naoussa-imathia": {
+    "id": 18774925,
+    "photographer": "AXP Photography",
+    "alt": "Charming white-washed buildings and boats along Paros Island's scenic waterfront pier.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "serres": {
+    "id": 30410208,
+    "photographer": "Lydia Griva",
+    "alt": "Beautiful sunset view over a Greek coastal village with sea and mountain backdrop.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kilkis": {
+    "id": 6456000,
+    "photographer": "Dimitris Mourousiadis",
+    "alt": "Aerial view of Elafonisos harbor, Greece with boats by dock on a sunny day.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "pella": {
+    "id": 36621608,
+    "photographer": "Mert Ocak",
+    "alt": "Beautiful historic church building with red dome roof beside a tall cypress tree under a cloudy sky.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kastoria": {
+    "id": 11031404,
+    "photographer": "George  Zografidis",
+    "alt": "Scenic winter landscape of Kastoria with houses reflecting in Lake Orestiada against a mountain backdrop.",
+    "q": "Kastoria Greece night",
+    "strict": true
+  },
+  "florina": {
+    "id": 10493098,
+    "photographer": "Markella Floka",
+    "alt": "Picturesque autumn scenery of Florina, Greece with a serene lake and mountain reflections.",
+    "q": "Florina Greece",
+    "strict": true
+  },
+  "kozani": {
+    "id": 6459797,
+    "photographer": "Ioannis Ioannidis",
+    "alt": "Beautiful lavender fields under a pink sunset sky in Kozani, Greece. Serene and vibrant nature scenery.",
+    "q": "Kozani Greece",
+    "strict": true
+  },
+  "grevena": {
+    "id": 37328899,
+    "photographer": "Angelos Lamprakopoulos",
+    "alt": "Stunning aerial view of rugged Pindus Mountains under a cloudy sky in Greece.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kavala": {
+    "id": 26764302,
+    "photographer": "Efrem C.",
+    "alt": "Elegant view of architectural styles and narrow streets in Kavala, Greece, showcasing historic charm.",
+    "q": "Kavala Greece",
+    "strict": true
+  },
+  "drama": {
+    "id": 776744,
+    "photographer": "GEORGE DESIPRIS",
+    "alt": "Dramatic sunset view of Hephaestus Temple surrounded by autumn foliage in Athens, Greece.",
+    "q": "Drama Greece night",
+    "strict": true
+  },
+  "xanthi": {
+    "id": 15628117,
+    "photographer": "John  Kostopoulos",
+    "alt": "Picturesque aerial view of Andritsaina, Greece with traditional red-roofed houses nestled in a hilly landscape.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "komotini": {
+    "id": 14754006,
+    "photographer": "Alex Does Pictures",
+    "alt": "Stunning aerial view of Athens showing a vibrant cityscape with autumn colors.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "alexandroupolis": {
+    "id": 20073725,
+    "photographer": "A.A. Samerkas",
+    "alt": "A person wearing a hoodie walks along a seafront promenade in Alexandroupoli, Greece.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "antiparos": {
+    "id": 20142606,
+    "photographer": "Claudia Schmalz",
+    "alt": "Relaxing view of Antiparos, Greece from a luxurious balcony setting.",
+    "q": "Antiparos Greece night",
+    "strict": true
+  },
+  "folegandros": {
+    "id": 18343638,
+    "photographer": "George  Zografidis",
+    "alt": "Capture of a beautiful white village atop a rugged cliff in Folegandros, Greece with the sea in the background.",
+    "q": "Folegandros Greece night",
+    "strict": true
+  },
+  "kea": {
+    "id": 32168367,
+    "photographer": "Daciana  Cristina  Visan",
+    "alt": "Vibrant Greek architecture along the coast in Mandrakia, Milos, Greece.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kythnos": {
+    "id": 19894286,
+    "photographer": "George Papantoniou",
+    "alt": "A stunning aerial view of Kythnos, Greece, showcasing a sandy beach, turquoise waters, and anchored boats.",
+    "q": "Kythnos Greece",
+    "strict": true
+  },
+  "serifos": {
+    "id": 15444381,
+    "photographer": "ΧΡΗΣΤΟΣ ΜΙΧΑΛΑΙΝΑΣ",
+    "alt": "Discover the charming white buildings of Serifos, Greece, by the sea.",
+    "q": "Serifos Greece night",
+    "strict": true
+  },
+  "anafi": {
+    "id": 32137713,
+    "photographer": "Daciana  Cristina  Visan",
+    "alt": "Charming white chapel with bright blue door set against a rocky hillside in Anafi, Greece.",
+    "q": "Anafi Greece",
+    "strict": true
+  },
+  "amorgos": {
+    "id": 30167761,
+    "photographer": "drB drB",
+    "alt": "Aerial view of Panagia Hozoviotissa Monastery on Amorgos Island at sunset, featuring stunning coastal cliffs.",
+    "q": "Amorgos Greece night",
+    "strict": true
+  },
+  "koufonisia": {
+    "id": 20346948,
+    "photographer": "Claudia Schmalz",
+    "alt": "Serene seaside view with motorboats in Koufonisia, Greece under sunny skies.",
+    "q": "Koufonisia Greece night",
+    "strict": true
+  },
+  "sikinos": {
+    "id": 4684017,
+    "photographer": "Mary Fotinaki",
+    "alt": "Scenic view of a rocky hillside with a remote lighthouse by the sea under a clear blue sky.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kalymnos": {
+    "id": 4370899,
+    "photographer": "Bert Christiaens",
+    "alt": "Explore the scenic beauty of Kalymnos Island's harbor with traditional architecture and calm waters.",
+    "q": "Kalymnos Greece night",
+    "strict": true
+  },
+  "karpathos": {
+    "id": 5339600,
+    "photographer": "tom analogicus",
+    "alt": "Aerial view of a picturesque village in Karpathos, Greece, surrounded by mountains and sea.",
+    "q": "Karpathos Greece night",
+    "strict": true
+  },
+  "astypalea": {
+    "id": 13290787,
+    "photographer": "Claudia Schmalz",
+    "alt": "Peaceful beach scene at Astypalea, Greece with calm waters and rocky shoreline.",
+    "q": "Astypalea Greece night",
+    "strict": true
+  },
+  "leros": {
+    "id": 19861844,
+    "photographer": "Iris Kampanelli",
+    "alt": "A scenic chapel perched on a rocky shore in Leros, Greece, with a winding staircase leading to the sea.",
+    "q": "Leros Greece night",
+    "strict": true
+  },
+  "nisyros": {
+    "id": 24244275,
+    "photographer": "Xavier Messina",
+    "alt": "Charming white buildings and vibrant boats in Mykonos harbor on a sunny summer day.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "tilos": {
+    "id": 29962708,
+    "photographer": "Bruna Santos",
+    "alt": "Peaceful scene of fishing boats on the Aegean Sea with Greek islands in the background.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kasos": {
+    "id": 27382890,
+    "photographer": "Azizi Co",
+    "alt": "Peaceful view of the Aegean Sea with distant Greek islands under a clear sky.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "halki": {
+    "id": 29962708,
+    "photographer": "Bruna Santos",
+    "alt": "Peaceful scene of fishing boats on the Aegean Sea with Greek islands in the background.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "lipsi": {
+    "id": 24244275,
+    "photographer": "Xavier Messina",
+    "alt": "Charming white buildings and vibrant boats in Mykonos harbor on a sunny summer day.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "kastellorizo": {
+    "id": 16897871,
+    "photographer": "Arthur Shuraev",
+    "alt": "Peaceful view of Kastellorizo Island at sunset, Greece.",
+    "q": "Kastellorizo Greece night",
+    "strict": true
+  },
+  "limnos": {
+    "id": 20320144,
+    "photographer": "IOANNIS SAKKOS",
+    "alt": "Scenic view of Corfu's old fortress and sailboats under a blue sky.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "ikaria": {
+    "id": 37557762,
+    "photographer": "Wojtek Strzelec",
+    "alt": "Gorgeous sunset view of a beach and coastal village in Ikaria, Greece, during the blue hour.",
+    "q": "Ikaria Greece night",
+    "strict": true
+  },
+  "fournoi": {
+    "id": 29962708,
+    "photographer": "Bruna Santos",
+    "alt": "Peaceful scene of fishing boats on the Aegean Sea with Greek islands in the background.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "thasos": {
+    "id": 28576091,
+    "photographer": "Daniel Chobanov",
+    "alt": "Peaceful beach scene in Thasos, Greece at dusk with soft waves and cloudy sky.",
+    "q": "Thasos Greece night",
+    "strict": true
+  },
+  "samothraki": {
+    "id": 9641485,
+    "photographer": "Marina Gr",
+    "alt": "A woman in a bikini reads by a rocky river in Samothraki, Greece.",
+    "q": "Samothraki Greece",
+    "strict": true
+  },
+  "paxos": {
+    "id": 31320634,
+    "photographer": "Eleni Zafeiri",
+    "alt": "Scenic waterfront view of Paxos village, Greece, with vibrant buildings and serene water.",
+    "q": "Paxos Greece night",
+    "strict": true
+  },
+  "antipaxos": {
+    "id": 5994972,
+    "photographer": "Michelangelo Iaia",
+    "alt": "Beautiful turquoise waters with boats near lush green Antipaxos island, Greece.",
+    "q": "Antipaxos Greece night",
+    "strict": true
+  },
+  "ithaca": {
+    "id": 13135419,
+    "photographer": "TonyNojmanSK",
+    "alt": "Scenic view of a quaint chapel nestled on the rocky coastline of Ithaca, Greece.",
+    "q": "Ithaca Greece",
+    "strict": true
+  },
+  "agios-nikolaos": {
+    "id": 28523451,
+    "photographer": "Aniestla✨ ‎",
+    "alt": "Colorful coastal city of Agios Nikolaos with mountain backdrop, ideal for travel inspiration.",
+    "q": "Agios Nikolaos Greece night",
+    "strict": true
+  },
+  "elounda": {
+    "id": 14090206,
+    "photographer": "Mike Kw",
+    "alt": "Scenic view of stone cairns on a hill overlooking Elounda Bay, Crete, Greece.",
+    "q": "Elounda Greece night",
+    "strict": true
+  },
+  "sitia": {
+    "id": 984868,
+    "photographer": "Cátia Matos",
+    "alt": "Vibrant square in Chania, Greece, showcasing palm trees, cafes, and charming architecture.",
+    "q": "{name} Greece (loose)",
+    "strict": false
+  },
+  "ierapetra": {
+    "id": 18997385,
+    "photographer": "James Owen",
+    "alt": "Breathtaking aerial shot of Ierapetra harbor and cityscape during the sunset in Greece.",
+    "q": "Ierapetra Greece night",
+    "strict": true
+  },
+  "matala": {
+    "id": 10522894,
+    "photographer": "Francesco Ungaro",
+    "alt": "Charming coastal scene of Matala with rustic architecture along the shore.",
+    "q": "Matala Greece night",
+    "strict": true
+  },
+  "paleochora": {
+    "id": 4219367,
+    "photographer": "James Owen",
+    "alt": "Stunning aerial view of Paleochora beach with turquoise waters and mountains in Greece.",
+    "q": "Paleochora Greece night",
+    "strict": true
+  }
+}

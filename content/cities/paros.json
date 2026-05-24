@@ -1,0 +1,104 @@
+{
+  "slug": "paros",
+  "dbId": "city_paros",
+  "season": "May to October",
+  "bestFor": {
+    "en": ["Naoussa harbour cocktail crawl", "Santa Maria and Kolymbithres beach bars", "Parikia old-town drink stops", "Smart-casual Cyclades alternative to Mykonos", "Bouzoukia in the back streets"],
+    "el": ["Cocktail crawl στο λιμάνι της Νάουσας", "Beach bars σε Σάντα Μαρία και Κολυμπήθρες", "Ποτά στα στενά της Παροικιάς", "Smart-casual εναλλακτική Μυκόνου", "Μπουζούκια στα στενά"],
+    "de": ["Cocktail-Crawl im Hafen von Naoussa", "Beach Bars in Santa Maria und Kolymbithres", "Drinks in den Gassen Parikias", "Smart-Casual-Alternative zu Mykonos", "Bouzoukia in den Seitenstraßen"],
+    "fr": ["Crawl cocktails au port de Naoussa", "Beach bars à Santa Maria et Kolymbithres", "Verres dans les ruelles de Parikia", "Alternative chic-décontractée à Mykonos", "Bouzoukia dans les ruelles"],
+    "it": ["Crawl di cocktail nel porto di Naoussa", "Beach bar a Santa Maria e Kolymbithres", "Drink nei vicoli di Parikia", "Alternativa smart-casual a Mykonos", "Bouzoukia nelle vie laterali"]
+  },
+  "intro": {
+    "en": "Paros has quietly become the Cyclades island people pick instead of Mykonos when they want the same look — whitewashed lanes, blue domes, design hotels — without the prices, the crowds and the celebrity tables. Naoussa is the engine: a horseshoe fishing harbour ringed by cocktail bars built into the warehouses, packed until 3am. Parikia, the capital, has the all-summer bar street running from the windmill at the port. The beach scene splits between Santa Maria and Kolymbithres in the north (designy beach clubs) and Golden Beach in the east (the kite-surfer beach with a sundown bar). Smart-casual everywhere — no Mykonos table-service performance.",
+    "el": "Η Πάρος έχει σιγά-σιγά γίνει το νησί που οι Κυκλαδίτες ταξιδιώτες διαλέγουν αντί για τη Μύκονο, όταν θέλουν την ίδια εικόνα — λευκά στενά, μπλε τρούλους, design ξενοδοχεία — χωρίς τις τιμές, την πολυκοσμία και τα celebrity τραπέζια. Η Νάουσα είναι η μηχανή: πέταλο ψαρολίμανου με cocktail bar μέσα σε παλιές αποθήκες, γεμάτο μέχρι τις 3. Η Παροικιά έχει το ολόσεζονο bar street από τον μύλο του λιμανιού. Η σκηνή παραλίας χωρίζεται σε Σάντα Μαρία και Κολυμπήθρες βόρεια (design beach club) και Χρυσή Ακτή ανατολικά (kite-surf παραλία με sundown bar). Smart-casual παντού — χωρίς το Mykonos table-service θέαμα.",
+    "de": "Paros ist still und leise die Kykladeninsel geworden, die Reisende statt Mykonos wählen, wenn sie denselben Look — weiße Gassen, blaue Kuppeln, Design-Hotels — ohne die Preise, die Massen und die Promi-Tische wollen. Naoussa ist der Motor: ein hufeisenförmiger Fischerhafen, ringsum Cocktailbars in alten Lagerhäusern, bis 3 Uhr voll. Parikia, die Hauptstadt, hat die ganzjährige Bar-Straße ab der Windmühle am Hafen. Die Strandszene teilt sich in Santa Maria und Kolymbithres im Norden (Design-Beachclubs) und Golden Beach im Osten (Kitesurfer-Strand mit Sundown-Bar). Smart-Casual überall — kein Mykonos-Table-Service-Theater.",
+    "fr": "Paros est devenue, en silence, l'île des Cyclades que les voyageurs choisissent à la place de Mykonos quand ils veulent la même image — ruelles blanchies, dômes bleus, hôtels de design — sans les prix, la foule ni les tables vip. Naoussa est le moteur : port de pêche en fer à cheval cerclé de bars à cocktails installés dans les anciens entrepôts, plein jusqu'à 3h. Parikia, la capitale, a sa rue de bars tout l'été depuis le moulin du port. La scène plage se partage entre Santa Maria et Kolymbithres au nord (beach clubs design) et Golden Beach à l'est (plage de kite-surfeurs avec un bar au coucher du soleil). Smart-casual partout — pas de spectacle table-service à la Mykonos.",
+    "it": "Paros è diventata, in silenzio, l'isola delle Cicladi che i viaggiatori scelgono al posto di Mykonos quando vogliono la stessa immagine — vicoli bianchi, cupole blu, hotel di design — senza i prezzi, la folla e i tavoli vip. Naoussa è il motore: porto di pescatori a ferro di cavallo circondato da cocktail bar negli antichi magazzini, pieno fino alle 3. Parikia, capoluogo, ha la sua strada di bar per tutta l'estate dal mulino del porto. La scena spiaggia si divide tra Santa Maria e Kolymbithres a nord (beach club di design) e Golden Beach a est (spiaggia da kite con bar al tramonto). Smart-casual ovunque — niente spettacolo table-service alla Mykonos."
+  },
+  "neighborhoods": [
+    {
+      "slug": "naoussa",
+      "name": { "en": "Naoussa", "el": "Νάουσα", "de": "Naoussa", "fr": "Naoussa", "it": "Naoussa" },
+      "blurb": {
+        "en": "Horseshoe fishing port. Cocktail bars in the old warehouses, fish tavernas on the harbour wall, the whole town stays up until 3am.",
+        "el": "Πέταλο ψαρολίμανο. Cocktail bar στις παλιές αποθήκες, ψαροταβέρνες στον μώλο, όλη η πόλη ξύπνια μέχρι τις 3.",
+        "de": "Hufeisenförmiger Fischerhafen. Cocktailbars in alten Lagerhäusern, Fischtavernen an der Hafenmauer, der ganze Ort bis 3 Uhr wach.",
+        "fr": "Port de pêche en fer à cheval. Bars à cocktails dans les anciens entrepôts, tavernes de poisson sur le môle, toute la ville debout jusqu'à 3h.",
+        "it": "Porto di pescatori a ferro di cavallo. Cocktail bar nei vecchi magazzini, taverne di pesce sul molo, tutto il paese sveglio fino alle 3."
+      }
+    },
+    {
+      "slug": "parikia",
+      "name": { "en": "Parikia", "el": "Παροικιά", "de": "Parikia", "fr": "Parikia", "it": "Parikia" },
+      "blurb": {
+        "en": "The capital and port. Bar street runs from the harbour windmill into the old town — broader and busier than Naoussa.",
+        "el": "Πρωτεύουσα και λιμάνι. Το bar street τρέχει από τον μύλο του λιμανιού στην παλιά πόλη — πιο φαρδύ και πιο γεμάτο από τη Νάουσα.",
+        "de": "Hauptstadt und Hafen. Die Bar-Straße führt von der Hafenwindmühle in die Altstadt — breiter und voller als Naoussa.",
+        "fr": "Capitale et port. La rue des bars part du moulin du port vers la vieille ville — plus large et plus animée que Naoussa.",
+        "it": "Capoluogo e porto. La via dei bar parte dal mulino del porto verso la città vecchia — più larga e affollata di Naoussa."
+      }
+    },
+    {
+      "slug": "santa-maria-kolymbithres",
+      "name": { "en": "Santa Maria & Kolymbithres", "el": "Σάντα Μαρία & Κολυμπήθρες", "de": "Santa Maria & Kolymbithres", "fr": "Santa Maria & Kolymbithres", "it": "Santa Maria e Kolymbithres" },
+      "blurb": {
+        "en": "Northern beach clubs. Smaller, designy, less corporate than Mykonos equivalents — sunbeds, DJ, sea swim, long lunches.",
+        "el": "Beach club στο βορρά. Μικρότερα, design, λιγότερο corporate από Μυκόνου — ξαπλώστρες, DJ, μπάνιο, long lunch.",
+        "de": "Beachclubs im Norden. Kleiner, designorientiert, weniger Corporate als auf Mykonos — Liegen, DJ, Schwimmen, lange Lunches.",
+        "fr": "Beach clubs du nord. Plus petits, design, moins corporate que ceux de Mykonos — transats, DJ, baignade, longs déjeuners.",
+        "it": "Beach club a nord. Più piccoli, di design, meno corporate di quelli di Mykonos — lettini, DJ, bagno, pranzi lunghi."
+      }
+    },
+    {
+      "slug": "lefkes",
+      "name": { "en": "Lefkes (inland)", "el": "Λεύκες (ενδοχώρα)", "de": "Lefkes (Inland)", "fr": "Lefkes (intérieur)", "it": "Lefkes (entroterra)" },
+      "blurb": {
+        "en": "Marble-paved mountain village. No clubs — wine bars, tavernas, the romantic dinner option. Cool when the coast is hot.",
+        "el": "Ορεινό χωριό με μαρμάρινα καλντερίμια. Χωρίς κλαμπ — wine bars, ταβέρνες, η ρομαντική επιλογή. Δροσερό όταν η ακτή ψήνεται.",
+        "de": "Bergdorf mit Marmorpflaster. Keine Clubs — Weinbars, Tavernen, die romantische Option. Kühl, wenn die Küste glüht.",
+        "fr": "Village de montagne pavé de marbre. Pas de clubs — bars à vin, tavernes, l'option romantique. Frais quand la côte brûle.",
+        "it": "Borgo di montagna lastricato di marmo. Niente club — wine bar, taverne, l'opzione romantica. Fresco quando la costa scotta."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Harbour-side fish tavernas in Naoussa", "Modern Cycladic tasting menus", "Cheese-and-charcuterie wine bars", "Mountain-village lamb in Lefkes and Marpissa", "Sourdough bakeries and brunch"],
+      "el": ["Ψαροταβέρνες στο λιμάνι της Νάουσας", "Σύγχρονη κυκλαδίτικη", "Wine bars με τυρί-αλλαντικά", "Αρνί στα ορεινά χωριά Λεύκες, Μάρπησσα", "Φούρνοι με προζύμι και brunch"],
+      "de": ["Hafentavernen in Naoussa", "Moderne kykladische Tasting-Menüs", "Weinbars mit Käse und Charcuterie", "Lamm in Bergdörfern wie Lefkes und Marpissa", "Sauerteigbäckereien und Brunch"],
+      "fr": ["Tavernes de poisson au port de Naoussa", "Menus dégustation cycladiques modernes", "Bars à vin avec fromages et charcuterie", "Agneau des villages de Lefkes et Marpissa", "Boulangeries au levain et brunch"],
+      "it": ["Taverne di pesce al porto di Naoussa", "Menu degustazione cicladici moderni", "Wine bar con formaggi e salumi", "Agnello nei borghi montani di Lefkes e Marpissa", "Panetterie con lievito madre e brunch"]
+    },
+    "intro": {
+      "en": "Paros' food has caught up with its hotel scene over the past decade. Naoussa harbour has the classic Cycladic fish tavernas at the cheap end and a serious modern-Greek fine-dining tier (Mario, Soso, Sigi Ikthyos) at the top. Cheese-and-natural-wine spots have opened along the back lanes of both Naoussa and Parikia. Inland in Lefkes and Marpissa, traditional tavernas serve the same lamb, gouna (sun-dried mackerel) and kakavia (fisherman's soup) the islanders have eaten for generations — at a third of the harbour-front price. The brunch and bakery scene is now strong, which Paros didn't have ten years ago.",
+      "el": "Το φαγητό της Πάρου έχει φτάσει τη σκηνή των ξενοδοχείων την τελευταία δεκαετία. Το λιμάνι της Νάουσας έχει τις κλασικές κυκλαδίτικες ψαροταβέρνες στο φτηνό άκρο και σοβαρό fine-dining (Mario, Soso, Σιγή Ιχθύος) στο επάνω. Wine bars με τυρί-φυσικά κρασιά άνοιξαν στα στενά Νάουσας και Παροικιάς. Στα ορεινά (Λεύκες, Μάρπησσα), παραδοσιακές ταβέρνες με αρνί, γούνα (λιαστό σκουμπρί), κακαβιά — στο 1/3 της τιμής του λιμανιού. Η σκηνή brunch και φούρνου είναι πια δυνατή — δεν την είχε η Πάρος πριν 10 χρόνια.",
+      "de": "Die Küche von Paros hat ihre Hotelszene im letzten Jahrzehnt eingeholt. Der Hafen von Naoussa hat die klassischen kykladischen Fischtavernen am günstigen Ende und ernsthaftes Fine Dining (Mario, Soso, Sigi Ikthyos) oben. Käse-und-Naturweinbars sind in den Hintergassen von Naoussa und Parikia entstanden. Im Hinterland (Lefkes, Marpissa) servieren traditionelle Tavernen Lamm, Gouna (sonnengetrockneter Makrele) und Kakavia (Fischersuppe) zu einem Drittel des Hafenpreises. Die Brunch- und Bäckereiszene ist inzwischen stark — gab es vor zehn Jahren auf Paros nicht.",
+      "fr": "La cuisine de Paros a rattrapé sa scène hôtelière en dix ans. Le port de Naoussa propose les tavernes de poisson cycladiques classiques en bas de gamme et un vrai fine dining (Mario, Soso, Sigi Ikthyos) en haut. Bars à fromages et vins naturels se sont multipliés dans les ruelles de Naoussa et Parikia. À l'intérieur (Lefkes, Marpissa), les tavernes traditionnelles servent agneau, gouna (maquereau séché) et kakavia (soupe de pêcheur) au tiers du prix du port. La scène brunch et boulangerie est maintenant solide — Paros ne l'avait pas il y a dix ans.",
+      "it": "La cucina di Paros ha raggiunto la scena alberghiera nell'ultimo decennio. Il porto di Naoussa ha le classiche taverne di pesce cicladiche in basso e un vero fine dining (Mario, Soso, Sigi Ikthyos) in alto. Wine bar con formaggi e vini naturali sono spuntati nei vicoli di Naoussa e Parikia. Nell'entroterra (Lefkes, Marpissa), taverne tradizionali servono agnello, gouna (sgombro essiccato) e kakavia (zuppa di pescatori) a un terzo del prezzo del porto. La scena brunch e panetteria è ormai forte — Paros non l'aveva dieci anni fa."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Boutique design hotels in Naoussa", "Whitewashed villas near Kolymbithres", "Adults-only retreats in Ambelas", "Family-friendly Parikia hotels", "Cheap pensions in Aliki for kitesurfers"],
+      "el": ["Design boutique στη Νάουσα", "Λευκασμένες βίλες κοντά στις Κολυμπήθρες", "Adults-only retreats στον Άμπελα", "Οικογενειακά στην Παροικιά", "Φθηνά πενσιόν στην Αλυκή για kitesurfers"],
+      "de": ["Boutique-Designhotels in Naoussa", "Weiße Villen bei Kolymbithres", "Adults-Only-Retreats in Ambelas", "Familienfreundliche Hotels in Parikia", "Günstige Pensionen in Aliki für Kitesurfer"],
+      "fr": ["Boutiques de design à Naoussa", "Villas blanchies près de Kolymbithres", "Retraites adults-only à Ambelas", "Hôtels familiaux à Parikia", "Pensions pas chères à Aliki pour kitesurfers"],
+      "it": ["Boutique design a Naoussa", "Ville imbiancate vicino a Kolymbithres", "Retreat adults-only ad Ambelas", "Hotel per famiglie a Parikia", "Pensioni economiche ad Aliki per kitesurfer"]
+    },
+    "intro": {
+      "en": "Where you sleep on Paros decides the day. Naoussa puts you walking distance from the harbour party and a 10-min taxi from the northern beach clubs — most boutique design hotels cluster between Naoussa and the Ambelas peninsula. Parikia is for first-time visitors who want easy ferry access, more shops, more restaurants, and a slightly less hipster crowd. Drios and Golden Beach on the east coast are for kitesurfers and travellers who want the quiet end. The mountain villages (Lefkes, Marpissa) have a small but growing set of traditional-stone guesthouses for car-equipped travellers willing to trade beach access for romance.",
+      "el": "Πού θα μείνεις στην Πάρο καθορίζει τη μέρα. Νάουσα: με τα πόδια στο λιμάνι-πάρτι, 10 λεπτά ταξί από βόρειες παραλίες — design boutique μεταξύ Νάουσας και χερσονήσου Άμπελα. Παροικιά: για πρώτη επίσκεψη, εύκολο καράβι, περισσότερα μαγαζιά, λίγο λιγότερο hipster κοινό. Δρυός και Χρυσή Ακτή στα ανατολικά: για kitesurfers και ησυχία. Στα ορεινά χωριά (Λεύκες, Μάρπησσα) μικρή αλλά αυξανόμενη σκηνή πέτρινων ξενώνων για όσους έχουν αμάξι και προτιμούν ρομαντικό από παραλία.",
+      "de": "Wo Sie auf Paros schlafen, bestimmt den Tag. Naoussa: zu Fuß zur Hafenparty, 10 Minuten Taxi zu den nördlichen Beachclubs — Boutique-Designhotels ballen sich zwischen Naoussa und der Ambelas-Halbinsel. Parikia: für Erstbesucher, einfache Fährverbindung, mehr Läden, etwas weniger Hipster-Publikum. Drios und Golden Beach im Osten: für Kitesurfer und Ruhe. In den Bergdörfern (Lefkes, Marpissa) gibt es eine kleine, wachsende Auswahl an Stein-Gästehäusern für Autoreisende, die Romantik dem Strandzugang vorziehen.",
+      "fr": "Où vous dormez à Paros décide la journée. Naoussa : à pied du port-fête, 10 min en taxi des beach clubs du nord — les boutiques de design se concentrent entre Naoussa et la péninsule d'Ambelas. Parikia : pour les primo-visiteurs, ferry facile, plus de boutiques, public un peu moins hipster. Drios et Golden Beach à l'est : pour les kitesurfers et le calme. Dans les villages de montagne (Lefkes, Marpissa), une petite mais croissante offre de maisons d'hôtes en pierre pour voyageurs en voiture qui préfèrent le romantique à la plage.",
+      "it": "Dove dormi a Paros decide la giornata. Naoussa: a piedi dal porto-festa, 10 minuti in taxi dai beach club a nord — i boutique design si concentrano tra Naoussa e la penisola di Ambelas. Parikia: per i primo-visitatori, traghetto comodo, più negozi, pubblico un po' meno hipster. Drios e Golden Beach a est: per kitesurfer e tranquillità. Nei borghi montani (Lefkes, Marpissa) piccola ma crescente offerta di guesthouse in pietra per chi ha auto e preferisce il romantico alla spiaggia."
+    }
+  },
+  "heroQueries": {
+    "hero": "Paros Naoussa fishing harbour white blue Cyclades",
+    "nightlife": "Paros Naoussa harbour evening lights boats",
+    "food": "Greek seafood fresh fish plate harbour taverna Cyclades",
+    "stay": "Paros white cycladic boutique hotel pool"
+  },
+  "unsplashQuery": "Paros Naoussa fishing harbour white houses"
+}

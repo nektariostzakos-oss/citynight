@@ -1,0 +1,115 @@
+{
+  "slug": "athens",
+  "dbId": "city_athens",
+  "season": "year-round",
+  "bestFor": {
+    "en": ["Year-round nightlife", "Rooftop bars", "Live music", "Late-night clubs", "Bouzoukia"],
+    "el": ["Νυχτερινή ζωή όλο τον χρόνο", "Roof-top μπαρ", "Live μουσική", "Late-night κλαμπ", "Μπουζούκια"],
+    "de": ["Ganzjährig", "Rooftop-Bars", "Live-Musik", "Late-Night-Clubs", "Bouzoukia"],
+    "fr": ["Toute l'année", "Bars sur les toits", "Musique live", "Clubs late-night", "Bouzoukia"],
+    "it": ["Tutto l'anno", "Bar sui tetti", "Musica dal vivo", "Club a tarda notte", "Bouzoukia"]
+  },
+  "intro": {
+    "en": "Athens is the only Greek city that runs hard every night of the year. The scene splits cleanly: Gazi-Kerameikos and Psyrri carry the late, sweaty club nights; Kolonaki and Plaka host the Acropolis-view rooftops; Exarchia rules the indie and alt-rock circuit; and from June to September the whole city drifts south to the Athens Riviera beach clubs in Glyfada and Vouliagmeni. Things start late — bars fill at midnight, clubs after 1am, bouzoukia keep going until sunrise.",
+    "el": "Η Αθήνα είναι η μόνη ελληνική πόλη που \"βγαίνει\" δυνατά κάθε βράδυ του χρόνου. Η σκηνή χωρίζεται καθαρά: Γκάζι-Κεραμεικός και Ψυρρή τραβάνε τις κλαμπίστικες βραδιές, Κολωνάκι και Πλάκα έχουν τα roof-top με θέα Ακρόπολη, Εξάρχεια κρατάνε την indie και alt σκηνή, και από Ιούνιο μέχρι Σεπτέμβριο όλη η πόλη μετακινείται νότια στα beach club της Αθηναϊκής Ριβιέρας — Γλυφάδα, Βουλιαγμένη. Όλα ξεκινάνε αργά: τα μπαρ γεμίζουν μετά τα μεσάνυχτα, τα κλαμπ μετά τη μία, τα μπουζούκια κρατάνε μέχρι το πρωί.",
+    "de": "Athen ist die einzige griechische Stadt, in der jede Nacht des Jahres etwas läuft. Die Szene teilt sich klar auf: Gazi-Kerameikos und Psyrri tragen die langen Club-Nächte, Kolonaki und Plaka die Rooftop-Bars mit Akropolis-Blick, Exarchia regiert die Indie- und Alt-Rock-Schiene, und von Juni bis September wandert die ganze Stadt südwärts an die Beachclubs der Athener Riviera in Glyfada und Vouliagmeni. Es geht spät los — Bars füllen sich gegen Mitternacht, Clubs nach 1 Uhr, Bouzoukia bis zum Sonnenaufgang.",
+    "fr": "Athènes est la seule ville grecque qui sort fort toute l'année. La scène se divise nettement : Gazi-Kerameikos et Psyrri portent les longues nuits en club, Kolonaki et Plaka les rooftops avec vue sur l'Acropole, Exarchia règne sur la scène indie et alt-rock, et de juin à septembre toute la ville file vers le sud, sur les beach clubs de la Riviera athénienne à Glyfada et Vouliagmeni. Tout commence tard — les bars se remplissent à minuit, les clubs après 1h, les bouzoukia tiennent jusqu'au lever du soleil.",
+    "it": "Atene è l'unica città greca che funziona forte ogni notte dell'anno. La scena si divide nettamente: Gazi-Kerameikos e Psyrri reggono le serate in club fino a tardi, Kolonaki e Plaka i rooftop con vista Acropoli, Exarchia domina la scena indie e alt-rock, e da giugno a settembre tutta la città si sposta a sud sui beach club della Riviera Ateniese a Glyfada e Vouliagmeni. Si parte tardi — i bar si riempiono a mezzanotte, i club dopo l'una, i bouzoukia tengono fino all'alba."
+  },
+  "neighborhoods": [
+    {
+      "slug": "gazi",
+      "name": { "en": "Gazi", "el": "Γκάζι", "de": "Gazi", "fr": "Gazi", "it": "Gazi" },
+      "blurb": {
+        "en": "The city's main club district, anchored by Technopolis. Big rooms, heavy sound, doors open past 1am.",
+        "el": "Η κύρια κλαμπίστικη συνοικία της πόλης, με κέντρο την Τεχνόπολη. Μεγάλοι χώροι, δυνατός ήχος, ανοίγουν μετά τη μία.",
+        "de": "Das wichtigste Club-Viertel der Stadt, rund um Technopolis. Große Rooms, lauter Sound, Türen öffnen nach 1 Uhr.",
+        "fr": "Le principal quartier club de la ville, autour de Technopolis. Grandes salles, son puissant, portes ouvertes après 1h.",
+        "it": "Il principale quartiere dei club della città, attorno a Technopolis. Sale grandi, suono pieno, si apre dopo l'una."
+      }
+    },
+    {
+      "slug": "psyrri",
+      "name": { "en": "Psyrri", "el": "Ψυρρή", "de": "Psyrri", "fr": "Psyrri", "it": "Psyrri" },
+      "blurb": {
+        "en": "Walkable bar quarter between Monastiraki and Athinas. Dense, loud, mixed crowd — start a night here before moving on.",
+        "el": "Περπατήσιμη συνοικία με μπαρ, ανάμεσα σε Μοναστηράκι και Αθηνάς. Πυκνό, δυνατό, ανάμεικτο κοινό — ιδανικό για να ξεκινήσεις τη βραδιά.",
+        "de": "Begehbares Bar-Viertel zwischen Monastiraki und Athinas. Dicht, laut, gemischtes Publikum — guter Startpunkt für die Nacht.",
+        "fr": "Quartier de bars piéton entre Monastiraki et Athinas. Dense, bruyant, public mélangé — bon endroit pour commencer la nuit.",
+        "it": "Quartiere bar pedonale tra Monastiraki e Athinas. Denso, rumoroso, pubblico misto — buon posto per iniziare la serata."
+      }
+    },
+    {
+      "slug": "kolonaki",
+      "name": { "en": "Kolonaki", "el": "Κολωνάκι", "de": "Kolonaki", "fr": "Kolonaki", "it": "Kolonaki" },
+      "blurb": {
+        "en": "Upscale, smaller bars, rooftops with Lycabettus and Acropolis views. Less club, more after-dinner cocktails.",
+        "el": "Πιο high-end, μικρότερα μπαρ, ταράτσες με θέα Λυκαβηττό και Ακρόπολη. Λιγότερο κλαμπ, περισσότερο after-dinner cocktail.",
+        "de": "Gehoben, kleinere Bars, Rooftops mit Blick auf Lykabettus und Akropolis. Weniger Club, mehr After-Dinner-Cocktails.",
+        "fr": "Plus chic, bars plus petits, rooftops avec vue Lycabette et Acropole. Moins de clubs, plus de cocktails d'après-dîner.",
+        "it": "Più chic, bar più piccoli, rooftop con vista Licabetto e Acropoli. Meno club, più cocktail post-cena."
+      }
+    },
+    {
+      "slug": "exarchia",
+      "name": { "en": "Exarchia", "el": "Εξάρχεια", "de": "Exarchia", "fr": "Exarchia", "it": "Exarchia" },
+      "blurb": {
+        "en": "Indie, alt-rock, punk and live music venues. Cheaper drinks, students, no dress code — the opposite of Kolonaki.",
+        "el": "Indie, alt-rock, punk, live μαγαζιά. Φθηνότερα ποτά, φοιτητές, κανένα dress code — το αντίθετο του Κολωνακίου.",
+        "de": "Indie, Alt-Rock, Punk und Live-Musik-Locations. Günstigere Drinks, Studenten, keine Kleiderordnung — das Gegenteil von Kolonaki.",
+        "fr": "Indie, alt-rock, punk et salles de concerts. Boissons moins chères, étudiants, aucun dress code — l'opposé de Kolonaki.",
+        "it": "Indie, alt-rock, punk e locali di musica dal vivo. Drink più economici, studenti, nessun dress code — l'opposto di Kolonaki."
+      }
+    },
+    {
+      "slug": "glyfada",
+      "name": { "en": "Glyfada", "el": "Γλυφάδα", "de": "Glyfada", "fr": "Glyfada", "it": "Glyfada" },
+      "blurb": {
+        "en": "Athens Riviera. Summer-only beach clubs along the coast — drive 20–30 min south from the centre.",
+        "el": "Αθηναϊκή Ριβιέρα. Καλοκαιρινά beach club κατά μήκος της παραλίας — 20–30 λεπτά νότια από το κέντρο.",
+        "de": "Athener Riviera. Saisonale Beach-Clubs entlang der Küste — 20–30 Minuten südlich vom Zentrum.",
+        "fr": "Riviera athénienne. Beach clubs saisonniers le long de la côte — 20 à 30 min au sud du centre.",
+        "it": "Riviera Ateniese. Beach club stagionali lungo la costa — 20–30 min a sud dal centro."
+      }
+    }
+  ],
+  "food": {
+    "bestFor": {
+      "en": ["Modern Greek tavernas", "Acropolis-view dining", "Seafood mezedopoleia", "Souvlaki institutions", "Vegetarian cuisine"],
+      "el": ["Σύγχρονες ταβέρνες", "Δείπνο με θέα Ακρόπολη", "Μεζεδοπωλεία θαλασσινών", "Ιστορικά σουβλατζίδικα", "Χορτοφαγική κουζίνα"],
+      "de": ["Moderne Tavernen", "Dinner mit Akropolis-Blick", "Fischmezedopoleia", "Souvláki-Klassiker", "Vegetarische Küche"],
+      "fr": ["Tavernes modernes", "Dîner avec vue sur l'Acropole", "Mezedopoleia de poisson", "Souvláki institutionnels", "Cuisine végétarienne"],
+      "it": ["Taverne moderne", "Cena con vista Acropoli", "Mezedopoleia di pesce", "Souvláki storici", "Cucina vegetariana"]
+    },
+    "intro": {
+      "en": "Athens eats late and eats well. The food scene splits between low-key neighbourhood tavernas (Koukaki, Pangrati, Petralona) where €25 buys dinner for two, and a serious modern Greek tier in Plaka and Kolonaki where chefs like the Funky Gourmet and Spondi alumni run tasting menus that hold their own internationally. Souvlaki is a meal, not a snack — Kostas in Syntagma and O Thanasis in Monastiraki are the references. Don't book before 9pm; locals eat at 10.",
+      "el": "Η Αθήνα τρώει αργά και τρώει καλά. Η σκηνή χωρίζεται ανάμεσα σε γειτονιακές ταβέρνες (Κουκάκι, Παγκράτι, Πετράλωνα) όπου με €25 τρώνε δύο, και μια σοβαρή μοντέρνα ελληνική σκηνή σε Πλάκα και Κολωνάκι, με σεφ που κρατάνε tasting menus σε διεθνές επίπεδο. Το σουβλάκι είναι γεύμα, όχι σνακ — Κώστας στο Σύνταγμα και Ο Θανάσης στο Μοναστηράκι είναι τα σημεία αναφοράς. Μην κλείσεις πριν τις 9· οι ντόπιοι τρώνε στις 10.",
+      "de": "Athen isst spät und isst gut. Die Szene teilt sich zwischen ruhigen Stadtteil-Tavernen (Koukaki, Pangrati, Petralona), wo 25 € ein Abendessen für zwei reichen, und einer ernsthaften modernen griechischen Liga in Plaka und Kolonaki, wo Köche aus dem Funky-Gourmet- und Spondi-Umfeld international konkurrenzfähige Tasting Menus fahren. Souvláki ist eine Mahlzeit, kein Snack — Kostas am Syntagma und O Thanasis in Monastiraki sind die Referenzen. Vor 21 Uhr nicht reservieren; Einheimische essen um 22.",
+      "fr": "Athènes mange tard et mange bien. La scène se partage entre les tavernes de quartier discrètes (Koukaki, Pangrati, Petralona) où 25 € suffisent à dîner à deux, et un vrai niveau grec moderne à Plaka et Kolonaki, avec des chefs issus du Funky Gourmet ou de Spondi qui tiennent des menus dégustation au niveau international. Le souvlaki est un repas, pas un en-cas — Kostas à Syntagma et O Thanasis à Monastiraki sont les références. Ne réservez pas avant 21h ; les Athéniens dînent à 22h.",
+      "it": "Atene mangia tardi e mangia bene. La scena si divide tra taverne di quartiere tranquille (Koukaki, Pangrati, Petralona) dove con 25 € si cena in due, e un vero livello greco moderno a Plaka e Kolonaki, con chef della scuola Funky Gourmet e Spondi che reggono menu degustazione internazionali. Il souvláki è un pasto, non uno snack — Kostas a Syntagma e O Thanasis a Monastiraki sono i riferimenti. Non prenotare prima delle 21; gli ateniesi cenano alle 22."
+    }
+  },
+  "stay": {
+    "bestFor": {
+      "en": ["Acropolis-view boutique hotels", "Rooftop pool hotels", "Plaka stays for first-time visitors", "Luxury Athens Riviera resorts", "Design hotels in Monastiraki"],
+      "el": ["Boutique ξενοδοχεία με θέα Ακρόπολη", "Ξενοδοχεία με rooftop πισίνα", "Πλάκα για πρώτη επίσκεψη", "Luxury resorts στην Αθηναϊκή Ριβιέρα", "Design ξενοδοχεία στο Μοναστηράκι"],
+      "de": ["Boutique-Hotels mit Akropolis-Blick", "Hotels mit Rooftop-Pool", "Plaka für Erstbesucher", "Luxusresorts an der Athener Riviera", "Designhotels in Monastiraki"],
+      "fr": ["Hôtels boutique avec vue Acropole", "Hôtels avec piscine sur le toit", "Plaka pour une première visite", "Resorts de luxe sur la Riviera athénienne", "Hôtels de design à Monastiraki"],
+      "it": ["Hotel boutique con vista Acropoli", "Hotel con piscina sul tetto", "Plaka per la prima visita", "Resort di lusso sulla Riviera Ateniese", "Hotel di design a Monastiraki"]
+    },
+    "intro": {
+      "en": "Where you sleep in Athens shapes the trip. For a first visit, Plaka and Monastiraki put you 10 minutes' walk from the Acropolis and 5 from the metro. Koukaki and Makrygianni are quieter, residential, and still walkable to the ancient sites — Airbnb-heavy. The Athens Riviera (Vouliagmeni, Astir) is a different city: 30 minutes south, full-resort beach hotels for travellers who want sea and don't care if they ever ride the metro. For the rooftop-pool-with-Acropolis-view shot, the cluster around Syntagma is where the new design hotels concentrate.",
+      "el": "Πού θα μείνεις στην Αθήνα, καθορίζει το ταξίδι. Για πρώτη φορά, Πλάκα και Μοναστηράκι σε φέρνουν 10 λεπτά από την Ακρόπολη και 5 από το μετρό. Κουκάκι και Μακρυγιάννη είναι πιο ήσυχα, γειτονιά, και πάλι περπατήσιμα στα μνημεία — γεμάτα Airbnb. Η Αθηναϊκή Ριβιέρα (Βουλιαγμένη, Αστέρας) είναι άλλη πόλη: 30 λεπτά νότια, beach resort για όποιον θέλει θάλασσα και δεν τον νοιάζει το μετρό. Για τη φωτογραφία rooftop-πισίνα-με-Ακρόπολη, το κουκούτσι γύρω από Σύνταγμα συγκεντρώνει τα νέα design ξενοδοχεία.",
+      "de": "Wo Sie in Athen schlafen, prägt die Reise. Beim ersten Besuch bringt Sie Plaka oder Monastiraki 10 Gehminuten zur Akropolis und 5 zur Metro. Koukaki und Makrygianni sind ruhiger, wohnlich, und immer noch zu Fuß zu den antiken Stätten — viele Airbnbs. Die Athener Riviera (Vouliagmeni, Astir) ist eine andere Stadt: 30 Minuten südlich, Vollresort-Strandhotels für Gäste, die das Meer wollen und nie Metro fahren müssen. Für das Rooftop-Pool-mit-Akropolis-Blick-Foto sind die neuen Designhotels um Syntagma die Adresse.",
+      "fr": "Où vous dormez à Athènes change le voyage. Pour une première visite, Plaka et Monastiraki vous placent à 10 minutes à pied de l'Acropole et à 5 du métro. Koukaki et Makrygianni sont plus calmes, résidentiels, toujours accessibles à pied aux sites antiques — beaucoup d'Airbnb. La Riviera athénienne (Vouliagmeni, Astir) est une autre ville : 30 minutes au sud, des resorts de plage tout-compris pour ceux qui veulent la mer et n'auront jamais besoin du métro. Pour la photo piscine-sur-toit-vue-Acropole, c'est autour de Syntagma que se concentrent les nouveaux hôtels de design.",
+      "it": "Dove dormi ad Atene cambia il viaggio. Per la prima visita, Plaka e Monastiraki ti mettono a 10 minuti a piedi dall'Acropoli e 5 dalla metro. Koukaki e Makrygianni sono più tranquilli, residenziali, ancora vicini ai siti antichi a piedi — pieni di Airbnb. La Riviera Ateniese (Vouliagmeni, Astir) è un'altra città: 30 minuti a sud, resort di spiaggia per chi vuole il mare e non userà mai la metro. Per la foto piscina-sul-tetto-con-Acropoli, gli hotel di design nuovi si concentrano attorno a Syntagma."
+    }
+  },
+  "heroQueries": {
+    "hero": "Athens Acropolis evening cityscape long exposure",
+    "nightlife": "Athens rooftop bar Acropolis night skyline",
+    "food": "Greek mezze taverna table overhead Athens",
+    "stay": "Athens boutique hotel rooftop pool Acropolis view"
+  },
+  "unsplashQuery": "Athens Acropolis evening cityscape"
+}

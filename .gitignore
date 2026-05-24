@@ -1,0 +1,39 @@
+# deps
+node_modules
+.pnpm-store
+
+# next
+.next
+out
+next-env.d.ts
+
+# env
+.env
+.env.local
+.env.*.local
+
+# sqlite (db lives OUTSIDE deploy on Hostinger; never commit)
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.db
+
+# build artifacts
+dist
+*.tsbuildinfo
+
+# editor / os
+.DS_Store
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# coverage
+coverage

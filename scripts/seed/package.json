@@ -1,0 +1,14 @@
+{
+  "name": "citynight-seed",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Seed + refresh pipeline for citynight.gr (ingest Google Places → enrich via Anthropic batches → resolve photos → gate).",
+  "scripts": {
+    "start": "node run.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5"
+  }
+}

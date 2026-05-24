@@ -1,0 +1,41 @@
+{
+  "cities": [
+    { "slug": "athens",       "id": "city_athens",       "lat": 37.9838, "lng": 23.7275, "radiusM": 12000 },
+    { "slug": "thessaloniki", "id": "city_thessaloniki", "lat": 40.6401, "lng": 22.9444, "radiusM": 8000 },
+    { "slug": "mykonos",      "id": "city_mykonos",      "lat": 37.4467, "lng": 25.3289, "radiusM": 10000 },
+    { "slug": "santorini",    "id": "city_santorini",    "lat": 36.3932, "lng": 25.4615, "radiusM": 10000 },
+    { "slug": "corfu",        "id": "city_corfu",        "lat": 39.6243, "lng": 19.9217, "radiusM": 12000 },
+    { "slug": "zakynthos",    "id": "city_zakynthos",    "lat": 37.7869, "lng": 20.8995, "radiusM": 12000 },
+    { "slug": "heraklion",    "id": "city_heraklion",    "lat": 35.3387, "lng": 25.1442, "radiusM": 12000 },
+    { "slug": "rhodes",       "id": "city_rhodes",       "lat": 36.4341, "lng": 28.2176, "radiusM": 15000 },
+    { "slug": "paros",        "id": "city_paros",        "lat": 37.0855, "lng": 25.1497, "radiusM": 10000 },
+    { "slug": "ios",          "id": "city_ios",          "lat": 36.7339, "lng": 25.2820, "radiusM": 8000 },
+    { "slug": "chania",       "id": "city_chania",       "lat": 35.5138, "lng": 24.0180, "radiusM": 12000 },
+    { "slug": "rethymno",     "id": "city_rethymno",     "lat": 35.3667, "lng": 24.4736, "radiusM": 10000 },
+    { "slug": "naxos",        "id": "city_naxos",        "lat": 37.1036, "lng": 25.3768, "radiusM": 10000 },
+    { "slug": "milos",        "id": "city_milos",        "lat": 36.6960, "lng": 24.4232, "radiusM": 8000 },
+    { "slug": "sifnos",       "id": "city_sifnos",       "lat": 36.9774, "lng": 24.7124, "radiusM": 7000 },
+    { "slug": "skiathos",     "id": "city_skiathos",     "lat": 39.1633, "lng": 23.4900, "radiusM": 8000 },
+    { "slug": "kos",          "id": "city_kos",          "lat": 36.8938, "lng": 27.2877, "radiusM": 12000 },
+    { "slug": "kefalonia",    "id": "city_kefalonia",    "lat": 38.1755, "lng": 20.5715, "radiusM": 18000 },
+    { "slug": "lefkada",      "id": "city_lefkada",      "lat": 38.8333, "lng": 20.7000, "radiusM": 15000 },
+    { "slug": "halkidiki",    "id": "city_halkidiki",    "lat": 40.3000, "lng": 23.4000, "radiusM": 25000 },
+    { "slug": "nafplio",      "id": "city_nafplio",      "lat": 37.5683, "lng": 22.8000, "radiusM": 7000 },
+    { "slug": "hydra",        "id": "city_hydra",        "lat": 37.3500, "lng": 23.4667, "radiusM": 6000 },
+    { "slug": "spetses",      "id": "city_spetses",      "lat": 37.2667, "lng": 23.1500, "radiusM": 6000 }
+  ],
+  "categories": [
+    { "id": "cat_night_club",   "slug": "night-club",   "includedType": "night_club",   "textQuery": null },
+    { "id": "cat_bar",          "slug": "bar",          "includedType": "bar",          "textQuery": null },
+    { "id": "cat_rooftop_bar",  "slug": "rooftop-bar",  "includedType": null,           "textQuery": "rooftop bar" },
+    { "id": "cat_live_music",   "slug": "live-music",   "includedType": null,           "textQuery": "live music venue" },
+    { "id": "cat_bouzoukia",    "slug": "bouzoukia",    "includedType": null,           "textQuery": "μπουζούκια",
+      "keywords": ["μπουζούκια","μπουζουκια","πίστα","σκυλάδικο","skyladiko","bouzoukia"] },
+    { "id": "cat_beach_club",   "slug": "beach-club",   "includedType": null,           "textQuery": "beach bar",
+      "keywords": ["beach bar","beach club","παραλία","beach"] }
+  ],
+  "locales": ["en","el","de","fr","it"],
+  "enrichModel": "claude-haiku-4-5",
+  "maxPageTokens": 2,
+  "anthropicVersion": "2023-06-01"
+}
