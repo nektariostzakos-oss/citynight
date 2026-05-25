@@ -45,13 +45,23 @@ export default async function LocaleLayout({
   // once hydration completes — no per-visitor server personalisation.
   const cities = listPublishedCities(typedLocale);
 
+  // Mobile menu's "Popular" preview fallback (used when precise location
+  // isn't available). Iconic-first, then any other published city.
+  const ICONIC_SLUGS = ['athens', 'mykonos', 'santorini', 'thessaloniki', 'corfu', 'rhodes'];
+  const popularCities = [
+    ...ICONIC_SLUGS.map((s) => cities.find((c) => c.slug === s)).filter((x): x is typeof cities[number] => !!x),
+    ...cities.filter((c) => !ICONIC_SLUGS.includes(c.slug)),
+  ]
+    .slice(0, 6)
+    .map((c) => ({ slug: c.slug, name: c.name, region: c.region }));
+
   return (
     <div lang={HREFLANG[typedLocale]} className="flex min-h-screen flex-col">
       <CmpInit />
       <AdsenseInit />
       <VisitorLocationProvider>
         <NearbyCitiesProvider cities={cities}>
-          <SiteHeader locale={typedLocale} />
+          <SiteHeader locale={typedLocale} popularCities={popularCities} />
           <main className="flex-1">{children}</main>
           <SiteFooter locale={typedLocale} />
           {/* Auto-redirect on precise location lock + iOS tap fallback CTA. */}

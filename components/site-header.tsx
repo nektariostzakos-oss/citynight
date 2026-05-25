@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { type Locale } from '@/lib/i18n';
 import { SearchBox } from './search-box';
-import { MobileMenu } from './mobile-menu';
+import { MobileMenu, type PopularCity } from './mobile-menu';
 import { LangDropdown } from './lang-dropdown';
 import { ThemeToggle } from './theme-toggle';
 import { MegaMenu } from './mega-menu';
@@ -11,7 +11,13 @@ import { MoonIcon } from './nav-icons';
 // the hover/click panels). Mobile = small hamburger that opens the animated
 // drawer in MobileMenu.
 
-export function SiteHeader({ locale }: { locale: Locale }) {
+export function SiteHeader({
+  locale,
+  popularCities = [],
+}: {
+  locale: Locale;
+  popularCities?: PopularCity[];
+}) {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-bg-2)]/80 bg-[color-mix(in_oklab,var(--color-bg-0)_75%,transparent)] backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
@@ -36,7 +42,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           <div className="hidden md:block">
             <LangDropdown current={locale} />
           </div>
-          <MobileMenu locale={locale} />
+          <MobileMenu locale={locale} popularCities={popularCities} />
         </div>
       </div>
     </header>
