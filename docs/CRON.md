@@ -33,6 +33,12 @@ STRIPE_SECRET_KEY=...
 
 # Sunday 09:00 local: weekly digest to every Featured owner with traffic.
 0 9 * * 0  cd ~/domains/citynight.gr/public_html && node scripts/cron/weekly-digest.js >> ~/logs/weekly-digest.log 2>&1
+
+# Every 5 minutes: uptime sentinel. Emails ALERT_EMAIL on first failure.
+*/5 * * * *  /home/uXXX/domains/citynight.gr/public_html/scripts/cron/uptime-check.sh >> ~/logs/uptime.log 2>&1
+
+# Daily 04:00: verify the most recent gzipped backup actually restores.
+0 4 * * *  DATABASE_PATH=/home/uXXX/persistent/citynight.sqlite /home/uXXX/domains/citynight.gr/public_html/scripts/cron/backup-verify.sh >> ~/logs/backup-verify.log 2>&1
 ```
 
 ## Verification checklist (run after first deploy)
