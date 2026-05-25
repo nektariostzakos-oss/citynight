@@ -164,15 +164,49 @@ function venueEntries(venues: VenueRow[]): MetadataRoute.Sitemap {
 //   return [{ id: 'core' }, ...cities.map((c) => ({ id: `city-${c.slug}` }))];
 // }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  if (estimateUrlCount() > SEGMENT_THRESHOLD) {
-    // Safety log — flip the file to the generateSitemaps shape above if this hits.
-    console.warn(
-      `[sitemap] URL count ${estimateUrlCount()} exceeds ${SEGMENT_THRESHOLD}; ` +
-        'consider enabling generateSitemaps() segmentation.',
-    );
+// Minimal fallback used when the SQLite file isn't available — e.g. the very
+// first build on a fresh host before migrations run, or a misconfigured
+// DATABASE_PATH. Returns only the static surfaces (root + /greece for every
+// locale) so the build can still produce a valid sitemap.xml; the real data
+// is picked up on the next revalidation.
+function fallbackSitemap(): MetadataRoute.Sitemap {
+  const entries: MetadataRoute.Sitemap = [];
+  for (const l of LOCALES) {
+    entries.push({
+      url: `${SITE_URL}/${l}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1.0,
+      alternates: { languages: alternatesAt('') },
+    });
+    entries.push({
+      url: `${SITE_URL}/${l}/greece`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+      alternates: { languages: alternatesAt('/greece') },
+    });
   }
-  return [...coreEntries(), ...venueEntries(loadVenues())];
+  return entries;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  try {
+    if (estimateUrlCount() > SEGMENT_THRESHOLD) {
+      // Safety log — flip the file to the generateSitemaps shape above if this hits.
+      console.warn(
+        `[sitemap] URL count ${estimateUrlCount()} exceeds ${SEGMENT_THRESHOLD}; ` +
+          'consider enabling generateSitemaps() segmentation.',
+      );
+    }
+    return [...coreEntries(), ...venueEntries(loadVenues())];
+  } catch (err) {
+    // Don't break the build if the DB isn't ready yet — fall back to the
+    // static surfaces. Real data appears on the next revalidation once
+    // migrations have run and cities/venues exist.
+    console.warn('[sitemap] DB unavailable, returning fallback sitemap:', err instanceof Error ? err.message : err);
+    return fallbackSitemap();
+  }
 }
 
 // Exported so tests / future segmentation can re-use without re-querying.

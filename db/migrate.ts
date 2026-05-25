@@ -43,6 +43,12 @@ function main() {
   }
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.sql')).sort();
 
+  // Idempotency signals from SQLite. A migration whose first failure matches
+  // any of these has clearly already been applied at the schema level — we
+  // record it in _migrations and move on so a drifted bookkeeping table
+  // doesn't block forward progress.
+  const IDEMPOTENT_ERROR_RE = /(duplicate column name|already exists|no such table .* duplicate)/i;
+
   for (const f of files) {
     if (done.has(f)) {
       console.log(`= ${f} (already applied)`);
@@ -57,6 +63,13 @@ function main() {
       db.exec('COMMIT');
     } catch (err) {
       db.exec('ROLLBACK');
+      const msg = err instanceof Error ? err.message : String(err);
+      if (IDEMPOTENT_ERROR_RE.test(msg)) {
+        // Already in the schema — backfill the bookkeeping row.
+        db.prepare('INSERT INTO _migrations (name) VALUES (?)').run(f);
+        console.log(`~ ${f} (schema already had it: ${msg}) — recorded as applied`);
+        continue;
+      }
       console.error(`Failed: ${f}`);
       throw err;
     }
