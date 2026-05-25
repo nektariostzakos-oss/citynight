@@ -1,37 +1,44 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useVisitorLocation } from './visitor-location-provider';
 import { useNearbyCities } from './nearby-cities-context';
 import type { Locale } from '@/lib/i18n';
+import { formatDistanceKm } from '@/lib/geo-distance';
 
-// One client component, two jobs:
+// One client component, three jobs:
 //
-// 1. Auto-redirect on precise location lock.
-//    The moment `source` flips to 'precise' and we have a nearest city, push
-//    the visitor to /{locale}/greece/{nearest.slug}. Only fires from the
-//    doorway / locale-root (so we don't yank users mid-browse). Fires once
-//    per session (sessionStorage flag) so refreshing the city page doesn't
-//    bounce them again.
+// 1. iOS / first-time tap CTA. iOS Safari silently drops
+//    navigator.geolocation.getCurrentPosition() unless it's bound to a user
+//    gesture. We render a small floating button whenever the provider asked
+//    for help (error in ACTIONABLE_ERRORS). Pressing it triggers
+//    requestPreciseFromGesture() — sync call inside the gesture handler.
 //
-// 2. Tap-bound CTA for iOS (and any state where the auto-prompt didn't land).
-//    iOS Safari silently drops navigator.geolocation.getCurrentPosition()
-//    unless it's bound to a user gesture. We render a small glassy floating
-//    button whenever we need help: 'needs-gesture' (iOS first visit),
-//    'permission denied' (visitor previously declined — show iOS Settings
-//    instructions), 'timeout' / 'position unavailable' (retry).
+// 2. Found-you confirmation panel. The instant `source` flips to 'precise',
+//    we render a visible card: "Found you near X — go now". Auto-navigates
+//    after 3 s. Visitor can cancel or hit "Take me there" immediately. No
+//    silent redirects — the user always sees what happened.
+//
+// 3. Debug overlay. Append ?debug=geo to any URL to surface live state
+//    (source, error, permission state, last lat/lng, nearestCities[0]).
+//    Useful for diagnosing iOS-specific oddness in the field.
 
 const REDIRECT_FLAG = 'cn:geo-redirected';
+const AUTO_REDIRECT_MS = 3000;
 
 type LocCopy = {
-  near: string;          // headline copy: "take me to my nearest city"
-  useMyLocation: string; // primary CTA label (first try)
-  retry: string;         // CTA label after a failed attempt
-  finding: string;       // CTA label while waiting for the GPS fix
-  denied: string;        // explainer when permission was denied
-  unavailable: string;   // explainer when GPS couldn't get a fix
-  iosSettingsHint: string; // pointer to Settings → Safari → Location
+  near: string;
+  useMyLocation: string;
+  retry: string;
+  finding: string;
+  denied: string;
+  unavailable: string;
+  iosSettingsHint: string;
+  foundYou: (city: string) => string;
+  takeMeThere: string;
+  goingIn: (sec: number) => string;
+  stayHere: string;
 };
 
 const COPY: Record<Locale, LocCopy> = {
@@ -43,6 +50,10 @@ const COPY: Record<Locale, LocCopy> = {
     denied: 'Location is blocked for this site.',
     unavailable: 'Could not get your location.',
     iosSettingsHint: 'iOS: Settings → Safari → Location → Allow.',
+    foundYou: (c) => `Found you near ${c}`,
+    takeMeThere: 'Take me there →',
+    goingIn: (s) => `Going in ${s}s…`,
+    stayHere: 'Stay here',
   },
   el: {
     near: 'Πήγαινε με στην πιο κοντινή πόλη',
@@ -52,6 +63,10 @@ const COPY: Record<Locale, LocCopy> = {
     denied: 'Η τοποθεσία είναι μπλοκαρισμένη για το site.',
     unavailable: 'Δεν βρέθηκε η τοποθεσία σου.',
     iosSettingsHint: 'iOS: Ρυθμίσεις → Safari → Τοποθεσία → Επιτρέπεται.',
+    foundYou: (c) => `Σε βρήκαμε κοντά στο ${c}`,
+    takeMeThere: 'Πάμε εκεί →',
+    goingIn: (s) => `Σε ${s}δ…`,
+    stayHere: 'Μείνε εδώ',
   },
   de: {
     near: 'Bring mich zur nächsten Stadt',
@@ -61,6 +76,10 @@ const COPY: Record<Locale, LocCopy> = {
     denied: 'Standort ist für diese Seite gesperrt.',
     unavailable: 'Standort konnte nicht ermittelt werden.',
     iosSettingsHint: 'iOS: Einstellungen → Safari → Standort → Erlauben.',
+    foundYou: (c) => `Gefunden in der Nähe von ${c}`,
+    takeMeThere: 'Dorthin →',
+    goingIn: (s) => `In ${s}s…`,
+    stayHere: 'Hier bleiben',
   },
   fr: {
     near: 'Aller à la ville la plus proche',
@@ -70,6 +89,10 @@ const COPY: Record<Locale, LocCopy> = {
     denied: 'La localisation est bloquée pour ce site.',
     unavailable: 'Impossible d’obtenir votre position.',
     iosSettingsHint: 'iOS : Réglages → Safari → Localisation → Autoriser.',
+    foundYou: (c) => `Trouvé près de ${c}`,
+    takeMeThere: 'M’y emmener →',
+    goingIn: (s) => `Dans ${s}s…`,
+    stayHere: 'Rester ici',
   },
   it: {
     near: 'Portami nella città più vicina',
@@ -79,11 +102,13 @@ const COPY: Record<Locale, LocCopy> = {
     denied: 'La posizione è bloccata per questo sito.',
     unavailable: 'Impossibile ottenere la tua posizione.',
     iosSettingsHint: 'iOS: Impostazioni → Safari → Posizione → Consenti.',
+    foundYou: (c) => `Trovato vicino a ${c}`,
+    takeMeThere: 'Portami lì →',
+    goingIn: (s) => `Tra ${s}s…`,
+    stayHere: 'Resta qui',
   },
 };
 
-// States in which we render the floating CTA. We keep it visible after a
-// failed attempt so the visitor can see the reason + retry.
 const ACTIONABLE_ERRORS = new Set<string>([
   'needs-gesture',
   'permission denied',
@@ -96,105 +121,198 @@ const ACTIONABLE_ERRORS = new Set<string>([
 export function GeoEnhancer({ locale }: { locale: Locale }) {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const debug = searchParams?.get('debug') === 'geo';
+
   const {
     visitor, error, preciseLoading,
     requestPreciseFromGesture,
   } = useVisitorLocation();
-  const { nearestCities } = useNearbyCities();
-  const redirectedRef = useRef(false);
-  const [dismissed, setDismissed] = useState(false);
+  const { nearestCities, hasLocation } = useNearbyCities();
+  const [dismissedCta, setDismissedCta] = useState(false);
+  const [dismissedFound, setDismissedFound] = useState(false);
+  const [autoLeft, setAutoLeft] = useState(AUTO_REDIRECT_MS / 1000);
+  const autoTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const c = COPY[locale];
+  const nearest = nearestCities[0];
 
-  // ── 1. Auto-redirect when precise location resolves ────────────────────
+  // ── Auto-countdown when precise location is locked ─────────────────────
+  // Resets to 3 every time we hand control to the panel.
   useEffect(() => {
-    if (redirectedRef.current) return;
-    if (visitor.source !== 'precise') return;
-    if (nearestCities.length === 0) return;
-
-    // Only redirect from the doorway / locale root — not from deeper pages.
+    if (visitor.source !== 'precise' || !nearest || dismissedFound) {
+      setAutoLeft(AUTO_REDIRECT_MS / 1000);
+      if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+      autoTimerRef.current = null;
+      return;
+    }
+    // Only auto-redirect from the doorway / locale-root. On deeper pages we
+    // still show the found-you panel but don't auto-navigate (less hostile).
     const onRoot = pathname === '/' || pathname === `/${locale}` || pathname === `/${locale}/`;
     if (!onRoot) return;
 
-    try {
-      if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(REDIRECT_FLAG)) return;
-    } catch { /* private mode */ }
+    setAutoLeft(AUTO_REDIRECT_MS / 1000);
+    autoTimerRef.current = setInterval(() => {
+      setAutoLeft((s) => {
+        if (s <= 1) {
+          if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+          // Mark as redirected so the panel doesn't re-fire next time the
+          // user lands back on this page in the same tab.
+          try { sessionStorage.setItem(REDIRECT_FLAG, nearest.slug); } catch { /* ignore */ }
+          router.push(`/${locale}/greece/${nearest.slug}`);
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+    return () => {
+      if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visitor.source, nearest?.slug, pathname, locale, dismissedFound]);
 
-    const target = nearestCities[0];
-    if (!target) return;
+  const goNow = () => {
+    if (!nearest) return;
+    try { sessionStorage.setItem(REDIRECT_FLAG, nearest.slug); } catch { /* ignore */ }
+    if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+    router.push(`/${locale}/greece/${nearest.slug}`);
+  };
 
-    redirectedRef.current = true;
-    try { sessionStorage.setItem(REDIRECT_FLAG, target.slug); } catch { /* ignore */ }
-    router.push(`/${locale}/greece/${target.slug}`);
-  }, [visitor.source, nearestCities, pathname, locale, router]);
+  const cancelAuto = () => {
+    setDismissedFound(true);
+    if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+    autoTimerRef.current = null;
+  };
 
-  // ── 2. Tap CTA ─────────────────────────────────────────────────────────
-  // Visible whenever the auto-prompt didn't land AND we don't already have
-  // a precise fix AND the visitor hasn't dismissed it.
+  // ── State decisions ────────────────────────────────────────────────────
+  const hasPrecise = visitor.source === 'precise' && hasLocation && !!nearest;
+  const showFoundPanel = hasPrecise && !dismissedFound;
   const showCta =
-    visitor.source !== 'precise' &&
-    !dismissed &&
-    (error === null ? false : ACTIONABLE_ERRORS.has(error));
-  // ^ if error is null we don't render; auto-prompt may still be in flight.
-
-  if (!showCta) return null;
-
-  const denied = error === 'permission denied';
-  const failed =
-    error === 'position unavailable' ||
-    error === 'timeout' ||
-    error === 'precise lookup failed';
-
-  // Sub-line text under the headline. Empty for the initial "needs-gesture"
-  // state so the CTA stays a single clean line on first show.
-  const subline = denied
-    ? `${c.denied} ${c.iosSettingsHint}`
-    : failed
-    ? c.unavailable
-    : '';
-
-  // CTA label: first time vs. retry.
-  const label = preciseLoading
-    ? c.finding
-    : (denied || failed)
-    ? c.retry
-    : c.useMyLocation;
+    !hasPrecise &&
+    !dismissedCta &&
+    error !== null &&
+    ACTIONABLE_ERRORS.has(error);
 
   return (
-    <div
-      role="dialog"
-      aria-label={c.near}
-      className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-2 rounded-2xl border border-[var(--color-bg-3)] bg-[color-mix(in_oklab,var(--color-bg-1)_92%,transparent)] p-3 shadow-[0_18px_60px_-12px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:left-4 sm:right-auto"
-    >
-      <div className="flex items-center gap-3">
-        <span aria-hidden className="relative inline-flex h-2.5 w-2.5 shrink-0">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent-cyan)]" />
-        </span>
-        <p className="flex-1 text-sm leading-snug text-[var(--color-fg-1)]">{c.near}</p>
-        <button
-          type="button"
-          // IMPORTANT: requestPreciseFromGesture calls navigator.geolocation
-          // SYNCHRONOUSLY inside this onClick — no await/setState before the
-          // API call, so iOS Safari accepts the gesture.
-          onClick={() => requestPreciseFromGesture()}
-          disabled={preciseLoading || denied}
-          className="shrink-0 rounded-full bg-[var(--color-accent-cyan)] px-3 py-1.5 text-xs font-semibold text-[var(--color-bg-0)] transition hover:brightness-110 disabled:opacity-60"
+    <>
+      {/* ── Found-you panel ─────────────────────────────────────────────── */}
+      {showFoundPanel && nearest && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-3 rounded-2xl bg-[var(--color-bg-1)] p-4 shadow-[0_18px_60px_-12px_rgba(0,0,0,0.8)] ring-1 ring-[var(--color-accent-cyan)]/40 sm:left-4 sm:right-auto"
         >
-          {label}
-        </button>
-        <button
-          type="button"
-          onClick={() => setDismissed(true)}
-          aria-label="Dismiss"
-          className="rounded-md p-1 text-[var(--color-fg-3)] hover:text-[var(--color-fg-1)]"
-        >
-          ×
-        </button>
-      </div>
-      {subline && (
-        <p className="pl-6 text-[11px] leading-snug text-[var(--color-fg-3)]">{subline}</p>
+          {/* Accent strip */}
+          <span
+            aria-hidden
+            className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-cyan)] to-transparent"
+          />
+          <div className="flex items-start gap-3">
+            <span aria-hidden className="relative mt-0.5 inline-flex h-2.5 w-2.5 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent-cyan)]" />
+            </span>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-[var(--color-fg-0)]">
+                {c.foundYou(nearest.name)}
+              </p>
+              {Number.isFinite(nearest.distanceKm) && (
+                <p className="mt-0.5 text-[11px] text-[var(--color-fg-2)]">
+                  {formatDistanceKm(nearest.distanceKm)}
+                  {autoLeft > 0 && (
+                    <>
+                      <span className="mx-1.5 text-[var(--color-fg-3)]">·</span>
+                      {c.goingIn(autoLeft)}
+                    </>
+                  )}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={goNow}
+              className="flex-1 rounded-full bg-[var(--color-accent-cyan)] px-4 py-2 text-sm font-semibold text-[var(--color-bg-0)] transition hover:brightness-110"
+            >
+              {c.takeMeThere}
+            </button>
+            <button
+              type="button"
+              onClick={cancelAuto}
+              className="rounded-full border border-[var(--color-bg-3)] px-3 py-2 text-xs font-semibold text-[var(--color-fg-1)] hover:border-[var(--color-fg-1)]"
+            >
+              {c.stayHere}
+            </button>
+          </div>
+        </div>
       )}
-    </div>
+
+      {/* ── Tap CTA for first-time / iOS-blocked / errored states ──────── */}
+      {showCta && (
+        <div
+          role="dialog"
+          aria-label={c.near}
+          className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-2 rounded-2xl bg-[var(--color-bg-1)] p-3 shadow-[0_18px_60px_-12px_rgba(0,0,0,0.8)] ring-1 ring-[var(--color-bg-2)] sm:left-4 sm:right-auto"
+        >
+          <div className="flex items-center gap-3">
+            <span aria-hidden className="relative inline-flex h-2.5 w-2.5 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent-cyan)]" />
+            </span>
+            <p className="flex-1 text-sm leading-snug text-[var(--color-fg-1)]">{c.near}</p>
+            <button
+              type="button"
+              onClick={() => requestPreciseFromGesture()}
+              disabled={preciseLoading || error === 'permission denied'}
+              className="shrink-0 rounded-full bg-[var(--color-accent-cyan)] px-3 py-1.5 text-xs font-semibold text-[var(--color-bg-0)] transition hover:brightness-110 disabled:opacity-60"
+            >
+              {preciseLoading
+                ? c.finding
+                : error === 'permission denied' || error === 'position unavailable' || error === 'timeout' || error === 'precise lookup failed'
+                ? c.retry
+                : c.useMyLocation}
+            </button>
+            <button
+              type="button"
+              onClick={() => setDismissedCta(true)}
+              aria-label="Dismiss"
+              className="rounded-md p-1 text-[var(--color-fg-3)] hover:text-[var(--color-fg-1)]"
+            >
+              ×
+            </button>
+          </div>
+          {(error === 'permission denied') && (
+            <p className="pl-6 text-[11px] leading-snug text-[var(--color-fg-3)]">
+              {c.denied} {c.iosSettingsHint}
+            </p>
+          )}
+          {(error === 'position unavailable' || error === 'timeout' || error === 'precise lookup failed') && (
+            <p className="pl-6 text-[11px] leading-snug text-[var(--color-fg-3)]">
+              {c.unavailable}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* ── Debug overlay (only with ?debug=geo) ───────────────────────── */}
+      {debug && (
+        <pre
+          className="fixed left-2 top-2 z-50 max-w-[92vw] overflow-x-auto whitespace-pre-wrap break-all rounded-md border border-[var(--color-bg-3)] bg-[var(--color-bg-0)]/95 p-2 text-[10px] leading-snug text-[var(--color-fg-1)]"
+        >
+{JSON.stringify({
+  pathname,
+  source: visitor.source,
+  hasLocation,
+  preciseLoading,
+  error,
+  cached: { lat: visitor.lat, lng: visitor.lng, city: visitor.city },
+  nearest: nearest ? { slug: nearest.slug, name: nearest.name, distanceKm: nearest.distanceKm } : null,
+  redirectFlag: typeof window !== 'undefined' ? sessionStorage.getItem(REDIRECT_FLAG) : null,
+  ua: typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 80) : null,
+}, null, 2)}
+        </pre>
+      )}
+    </>
   );
 }
