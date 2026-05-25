@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { LOCALES, HREFLANG, isLocale, type Locale } from '@/lib/i18n';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -64,8 +65,13 @@ export default async function LocaleLayout({
           <SiteHeader locale={typedLocale} popularCities={popularCities} />
           <main className="flex-1">{children}</main>
           <SiteFooter locale={typedLocale} />
-          {/* Auto-redirect on precise location lock + iOS tap fallback CTA. */}
-          <GeoEnhancer locale={typedLocale} />
+          {/* Auto-redirect on precise location lock + iOS tap fallback CTA.
+              Wrapped in Suspense because it reads useSearchParams() (for the
+              ?debug=geo overlay); Next 15 requires a boundary or the SSG
+              prerender bails to CSR for any page that mounts the layout. */}
+          <Suspense fallback={null}>
+            <GeoEnhancer locale={typedLocale} />
+          </Suspense>
         </NearbyCitiesProvider>
       </VisitorLocationProvider>
     </div>
