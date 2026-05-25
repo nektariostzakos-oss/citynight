@@ -11,12 +11,21 @@ import Script from 'next/script';
 export function AdSlot({ id, scope }: { id: string; scope: 'site' | 'section' | 'category' }) {
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
+  // CLS hygiene: reserve a fixed height per scope so the layout doesn't
+  // shift when AdSense (or the fallback placeholder) paints. Numbers
+  // chosen to match what AdSense's auto-responsive returns for typical
+  // 320–1200px viewports — over-reserving by ~15% beats a layout jump.
+  const reservedHeight =
+    scope === 'site'     ? 'h-[250px]' :  // leaderboard / large rect
+    scope === 'section'  ? 'h-[200px]' :
+    /* category */         'h-[120px]';   // inline strip
+
   if (!client) {
     return (
       <div
         data-slot-id={id}
         data-slot-scope={scope}
-        className="flex h-24 w-full items-center justify-center rounded-md border border-dashed border-[var(--color-bg-3)] text-xs uppercase tracking-widest text-[var(--color-fg-3)]"
+        className={`flex ${reservedHeight} w-full items-center justify-center rounded-md border border-dashed border-[var(--color-bg-3)] text-xs uppercase tracking-widest text-[var(--color-fg-3)]`}
       >
         Ad slot · {scope}
       </div>
@@ -24,10 +33,10 @@ export function AdSlot({ id, scope }: { id: string; scope: 'site' | 'section' | 
   }
 
   return (
-    <div data-slot-id={id} data-slot-scope={scope} className="min-h-[6rem] w-full">
+    <div data-slot-id={id} data-slot-scope={scope} className={`${reservedHeight} w-full`}>
       <ins
         className="adsbygoogle"
-        style={{ display: 'block' }}
+        style={{ display: 'block', width: '100%', height: '100%' }}
         data-ad-client={client}
         data-ad-slot={id}
         data-ad-format="auto"

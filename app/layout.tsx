@@ -1,5 +1,15 @@
 import type { Metadata, Viewport } from 'next';
+import { Manrope } from 'next/font/google';
 import './globals.css';
+
+// next/font/google self-hosts the font + auto-emits `font-display: swap`
+// so first paint never blocks on the Manrope download. Subset to latin +
+// latin-ext + greek so EL pages still render correctly.
+const manrope = Manrope({
+  subsets: ['latin', 'latin-ext', 'greek'],
+  display: 'swap',
+  variable: '--font-display-loaded',
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://citynight.gr';
 
@@ -49,8 +59,13 @@ const NO_FLASH_SCRIPT = `
 // '/' (no prefix) still uses this layout for the soft-default landing surface.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={manrope.variable} suppressHydrationWarning>
       <head>
+        {/* DNS + TLS warm-up for the two image CDNs we hit most often. Saves
+            ~100ms on the first photo render on a fresh connection. Add more
+            here only if you actually see them in WebPageTest's waterfall. */}
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
+        <link rel="preconnect" href="https://lh3.googleusercontent.com" crossOrigin="" />
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_SCRIPT }} />
       </head>
       <body className="min-h-screen bg-[var(--color-bg-0)] text-[var(--color-fg-0)] antialiased">
