@@ -100,6 +100,17 @@ export async function POST(req: NextRequest) {
     return new NextResponse(`Bad signature: ${msg}`, { status: 400 });
   }
 
+  // Idempotency: Stripe retries on any non-2xx / timeout. INSERT OR IGNORE
+  // on (event_id) returns changes=0 if we've already processed this event;
+  // we 200 without re-running the handler so a duplicate delivery never
+  // re-charges the venue tier, re-sends an email, etc.
+  const seen = dbh().prepare(
+    `INSERT OR IGNORE INTO stripe_events_seen (event_id, type) VALUES (?, ?)`,
+  ).run(event.id, event.type);
+  if (seen.changes === 0) {
+    return NextResponse.json({ ok: true, duplicate: true });
+  }
+
   switch (event.type) {
     case 'checkout.session.completed': {
       const s = event.data.object as {

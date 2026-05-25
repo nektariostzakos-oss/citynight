@@ -14,6 +14,30 @@ const nextConfig = {
     // ISR cache lives in .next/cache and must persist between requests on Hostinger.
     // No worker queues; revalidation is on schedule + on owner edits.
   },
+  // Normalize trailing slashes: /en/greece/athens/  → /en/greece/athens.
+  // Next 15 default is `false` already; making it explicit + documented.
+  trailingSlash: false,
+
+  // Permanent (301) cosmetic redirects. Old IETF-style locales (/el-GR/...)
+  // → bare 2-letter locale; double-locale typos collapse cleanly.
+  async redirects() {
+    return [
+      // /el-GR/anything → /el/anything (and the same for the other 4 locales)
+      { source: '/el-GR/:path*', destination: '/el/:path*', permanent: true },
+      { source: '/el-gr/:path*', destination: '/el/:path*', permanent: true },
+      { source: '/en-US/:path*', destination: '/en/:path*', permanent: true },
+      { source: '/en-us/:path*', destination: '/en/:path*', permanent: true },
+      { source: '/de-DE/:path*', destination: '/de/:path*', permanent: true },
+      { source: '/de-de/:path*', destination: '/de/:path*', permanent: true },
+      { source: '/fr-FR/:path*', destination: '/fr/:path*', permanent: true },
+      { source: '/fr-fr/:path*', destination: '/fr/:path*', permanent: true },
+      { source: '/it-IT/:path*', destination: '/it/:path*', permanent: true },
+      { source: '/it-it/:path*', destination: '/it/:path*', permanent: true },
+      // Pre-launch path shape some early drafts used: /greece/... → /en/greece/...
+      { source: '/greece/:path*', destination: '/en/greece/:path*', permanent: true },
+    ];
+  },
+
   images: {
     // Google Places photo URLs are short-lived; we cache them in DB and serve directly.
     // Allow common Google photo CDN hostnames.

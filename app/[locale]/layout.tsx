@@ -5,6 +5,7 @@ import { LOCALES, HREFLANG, isLocale, type Locale } from '@/lib/i18n';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CmpInit } from '@/components/cmp';
+import { Ga4 } from '@/components/ga4';
 import { AdsenseInit } from '@/components/adsense-init';
 import { VisitorLocationProvider } from '@/components/visitor-location-provider';
 import { NearbyCitiesProvider } from '@/components/nearby-cities-context';
@@ -58,7 +59,12 @@ export default async function LocaleLayout({
 
   return (
     <div lang={HREFLANG[typedLocale]} className="flex min-h-screen flex-col">
+      {/* Strict loading order for Consent Mode v2 compliance:
+            CmpInit (beforeInteractive defaults) → Ga4 (afterInteractive,
+            queues events until consent grants) → AdsenseInit (lazyOnload,
+            after LCP). */}
       <CmpInit />
+      <Ga4 />
       <AdsenseInit />
       <VisitorLocationProvider>
         <NearbyCitiesProvider cities={cities}>

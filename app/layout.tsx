@@ -71,6 +71,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             here only if you actually see them in WebPageTest's waterfall. */}
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preconnect" href="https://lh3.googleusercontent.com" crossOrigin="" />
+        {/* Search-console verification — set the env on Hostinger to the
+            content value GSC / Bing give you in the meta-tag verification
+            flow. We render only when set; absent env = no tag. */}
+        {process.env.GSC_VERIFICATION && (
+          <meta name="google-site-verification" content={process.env.GSC_VERIFICATION} />
+        )}
+        {process.env.BING_VERIFICATION && (
+          <meta name="msvalidate.01" content={process.env.BING_VERIFICATION} />
+        )}
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_SCRIPT }} />
       </head>
       <body className="min-h-screen bg-[var(--color-bg-0)] text-[var(--color-fg-0)] antialiased">

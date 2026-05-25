@@ -21,7 +21,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: ['/'],
-        disallow: ['/api/', '/*/dashboard/', '/*/claim/', '/*/auth/', '/*/sign-in'],
+        // Private surfaces + the /go/ affiliate router (no crawl value;
+        // 302s to external sponsors and we don't want them indexed under
+        // our domain).
+        disallow: [
+          '/api/',
+          '/*/dashboard/', '/*/claim/', '/*/auth/', '/*/sign-in',
+          '/*/go/',
+        ],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
