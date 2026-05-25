@@ -5,7 +5,8 @@ import { consumeMagicToken, findOrCreateUser } from '@/lib/auth/magic-link';
 import { createSession } from '@/lib/auth/session';
 import { db } from '@/db';
 import { isLocale } from '@/lib/i18n';
-import { privateMetadata } from '@/lib/seo';
+import { privateMetadata, SITE_URL } from '@/lib/seo';
+import { sendEmail, welcomeOnFirstClaimEmail } from '@/lib/email';
 
 // Magic-link landing page. Reads ?token=&purpose=. On success:
 //  - login  → create session, redirect to dashboard
@@ -39,6 +40,13 @@ export default async function VerifyPage({
       `SELECT id FROM claims WHERE venue_id = ? AND user_id = ? ORDER BY created_at DESC LIMIT 1`,
     ).get(consumed.venueId, userId) as { id: string } | undefined;
 
+    // Was this the user's first verified claim? Used to gate the welcome email
+    // (we don't want to re-spam on every subsequent claim).
+    const otherVerified = (sqlite.prepare(
+      `SELECT COUNT(*) AS n FROM venues WHERE owner_id = ? AND claim = 'verified' AND id != ?`,
+    ).get(userId, consumed.venueId) as { n: number }).n;
+    const isFirstClaim = otherVerified === 0;
+
     const claimTx = sqlite.transaction((claimId: string | null) => {
       if (claimId) {
         sqlite.prepare(`UPDATE claims SET status = 'verified', verified_at = unixepoch() WHERE id = ?`).run(claimId);
@@ -54,7 +62,22 @@ export default async function VerifyPage({
     });
     claimTx(existing?.id ?? null);
 
-    redirect(`/${locale}/dashboard/${consumed.venueId}`);
+    // Welcome email — fire-and-forget, never block the redirect. Only send on
+    // the visitor's first verified claim so subsequent claims don't re-spam.
+    if (isFirstClaim) {
+      const venue = sqlite.prepare(`SELECT name FROM venues WHERE id = ?`).get(consumed.venueId) as { name: string } | undefined;
+      if (venue) {
+        const tmpl = welcomeOnFirstClaimEmail({
+          venueName: venue.name,
+          manageUrl: `${SITE_URL}/${locale}/dashboard/${consumed.venueId}`,
+          dashboardUrl: `${SITE_URL}/${locale}/dashboard`,
+        });
+        sendEmail({ to: consumed.email, subject: tmpl.subject, html: tmpl.html, text: tmpl.text })
+          .catch((err) => { console.error('welcome email failed:', err); });
+      }
+    }
+
+    redirect(`/${locale}/dashboard/${consumed.venueId}?welcome=1`);
   }
 
   redirect(`/${locale}/dashboard`);
