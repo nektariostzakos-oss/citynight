@@ -70,7 +70,7 @@ export default async function LocaleLayout({
               ?debug=geo overlay); Next 15 requires a boundary or the SSG
               prerender bails to CSR for any page that mounts the layout. */}
           <Suspense fallback={null}>
-            <GeoEnhancer locale={typedLocale} />
+            <GeoEnhancer locale={typedLocale} fallbackCities={popularCities} />
           </Suspense>
         </NearbyCitiesProvider>
       </VisitorLocationProvider>

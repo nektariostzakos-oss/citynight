@@ -118,7 +118,16 @@ const ACTIONABLE_ERRORS = new Set<string>([
   'geolocation unsupported',
 ]);
 
-export function GeoEnhancer({ locale }: { locale: Locale }) {
+export function GeoEnhancer({
+  locale,
+  fallbackCities = [],
+}: {
+  locale: Locale;
+  /** Used when nearestCities is empty (eg. cities lack lat/lng or the
+   *  nearby-cities context hasn't hydrated yet). First entry becomes the
+   *  redirect target so the visitor is never stuck on the doorway. */
+  fallbackCities?: { slug: string; name: string; region: string | null }[];
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -135,7 +144,15 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   const autoTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const c = COPY[locale];
-  const nearest = nearestCities[0];
+  // Resolved target: real nearest first, fallback to first popular city so
+  // the "Found you" panel always has a destination to offer.
+  const nearestReal = nearestCities[0];
+  const fallback = fallbackCities[0];
+  const target = nearestReal
+    ? { slug: nearestReal.slug, name: nearestReal.name, distanceKm: nearestReal.distanceKm as number | null }
+    : fallback
+    ? { slug: fallback.slug, name: fallback.name, distanceKm: null }
+    : null;
 
   // Detect iOS once on mount — used to keep the CTA visible on iOS even when
   // the provider effect didn't set an error (older iOS Safaris are silent
@@ -143,10 +160,45 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   const [isIos, setIsIos] = useState(false);
   useEffect(() => { setIsIos(isIOS()); }, []);
 
-  // ── Auto-countdown when precise location is locked ─────────────────────
-  // Resets to 3 every time we hand control to the panel.
+  // Per-tab "already redirected once" flag. Once the visitor has been auto-
+  // redirected from the doorway in this tab, suppress the panel even if they
+  // navigate back to the doorway and we lock precise again. They explicitly
+  // chose to go back — don't bounce them out.
+  const [alreadyRedirected, setAlreadyRedirected] = useState(false);
   useEffect(() => {
-    if (visitor.source !== 'precise' || !nearest || dismissedFound) {
+    try {
+      if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(REDIRECT_FLAG)) {
+        setAlreadyRedirected(true);
+      }
+    } catch { /* private mode */ }
+  }, []);
+
+  // Hard-navigate helper. router.push() is unreliable on older iOS Safaris
+  // (sometimes triggers but doesn't actually navigate). window.location.href
+  // is bulletproof everywhere — slightly heavier but guaranteed to work.
+  const navigate = (slug: string) => {
+    try { sessionStorage.setItem(REDIRECT_FLAG, slug); } catch { /* ignore */ }
+    setAlreadyRedirected(true);
+    if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+    const url = `/${locale}/greece/${slug}`;
+    try {
+      router.push(url);
+      // Belt-and-braces: if router.push doesn't navigate within 500ms
+      // (observed on iOS 12–13 Safari), fall back to a hard navigation.
+      window.setTimeout(() => {
+        if (typeof window !== 'undefined' && window.location.pathname !== url) {
+          window.location.href = url;
+        }
+      }, 500);
+    } catch {
+      window.location.href = url;
+    }
+  };
+
+  // ── Auto-countdown when precise location is locked ─────────────────────
+  useEffect(() => {
+    if (alreadyRedirected) return;
+    if (visitor.source !== 'precise' || !target || dismissedFound) {
       setAutoLeft(AUTO_REDIRECT_MS / 1000);
       if (autoTimerRef.current) clearInterval(autoTimerRef.current);
       autoTimerRef.current = null;
@@ -162,10 +214,7 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
       setAutoLeft((s) => {
         if (s <= 1) {
           if (autoTimerRef.current) clearInterval(autoTimerRef.current);
-          // Mark as redirected so the panel doesn't re-fire next time the
-          // user lands back on this page in the same tab.
-          try { sessionStorage.setItem(REDIRECT_FLAG, nearest.slug); } catch { /* ignore */ }
-          router.push(`/${locale}/greece/${nearest.slug}`);
+          navigate(target.slug);
           return 0;
         }
         return s - 1;
@@ -175,14 +224,9 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
       if (autoTimerRef.current) clearInterval(autoTimerRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visitor.source, nearest?.slug, pathname, locale, dismissedFound]);
+  }, [visitor.source, target?.slug, pathname, locale, dismissedFound, alreadyRedirected]);
 
-  const goNow = () => {
-    if (!nearest) return;
-    try { sessionStorage.setItem(REDIRECT_FLAG, nearest.slug); } catch { /* ignore */ }
-    if (autoTimerRef.current) clearInterval(autoTimerRef.current);
-    router.push(`/${locale}/greece/${nearest.slug}`);
-  };
+  const goNow = () => { if (target) navigate(target.slug); };
 
   const cancelAuto = () => {
     setDismissedFound(true);
@@ -191,8 +235,11 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   };
 
   // ── State decisions ────────────────────────────────────────────────────
-  const hasPrecise = visitor.source === 'precise' && hasLocation && !!nearest;
-  const showFoundPanel = hasPrecise && !dismissedFound;
+  const hasPrecise = visitor.source === 'precise' && hasLocation && !!target;
+  // Suppress the panel entirely after the first redirect in this tab, even
+  // on a fresh root visit — the visitor went back deliberately. Also hide
+  // after the visitor cancelled it.
+  const showFoundPanel = hasPrecise && !dismissedFound && !alreadyRedirected;
 
   // CTA visibility:
   //  - On iOS: ALWAYS show until we have a precise fix, regardless of error
@@ -209,7 +256,7 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   return (
     <>
       {/* ── Found-you panel ─────────────────────────────────────────────── */}
-      {showFoundPanel && nearest && (
+      {showFoundPanel && target && (
         <div
           role="status"
           aria-live="polite"
@@ -227,19 +274,19 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
             </span>
             <div className="flex-1">
               <p className="text-sm font-semibold text-[var(--color-fg-0)]">
-                {c.foundYou(nearest.name)}
+                {c.foundYou(target.name)}
               </p>
-              {Number.isFinite(nearest.distanceKm) && (
+              {(typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm)) || autoLeft > 0 ? (
                 <p className="mt-0.5 text-[11px] text-[var(--color-fg-2)]">
-                  {formatDistanceKm(nearest.distanceKm)}
-                  {autoLeft > 0 && (
-                    <>
-                      <span className="mx-1.5 text-[var(--color-fg-3)]">·</span>
-                      {c.goingIn(autoLeft)}
-                    </>
+                  {typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm)
+                    ? formatDistanceKm(target.distanceKm)
+                    : null}
+                  {typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm) && autoLeft > 0 && (
+                    <span className="mx-1.5 text-[var(--color-fg-3)]">·</span>
                   )}
+                  {autoLeft > 0 && c.goingIn(autoLeft)}
                 </p>
-              )}
+              ) : null}
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -320,7 +367,10 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   preciseLoading,
   error,
   cached: { lat: visitor.lat, lng: visitor.lng, city: visitor.city },
-  nearest: nearest ? { slug: nearest.slug, name: nearest.name, distanceKm: nearest.distanceKm } : null,
+  nearest: nearestReal ? { slug: nearestReal.slug, name: nearestReal.name, distanceKm: nearestReal.distanceKm } : null,
+  target: target ? { slug: target.slug, name: target.name, distanceKm: target.distanceKm } : null,
+  alreadyRedirected,
+  isIos,
   redirectFlag: typeof window !== 'undefined' ? sessionStorage.getItem(REDIRECT_FLAG) : null,
   ua: typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 80) : null,
 }, null, 2)}
