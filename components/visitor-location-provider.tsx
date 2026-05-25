@@ -57,13 +57,18 @@ type Ctx = {
   refresh: () => Promise<void>;
   /** Ask the browser for GPS-precise coordinates. Triggers a permission popup. */
   requestPrecise: () => Promise<void>;
+  /** Synchronous entry point — calls navigator.geolocation immediately, no
+   *  async hops between the user gesture and the API call. iOS Safari is
+   *  strict about this; use this from onClick handlers. */
+  requestPreciseFromGesture: () => void;
   /** True while we're waiting on the permission popup / GPS fix / reverse geocode. */
   preciseLoading: boolean;
 };
 
 const VisitorLocationContext = createContext<Ctx>({
   visitor: EMPTY, loading: false, error: null,
-  refresh: async () => {}, requestPrecise: async () => {}, preciseLoading: false,
+  refresh: async () => {}, requestPrecise: async () => {},
+  requestPreciseFromGesture: () => {}, preciseLoading: false,
 });
 
 function loadCache(): VisitorLocation | null {
@@ -164,39 +169,69 @@ export function VisitorLocationProvider({ children }: { children: React.ReactNod
     }
   }
 
+  // Shared success/failure handlers used by both the async (auto-prompt)
+  // and synchronous (tap) entry points. Kept here so the work after the GPS
+  // fix is identical in both paths.
+  async function handlePreciseSuccess(pos: GeolocationPosition) {
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+    const lang = typeof document !== 'undefined' ? document.documentElement.lang || 'en' : 'en';
+    const rg = await reverseGeocode(lat, lng, lang);
+    const next: VisitorLocation = {
+      countryCode: rg.countryCode ?? visitor.countryCode,
+      city: rg.city,
+      region: rg.region ?? visitor.region,
+      lat, lng,
+      source: 'precise',
+      fetchedAt: Date.now(),
+    };
+    setVisitor(next);
+    saveCache(next);
+    setPreciseLoading(false);
+  }
+
+  function handlePreciseError(err: GeolocationPositionError | Error | unknown) {
+    // PERMISSION_DENIED = 1, POSITION_UNAVAILABLE = 2, TIMEOUT = 3
+    const code = (err as GeolocationPositionError | undefined)?.code;
+    const msg = code === 1 ? 'permission denied'
+              : code === 2 ? 'position unavailable'
+              : code === 3 ? 'timeout'
+              : (err instanceof Error ? err.message : 'precise lookup failed');
+    setError(msg);
+    setPreciseLoading(false);
+  }
+
   async function requestPrecise() {
     setPreciseLoading(true);
     setError(null);
     try {
       const pos = await getPrecisePosition();
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
-      // Reverse-geocode in the browser's language so "Loutraki" shows in EN,
-      // "Λουτράκι" in EL, etc. document.documentElement.lang is set by the
-      // [locale] layout (HREFLANG[locale]).
-      const lang = typeof document !== 'undefined' ? document.documentElement.lang || 'en' : 'en';
-      const rg = await reverseGeocode(lat, lng, lang);
-      const next: VisitorLocation = {
-        countryCode: rg.countryCode ?? visitor.countryCode,
-        city: rg.city,
-        region: rg.region ?? visitor.region,
-        lat, lng,
-        source: 'precise',
-        fetchedAt: Date.now(),
-      };
-      setVisitor(next);
-      saveCache(next);
+      await handlePreciseSuccess(pos);
     } catch (e) {
-      // PERMISSION_DENIED = 1, POSITION_UNAVAILABLE = 2, TIMEOUT = 3
-      const code = (e as GeolocationPositionError | undefined)?.code;
-      const msg = code === 1 ? 'permission denied'
-                : code === 2 ? 'position unavailable'
-                : code === 3 ? 'timeout'
-                : (e instanceof Error ? e.message : 'precise lookup failed');
-      setError(msg);
-    } finally {
-      setPreciseLoading(false);
+      handlePreciseError(e);
     }
+  }
+
+  // Synchronous tap-bound entry. NO async / await between the click and
+  // navigator.geolocation.getCurrentPosition — iOS Safari requires the API
+  // call to live inside the same gesture turn or the permission popup is
+  // silently dropped.
+  function requestPreciseFromGesture(): void {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      setError('geolocation unsupported');
+      return;
+    }
+    // Call geolocation FIRST — before any setState — so nothing pre-empts the
+    // gesture. Safari has been observed to drop the call if setState happens
+    // before the API invocation.
+    navigator.geolocation.getCurrentPosition(
+      (pos) => { void handlePreciseSuccess(pos); },
+      (err) => { handlePreciseError(err); },
+      { enableHighAccuracy: true, timeout: 12_000, maximumAge: 60_000 },
+    );
+    // Now safe to update React state — the gesture-bound call is in flight.
+    setPreciseLoading(true);
+    setError(null);
   }
 
   useEffect(() => {
@@ -262,7 +297,11 @@ export function VisitorLocationProvider({ children }: { children: React.ReactNod
 
   return (
     <VisitorLocationContext.Provider
-      value={{ visitor, loading, error, refresh, requestPrecise, preciseLoading }}
+      value={{
+        visitor, loading, error,
+        refresh, requestPrecise, requestPreciseFromGesture,
+        preciseLoading,
+      }}
     >
       {children}
     </VisitorLocationContext.Provider>
