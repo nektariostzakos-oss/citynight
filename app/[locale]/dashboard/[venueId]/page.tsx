@@ -19,15 +19,30 @@ const WELCOME_COPY: Record<Locale, { title: string; body: string; cta: string }>
   it: { title: 'Benvenuto — la pagina è tua.', body: 'Le modifiche vanno online in secondi. Orari, telefono, indirizzo arrivano da Google; quello che modifichi qui sovrascrive la prossima sync.', cta: 'OK' },
 };
 
+const UPGRADED_COPY: Record<Locale, { title: string; body: string }> = {
+  en: { title: 'Featured is live.', body: 'Your venue now sits at the top of its category and analytics start collecting tonight. Stripe will email the receipt.' },
+  el: { title: 'Το Featured ενεργοποιήθηκε.', body: 'Το μαγαζί σου είναι στην κορυφή της κατηγορίας του και τα analytics ξεκινούν να μαζεύονται απόψε. Η Stripe θα στείλει την απόδειξη.' },
+  de: { title: 'Featured ist aktiv.', body: 'Deine Location steht jetzt oben in ihrer Kategorie und Analytics starten heute Nacht. Stripe schickt die Rechnung.' },
+  fr: { title: 'Featured est actif.', body: 'Votre lieu est désormais en tête de sa catégorie et les analytics commencent ce soir. Stripe enverra la facture.' },
+  it: { title: 'Featured è attivo.', body: 'Il tuo locale è ora in cima alla sua categoria e gli analytics partono stanotte. Stripe invia la ricevuta.' },
+};
+const CANCELED_COPY: Record<Locale, { title: string; body: string }> = {
+  en: { title: 'Upgrade canceled.', body: 'No charge made. You can still upgrade any time from the billing page.' },
+  el: { title: 'Η αναβάθμιση ακυρώθηκε.', body: 'Δεν υπήρξε χρέωση. Μπορείς πάντα να κάνεις upgrade από τη σελίδα χρεώσεων.' },
+  de: { title: 'Upgrade abgebrochen.', body: 'Keine Abbuchung. Du kannst jederzeit von der Abrechnungsseite upgraden.' },
+  fr: { title: 'Mise à niveau annulée.', body: 'Aucun débit. Vous pouvez passer à Featured à tout moment depuis la facturation.' },
+  it: { title: 'Aggiornamento annullato.', body: 'Nessun addebito. Puoi sempre passare a Featured dalla pagina di fatturazione.' },
+};
+
 export default async function VenueDashboard({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: string; venueId: string }>;
-  searchParams: Promise<{ welcome?: string }>;
+  searchParams: Promise<{ welcome?: string; upgraded?: string; canceled?: string }>;
 }) {
   const { locale, venueId } = await params;
-  const { welcome } = await searchParams;
+  const { welcome, upgraded, canceled } = await searchParams;
   if (!isLocale(locale)) redirect('/en/sign-in');
   const user = await getCurrentUser();
   if (!user) redirect(`/${locale}/sign-in`);
@@ -68,6 +83,30 @@ export default async function VenueDashboard({
             >
               {wc.cta}
             </Link>
+          </div>
+        </div>
+      )}
+
+      {upgraded === '1' && (
+        <div className="mb-8 rounded-xl border border-[var(--color-success)]/40 bg-[var(--color-success)]/10 p-4">
+          <div className="flex items-start gap-3">
+            <span aria-hidden className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[var(--color-success)]/15 text-[var(--color-success)]">✓</span>
+            <div className="flex-1">
+              <p className="font-semibold text-[var(--color-fg-0)]">{UPGRADED_COPY[locale].title}</p>
+              <p className="mt-1 text-sm text-[var(--color-fg-1)]">{UPGRADED_COPY[locale].body}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {canceled === '1' && (
+        <div className="mb-8 rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] p-4">
+          <div className="flex items-start gap-3">
+            <span aria-hidden className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[var(--color-bg-2)] text-[var(--color-fg-2)]">×</span>
+            <div className="flex-1">
+              <p className="font-semibold text-[var(--color-fg-0)]">{CANCELED_COPY[locale].title}</p>
+              <p className="mt-1 text-sm text-[var(--color-fg-1)]">{CANCELED_COPY[locale].body}</p>
+            </div>
           </div>
         </div>
       )}

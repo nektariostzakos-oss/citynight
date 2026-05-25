@@ -9,10 +9,16 @@ import { db } from '@/db';
 
 export async function POST(req: NextRequest) {
   const user = await requireUser();
-  let body: { venueId?: unknown; plan?: unknown };
+  let body: { venueId?: unknown; plan?: unknown; locale?: unknown };
   try { body = await req.json(); } catch { return NextResponse.json({ ok: false }, { status: 400 }); }
   const venueId = typeof body.venueId === 'string' ? body.venueId : null;
   if (!venueId) return NextResponse.json({ ok: false }, { status: 400 });
+  // Honour the caller's locale so the success+cancel redirects land in the
+  // same language the visitor was browsing in. Defaults to 'en' on bad input.
+  const allowedLocales = ['en', 'el', 'de', 'fr', 'it'] as const;
+  const locale = (allowedLocales as readonly string[]).includes(body.locale as string)
+    ? (body.locale as string)
+    : 'en';
 
   const venue = db.$client.prepare(`SELECT id, name FROM venues WHERE id = ? AND owner_id = ?`)
     .get(venueId, user.id) as { id: string; name: string } | undefined;
@@ -31,8 +37,8 @@ export async function POST(req: NextRequest) {
     client_reference_id: user.id,
     metadata: { venueId, userId: user.id, plan: 'featured' },
     subscription_data: { metadata: { venueId, userId: user.id, plan: 'featured' } },
-    success_url: `${base}/en/dashboard/${venueId}?upgraded=1`,
-    cancel_url: `${base}/en/dashboard/${venueId}?canceled=1`,
+    success_url: `${base}/${locale}/dashboard/${venueId}?upgraded=1`,
+    cancel_url: `${base}/${locale}/dashboard/${venueId}?canceled=1`,
     allow_promotion_codes: true,
   });
 
