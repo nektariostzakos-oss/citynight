@@ -14,7 +14,9 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx db/migrate.ts",
     "db:studio": "drizzle-kit studio",
-    "test:seo": "node scripts/tests/seo-smoke.mjs"
+    "test:seo": "node scripts/tests/seo-smoke.mjs",
+    "test:integrity": "node scripts/seed/tests/enrichment-writer.test.js && node scripts/tests/owner-edit.test.mjs && node scripts/tests/photos-check.test.mjs && node scripts/tests/gates.test.mjs",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@next/mdx": "^15.0.0",
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@next/eslint-plugin-next": "^15.5.18",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/better-sqlite3": "^7.6.11",
     "@types/node": "^22.0.0",
