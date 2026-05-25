@@ -3,7 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { isLocale, LOCALES, type Locale } from '@/lib/i18n';
-import { getVenueByCityArea, listRelatedVenues, getCityIdBySlug, getCategoryIdBySlug } from '@/lib/queries';
+import { getVenueByCityArea, listRelatedVenues, getCityIdBySlug, getCategoryIdBySlug, listUpcomingVenueEvents } from '@/lib/queries';
 import { VenueCard } from '@/components/venue-card';
 import {
   publicMetadata, jsonLdProps,
@@ -82,6 +82,12 @@ export default async function VenuePage({
   const related = cityId
     ? listRelatedVenues({ cityId, excludeVenueId: v.id as string, categoryId, locale, limit: 6 })
     : [];
+
+  const upcomingEvents = listUpcomingVenueEvents(v.id as string, 6);
+  const upcomingHeading: Record<Locale, string> = {
+    en: 'Upcoming events', el: 'Επερχόμενα events',
+    de: 'Kommende Events', fr: 'Événements à venir', it: 'Prossimi eventi',
+  };
 
   const venuePath = `/${locale}/greece/${city}/${bucket}/${venue}`;
   const homeLabel: Record<Locale, string> = { en: 'Home', el: 'Αρχική', de: 'Start', fr: 'Accueil', it: 'Home' };
@@ -162,6 +168,37 @@ export default async function VenuePage({
           {t.noPhotoYet}{' '}
           <Link href={`/${locale}/claim/${v.id as string}`} className="ml-2 text-[var(--color-accent-pink)]">{t.claimAndUpload}</Link>
         </div>
+      )}
+
+      {/* Upcoming events — Featured-tier owners can post these from the
+          dashboard. Renders only when at least one upcoming event exists. */}
+      {upcomingEvents.length > 0 && (
+        <section className="mt-6 rounded-xl border border-[var(--color-accent-pink)]/30 bg-[var(--color-bg-1)] p-4" aria-label={upcomingHeading[locale]}>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent-pink)]">
+            {upcomingHeading[locale]}
+          </p>
+          <ul className="mt-3 divide-y divide-[var(--color-bg-2)]">
+            {upcomingEvents.map((ev) => (
+              <li key={ev.id} className="py-3">
+                <p className="font-semibold text-[var(--color-fg-0)]">{ev.title}</p>
+                <p className="text-xs text-[var(--color-fg-2)]">
+                  {new Date(ev.startsAt * 1000).toLocaleString(locale, {
+                    weekday: 'short', day: 'numeric', month: 'short',
+                    hour: '2-digit', minute: '2-digit',
+                  })}
+                </p>
+                {ev.description && (
+                  <p className="mt-1 text-sm leading-relaxed text-[var(--color-fg-1)]">{ev.description}</p>
+                )}
+                {ev.url && (
+                  <a href={ev.url} rel="nofollow noopener" target="_blank" className="mt-1 inline-block text-xs text-[var(--color-accent-cyan)] hover:underline">
+                    {ev.url.replace(/^https?:\/\//, '').slice(0, 60)} →
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {/* Photo gallery — remaining photos in a tight grid below the hero.

@@ -440,3 +440,28 @@ export function searchVenues(query: string, opts: { cityId?: string; locale: Loc
      LIMIT ?
   `).all(...params) as SearchHit[];
 }
+
+// ── Venue events (Featured-tier owner posts; A5) ────────────────────────
+// Public-side query — upcoming published events only, ordered by start time
+// ascending. Used by the venue page to render a "Tonight" block above the
+// description when the venue has scheduled events.
+export type UpcomingEvent = {
+  id: string;
+  title: string;
+  description: string | null;
+  startsAt: number; // unix seconds
+  endsAt: number | null;
+  url: string | null;
+};
+
+export function listUpcomingVenueEvents(venueId: string, limit = 6): UpcomingEvent[] {
+  return sqlite().prepare(`
+    SELECT id, title, description, starts_at AS startsAt, ends_at AS endsAt, url
+      FROM venue_events
+     WHERE venue_id = ?
+       AND status = 'published'
+       AND COALESCE(ends_at, starts_at) >= unixepoch() - 3600
+     ORDER BY starts_at ASC
+     LIMIT ?
+  `).all(venueId, limit) as UpcomingEvent[];
+}

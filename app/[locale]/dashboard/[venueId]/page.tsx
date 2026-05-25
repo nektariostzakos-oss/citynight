@@ -6,6 +6,7 @@ import { getCurrentUser } from '@/lib/auth/session';
 import { db } from '@/db';
 import { VenueEditor } from '@/components/venue-editor';
 import { VenueAnalytics } from '@/components/venue-analytics';
+import { VenueEventsManager } from '@/components/venue-events-manager';
 import { privateMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
@@ -153,6 +154,20 @@ export default async function VenueDashboard({
             </div>
           )}
         </div>
+      </div>
+
+      {/* Featured-only: post events. Free-tier owners see the upsell instead. */}
+      <div className="mt-12 border-t border-[var(--color-bg-2)] pt-10">
+        {v.tier === 'featured' ? (
+          <VenueEventsManager venueId={v.id as string} locale={locale} />
+        ) : (
+          <div className="rounded-lg border border-dashed border-[var(--color-bg-3)] p-5 text-sm text-[var(--color-fg-2)]">
+            <p className="font-display text-base text-[var(--color-fg-0)]">Post events</p>
+            <p className="mt-1">Events posting is a Featured-tier feature — owners with Featured get a dedicated &quot;Tonight&quot; surface on their venue page.{' '}
+              <Link href={`/${locale}/dashboard/${v.id as string}/billing`} className="text-[var(--color-accent-pink)] hover:underline">Upgrade →</Link>
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
