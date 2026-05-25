@@ -186,12 +186,12 @@ export default async function RootPage() {
           <div className="mx-auto flex max-w-6xl items-center justify-between text-[10px] uppercase tracking-[0.32em] text-[var(--color-fg-2)]">
             <p className="cn-tab">
               <span className="text-[var(--color-fg-0)]">CITYNIGHT</span>
-              <span className="mx-2 text-[var(--color-fg-3)]">//</span>
+              <span className="mx-2 text-[var(--color-fg-3)]">{'//'}</span>
               <span>GR · v1</span>
             </p>
             <p className="hidden cn-tab sm:block">
               38.04°N · 23.72°E
-              <span className="mx-2 text-[var(--color-fg-3)]">//</span>
+              <span className="mx-2 text-[var(--color-fg-3)]">{'//'}</span>
               {new Date().getUTCFullYear()}
             </p>
           </div>

@@ -14,7 +14,6 @@ import fs from 'node:fs';
 loadEnv({ path: '.env.local' });
 loadEnv({ path: '.env' });
 
-// eslint-disable-next-line import/first
 import { getRawSqlite } from './client';
 
 function ensureMigrationsTable(db: ReturnType<typeof getRawSqlite>) {

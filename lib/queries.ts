@@ -3,7 +3,6 @@
 
 import 'server-only';
 import { db } from '@/db';
-import { sql } from 'drizzle-orm';
 import type { Locale } from './i18n';
 
 export type City = {

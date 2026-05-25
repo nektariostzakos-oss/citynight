@@ -5,7 +5,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { getCountryCode } from '@/lib/geo';
-import { sql } from 'drizzle-orm';
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

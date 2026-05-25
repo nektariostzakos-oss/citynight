@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
 
 const COPY: Record<Locale, { cta: string; or: string }> = {

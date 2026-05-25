@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { isLocale, type Locale } from '@/lib/i18n';
+import { isLocale } from '@/lib/i18n';
 import { getCurrentUser } from '@/lib/auth/session';
 import { db } from '@/db';
 import { privateMetadata } from '@/lib/seo';

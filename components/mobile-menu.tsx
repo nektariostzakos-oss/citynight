@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { LOCALES, LOCALE_LABELS, type Locale } from '@/lib/i18n';
@@ -106,18 +106,61 @@ export function MobileMenu({
   const [rangeIdx, setRangeIdx] = useState(0);
   const c = COPY[locale];
 
+  // a11y refs: keep a reference to the hamburger trigger so focus can return
+  // to it on close, and to the panel root so we can scope the focus trap.
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  // Touch-swipe-to-close tracker (right-swipe over ≈80px closes the panel).
+  const touchStartX = useRef<number | null>(null);
+
   // Need to wait for the client mount before we can portal into document.body.
   useEffect(() => { setMounted(true); }, []);
 
+  // Body-scroll lock, Esc handler, focus trap, focus restore — all the panel
+  // lifecycle a11y in one effect so cleanup is symmetric.
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
+    const previouslyFocused = (document.activeElement as HTMLElement | null) ?? null;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+
+    // Move focus into the panel on the next frame so the panel exists in the DOM.
+    const focusFrame = window.requestAnimationFrame(() => {
+      const first = panelRef.current?.querySelector<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])',
+      );
+      first?.focus();
+    });
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !panelRef.current) return;
+      // Focus trap — cycle within the panel only.
+      const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+    }
     window.addEventListener('keydown', onKey);
+
+    // Snapshot the trigger ref now — by the time cleanup runs, the ref may
+    // have changed (React warns about reading refs in cleanup directly).
+    const triggerSnapshot = triggerRef.current;
     return () => {
-      document.body.style.overflow = prev;
+      window.cancelAnimationFrame(focusFrame);
+      document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', onKey);
+      // Restore focus to whatever opened the panel (typically the hamburger).
+      const target = previouslyFocused ?? triggerSnapshot;
+      target?.focus?.();
     };
   }, [open]);
 
@@ -147,9 +190,12 @@ export function MobileMenu({
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen(true)}
         aria-label={c.open}
+        aria-expanded={open}
+        aria-haspopup="dialog"
         className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] text-[var(--color-fg-0)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)] md:hidden"
       >
         <MenuIcon />
@@ -167,8 +213,21 @@ export function MobileMenu({
 
           {/* Panel — fully opaque so dark content behind never bleeds through.
               Single top accent gradient bar carries the brand without
-              colouring every row. */}
-          <div className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-[var(--color-bg-0)] shadow-[0_0_60px_-10px_rgba(0,0,0,0.9)] ring-1 ring-[var(--color-bg-2)]">
+              colouring every row.
+              touchstart/touchend track horizontal swipes — right-swipe of
+              ≥80 px closes the drawer (mirrors native iOS/Android pattern). */}
+          <div
+            ref={panelRef}
+            onTouchStart={(e) => { touchStartX.current = e.touches[0]?.clientX ?? null; }}
+            onTouchEnd={(e) => {
+              const start = touchStartX.current;
+              touchStartX.current = null;
+              if (start == null) return;
+              const dx = (e.changedTouches[0]?.clientX ?? start) - start;
+              if (dx > 80) setOpen(false);
+            }}
+            className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-[var(--color-bg-0)] shadow-[0_0_60px_-10px_rgba(0,0,0,0.9)] ring-1 ring-[var(--color-bg-2)]"
+          >
             {/* Accent strip */}
             <div
               aria-hidden

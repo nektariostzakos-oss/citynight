@@ -6,7 +6,7 @@ import type { Locale } from '@/lib/i18n';
 import { useNearbyCities, type CityWithDistance } from './nearby-cities-context';
 import { useVisitorLocation } from './visitor-location-provider';
 import { formatDistanceKm } from '@/lib/geo-distance';
-import { MoonIcon, ForkKnifeIcon, BedIcon, MapPinIcon, StoreIcon } from './nav-icons';
+import { MoonIcon, ForkKnifeIcon, BedIcon, MapPinIcon } from './nav-icons';
 
 // Futuristic mega menu: hover (desktop) / click (mobile) opens a full-width
 // glassmorphic panel below the header. The Cities panel groups cities by
@@ -65,7 +65,7 @@ const VERTICAL_COPY: Record<Locale, Record<Vertical, { tagline: string }>> = {
   },
 };
 
-const COMMON_COPY: Record<Locale, {
+type CopyShape = {
   nearYou: (city: string | null) => string;
   enable: string;
   viewAll: string;
@@ -79,7 +79,9 @@ const COMMON_COPY: Record<Locale, {
   preciseLoading: string;    // shown while waiting on permission / GPS fix
   preciseDeniedNote: string; // shown once after the user denies the permission
   preciseActive: string;     // little "✓ precise" chip when source='precise'
-}> = {
+};
+
+const COMMON_COPY: Record<Locale, CopyShape> = {
   en: {
     nearYou: (c) => c ? `Near you · ${c}` : 'Near you',
     enable: 'Detecting your location…',
@@ -276,7 +278,7 @@ const POPULAR_CITY_SLUGS = [
 
 function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity }: {
   locale: Locale;
-  c: ReturnType<typeof copy>;
+  c: CopyShape;
   cities: CityWithDistance[];
   nearest: CityWithDistance[];
   hasLocation: boolean;
@@ -354,7 +356,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity }: {
 
 function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorCity }: {
   locale: Locale;
-  c: ReturnType<typeof copy>;
+  c: CopyShape;
   kind: 'nightlife' | 'food' | 'stay';
   accent: AccentKey;
   nearest: CityWithDistance[];
@@ -409,7 +411,7 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
 
 function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, kindHref }: {
   locale: Locale;
-  c: ReturnType<typeof copy>;
+  c: CopyShape;
   nearest: CityWithDistance[];
   hasLocation: boolean;
   visitorCity: string | null;
@@ -464,6 +466,3 @@ function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, ki
   );
 }
 
-// Type helper so the inner panels know the COMMON_COPY shape.
-type CopyShape = (typeof COMMON_COPY)[Locale];
-function copy(): CopyShape { return COMMON_COPY.en; }

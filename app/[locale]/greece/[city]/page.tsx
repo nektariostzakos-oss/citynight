@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { isLocale, LOCALES, type Locale } from '@/lib/i18n';
 import {
@@ -166,8 +167,13 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
           <ul className="grid gap-3 sm:grid-cols-3">
             {supportingPhotos.map((p, i) => (
               <li key={i} className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.url} alt={`${cityRow.name} scene ${i + 1}`} className="h-full w-full object-cover city-hero-crop" loading="lazy" />
+                <Image
+                  src={p.url}
+                  alt={`${cityRow.name} scene ${i + 1}`}
+                  fill
+                  sizes="(min-width: 640px) 33vw, 100vw"
+                  className="object-cover city-hero-crop"
+                />
                 {/* Attribution intentionally not overlaid on the image (it
                     looked like a watermark to visitors). Visible credit lives
                     in the hero caption + the global credits page. */}

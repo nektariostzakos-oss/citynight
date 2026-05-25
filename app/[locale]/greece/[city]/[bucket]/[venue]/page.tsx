@@ -149,7 +149,7 @@ export default async function VenuePage({
           <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-lg">
             {/* `city-hero-crop` clips the bottom ~3.5% to hide any photographer
                 watermark that might exist in the source image. */}
-            <Image src={hero.url} alt={v.name as string} fill sizes="100vw" className="object-cover city-hero-crop" priority />
+            <Image src={hero.url} alt={v.name as string} fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover city-hero-crop" priority />
           </div>
           {hero.attribution && (
             <p className="mt-2 text-[10px] text-[var(--color-fg-3)]">
