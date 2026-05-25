@@ -14,7 +14,11 @@ import { AdSlot } from '@/components/ad-slot';
 import { AffiliateBlock } from '@/components/affiliate-block';
 import { ViewTracker } from '@/components/view-tracker';
 
-export const revalidate = 3600;
+// Venue pages — facts move slowly; revalidate every 6h. Owner edits +
+// new events flip pages immediately via revalidatePath() from the venues
+// PATCH + events POST routes, so this is just the worst-case freshness
+// for non-edited venues.
+export const revalidate = 21600;
 
 // Per-locale chrome. Greek is the primary surface.
 const COPY: Record<Locale, {
@@ -155,7 +159,7 @@ export default async function VenuePage({
           <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-lg">
             {/* `city-hero-crop` clips the bottom ~3.5% to hide any photographer
                 watermark that might exist in the source image. */}
-            <Image src={hero.url} alt={v.name as string} fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover city-hero-crop" priority />
+            <Image src={hero.url} alt={v.name as string} fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover city-hero-crop" priority fetchPriority="high" />
           </div>
           {hero.attribution && (
             <p className="mt-2 text-[10px] text-[var(--color-fg-3)]">
@@ -208,7 +212,7 @@ export default async function VenuePage({
         <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {gallery.map((p) => (
             <li key={p.id} className="relative aspect-[4/3] overflow-hidden rounded-lg">
-              <Image src={p.url} alt={v.name as string} fill sizes="(min-width:1024px) 20vw, (min-width:640px) 33vw, 50vw" className="object-cover transition hover:scale-105 city-hero-crop" />
+              <Image src={p.url} alt={v.name as string} fill sizes="(min-width:1024px) 20vw, (min-width:640px) 33vw, 50vw" loading="lazy" decoding="async" className="object-cover transition hover:scale-105 city-hero-crop" />
             </li>
           ))}
         </ul>

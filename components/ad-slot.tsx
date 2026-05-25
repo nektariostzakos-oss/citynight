@@ -42,7 +42,7 @@ export function AdSlot({ id, scope }: { id: string; scope: 'site' | 'section' | 
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
-      <Script id={`ad-${id}`} strategy="afterInteractive">
+      <Script id={`ad-${id}`} strategy="lazyOnload">
         {`(adsbygoogle = window.adsbygoogle || []).push({});`}
       </Script>
     </div>

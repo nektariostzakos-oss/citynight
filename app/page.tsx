@@ -143,6 +143,7 @@ export default async function RootPage() {
             fill
             sizes="100vw"
             priority
+            fetchPriority="high"
             className="object-cover opacity-50"
           />
         )}

@@ -37,6 +37,9 @@ export function HeroPhotoCycle({ photos, intervalMs = 7000 }: { photos: { url: s
             fill
             sizes="100vw"
             priority={i === 0}
+            fetchPriority={i === 0 ? 'high' : 'low'}
+            loading={i === 0 ? undefined : 'lazy'}
+            decoding={i === 0 ? undefined : 'async'}
             className="object-cover city-hero-crop"
           />
         </div>

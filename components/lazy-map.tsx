@@ -47,8 +47,21 @@ export function LazyMap({ lat, lng, name, locale = 'en' }: { lat: number | null;
           aria-label={c.loadInteractive}
         >
           {staticUrl ? (
+            // Native <img> — Google's signed static-map URL changes every call
+            // (key + style query string); next/image's optimizer would just
+            // re-fetch it via /_next/image proxy and cache the same bytes
+            // twice. width/height fixes layout shift; lazy keeps it out of
+            // the LCP budget on pages where the map sits below the fold.
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={staticUrl} alt={c.mapOf(name)} className="w-full" />
+            <img
+              src={staticUrl}
+              alt={c.mapOf(name)}
+              width={600}
+              height={400}
+              loading="lazy"
+              decoding="async"
+              className="w-full"
+            />
           ) : (
             <div className="flex h-40 w-full items-center justify-center bg-[var(--color-bg-1)] text-sm text-[var(--color-fg-3)]">
               {c.unavailable}

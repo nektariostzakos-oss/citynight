@@ -19,7 +19,10 @@ import {
 } from '@/lib/seo';
 import { getCityGuide } from '@/content/cities';
 
-export const revalidate = 1800;
+// City pages — re-cut hourly. Owner edits flip them sooner via
+// revalidatePath() from the venues PATCH route, so changes are visible
+// within seconds regardless of this window.
+export const revalidate = 3600;
 
 const NEIGHBOURHOODS_HEADING: Record<Locale, string> = {
   en: 'Where to go, by neighborhood',
@@ -172,6 +175,8 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
                   alt={`${cityRow.name} scene ${i + 1}`}
                   fill
                   sizes="(min-width: 640px) 33vw, 100vw"
+                  loading="lazy"
+                  decoding="async"
                   className="object-cover city-hero-crop"
                 />
                 {/* Attribution intentionally not overlaid on the image (it

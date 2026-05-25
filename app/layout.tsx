@@ -3,11 +3,16 @@ import { Manrope } from 'next/font/google';
 import './globals.css';
 
 // next/font/google self-hosts the font + auto-emits `font-display: swap`
-// so first paint never blocks on the Manrope download. Subset to latin +
-// latin-ext + greek so EL pages still render correctly.
+// + preloads the LCP-critical files automatically. We constrain the variable
+// font to the three weights actually used in the codebase (medium 500 for
+// body chrome, semibold 600 for most display headings, bold 700 for stats
+// + emphasis). Subsets cover EN/DE/FR/IT (latin + latin-ext for ä/ö/é) and
+// EL (greek).
 const manrope = Manrope({
   subsets: ['latin', 'latin-ext', 'greek'],
+  weight: ['500', '600', '700'],
   display: 'swap',
+  preload: true,
   variable: '--font-display-loaded',
 });
 

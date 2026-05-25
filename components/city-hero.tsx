@@ -51,6 +51,7 @@ export function CityHero({
             fill
             sizes="100vw"
             priority
+            fetchPriority="high"
             className="object-cover city-hero-crop"
           />
         ) : (
