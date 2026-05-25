@@ -22,6 +22,20 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const STORAGE_KEY = 'cn:visitor-loc';
 const STORAGE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
+// iOS Safari (incl. iPad Safari, all in-app webviews on iOS) silently blocks
+// getCurrentPosition() when it's not triggered by a user gesture. The
+// permission dialog never appears, the promise never resolves, and the
+// page is left with `source='ip'` forever. On iOS we skip the auto-prompt
+// and require a tap (see <GeoEnhancer/>) — once permission is granted,
+// subsequent loads auto-prompt fine.
+function isIOS(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent;
+  // Modern iPad reports as Mac; the touch-points check disambiguates.
+  const isIPadOS = navigator.platform === 'MacIntel' && (navigator as Navigator & { maxTouchPoints?: number }).maxTouchPoints! > 1;
+  return /iPad|iPhone|iPod/.test(ua) || isIPadOS;
+}
+
 export type VisitorLocation = {
   countryCode: string | null;  // ISO alpha-2, e.g. 'GR'
   city: string | null;         // e.g. 'Loutraki', 'Korinthos' — small towns supported
@@ -210,6 +224,7 @@ export function VisitorLocationProvider({ children }: { children: React.ReactNod
     let cancelled = false;
     (async () => {
       try {
+        const ios = isIOS();
         // Permissions API is supported everywhere we care about (Chrome,
         // Edge, Firefox, Safari 16+). If it's missing we just attempt anyway
         // — that'll surface the popup on first run, which is the goal.
@@ -220,12 +235,24 @@ export function VisitorLocationProvider({ children }: { children: React.ReactNod
             setError('permission denied');
             return;
           }
+          // iOS Safari: only auto-call if permission is already 'granted'
+          // (i.e. visitor allowed us before). For 'prompt', wait for the
+          // tap-bound CTA — auto-call would be silently dropped.
+          if (ios && status.state !== 'granted') {
+            setError('needs-gesture');
+            return;
+          }
+        } else if (ios) {
+          // Old iOS without Permissions API — always require a gesture.
+          setError('needs-gesture');
+          return;
         }
         if (cancelled) return;
         await requestPrecise();
       } catch {
-        // Permissions API itself failed — fall back to attempting the prompt.
-        if (!cancelled) await requestPrecise();
+        // Permissions API itself failed — on non-iOS, attempt the prompt;
+        // on iOS, defer to gesture.
+        if (!cancelled && !isIOS()) await requestPrecise();
       }
     })();
 

@@ -7,6 +7,7 @@ import { CmpInit } from '@/components/cmp';
 import { AdsenseInit } from '@/components/adsense-init';
 import { VisitorLocationProvider } from '@/components/visitor-location-provider';
 import { NearbyCitiesProvider } from '@/components/nearby-cities-context';
+import { GeoEnhancer } from '@/components/geo-enhancer';
 import { listPublishedCities } from '@/lib/queries';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://citynight.gr';
@@ -53,6 +54,8 @@ export default async function LocaleLayout({
           <SiteHeader locale={typedLocale} />
           <main className="flex-1">{children}</main>
           <SiteFooter locale={typedLocale} />
+          {/* Auto-redirect on precise location lock + iOS tap fallback CTA. */}
+          <GeoEnhancer locale={typedLocale} />
         </NearbyCitiesProvider>
       </VisitorLocationProvider>
     </div>
