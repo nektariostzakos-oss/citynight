@@ -2,27 +2,67 @@
 //   confidence >= 0.7 + reviewCount >= 3        → auto_publish (status='published')
 //   confidence >= 0.4                            → hold       (status='pending')
 //   otherwise                                    → reject     (status='rejected')
+//
+// Rate limit: 3 successful or held submissions per user per 24h. Reject/bad-
+// input attempts don't count toward the cap (so a typo doesn't lock you out).
 
 import { NextRequest, NextResponse } from 'next/server';
 import { requireUser } from '@/lib/auth/session';
 import { findPlacesMatch } from '@/lib/places-validate';
 import { db } from '@/db';
 
+const DAILY_SUBMISSION_CAP = 3;
+const RATE_WINDOW_S = 24 * 60 * 60;
+
+function recordAttempt(userId: string, outcome: string, venueId: string | null, ip: string | null) {
+  db.$client.prepare(
+    `INSERT INTO submission_attempts (id, user_id, ip, outcome, venue_id) VALUES (?, ?, ?, ?, ?)`,
+  ).run(crypto.randomUUID(), userId, ip, outcome, venueId);
+}
+
 export async function POST(req: NextRequest) {
   const user = await requireUser();
+  // CF / proxy header first; fall back to undefined locally.
+  const ip = req.headers.get('cf-connecting-ip') ?? req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null;
+
   let body: Record<string, unknown>;
-  try { body = await req.json(); } catch { return NextResponse.json({ ok: false }, { status: 400 }); }
+  try { body = await req.json(); }
+  catch {
+    recordAttempt(user.id, 'bad_input', null, ip);
+    return NextResponse.json({ ok: false }, { status: 400 });
+  }
 
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const citySlug = typeof body.citySlug === 'string' ? body.citySlug : '';
   const categorySlug = typeof body.categorySlug === 'string' ? body.categorySlug : '';
-  if (!name || !citySlug || !categorySlug) return NextResponse.json({ ok: false, error: 'missing fields' }, { status: 400 });
+  if (!name || !citySlug || !categorySlug) {
+    recordAttempt(user.id, 'bad_input', null, ip);
+    return NextResponse.json({ ok: false, error: 'missing fields' }, { status: 400 });
+  }
+
+  // Rate limit — count attempts in the last 24h that actually persisted
+  // (auto_publish or hold). Reject + bad_input attempts are free.
+  const recent = (db.$client.prepare(
+    `SELECT COUNT(*) AS n FROM submission_attempts
+      WHERE user_id = ? AND created_at >= unixepoch() - ?
+        AND outcome IN ('auto_publish', 'hold')`,
+  ).get(user.id, RATE_WINDOW_S) as { n: number }).n;
+  if (recent >= DAILY_SUBMISSION_CAP) {
+    recordAttempt(user.id, 'rate_limited', null, ip);
+    return NextResponse.json(
+      { ok: false, error: 'rate_limited', limit: DAILY_SUBMISSION_CAP, windowHours: 24 },
+      { status: 429 },
+    );
+  }
 
   const sqlite = db.$client;
   const city = sqlite.prepare(`SELECT id, name FROM cities WHERE slug = ? AND is_published = 1`).get(citySlug) as
     | { id: string; name: string } | undefined;
   const cat = sqlite.prepare(`SELECT id FROM categories WHERE slug = ?`).get(categorySlug) as { id: string } | undefined;
-  if (!city || !cat) return NextResponse.json({ ok: false, error: 'unknown city or category' }, { status: 400 });
+  if (!city || !cat) {
+    recordAttempt(user.id, 'bad_input', null, ip);
+    return NextResponse.json({ ok: false, error: 'unknown city or category' }, { status: 400 });
+  }
 
   const match = await findPlacesMatch({ name, city: city.name });
   const confidence = match?.confidence ?? 0;
@@ -57,6 +97,8 @@ export async function POST(req: NextRequest) {
     `).run(crypto.randomUUID(), venueId, user.id, match ? 1 : 0, confidence, decision);
   });
   tx();
+
+  recordAttempt(user.id, decision, venueId, ip);
 
   return NextResponse.json({ ok: true, venueId, decision, status, confidence });
 }

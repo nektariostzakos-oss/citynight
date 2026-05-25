@@ -27,6 +27,9 @@ STRIPE_SECRET_KEY=...
 
 # Weekly Mon 04:00: Places sync — facts, photos, close-detection, auto-resolve reports.
 0 4 * * 1  cd ~/domains/citynight.gr/public_html && node scripts/cron/sync.js >> ~/logs/sync.log 2>&1
+
+# Every 15 minutes: email owners whose venues flipped to published since last tick.
+*/15 * * * *  cd ~/domains/citynight.gr/public_html && node scripts/cron/notify-published.js >> ~/logs/notify-published.log 2>&1
 ```
 
 ## Verification checklist (run after first deploy)

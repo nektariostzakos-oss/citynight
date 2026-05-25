@@ -24,6 +24,7 @@ const STATUS_COPY: Record<Locale, {
   pending: string;
   rejected: string;
   network: string;
+  rateLimited: (limit: number) => string;
   submit: string;
   managed: string;
 }> = {
@@ -33,6 +34,7 @@ const STATUS_COPY: Record<Locale, {
     pending: 'Held for review — we couldn’t confidently match Google Places, an editor will look at it shortly.',
     rejected: 'No match on Google Places. Please double-check the name and city, then try again.',
     network: 'Could not submit — check your connection and retry.',
+    rateLimited: (n) => `Daily limit hit (${n} submissions / 24 h). Try again tomorrow.`,
     submit: 'Submit venue',
     managed: 'Open the manage page →',
   },
@@ -42,6 +44,7 @@ const STATUS_COPY: Record<Locale, {
     pending: 'Σε αναμονή — δεν μπορέσαμε να το ταιριάξουμε με σιγουριά. Συντάκτης θα ρίξει μια ματιά σύντομα.',
     rejected: 'Δεν βρέθηκε στο Google Places. Έλεγξε το όνομα και την πόλη και ξαναδοκίμασε.',
     network: 'Δεν στάλθηκε — έλεγξε σύνδεση και δοκίμασε ξανά.',
+    rateLimited: (n) => `Έφτασες το ημερήσιο όριο (${n} καταχωρήσεις / 24ω). Δοκίμασε αύριο.`,
     submit: 'Αποστολή μαγαζιού',
     managed: 'Άνοιξε τη σελίδα διαχείρισης →',
   },
@@ -51,6 +54,7 @@ const STATUS_COPY: Record<Locale, {
     pending: 'Zur Prüfung gehalten — kein klarer Google-Places-Treffer; ein Redakteur schaut bald drauf.',
     rejected: 'Kein Google-Places-Treffer. Bitte Name + Stadt prüfen und erneut versuchen.',
     network: 'Senden fehlgeschlagen — Verbindung prüfen.',
+    rateLimited: (n) => `Tageslimit erreicht (${n} Einreichungen / 24 h). Morgen erneut versuchen.`,
     submit: 'Location einreichen',
     managed: 'Verwaltungsseite öffnen →',
   },
@@ -60,6 +64,7 @@ const STATUS_COPY: Record<Locale, {
     pending: 'En attente de revue — pas de correspondance claire ; un éditeur va regarder.',
     rejected: 'Aucune correspondance Google Places. Vérifiez nom + ville puis réessayez.',
     network: 'Envoi impossible — vérifiez votre connexion.',
+    rateLimited: (n) => `Limite quotidienne atteinte (${n} soumissions / 24 h). Réessayez demain.`,
     submit: 'Soumettre le lieu',
     managed: 'Ouvrir la page de gestion →',
   },
@@ -69,6 +74,7 @@ const STATUS_COPY: Record<Locale, {
     pending: 'In attesa di revisione — nessun match certo; un editor la guarderà a breve.',
     rejected: 'Nessun match su Google Places. Controlla nome e città e riprova.',
     network: 'Invio fallito — controlla la connessione.',
+    rateLimited: (n) => `Limite giornaliero raggiunto (${n} invii / 24 h). Riprova domani.`,
     submit: 'Invia il locale',
     managed: 'Apri la pagina di gestione →',
   },
@@ -80,6 +86,9 @@ type ApiResponse = {
   decision?: 'auto_publish' | 'hold' | 'reject';
   status?: 'published' | 'pending' | 'rejected';
   error?: string;
+  /** Present on rate-limited responses (HTTP 429). */
+  limit?: number;
+  windowHours?: number;
 };
 
 export function SubmitNewVenueForm({
@@ -188,7 +197,11 @@ export function SubmitNewVenueForm({
 
       {result && !result.ok && (
         <p className="text-sm text-[var(--color-danger)]">
-          {result.error === 'network' ? t.network : (result.error ?? t.network)}
+          {result.error === 'rate_limited'
+            ? t.rateLimited(result.limit ?? 3)
+            : result.error === 'network'
+            ? t.network
+            : (result.error ?? t.network)}
         </p>
       )}
 
