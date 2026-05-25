@@ -18,7 +18,10 @@
     "test:seo": "node scripts/tests/seo-smoke.mjs",
     "test:integrity": "node scripts/seed/tests/enrichment-writer.test.js && node scripts/tests/owner-edit.test.mjs && node scripts/tests/photos-check.test.mjs && node scripts/tests/gates.test.mjs",
     "test:e2e": "playwright test",
-    "test:lighthouse": "node scripts/tests/lighthouse.mjs"
+    "test:lighthouse": "node scripts/tests/lighthouse.mjs",
+    "test:crawl": "node scripts/tests/crawl-reachable.mjs",
+    "translations:audit": "node scripts/translations/audit.mjs",
+    "translations:backfill": "node scripts/translations/backfill.js"
   },
   "dependencies": {
     "@next/mdx": "^15.0.0",

@@ -8,6 +8,7 @@ import {
   listVenuesForCity,
   listCategories,
   listCityLocationPhotos,
+  listNearbyCities,
 } from '@/lib/queries';
 import { VenueCard } from '@/components/venue-card';
 import { AdSlot } from '@/components/ad-slot';
@@ -97,6 +98,33 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
   const supportingPhotos = photos.filter((p) => p !== heroPhoto).slice(0, 3);
   const venues = listVenuesForCity(cityRow.id, locale, { limit: 60 });
   const categories = listCategories(locale);
+  const nearbyCities = listNearbyCities(cityRow.id, locale, 6);
+
+  // Top-10 venues for the ItemList JSON-LD (vs. the 60 we render in the
+  // grid — keeps the structured-data signal focused on the editorially-
+  // strongest set instead of every published listing).
+  const topVenues = venues.slice(0, 10);
+
+  // Group by category so each shows up as its own H3 sub-section. Keeps
+  // anchor-text descriptive ("best bars in {city}" → bar venue names) and
+  // gives Google a clearer topical map of the city.
+  const venuesByCategory = new Map<string, { slug: string; name: string; venues: typeof venues }>();
+  for (const v of venues) {
+    if (!v.categorySlug || !v.categoryName) continue;
+    if (!venuesByCategory.has(v.categorySlug)) {
+      venuesByCategory.set(v.categorySlug, { slug: v.categorySlug, name: v.categoryName, venues: [] });
+    }
+    venuesByCategory.get(v.categorySlug)!.venues.push(v);
+  }
+
+  // Localized labels for the new content blocks.
+  const NEARBY_LABEL: Record<Locale, string> = { en: 'Nearby cities', el: 'Κοντινές πόλεις', de: 'In der Nähe', fr: 'Villes proches',   it: 'Città vicine' };
+  const BY_CATEGORY_LABEL: Record<Locale, (city: string) => string> = {
+    en: (c) => `${c} by category`, el: (c) => `${c} ανά κατηγορία`, de: (c) => `${c} nach Kategorie`, fr: (c) => `${c} par catégorie`, it: (c) => `${c} per categoria`,
+  };
+  const TOP_LABEL: Record<Locale, (city: string) => string> = {
+    en: (c) => `Top venues in ${c}`, el: (c) => `Κορυφαία μαγαζιά στην ${c}`, de: (c) => `Top-Locations in ${c}`, fr: (c) => `Lieux phares à ${c}`, it: (c) => `Locali top a ${c}`,
+  };
 
   const greeceLabel: Record<Locale, string> = { en: 'Greece', el: 'Ελλάδα', de: 'Griechenland', fr: 'Grèce', it: 'Grecia' };
   const homeLabel: Record<Locale, string> = { en: 'Home', el: 'Αρχική', de: 'Start', fr: 'Accueil', it: 'Home' };
@@ -113,8 +141,9 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
             { name: cityRow.name, path: `/${locale}/greece/${cityRow.slug}` },
           ]),
           itemListJsonLd({
-            name: `${cityRow.name} — venues`,
-            items: venues.map((v) => ({
+            name: TOP_LABEL[locale](cityRow.name),
+            // Top 10 — editorial signal, not the full 60-venue dump.
+            items: topVenues.map((v) => ({
               name: v.name,
               path: `/${locale}/greece/${cityRow.slug}/${v.areaSlug ?? v.categorySlug ?? ''}/${v.slug ?? ''}`,
             })),
@@ -211,10 +240,10 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
         <AdSlot id={`city-${cityRow.slug}-mid`} scope="section" />
       </div>
 
-      {/* Venue grid */}
+      {/* Top venues — editorial top-10 with descriptive H2. */}
       <section className="mx-auto w-full max-w-6xl px-6 py-12">
         <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-          {VENUES_HEADING[locale]}
+          {TOP_LABEL[locale](cityRow.name)}
         </h2>
 
         {venues.length === 0 ? (
@@ -223,7 +252,7 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
           </p>
         ) : (
           <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {venues.map((v) => (
+            {topVenues.map((v) => (
               <li key={v.id}>
                 <VenueCard venue={v} locale={locale} />
               </li>
@@ -231,6 +260,77 @@ export default async function CityPage({ params }: { params: Promise<{ locale: s
           </ul>
         )}
       </section>
+
+      {/* By-category sub-lists — each category gets its own H3 + a tight
+          list of venues. Anchor text reads "Top {category} in {city}" which
+          gives Google a strong topical signal + lets visitors jump straight
+          into the slice they came for. */}
+      {venuesByCategory.size > 1 && (
+        <section className="mx-auto w-full max-w-6xl px-6 py-8">
+          <h2 className="font-display text-xl font-semibold tracking-tight md:text-2xl">
+            {BY_CATEGORY_LABEL[locale](cityRow.name)}
+          </h2>
+          <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {[...venuesByCategory.values()].map((group) => (
+              <div key={group.slug}>
+                <h3 className="font-display text-base font-semibold text-[var(--color-accent-cyan)]">
+                  <Link href={`/${locale}/greece/${cityRow.slug}/${group.slug}`} className="hover:underline">
+                    {group.name}
+                  </Link>
+                </h3>
+                <ul className="mt-2 space-y-1.5 text-sm">
+                  {group.venues.slice(0, 6).map((v) => (
+                    <li key={v.id}>
+                      <Link
+                        href={`/${locale}/greece/${cityRow.slug}/${v.areaSlug ?? v.categorySlug ?? ''}/${v.slug ?? ''}`}
+                        className="text-[var(--color-fg-1)] hover:text-[var(--color-accent-cyan)]"
+                      >
+                        {v.name}
+                      </Link>
+                      {v.areaName && (
+                        <span className="ml-1.5 text-[11px] text-[var(--color-fg-3)]">· {v.areaName}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {group.venues.length > 6 && (
+                  <Link
+                    href={`/${locale}/greece/${cityRow.slug}/${group.slug}`}
+                    className="mt-2 inline-block text-xs font-semibold text-[var(--color-accent-cyan)] hover:underline"
+                  >
+                    + {group.venues.length - 6} more →
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Nearby cities — internal-link cluster + UX safety net (visitor
+          picked the wrong island, here are the actual closest options). */}
+      {nearbyCities.length > 0 && (
+        <section className="border-t border-[var(--color-bg-2)] bg-[var(--color-bg-1)]/30">
+          <div className="mx-auto w-full max-w-6xl px-6 py-10">
+            <h2 className="font-display text-lg font-semibold tracking-tight text-[var(--color-fg-1)]">
+              {NEARBY_LABEL[locale]}
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {nearbyCities.map((nc) => (
+                <li key={nc.id}>
+                  <Link
+                    href={`/${locale}/greece/${nc.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-3 py-1.5 text-sm text-[var(--color-fg-1)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+                  >
+                    {nc.name}
+                    <span className="text-[10px] text-[var(--color-fg-3)]">{Math.round(nc.distanceKm)} km</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
     </>
   );
 }

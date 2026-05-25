@@ -1,0 +1,50 @@
+---
+title: "TEMPLATE — replace with the real guide title"
+description: "One-sentence summary that fits Google's 50–160 char window. Avoid clickbait; this also goes in the meta description if the page-level metadata doesn't override."
+publishedAt: "2026-01-01"
+updatedAt: "2026-01-01"
+---
+
+# {{ replace with the H1 — usually matches the title field above }}
+
+A one-paragraph intro. Set the topic, name the city/scene, hint at the bottom-line takeaway. 60–120 words.
+
+## Table of contents
+
+- [Section one](#section-one)
+- [Section two](#section-two)
+- [FAQ](#faq)
+
+## Section one
+
+Body copy. Cross-link to ≥2 venues here using locale-relative URLs:
+
+- [Six DOGS — Athens, Monastiraki](/en/greece/athens/night_club/six-dogs)
+- [Astra Suites — Santorini](/en/greece/santorini/boutique_hotel/astra-suites)
+
+## Section two
+
+More body. Cross-link to ≥1 related city + ≥1 sibling guide.
+
+Pull-quote or aside if you have one. Avoid bullet-list spam — read like a paragraph.
+
+## FAQ
+
+> **First question?**
+> Plain-text answer. The /[locale]/guides/[slug] page will scan for `##`/`###` lines that end in `?` and turn them into a FAQPage JSON-LD block automatically.
+
+> **Second question?**
+> Same shape.
+
+> **Third question?**
+> Aim for 3–6 questions covering the actual things a first-time visitor would ask.
+
+---
+
+**Editor checklist before publishing:**
+- [ ] H1 set, matches title front-matter
+- [ ] ≥5 internal links across body (mix of venues + cities + sibling guides)
+- [ ] ≥1 image (drop in via `![alt](/path/to/image.jpg)` once we wire MDX images)
+- [ ] FAQ block with ≥3 questions (auto becomes FAQPage schema)
+- [ ] description front-matter fits 50–160 chars
+- [ ] Linted with `npm run lint` — MDX flags broken links

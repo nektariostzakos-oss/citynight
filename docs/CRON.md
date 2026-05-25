@@ -39,6 +39,12 @@ STRIPE_SECRET_KEY=...
 
 # Daily 04:00: verify the most recent gzipped backup actually restores.
 0 4 * * *  DATABASE_PATH=/home/uXXX/persistent/citynight.sqlite /home/uXXX/domains/citynight.gr/public_html/scripts/cron/backup-verify.sh >> ~/logs/backup-verify.log 2>&1
+
+# Weekly Wed 02:00: translation backfill — fills missing translations rows
+# for published cities/venues/areas via Claude Haiku 4.5 (Anthropic Batches
+# API). Dry-runs without ANTHROPIC_API_KEY. Capped at TRANSLATION_BACKFILL_MAX
+# tuples per run (default 200) for budget control.
+0 2 * * 3  cd ~/domains/citynight.gr/public_html && node scripts/translations/backfill.js >> ~/logs/translation-backfill.log 2>&1
 ```
 
 ## Verification checklist (run after first deploy)

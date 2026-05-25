@@ -465,3 +465,48 @@ export function listUpcomingVenueEvents(venueId: string, limit = 6): UpcomingEve
      LIMIT ?
   `).all(venueId, limit) as UpcomingEvent[];
 }
+
+// ── Nearby cities (content-layer #1) ────────────────────────────────────
+// Returns the N closest other published cities by great-circle distance.
+// Used in the city-page footer block as an internal-link cluster — improves
+// crawl depth + bounces visitors who picked the wrong island.
+export type NearbyCity = {
+  id: string;
+  slug: string;
+  name: string;
+  region: string | null;
+  distanceKm: number;
+};
+
+export function listNearbyCities(cityId: string, locale: Locale, limit = 6): NearbyCity[] {
+  // Pull the source city's coords.
+  const src = sqlite().prepare(
+    `SELECT id, lat, lng FROM cities WHERE id = ? AND is_published = 1`,
+  ).get(cityId) as { id: string; lat: number | null; lng: number | null } | undefined;
+  if (!src || src.lat == null || src.lng == null) return [];
+
+  // Haversine in SQL — sqlite has the math functions enabled in better-sqlite3.
+  // 6371 = Earth radius in km. We compute against all other published cities
+  // with valid coords and sort by distance ascending.
+  const rows = sqlite().prepare(`
+    SELECT c.id,
+           c.slug,
+           ${localizedName('city', 'c', locale)} AS name,
+           c.region,
+           (
+             6371 * 2 * ASIN(MIN(1, SQRT(
+               POWER(SIN(((c.lat - ?) * 3.141592653589793 / 180) / 2), 2) +
+               COS(? * 3.141592653589793 / 180) * COS(c.lat * 3.141592653589793 / 180) *
+               POWER(SIN(((c.lng - ?) * 3.141592653589793 / 180) / 2), 2)
+             )))
+           ) AS distanceKm
+      FROM cities c
+     WHERE c.id != ?
+       AND c.is_published = 1
+       AND c.lat IS NOT NULL AND c.lng IS NOT NULL
+     ORDER BY distanceKm ASC
+     LIMIT ?
+  `).all(src.lat, src.lat, src.lng, cityId, limit) as NearbyCity[];
+
+  return rows;
+}

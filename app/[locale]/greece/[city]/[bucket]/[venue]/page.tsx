@@ -7,7 +7,7 @@ import { getVenueByCityArea, listRelatedVenues, getCityIdBySlug, getCategoryIdBy
 import { VenueCard } from '@/components/venue-card';
 import {
   publicMetadata, jsonLdProps,
-  breadcrumbJsonLd, localBusinessJsonLd,
+  breadcrumbJsonLd, localBusinessJsonLd, faqJsonLd,
 } from '@/lib/seo';
 import { LazyMap } from '@/components/lazy-map';
 import { AdSlot } from '@/components/ad-slot';
@@ -97,6 +97,32 @@ export default async function VenuePage({
   const homeLabel: Record<Locale, string> = { en: 'Home', el: 'Αρχική', de: 'Start', fr: 'Accueil', it: 'Home' };
   const greeceLabel: Record<Locale, string> = { en: 'Greece', el: 'Ελλάδα', de: 'Griechenland', fr: 'Grèce', it: 'Grecia' };
 
+  // H2 section labels for the content-layer pass — each render-block gets
+  // a proper heading so the page reads as a structured article (Google +
+  // accessibility both benefit).
+  const SECTION_COPY: Record<Locale, { overview: string; hours: string; location: string; similar: string; faq: string }> = {
+    en: { overview: 'Overview',        hours: 'Hours',     location: 'Location',  similar: 'Similar venues',  faq: 'Common questions' },
+    el: { overview: 'Επισκόπηση',      hours: 'Ώρες',      location: 'Τοποθεσία', similar: 'Παρόμοια μαγαζιά', faq: 'Συχνές ερωτήσεις' },
+    de: { overview: 'Übersicht',       hours: 'Öffnungszeiten', location: 'Lage', similar: 'Ähnliche Locations', faq: 'Häufige Fragen' },
+    fr: { overview: 'Aperçu',          hours: 'Horaires',  location: 'Emplacement', similar: 'Lieux similaires', faq: 'Questions fréquentes' },
+    it: { overview: 'Panoramica',      hours: 'Orari',     location: 'Posizione', similar: 'Locali simili',  faq: 'Domande frequenti' },
+  };
+  const sect = SECTION_COPY[locale];
+
+  // FAQ generator — facts only, never invented. The Q&A set is keyed by the
+  // venue's real data (city, category, hours-presence, claim state) so the
+  // page surfaces useful answers without making anything up. FAQPage schema
+  // gets the same 4 items.
+  const faqs = buildVenueFaqs(locale, {
+    name: v.name,
+    cityName: v.cityName,
+    categoryName: v.categoryName,
+    address: v.address,
+    hasHours: !!v.openingHours,
+    phone: v.phone,
+    isClaimed: claimed,
+  });
+
   return (
     <article className="mx-auto w-full max-w-5xl px-6 py-10">
       {/* JSON-LD: LocalBusiness (typed by category) + Breadcrumb */}
@@ -128,6 +154,8 @@ export default async function VenuePage({
             photos: v.photos.map((p) => ({ url: p.url })),
             categorySlug: v.categorySlug,
           }),
+          // FAQPage schema mirrors the visible FAQ block.
+          faqJsonLd(faqs),
         ])}
       />
 
@@ -220,9 +248,25 @@ export default async function VenuePage({
 
       <div className="mt-10 grid gap-10 md:grid-cols-3">
         <div className="md:col-span-2">
+          {/* Overview — the AI-written description, framed as a section. */}
           {v.description ? (
-            <p className="text-lg leading-relaxed text-[var(--color-fg-1)]">{v.description as string}</p>
+            <section aria-labelledby="overview-h2">
+              <h2 id="overview-h2" className="font-display text-xl font-semibold tracking-tight md:text-2xl">{sect.overview}</h2>
+              <p className="mt-3 text-lg leading-relaxed text-[var(--color-fg-1)]">{v.description as string}</p>
+            </section>
           ) : null}
+
+          {/* Hours — facts only, rendered from venues.opening_hours JSON
+              (Google Places source). Hidden when we have no hours data;
+              never invented. */}
+          {v.openingHours && (
+            <section className="mt-10" aria-labelledby="hours-h2">
+              <h2 id="hours-h2" className="font-display text-xl font-semibold tracking-tight md:text-2xl">{sect.hours}</h2>
+              <div className="mt-3">
+                <HoursTable raw={v.openingHours as string | null} locale={locale} />
+              </div>
+            </section>
+          )}
 
           <div className="mt-10">
             <AffiliateBlock venueId={v.id as string} locale={locale} />
@@ -233,7 +277,8 @@ export default async function VenuePage({
           </div>
         </div>
 
-        <aside className="space-y-4 text-sm">
+        <aside aria-labelledby="location-h2" className="space-y-4 text-sm">
+          <h2 id="location-h2" className="font-display text-xl font-semibold tracking-tight md:text-2xl">{sect.location}</h2>
           {v.address ? (
             <Row label={t.address} value={v.address as string} />
           ) : null}
@@ -265,11 +310,25 @@ export default async function VenuePage({
         </aside>
       </div>
 
+      {/* FAQ — Q&A driven by venue facts (city, category, hours-presence,
+          phone-presence, claim state). Mirrored by FAQPage JSON-LD up top. */}
+      <section className="mt-16 border-t border-[var(--color-bg-2)] pt-12" aria-labelledby="faq-h2">
+        <h2 id="faq-h2" className="font-display text-2xl font-semibold tracking-tight md:text-3xl">{sect.faq}</h2>
+        <dl className="mt-6 divide-y divide-[var(--color-bg-2)]">
+          {faqs.map((f) => (
+            <div key={f.q} className="py-4">
+              <dt className="font-semibold text-[var(--color-fg-0)]">{f.q}</dt>
+              <dd className="mt-1.5 text-sm leading-relaxed text-[var(--color-fg-1)]">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       {related.length > 0 && (
-        <section className="mt-16 border-t border-[var(--color-bg-2)] pt-12">
+        <section className="mt-16 border-t border-[var(--color-bg-2)] pt-12" aria-labelledby="similar-h2">
           <div className="flex items-baseline justify-between gap-4">
-            <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-              {t.more(v.cityName as string)}
+            <h2 id="similar-h2" className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+              {sect.similar}
             </h2>
             <Link href={`/${locale}/greece/${city}`} className="text-sm text-[var(--color-accent-cyan)] hover:underline">
               {t.allCityVenues(v.cityName as string)}
@@ -293,5 +352,170 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
       <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-2)]">{label}</p>
       <p className="mt-1 text-[var(--color-fg-0)]">{value}</p>
     </div>
+  );
+}
+
+// FAQ generator. Strictly fact-driven — never invents hours, prices, or
+// names. Every answer is derived from data we already trust (Places + owner
+// edits + claim state). Returns 3–5 items depending on what facts exist.
+function buildVenueFaqs(locale: Locale, v: {
+  name: string;
+  cityName: string;
+  categoryName: string | null;
+  address: string | null;
+  hasHours: boolean;
+  phone: string | null;
+  isClaimed: boolean;
+}): { q: string; a: string }[] {
+  const C = {
+    en: {
+      whereQ: (n: string, c: string) => `Where is ${n}?`,
+      whereA: (n: string, c: string, addr: string | null) =>
+        addr ? `${n} is at ${addr}, ${c}.` : `${n} is in ${c}.`,
+      hoursQ: (n: string) => `What are ${n}'s opening hours?`,
+      hoursA: (n: string) => `${n}'s opening hours are listed above in the Hours section — sourced from Google and refreshed weekly.`,
+      hoursNoA: (n: string) => `We don't have confirmed opening hours for ${n} yet. The owner can publish them from the dashboard.`,
+      phoneQ: (n: string) => `Can I call ${n} to book?`,
+      phoneA: (n: string, p: string) => `Yes — ${n}'s phone is ${p}.`,
+      phoneNoA: (n: string) => `No phone number is listed for ${n}. Try the website or visit in person.`,
+      typeQ: (n: string, c: string, cat: string) => `What kind of venue is ${n}?`,
+      typeA: (n: string, c: string, cat: string) => `${n} is a ${cat.toLowerCase()} in ${c}.`,
+      claimQ: (n: string) => `Is ${n} run by its owner on citynight?`,
+      claimY: (n: string) => `Yes — the page is claimed by the venue's owner, so the details here are owner-verified.`,
+      claimN: (n: string) => `Not yet — this page is unclaimed. If you run ${n}, you can claim it for free and start editing within minutes.`,
+    },
+    el: {
+      whereQ: (n: string, c: string) => `Πού βρίσκεται το ${n};`,
+      whereA: (n: string, c: string, addr: string | null) =>
+        addr ? `Το ${n} βρίσκεται στη διεύθυνση ${addr}, ${c}.` : `Το ${n} βρίσκεται στην ${c}.`,
+      hoursQ: (n: string) => `Ποιες είναι οι ώρες λειτουργίας του ${n};`,
+      hoursA: (n: string) => `Οι ώρες λειτουργίας του ${n} φαίνονται παραπάνω στην ενότητα Ώρες — πηγή Google, ανανέωση εβδομαδιαία.`,
+      hoursNoA: (n: string) => `Δεν έχουμε ακόμα επιβεβαιωμένες ώρες λειτουργίας για το ${n}. Ο ιδιοκτήτης μπορεί να τις δημοσιεύσει από το dashboard.`,
+      phoneQ: (n: string) => `Μπορώ να καλέσω το ${n} για κράτηση;`,
+      phoneA: (n: string, p: string) => `Ναι — το τηλέφωνο του ${n} είναι ${p}.`,
+      phoneNoA: (n: string) => `Δεν υπάρχει τηλέφωνο για το ${n}. Δοκίμασε το website ή πέρασε από εκεί.`,
+      typeQ: (n: string, c: string, cat: string) => `Τι τύπος μαγαζιού είναι το ${n};`,
+      typeA: (n: string, c: string, cat: string) => `Το ${n} είναι ${cat.toLowerCase()} στην ${c}.`,
+      claimQ: (n: string) => `Διαχειρίζεται ο ιδιοκτήτης το ${n} στο citynight;`,
+      claimY: (n: string) => `Ναι — η σελίδα είναι claimed από τον ιδιοκτήτη και οι πληροφορίες είναι owner-verified.`,
+      claimN: (n: string) => `Όχι ακόμα — η σελίδα είναι unclaimed. Αν είσαι ο ιδιοκτήτης του ${n}, μπορείς να την κάνεις claim δωρεάν και να επεξεργαστείς τις πληροφορίες σε λίγα λεπτά.`,
+    },
+    de: {
+      whereQ: (n: string, c: string) => `Wo befindet sich ${n}?`,
+      whereA: (n: string, c: string, addr: string | null) =>
+        addr ? `${n} liegt an der Adresse ${addr}, ${c}.` : `${n} liegt in ${c}.`,
+      hoursQ: (n: string) => `Wie sind die Öffnungszeiten von ${n}?`,
+      hoursA: (n: string) => `Die Öffnungszeiten von ${n} stehen oben im Abschnitt Öffnungszeiten — Quelle Google, wöchentlich aktualisiert.`,
+      hoursNoA: (n: string) => `Wir haben noch keine bestätigten Öffnungszeiten für ${n}. Der Inhaber kann sie über das Dashboard veröffentlichen.`,
+      phoneQ: (n: string) => `Kann ich ${n} anrufen, um zu reservieren?`,
+      phoneA: (n: string, p: string) => `Ja — die Telefonnummer von ${n} ist ${p}.`,
+      phoneNoA: (n: string) => `Keine Telefonnummer für ${n} hinterlegt. Versuche die Website oder gehe direkt vorbei.`,
+      typeQ: (n: string, c: string, cat: string) => `Welche Art von Location ist ${n}?`,
+      typeA: (n: string, c: string, cat: string) => `${n} ist ${cat} in ${c}.`,
+      claimQ: (n: string) => `Wird ${n} vom Inhaber auf citynight betreut?`,
+      claimY: (n: string) => `Ja — die Seite ist vom Inhaber beansprucht; die Angaben hier sind inhaberverifiziert.`,
+      claimN: (n: string) => `Noch nicht — die Seite ist nicht beansprucht. Wenn du ${n} betreibst, kannst du sie kostenlos übernehmen und in Minuten bearbeiten.`,
+    },
+    fr: {
+      whereQ: (n: string, c: string) => `Où se trouve ${n} ?`,
+      whereA: (n: string, c: string, addr: string | null) =>
+        addr ? `${n} se trouve au ${addr}, ${c}.` : `${n} se trouve à ${c}.`,
+      hoursQ: (n: string) => `Quels sont les horaires de ${n} ?`,
+      hoursA: (n: string) => `Les horaires de ${n} apparaissent ci-dessus dans la section Horaires — source Google, actualisé chaque semaine.`,
+      hoursNoA: (n: string) => `Nous n'avons pas encore d'horaires confirmés pour ${n}. L'exploitant peut les publier depuis le dashboard.`,
+      phoneQ: (n: string) => `Puis-je appeler ${n} pour réserver ?`,
+      phoneA: (n: string, p: string) => `Oui — le numéro de ${n} est ${p}.`,
+      phoneNoA: (n: string) => `Aucun numéro n'est listé pour ${n}. Essayez le site ou passez sur place.`,
+      typeQ: (n: string, c: string, cat: string) => `Quel type de lieu est ${n} ?`,
+      typeA: (n: string, c: string, cat: string) => `${n} est ${cat.toLowerCase()} à ${c}.`,
+      claimQ: (n: string) => `${n} est-il géré par son exploitant sur citynight ?`,
+      claimY: (n: string) => `Oui — la page est revendiquée par l'exploitant ; les infos sont vérifiées par lui.`,
+      claimN: (n: string) => `Pas encore — la page n'est pas revendiquée. Si vous gérez ${n}, vous pouvez la revendiquer gratuitement.`,
+    },
+    it: {
+      whereQ: (n: string, c: string) => `Dove si trova ${n}?`,
+      whereA: (n: string, c: string, addr: string | null) =>
+        addr ? `${n} si trova in ${addr}, ${c}.` : `${n} si trova a ${c}.`,
+      hoursQ: (n: string) => `Quali sono gli orari di ${n}?`,
+      hoursA: (n: string) => `Gli orari di ${n} sono qui sopra nella sezione Orari — fonte Google, aggiornati settimanalmente.`,
+      hoursNoA: (n: string) => `Non abbiamo ancora orari confermati per ${n}. Il proprietario può pubblicarli dal dashboard.`,
+      phoneQ: (n: string) => `Posso chiamare ${n} per prenotare?`,
+      phoneA: (n: string, p: string) => `Sì — il telefono di ${n} è ${p}.`,
+      phoneNoA: (n: string) => `Nessun numero per ${n}. Prova il sito o passa di persona.`,
+      typeQ: (n: string, c: string, cat: string) => `Che tipo di locale è ${n}?`,
+      typeA: (n: string, c: string, cat: string) => `${n} è ${cat.toLowerCase()} a ${c}.`,
+      claimQ: (n: string) => `${n} è gestito dal proprietario su citynight?`,
+      claimY: (n: string) => `Sì — la pagina è rivendicata dal proprietario; le info qui sono verificate.`,
+      claimN: (n: string) => `Non ancora — la pagina non è rivendicata. Se gestisci ${n}, puoi rivendicarla gratis in pochi minuti.`,
+    },
+  }[locale];
+
+  const out: { q: string; a: string }[] = [];
+  out.push({ q: C.whereQ(v.name, v.cityName), a: C.whereA(v.name, v.cityName, v.address) });
+  out.push({
+    q: C.hoursQ(v.name),
+    a: v.hasHours ? C.hoursA(v.name) : C.hoursNoA(v.name),
+  });
+  if (v.categoryName) {
+    out.push({ q: C.typeQ(v.name, v.cityName, v.categoryName), a: C.typeA(v.name, v.cityName, v.categoryName) });
+  }
+  out.push({
+    q: C.phoneQ(v.name),
+    a: v.phone ? C.phoneA(v.name, v.phone) : C.phoneNoA(v.name),
+  });
+  out.push({ q: C.claimQ(v.name), a: v.isClaimed ? C.claimY(v.name) : C.claimN(v.name) });
+  return out;
+}
+
+// Render Google Places `opening_hours` JSON as a per-day table. Trusted
+// because the source is Places (a fact source), never AI.
+function HoursTable({ raw, locale }: { raw: string | null; locale: Locale }) {
+  if (!raw) return null;
+  let parsed: { periods?: Array<{ open?: { day?: number; hour?: number; minute?: number }; close?: { day?: number; hour?: number; minute?: number } }> };
+  try { parsed = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch { return null; }
+  const periods = parsed?.periods ?? [];
+  if (!Array.isArray(periods) || !periods.length) return null;
+
+  // ISO 8601: Monday = 0 in our table even though Places uses Sunday=0; we
+  // remap so the table reads Mon→Sun, which is the more common European
+  // mental model for opening hours.
+  const PLACES_TO_LOCAL = [6, 0, 1, 2, 3, 4, 5]; // Places' Sunday=0 → row 6
+  const DAY_NAMES: Record<Locale, string[]> = {
+    en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    el: ['Δευ', 'Τρι', 'Τετ', 'Πεμ', 'Παρ', 'Σαβ', 'Κυρ'],
+    de: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+    fr: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+    it: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+  };
+
+  const rows: { day: string; opens: string; closes: string }[] = Array.from({ length: 7 }, (_, i) => ({
+    day: DAY_NAMES[locale][i]!, opens: '', closes: '',
+  }));
+  const pad = (n: number) => String(n).padStart(2, '0');
+  for (const p of periods) {
+    if (typeof p?.open?.day !== 'number') continue;
+    const idx = PLACES_TO_LOCAL[p.open.day];
+    if (idx === undefined) continue;
+    rows[idx]!.opens = `${pad(p.open.hour ?? 0)}:${pad(p.open.minute ?? 0)}`;
+    if (typeof p.close?.day === 'number') {
+      rows[idx]!.closes = `${pad(p.close.hour ?? 0)}:${pad(p.close.minute ?? 0)}`;
+    }
+  }
+
+  const closedLabel: Record<Locale, string> = {
+    en: 'Closed', el: 'Κλειστά', de: 'Geschlossen', fr: 'Fermé', it: 'Chiuso',
+  };
+
+  return (
+    <dl className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-sm sm:grid-cols-3">
+      {rows.map((r) => (
+        <div key={r.day} className="flex items-baseline justify-between gap-3 border-b border-[var(--color-bg-2)] py-1.5">
+          <dt className="font-semibold text-[var(--color-fg-1)]">{r.day}</dt>
+          <dd className="text-[var(--color-fg-0)]">
+            {r.opens ? `${r.opens} – ${r.closes || '?'}` : closedLabel[locale]}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
