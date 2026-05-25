@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { LOCALES, LOCALE_LABELS, type Locale } from '@/lib/i18n';
 import {
@@ -32,6 +33,9 @@ type Copy = {
   popular: string;
   language: string;
   goTo: string;
+  /** Range expand chip — singular form */
+  rangeWider: (km: number) => string;
+  rangeReset: string;
 };
 
 const COPY: Record<Locale, Copy> = {
@@ -41,6 +45,8 @@ const COPY: Record<Locale, Copy> = {
     guides: 'Guides', owners: 'For owners', signIn: 'Sign in',
     near: 'Near you', popular: 'Popular',
     language: 'Language', goTo: 'Go to',
+    rangeWider: (km) => `+ ${km} km`,
+    rangeReset: 'Closest',
   },
   el: {
     open: 'Άνοιγμα μενού', close: 'Κλείσιμο μενού',
@@ -48,6 +54,8 @@ const COPY: Record<Locale, Copy> = {
     guides: 'Οδηγοί', owners: 'Για ιδιοκτήτες', signIn: 'Σύνδεση',
     near: 'Κοντά σου', popular: 'Δημοφιλή',
     language: 'Γλώσσα', goTo: 'Πήγαινε',
+    rangeWider: (km) => `+ ${km} χλμ`,
+    rangeReset: 'Πιο κοντά',
   },
   de: {
     open: 'Menü öffnen', close: 'Menü schließen',
@@ -55,6 +63,8 @@ const COPY: Record<Locale, Copy> = {
     guides: 'Guides', owners: 'Für Inhaber', signIn: 'Anmelden',
     near: 'In deiner Nähe', popular: 'Beliebt',
     language: 'Sprache', goTo: 'Öffnen',
+    rangeWider: (km) => `+ ${km} km`,
+    rangeReset: 'Näher',
   },
   fr: {
     open: 'Ouvrir le menu', close: 'Fermer le menu',
@@ -62,6 +72,8 @@ const COPY: Record<Locale, Copy> = {
     guides: 'Guides', owners: 'Pour les exploitants', signIn: 'Connexion',
     near: 'Près de vous', popular: 'Populaire',
     language: 'Langue', goTo: 'Ouvrir',
+    rangeWider: (km) => `+ ${km} km`,
+    rangeReset: 'Plus près',
   },
   it: {
     open: 'Apri menu', close: 'Chiudi menu',
@@ -69,8 +81,15 @@ const COPY: Record<Locale, Copy> = {
     guides: 'Guide', owners: 'Per i proprietari', signIn: 'Accedi',
     near: 'Vicino a te', popular: 'Popolari',
     language: 'Lingua', goTo: 'Apri',
+    rangeWider: (km) => `+ ${km} km`,
+    rangeReset: 'Più vicino',
   },
 };
+
+// Range tiers shown sequentially as the visitor taps "+ N km". Cap at 500
+// (covers all of Greece comfortably). Single chip — visitor never sees
+// multiple options at once, so no decision fatigue.
+const RANGE_TIERS_KM = [50, 150, 500];
 
 export function MobileMenu({
   locale,
@@ -80,8 +99,15 @@ export function MobileMenu({
   popularCities?: PopularCity[];
 }) {
   const [open, setOpen] = useState(false);
-  const { hasLocation, nearestCities } = useNearbyCities();
+  const [mounted, setMounted] = useState(false);
+  const { hasLocation, nearestCities, sortedAllCities } = useNearbyCities();
+  // Range tier index. 0 = closest only (default), 1 = +50 km, 2 = +150 km, 3 = +500 km.
+  // Bumped by tapping the small chip; reset by tapping it again past the end.
+  const [rangeIdx, setRangeIdx] = useState(0);
   const c = COPY[locale];
+
+  // Need to wait for the client mount before we can portal into document.body.
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -98,14 +124,25 @@ export function MobileMenu({
   // Smart preview source. When precise location is known, show nearest 4 with
   // distance chips. Otherwise fall back to the server-provided popular list.
   const previewIsNear = hasLocation && nearestCities.length > 0;
+  // Range filtering: when the visitor has expanded their range, draw from the
+  // full sorted-by-distance list and keep entries within the active radius.
+  // Default tier (idx 0) shows only the 4 closest.
+  const radiusKm = rangeIdx === 0 ? null : RANGE_TIERS_KM[rangeIdx - 1] ?? null;
   const previewItems = previewIsNear
-    ? nearestCities.slice(0, 4).map((x) => ({
+    ? (radiusKm === null
+        ? nearestCities.slice(0, 4)
+        : sortedAllCities.filter((x) => Number.isFinite(x.distanceKm) && x.distanceKm <= radiusKm).slice(0, 6)
+      ).map((x) => ({
         slug: x.slug, name: x.name, region: x.region,
         distanceKm: Number.isFinite(x.distanceKm) ? x.distanceKm : null,
       }))
     : popularCities.slice(0, 4).map((x) => ({
         slug: x.slug, name: x.name, region: x.region, distanceKm: null,
       }));
+  // Next radius tier the chip will jump to. Wraps back to 0 (closest) after
+  // the last tier so the visitor can collapse the list.
+  const nextRangeIdx = (rangeIdx + 1) % (RANGE_TIERS_KM.length + 1);
+  const showRangeChip = previewIsNear; // only meaningful when we have GPS
 
   return (
     <>
@@ -118,7 +155,7 @@ export function MobileMenu({
         <MenuIcon />
       </button>
 
-      {open && (
+      {open && mounted && createPortal(
         <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true" aria-label={c.cities}>
           {/* Solid backdrop (no transparency on the panel itself). */}
           <button
@@ -207,25 +244,45 @@ export function MobileMenu({
                 </div>
               </section>
 
-              {/* Smart preview — nearest cities (precise location) or popular */}
+              {/* Smart preview — nearest cities (precise location) or popular.
+                  When GPS is on, a tiny single chip on the right lets the
+                  visitor widen the radius (+50 → +150 → +500 km → reset).
+                  One chip, no menus — chosen to keep the surface calm. */}
               {previewItems.length > 0 && (
                 <section className="mt-6" aria-label={previewIsNear ? c.near : c.popular}>
-                  <div className="mb-2 flex items-baseline justify-between">
+                  <div className="mb-2 flex items-baseline justify-between gap-2">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-fg-3)]">
                       {previewIsNear ? c.near : c.popular}
-                    </p>
-                    {previewIsNear && (
-                      <span
-                        aria-hidden
-                        className="inline-flex items-center gap-1 text-[10px] text-[var(--color-accent-cyan)]"
-                      >
-                        <span className="relative inline-flex h-1.5 w-1.5">
-                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]" />
+                      {previewIsNear && radiusKm !== null && (
+                        <span className="ml-1.5 normal-case tracking-normal text-[var(--color-fg-2)]">
+                          · ≤ {radiusKm} km
                         </span>
-                        GPS
-                      </span>
-                    )}
+                      )}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      {showRangeChip && (
+                        <button
+                          type="button"
+                          onClick={() => setRangeIdx(nextRangeIdx)}
+                          className="rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-fg-1)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+                          aria-label={nextRangeIdx === 0 ? c.rangeReset : c.rangeWider(RANGE_TIERS_KM[nextRangeIdx - 1]!)}
+                        >
+                          {nextRangeIdx === 0 ? c.rangeReset : c.rangeWider(RANGE_TIERS_KM[nextRangeIdx - 1]!)}
+                        </button>
+                      )}
+                      {previewIsNear && (
+                        <span
+                          aria-hidden
+                          className="inline-flex items-center gap-1 text-[10px] text-[var(--color-accent-cyan)]"
+                        >
+                          <span className="relative inline-flex h-1.5 w-1.5">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
+                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]" />
+                          </span>
+                          GPS
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <ul className="flex flex-col divide-y divide-[var(--color-bg-2)] overflow-hidden rounded-xl bg-[var(--color-bg-1)] ring-1 ring-[var(--color-bg-2)]">
                     {previewItems.map((item) => (
@@ -314,7 +371,8 @@ export function MobileMenu({
               </section>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
