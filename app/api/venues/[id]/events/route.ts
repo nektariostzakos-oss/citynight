@@ -13,6 +13,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { requireUser } from '@/lib/auth/session';
+import { requireSameOrigin } from '@/lib/csrf';
+import { rateLimit429 } from '@/lib/rate-limit';
 import { db } from '@/db';
 
 type VenueRow = { id: string; tier: 'free' | 'featured'; slug: string | null; city: string; bucket: string | null };
@@ -72,7 +74,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
 // ── POST ─────────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const csrf = requireSameOrigin(req); if (csrf) return csrf;
   const user = await requireUser();
+  // Cap event-posting to 20/hour per user to keep noise + abuse contained.
+  const rl = rateLimit429(`venue-events:create:${user.id}`, { max: 20, windowMs: 60 * 60_000 });
+  if (rl) return rl;
   const { id } = await params;
   const v = loadVenue(id, user.id);
   const guard = ensureFeatured(v); if (guard) return guard;
@@ -102,6 +108,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
 // ── PATCH ────────────────────────────────────────────────────────────────
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const csrf = requireSameOrigin(req); if (csrf) return csrf;
   const user = await requireUser();
   const { id } = await params;
   const v = loadVenue(id, user.id);
@@ -139,6 +146,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
 // ── DELETE ───────────────────────────────────────────────────────────────
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const csrf = requireSameOrigin(req); if (csrf) return csrf;
   const user = await requireUser();
   const { id } = await params;
   const v = loadVenue(id, user.id);

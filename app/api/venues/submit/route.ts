@@ -9,6 +9,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireUser } from '@/lib/auth/session';
 import { findPlacesMatch } from '@/lib/places-validate';
+import { requireSameOrigin } from '@/lib/csrf';
 import { db } from '@/db';
 
 const DAILY_SUBMISSION_CAP = 3;
@@ -21,6 +22,7 @@ function recordAttempt(userId: string, outcome: string, venueId: string | null, 
 }
 
 export async function POST(req: NextRequest) {
+  const csrf = requireSameOrigin(req); if (csrf) return csrf;
   const user = await requireUser();
   // CF / proxy header first; fall back to undefined locally.
   const ip = req.headers.get('cf-connecting-ip') ?? req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null;

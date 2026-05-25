@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireUser } from '@/lib/auth/session';
 import { stripe, PRICE_FEATURED_MONTHLY } from '@/lib/stripe';
+import { requireSameOrigin } from '@/lib/csrf';
 import { db } from '@/db';
 
 // POST /api/stripe/checkout — { venueId, plan: 'featured' } → Stripe Checkout URL.
@@ -8,6 +9,7 @@ import { db } from '@/db';
 // what actually flips the venue tier (DB source of truth, §11).
 
 export async function POST(req: NextRequest) {
+  const csrf = requireSameOrigin(req); if (csrf) return csrf;
   const user = await requireUser();
   let body: { venueId?: unknown; plan?: unknown; locale?: unknown };
   try { body = await req.json(); } catch { return NextResponse.json({ ok: false }, { status: 400 }); }

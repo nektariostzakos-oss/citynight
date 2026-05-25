@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { requireUser } from '@/lib/auth/session';
 import { ownerUpdateVenue } from '@/lib/owner-edit';
+import { requireSameOrigin } from '@/lib/csrf';
 import { db } from '@/db';
 
 // PATCH /api/venues/[id] — owner edits a small set of fact + content fields.
@@ -9,6 +10,7 @@ import { db } from '@/db';
 // on the public site within seconds (no waiting for the next on-schedule revalidate).
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const csrf = requireSameOrigin(req); if (csrf) return csrf;
   const user = await requireUser();
   const { id } = await params;
   let body: Record<string, unknown>;
