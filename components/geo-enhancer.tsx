@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useVisitorLocation } from './visitor-location-provider';
+import { isIOS, useVisitorLocation } from './visitor-location-provider';
 import { useNearbyCities } from './nearby-cities-context';
 import type { Locale } from '@/lib/i18n';
 import { formatDistanceKm } from '@/lib/geo-distance';
@@ -137,6 +137,12 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   const c = COPY[locale];
   const nearest = nearestCities[0];
 
+  // Detect iOS once on mount — used to keep the CTA visible on iOS even when
+  // the provider effect didn't set an error (older iOS Safaris are silent
+  // about geolocation state).
+  const [isIos, setIsIos] = useState(false);
+  useEffect(() => { setIsIos(isIOS()); }, []);
+
   // ── Auto-countdown when precise location is locked ─────────────────────
   // Resets to 3 every time we hand control to the panel.
   useEffect(() => {
@@ -187,11 +193,18 @@ export function GeoEnhancer({ locale }: { locale: Locale }) {
   // ── State decisions ────────────────────────────────────────────────────
   const hasPrecise = visitor.source === 'precise' && hasLocation && !!nearest;
   const showFoundPanel = hasPrecise && !dismissedFound;
+
+  // CTA visibility:
+  //  - On iOS: ALWAYS show until we have a precise fix, regardless of error
+  //    state. Older iOS Safaris don't report a useful error and the
+  //    Permissions API is unreliable — so a visible tap CTA is the only
+  //    guaranteed path to a successful geolocation prompt.
+  //  - Elsewhere: show only when the provider asked for help (actionable
+  //    error), so we don't render an unsolicited card on desktop.
   const showCta =
     !hasPrecise &&
     !dismissedCta &&
-    error !== null &&
-    ACTIONABLE_ERRORS.has(error);
+    (isIos || (error !== null && ACTIONABLE_ERRORS.has(error)));
 
   return (
     <>

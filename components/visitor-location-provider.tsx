@@ -28,7 +28,12 @@ const STORAGE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 // page is left with `source='ip'` forever. On iOS we skip the auto-prompt
 // and require a tap (see <GeoEnhancer/>) — once permission is granted,
 // subsequent loads auto-prompt fine.
-function isIOS(): boolean {
+//
+// Older iOS (≤15) also has unreliable navigator.permissions for geolocation:
+// the query may throw, return 'prompt' permanently, or hang. So on iOS we
+// don't depend on the Permissions API at all — we just mark "needs-gesture"
+// and let the visible CTA collect the tap.
+export function isIOS(): boolean {
   if (typeof navigator === 'undefined') return false;
   const ua = navigator.userAgent;
   // Modern iPad reports as Mac; the touch-points check disambiguates.
@@ -258,36 +263,31 @@ export function VisitorLocationProvider({ children }: { children: React.ReactNod
 
     let cancelled = false;
     (async () => {
+      const ios = isIOS();
+
+      // iOS path — never depend on Permissions API. iOS ≤15 has unreliable
+      // support for navigator.permissions.query({name:'geolocation'}) and
+      // even on iOS 16+ the query result doesn't gate whether a popup will
+      // appear (Safari needs a gesture for the FIRST grant either way).
+      // Just mark needs-gesture; GeoEnhancer surfaces the tap CTA.
+      if (ios) {
+        setError('needs-gesture');
+        return;
+      }
+
       try {
-        const ios = isIOS();
-        // Permissions API is supported everywhere we care about (Chrome,
-        // Edge, Firefox, Safari 16+). If it's missing we just attempt anyway
-        // — that'll surface the popup on first run, which is the goal.
         if (typeof navigator !== 'undefined' && 'permissions' in navigator) {
           const status = await navigator.permissions.query({ name: 'geolocation' });
           if (status.state === 'denied') {
-            // Visitor said no in a previous session — don't re-prompt.
             setError('permission denied');
             return;
           }
-          // iOS Safari: only auto-call if permission is already 'granted'
-          // (i.e. visitor allowed us before). For 'prompt', wait for the
-          // tap-bound CTA — auto-call would be silently dropped.
-          if (ios && status.state !== 'granted') {
-            setError('needs-gesture');
-            return;
-          }
-        } else if (ios) {
-          // Old iOS without Permissions API — always require a gesture.
-          setError('needs-gesture');
-          return;
         }
         if (cancelled) return;
         await requestPrecise();
       } catch {
-        // Permissions API itself failed — on non-iOS, attempt the prompt;
-        // on iOS, defer to gesture.
-        if (!cancelled && !isIOS()) await requestPrecise();
+        // Permissions API itself failed — try the prompt anyway.
+        if (!cancelled) await requestPrecise();
       }
     })();
 
