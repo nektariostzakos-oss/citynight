@@ -30,6 +30,9 @@ STRIPE_SECRET_KEY=...
 
 # Every 15 minutes: email owners whose venues flipped to published since last tick.
 */15 * * * *  cd ~/domains/citynight.gr/public_html && node scripts/cron/notify-published.js >> ~/logs/notify-published.log 2>&1
+
+# Sunday 09:00 local: weekly digest to every Featured owner with traffic.
+0 9 * * 0  cd ~/domains/citynight.gr/public_html && node scripts/cron/weekly-digest.js >> ~/logs/weekly-digest.log 2>&1
 ```
 
 ## Verification checklist (run after first deploy)
