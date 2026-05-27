@@ -54,38 +54,11 @@ const TILE_LOCALE: Record<Locale, { region: Record<string, string>; comingSoon: 
 
 // Hero quick-action chips. Each routes to a vertical or category page.
 // Keep this list to 4 — more than that and the hero gets cluttered.
-const HERO_ACTIONS: Record<Locale, { label: string; href: (locale: Locale) => string }[]> = {
-  en: [
-    { label: 'Nightlife',   href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Bouzoukia',   href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Beach clubs', href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Restaurants', href: (l) => `/${l}/greece?kind=food` },
-  ],
-  el: [
-    { label: 'Νυχτερινή ζωή', href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Μπουζούκια',    href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Beach clubs',   href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Εστιατόρια',     href: (l) => `/${l}/greece?kind=food` },
-  ],
-  de: [
-    { label: 'Nightlife',   href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Bouzoukia',   href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Beachclubs',  href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Restaurants', href: (l) => `/${l}/greece?kind=food` },
-  ],
-  fr: [
-    { label: 'Vie nocturne', href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Bouzoukia',    href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Beach clubs',  href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Restaurants',  href: (l) => `/${l}/greece?kind=food` },
-  ],
-  it: [
-    { label: 'Vita notturna', href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Bouzoukia',     href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Beach club',    href: (l) => `/${l}/greece?kind=nightlife` },
-    { label: 'Ristoranti',    href: (l) => `/${l}/greece?kind=food` },
-  ],
-};
+// Phase K.6 — hero quick-action chips removed. They previously linked
+// to /greece?kind=X (a dead URL pattern; each landed on the same
+// vertical-filtered listing). In the article-led model the right
+// next-click is "open a city guide", which the cities grid + the
+// "All cities" CTA below the hero already serve.
 
 // Tagline appended below the hero subtitle — short, futuristic, action-y.
 const HERO_TAGLINE: Record<Locale, (cities: number) => string> = {
@@ -104,12 +77,8 @@ const COPY: Record<Locale, {
   citiesHeading: string;
   citiesSub: string;
   citiesCta: string;
-  venuesHeading: string;
-  venuesSub: string;
   latestArticlesHeading: string;
   latestArticlesSub: string;
-  categoriesHeading: string;
-  categoriesSub: string;
   ownersHeading: string;
   ownersBody: string;
   ownersCta: string;
@@ -117,8 +86,6 @@ const COPY: Record<Locale, {
   statsVenues: string;
   statsNeighborhoods: string;
   statsLocales: string;
-  neighborhoodsHeading: string;
-  neighborhoodsSub: string;
   guidesHeading: string;
   guidesSub: string;
 }> = {
@@ -130,18 +97,12 @@ const COPY: Record<Locale, {
     citiesHeading: 'Top destinations',
     citiesSub: 'Each city is a guide — neighborhoods, scenes, and the venues that define them.',
     citiesCta: 'All cities →',
-    venuesHeading: 'Top venues right now',
-    venuesSub: 'Featured first, then by reviews.',
     latestArticlesHeading: 'Latest guides',
     latestArticlesSub: 'Fresh ranked picks across every city.',
-    categoriesHeading: 'By the kind of night you want',
-    categoriesSub: 'Cross any city by category.',
-    ownersHeading: 'Own a venue?',
-    ownersBody: 'Your page already exists. Claim it, keep the facts straight, get traffic — free.',
-    ownersCta: 'Claim your venue →',
+    ownersHeading: 'Run a venue?',
+    ownersBody: 'Get your own website in 60 seconds — your photos, your menu, your bookings. Free hosted forever. €19/mo only if you want your own domain.',
+    ownersCta: 'Make your site →',
     statsCities: 'cities', statsVenues: 'venues', statsNeighborhoods: 'neighborhoods', statsLocales: 'languages',
-    neighborhoodsHeading: 'Find your kind of street',
-    neighborhoodsSub: 'A page for every nightlife district worth knowing.',
     guidesHeading: 'Editorial guides',
     guidesSub: 'Long-form, evergreen, written by people who know the cities.',
   },
@@ -153,18 +114,12 @@ const COPY: Record<Locale, {
     citiesHeading: 'Κορυφαίοι προορισμοί',
     citiesSub: 'Κάθε πόλη είναι οδηγός — γειτονιές, σκηνές, και τα μαγαζιά που την ορίζουν.',
     citiesCta: 'Όλες οι πόλεις →',
-    venuesHeading: 'Κορυφαία μαγαζιά τώρα',
-    venuesSub: 'Featured πρώτα, μετά κατά reviews.',
     latestArticlesHeading: 'Πρόσφατοι οδηγοί',
     latestArticlesSub: 'Φρέσκα ranked picks από κάθε πόλη.',
-    categoriesHeading: 'Ανάλογα με τη βραδιά που θες',
-    categoriesSub: 'Κάθε πόλη, ανά κατηγορία.',
     ownersHeading: 'Έχεις μαγαζί;',
-    ownersBody: 'Η σελίδα σου ήδη υπάρχει. Διεκδίκησε την, κράτα σωστά στοιχεία, πάρε επισκεψιμότητα — δωρεάν.',
-    ownersCta: 'Διεκδίκησε τη σελίδα σου →',
+    ownersBody: 'Έτοιμο website σε 60 δευτερόλεπτα — οι φωτογραφίες σου, το μενού σου, οι κρατήσεις σου. Δωρεάν για πάντα. €19/μήνα μόνο για δικό σου domain.',
+    ownersCta: 'Φτιάξε το site σου →',
     statsCities: 'πόλεις', statsVenues: 'μαγαζιά', statsNeighborhoods: 'γειτονιές', statsLocales: 'γλώσσες',
-    neighborhoodsHeading: 'Βρες τη δική σου γειτονιά',
-    neighborhoodsSub: 'Μία σελίδα για κάθε γειτονιά νυχτερινής ζωής που αξίζει.',
     guidesHeading: 'Editorial οδηγοί',
     guidesSub: 'Μεγάλα κείμενα, evergreen, γραμμένα από ανθρώπους που ξέρουν.',
   },
@@ -176,18 +131,12 @@ const COPY: Record<Locale, {
     citiesHeading: 'Top-Destinationen',
     citiesSub: 'Jede Stadt ist ein Guide — Viertel, Szenen und die Locations, die sie prägen.',
     citiesCta: 'Alle Städte →',
-    venuesHeading: 'Top-Locations gerade jetzt',
-    venuesSub: 'Featured zuerst, dann nach Bewertungen.',
     latestArticlesHeading: 'Neueste Guides',
     latestArticlesSub: 'Frische Ranglisten aus jeder Stadt.',
-    categoriesHeading: 'Nach Art der Nacht',
-    categoriesSub: 'Jede Stadt, nach Kategorie.',
     ownersHeading: 'Lokal-Inhaber?',
-    ownersBody: 'Ihre Seite existiert bereits. Übernehmen Sie sie, halten Sie die Daten aktuell, holen Sie sich Traffic — kostenlos.',
-    ownersCta: 'Seite beanspruchen →',
+    ownersBody: 'Ihre eigene Website in 60 Sekunden — Fotos, Speisekarte, Buchungen. Dauerhaft kostenlos. €19/Monat nur für eigene Domain.',
+    ownersCta: 'Website erstellen →',
     statsCities: 'Städte', statsVenues: 'Locations', statsNeighborhoods: 'Viertel', statsLocales: 'Sprachen',
-    neighborhoodsHeading: 'Finden Sie Ihre Straße',
-    neighborhoodsSub: 'Eine Seite für jedes Nightlife-Viertel, das es wert ist.',
     guidesHeading: 'Editorial-Guides',
     guidesSub: 'Lang, evergreen, geschrieben von Menschen, die die Städte kennen.',
   },
@@ -199,18 +148,12 @@ const COPY: Record<Locale, {
     citiesHeading: 'Destinations phares',
     citiesSub: 'Chaque ville est un guide — quartiers, scènes, lieux qui la définissent.',
     citiesCta: 'Toutes les villes →',
-    venuesHeading: 'Lieux phares du moment',
-    venuesSub: 'Featured d’abord, puis par avis.',
     latestArticlesHeading: 'Derniers guides',
     latestArticlesSub: 'Nouveaux classements pour chaque ville.',
-    categoriesHeading: 'Selon le type de soirée',
-    categoriesSub: 'Chaque ville, par catégorie.',
     ownersHeading: 'Propriétaire ?',
-    ownersBody: 'Votre page existe déjà. Revendiquez-la, gardez les infos à jour, attirez du trafic — gratuitement.',
-    ownersCta: 'Revendiquer ma page →',
+    ownersBody: 'Votre propre site en 60 secondes — photos, menu, réservations. Gratuit pour toujours. €19/mois uniquement pour votre propre domaine.',
+    ownersCta: 'Créer mon site →',
     statsCities: 'villes', statsVenues: 'lieux', statsNeighborhoods: 'quartiers', statsLocales: 'langues',
-    neighborhoodsHeading: 'Trouvez votre rue',
-    neighborhoodsSub: 'Une page pour chaque quartier de vie nocturne qui compte.',
     guidesHeading: 'Guides éditoriaux',
     guidesSub: 'Long format, intemporels, écrits par des gens qui connaissent.',
   },
@@ -222,18 +165,12 @@ const COPY: Record<Locale, {
     citiesHeading: 'Destinazioni top',
     citiesSub: 'Ogni città è una guida — quartieri, scene e i locali che la definiscono.',
     citiesCta: 'Tutte le città →',
-    venuesHeading: 'Locali top in questo momento',
-    venuesSub: 'Featured prima, poi per recensioni.',
     latestArticlesHeading: 'Ultime guide',
     latestArticlesSub: 'Nuove classifiche da ogni città.',
-    categoriesHeading: 'Per tipo di serata',
-    categoriesSub: 'Ogni città, per categoria.',
     ownersHeading: 'Hai un locale?',
-    ownersBody: 'La tua pagina esiste già. Reclamala, tieni le info aggiornate, prendi traffico — gratis.',
-    ownersCta: 'Reclama la tua pagina →',
+    ownersBody: 'Il tuo sito in 60 secondi — foto, menu, prenotazioni. Gratis per sempre. €19/mese solo per il tuo dominio.',
+    ownersCta: 'Crea il tuo sito →',
     statsCities: 'città', statsVenues: 'locali', statsNeighborhoods: 'quartieri', statsLocales: 'lingue',
-    neighborhoodsHeading: 'Trova la tua via',
-    neighborhoodsSub: 'Una pagina per ogni quartiere della vita notturna che conta.',
     guidesHeading: 'Guide editoriali',
     guidesSub: 'Lunghe, evergreen, scritte da chi conosce le città.',
   },
@@ -264,8 +201,6 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
     .map((slug) => cities.find((cc) => cc.slug === slug))
     .filter((cc) => cc && cc.heroPhotoUrl) as typeof cities;
   const heroPhotos = heroByPriority.slice(0, 5).map((cc) => ({ url: cc.heroPhotoUrl as string, alt: cc.name }));
-
-  const heroActions = HERO_ACTIONS[locale];
 
   const breadcrumbName: Record<Locale, string> = { en: 'Home', el: 'Αρχική', de: 'Start', fr: 'Accueil', it: 'Home' };
 
@@ -344,21 +279,11 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
               <SearchBox locale={locale} />
             </div>
 
-            {/* Quick-action chips */}
-            <nav aria-label="Quick filters" className="mt-5 flex flex-wrap gap-2">
-              {heroActions.map((a) => (
-                <Link
-                  key={a.label}
-                  href={a.href(locale)}
-                  className="group relative inline-flex items-center gap-1.5 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/55 px-4 py-2 text-sm text-[var(--color-fg-1)] backdrop-blur transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
-                >
-                  <span className="h-1 w-1 rounded-full bg-[var(--color-accent-cyan)]/60 transition group-hover:bg-[var(--color-accent-cyan)]" aria-hidden />
-                  {a.label}
-                </Link>
-              ))}
+            {/* Single CTA — anchor-scroll to the cities grid below. */}
+            <nav aria-label="Primary call to action" className="mt-5 flex flex-wrap gap-2">
               <Link
-                href={`/${locale}/greece`}
-                className="ml-auto inline-flex items-center gap-1 rounded-full bg-[var(--color-accent-pink)] px-5 py-2 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] transition hover:brightness-110"
+                href="#cities"
+                className="inline-flex items-center gap-1 rounded-full bg-[var(--color-accent-pink)] px-5 py-2 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] transition hover:brightness-110"
               >
                 {c.citiesCta}
               </Link>
@@ -391,18 +316,10 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
       </section>
 
       {/* CITIES — top destinations grid with neon hover glow + ranking pill. */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-16">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.citiesHeading}</h2>
-            <p className="mt-2 text-[var(--color-fg-2)]">{c.citiesSub}</p>
-          </div>
-          <Link
-            href={`/${locale}/greece`}
-            className="hidden text-sm text-[var(--color-accent-cyan)] hover:underline md:inline"
-          >
-            {c.citiesCta}
-          </Link>
+      <section id="cities" className="mx-auto w-full max-w-6xl px-6 py-16 scroll-mt-20">
+        <div>
+          <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.citiesHeading}</h2>
+          <p className="mt-2 text-[var(--color-fg-2)]">{c.citiesSub}</p>
         </div>
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

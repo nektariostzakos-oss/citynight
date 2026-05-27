@@ -49,7 +49,7 @@ const COPY: Record<Locale, Copy> = {
     newsletterCta: 'Subscribe',
     rightsLine: 'All rights reserved. Affiliate links carry rel="sponsored".',
     linkCities: 'Cities', linkNightlife: 'Nightlife', linkFood: 'Food', linkStay: 'Stay', linkGuides: 'Guides',
-    linkClaim: 'Claim your venue', linkPricing: 'Pricing', linkSignIn: 'Sign in', linkDashboard: 'Dashboard',
+    linkClaim: 'Make your site', linkPricing: 'Pricing', linkSignIn: 'Sign in', linkDashboard: 'Dashboard',
     linkTerms: 'Terms', linkPrivacy: 'Privacy', linkCookies: 'Cookies', linkSitemap: 'Sitemap',
   },
   el: {
@@ -64,7 +64,7 @@ const COPY: Record<Locale, Copy> = {
     newsletterCta: 'Εγγραφή',
     rightsLine: 'Με επιφύλαξη παντός δικαιώματος. Affiliate links με rel="sponsored".',
     linkCities: 'Πόλεις', linkNightlife: 'Νυχτερινή ζωή', linkFood: 'Φαγητό', linkStay: 'Διαμονή', linkGuides: 'Οδηγοί',
-    linkClaim: 'Κάνε claim το μαγαζί σου', linkPricing: 'Τιμές', linkSignIn: 'Είσοδος', linkDashboard: 'Πίνακας ελέγχου',
+    linkClaim: 'Φτιάξε το site σου', linkPricing: 'Τιμές', linkSignIn: 'Είσοδος', linkDashboard: 'Πίνακας ελέγχου',
     linkTerms: 'Όροι', linkPrivacy: 'Απόρρητο', linkCookies: 'Cookies', linkSitemap: 'Χάρτης σελίδας',
   },
   de: {
@@ -79,7 +79,7 @@ const COPY: Record<Locale, Copy> = {
     newsletterCta: 'Abonnieren',
     rightsLine: 'Alle Rechte vorbehalten. Affiliate-Links tragen rel="sponsored".',
     linkCities: 'Städte', linkNightlife: 'Nightlife', linkFood: 'Essen', linkStay: 'Übernachten', linkGuides: 'Guides',
-    linkClaim: 'Location beanspruchen', linkPricing: 'Preise', linkSignIn: 'Anmelden', linkDashboard: 'Dashboard',
+    linkClaim: 'Website erstellen', linkPricing: 'Preise', linkSignIn: 'Anmelden', linkDashboard: 'Dashboard',
     linkTerms: 'AGB', linkPrivacy: 'Datenschutz', linkCookies: 'Cookies', linkSitemap: 'Sitemap',
   },
   fr: {
@@ -94,7 +94,7 @@ const COPY: Record<Locale, Copy> = {
     newsletterCta: "S'abonner",
     rightsLine: 'Tous droits réservés. Liens d’affiliation avec rel="sponsored".',
     linkCities: 'Villes', linkNightlife: 'Vie nocturne', linkFood: 'Cuisine', linkStay: 'Hébergement', linkGuides: 'Guides',
-    linkClaim: 'Revendiquer votre lieu', linkPricing: 'Tarifs', linkSignIn: 'Connexion', linkDashboard: 'Tableau de bord',
+    linkClaim: 'Créer mon site', linkPricing: 'Tarifs', linkSignIn: 'Connexion', linkDashboard: 'Tableau de bord',
     linkTerms: 'Conditions', linkPrivacy: 'Confidentialité', linkCookies: 'Cookies', linkSitemap: 'Plan du site',
   },
   it: {
@@ -109,7 +109,7 @@ const COPY: Record<Locale, Copy> = {
     newsletterCta: 'Iscriviti',
     rightsLine: 'Tutti i diritti riservati. Link di affiliazione con rel="sponsored".',
     linkCities: 'Città', linkNightlife: 'Vita notturna', linkFood: 'Cucina', linkStay: 'Alloggio', linkGuides: 'Guide',
-    linkClaim: 'Rivendica il locale', linkPricing: 'Prezzi', linkSignIn: 'Accedi', linkDashboard: 'Dashboard',
+    linkClaim: 'Crea il tuo sito', linkPricing: 'Prezzi', linkSignIn: 'Accedi', linkDashboard: 'Dashboard',
     linkTerms: 'Termini', linkPrivacy: 'Privacy', linkCookies: 'Cookies', linkSitemap: 'Mappa del sito',
   },
 };
