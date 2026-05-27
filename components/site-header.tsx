@@ -130,15 +130,21 @@ async function loadMegaMenuPulse(locale: Locale): Promise<MegaMenuPulse> {
     }
   }
 
-  // Phase K.9 — all seeded areas with coords + parent city. Sent down so
-  // the menu's "Popular areas" column can sort by visitor distance
-  // client-side using useVisitorLocation.
+  // Phase K.9 / K.12 — all seeded areas + parent city. We no longer
+  // require the area itself to have lat/lng; when it doesn't, the parent
+  // city's coords are used so client-side haversine still works. Without
+  // this, the "Popular areas" column was silently restricted to the ~14
+  // areas with their own coords (Athens + Mykonos seeds) instead of the
+  // ~100 areas the rest of Greece carries.
   const areas = db.$client.prepare(`
-    SELECT a.slug, a.name, a.lat, a.lng,
+    SELECT a.slug, a.name,
+           COALESCE(a.lat, c.lat) AS lat,
+           COALESCE(a.lng, c.lng) AS lng,
            c.name AS cityName, c.slug AS citySlug
       FROM areas a
       JOIN cities c ON c.id = a.city_id
-     WHERE a.lat IS NOT NULL AND a.lng IS NOT NULL
+     WHERE COALESCE(a.lat, c.lat) IS NOT NULL
+       AND COALESCE(a.lng, c.lng) IS NOT NULL
        AND c.is_published = 1
   `).all() as MegaMenuPulse['areas'];
 
