@@ -9,6 +9,7 @@ import { db } from '@/db';
 import { getProduct, decrementStock, type SiteProduct } from './products';
 import { applyCoupon, incrementCouponUse, type ApplyResult } from './coupons';
 import { checkGiftCard, commitGiftCardRedemption, type RedeemResult } from './gift-cards';
+import { upsertClientFromContact, recordOrderForClient } from '@/lib/crm/clients';
 
 export type OrderStatus = 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled' | 'refunded';
 const TERMINAL: Set<OrderStatus> = new Set(['cancelled', 'refunded']);
@@ -187,6 +188,14 @@ export function createOrder(siteId: string, input: NewOrderInput): PricedOrder {
 
   const conn = dbh();
   const tx = conn.transaction(() => {
+    // Resolve / create the client row inside the order transaction so
+    // both move atomically.
+    const clientId = upsertClientFromContact(siteId, {
+      name: input.customerName,
+      email: input.customerEmail ?? null,
+      phone: input.customerPhone ?? null,
+    });
+
     const orderId = crypto.randomUUID();
     conn.prepare(`
       INSERT INTO site_orders (
@@ -198,7 +207,7 @@ export function createOrder(siteId: string, input: NewOrderInput): PricedOrder {
         currency, coupon_id, gift_card_id,
         status
       ) VALUES (
-        ?, ?, NULL,
+        ?, ?, ?,
         ?, ?, ?,
         ?, ?, ?, ?,
         ?, ?,
@@ -207,7 +216,7 @@ export function createOrder(siteId: string, input: NewOrderInput): PricedOrder {
         'pending'
       )
     `).run(
-      orderId, siteId,
+      orderId, siteId, clientId,
       input.customerName, input.customerEmail ?? null, input.customerPhone ?? null,
       input.shippingAddress ?? null, input.shippingCity ?? null,
       input.shippingPostal ?? null, input.shippingCountry ?? null,
@@ -308,6 +317,16 @@ export function updateOrderStatus(
   dbh().prepare(
     `UPDATE site_orders SET ${sets.join(', ')} WHERE site_id = ? AND id = ?`,
   ).run(...args);
+
+  // Rollup: bump client total_spent + last_ordered_at when the order
+  // first reaches 'paid'. Subsequent transitions (shipped/delivered)
+  // don't change spend; refunded is logged but rollup not decremented in
+  // v1 — refunds are rare enough that owners can read the orders table
+  // directly when they need accurate spend.
+  if (current.status === 'pending' && next === 'paid' && current.clientId) {
+    recordOrderForClient(current.clientId, current.totalCents, Math.floor(Date.now() / 1000));
+  }
+
   return getOrder(siteId, orderId);
 }
 

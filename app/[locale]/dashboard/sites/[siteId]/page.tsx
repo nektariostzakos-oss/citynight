@@ -24,8 +24,11 @@ import { SiteConnectButton } from '@/components/site-connect-button';
 import { SiteBookingsPanel } from '@/components/site-bookings-panel';
 import { SiteProductsPanel } from '@/components/site-products-panel';
 import { SiteOrdersPanel } from '@/components/site-orders-panel';
+import { SiteClientsPanel } from '@/components/site-clients-panel';
+import { SiteReviewsPanel } from '@/components/site-reviews-panel';
 import { listEnabledServices } from '@/lib/booking';
 import { listProducts } from '@/lib/shop';
+import { listClients } from '@/lib/crm';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = privateMetadata({ title: 'Site dashboard — citynight' });
@@ -89,6 +92,12 @@ export default async function SiteDashboard({
   // products at all (enabled OR disabled). Orders surface independently
   // — they exist even if all products are later disabled / deleted.
   const hasAnyProducts = listProducts(siteId).length > 0;
+
+  // Phase I.7 — Clients + Reviews panels render once the site has at
+  // least one client row. Client rows are populated automatically by
+  // booking + order creation, so this gates on "has the site sold or
+  // booked anything yet".
+  const hasAnyClients = listClients(siteId, { limit: 1 }).length > 0;
 
   const t = LABELS[locale];
 
@@ -237,6 +246,19 @@ export default async function SiteDashboard({
           </div>
         )}
 
+        {/* Clients + Reviews — Phase I.7. Gated on the site having any
+            client rows (booking/order side-effects create them). */}
+        {hasAnyClients && (
+          <>
+            <div className="border-t border-[var(--color-bg-2)] pt-10">
+              <SiteClientsPanel siteId={siteId} labels={t.clients} />
+            </div>
+            <div className="border-t border-[var(--color-bg-2)] pt-10">
+              <SiteReviewsPanel siteId={siteId} labels={t.reviews} />
+            </div>
+          </>
+        )}
+
         {/* Atelier ZIP — gated on €190 one-time purchase (Phase H4). */}
         <div className="border-t border-[var(--color-bg-2)] pt-10">
           <section>
@@ -306,6 +328,17 @@ type DashboardLabels = {
     columnStatus: string; columnActions: string;
     markShipped: string; markDelivered: string; cancel: string; refund: string;
     showCancelled: string;
+  };
+  clients: {
+    heading: string; body: string; empty: string; loadError: string;
+    searchPlaceholder: string;
+    columnName: string; columnContact: string; columnBookings: string;
+    columnSpent: string; columnLast: string;
+  };
+  reviews: {
+    heading: string; body: string; empty: string; loadError: string;
+    filterAll: string; filterPending: string; filterApproved: string; filterRejected: string;
+    approve: string; reject: string; reply: string;
   };
 };
 
@@ -413,6 +446,23 @@ const EN_LABELS: DashboardLabels = {
     cancel: 'Cancel', refund: 'Refund',
     showCancelled: 'Show cancelled',
   },
+  clients: {
+    heading: 'Clients',
+    body: 'Customers who booked or ordered. Rollups update automatically.',
+    empty: 'No clients yet.',
+    loadError: 'Could not load clients.',
+    searchPlaceholder: 'Search name, email, phone',
+    columnName: 'Name', columnContact: 'Contact', columnBookings: 'Bookings',
+    columnSpent: 'Spent', columnLast: 'Last visit',
+  },
+  reviews: {
+    heading: 'Reviews',
+    body: 'Approve reviews to publish them on your site. Customers submit through the post-visit email link.',
+    empty: 'No reviews in this view.',
+    loadError: 'Could not load reviews.',
+    filterAll: 'All', filterPending: 'Pending', filterApproved: 'Approved', filterRejected: 'Rejected',
+    approve: 'Approve', reject: 'Reject', reply: 'Add reply',
+  },
 };
 
 const EL_LABELS: DashboardLabels = {
@@ -518,6 +568,23 @@ const EL_LABELS: DashboardLabels = {
     markShipped: 'Αποστολή', markDelivered: 'Παράδοση',
     cancel: 'Ακύρωση', refund: 'Επιστροφή',
     showCancelled: 'Εμφάνιση ακυρωμένων',
+  },
+  clients: {
+    heading: 'Πελάτες',
+    body: 'Πελάτες που έκλεισαν ή παρήγγειλαν. Τα σύνολα ενημερώνονται αυτόματα.',
+    empty: 'Δεν υπάρχουν ακόμα πελάτες.',
+    loadError: 'Αδυναμία φόρτωσης πελατών.',
+    searchPlaceholder: 'Αναζήτηση: όνομα, email, τηλέφωνο',
+    columnName: 'Όνομα', columnContact: 'Επικοινωνία', columnBookings: 'Κρατήσεις',
+    columnSpent: 'Σύνολο', columnLast: 'Τελευταία επίσκεψη',
+  },
+  reviews: {
+    heading: 'Κριτικές',
+    body: 'Έγκρινε κριτικές για να δημοσιευτούν στο site σου. Οι πελάτες υποβάλλουν από το email μετά την επίσκεψη.',
+    empty: 'Δεν υπάρχουν κριτικές σε αυτό το φίλτρο.',
+    loadError: 'Αδυναμία φόρτωσης κριτικών.',
+    filterAll: 'Όλες', filterPending: 'Εκκρεμείς', filterApproved: 'Εγκεκριμένες', filterRejected: 'Απορρίφθηκαν',
+    approve: 'Έγκριση', reject: 'Απόρριψη', reply: 'Απάντηση',
   },
 };
 

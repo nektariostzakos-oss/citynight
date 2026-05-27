@@ -10,6 +10,7 @@
 import 'server-only';
 import { db } from '@/db';
 import { getServiceBufferMinutes } from './services';
+import { upsertClientFromContact, recordBookingForClient } from '@/lib/crm/clients';
 
 export type BookingStatus = 'pending' | 'confirmed' | 'completed' | 'no_show' | 'cancelled';
 const TERMINAL_STATUSES = new Set<BookingStatus>(['cancelled', 'completed', 'no_show']);
@@ -195,6 +196,16 @@ export function createBooking(siteId: string, input: NewBookingInput): SiteBooki
     // No deposit → 'confirmed' immediately, as before.
     const initialStatus: BookingStatus = (input.depositPercent && input.depositPercent > 0) ? 'pending' : 'confirmed';
 
+    // Resolve / create the client row inside the same transaction so the
+    // booking insert and the client rollup move together — partial state
+    // can't leak through if the booking later fails.
+    const clientId = input.clientId
+      ?? upsertClientFromContact(siteId, {
+        name: input.customerName,
+        email: input.customerEmail ?? null,
+        phone: input.customerPhone ?? null,
+      });
+
     const id = crypto.randomUUID();
     conn.prepare(`
       INSERT INTO site_bookings (
@@ -215,7 +226,7 @@ export function createBooking(siteId: string, input: NewBookingInput): SiteBooki
         ?, ?, ?, ?
       )
     `).run(
-      id, siteId, input.serviceId, input.staffId, input.clientId ?? null,
+      id, siteId, input.serviceId, input.staffId, clientId,
       input.date, input.time, input.durationMinutes, buffer,
       input.customerName, input.customerEmail ?? null, input.customerPhone ?? null,
       input.priceCents, input.currency ?? 'EUR',
@@ -223,6 +234,13 @@ export function createBooking(siteId: string, input: NewBookingInput): SiteBooki
       input.membershipId ?? null, input.discountPercent ?? null,
       initialStatus, input.customerNotes ?? null, input.walkIn ? 1 : 0, input.lang ?? 'en',
     );
+
+    // Bump the client rollups. Only count toward total_bookings if the
+    // booking is immediately confirmed — pending deposits flip later via
+    // updateBookingStatus, which doesn't double-count.
+    if (initialStatus === 'confirmed') {
+      recordBookingForClient(clientId, input.priceCents, Math.floor(Date.now() / 1000));
+    }
 
     return id;
   });
@@ -260,6 +278,14 @@ export function updateBookingStatus(
   dbh().prepare(
     `UPDATE site_bookings SET ${sets.join(', ')} WHERE site_id = ? AND id = ?`,
   ).run(...args);
+
+  // Rollup bump on pending → confirmed (deposit paid path). The initial
+  // 'confirmed' booking already bumped rollups in createBooking; pending
+  // didn't, so we bump here.
+  if (current.status === 'pending' && next === 'confirmed' && current.clientId) {
+    recordBookingForClient(current.clientId, current.priceCents, Math.floor(Date.now() / 1000));
+  }
+
   return getBooking(siteId, bookingId);
 }
 
