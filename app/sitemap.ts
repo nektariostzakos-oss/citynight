@@ -169,6 +169,49 @@ function venueEntries(venues: VenueRow[]): MetadataRoute.Sitemap {
 // DATABASE_PATH. Returns only the static surfaces (root + /greece for every
 // locale) so the build can still produce a valid sitemap.xml; the real data
 // is picked up on the next revalidation.
+// Phase J.2 — article URLs. /{locale}/{city} + /{locale}/{city}/{slug}.
+// Only published articles. Each article only emits for its own locale
+// (per-locale articles aren't hreflang-aliased yet — that comes when we
+// generate parallel translations).
+type ArticleRow = { citySlug: string; locale: string; slug: string; publishedAt: number | null };
+
+function loadArticleRows(): ArticleRow[] {
+  return db.$client.prepare(`
+    SELECT c.slug AS citySlug, a.locale, a.slug, a.published_at AS publishedAt
+      FROM articles a
+      JOIN cities c ON c.id = a.city_id
+     WHERE a.status = 'published'
+       AND c.is_published = 1
+  `).all() as ArticleRow[];
+}
+
+function articleEntries(): MetadataRoute.Sitemap {
+  const entries: MetadataRoute.Sitemap = [];
+  const cities = loadCities();
+  // City article-index pages, one per locale.
+  for (const l of LOCALES) {
+    for (const c of cities) {
+      entries.push({
+        url: `${SITE_URL}/${l}/${c.slug}`,
+        lastModified: tsToDate(c.createdAt),
+        changeFrequency: 'daily',
+        priority: 0.8,
+        alternates: { languages: alternatesAt(`/${c.slug}`) },
+      });
+    }
+  }
+  // Article detail pages — single locale per row.
+  for (const a of loadArticleRows()) {
+    entries.push({
+      url: `${SITE_URL}/${a.locale}/${a.citySlug}/${a.slug}`,
+      lastModified: tsToDate(a.publishedAt),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
+  }
+  return entries;
+}
+
 function fallbackSitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
   for (const l of LOCALES) {
@@ -199,7 +242,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           'consider enabling generateSitemaps() segmentation.',
       );
     }
-    return [...coreEntries(), ...venueEntries(loadVenues())];
+    return [...coreEntries(), ...articleEntries(), ...venueEntries(loadVenues())];
   } catch (err) {
     // Don't break the build if the DB isn't ready yet — fall back to the
     // static surfaces. Real data appears on the next revalidation once
