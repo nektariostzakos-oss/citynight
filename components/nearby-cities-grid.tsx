@@ -31,7 +31,7 @@ export type CityTile = {
   lat: number | null;
   lng: number | null;
   heroPhotoUrl: string | null;
-  venueCount: number;
+  articleCount: number;
   countLabel: string;
   emptyLabel: string;
 };
@@ -97,7 +97,7 @@ export function NearbyCitiesGrid({
                   {city.name}
                 </p>
                 <p className="mt-0.5 truncate text-xs text-[var(--color-fg-2)]">
-                  {city.venueCount > 0 ? `${city.venueCount} ${city.countLabel}` : city.emptyLabel}
+                  {city.articleCount > 0 ? `${city.articleCount} ${city.countLabel}` : city.emptyLabel}
                 </p>
               </div>
 

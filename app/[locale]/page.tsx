@@ -82,7 +82,7 @@ const COPY: Record<Locale, {
   ownersBody: string;
   ownersCta: string;
   statsCities: string;
-  statsVenues: string;
+  statsArticles: string;
   statsNeighborhoods: string;
   statsLocales: string;
   guidesHeading: string;
@@ -101,7 +101,7 @@ const COPY: Record<Locale, {
     ownersHeading: 'Run a venue?',
     ownersBody: 'Get your own website in 60 seconds — your photos, your menu, your bookings. Free hosted forever. €19/mo only if you want your own domain.',
     ownersCta: 'Make your site →',
-    statsCities: 'cities', statsVenues: 'venues', statsNeighborhoods: 'neighborhoods', statsLocales: 'languages',
+    statsCities: 'cities', statsArticles: 'articles', statsNeighborhoods: 'neighborhoods', statsLocales: 'languages',
     guidesHeading: 'Editorial guides',
     guidesSub: 'Long-form, evergreen, written by people who know the cities.',
   },
@@ -118,7 +118,7 @@ const COPY: Record<Locale, {
     ownersHeading: 'Έχεις μαγαζί;',
     ownersBody: 'Έτοιμο website σε 60 δευτερόλεπτα — οι φωτογραφίες σου, το μενού σου, οι κρατήσεις σου. Δωρεάν για πάντα. €19/μήνα μόνο για δικό σου domain.',
     ownersCta: 'Φτιάξε το site σου →',
-    statsCities: 'πόλεις', statsVenues: 'μαγαζιά', statsNeighborhoods: 'γειτονιές', statsLocales: 'γλώσσες',
+    statsCities: 'πόλεις', statsArticles: 'άρθρα', statsNeighborhoods: 'γειτονιές', statsLocales: 'γλώσσες',
     guidesHeading: 'Editorial οδηγοί',
     guidesSub: 'Μεγάλα κείμενα, evergreen, γραμμένα από ανθρώπους που ξέρουν.',
   },
@@ -135,7 +135,7 @@ const COPY: Record<Locale, {
     ownersHeading: 'Lokal-Inhaber?',
     ownersBody: 'Ihre eigene Website in 60 Sekunden — Fotos, Speisekarte, Buchungen. Dauerhaft kostenlos. €19/Monat nur für eigene Domain.',
     ownersCta: 'Website erstellen →',
-    statsCities: 'Städte', statsVenues: 'Locations', statsNeighborhoods: 'Viertel', statsLocales: 'Sprachen',
+    statsCities: 'Städte', statsArticles: 'Artikel', statsNeighborhoods: 'Viertel', statsLocales: 'Sprachen',
     guidesHeading: 'Editorial-Guides',
     guidesSub: 'Lang, evergreen, geschrieben von Menschen, die die Städte kennen.',
   },
@@ -152,7 +152,7 @@ const COPY: Record<Locale, {
     ownersHeading: 'Propriétaire ?',
     ownersBody: 'Votre propre site en 60 secondes — photos, menu, réservations. Gratuit pour toujours. €19/mois uniquement pour votre propre domaine.',
     ownersCta: 'Créer mon site →',
-    statsCities: 'villes', statsVenues: 'lieux', statsNeighborhoods: 'quartiers', statsLocales: 'langues',
+    statsCities: 'villes', statsArticles: 'articles', statsNeighborhoods: 'quartiers', statsLocales: 'langues',
     guidesHeading: 'Guides éditoriaux',
     guidesSub: 'Long format, intemporels, écrits par des gens qui connaissent.',
   },
@@ -169,7 +169,7 @@ const COPY: Record<Locale, {
     ownersHeading: 'Hai un locale?',
     ownersBody: 'Il tuo sito in 60 secondi — foto, menu, prenotazioni. Gratis per sempre. €19/mese solo per il tuo dominio.',
     ownersCta: 'Crea il tuo sito →',
-    statsCities: 'città', statsVenues: 'locali', statsNeighborhoods: 'quartieri', statsLocales: 'lingue',
+    statsCities: 'città', statsArticles: 'articoli', statsNeighborhoods: 'quartieri', statsLocales: 'lingue',
     guidesHeading: 'Guide editoriali',
     guidesSub: 'Lunghe, evergreen, scritte da chi conosce le città.',
   },
@@ -296,7 +296,7 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-pink)]/40 to-transparent" aria-hidden />
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
           <Stat n={stats.cities}        label={c.statsCities}        accent="cyan" />
-          <Stat n={stats.venues}        label={c.statsVenues}        accent="pink" />
+          <Stat n={stats.articles}      label={c.statsArticles}      accent="pink" />
           <Stat n={stats.neighborhoods} label={c.statsNeighborhoods} accent="violet" />
           <Stat n={stats.locales}       label={c.statsLocales}       accent="amber" />
         </div>
@@ -338,7 +338,7 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
                     {city.name}
                   </p>
                   <p className="mt-0.5 truncate text-xs text-[var(--color-fg-2)]">
-                    {city.venueCount > 0 ? `${city.venueCount} ${c.statsVenues}` : TILE_LOCALE[locale].comingSoon}
+                    {city.articleCount > 0 ? `${city.articleCount} ${c.statsArticles}` : TILE_LOCALE[locale].comingSoon}
                   </p>
                 </div>
 

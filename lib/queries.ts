@@ -77,7 +77,7 @@ export function listPublishedCities(locale: Locale = 'en'): City[] {
   `).all() as City[];
 }
 
-export type CityCardItem = City & { heroPhotoUrl: string | null; venueCount: number };
+export type CityCardItem = City & { heroPhotoUrl: string | null; articleCount: number };
 
 const VERTICAL_PARENT_ID: Record<'nightlife' | 'food' | 'stay', string> = {
   nightlife: 'parent_nightlife',
@@ -90,32 +90,37 @@ export function listCitiesWithHero(
   locale: Locale = 'en',
 ): CityCardItem[] {
   const nameExpr = localizedName('city', 'c', locale);
-  // venueCount is either total published, or filtered to venues whose category
-  // sits under the requested vertical's parent_id (per the scope-expansion
-  // mapping: parent_nightlife / parent_food / parent_stay).
+  // articleCount is the published-article count for this city in the
+  // current locale. The optional vertical narrows the count to articles
+  // whose category sits under that vertical's parent_id (parent_nightlife
+  // / parent_food / parent_stay). The legacy venue-count was misleading
+  // after the article-led pivot (most cities still report 0 venues).
   if (vertical) {
     return sqlite().prepare(`
       SELECT c.id, c.slug, ${nameExpr} AS name, c.region, c.lat, c.lng,
              (SELECT url FROM photos p WHERE p.city_id = c.id AND p.subject_type = 'location'
                 ORDER BY p.is_primary DESC, p.sort_order ASC LIMIT 1) AS heroPhotoUrl,
-             (SELECT COUNT(*) FROM venues v
-                JOIN categories cat ON cat.id = v.category_id
-                WHERE v.city_id = c.id AND v.status = 'published'
-                  AND cat.parent_id = ?) AS venueCount
+             (SELECT COUNT(*) FROM articles ar
+                JOIN categories cat ON cat.id = ar.category_id
+                WHERE ar.city_id = c.id AND ar.status = 'published'
+                  AND ar.locale = ?
+                  AND cat.parent_id = ?) AS articleCount
         FROM cities c
        WHERE c.is_published = 1
-       ORDER BY (venueCount > 0) DESC, name
-    `).all(VERTICAL_PARENT_ID[vertical]) as CityCardItem[];
+       ORDER BY (articleCount > 0) DESC, name
+    `).all(locale, VERTICAL_PARENT_ID[vertical]) as CityCardItem[];
   }
   return sqlite().prepare(`
     SELECT c.id, c.slug, ${nameExpr} AS name, c.region, c.lat, c.lng,
            (SELECT url FROM photos p WHERE p.city_id = c.id AND p.subject_type = 'location'
               ORDER BY p.is_primary DESC, p.sort_order ASC LIMIT 1) AS heroPhotoUrl,
-           (SELECT COUNT(*) FROM venues v WHERE v.city_id = c.id AND v.status = 'published') AS venueCount
+           (SELECT COUNT(*) FROM articles ar
+              WHERE ar.city_id = c.id AND ar.status = 'published'
+                AND ar.locale = ?) AS articleCount
       FROM cities c
      WHERE c.is_published = 1
-     ORDER BY (venueCount > 0) DESC, name
-  `).all() as CityCardItem[];
+     ORDER BY (articleCount > 0) DESC, name
+  `).all(locale) as CityCardItem[];
 }
 
 export function listTopVenuesAcrossCountry(locale: Locale, limit = 9): VenueListItem[] {
@@ -330,11 +335,14 @@ export function getVenueByCityArea(citySlug: string, areaOrCategorySlug: string,
   };
 }
 
-export function siteStats(): { cities: number; venues: number; neighborhoods: number; locales: number } {
+export function siteStats(): { cities: number; articles: number; neighborhoods: number; locales: number } {
   const s = sqlite();
   return {
     cities: (s.prepare(`SELECT COUNT(*) c FROM cities WHERE is_published = 1`).get() as { c: number }).c,
-    venues: (s.prepare(`SELECT COUNT(*) c FROM venues WHERE status = 'published'`).get() as { c: number }).c,
+    // Post-article-pivot: the public stat is published articles, not
+    // venues. Venues still live in the DB as the candidate pool the AI
+    // picks from, but they're not a user-facing unit anymore.
+    articles: (s.prepare(`SELECT COUNT(*) c FROM articles WHERE status = 'published'`).get() as { c: number }).c,
     neighborhoods: (s.prepare(`SELECT COUNT(*) c FROM areas`).get() as { c: number }).c,
     locales: 5,
   };
