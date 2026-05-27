@@ -8,7 +8,6 @@ import {
   CloseIcon, MenuIcon, MoonIcon, ForkKnifeIcon, BedIcon,
   MapPinIcon, StoreIcon,
 } from './nav-icons';
-import { SearchBox } from './search-box';
 import { useNearbyCities } from './nearby-cities-context';
 import { formatDistanceKm } from '@/lib/geo-distance';
 
@@ -261,11 +260,6 @@ export function MobileMenu({
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-5 pb-6">
-              {/* Search */}
-              <div className="pb-5">
-                <SearchBox locale={locale} />
-              </div>
-
               {/* Verticals — 2×2 grid of large tiles. One accent per tile.  */}
               {/* Phase K.3 — drop the Nightlife/Food/Stay tiles. The
                   vertical filters live inside each city's article guide

@@ -142,7 +142,11 @@ export function organizationJsonLd(): Json {
   });
 }
 
-/** WebSite + SearchAction (sitelinks search box) for the active locale. */
+/** WebSite JSON-LD for the active locale. The SearchAction (Sitelinks
+ *  search box) was removed alongside the in-page search UI — discovery
+ *  now goes through the Cities mega-menu instead of a global search
+ *  field. Schema stays clean rather than advertising a search box we
+ *  no longer surface. */
 export function websiteJsonLd(locale: Locale): Json {
   return {
     '@context': 'https://schema.org',
@@ -150,14 +154,6 @@ export function websiteJsonLd(locale: Locale): Json {
     name: SITE_NAME,
     url: `${SITE_URL}/${locale}`,
     inLanguage: HREFLANG[locale],
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/${locale}/greece?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   };
 }
 

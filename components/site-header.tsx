@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { type Locale } from '@/lib/i18n';
-import { SearchBox } from './search-box';
 import { MobileMenu, type PopularCity } from './mobile-menu';
 import { LangDropdown } from './lang-dropdown';
 import { ThemeToggle } from './theme-toggle';
@@ -62,9 +61,11 @@ export async function SiteHeader({
             (Athens time + weather) and the freshest article card. */}
         <MegaMenu locale={locale} pulse={pulse} />
 
-        {/* Right side: search + theme + lang + auth + mobile menu */}
+        {/* Right side: theme + lang + auth + mobile menu.
+            Search was removed — discovery happens through the Cities
+            mega-menu (filter input + nearest cities + areas) instead of
+            a separate global search box. */}
         <div className="flex items-center gap-2">
-          <SearchBox locale={locale} />
           <ThemeToggle />
           <div className="hidden md:block">
             <LangDropdown current={locale} />
