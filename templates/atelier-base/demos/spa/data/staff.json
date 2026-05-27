@@ -1,0 +1,53 @@
+[
+  {
+    "id": "elena",
+    "name": "Elena Marchetti",
+    "role": "Lead Therapist & Owner",
+    "bio": "Trained in clinical and holistic massage, Elena opened Aurelia to give every treatment the time it deserves. Twelve years at the table.",
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Signature massage",
+      "Hot stone ritual",
+      "Deep tissue therapy"
+    ],
+    "enabled": true,
+    "workDays": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "09:00",
+    "endTime": "19:00",
+    "breakStart": "13:00",
+    "breakEnd": "13:45",
+    "order": 1
+  },
+  {
+    "id": "sofia",
+    "name": "Sofia Lindqvist",
+    "role": "Massage & Facial Therapist",
+    "bio": "A calm, careful hand for facials and body treatments. Sofia keeps the spa running quiet and unhurried, one guest at a time.",
+    "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Aromatherapy facial",
+      "Body scrub & wrap",
+      "Couples retreat"
+    ],
+    "enabled": true,
+    "workDays": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "11:00",
+    "endTime": "21:00",
+    "breakStart": "15:00",
+    "breakEnd": "15:45",
+    "order": 2
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "classic-manicure",
+    "name": "Classic manicure",
+    "desc": "Shape, cuticle care and a flawless coat of colour.",
+    "duration": 45,
+    "price": 28,
+    "bufferMinutes": 5,
+    "category": "Manicure",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "gel-biab",
+    "name": "Gel & BIAB",
+    "desc": "Strength and a glassy shine that holds for three weeks plus.",
+    "duration": 75,
+    "price": 42,
+    "bufferMinutes": 5,
+    "category": "Gel",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "hand-painted-art",
+    "name": "Hand-painted art",
+    "desc": "Chrome, fine-line and bespoke sets, painted by hand.",
+    "duration": 90,
+    "price": 55,
+    "bufferMinutes": 10,
+    "category": "Nail art",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "luxury-pedicure",
+    "name": "Luxury pedicure",
+    "desc": "A warm soak, exfoliation and colour that wears beautifully.",
+    "duration": 60,
+    "price": 45,
+    "bufferMinutes": 5,
+    "category": "Pedicure",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "gel-extensions",
+    "name": "Gel extensions",
+    "desc": "Sculpted length in gel or acrylic, shaped to suit your hands.",
+    "duration": 105,
+    "price": 60,
+    "bufferMinutes": 10,
+    "category": "Gel",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "soak-off-repair",
+    "name": "Soak-off & repair",
+    "desc": "Gentle removal and a quiet reset for tired nails.",
+    "duration": 30,
+    "price": 20,
+    "bufferMinutes": 5,
+    "category": "Manicure",
+    "enabled": true,
+    "order": 6
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "helena",
+    "name": "Dr. Helena Voss",
+    "role": "Lead Aesthetic Doctor & Founder",
+    "bio": "A GMC-registered doctor who trained in medicine before specialising in aesthetics. Twelve years of conservative, natural-looking work.",
+    "photo": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Anti-wrinkle treatment",
+      "Dermal filler",
+      "Skin consultation"
+    ],
+    "enabled": true,
+    "workDays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "startTime": "09:00",
+    "endTime": "18:00",
+    "breakStart": "13:00",
+    "breakEnd": "13:45",
+    "order": 1
+  },
+  {
+    "id": "marcus",
+    "name": "Marcus Whitfield",
+    "role": "Aesthetic Nurse Prescriber",
+    "bio": "A registered nurse prescriber with a calm, careful approach to skin treatments and laser.",
+    "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Medical microneedling",
+      "Laser hair removal",
+      "Signature HydraFacial"
+    ],
+    "enabled": true,
+    "workDays": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "10:00",
+    "endTime": "18:00",
+    "breakStart": "14:00",
+    "breakEnd": "14:45",
+    "order": 2
+  }
+]

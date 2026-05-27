@@ -1,0 +1,96 @@
+{
+  "onboarded": true,
+  "template": "template6",
+  "industryId": "hair",
+  "demoShowcase": true,
+  "bookingMode": "appointment",
+  "enabledLanguages": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it"
+  ],
+  "business": {
+    "name": "Maison Loré",
+    "streetAddress": "24 Mount Street",
+    "city": "London",
+    "postalCode": "W1K 2RR",
+    "country": "GB",
+    "phone": "+44 20 7946 0512",
+    "email": "hello@maisonlore.studio",
+    "latitude": 51.5089,
+    "longitude": -0.1499,
+    "hours": [
+      {
+        "day": "mon",
+        "open": "00:00",
+        "close": "00:00",
+        "closed": true
+      },
+      {
+        "day": "tue",
+        "open": "10:00",
+        "close": "19:00",
+        "closed": false
+      },
+      {
+        "day": "wed",
+        "open": "10:00",
+        "close": "19:00",
+        "closed": false
+      },
+      {
+        "day": "thu",
+        "open": "10:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "fri",
+        "open": "10:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "sat",
+        "open": "09:00",
+        "close": "17:00",
+        "closed": false
+      },
+      {
+        "day": "sun",
+        "open": "00:00",
+        "close": "00:00",
+        "closed": true
+      }
+    ],
+    "timezone": "Europe/London",
+    "social": {
+      "instagram": "https://instagram.com/maisonlore.studio"
+    },
+    "priceRange": "£££",
+    "bookingRules": {
+      "leadTimeMinutes": 120,
+      "cancellationWindowHours": 24,
+      "depositPercent": 0,
+      "noShowFeePercent": 50
+    }
+  },
+  "branding": {
+    "wordmark": "MAISON LORÉ",
+    "tagline_en": "Hair, edited."
+  },
+  "theme": {
+    "background": "#faf5ec",
+    "foreground": "#20242a",
+    "primary": "#b69457",
+    "primaryAccent": "#8e7339",
+    "surface": "#ffffff",
+    "surfaceStrong": "#ece4d2",
+    "border": "#e0d4b9",
+    "borderStrong": "#c9b88f",
+    "muted": "#5a5f68",
+    "muted2": "#8b909b"
+  }
+}

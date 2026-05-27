@@ -1,0 +1,61 @@
+[
+  {
+    "id": "pg_demo5_1",
+    "slug": "your-very-first-class",
+    "title_en": "What to expect from your very first class",
+    "title_el": "What to expect from your very first class",
+    "excerpt_en": "Where to stand, what to wear, and the one thing every nervous beginner is surprised to learn.",
+    "excerpt_el": "Where to stand, what to wear, and the one thing every nervous beginner is surprised to learn.",
+    "body_en": "<p>A first yoga class is mostly nerves, and almost none of them turn out to be founded. Arrive ten minutes early, leave your shoes at the door, and a teacher will show you where the mats and props live.</p><p>You do not need to be flexible, fit or experienced. You need comfy clothes and a willingness to rest whenever you want to. That is genuinely the whole secret, and everyone in the room learned it exactly the same way.</p>",
+    "body_el": "<p>A first yoga class is mostly nerves, and almost none of them turn out to be founded. Arrive ten minutes early, leave your shoes at the door, and a teacher will show you where the mats and props live.</p><p>You do not need to be flexible, fit or experienced. You need comfy clothes and a willingness to rest whenever you want to. That is genuinely the whole secret, and everyone in the room learned it exactly the same way.</p>",
+    "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "beginners",
+      "guide"
+    ],
+    "category": "Guides",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-05-12T06:00:00.000Z",
+    "updatedAt": "2026-05-12T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo5_2",
+    "slug": "five-minutes-of-breath",
+    "title_en": "Five minutes of breathing to start the day",
+    "title_el": "Five minutes of breathing to start the day",
+    "excerpt_en": "A short, simple breathing practice you can do before your feet even touch the floor.",
+    "excerpt_el": "A short, simple breathing practice you can do before your feet even touch the floor.",
+    "body_en": "<p>Before you reach for your phone, try this. Sit up against the headboard, close your eyes, and breathe in for a count of four, then out for a slow count of six.</p><p>Five minutes of slightly longer exhales tells your nervous system the day can begin gently. It is the smallest possible practice, and on a busy week it might be the most important one.</p>",
+    "body_el": "<p>Before you reach for your phone, try this. Sit up against the headboard, close your eyes, and breathe in for a count of four, then out for a slow count of six.</p><p>Five minutes of slightly longer exhales tells your nervous system the day can begin gently. It is the smallest possible practice, and on a busy week it might be the most important one.</p>",
+    "image": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "breath",
+      "practice"
+    ],
+    "category": "Practice",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-04-19T06:00:00.000Z",
+    "updatedAt": "2026-04-19T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo5_3",
+    "slug": "why-we-keep-classes-small",
+    "title_en": "Why we keep our classes small",
+    "title_el": "Why we keep our classes small",
+    "excerpt_en": "A capped class is not a smaller business decision. It is the whole point of how we teach.",
+    "excerpt_el": "A capped class is not a smaller business decision. It is the whole point of how we teach.",
+    "body_en": "<p>We cap every class, and we are asked about it often. A smaller room means a teacher can actually see you, offer the right option, and notice when something is not working.</p><p>It also keeps the studio calm. Nobody is fighting for space, nobody is anonymous, and a beginner is never lost at the back. That is worth far more to us than a few extra mats.</p>",
+    "body_el": "<p>We cap every class, and we are asked about it often. A smaller room means a teacher can actually see you, offer the right option, and notice when something is not working.</p><p>It also keeps the studio calm. Nobody is fighting for space, nobody is anonymous, and a beginner is never lost at the back. That is worth far more to us than a few extra mats.</p>",
+    "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "studio"
+    ],
+    "category": "The studio",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-03-22T07:00:00.000Z",
+    "updatedAt": "2026-03-22T07:00:00.000Z"
+  }
+]

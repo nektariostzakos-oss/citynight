@@ -1,0 +1,96 @@
+{
+  "onboarded": true,
+  "template": "template4",
+  "industryId": "aesthetics",
+  "demoShowcase": true,
+  "bookingMode": "appointment",
+  "enabledLanguages": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it"
+  ],
+  "business": {
+    "name": "Lumea Aesthetics",
+    "streetAddress": "30 Wimpole Street",
+    "city": "London",
+    "postalCode": "W1G 8FG",
+    "country": "GB",
+    "phone": "+44 20 7946 0300",
+    "email": "hello@lumea-aesthetics.com",
+    "latitude": 51.5205,
+    "longitude": -0.1469,
+    "hours": [
+      {
+        "day": "mon",
+        "open": "09:00",
+        "close": "18:00",
+        "closed": false
+      },
+      {
+        "day": "tue",
+        "open": "09:00",
+        "close": "18:00",
+        "closed": false
+      },
+      {
+        "day": "wed",
+        "open": "09:00",
+        "close": "20:00",
+        "closed": false
+      },
+      {
+        "day": "thu",
+        "open": "09:00",
+        "close": "20:00",
+        "closed": false
+      },
+      {
+        "day": "fri",
+        "open": "09:00",
+        "close": "18:00",
+        "closed": false
+      },
+      {
+        "day": "sat",
+        "open": "10:00",
+        "close": "16:00",
+        "closed": false
+      },
+      {
+        "day": "sun",
+        "open": "00:00",
+        "close": "00:00",
+        "closed": true
+      }
+    ],
+    "timezone": "Europe/London",
+    "social": {
+      "instagram": "https://instagram.com/lumeaaesthetics"
+    },
+    "priceRange": "£££",
+    "bookingRules": {
+      "leadTimeMinutes": 120,
+      "cancellationWindowHours": 48,
+      "depositPercent": 0,
+      "noShowFeePercent": 50
+    }
+  },
+  "branding": {
+    "wordmark": "LUMEA",
+    "tagline_en": "Considered aesthetic care."
+  },
+  "theme": {
+    "background": "#f3f5f7",
+    "foreground": "#1b2330",
+    "primary": "#3f6f9c",
+    "primaryAccent": "#2f567c",
+    "surface": "#ffffff",
+    "surfaceStrong": "#e8ebef",
+    "border": "#dfe3e8",
+    "borderStrong": "#c8d0d9",
+    "muted": "#54606e",
+    "muted2": "#8b95a1"
+  }
+}

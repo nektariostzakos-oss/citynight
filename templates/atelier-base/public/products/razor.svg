@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="blade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8e4da"/><stop offset="50%" stop-color="#b4aea0"/><stop offset="100%" stop-color="#5a564d"/></linearGradient>
+    <linearGradient id="walnut" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5a3820"/><stop offset="50%" stop-color="#3a2414"/><stop offset="100%" stop-color="#1e120a"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="440" rx="280" ry="14" fill="#000" opacity="0.55"/>
+  <!-- straight razor, open at slight angle -->
+  <g transform="translate(400 320) rotate(-14)">
+    <!-- walnut handle -->
+    <rect x="-240" y="-18" width="240" height="36" rx="6" fill="url(#walnut)" stroke="#201008" stroke-width="1"/>
+    <!-- pin -->
+    <circle cx="0" cy="0" r="4" fill="#c9a961"/>
+    <!-- blade -->
+    <path d="M0 -22 L240 -22 L260 -18 L260 -2 L0 -2 Z" fill="url(#blade)" stroke="#3a362c" stroke-width="1"/>
+    <!-- blade edge highlight -->
+    <path d="M4 -21 L238 -21" stroke="#f8f4e8" stroke-width="1" opacity="0.8"/>
+    <!-- tang -->
+    <rect x="-40" y="-12" width="40" height="24" fill="url(#blade)" stroke="#3a362c" stroke-width="1"/>
+    <!-- engraving on blade -->
+    </g>
+</svg>

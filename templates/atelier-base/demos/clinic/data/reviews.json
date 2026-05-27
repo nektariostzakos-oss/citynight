@@ -1,0 +1,156 @@
+[
+  {
+    "id": "r_demo4_0001",
+    "name": "Adam G.",
+    "rating": 5,
+    "title": "I went in nervous and came out reassured",
+    "body": "Dr. Voss talked me out of half of what I thought I wanted. The result is so subtle that friends just say I look well.",
+    "source": "booking",
+    "bookingId": "b_demo4_0001",
+    "status": "pending",
+    "createdAt": "2026-03-21T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0002",
+    "name": "Amelia T.",
+    "rating": 5,
+    "title": "Honest, which is rare",
+    "body": "No upsell, no pressure. A clear plan, a clear price, and a doctor who actually listens.",
+    "source": "booking",
+    "bookingId": "b_demo4_0007",
+    "status": "approved",
+    "createdAt": "2026-03-24T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0003",
+    "name": "Clara G.",
+    "rating": 5,
+    "title": "Exactly the natural look I wanted",
+    "body": "Conservative dosing and a careful hand. Refreshed, never overdone. I will not go anywhere else.",
+    "source": "booking",
+    "bookingId": "b_demo4_0014",
+    "status": "approved",
+    "createdAt": "2026-03-28T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0004",
+    "name": "Isla B.",
+    "rating": 4,
+    "title": "Spotless and professional",
+    "body": "It feels like a medical clinic, because it is one. Reassuring from the moment you walk in.",
+    "source": "booking",
+    "bookingId": "b_demo4_0021",
+    "status": "approved",
+    "createdAt": "2026-04-02T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0005",
+    "name": "Anna C.",
+    "rating": 5,
+    "title": "Booked online in a minute",
+    "body": "Easy booking, a calm consultation, and a follow-up to check I was happy. Faultless.",
+    "source": "booking",
+    "bookingId": "b_demo4_0029",
+    "status": "approved",
+    "createdAt": "2026-04-04T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0006",
+    "name": "Lena Y.",
+    "rating": 5,
+    "title": "Worth the wait for the right clinic",
+    "body": "I had treatment elsewhere before and regretted it. This is what doctor-led actually means.",
+    "source": "booking",
+    "bookingId": "b_demo4_0036",
+    "status": "approved",
+    "createdAt": "2026-04-10T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0007",
+    "name": "Amelia T.",
+    "rating": 5,
+    "title": "My skin has not looked this good in years",
+    "body": "The HydraFacial plus a simple routine they recommended. Genuine, lasting difference.",
+    "source": "booking",
+    "bookingId": "b_demo4_0045",
+    "status": "pending",
+    "createdAt": "2026-04-14T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0008",
+    "name": "Freya H.",
+    "rating": 5,
+    "title": "I went in nervous and came out reassured",
+    "body": "Dr. Voss talked me out of half of what I thought I wanted. The result is so subtle that friends just say I look well.",
+    "source": "booking",
+    "bookingId": "b_demo4_0055",
+    "status": "approved",
+    "createdAt": "2026-04-20T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0009",
+    "name": "Emma B.",
+    "rating": 5,
+    "title": "Honest, which is rare",
+    "body": "No upsell, no pressure. A clear plan, a clear price, and a doctor who actually listens.",
+    "source": "booking",
+    "bookingId": "b_demo4_0062",
+    "status": "approved",
+    "createdAt": "2026-04-23T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0010",
+    "name": "Adam B.",
+    "rating": 5,
+    "title": "Exactly the natural look I wanted",
+    "body": "Conservative dosing and a careful hand. Refreshed, never overdone. I will not go anywhere else.",
+    "source": "booking",
+    "bookingId": "b_demo4_0068",
+    "status": "approved",
+    "createdAt": "2026-04-27T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0011",
+    "name": "Anna C.",
+    "rating": 5,
+    "title": "Spotless and professional",
+    "body": "It feels like a medical clinic, because it is one. Reassuring from the moment you walk in.",
+    "source": "booking",
+    "bookingId": "b_demo4_0074",
+    "status": "approved",
+    "createdAt": "2026-04-30T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0012",
+    "name": "Adam G.",
+    "rating": 5,
+    "title": "Booked online in a minute",
+    "body": "Easy booking, a calm consultation, and a follow-up to check I was happy. Faultless.",
+    "source": "booking",
+    "bookingId": "b_demo4_0080",
+    "status": "approved",
+    "createdAt": "2026-05-04T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0013",
+    "name": "Grace B.",
+    "rating": 5,
+    "title": "Worth the wait for the right clinic",
+    "body": "I had treatment elsewhere before and regretted it. This is what doctor-led actually means.",
+    "source": "booking",
+    "bookingId": "b_demo4_0086",
+    "status": "approved",
+    "createdAt": "2026-05-08T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo4_0014",
+    "name": "Lucy W.",
+    "rating": 5,
+    "title": "My skin has not looked this good in years",
+    "body": "The HydraFacial plus a simple routine they recommended. Genuine, lasting difference.",
+    "source": "booking",
+    "bookingId": "b_demo4_0096",
+    "status": "pending",
+    "createdAt": "2026-05-13T15:00:00.000Z"
+  }
+]

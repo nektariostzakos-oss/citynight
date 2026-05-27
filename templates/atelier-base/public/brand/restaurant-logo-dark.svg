@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" fill="none">
+  <g font-family="Fraunces, Georgia, serif" font-weight="600" fill="#1a120b">
+    <text x="0" y="38" font-size="34" letter-spacing="0.04em">LEMONI</text>
+  </g>
+  <g transform="translate(186 14)">
+    <circle cx="14" cy="14" r="13" fill="none" stroke="#a8762c" stroke-width="1.5"/>
+    <path d="M14 4 L14 24 M4 14 L24 14" stroke="#a8762c" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="14" cy="14" r="3" fill="#a8762c"/>
+  </g>
+</svg>

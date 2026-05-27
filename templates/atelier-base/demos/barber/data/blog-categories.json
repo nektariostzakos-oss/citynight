@@ -1,0 +1,8 @@
+[
+  { "id": "cat_grooming", "name": "Grooming tips", "slug": "grooming-tips", "order": 0 },
+  { "id": "cat_styling", "name": "Styling guides", "slug": "styling-guides", "order": 1 },
+  { "id": "cat_beard", "name": "Beard care", "slug": "beard-care", "order": 2 },
+  { "id": "cat_hair", "name": "Hair care", "slug": "hair-care", "order": 3 },
+  { "id": "cat_chair", "name": "Behind the chair", "slug": "behind-the-chair", "order": 4 },
+  { "id": "cat_vegas", "name": "Vegas life", "slug": "vegas-life", "order": 5 }
+]

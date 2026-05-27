@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cpn_demo2_1",
+    "code": "WELCOME10",
+    "kind": "percent",
+    "value": 10,
+    "maxUses": 300,
+    "uses": 59,
+    "minTotal": 0,
+    "expiresAt": "2026-08-10T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-04-08T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo2_2",
+    "code": "NEWSET20",
+    "kind": "percent",
+    "value": 20,
+    "maxUses": 150,
+    "uses": 0,
+    "minTotal": 0,
+    "expiresAt": "2026-10-09T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-04-18T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo2_3",
+    "code": "SHOPFIVE",
+    "kind": "fixed",
+    "value": 5,
+    "maxUses": 200,
+    "uses": 39,
+    "minTotal": 30,
+    "expiresAt": "2026-11-27T21:59:00.000Z",
+    "appliesTo": "shop",
+    "active": true,
+    "createdAt": "2026-04-29T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo2_4",
+    "code": "GLOSS15",
+    "kind": "percent",
+    "value": 15,
+    "maxUses": 120,
+    "uses": 43,
+    "minTotal": 0,
+    "expiresAt": "2026-12-04T21:59:00.000Z",
+    "appliesTo": "shop",
+    "active": true,
+    "createdAt": "2026-04-15T09:00:00.000Z"
+  }
+]

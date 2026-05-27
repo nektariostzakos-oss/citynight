@@ -1,0 +1,673 @@
+@import "tailwindcss";
+
+/* === Demo mode: push fixed nav below the persistent demo banner === */
+:root {
+  --demo-banner-h: 0px;
+}
+body.demo-mode {
+  --demo-banner-h: 38px;
+}
+body.demo-mode header[class*="fixed"] {
+  top: var(--demo-banner-h) !important;
+}
+
+/* === Theme tokens === */
+:root {
+  /* Dark (default) */
+  --background: #0a0806;
+  --foreground: #f5efe6;
+  --gold: #c9a961;
+  --gold-2: #d4b878;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-strong: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --muted: rgba(245, 239, 230, 0.78);
+  --muted-2: rgba(245, 239, 230, 0.72);
+  --nav-bg: rgba(10, 8, 6, 0.85);
+  --hero-overlay-from: rgba(10, 8, 6, 0.25);
+  --hero-overlay-mid: rgba(10, 8, 6, 0.35);
+  --hero-overlay-to: #0a0806;
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+html.light {
+  --background: #f7f3ec;
+  --foreground: #1a1410;
+  --gold: #8a6f2e;
+  --gold-2: #a98741;
+  --surface: rgba(0, 0, 0, 0.03);
+  --surface-strong: rgba(0, 0, 0, 0.06);
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --muted: rgba(26, 20, 16, 0.78);
+  --muted-2: rgba(26, 20, 16, 0.66);
+  --nav-bg: rgba(247, 243, 236, 0.85);
+  --hero-overlay-from: rgba(247, 243, 236, 0.6);
+  --hero-overlay-mid: rgba(247, 243, 236, 0.4);
+  --hero-overlay-to: #f7f3ec;
+  --shadow: rgba(0, 0, 0, 0.12);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: var(--gold);
+  --color-gold-2: var(--gold-2);
+  --color-atelier-bg: var(--background);
+  --color-atelier-fg: var(--foreground);
+  --color-atelier-gold: var(--gold);
+  --color-atelier-surface: var(--surface);
+  --color-atelier-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background: var(--background);
+  transition: background-color 0.25s ease;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+select option {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 40%, transparent);
+  color: var(--background);
+}
+
+/* === Setup wizard: dark by default, full light-mode repaint ===
+   InstallWizard is built with hardcoded `*-white` utilities. Tailwind v4
+   resolves those against `--color-white`, so remapping that one variable
+   under `.light` flips every text/border/surface tint at once — no need to
+   touch the ~200 utility classes in the component. */
+.install-wizard {
+  background: radial-gradient(ellipse at top, #15110b 0%, #0d0a07 55%, #0a0806 100%);
+  color: #f5efe6;
+}
+.install-wizard-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+html.light .install-wizard {
+  background: radial-gradient(ellipse at top, #fbf7ef 0%, #f4ecdd 55%, #ece2d0 100%);
+  color: #1a1410;
+  /* Every `*-white` utility inside the wizard now resolves to this ink. */
+  --color-white: #1a1410;
+}
+html.light .install-wizard-grid {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+}
+/* The wizard hardcodes the dark-mode gold `#c9a961` as a literal arbitrary
+   value, which is too pale on the cream background. Darken it for light. */
+html.light .install-wizard .text-\[\#c9a961\] {
+  color: #8a6f2e;
+}
+
+/* === Premium type system ===
+   Editorial scale used by all templates. Override per-template via meta.json
+   typography fonts; the *shape* of the scale stays constant. */
+.h-display {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2.75rem, 6vw + 0.5rem, 5.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--foreground);
+}
+.h-display-italic {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.h-section {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2rem, 3.5vw + 0.5rem, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  color: var(--foreground);
+}
+.eyebrow {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.body-lead {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(1.125rem, 1.2vw + 0.6rem, 1.375rem);
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--muted);
+}
+.body-prose {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.caption {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.dotted-leader {
+  flex: 1;
+  border-bottom: 1px dotted color-mix(in srgb, var(--foreground) 25%, transparent);
+  margin: 0 0.5rem;
+  position: relative;
+  top: -3px;
+}
+
+/* === Premium buttons === */
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 32px;
+  border: 1.5px solid var(--gold);
+  background: var(--gold);
+  color: var(--background);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+}
+.btn-premium:hover {
+  background: var(--gold-2);
+  border-color: var(--gold-2);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px -10px color-mix(in srgb, var(--gold) 50%, transparent);
+}
+.btn-premium-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 32px;
+  border: 1.5px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+}
+.btn-premium-outline:hover {
+  background: color-mix(in srgb, var(--gold) 15%, transparent);
+  transform: translateY(-1px);
+}
+
+/* === Premium card elevation === */
+.card-elevation {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease;
+}
+.card-elevation:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -25px color-mix(in srgb, var(--foreground) 30%, transparent);
+  border-color: color-mix(in srgb, var(--gold) 40%, transparent);
+}
+
+/* === Hero ken-burns === */
+@keyframes kenBurns {
+  0%   { transform: scale(1.04) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1%); }
+}
+.ken-burns {
+  animation: kenBurns 18s ease-out forwards;
+}
+
+/* === Refined focus ring for accessibility === */
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* === Drop cap for long-form prose (blog posts) === */
+.prose-drop-cap > p:first-of-type::first-letter {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 4.5em;
+  float: left;
+  line-height: 0.85;
+  margin: 0.05em 0.12em 0 0;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* === Ornamental section divider === */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem auto;
+  max-width: 22rem;
+  color: var(--gold);
+}
+.divider-ornament::before,
+.divider-ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.divider-ornament .glyph {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* === Subtle scroll-respect: reduce motion when user prefers === */
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns,
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === Light-theme overrides for hardcoded dark-mode utilities ===
+   Public-site components were written with text-white/X, bg-white/[0.X],
+   border-white/X baked in. On a light template those render invisible.
+   Scope-override every relevant Tailwind arbitrary utility to use
+   var(--foreground) so light templates (cream / paper) stay legible
+   without rewriting every component. Scoped to public pages only — admin
+   and setup stay dark by design. */
+html[data-theme="light"] main .text-white,
+html[data-theme="light"] header:not(.atelier-admin-header) .text-white,
+html[data-theme="light"] footer .text-white { color: var(--foreground) !important; }
+
+html[data-theme="light"] main {
+  --tw-mix-fg: var(--foreground);
+}
+html[data-theme="light"] main .text-white\/95,
+html[data-theme="light"] footer .text-white\/95 { color: color-mix(in srgb, var(--foreground) 95%, transparent) !important; }
+html[data-theme="light"] main .text-white\/90,
+html[data-theme="light"] footer .text-white\/90 { color: color-mix(in srgb, var(--foreground) 90%, transparent) !important; }
+html[data-theme="light"] main .text-white\/85,
+html[data-theme="light"] footer .text-white\/85 { color: color-mix(in srgb, var(--foreground) 85%, transparent) !important; }
+html[data-theme="light"] main .text-white\/80,
+html[data-theme="light"] footer .text-white\/80 { color: color-mix(in srgb, var(--foreground) 80%, transparent) !important; }
+html[data-theme="light"] main .text-white\/75,
+html[data-theme="light"] footer .text-white\/75 { color: color-mix(in srgb, var(--foreground) 75%, transparent) !important; }
+html[data-theme="light"] main .text-white\/70,
+html[data-theme="light"] footer .text-white\/70 { color: color-mix(in srgb, var(--foreground) 70%, transparent) !important; }
+html[data-theme="light"] main .text-white\/65,
+html[data-theme="light"] footer .text-white\/65 { color: color-mix(in srgb, var(--foreground) 65%, transparent) !important; }
+html[data-theme="light"] main .text-white\/60,
+html[data-theme="light"] footer .text-white\/60 { color: color-mix(in srgb, var(--foreground) 60%, transparent) !important; }
+html[data-theme="light"] main .text-white\/55,
+html[data-theme="light"] footer .text-white\/55 { color: color-mix(in srgb, var(--foreground) 55%, transparent) !important; }
+html[data-theme="light"] main .text-white\/50,
+html[data-theme="light"] footer .text-white\/50 { color: color-mix(in srgb, var(--foreground) 50%, transparent) !important; }
+html[data-theme="light"] main .text-white\/45,
+html[data-theme="light"] footer .text-white\/45 { color: color-mix(in srgb, var(--foreground) 45%, transparent) !important; }
+html[data-theme="light"] main .text-white\/40,
+html[data-theme="light"] footer .text-white\/40 { color: color-mix(in srgb, var(--foreground) 40%, transparent) !important; }
+html[data-theme="light"] main .text-white\/30,
+html[data-theme="light"] footer .text-white\/30 { color: color-mix(in srgb, var(--foreground) 30%, transparent) !important; }
+
+html[data-theme="light"] main .bg-white\/\[0\.02\],
+html[data-theme="light"] footer .bg-white\/\[0\.02\] { background-color: color-mix(in srgb, var(--foreground) 3%, transparent) !important; }
+html[data-theme="light"] main .bg-white\/\[0\.03\],
+html[data-theme="light"] footer .bg-white\/\[0\.03\] { background-color: color-mix(in srgb, var(--foreground) 4%, transparent) !important; }
+html[data-theme="light"] main .bg-white\/\[0\.04\],
+html[data-theme="light"] footer .bg-white\/\[0\.04\] { background-color: color-mix(in srgb, var(--foreground) 5%, transparent) !important; }
+html[data-theme="light"] main .bg-white\/\[0\.05\],
+html[data-theme="light"] footer .bg-white\/\[0\.05\] { background-color: color-mix(in srgb, var(--foreground) 6%, transparent) !important; }
+html[data-theme="light"] main .bg-white\/\[0\.06\],
+html[data-theme="light"] footer .bg-white\/\[0\.06\] { background-color: color-mix(in srgb, var(--foreground) 8%, transparent) !important; }
+html[data-theme="light"] main .bg-white\/5,
+html[data-theme="light"] footer .bg-white\/5 { background-color: color-mix(in srgb, var(--foreground) 5%, transparent) !important; }
+html[data-theme="light"] main .bg-white\/10,
+html[data-theme="light"] footer .bg-white\/10 { background-color: color-mix(in srgb, var(--foreground) 10%, transparent) !important; }
+
+html[data-theme="light"] main .border-white\/10,
+html[data-theme="light"] footer .border-white\/10 { border-color: color-mix(in srgb, var(--foreground) 12%, transparent) !important; }
+html[data-theme="light"] main .border-white\/15,
+html[data-theme="light"] footer .border-white\/15 { border-color: color-mix(in srgb, var(--foreground) 16%, transparent) !important; }
+html[data-theme="light"] main .border-white\/20,
+html[data-theme="light"] footer .border-white\/20 { border-color: color-mix(in srgb, var(--foreground) 20%, transparent) !important; }
+html[data-theme="light"] main .border-white\/30,
+html[data-theme="light"] footer .border-white\/30 { border-color: color-mix(in srgb, var(--foreground) 30%, transparent) !important; }
+
+html[data-theme="light"] main .placeholder-white\/30::placeholder { color: color-mix(in srgb, var(--foreground) 35%, transparent) !important; }
+html[data-theme="light"] main .bg-\[\#14110d\] { background-color: var(--surface-strong) !important; color: var(--foreground) !important; }
+/* === Inline edit pencil + side panel === */
+.atelier-edit-pencil {
+  position: absolute;
+  top: 80px;
+  right: 16px;
+  z-index: 30;
+  background: var(--gold);
+  color: #000;
+  border: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 24px var(--shadow);
+}
+section:hover > .atelier-edit-pencil,
+.atelier-editable:hover > .atelier-edit-pencil {
+  opacity: 1;
+  transform: translateY(0);
+}
+.atelier-edit-pencil:hover {
+  background: var(--gold-2);
+}
+
+.atelier-editor-panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 420px; max-width: 100vw;
+  z-index: 100;
+  background: var(--background);
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: -8px 0 32px var(--shadow);
+}
+.atelier-editor-panel.is-open { transform: translateX(0); }
+.atelier-editor-panel__head {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.atelier-editor-panel__title {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin: 0;
+}
+.atelier-editor-panel__body {
+  flex: 1; overflow-y: auto; padding: 20px;
+}
+.atelier-editor-panel__foot {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+
+html.light ::selection {
+  background: rgba(138, 111, 46, 0.25);
+  color: var(--foreground);
+}
+
+/* === Light-mode overrides for hard-coded utility colors used across the app ===
+   The components were originally written for a dark-only design with classes
+   like text-white/70, bg-white/5, border-white/10, and hex literals like
+   bg-[#0a0806] / text-[#c9a961]. Rather than rewriting every single component,
+   we flip those tokens here when .light is on <html>. */
+html.light .text-white { color: #1a1410 !important; }
+html.light .text-white\/95 { color: rgba(26,20,16,0.95) !important; }
+html.light .text-white\/90 { color: rgba(26,20,16,0.9) !important; }
+html.light .text-white\/85 { color: rgba(26,20,16,0.85) !important; }
+html.light .text-white\/80 { color: rgba(26,20,16,0.8) !important; }
+html.light .text-white\/70 { color: rgba(26,20,16,0.7) !important; }
+html.light .text-white\/65 { color: rgba(26,20,16,0.7) !important; }
+html.light .text-white\/60 { color: rgba(26,20,16,0.65) !important; }
+html.light .text-white\/55 { color: rgba(26,20,16,0.65) !important; }
+html.light .text-white\/50 { color: rgba(26,20,16,0.55) !important; }
+html.light .text-white\/45 { color: rgba(26,20,16,0.55) !important; }
+html.light .text-white\/40 { color: rgba(26,20,16,0.5) !important; }
+html.light .text-white\/30 { color: rgba(26,20,16,0.4) !important; }
+html.light .text-white\/25 { color: rgba(26,20,16,0.35) !important; }
+
+html.light .placeholder-white\/30::placeholder { color: rgba(26,20,16,0.4) !important; }
+
+html.light .bg-white { background-color: #ffffff !important; }
+html.light .bg-white\/10 { background-color: rgba(0,0,0,0.06) !important; }
+html.light .bg-white\/5 { background-color: rgba(0,0,0,0.04) !important; }
+html.light .bg-white\/\[0\.06\] { background-color: rgba(0,0,0,0.06) !important; }
+html.light .bg-white\/\[0\.04\] { background-color: rgba(0,0,0,0.04) !important; }
+html.light .bg-white\/\[0\.03\] { background-color: rgba(0,0,0,0.04) !important; }
+html.light .bg-white\/\[0\.02\] { background-color: rgba(0,0,0,0.025) !important; }
+html.light .bg-white\/\[0\.01\] { background-color: rgba(0,0,0,0.015) !important; }
+
+html.light .border-white { border-color: rgba(0,0,0,0.5) !important; }
+html.light .border-white\/30 { border-color: rgba(0,0,0,0.18) !important; }
+html.light .border-white\/20 { border-color: rgba(0,0,0,0.14) !important; }
+html.light .border-white\/15 { border-color: rgba(0,0,0,0.12) !important; }
+html.light .border-white\/10 { border-color: rgba(0,0,0,0.1) !important; }
+html.light .border-white\/5 { border-color: rgba(0,0,0,0.06) !important; }
+
+html.light .divide-white\/10 > * + * { border-color: rgba(0,0,0,0.1) !important; }
+
+html.light .from-\[\#0a0806\] { --tw-gradient-from: #f7f3ec !important; }
+html.light .via-\[\#0a0806\]\/70 { --tw-gradient-via: rgba(247,243,236,0.7) !important; }
+html.light .via-\[\#0a0806\]\/30 { --tw-gradient-via: rgba(247,243,236,0.3) !important; }
+html.light .to-\[\#0a0806\] { --tw-gradient-to: #f7f3ec !important; }
+html.light .from-\[\#0a0806\]\/90 { --tw-gradient-from: rgba(247,243,236,0.9) !important; }
+html.light .via-\[\#0a0806\]\/20 { --tw-gradient-via: rgba(247,243,236,0.2) !important; }
+html.light .from-\[\#0a0806\]\/95 { --tw-gradient-from: rgba(247,243,236,0.95) !important; }
+html.light .from-black\/80 { --tw-gradient-from: rgba(0,0,0,0.4) !important; }
+html.light .from-black\/60 { --tw-gradient-from: rgba(0,0,0,0.3) !important; }
+html.light .from-black\/40 { --tw-gradient-from: rgba(0,0,0,0.2) !important; }
+
+html.light .bg-\[\#0a0806\] { background-color: #f7f3ec !important; }
+html.light .bg-\[\#0a0806\]\/95 { background-color: rgba(247,243,236,0.95) !important; }
+html.light .bg-\[\#0a0806\]\/90 { background-color: rgba(247,243,236,0.9) !important; }
+html.light .bg-\[\#0a0806\]\/85 { background-color: rgba(247,243,236,0.85) !important; }
+html.light .bg-\[\#0a0806\]\/70 { background-color: rgba(247,243,236,0.85) !important; }
+html.light .text-\[\#f5efe6\] { color: #1a1410 !important; }
+
+/* Gold links / accents stay gold but slightly darker for contrast */
+html.light .text-\[\#c9a961\] { color: #8a6f2e !important; }
+html.light .bg-\[\#c9a961\] { background-color: #8a6f2e !important; }
+html.light .bg-\[\#c9a961\]\/10 { background-color: rgba(138,111,46,0.1) !important; }
+html.light .bg-\[\#c9a961\]\/5 { background-color: rgba(138,111,46,0.06) !important; }
+html.light .border-\[\#c9a961\] { border-color: #8a6f2e !important; }
+html.light .border-\[\#c9a961\]\/40 { border-color: rgba(138,111,46,0.4) !important; }
+html.light .border-\[\#c9a961\]\/30 { border-color: rgba(138,111,46,0.3) !important; }
+html.light .border-\[\#c9a961\]\/20 { border-color: rgba(138,111,46,0.2) !important; }
+html.light .hover\:bg-\[\#d4b878\]:hover { background-color: #a98741 !important; }
+html.light .hover\:text-\[\#d4b878\]:hover { color: #a98741 !important; }
+
+/* Indigo / fuchsia decorative blurs in page headers — soften in light */
+html.light .bg-indigo-600\/20 { background-color: rgba(99,102,241,0.1) !important; }
+html.light .bg-fuchsia-600\/15 { background-color: rgba(217,70,239,0.08) !important; }
+html.light .bg-indigo-600\/15 { background-color: rgba(99,102,241,0.08) !important; }
+html.light .bg-cyan-500\/15 { background-color: rgba(6,182,212,0.08) !important; }
+
+/* Headlines stay solid black in light mode (override gradient text + bg-clip) */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light .font-serif {
+  color: #1a1410;
+}
+html.light .bg-clip-text.text-transparent {
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #1a1410 !important;
+  color: #1a1410 !important;
+  background-image: none !important;
+}
+/* Gold accent words inside Hero h1 should stay gold, not go black */
+html.light h1 .text-\[\#c9a961\],
+html.light h1 [style*="color: var(--gold)"],
+html.light .font-serif .text-\[\#c9a961\] {
+  color: #8a6f2e !important;
+}
+
+/* Booking widget surfaces */
+html.light .bg-\[\#c9a961\]\/10 { background-color: rgba(138,111,46,0.08) !important; }
+html.light .text-emerald-300 { color: #047857 !important; }
+html.light .text-emerald-200 { color: #065f46 !important; }
+html.light .text-amber-300 { color: #b45309 !important; }
+html.light .text-amber-200 { color: #78350f !important; }
+html.light .text-amber-300\/80 { color: #b45309 !important; }
+html.light .text-fuchsia-400 { color: #a21caf !important; }
+html.light .text-red-300 { color: #b91c1c !important; }
+html.light .text-fca5a5 { color: #b91c1c !important; }
+html.light .bg-emerald-500\/10 { background-color: rgba(16,185,129,0.12) !important; }
+html.light .bg-amber-500\/10 { background-color: rgba(245,158,11,0.12) !important; }
+html.light .bg-red-500\/10 { background-color: rgba(239,68,68,0.1) !important; }
+html.light .border-emerald-400\/40 { border-color: rgba(16,185,129,0.5) !important; }
+html.light .border-amber-400\/40 { border-color: rgba(245,158,11,0.5) !important; }
+html.light .border-red-400\/40 { border-color: rgba(239,68,68,0.5) !important; }
+
+/* === Dual-rendered i18n (server-safe, no per-request dynamic reads) ===
+ * Server components emit one <span data-i18n="<lang>"> per language; the
+ * browser shows only the one matching the current html lang and hides the
+ * rest. LangProvider keeps <html lang> in sync with the user's preference.
+ * English is the default shown when the page language has no variant. */
+[data-i18n] { display: none; }
+[data-i18n="en"] { display: inline; }
+html:lang(en) [data-i18n="en"],
+html:lang(el) [data-i18n="el"],
+html:lang(de) [data-i18n="de"],
+html:lang(it) [data-i18n="it"],
+html:lang(fr) [data-i18n="fr"],
+html:lang(es) [data-i18n="es"],
+html:lang(nl) [data-i18n="nl"],
+html:lang(pl) [data-i18n="pl"],
+html:lang(pt) [data-i18n="pt"],
+html:lang(sv) [data-i18n="sv"],
+html:lang(sq) [data-i18n="sq"] { display: inline; }
+html:lang(el) [data-i18n="en"],
+html:lang(de) [data-i18n="en"],
+html:lang(it) [data-i18n="en"],
+html:lang(fr) [data-i18n="en"],
+html:lang(es) [data-i18n="en"],
+html:lang(nl) [data-i18n="en"],
+html:lang(pl) [data-i18n="en"],
+html:lang(pt) [data-i18n="en"],
+html:lang(sv) [data-i18n="en"],
+html:lang(sq) [data-i18n="en"] { display: none; }
+
+/* ============================================================
+   Admin light mode — scoped theme-override layer.
+   The admin is built with hardcoded dark utilities. Rather than
+   rewriting ~20 panel files, this block re-maps those utilities to
+   light values whenever the admin root carries data-atelier-admin
+   ="light". It is fully scoped: the public site never sets the
+   attribute, so it is unaffected. Toggle lives in the admin header.
+   ============================================================ */
+[data-atelier-admin="light"] {
+  background-color: #f4efe6;
+  color: #1c1712;
+}
+
+/* The admin panel is self-themed and must stay legible no matter the public
+   site's palette. The light-mode utility overrides above are all expressed
+   through var(--foreground); re-declaring it on the admin root makes them
+   resolve to the admin's OWN colours, so a dark admin shown on a light-themed
+   tenant site (a day-spa / nail-studio template) no longer renders dark text
+   on a dark chrome. CSS custom properties resolve from the nearest ancestor,
+   so this beats the tenant's :root value with no specificity fight. */
+[data-atelier-admin="dark"] {
+  --foreground: #ffffff;
+}
+[data-atelier-admin="light"] {
+  --foreground: #1c1712;
+}
+
+/* solid backgrounds */
+[data-atelier-admin="light"] .bg-\[\#0a0806\] { background-color: #f4efe6 !important; }
+[data-atelier-admin="light"] .bg-\[\#14110d\],
+[data-atelier-admin="light"] .bg-\[\#0f0c09\] { background-color: #ffffff !important; }
+
+/* white surfaces -> subtle warm-dark tints on cream */
+[data-atelier-admin="light"] .bg-white\/5 { background-color: rgba(28,23,18,0.05) !important; }
+[data-atelier-admin="light"] .bg-white\/10 { background-color: rgba(28,23,18,0.08) !important; }
+[data-atelier-admin="light"] .bg-white\/80 { background-color: rgba(255,255,255,0.9) !important; }
+[data-atelier-admin="light"] .bg-white\/\[0\.02\] { background-color: rgba(28,23,18,0.035) !important; }
+[data-atelier-admin="light"] .bg-white\/\[0\.03\] { background-color: rgba(28,23,18,0.05) !important; }
+[data-atelier-admin="light"] .bg-white\/\[0\.04\] { background-color: rgba(28,23,18,0.06) !important; }
+[data-atelier-admin="light"] .bg-white\/\[0\.06\] { background-color: rgba(28,23,18,0.08) !important; }
+[data-atelier-admin="light"] .bg-black\/30,
+[data-atelier-admin="light"] .bg-black\/40 { background-color: rgba(28,23,18,0.08) !important; }
+
+/* text */
+[data-atelier-admin="light"] .text-white { color: #1c1712 !important; }
+[data-atelier-admin="light"] .text-white\/85 { color: rgba(28,23,18,0.85) !important; }
+[data-atelier-admin="light"] .text-white\/80 { color: rgba(28,23,18,0.8) !important; }
+[data-atelier-admin="light"] .text-white\/75 { color: rgba(28,23,18,0.72) !important; }
+[data-atelier-admin="light"] .text-white\/70 { color: rgba(28,23,18,0.68) !important; }
+[data-atelier-admin="light"] .text-white\/65 { color: rgba(28,23,18,0.62) !important; }
+[data-atelier-admin="light"] .text-white\/60 { color: rgba(28,23,18,0.58) !important; }
+[data-atelier-admin="light"] .text-white\/55 { color: rgba(28,23,18,0.54) !important; }
+[data-atelier-admin="light"] .text-white\/50 { color: rgba(28,23,18,0.5) !important; }
+[data-atelier-admin="light"] .text-white\/45 { color: rgba(28,23,18,0.46) !important; }
+
+/* borders */
+[data-atelier-admin="light"] .border-white\/5 { border-color: rgba(28,23,18,0.07) !important; }
+[data-atelier-admin="light"] .border-white\/10 { border-color: rgba(28,23,18,0.12) !important; }
+[data-atelier-admin="light"] .border-white\/15 { border-color: rgba(28,23,18,0.16) !important; }
+[data-atelier-admin="light"] .border-white\/20 { border-color: rgba(28,23,18,0.2) !important; }
+[data-atelier-admin="light"] .border-white\/30 { border-color: rgba(28,23,18,0.28) !important; }
+[data-atelier-admin="light"] .border-white\/40 { border-color: rgba(28,23,18,0.34) !important; }
+[data-atelier-admin="light"] .divide-white\/10 > * + * { border-color: rgba(28,23,18,0.12) !important; }
+
+/* placeholder + gold text (darkened so it reads on cream) */
+[data-atelier-admin="light"] .placeholder-white\/30::placeholder { color: rgba(28,23,18,0.4) !important; }
+[data-atelier-admin="light"] .text-\[\#c9a961\] { color: #8a6a23 !important; }
+
+/* interactive states */
+[data-atelier-admin="light"] .hover\:bg-white\/10:hover { background-color: rgba(28,23,18,0.07) !important; }
+[data-atelier-admin="light"] .hover\:bg-white\/\[0\.06\]:hover { background-color: rgba(28,23,18,0.07) !important; }
+[data-atelier-admin="light"] .hover\:text-white:hover { color: #1c1712 !important; }
+[data-atelier-admin="light"] .hover\:text-white\/70:hover { color: rgba(28,23,18,0.68) !important; }
+[data-atelier-admin="light"] .hover\:text-white\/80:hover { color: rgba(28,23,18,0.8) !important; }
+[data-atelier-admin="light"] .hover\:border-white\/30:hover { border-color: rgba(28,23,18,0.28) !important; }
+[data-atelier-admin="light"] .focus\:border-white\/40:focus { border-color: rgba(28,23,18,0.4) !important; }
+
+/* native form controls follow the light theme */
+[data-atelier-admin="light"] input,
+[data-atelier-admin="light"] textarea,
+[data-atelier-admin="light"] select { color-scheme: light; }
+
+/* Status tints — the -200/-300 shades are tuned for a dark background;
+   darken them in admin light mode so they stay legible on cream. */
+[data-atelier-admin="light"] .text-emerald-300,
+[data-atelier-admin="light"] .text-emerald-200 { color: #1d6b3f !important; }
+[data-atelier-admin="light"] .text-red-300,
+[data-atelier-admin="light"] .text-red-200 { color: #b03636 !important; }
+[data-atelier-admin="light"] .text-amber-300,
+[data-atelier-admin="light"] .text-amber-200 { color: #946011 !important; }
+[data-atelier-admin="light"] .text-blue-300 { color: #2f5fae !important; }
+[data-atelier-admin="light"] .text-purple-300 { color: #6b3fae !important; }

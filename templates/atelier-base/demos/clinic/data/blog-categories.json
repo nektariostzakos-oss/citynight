@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cat_demo4_0",
+    "name": "Guides",
+    "slug": "guides",
+    "order": 0
+  },
+  {
+    "id": "cat_demo4_1",
+    "name": "Treatments",
+    "slug": "treatments",
+    "order": 1
+  },
+  {
+    "id": "cat_demo4_2",
+    "name": "Skincare",
+    "slug": "skincare",
+    "order": 2
+  }
+]

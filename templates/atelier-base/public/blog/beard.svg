@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a2a1e"/><stop offset="100%" stop-color="#1a120b"/></linearGradient>
+    <linearGradient id="beardG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a120b"/><stop offset="100%" stop-color="#050302"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- silhouette head -->
+  <ellipse cx="400" cy="260" rx="130" ry="160" fill="url(#skin)"/>
+  <!-- hair -->
+  <path d="M280 180 Q400 90 520 180 L520 240 Q470 200 400 205 Q330 200 280 240 Z" fill="url(#beardG)"/>
+  <!-- beard (thick, trimmed) -->
+  <path d="M300 300 Q320 420 400 460 Q480 420 500 300 Q460 330 400 335 Q340 330 300 300 Z" fill="url(#beardG)" stroke="#0a0603" stroke-width="1"/>
+  <!-- beard texture lines -->
+  <g stroke="#2a1d13" stroke-width="0.6" opacity="0.8" fill="none">
+    <path d="M320 320 Q340 400 380 440"/>
+    <path d="M360 325 Q370 410 400 450"/>
+    <path d="M400 330 Q400 410 400 450"/>
+    <path d="M440 325 Q430 410 420 445"/>
+    <path d="M480 320 Q460 400 420 440"/>
+  </g>
+  <!-- moustache -->
+  <path d="M340 285 Q370 295 400 290 Q430 295 460 285 Q440 305 400 305 Q360 305 340 285 Z" fill="url(#beardG)"/>
+  <!-- nose shadow -->
+  <path d="M390 260 L400 285 L410 260" stroke="#1a120b" stroke-width="2" fill="none" opacity="0.5"/>
+  </svg>

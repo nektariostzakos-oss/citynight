@@ -1,0 +1,34 @@
+{
+  "t3_hero": {
+    "sub_en": "Massage, facials and quiet body rituals at Aurelia, a day spa built around a single idea: unhurried care. Book online in under a minute."
+  },
+  "t3_therapist": {
+    "eyebrow_en": "Meet your lead therapist",
+    "title_en": "Hi, I'm Elena.",
+    "body_en": "I trained in clinical and holistic massage, and have spent twelve years learning what a body actually needs: the right pressure, genuine quiet, and time that is never rushed. Aurelia is a calm spa, one guest at a time, and your hour is entirely your own.",
+    "cta_en": "Book with Elena"
+  },
+  "t3_about_story": {
+    "p1_en": "Aurelia opened with a simple idea: give every treatment the time it deserves. No double-booking, no rushing, no leaving before you feel ready."
+  },
+  "t3_contact": {
+    "details": [
+      {
+        "label_en": "Spa",
+        "value_en": "12 Lavender Walk, London SW3"
+      },
+      {
+        "label_en": "Phone",
+        "value_en": "+44 20 7946 0100"
+      },
+      {
+        "label_en": "Email",
+        "value_en": "hello@aureliadayspa.com"
+      },
+      {
+        "label_en": "Instagram",
+        "value_en": "@aureliadayspa"
+      }
+    ]
+  }
+}

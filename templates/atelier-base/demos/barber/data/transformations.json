@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fade",
+    "title_en": "Skin fade + classic taper",
+    "title_el": "Skin fade + classic taper",
+    "caption_en": "Three weeks between · Elliott",
+    "caption_el": "Τρεις εβδομάδες ενδιάμεσα · Elliott",
+    "before": "/transformations/fade-before.svg",
+    "after": "/transformations/fade-after.svg"
+  },
+  {
+    "id": "beard-sculpt",
+    "title_en": "Beard line-up + scissor blend",
+    "title_el": "Beard line-up + scissor blend",
+    "caption_en": "45 minutes · Reuben",
+    "caption_el": "45 λεπτά · Reuben",
+    "before": "/transformations/beard-before.svg",
+    "after": "/transformations/beard-after.svg"
+  },
+  {
+    "id": "full-refresh",
+    "title_en": "The Cranley · cut + beard + hot towel",
+    "title_el": "The Cranley · κούρεμα + γένια + ζεστή πετσέτα",
+    "caption_en": "90 minutes · Cal",
+    "caption_el": "90 λεπτά · Cal",
+    "before": "/transformations/full-before.svg",
+    "after": "/transformations/full-after.svg"
+  }
+]

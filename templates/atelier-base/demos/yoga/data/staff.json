@@ -1,0 +1,54 @@
+[
+  {
+    "id": "sienna",
+    "name": "Sienna Brook",
+    "role": "Lead Teacher & Founder",
+    "bio": "Sienna founded Marigold after years of practising in rooms that felt like competitions. She wanted the opposite: a warm space, patient teaching and no mirrors.",
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Vinyasa flow",
+      "Yin & restore",
+      "Beginners course"
+    ],
+    "enabled": true,
+    "workDays": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "07:00",
+    "endTime": "15:00",
+    "breakStart": "11:00",
+    "breakEnd": "11:45",
+    "order": 1
+  },
+  {
+    "id": "theo",
+    "name": "Theo Marsh",
+    "role": "Yoga & Mobility Teacher",
+    "bio": "A calm, funny teacher with a real love of slow, careful movement. Theo keeps every class unhurried and every option open.",
+    "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Strong flow",
+      "Morning mobility",
+      "Slow flow"
+    ],
+    "enabled": true,
+    "workDays": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "12:00",
+    "endTime": "21:00",
+    "breakStart": "16:00",
+    "breakEnd": "16:45",
+    "order": 2
+  }
+]

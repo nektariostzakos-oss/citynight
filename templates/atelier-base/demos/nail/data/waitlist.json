@@ -1,0 +1,72 @@
+[
+  {
+    "id": "w_demo2_0001",
+    "name": "Ella Scott",
+    "phone": "+44 7319 837979",
+    "email": "ella.scott27@hotmail.co.uk",
+    "serviceId": "soak-off-repair",
+    "serviceName": "Soak-off & repair",
+    "barberId": "any",
+    "preferredDate": "2026-06-11",
+    "preferredTime": "13:00",
+    "notes": "Prefers Amelie for art sets.",
+    "status": "contacted",
+    "createdAt": "2026-05-21T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo2_0002",
+    "name": "Adam Cole",
+    "phone": "+44 7404 903238",
+    "email": "adam.cole15@yahoo.co.uk",
+    "serviceId": "luxury-pedicure",
+    "serviceName": "Luxury pedicure",
+    "barberId": "any",
+    "preferredDate": "2026-05-26",
+    "preferredTime": "13:00",
+    "notes": "Travels in from Brighton.",
+    "status": "waiting",
+    "createdAt": "2026-05-13T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo2_0003",
+    "name": "Tom Lewis",
+    "phone": "+44 7342 285773",
+    "email": "tom.lewis57@gmail.com",
+    "serviceId": "soak-off-repair",
+    "serviceName": "Soak-off & repair",
+    "barberId": "any",
+    "preferredDate": "2026-06-07",
+    "preferredTime": "10:00",
+    "notes": "Bridal party, wedding in June.",
+    "status": "converted",
+    "createdAt": "2026-05-19T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo2_0004",
+    "name": "Leah Evans",
+    "phone": "+44 7400 857061",
+    "email": "leah.evans26@yahoo.co.uk",
+    "serviceId": "gel-biab",
+    "serviceName": "Gel & BIAB",
+    "barberId": "amelie",
+    "preferredDate": "2026-06-01",
+    "preferredTime": "18:00",
+    "notes": "Loves a glazed nude finish.",
+    "status": "waiting",
+    "createdAt": "2026-05-20T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo2_0005",
+    "name": "Noah Smith",
+    "phone": "+44 7739 183541",
+    "email": "noah.smith32@hotmail.co.uk",
+    "serviceId": "luxury-pedicure",
+    "serviceName": "Luxury pedicure",
+    "barberId": "any",
+    "preferredDate": "2026-06-01",
+    "preferredTime": "13:00",
+    "notes": "Prefers Amelie for art sets.",
+    "status": "contacted",
+    "createdAt": "2026-05-15T09:00:00.000Z"
+  }
+]

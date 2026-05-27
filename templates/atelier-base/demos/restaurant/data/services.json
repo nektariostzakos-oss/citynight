@@ -1,0 +1,50 @@
+[
+  {
+    "id": "tasting-menu",
+    "tkey": "svc.tasting",
+    "name": "Lemoni Tasting Menu",
+    "desc": "Seven courses, kitchen's choice, paired with three Naxian wines.",
+    "duration": 120,
+    "price": 58,
+    "bufferMinutes": 15,
+    "category": "Tastings",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "chefs-table",
+    "tkey": "svc.chefs",
+    "name": "Chef's Table",
+    "desc": "Six seats facing the open kitchen. Nine courses, wine pairings, no fixed menu.",
+    "duration": 150,
+    "price": 78,
+    "bufferMinutes": 15,
+    "category": "Tastings",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "private-courtyard",
+    "tkey": "svc.private",
+    "name": "Private Courtyard",
+    "desc": "Full courtyard, up to 24 guests, set menu, reserved staff. Birthdays, baptisms, small weddings.",
+    "duration": 240,
+    "price": 280,
+    "bufferMinutes": 30,
+    "category": "Private dining",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "cooking-lesson",
+    "tkey": "svc.lesson",
+    "name": "Cooking Lesson + Lunch",
+    "desc": "Two hours in the kitchen with Eleni, then sit down to eat what you made.",
+    "duration": 180,
+    "price": 95,
+    "bufferMinutes": 30,
+    "category": "Experiences",
+    "enabled": true,
+    "order": 4
+  }
+]

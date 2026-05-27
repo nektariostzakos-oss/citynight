@@ -1,0 +1,64 @@
+{
+  "id": "restaurant",
+  "name": "Lemoni Taverna",
+  "industry": "Restaurant",
+  "tagline": "An island taverna, the modern way.",
+  "description": "Mediterranean restaurant template with reservation flow, full bilingual menu, wine list, private events, gift cards and a chef's notebook blog. Warm cream-on-cocoa aesthetic, tuned for Greek and EU dining.",
+  "cover": "/demos/restaurant/cover.svg?v=1",
+  "accentColor": "#c08a3a",
+  "theme": {
+    "background": "#0f0b07",
+    "foreground": "#f3ebdc",
+    "primary": "#c08a3a",
+    "primaryAccent": "#d6a55a",
+    "surface": "rgba(255, 255, 255, 0.03)",
+    "surfaceStrong": "rgba(255, 255, 255, 0.06)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "borderStrong": "rgba(255, 255, 255, 0.18)",
+    "muted": "rgba(243, 235, 220, 0.65)",
+    "muted2": "rgba(243, 235, 220, 0.45)"
+  },
+  "typography": {
+    "headingFont": "fraunces",
+    "bodyFont": "inter"
+  },
+  "bookingMode": "reservation",
+  "industryId": "restaurant",
+  "branding": {
+    "wordmark": "",
+    "tagline_en": "",
+    "tagline_el": "",
+    "logoUrl": "",
+    "logoUrlDark": "",
+    "faviconUrl": ""
+  },
+  "nav": {
+    "links": [
+      { "id": "home",       "label_en": "Home",     "label_el": "Αρχική",       "href": "/",          "enabled": true },
+      { "id": "menu",       "label_en": "Menu",     "label_el": "Μενού",        "href": "/menu",      "enabled": true },
+      { "id": "experiences","label_en": "Tastings", "label_el": "Δοκιμαστικά",  "href": "/experiences","enabled": true },
+      { "id": "wine",       "label_en": "Wine",     "label_el": "Κρασιά",       "href": "/shop",      "enabled": true },
+      { "id": "gallery",    "label_en": "Gallery",  "label_el": "Γκαλερί",      "href": "/gallery",   "enabled": true },
+      { "id": "team",       "label_en": "About",    "label_el": "Σχετικά",       "href": "/about",     "enabled": true },
+      { "id": "contact",    "label_en": "Contact",  "label_el": "Επικοινωνία",  "href": "/contact",   "enabled": true },
+      { "id": "blog",       "label_en": "Notebook", "label_el": "Σημειωματάριο","href": "/blog",      "enabled": true }
+    ],
+    "bookLabel_en": "Reserve a table",
+    "bookLabel_el": "Κράτηση τραπεζιού",
+    "bookHref": "/book"
+  },
+  "features": [
+    "Reservation flow (party size → date → time → guest details)",
+    "Full bilingual menu — 6 sections, 30+ dishes",
+    "Wine + spirits shop (8 items)",
+    "Private events + tasting menu via dedicated /experiences page",
+    "6 chef-notebook blog posts (EN/EL)",
+    "Warm cream-on-cocoa Mediterranean theme"
+  ],
+  "stats": {
+    "services": 4,
+    "products": 8,
+    "posts": 6,
+    "categories": 4
+  }
+}

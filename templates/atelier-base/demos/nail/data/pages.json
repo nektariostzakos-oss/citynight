@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pg_demo2_1",
+    "slug": "make-a-gel-manicure-last",
+    "title_en": "How to make a gel manicure last four full weeks",
+    "title_el": "How to make a gel manicure last four full weeks",
+    "excerpt_en": "The small daily habits that keep an overlay looking fresh long after you leave the studio.",
+    "excerpt_el": "The small daily habits that keep an overlay looking fresh long after you leave the studio.",
+    "body_en": "<p>A gel manicure should hold for three weeks and still look fresh. Most of that is in the prep we do at the desk, but the rest is down to a few small habits at home.</p><p>Oil your cuticles every night, wear gloves for washing up, and never use your nails as tools. Book a proper soak-off rather than picking. A lifted edge is how a set starts to fail.</p>",
+    "body_el": "<p>A gel manicure should hold for three weeks and still look fresh. Most of that is in the prep we do at the desk, but the rest is down to a few small habits at home.</p><p>Oil your cuticles every night, wear gloves for washing up, and never use your nails as tools. Book a proper soak-off rather than picking. A lifted edge is how a set starts to fail.</p>",
+    "image": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "gel",
+      "aftercare"
+    ],
+    "category": "Care",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-05-11T06:00:00.000Z",
+    "updatedAt": "2026-05-11T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo2_2",
+    "slug": "quiet-nail-looks-this-season",
+    "title_en": "The quiet nail looks defining this season",
+    "title_el": "The quiet nail looks defining this season",
+    "excerpt_en": "Glazed nudes, fine-line art and the softest chrome. What clients are asking for right now.",
+    "excerpt_el": "Glazed nudes, fine-line art and the softest chrome. What clients are asking for right now.",
+    "body_en": "<p>This season is quiet. Glazed nudes, the softest chrome, and fine-line art so delicate you have to look twice.</p><p>Clients are asking for sets that suit their hands rather than a trend. Shorter shapes, warm neutrals, and a finish that looks expensive without shouting about it.</p>",
+    "body_el": "<p>This season is quiet. Glazed nudes, the softest chrome, and fine-line art so delicate you have to look twice.</p><p>Clients are asking for sets that suit their hands rather than a trend. Shorter shapes, warm neutrals, and a finish that looks expensive without shouting about it.</p>",
+    "image": "https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "trends",
+      "colour"
+    ],
+    "category": "Trends",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-04-15T06:00:00.000Z",
+    "updatedAt": "2026-04-15T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo2_3",
+    "slug": "one-client-at-a-time",
+    "title_en": "Why we only book one client at a time",
+    "title_el": "Why we only book one client at a time",
+    "excerpt_en": "A calmer studio is a cleaner, more careful studio. A look at how we run our day.",
+    "excerpt_el": "A calmer studio is a cleaner, more careful studio. A look at how we run our day.",
+    "body_en": "<p>We only ever book one client at a time. It keeps the studio calm, the tools freshly sterilised, and nobody rushed.</p><p>A good set cannot be hurried. The cure needs its minutes, the shape needs a second look, and you deserve an hour that is genuinely yours.</p>",
+    "body_el": "<p>We only ever book one client at a time. It keeps the studio calm, the tools freshly sterilised, and nobody rushed.</p><p>A good set cannot be hurried. The cure needs its minutes, the shape needs a second look, and you deserve an hour that is genuinely yours.</p>",
+    "image": "https://images.unsplash.com/photo-1736434518489-0eb84070017f?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "studio",
+      "hygiene"
+    ],
+    "category": "Studio",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-03-20T07:00:00.000Z",
+    "updatedAt": "2026-03-20T07:00:00.000Z"
+  }
+]

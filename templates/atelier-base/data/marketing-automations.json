@@ -1,0 +1,85 @@
+[
+  {
+    "type": "win_back",
+    "name": "Win-back",
+    "enabled": false,
+    "channels": [
+      "email"
+    ],
+    "messages": {
+      "email": {
+        "subject": "We miss you",
+        "body": "Hi {name}, it's been a while. Book a visit and enjoy your favourite service."
+      }
+    },
+    "params": {
+      "daysSince": 60
+    },
+    "id": "auto_9bf3d83b0e35",
+    "createdAt": "2026-05-22T01:17:44.667Z",
+    "updatedAt": "2026-05-22T01:17:44.667Z"
+  },
+  {
+    "type": "birthday",
+    "name": "Birthday offer",
+    "enabled": false,
+    "channels": [
+      "email"
+    ],
+    "messages": {
+      "email": {
+        "subject": "Happy birthday from us",
+        "body": "Hi {name}, wishing you a great birthday. Use code {coupon} for a treat on us."
+      }
+    },
+    "params": {},
+    "id": "auto_fb7132478a33",
+    "createdAt": "2026-05-22T01:17:44.667Z",
+    "updatedAt": "2026-05-22T01:17:44.667Z"
+  },
+  {
+    "type": "rebooking",
+    "name": "Rebooking nudge",
+    "enabled": false,
+    "channels": [
+      "push",
+      "email"
+    ],
+    "messages": {
+      "push": {
+        "title": "Time for your next visit?",
+        "body": "Book your next appointment online in seconds."
+      },
+      "email": {
+        "subject": "Ready to book again?",
+        "body": "Hi {name}, it's been a few weeks. Book your next appointment whenever suits you."
+      }
+    },
+    "params": {
+      "daysAfter": 21
+    },
+    "id": "auto_62841b040a88",
+    "createdAt": "2026-05-22T01:17:44.667Z",
+    "updatedAt": "2026-05-22T01:17:44.667Z"
+  },
+  {
+    "type": "loyalty",
+    "name": "Loyalty milestone",
+    "enabled": false,
+    "channels": [
+      "push"
+    ],
+    "messages": {
+      "push": {
+        "title": "Thank you for your loyalty!",
+        "body": "You've reached a loyalty milestone. Enjoy a special reward."
+      }
+    },
+    "params": {
+      "everyNVisits": 5
+    },
+    "id": "auto_a39a7d4fe1c2",
+    "createdAt": "2026-05-22T01:17:44.667Z",
+    "updatedAt": "2026-05-22T01:17:44.667Z"
+  }
+]

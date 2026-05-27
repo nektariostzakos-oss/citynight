@@ -1,0 +1,72 @@
+[
+  {
+    "id": "w_demo6_0001",
+    "name": "Hannah Evans",
+    "phone": "+44 7623 507607",
+    "email": "hannah.evans79@yahoo.co.uk",
+    "serviceId": "bridal-styling",
+    "serviceName": "Bridal styling",
+    "barberId": "any",
+    "preferredDate": "2026-06-01",
+    "preferredTime": "18:00",
+    "notes": "Allergic to fragrance, request the unscented finishing serum.",
+    "status": "waiting",
+    "createdAt": "2026-05-21T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo6_0002",
+    "name": "Hannah Evans",
+    "phone": "+44 7623 507607",
+    "email": "hannah.evans79@yahoo.co.uk",
+    "serviceId": "colour-service",
+    "serviceName": "Colour service",
+    "barberId": "sofia-r",
+    "preferredDate": "2026-06-07",
+    "preferredTime": "18:00",
+    "notes": "Loves a soft balayage refresh every 12 weeks.",
+    "status": "waiting",
+    "createdAt": "2026-05-14T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo6_0003",
+    "name": "James Hughes",
+    "phone": "+44 7900 777814",
+    "email": "james.hughes74@outlook.com",
+    "serviceId": "cut-finish",
+    "serviceName": "Cut & finish",
+    "barberId": "any",
+    "preferredDate": "2026-06-08",
+    "preferredTime": "13:00",
+    "notes": "Books early-morning slots only.",
+    "status": "converted",
+    "createdAt": "2026-05-14T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo6_0004",
+    "name": "Olivia Baker",
+    "phone": "+44 7751 482648",
+    "email": "olivia.baker85@hotmail.co.uk",
+    "serviceId": "bridal-styling",
+    "serviceName": "Bridal styling",
+    "barberId": "any",
+    "preferredDate": "2026-05-28",
+    "preferredTime": "18:00",
+    "notes": "Loves a soft balayage refresh every 12 weeks.",
+    "status": "waiting",
+    "createdAt": "2026-05-17T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo6_0005",
+    "name": "Hannah Hall",
+    "phone": "+44 7932 730475",
+    "email": "hannah.hall70@hotmail.co.uk",
+    "serviceId": "bridal-styling",
+    "serviceName": "Bridal styling",
+    "barberId": "hugo",
+    "preferredDate": "2026-06-04",
+    "preferredTime": "13:00",
+    "notes": "Sensitive scalp, use the gentle wash.",
+    "status": "waiting",
+    "createdAt": "2026-05-18T09:00:00.000Z"
+  }
+]

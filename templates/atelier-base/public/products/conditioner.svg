@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e3c88a"/><stop offset="55%" stop-color="#c9a961"/><stop offset="100%" stop-color="#8a6f33"/></linearGradient>
+    <linearGradient id="bottle" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1e1a16"/><stop offset="100%" stop-color="#060504"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="525" rx="115" ry="9" fill="#000" opacity="0.55"/>
+  <!-- wider, shorter bottle -->
+  <rect x="315" y="250" width="170" height="260" rx="18" fill="url(#bottle)" stroke="#3a332a" stroke-width="2"/>
+  <path d="M315 265 Q400 235 485 265 L485 285 L315 285 Z" fill="url(#bottle)" stroke="#3a332a" stroke-width="2"/>
+  <!-- flip cap -->
+  <rect x="375" y="200" width="50" height="55" rx="4" fill="url(#gold)"/>
+  <rect x="370" y="200" width="60" height="10" fill="#8a6f33"/>
+  <!-- label -->
+  <rect x="321" y="315" width="158" height="165" fill="#0a0806" stroke="#c9a961" opacity="0.9"/>
+  <line x1="360" y1="370" x2="440" y2="370" stroke="#c9a961" stroke-width="0.5"/>
+  </svg>

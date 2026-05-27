@@ -1,0 +1,77 @@
+[
+  {
+    "id": "marcus",
+    "name": "Elliott Vance",
+    "role": "Master Barber & Owner",
+    "bio": "London born and trained. Cut his teeth in a Soho shop, then ran the chair at a Marylebone barber for six years before opening Oakline on Cranley Mews in 2016. Fifteen years behind the chair, specialises in skin fades and classic scissor work.",
+    "photo": "/uploads/seed_c45ce9a58455.webp",
+    "specialties": [
+      "Skin fades",
+      "Classic cuts",
+      "Pompadours"
+    ],
+    "enabled": true,
+    "workDays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "startTime": "10:00",
+    "endTime": "19:00",
+    "breakStart": "13:00",
+    "breakEnd": "13:30",
+    "order": 1
+  },
+  {
+    "id": "jamal",
+    "name": "Reuben Okafor",
+    "role": "Senior Barber",
+    "bio": "Eight years cutting, the last four at Oakline. Beard work is where he shines: textured shapes, sharp line-ups, and hot-oil finishes that hold their shape for weeks.",
+    "photo": "/uploads/seed_e710b22ec143.webp",
+    "specialties": [
+      "Beard sculpting",
+      "Hot towel shaves",
+      "Line-ups"
+    ],
+    "enabled": true,
+    "workDays": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "10:00",
+    "endTime": "20:00",
+    "breakStart": "14:00",
+    "breakEnd": "14:30",
+    "order": 2
+  },
+  {
+    "id": "diego",
+    "name": "Cal Brennan",
+    "role": "Barber",
+    "bio": "Five years in. Trained in Manchester, moved to London in 2023. Texture is his thing: curls, coils, and thick hair that other barbers thin out instead of shaping.",
+    "photo": "/uploads/seed_c4f08f004eea.webp",
+    "specialties": [
+      "Textured cuts",
+      "Curl work",
+      "Modern fades"
+    ],
+    "enabled": true,
+    "workDays": [
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "11:00",
+    "endTime": "20:00",
+    "breakStart": "15:00",
+    "breakEnd": "15:30",
+    "order": 3
+  }
+]

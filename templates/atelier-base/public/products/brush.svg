@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="resin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2420"/><stop offset="50%" stop-color="#14110e"/><stop offset="100%" stop-color="#050403"/></linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4cdbd"/><stop offset="100%" stop-color="#6a6456"/></linearGradient>
+    <radialGradient id="bristle" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#d8cfb8"/><stop offset="70%" stop-color="#6a6050"/><stop offset="100%" stop-color="#2e2a22"/></radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="510" rx="90" ry="10" fill="#000" opacity="0.55"/>
+  <!-- resin handle, tapered -->
+  <path d="M360 500 L355 360 L445 360 L440 500 Z" fill="url(#resin)" stroke="#1a1612" stroke-width="1.5"/>
+  <!-- steel collar -->
+  <rect x="352" y="340" width="96" height="24" rx="2" fill="url(#steel)" stroke="#3a362c" stroke-width="1"/>
+  <rect x="352" y="345" width="96" height="3" fill="#f4eedd" opacity="0.7"/>
+  <!-- bristle knot -->
+  <ellipse cx="400" cy="280" rx="80" ry="75" fill="url(#bristle)"/>
+  <!-- bristle strands suggesting hair -->
+  <g stroke="#a29680" stroke-width="0.4" opacity="0.7">
+    <line x1="325" y1="280" x2="330" y2="215"/>
+    <line x1="345" y1="240" x2="348" y2="195"/>
+    <line x1="370" y1="215" x2="372" y2="180"/>
+    <line x1="400" y1="205" x2="400" y2="175"/>
+    <line x1="430" y1="215" x2="428" y2="180"/>
+    <line x1="455" y1="240" x2="452" y2="195"/>
+    <line x1="475" y1="280" x2="470" y2="215"/>
+  </g>
+  <!-- engraving -->
+  </svg>

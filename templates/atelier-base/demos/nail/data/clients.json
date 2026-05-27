@@ -1,0 +1,311 @@
+[
+  {
+    "id": "c_demo2_0001",
+    "name": "Adam Hunt",
+    "email": "adam.hunt62@yahoo.co.uk",
+    "phone": "+44 7375 579462",
+    "notes": "Travels in from Brighton.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-02-06T10:00:00.000Z",
+    "birthday": "1990-10-05",
+    "loyaltyPoints": 2
+  },
+  {
+    "id": "c_demo2_0002",
+    "name": "Tom Reid",
+    "email": "tom.reid41@yahoo.co.uk",
+    "phone": "+44 7623 666204",
+    "notes": "Loves a glazed nude finish.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-08-06T09:00:00.000Z",
+    "birthday": "1977-03-26",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo2_0003",
+    "name": "Amelia Hunt",
+    "email": "amelia.hunt51@yahoo.co.uk",
+    "phone": "+44 7547 481870",
+    "notes": "Patch-tested, no reactions.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-12-06T10:00:00.000Z",
+    "birthday": "1997-04-04",
+    "loyaltyPoints": 10
+  },
+  {
+    "id": "c_demo2_0004",
+    "name": "Ruby Hughes",
+    "email": "ruby.hughes64@icloud.com",
+    "phone": "+44 7266 644997",
+    "notes": "Always rebooks on the way out.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-11-28T10:00:00.000Z",
+    "birthday": "1991-04-09",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_demo2_0005",
+    "name": "Sophie King",
+    "email": "sophie.king63@icloud.com",
+    "phone": "+44 7980 665953",
+    "notes": "Patch-tested, no reactions.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-03-25T10:00:00.000Z",
+    "birthday": "1974-01-21",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo2_0006",
+    "name": "Noah Smith",
+    "email": "noah.smith32@hotmail.co.uk",
+    "phone": "+44 7739 183541",
+    "notes": "Prefers afternoon slots.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-03-15T10:00:00.000Z",
+    "birthday": "1970-03-12",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo2_0007",
+    "name": "Tom Lewis",
+    "email": "tom.lewis57@gmail.com",
+    "phone": "+44 7342 285773",
+    "notes": "Loves a glazed nude finish.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-08-27T09:00:00.000Z",
+    "birthday": "1996-11-13",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo2_0008",
+    "name": "Clara Hall",
+    "email": "clara.hall2@outlook.com",
+    "phone": "+44 7903 918320",
+    "notes": "Prefers afternoon slots.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-12-04T10:00:00.000Z",
+    "birthday": "1986-09-23",
+    "loyaltyPoints": 13
+  },
+  {
+    "id": "c_demo2_0009",
+    "name": "Maya Harris",
+    "email": "maya.harris68@outlook.com",
+    "phone": "+44 7961 847511",
+    "notes": "Loves a glazed nude finish.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-07-16T09:00:00.000Z",
+    "birthday": "1977-02-04",
+    "loyaltyPoints": 12
+  },
+  {
+    "id": "c_demo2_0010",
+    "name": "Olivia Ward",
+    "email": "olivia.ward43@yahoo.co.uk",
+    "phone": "+44 7351 619871",
+    "notes": "Travels in from Brighton.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-04-27T09:00:00.000Z",
+    "birthday": "1991-10-03",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo2_0011",
+    "name": "Adam Cole",
+    "email": "adam.cole15@yahoo.co.uk",
+    "phone": "+44 7404 903238",
+    "notes": "Bridal party, wedding in June.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-06-21T09:00:00.000Z",
+    "birthday": "1997-06-04",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo2_0012",
+    "name": "Lena Baker",
+    "email": "lena.baker79@gmail.com",
+    "phone": "+44 7361 611794",
+    "notes": "Always rebooks on the way out.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-12-17T10:00:00.000Z",
+    "birthday": "1996-09-05",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo2_0013",
+    "name": "Ava Jones",
+    "email": "ava.jones85@outlook.com",
+    "phone": "+44 7491 765094",
+    "notes": "Sensitive to strong scents.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-11-08T10:00:00.000Z",
+    "birthday": "1998-04-27",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo2_0014",
+    "name": "Amelia Walker",
+    "email": "amelia.walker42@yahoo.co.uk",
+    "phone": "+44 7757 815647",
+    "notes": "Loves a glazed nude finish.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-12-22T10:00:00.000Z",
+    "birthday": "1975-09-16",
+    "loyaltyPoints": 13
+  },
+  {
+    "id": "c_demo2_0015",
+    "name": "Leah Evans",
+    "email": "leah.evans26@yahoo.co.uk",
+    "phone": "+44 7400 857061",
+    "notes": "Patch-tested, no reactions.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-02-10T10:00:00.000Z",
+    "birthday": "1982-03-07",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_demo2_0016",
+    "name": "Emma Smith",
+    "email": "emma.smith29@gmail.com",
+    "phone": "+44 7855 801398",
+    "notes": "Loves a glazed nude finish.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-08-04T09:00:00.000Z",
+    "birthday": "1976-09-18",
+    "loyaltyPoints": 7
+  },
+  {
+    "id": "c_demo2_0017",
+    "name": "Lena Cooper",
+    "email": "lena.cooper30@outlook.com",
+    "phone": "+44 7199 946530",
+    "notes": "Travels in from Brighton.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-06-30T09:00:00.000Z",
+    "birthday": "1984-09-06",
+    "loyaltyPoints": 10
+  },
+  {
+    "id": "c_demo2_0018",
+    "name": "Lara Cole",
+    "email": "lara.cole43@hotmail.co.uk",
+    "phone": "+44 7345 248144",
+    "notes": "Travels in from Brighton.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-08-11T09:00:00.000Z",
+    "birthday": "1970-08-03",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo2_0019",
+    "name": "Grace Hughes",
+    "email": "grace.hughes86@icloud.com",
+    "phone": "+44 7832 522830",
+    "notes": "Loves a glazed nude finish.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-09-01T09:00:00.000Z",
+    "birthday": "1997-08-03",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo2_0020",
+    "name": "Anna Bell",
+    "email": "anna.bell20@hotmail.co.uk",
+    "phone": "+44 7623 544757",
+    "notes": "Travels in from Brighton.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-09-12T09:00:00.000Z",
+    "birthday": "1991-02-06",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo2_0021",
+    "name": "Amelia Young",
+    "email": "amelia.young67@hotmail.co.uk",
+    "phone": "+44 7316 814921",
+    "notes": "Always rebooks on the way out.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2026-04-08T09:00:00.000Z",
+    "birthday": "1976-12-07",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_demo2_0022",
+    "name": "Clara Young",
+    "email": "clara.young37@yahoo.co.uk",
+    "phone": "+44 7179 485172",
+    "notes": "Sensitive to strong scents.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2026-02-05T10:00:00.000Z",
+    "birthday": "1983-05-28",
+    "loyaltyPoints": 0
+  }
+]

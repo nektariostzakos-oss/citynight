@@ -1,0 +1,38 @@
+{
+  "t4_hero": {
+    "sub_en": "Lumea is a doctor-led aesthetics clinic. Honest assessments, conservative treatment, and results that look like you on a good day. Book a consultation online.",
+    "cardValue_en": "Dr. Helena Voss, GMC-registered"
+  },
+  "t4_practitioner": {
+    "eyebrow_en": "Your practitioner",
+    "title_en": "Led by Dr. Helena Voss.",
+    "p1_en": "Helena trained in medicine before specialising in aesthetics, and has spent twelve years refining one principle: the best results are the ones nobody can point to.",
+    "p2_en": "Every consultation at Lumea is with a doctor. Every treatment is planned conservatively, explained clearly, and carried out to medical-grade standards.",
+    "cta_en": "Book with Dr. Voss"
+  },
+  "t4_about_story": {
+    "title_en": "Founded on a quieter idea of aesthetics.",
+    "p1_en": "Lumea opened because its founder, a doctor, was tired of seeing aesthetics done badly: oversold, overdone, and detached from medicine.",
+    "p2_en": "The clinic runs on the opposite principle. Every consultation is with a doctor, every plan is honest, and the goal is always a result that looks like you, not like a treatment."
+  },
+  "t4_contact": {
+    "details": [
+      {
+        "label_en": "Clinic",
+        "value_en": "30 Wimpole Street, London W1G"
+      },
+      {
+        "label_en": "Phone",
+        "value_en": "+44 20 7946 0300"
+      },
+      {
+        "label_en": "Email",
+        "value_en": "hello@lumea-aesthetics.com"
+      },
+      {
+        "label_en": "Instagram",
+        "value_en": "@lumeaaesthetics"
+      }
+    ]
+  }
+}

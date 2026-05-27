@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pg_demo3_1",
+    "slug": "five-minutes-of-stillness",
+    "title_en": "Five minutes of stillness that change the whole day",
+    "title_el": "Five minutes of stillness that change the whole day",
+    "excerpt_en": "The small daily habits that carry the calm of a treatment long after you leave.",
+    "excerpt_el": "The small daily habits that carry the calm of a treatment long after you leave.",
+    "body_en": "<p>The calm of a treatment does not have to end at the door. A few minutes of stillness each day carry it much further than you would think.</p><p>Sit somewhere quiet, breathe slowly for five minutes, and let your shoulders drop. It is a small ritual, and it changes the whole shape of a day.</p>",
+    "body_el": "<p>The calm of a treatment does not have to end at the door. A few minutes of stillness each day carry it much further than you would think.</p><p>Sit somewhere quiet, breathe slowly for five minutes, and let your shoulders drop. It is a small ritual, and it changes the whole shape of a day.</p>",
+    "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "wellness",
+      "calm"
+    ],
+    "category": "Wellness",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-05-09T06:00:00.000Z",
+    "updatedAt": "2026-05-09T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo3_2",
+    "slug": "warmth-good-massage",
+    "title_en": "Why warmth is the heart of every good massage",
+    "title_el": "Why warmth is the heart of every good massage",
+    "excerpt_en": "Hot stones, warm oil and warm linen. A look at the role temperature plays in deep rest.",
+    "excerpt_el": "Hot stones, warm oil and warm linen. A look at the role temperature plays in deep rest.",
+    "body_en": "<p>Warmth is doing more in a massage than most people realise. Warm oil, warm stones and warm linen all tell the body it is safe to let go.</p><p>Muscle releases far more easily once it is warm. It is why our rooms stay gentle and quiet, and why every treatment begins slowly.</p>",
+    "body_el": "<p>Warmth is doing more in a massage than most people realise. Warm oil, warm stones and warm linen all tell the body it is safe to let go.</p><p>Muscle releases far more easily once it is warm. It is why our rooms stay gentle and quiet, and why every treatment begins slowly.</p>",
+    "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "rituals",
+      "massage"
+    ],
+    "category": "Rituals",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-04-12T06:00:00.000Z",
+    "updatedAt": "2026-04-12T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo3_3",
+    "slug": "one-guest-at-a-time",
+    "title_en": "Why we only book one guest at a time",
+    "title_el": "Why we only book one guest at a time",
+    "excerpt_en": "A calmer spa is a cleaner, more careful spa. A look at how we run our day.",
+    "excerpt_el": "A calmer spa is a cleaner, more careful spa. A look at how we run our day.",
+    "body_en": "<p>We only ever book one guest at a time. The spa stays quiet, the rooms stay spotless, and nobody feels hurried.</p><p>An hour of real rest cannot be rushed. The treatment needs its time, and so do you.</p>",
+    "body_el": "<p>We only ever book one guest at a time. The spa stays quiet, the rooms stay spotless, and nobody feels hurried.</p><p>An hour of real rest cannot be rushed. The treatment needs its time, and so do you.</p>",
+    "image": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "spa",
+      "care"
+    ],
+    "category": "The spa",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-03-14T07:00:00.000Z",
+    "updatedAt": "2026-03-14T07:00:00.000Z"
+  }
+]

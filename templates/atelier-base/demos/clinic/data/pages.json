@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pg_demo4_1",
+    "slug": "what-to-expect-first-consultation",
+    "title_en": "What to expect from your first consultation",
+    "title_el": "What to expect from your first consultation",
+    "excerpt_en": "A walk through the assessment, the questions we ask, and why we never treat on the first promise.",
+    "excerpt_el": "A walk through the assessment, the questions we ask, and why we never treat on the first promise.",
+    "body_en": "<p>A first consultation at a good clinic is mostly listening. We ask what is bothering you, what you have tried, and what you actually want the outcome to be.</p><p>We will not treat you on the same visit unless it is genuinely right. A plan, a price and a cooling-off period come first. That is not caution for its own sake. It is how good aesthetic medicine works.</p>",
+    "body_el": "<p>A first consultation at a good clinic is mostly listening. We ask what is bothering you, what you have tried, and what you actually want the outcome to be.</p><p>We will not treat you on the same visit unless it is genuinely right. A plan, a price and a cooling-off period come first. That is not caution for its own sake. It is how good aesthetic medicine works.</p>",
+    "image": "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "consultation",
+      "guide"
+    ],
+    "category": "Guides",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-05-10T06:00:00.000Z",
+    "updatedAt": "2026-05-10T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo4_2",
+    "slug": "anti-wrinkle-honest-guide",
+    "title_en": "Anti-wrinkle treatment: an honest guide",
+    "title_el": "Anti-wrinkle treatment: an honest guide",
+    "excerpt_en": "What it does, what it does not, and how to spot conservative, well-judged dosing.",
+    "excerpt_el": "What it does, what it does not, and how to spot conservative, well-judged dosing.",
+    "body_en": "<p>Anti-wrinkle treatment relaxes specific muscles so the lines they create soften. Done well, it is invisible. Done badly, it is the frozen look everyone is afraid of.</p><p>The difference is dosing and placement. We start conservative, review you at two weeks, and top up only if needed. You can always add a little. You cannot take it away.</p>",
+    "body_el": "<p>Anti-wrinkle treatment relaxes specific muscles so the lines they create soften. Done well, it is invisible. Done badly, it is the frozen look everyone is afraid of.</p><p>The difference is dosing and placement. We start conservative, review you at two weeks, and top up only if needed. You can always add a little. You cannot take it away.</p>",
+    "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "injectables",
+      "guide"
+    ],
+    "category": "Treatments",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-04-13T06:00:00.000Z",
+    "updatedAt": "2026-04-13T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo4_3",
+    "slug": "how-to-read-a-skincare-label",
+    "title_en": "How to read a skincare label",
+    "title_el": "How to read a skincare label",
+    "excerpt_en": "The actives worth paying for, the claims worth ignoring, and a simple routine that works.",
+    "excerpt_el": "The actives worth paying for, the claims worth ignoring, and a simple routine that works.",
+    "body_en": "<p>Most skincare is marketing. A few ingredients genuinely earn their place: a vitamin C in the morning, a retinoid at night, and an SPF every single day.</p><p>Ignore the word natural, ignore most percentages on the front of the box, and build a routine of three or four products you will actually use. Consistency beats complexity.</p>",
+    "body_el": "<p>Most skincare is marketing. A few ingredients genuinely earn their place: a vitamin C in the morning, a retinoid at night, and an SPF every single day.</p><p>Ignore the word natural, ignore most percentages on the front of the box, and build a routine of three or four products you will actually use. Consistency beats complexity.</p>",
+    "image": "https://images.unsplash.com/photo-1591343395082-e120087004b4?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "skincare",
+      "guide"
+    ],
+    "category": "Skincare",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-03-16T07:00:00.000Z",
+    "updatedAt": "2026-03-16T07:00:00.000Z"
+  }
+]

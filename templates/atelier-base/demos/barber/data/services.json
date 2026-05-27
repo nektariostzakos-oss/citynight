@@ -1,0 +1,98 @@
+[
+  {
+    "id": "signature-cut",
+    "tkey": "svc.signature",
+    "name": "Signature Cut",
+    "desc": "Consultation, scissor or clipper cut, hot-towel finish.",
+    "duration": 45,
+    "price": 45,
+    "bufferMinutes": 5,
+    "category": "Hair",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "skin-fade",
+    "tkey": "svc.skinfade",
+    "name": "Skin Fade",
+    "desc": "Bald-fade transitions with razor-clean edges.",
+    "duration": 50,
+    "price": 55,
+    "bufferMinutes": 5,
+    "category": "Hair",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "beard-sculpt",
+    "tkey": "svc.beard",
+    "name": "Beard Sculpt",
+    "desc": "Shape, line-up, hot-oil finish.",
+    "duration": 30,
+    "price": 30,
+    "bufferMinutes": 5,
+    "category": "Beard",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "hot-towel-shave",
+    "tkey": "svc.shave",
+    "name": "Hot Towel Shave",
+    "desc": "Straight razor, two hot towels, post-shave balm.",
+    "duration": 45,
+    "price": 55,
+    "bufferMinutes": 10,
+    "category": "Beard",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "cut-beard-combo",
+    "tkey": "svc.combo",
+    "name": "Cut + Beard",
+    "desc": "Full cut with beard sculpt. Our most-booked combo.",
+    "duration": 75,
+    "price": 70,
+    "bufferMinutes": 5,
+    "category": "Combo",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "boulevard-package",
+    "tkey": "svc.package",
+    "name": "The Cranley",
+    "desc": "Cut, beard sculpt, scalp massage, hot-towel shave.",
+    "duration": 90,
+    "price": 95,
+    "bufferMinutes": 10,
+    "category": "Combo",
+    "enabled": true,
+    "order": 6
+  },
+  {
+    "id": "kids-cut",
+    "tkey": "svc.kids",
+    "name": "Kids Cut (12 & under)",
+    "desc": "Patient work for young clients. LEGO and snacks behind the desk.",
+    "duration": 30,
+    "price": 30,
+    "bufferMinutes": 5,
+    "category": "Hair",
+    "enabled": true,
+    "order": 7
+  },
+  {
+    "id": "senior-cut",
+    "tkey": "svc.senior",
+    "name": "Senior Cut (65+)",
+    "desc": "Signature cut, no-rush pace, senior pricing.",
+    "duration": 45,
+    "price": 35,
+    "bufferMinutes": 5,
+    "category": "Hair",
+    "enabled": true,
+    "order": 8
+  }
+]

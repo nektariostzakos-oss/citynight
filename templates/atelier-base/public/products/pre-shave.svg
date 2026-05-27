@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e3c88a"/><stop offset="55%" stop-color="#c9a961"/><stop offset="100%" stop-color="#8a6f33"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2018"/><stop offset="100%" stop-color="#0c0805"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="525" rx="80" ry="9" fill="#000" opacity="0.55"/>
+  <!-- slim apothecary oil bottle -->
+  <rect x="362" y="230" width="76" height="285" rx="8" fill="url(#glass)" stroke="#3a2c1a" stroke-width="2"/>
+  <!-- shoulders -->
+  <path d="M362 245 Q400 205 438 245" fill="url(#glass)" stroke="#3a2c1a" stroke-width="2"/>
+  <!-- neck -->
+  <rect x="384" y="160" width="32" height="55" fill="url(#glass)" stroke="#3a2c1a" stroke-width="2"/>
+  <!-- tall gold cap -->
+  <rect x="378" y="110" width="44" height="58" rx="4" fill="url(#gold)"/>
+  <rect x="380" y="114" width="40" height="4" rx="2" fill="#f4e2b3" opacity="0.7"/>
+  <!-- oil level inside -->
+  <rect x="372" y="360" width="56" height="145" rx="5" fill="#8a6f33" opacity="0.4"/>
+  <!-- label -->
+  <rect x="370" y="300" width="60" height="64" fill="#0a0806" stroke="#c9a961" stroke-width="1" opacity="0.9"/>
+</svg>

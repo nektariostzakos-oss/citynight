@@ -1,0 +1,1355 @@
+[
+  {
+    "id": "kb_fade_types",
+    "category": "haircuts",
+    "keywords_en": [
+      "fade",
+      "fade types",
+      "skin fade",
+      "low fade",
+      "mid fade",
+      "high fade",
+      "taper fade",
+      "drop fade",
+      "burst fade"
+    ],
+    "keywords_el": [
+      "fade",
+      "ξύρισμα",
+      "χαμηλό fade",
+      "μεσαίο fade",
+      "ψηλό fade"
+    ],
+    "question_en": "What are the different types of fades?",
+    "question_el": "Τι είδη fade υπάρχουν;",
+    "answer_en": "A fade blends hair from short on the sides up to longer on top. **Skin fade** — shaved to skin at the bottom. **Low fade** — starts just above the ear, subtle. **Mid fade** — blends from around the temple line. **High fade** — starts near the top, bold contrast. **Drop fade** — curves down behind the ear. **Burst fade** — semicircle around the ear, common with mohawks. Pick based on how bold you want it and your hair growth pattern.",
+    "answer_el": "Το fade σβήνει το μαλλί από κοντό στα πλαϊνά σε μακρύτερο στην κορυφή. **Skin fade** — ξυρισμένο στο δέρμα στη βάση. **Low fade** — ξεκινά πάνω από το αυτί. **Mid fade** — στη γραμμή του κροτάφου. **High fade** — κοντά στην κορυφή, έντονη αντίθεση. Διαλέξτε το σύμφωνα με το πόσο έντονο θέλετε και τον τύπο του μαλλιού σας."
+  },
+  {
+    "id": "kb_fade_vs_taper",
+    "category": "haircuts",
+    "keywords_en": [
+      "fade vs taper",
+      "difference fade taper",
+      "taper",
+      "what is a taper"
+    ],
+    "keywords_el": [
+      "taper",
+      "διαφορά fade taper"
+    ],
+    "question_en": "What's the difference between a fade and a taper?",
+    "question_el": "Ποια η διαφορά fade και taper;",
+    "answer_en": "**Taper** is a gentle transition — sides go from longer to shorter, usually ending at a #2 or #1 near the skin. **Fade** is a bigger gradient that ends at skin or near-skin. Every fade is technically a taper, but not every taper is a fade. Tapers are a more conservative, office-friendly look; fades read sharper and more modern.",
+    "answer_el": "**Taper** είναι μια απαλή μετάβαση — τα πλαϊνά σταδιακά κονταίνουν. **Fade** είναι μεγαλύτερη βαθμίδα που καταλήγει στο δέρμα. Κάθε fade είναι taper, όχι κάθε taper είναι fade. Το taper είναι πιο συντηρητικό, το fade πιο σύγχρονο."
+  },
+  {
+    "id": "kb_undercut",
+    "category": "haircuts",
+    "keywords_en": [
+      "undercut",
+      "disconnected",
+      "hard line"
+    ],
+    "keywords_el": [
+      "undercut",
+      "γραμμή"
+    ],
+    "question_en": "What's an undercut?",
+    "question_el": "Τι είναι το undercut;",
+    "answer_en": "The undercut is a disconnected style — the sides and back are cut very short (or shaved), but the top is long with no blending between. You get a hard, visible line where short meets long. Pairs well with slicked-back tops, pompadours, or messy long tops. High-maintenance: needs a touch-up every 2–3 weeks.",
+    "answer_el": "Το undercut είναι αποκομμένο στιλ — τα πλαϊνά και πίσω πολύ κοντά, η κορυφή μακριά, χωρίς σβήσιμο ανάμεσα. Δημιουργεί σκληρή γραμμή εκεί που σμίγει το κοντό με το μακρύ. Ταιριάζει με slicked-back ή pompadour. Χρειάζεται φρεσκάρισμα κάθε 2-3 εβδομάδες."
+  },
+  {
+    "id": "kb_buzz_cut",
+    "category": "haircuts",
+    "keywords_en": [
+      "buzz cut",
+      "buzz",
+      "crew cut",
+      "military cut",
+      "how short",
+      "bald",
+      "bold",
+      "balding",
+      "shiny head",
+      "hairless"
+    ],
+    "keywords_el": [
+      "buzz",
+      "κοντό",
+      "ξυρισμένο κεφάλι",
+      "φαλακρος",
+      "φαλακρα",
+      "τριχοπτωση"
+    ],
+    "question_en": "What's a buzz cut and which number should I pick?",
+    "question_el": "Τι είναι το buzz cut και ποιο νούμερο;",
+    "answer_en": "A buzz cut is a uniformly short cut done with a single clipper guard. Popular numbers: **#1** (~3mm) — almost shaved, shows scalp. **#2** (~6mm) — classic short, still military-ish. **#3** (~10mm) — long enough to look intentional. **#4** (~12mm) — starts looking like hair again. Most men land on #2 or #3. Great for thinning hair because it makes everything uniform.",
+    "answer_el": "Buzz cut είναι ομοιόμορφα κοντό με μία λεπίδα κουρευτικής. **#1** (~3mm) πολύ κοντά. **#2** (~6mm) κλασικό κοντό. **#3** (~10mm) φαίνεται πιο μαλλιά. **#4** (~12mm) αρχίζει ξανά. Οι περισσότεροι διαλέγουν #2 ή #3. Ιδανικό για λεπτό μαλλί."
+  },
+  {
+    "id": "kb_pompadour",
+    "category": "haircuts",
+    "keywords_en": [
+      "pompadour",
+      "classic pomp",
+      "slicked back"
+    ],
+    "keywords_el": [
+      "pompadour",
+      "χτενισμένο"
+    ],
+    "question_en": "What's a pompadour?",
+    "question_el": "Τι είναι το pompadour;",
+    "answer_en": "The pompadour keeps significant length on top (typically 8–12cm), swept up and back from the forehead for height. Sides are either tapered or faded short. Needs a blowout with a round brush + medium-hold pomade to hold the volume. Don't try it on very fine hair — it needs some density to look right.",
+    "answer_el": "Το pompadour κρατά σημαντικό μήκος στην κορυφή (8-12cm), χτενισμένο πάνω και πίσω από το μέτωπο για ύψος. Τα πλαϊνά κοντά. Θέλει blowout με βούρτσα και μέτριο pomade. Δεν ταιριάζει σε πολύ λεπτό μαλλί."
+  },
+  {
+    "id": "kb_crew_cut",
+    "category": "haircuts",
+    "keywords_en": [
+      "crew cut",
+      "ivy league",
+      "short back sides"
+    ],
+    "keywords_el": [
+      "crew cut",
+      "κοντό κλασικό"
+    ],
+    "question_en": "What's a crew cut?",
+    "question_el": "Τι είναι το crew cut;",
+    "answer_en": "Classic American short cut — top is 2–4cm (longest at the front), sides are clipper-short with a taper. Universally flattering, low-maintenance, works with almost every hair type and face shape. A safe first choice if you're not sure what to ask for. Refresh every 3–4 weeks.",
+    "answer_el": "Κλασικό κοντό κούρεμα — κορυφή 2-4cm (πιο μακρύ μπροστά), πλαϊνά κοντά με taper. Ταιριάζει σχεδόν σε όλους, χαμηλή συντήρηση. Ασφαλής πρώτη επιλογή. Φρεσκάρισμα κάθε 3-4 εβδομάδες."
+  },
+  {
+    "id": "kb_textured_crop",
+    "category": "haircuts",
+    "keywords_en": [
+      "textured crop",
+      "french crop",
+      "crop",
+      "messy crop"
+    ],
+    "keywords_el": [
+      "crop",
+      "ατημέλητο"
+    ],
+    "question_en": "What's a textured crop?",
+    "question_el": "Τι είναι το textured crop;",
+    "answer_en": "Short on top with heavy texture pulled forward into a short fringe, sides faded or tapered. One of the most popular cuts of the last decade — easy to style (five seconds with clay + fingers), forgiving on most hair types, especially good if your hairline is receding because the forward fringe covers it.",
+    "answer_el": "Κοντό στην κορυφή με έντονη υφή μπροστά σε κοντή φράντζα, πλαϊνά faded ή taper. Από τα πιο δημοφιλή της δεκαετίας — εύκολο styling με clay. Ιδανικό αν η γραμμή των μαλλιών υποχωρεί."
+  },
+  {
+    "id": "kb_kids_cut",
+    "category": "haircuts",
+    "keywords_en": [
+      "kids haircut",
+      "child",
+      "boy cut",
+      "children",
+      "toddler"
+    ],
+    "keywords_el": [
+      "παιδικό",
+      "αγόρι"
+    ],
+    "question_en": "Do you cut kids' hair?",
+    "question_el": "Κάνετε παιδικά κουρέματα;",
+    "answer_en": "Yes — we do kids' cuts for all ages. Bring a picture if they want something specific, and plan for a slightly longer session the first time. Most barbers here are patient with younger kids. Price is usually a bit lower than adult — check our services page.",
+    "answer_el": "Ναι — κάνουμε παιδικά για όλες τις ηλικίες. Φέρτε φωτογραφία αν θέλουν κάτι συγκεκριμένο. Υπολογίστε λίγο περισσότερο χρόνο την πρώτη φορά. Η τιμή είναι συνήθως λίγο χαμηλότερη από αντρική."
+  },
+  {
+    "id": "kb_growing_out",
+    "category": "haircuts",
+    "keywords_en": [
+      "grow out",
+      "growing hair",
+      "longer hair",
+      "from short to long"
+    ],
+    "keywords_el": [
+      "μακραίνω",
+      "να μεγαλώσω"
+    ],
+    "question_en": "I want to grow my hair out — how do I manage the awkward stage?",
+    "question_el": "Θέλω να μακρύνω τα μαλλιά — πώς να περάσω τη μεταβατική φάση;",
+    "answer_en": "The first 3–4 months are the hardest. Our advice: **don't stop cutting**. Come in every 5–6 weeks so we can keep the shape clean — trim the sides, neaten the neckline, light point-cutting on top. Use a light product (sea salt spray, not heavy pomade) to add movement. Most men quit during this stage. Push through month four and you're home.",
+    "answer_el": "Οι πρώτοι 3-4 μήνες είναι οι πιο δύσκολοι. Συμβουλή: **μη σταματήσεις τα κουρέματα**. Ελάτε κάθε 5-6 εβδομάδες για να κρατάμε το σχήμα καθαρό. Χρησιμοποιήστε ελαφρύ προϊόν. Οι περισσότεροι τα παρατάνε τώρα — συνεχίστε."
+  },
+  {
+    "id": "kb_receding_hairline",
+    "category": "haircuts",
+    "keywords_en": [
+      "receding hairline",
+      "thinning front",
+      "widow's peak",
+      "bald spot",
+      "bald",
+      "bold",
+      "balding",
+      "shiny head",
+      "hairless"
+    ],
+    "keywords_el": [
+      "αραιώνουν",
+      "φαλάκρα",
+      "υποχωρεί",
+      "φαλακρος",
+      "φαλακρα",
+      "τριχοπτωση"
+    ],
+    "question_en": "What cut works best with a receding hairline?",
+    "question_el": "Ποιο κούρεμα ταιριάζει σε μαλλιά που υποχωρούν;",
+    "answer_en": "Two rules: **keep it short**, and **don't fight it**. A textured crop with a forward fringe camouflages the hairline naturally. A buzz cut (#2 or #3) removes the contrast and reads intentional, confident. The worst look is long wispy hair brushed forward — it actually highlights thinning. We're happy to show you options in the mirror before we start.",
+    "answer_el": "Δύο κανόνες: **κοντό** και **μην το πολεμάς**. Το textured crop με φράντζα μπροστά καλύπτει φυσικά. Ένα buzz cut (#2 ή #3) είναι σίγουρο και σκόπιμο. Χειρότερη επιλογή το μακρύ αραιό στα πλάγια. Δείχνουμε επιλογές πριν ξεκινήσουμε."
+  },
+  {
+    "id": "kb_haircut_frequency",
+    "category": "grooming_frequency",
+    "keywords_en": [
+      "how often cut",
+      "haircut frequency",
+      "how often come back",
+      "every how many weeks"
+    ],
+    "keywords_el": [
+      "πόσο συχνά κούρεμα",
+      "κάθε πότε"
+    ],
+    "question_en": "How often should I get my hair cut?",
+    "question_el": "Κάθε πότε πρέπει να κουρεύομαι;",
+    "answer_en": "Depends on the cut. **Fade or skin fade** — every 2–3 weeks, the contrast blurs fast. **Taper / short classic** — every 3–4 weeks. **Crop or medium length** — every 5–6 weeks. **Growing it out** — every 6–8 weeks for shape. Book the next appointment before you leave; we keep track of who you see and what you had.",
+    "answer_el": "Εξαρτάται από το κούρεμα. **Fade** — κάθε 2-3 εβδομάδες. **Taper / κλασικό** — 3-4 εβδομάδες. **Crop / μέτριο** — 5-6 εβδομάδες. **Μακραίνει** — 6-8 εβδομάδες για σχήμα. Κλείστε το επόμενο ραντεβού πριν φύγετε."
+  },
+  {
+    "id": "kb_first_visit",
+    "category": "etiquette",
+    "keywords_en": [
+      "first time",
+      "never been barber",
+      "what to expect",
+      "first visit",
+      "new client"
+    ],
+    "keywords_el": [
+      "πρώτη φορά",
+      "τι να περιμένω"
+    ],
+    "question_en": "I've never been to a barber — what should I expect?",
+    "question_el": "Δεν έχω πάει ποτέ σε μπαρμπέρη — τι να περιμένω;",
+    "answer_en": "Easy. You'll sit in the chair, we'll ask what you want (bring a photo if you have one — it helps), we'll talk through options, then start. First visit usually takes 35–45 minutes. No pressure to know the terminology. If you want a free 5-minute consultation first, just ask — we'd rather talk for 5 minutes than give you the wrong cut.",
+    "answer_el": "Εύκολα. Κάθεστε στην καρέκλα, σας ρωτάμε τι θέλετε (φέρτε φωτογραφία), συζητάμε, ξεκινάμε. Η πρώτη επίσκεψη 35-45 λεπτά. Δεν χρειάζεται να ξέρετε την ορολογία. Προτιμάμε 5' κουβέντα παρά λάθος κούρεμα."
+  },
+  {
+    "id": "kb_how_to_describe",
+    "category": "etiquette",
+    "keywords_en": [
+      "how to describe cut",
+      "what to ask for",
+      "don't know what I want",
+      "show picture"
+    ],
+    "keywords_el": [
+      "πώς να εξηγήσω",
+      "τι να ζητήσω"
+    ],
+    "question_en": "How do I describe what I want?",
+    "question_el": "Πώς να εξηγήσω τι θέλω;",
+    "answer_en": "Three things get a barber 90% of the way there: (1) **Length on top** — \"long enough to style\" or \"a finger's length\". (2) **Sides** — \"a #2 fade\" / \"short taper\" / \"same as last time\". (3) **Vibe** — \"clean and professional\", \"textured and messy\", \"classic\". A reference photo is the fastest way — don't feel embarrassed about it.",
+    "answer_el": "Τρία πράγματα: (1) **Μήκος κορυφής** — \"αρκετά για styling\" ή \"όσο ένα δάχτυλο\". (2) **Πλαϊνά** — \"#2 fade\" / \"κοντό taper\" / \"όπως την περασμένη φορά\". (3) **Αίσθηση** — \"καθαρό επαγγελματικό\", \"ατημέλητο\". Μια φωτογραφία είναι ο πιο γρήγορος τρόπος."
+  },
+  {
+    "id": "kb_tipping",
+    "category": "etiquette",
+    "keywords_en": [
+      "tip",
+      "tipping",
+      "should I tip",
+      "gratuity"
+    ],
+    "keywords_el": [
+      "φιλοδώρημα",
+      "τιπς"
+    ],
+    "question_en": "Should I tip the barber?",
+    "question_el": "Πρέπει να αφήσω φιλοδώρημα;",
+    "answer_en": "Tipping is appreciated, never expected. In the UK, most regulars tip £2 to £5 in cash, rounded up from the service price. If someone goes out of their way for you (a long consultation, an extra tidy-up between visits), a bigger tip is a nice gesture. Never feel obligated. A good review or a recommendation is worth more.",
+    "answer_el": "Το φιλοδώρημα εκτιμάται, δεν είναι υποχρεωτικό. Στο Ηνωμένο Βασίλειο, οι περισσότεροι αφήνουν £2 έως £5 σε μετρητά. Αν κάποιος έκανε κάτι παραπάνω για σας (μια εκτενή συμβουλευτική, ένα έξτρα φρεσκάρισμα μεταξύ επισκέψεων), ένα μεγαλύτερο φιλοδώρημα είναι μια ωραία χειρονομία. Μη νιώθετε ποτέ υποχρέωση. Μια καλή κριτική ή μια σύσταση αξίζει περισσότερα."
+  },
+  {
+    "id": "kb_how_long",
+    "category": "etiquette",
+    "keywords_en": [
+      "how long",
+      "duration",
+      "time",
+      "how long does a haircut take"
+    ],
+    "keywords_el": [
+      "πόση ώρα",
+      "διάρκεια"
+    ],
+    "question_en": "How long does a haircut take?",
+    "question_el": "Πόση ώρα διαρκεί;",
+    "answer_en": "A standard men's cut is 30 minutes. Add a beard — 45 minutes. Full grooming session (cut + beard + hot towel) — 60 minutes. First visits usually run 5–10 minutes longer while we figure out what works for you. Slots on our calendar already include buffer time.",
+    "answer_el": "Τυπικό κούρεμα 30 λεπτά. Με μούσι — 45'. Πλήρες grooming (κούρεμα + μούσι + πετσέτα) — 60'. Πρώτη επίσκεψη 5-10' παραπάνω. Τα slots στο ημερολόγιο έχουν ήδη περιθώριο."
+  },
+  {
+    "id": "kb_beard_trim_frequency",
+    "category": "beards",
+    "keywords_en": [
+      "beard trim frequency",
+      "how often trim beard",
+      "beard maintenance"
+    ],
+    "keywords_el": [
+      "μούσι πόσο συχνά",
+      "τριμάρω"
+    ],
+    "question_en": "How often should I trim my beard?",
+    "question_el": "Κάθε πότε να κόβω το μούσι;",
+    "answer_en": "Depends on style. **Short stubble (3–5mm)** — trim every 3–4 days with a beard trimmer. **Short beard (1–2cm)** — shape every 2 weeks. **Medium beard** — shape every 3 weeks, cheek line every week. **Long beard** — shape every 4–6 weeks, daily combing. The neckline should be cleaned up weekly at any length.",
+    "answer_el": "Εξαρτάται από το στιλ. **Stubble** — κάθε 3-4 μέρες. **Κοντό μούσι** — κάθε 2 βδομάδες. **Μεσαίο** — κάθε 3 βδομάδες. **Μακρύ** — κάθε 4-6 βδομάδες. Ο λαιμός θέλει καθάρισμα εβδομαδιαία."
+  },
+  {
+    "id": "kb_beard_oil_vs_balm",
+    "category": "beards",
+    "keywords_en": [
+      "beard oil vs balm",
+      "oil vs balm",
+      "difference oil balm",
+      "which first"
+    ],
+    "keywords_el": [
+      "λάδι balm μούσι",
+      "διαφορά"
+    ],
+    "question_en": "Beard oil vs balm — what's the difference?",
+    "question_el": "Λάδι ή balm για το μούσι;",
+    "answer_en": "**Oil** goes on the **skin under** the beard — it conditions the skin and stops the itchy week. Three drops, rub in palms, press into the beard down to the skin. **Balm** goes on the **hair on top** — it shapes and tames flyaways, gives light hold. Pea-sized amount. Order: oil first on damp skin, balm second on dry hair. Most men need both.",
+    "answer_el": "**Λάδι** πάει στο **δέρμα κάτω** από το μούσι — φροντίζει και σταματά τη φαγούρα. **Balm** πάει στην **τρίχα πάνω** — σχηματίζει και κρατάει. Σειρά: λάδι πρώτα, balm μετά. Οι περισσότεροι χρειάζονται και τα δύο."
+  },
+  {
+    "id": "kb_beard_itchy",
+    "category": "beards",
+    "keywords_en": [
+      "itchy beard",
+      "itch",
+      "first week beard",
+      "growing beard itches"
+    ],
+    "keywords_el": [
+      "φαγούρα μούσι"
+    ],
+    "question_en": "My new beard is itchy — what do I do?",
+    "question_el": "Το μούσι μου με τρώει — τι να κάνω;",
+    "answer_en": "The itch is from dry skin, not the beard itself. Hairs curl back and scratch skin that's lost its oil. Fix: wash the beard 2–3 times a week with a sulfate-free beard wash (shampoo is too harsh), then beard oil every morning on damp skin. The itch disappears in about 10 days if you stick with this.",
+    "answer_el": "Η φαγούρα είναι από ξηρό δέρμα, όχι από το μούσι. Οι τρίχες γυρίζουν μέσα και ξύνουν. Λύση: λούσιμο μουσιού 2-3 φορές τη βδομάδα με ειδικό σαπούνι (όχι shampoo), λάδι κάθε πρωί σε νωπό δέρμα. Φεύγει σε ~10 μέρες."
+  },
+  {
+    "id": "kb_patchy_beard",
+    "category": "beards",
+    "keywords_en": [
+      "patchy beard",
+      "beard patches",
+      "bald spots beard",
+      "uneven beard"
+    ],
+    "keywords_el": [
+      "αραιό μούσι",
+      "κενά μούσι"
+    ],
+    "question_en": "My beard is patchy — can I still grow one?",
+    "question_el": "Το μούσι μου είναι αραιό — μπορώ να το μεγαλώσω;",
+    "answer_en": "Probably. Most patchy beards fill in if you give them 8–12 uninterrupted weeks. The mistake is trimming too early. Other options: (1) **Shorter beard** — a thick 5–7mm stubble hides gaps better than length. (2) **Minoxidil** — works for many men, ask a doctor. (3) **Beard shaping** — we can design around a permanent patch with angled lines that draw the eye.",
+    "answer_el": "Πιθανόν ναι. Τα περισσότερα αραιά μούσια γεμίζουν σε 8-12 συνεχόμενες βδομάδες. Το λάθος είναι να κόψεις νωρίς. Άλλες επιλογές: (1) πιο κοντό (5-7mm stubble κρύβει τα κενά). (2) minoxidil. (3) σχεδιασμός με γωνιακές γραμμές."
+  },
+  {
+    "id": "kb_beard_neckline",
+    "category": "beards",
+    "keywords_en": [
+      "beard neckline",
+      "where stop beard",
+      "beard line",
+      "under jaw"
+    ],
+    "keywords_el": [
+      "λαιμός μούσι",
+      "γραμμή μούσι"
+    ],
+    "question_en": "Where should my beard neckline be?",
+    "question_el": "Πού πρέπει να τελειώνει ο λαιμός του μουσιού;",
+    "answer_en": "Not at the jawline (too high, makes the face look tight) and not at the Adam's apple (too low, messy). The rule: place two fingers horizontally above your Adam's apple — that's where the beard should stop. Curve the line gently from ear to ear. We do this free when we trim your beard.",
+    "answer_el": "Όχι στο σαγόνι (πολύ ψηλά) και όχι στο μήλο του Αδάμ (πολύ χαμηλά). Κανόνας: δύο δάχτυλα πάνω από το μήλο του Αδάμ. Καμπύλη από αυτί σε αυτί. Το κάνουμε δωρεάν όταν κόβουμε το μούσι."
+  },
+  {
+    "id": "kb_beard_cheek_line",
+    "category": "beards",
+    "keywords_en": [
+      "beard cheek line",
+      "cheekline",
+      "top of beard",
+      "where should beard stop"
+    ],
+    "keywords_el": [
+      "μούσι μάγουλο",
+      "πάνω γραμμή"
+    ],
+    "question_en": "Where should my beard's cheek line be?",
+    "question_el": "Πού πρέπει να είναι η πάνω γραμμή του μουσιού;",
+    "answer_en": "The natural cheek line works for 90% of faces — wherever the beard grows thick, leave it. Tidy the stragglers above it but don't create a straight line. Too-low cheek lines (shaved down to the mouth) age a man by 10 years. When in doubt, leave more, not less.",
+    "answer_el": "Η φυσική γραμμή δουλεύει για το 90% — όπου φυτρώνει πυκνά, αφήστε το. Καθαρίστε τα μεμονωμένα πάνω από αυτή, χωρίς ίσια γραμμή. Πολύ χαμηλή γραμμή γερνάει. Αν έχετε αμφιβολία, αφήστε περισσότερα."
+  },
+  {
+    "id": "kb_straight_razor",
+    "category": "beards",
+    "keywords_en": [
+      "straight razor",
+      "cut throat shave",
+      "hot towel shave",
+      "old school shave"
+    ],
+    "keywords_el": [
+      "ξυράφι",
+      "ξύρισμα με ξυράφι"
+    ],
+    "question_en": "Do you do straight-razor shaves?",
+    "question_el": "Κάνετε ξύρισμα με ξυράφι;",
+    "answer_en": "Yes — the full ritual: pre-shave oil, hot towel, lather applied with a badger brush, then the razor in two passes (with the grain, then across). Finishes with a cold towel and aftershave. Takes about 25 minutes. Book it on its own or pair with a haircut.",
+    "answer_el": "Ναι — η πλήρης τελετουργία: προ-ξυρίσματος λάδι, ζεστή πετσέτα, αφρός με πινέλο, ξυράφι σε δύο περάσματα. Τελειώνει με κρύα πετσέτα και aftershave. Περίπου 25 λεπτά. Κλείστε το μόνο του ή μαζί με κούρεμα."
+  },
+  {
+    "id": "kb_moustache_styles",
+    "category": "beards",
+    "keywords_en": [
+      "moustache",
+      "mustache styles",
+      "chevron",
+      "handlebar"
+    ],
+    "keywords_el": [
+      "μουστάκι",
+      "στυλ μουστακιού"
+    ],
+    "question_en": "What moustache styles work?",
+    "question_el": "Ποια στυλ μουστακιού δουλεύουν;",
+    "answer_en": "**Chevron** — thick, covers the upper lip. Classic. Suits most faces. **Handlebar** — waxed ends turn up. Needs 6+ months of growth and daily waxing. **Horseshoe** — extends down past the mouth. Bold. **Pencil** — very thin. Hard to pull off today. We can shape any of them — bring a reference.",
+    "answer_el": "**Chevron** — πυκνό, καλύπτει το πάνω χείλος. Κλασικό. **Handlebar** — οι άκρες κυρτωμένες προς τα πάνω, θέλει 6+ μήνες. **Horseshoe** — κατεβαίνει κάτω από το στόμα. **Pencil** — πολύ λεπτό. Σχηματίζουμε όποιο θέλετε — φέρτε φωτογραφία."
+  },
+  {
+    "id": "kb_pomade_types",
+    "category": "products",
+    "keywords_en": [
+      "pomade",
+      "pomade types",
+      "oil based",
+      "water based",
+      "which pomade"
+    ],
+    "keywords_el": [
+      "πομάδα",
+      "είδη πομάδας"
+    ],
+    "question_en": "Which pomade should I use?",
+    "question_el": "Ποια πομάδα να διαλέξω;",
+    "answer_en": "**Water-based pomade** — medium-strong hold, washes out with water, shiny finish. Best everyday choice for most men. **Oil-based pomade** — classic feel, very strong hold, requires degreasing shampoo to remove. For serious slicked-back styles. Our house pomade is water-based and works for 95% of clients.",
+    "answer_el": "**Νερού** — μέτριο-δυνατό κράτημα, βγαίνει με νερό, γυαλιστερό. Καλύτερη καθημερινή επιλογή. **Λαδιού** — κλασική αίσθηση, πολύ δυνατό κράτημα, θέλει ειδικό σαμπουάν. Η δική μας είναι νερού και δουλεύει για το 95%."
+  },
+  {
+    "id": "kb_clay_vs_pomade",
+    "category": "products",
+    "keywords_en": [
+      "clay vs pomade",
+      "matte vs shine",
+      "clay pomade wax cream difference"
+    ],
+    "keywords_el": [
+      "πηλός πομάδα",
+      "διαφορά"
+    ],
+    "question_en": "What's the difference between pomade, clay, wax, and cream?",
+    "question_el": "Ποια η διαφορά πομάδα, πηλός, wax, cream;",
+    "answer_en": "**Pomade** — shine, medium hold, restyleable. **Clay** — matte, strong hold, textured/natural look. Great for crops. **Wax** — strongest hold, semi-matte, stiffer finish. Less flexible. **Cream** — lightest hold, natural/soft look. Good for curly or longer hair. Match to your style: want shine? Pomade. Want textured messy? Clay.",
+    "answer_el": "**Πομάδα** — γυαλάδα, μέτριο κράτημα, επανά-styling. **Πηλός** — ματ, δυνατό κράτημα, υφή. **Wax** — πιο δυνατό, ημι-ματ. **Cream** — ελαφρύ, φυσικό. Θέλεις γυαλάδα? Πομάδα. Θέλεις ατημέλητο? Πηλός."
+  },
+  {
+    "id": "kb_salt_spray",
+    "category": "products",
+    "keywords_en": [
+      "sea salt spray",
+      "texture spray",
+      "salt spray",
+      "how use"
+    ],
+    "keywords_el": [
+      "αλατόνερο",
+      "texture spray"
+    ],
+    "question_en": "What's sea salt spray for?",
+    "question_el": "Για τι χρησιμεύει το sea salt spray;",
+    "answer_en": "Adds instant texture and lift, leaves a matte, beachy finish. Two uses: (1) **pre-styler** — spray on damp hair before blow-drying to add grip for whatever product comes next. (2) **standalone** — spray, scrunch, air-dry for easy wavy texture. Best for medium-length straight or wavy hair. Skip it if your hair is very fine — it can dry it out.",
+    "answer_el": "Δίνει υφή και ύψος, αφήνει ματ, παραλιακό αποτέλεσμα. Δύο χρήσεις: (1) πριν το στέγνωμα, σε νωπό μαλλί, για επιπλέον κράτημα. (2) μόνο του — ψεκάστε, σφίξτε, αφήστε να στεγνώσει. Καλύτερο για μεσαίου μήκους ίσιο ή κυματιστό μαλλί."
+  },
+  {
+    "id": "kb_shampoo_frequency",
+    "category": "scalp_health",
+    "keywords_en": [
+      "how often shampoo",
+      "wash hair frequency",
+      "daily shampoo",
+      "skip shampoo"
+    ],
+    "keywords_el": [
+      "πόσο συχνά σαμπουάν",
+      "πλύσιμο μαλλιών"
+    ],
+    "question_en": "How often should I shampoo?",
+    "question_el": "Κάθε πότε σαμπουάν;",
+    "answer_en": "Daily shampoo is the single most common reason we see dull, brittle hair. The scalp needs its natural oils — strip them every day and it fights back by producing more. **Fine straight hair** — every 2 days. **Thick or wavy** — every 3 days. **Curly/coily** — twice a week maximum, co-wash in between. Use a sulfate-free formula.",
+    "answer_el": "Το καθημερινό σαμπουάν είναι ο πρώτος λόγος που βλέπουμε άτονα μαλλιά. Το τριχωτό χρειάζεται τα φυσικά του έλαια. **Λεπτό ίσιο** — κάθε 2 μέρες. **Πυκνό/κυματιστό** — κάθε 3. **Σγουρό** — δύο φορές τη βδομάδα max. Χρησιμοποιήστε sulfate-free."
+  },
+  {
+    "id": "kb_dandruff",
+    "category": "scalp_health",
+    "keywords_en": [
+      "dandruff",
+      "flaking scalp",
+      "white flakes",
+      "itchy scalp"
+    ],
+    "keywords_el": [
+      "πιτυρίδα"
+    ],
+    "question_en": "How do I deal with dandruff?",
+    "question_el": "Πώς αντιμετωπίζω την πιτυρίδα;",
+    "answer_en": "Most dandruff is from a yeast (Malassezia) that lives on everyone's scalp but overgrows in some. Use a **pyrithione zinc** or **ketoconazole** shampoo twice a week, leave on 3–5 minutes before rinsing. Alternate with a gentle sulfate-free shampoo on other days. If it doesn't improve in 3 weeks, see a dermatologist — could be seborrheic dermatitis.",
+    "answer_el": "Τις περισσότερες φορές είναι από μύκητα (Malassezia) που ζει στο τριχωτό όλων. Σαμπουάν με **ketoconazole** ή **pyrithione zinc** δύο φορές τη βδομάδα, 3-5 λεπτά πριν το ξέβγαλμα. Αν δεν βελτιωθεί σε 3 βδομάδες, δερματολόγος."
+  },
+  {
+    "id": "kb_thinning_hair",
+    "category": "scalp_health",
+    "keywords_en": [
+      "thinning hair",
+      "hair loss",
+      "losing hair",
+      "bald",
+      "bold",
+      "balding",
+      "shiny head",
+      "hairless"
+    ],
+    "keywords_el": [
+      "αραιώνουν",
+      "τριχόπτωση",
+      "φαλακρος",
+      "φαλακρα",
+      "τριχοπτωση"
+    ],
+    "question_en": "My hair is thinning — what can I do?",
+    "question_el": "Τα μαλλιά μου αραιώνουν — τι να κάνω;",
+    "answer_en": "First, see if it's genuine loss or breakage (breakage responds to gentler handling, loss doesn't). Options: (1) **Cut it shorter** — shorter cuts make thinning invisible. (2) **Minoxidil (Rogaine)** — OTC, works for ~60% of men. (3) **Finasteride** — prescription, more effective, side effects possible. (4) **Hair transplant** — if it's progressed. We can help with (1) today and point you toward the rest.",
+    "answer_el": "Δείτε αν είναι πραγματική πτώση ή σπάσιμο. Επιλογές: (1) πιο κοντό κούρεμα — κρύβει την αραίωση. (2) minoxidil (χωρίς συνταγή). (3) finasteride (συνταγή). (4) μεταμόσχευση. Βοηθάμε με το (1) σήμερα."
+  },
+  {
+    "id": "kb_oily_scalp",
+    "category": "scalp_health",
+    "keywords_en": [
+      "oily scalp",
+      "greasy hair",
+      "oily roots"
+    ],
+    "keywords_el": [
+      "λιπαρό τριχωτό"
+    ],
+    "question_en": "My scalp gets oily fast — help?",
+    "question_el": "Το τριχωτό μου λιπαίνει γρήγορα — βοήθεια;",
+    "answer_en": "Counterintuitive answer: **shampoo less**, not more. Daily shampoo strips the scalp, which overproduces oil in response. Try every 2–3 days with a clarifying shampoo once a week. Use cooler water (hot water stimulates oil production). In between, a dry shampoo on the roots works wonders.",
+    "answer_el": "Αντίθετα στη λογική: **λιγότερο σαμπουάν**, όχι περισσότερο. Το καθημερινό λούσιμο αφαιρεί λιπαρότητα, το τριχωτό υπερπαράγει. Δοκιμάστε κάθε 2-3 μέρες + καθαριστικό σαμπουάν μία φορά τη βδομάδα. Πιο δροσερό νερό. Dry shampoo ενδιάμεσα."
+  },
+  {
+    "id": "kb_hair_type_straight",
+    "category": "hair_types",
+    "keywords_en": [
+      "straight hair",
+      "fine hair",
+      "thin straight"
+    ],
+    "keywords_el": [
+      "ίσια μαλλιά",
+      "λεπτά"
+    ],
+    "question_en": "What products work best for straight hair?",
+    "question_el": "Ποια προϊόντα για ίσια μαλλιά;",
+    "answer_en": "Straight hair often looks flat without the right product. **Fine** — volumizing spray + light pomade. Avoid anything heavy. **Medium** — sea salt spray pre-style, then clay or light pomade. **Thick** — stronger hold pomade or wax. Blow-dry with a round brush for lift at the root. Apply product to damp, not dry, hair.",
+    "answer_el": "Τα ίσια μαλλιά φαίνονται πεσμένα χωρίς σωστό προϊόν. **Λεπτά** — spray όγκου + ελαφριά πομάδα. **Μέτρια** — αλατόνερο πριν, μετά πηλός. **Πυκνά** — πιο δυνατή πομάδα. Στεγνώστε με βούρτσα για όγκο. Προϊόν σε νωπό μαλλί."
+  },
+  {
+    "id": "kb_hair_type_curly",
+    "category": "hair_types",
+    "keywords_en": [
+      "curly hair",
+      "curls",
+      "curl care"
+    ],
+    "keywords_el": [
+      "σγουρά",
+      "βόστρυχοι"
+    ],
+    "question_en": "How do I take care of curly hair?",
+    "question_el": "Πώς φροντίζω σγουρά μαλλιά;",
+    "answer_en": "Three rules: **sulfate-free shampoo**, **always condition**, **never brush dry**. Comb through with a wide-tooth comb while there's conditioner in — then rinse. Apply leave-in cream to wet hair, scrunch upward. Let it air-dry or use a diffuser on low. Refresh day 2 with water spray + a tiny bit more cream. Curly hair needs moisture more than anything.",
+    "answer_el": "Τρεις κανόνες: **sulfate-free σαμπουάν**, **πάντα μαλακτική**, **ποτέ βούρτσα σε στεγνό**. Χτένα χοντρή με μαλακτική μέσα. Leave-in κρέμα σε βρεγμένα, σφίξτε προς τα πάνω. Αέρας ή diffuser σε χαμηλά. Δεύτερη μέρα νερό + λίγη κρέμα. Υγρασία."
+  },
+  {
+    "id": "kb_hair_type_coily",
+    "category": "hair_types",
+    "keywords_en": [
+      "coily hair",
+      "4c hair",
+      "kinky hair",
+      "afro"
+    ],
+    "keywords_el": [
+      "αφρό",
+      "πολύ σγουρά"
+    ],
+    "question_en": "What works for coily / type 4 hair?",
+    "question_el": "Τι δουλεύει για πολύ σγουρά μαλλιά;",
+    "answer_en": "Moisture is everything. Use the LOC method: **L**iquid (water), **O**il (jojoba, argan), **C**ream (leave-in). Apply in that order on damp hair, 2–3 times a week. Low-manipulation styles (twists, braids) protect your hair between cuts. Cuts every 6–8 weeks keep shape; trim the ends dry to see the true length.",
+    "answer_el": "Υγρασία είναι το παν. Μέθοδος LOC: **L**iquid (νερό), **O**il (jojoba, argan), **C**ream (leave-in). Σε βρεγμένα, 2-3 φορές τη βδομάδα. Στυλ χαμηλής επέμβασης (πλεξούδες) προστατεύουν. Κούρεμα κάθε 6-8 βδομάδες, τρίμαρισμα σε στεγνό."
+  },
+  {
+    "id": "kb_hair_type_wavy",
+    "category": "hair_types",
+    "keywords_en": [
+      "wavy hair",
+      "2a 2b 2c",
+      "loose waves"
+    ],
+    "keywords_el": [
+      "κυματιστά"
+    ],
+    "question_en": "How do I style wavy hair?",
+    "question_el": "Πώς στυλάρω κυματιστά;",
+    "answer_en": "Wavy is the most versatile but also the hardest to settle. Sea salt spray on damp hair + scrunch + air-dry = natural beachy look. Want more shape? Add a light cream first, then scrunch. Keep it off the back of the neck with a scarf/hat when sleeping so waves don't flatten overnight — or sleep on a silk pillowcase.",
+    "answer_el": "Τα πιο ευέλικτα αλλά και τα πιο δύσκολα. Αλατόνερο σε νωπά + σφίξιμο + αέρας = φυσικό παραλιακό. Θέλετε πιο σχηματισμένο; Ελαφριά κρέμα πρώτα. Μαξιλαροθήκη από μετάξι για να μην πέφτουν τα κύματα τη νύχτα."
+  },
+  {
+    "id": "kb_blowout",
+    "category": "styling",
+    "keywords_en": [
+      "blowout",
+      "blow dry",
+      "how dry hair",
+      "hairdryer"
+    ],
+    "keywords_el": [
+      "στέγνωμα",
+      "πιστολάκι"
+    ],
+    "question_en": "How do I blow-dry my hair properly?",
+    "question_el": "Πώς να στεγνώσω σωστά;",
+    "answer_en": "Towel-dry until damp, not wet. Apply product to damp hair. Use a **round brush** (not flat) to lift roots — brush up and back, follow with the dryer nozzle. Medium heat, not high. Finish with 10 seconds of cool air to set the shape. Flip your head upside down and dry the roots for extra volume.",
+    "answer_el": "Στέγνωμα με πετσέτα σε νωπό, όχι βρεγμένο. Προϊόν σε νωπό. **Στρογγυλή βούρτσα** για όγκο στη ρίζα — βούρτσα πάνω και πίσω, πιστολάκι ακολουθεί. Μέτρια θερμοκρασία. Κρύο αέρα 10'' στο τέλος. Κάτω το κεφάλι για όγκο."
+  },
+  {
+    "id": "kb_comb_vs_brush",
+    "category": "styling",
+    "keywords_en": [
+      "comb vs brush",
+      "which to use",
+      "wide tooth"
+    ],
+    "keywords_el": [
+      "χτένα βούρτσα",
+      "διαφορά"
+    ],
+    "question_en": "Comb or brush?",
+    "question_el": "Χτένα ή βούρτσα;",
+    "answer_en": "**Wide-tooth comb** — wet hair, curly hair, detangling. Always. **Fine-tooth comb** — styling short hair precisely (side part, slicked back). **Round brush** — blow-drying for volume. **Paddle brush** — medium-long straight hair only, on dry. Never brush wet curly hair unless there's conditioner in it.",
+    "answer_el": "**Χτένα χοντρή** — βρεγμένα, σγουρά, ξεμπέρδεμα. **Χτένα λεπτή** — styling κοντού, γραμμή. **Βούρτσα στρογγυλή** — blow-dry για όγκο. **Βούρτσα πλατιά** — μεσαίο-μακρύ ίσιο, σε στεγνό. Ποτέ βούρτσα σε βρεγμένα σγουρά."
+  },
+  {
+    "id": "kb_product_amount",
+    "category": "styling",
+    "keywords_en": [
+      "how much product",
+      "too much pomade",
+      "right amount",
+      "pea sized"
+    ],
+    "keywords_el": [
+      "πόσο προϊόν",
+      "ποσότητα"
+    ],
+    "question_en": "How much product should I use?",
+    "question_el": "Πόσο προϊόν να βάλω;",
+    "answer_en": "The #1 mistake is using too much. Start with a **pea-sized amount** for short hair, **grape-sized** for medium. Warm it between palms first — cold pomade streaks. Apply from the back forward, never front to back. If you need more, add — don't start with a handful.",
+    "answer_el": "Το #1 λάθος: πολύ προϊόν. Ξεκινήστε με **μέγεθος μπιζελιού** για κοντά, **σταφύλι** για μέτρια. Ζεστάνετε ανάμεσα στις παλάμες. Βάλτε από πίσω μπροστά, όχι αντίστροφα. Αν χρειαστεί περισσότερο, προσθέστε — μην ξεκινήσετε με γεμάτη παλάμη."
+  },
+  {
+    "id": "kb_number_guards",
+    "category": "terminology",
+    "keywords_en": [
+      "clipper number",
+      "#2",
+      "#3",
+      "what number",
+      "guard"
+    ],
+    "keywords_el": [
+      "νούμερο",
+      "λεπίδα"
+    ],
+    "question_en": "What do the clipper numbers mean?",
+    "question_el": "Τι σημαίνουν τα νούμερα της κουρευτικής;",
+    "answer_en": "Each number = a guard thickness in 1/8 inch (~3mm). **#0** = skin-close (1.5mm). **#1** = 3mm. **#2** = 6mm (most common request). **#3** = 10mm. **#4** = 12mm. **#5+** = getting long enough for scissors instead. \"#2 fade\" means the sides end at around 6mm and blend down.",
+    "answer_el": "Κάθε νούμερο = πάχος λεπίδας σε 1/8 της ίντσας (~3mm). **#0** = δέρμα (1.5mm). **#1** = 3mm. **#2** = 6mm (πιο συχνό). **#3** = 10mm. **#4** = 12mm. **#5+** = αρκετά μακρύ για ψαλίδι. \"#2 fade\" = πλαϊνά στα 6mm και σβήνουν."
+  },
+  {
+    "id": "kb_scissor_over_comb",
+    "category": "terminology",
+    "keywords_en": [
+      "scissor over comb",
+      "technique",
+      "what is scissor over comb"
+    ],
+    "keywords_el": [
+      "ψαλίδι πάνω από χτένα"
+    ],
+    "question_en": "What's \"scissor over comb\"?",
+    "question_el": "Τι είναι το \"ψαλίδι πάνω από χτένα\";",
+    "answer_en": "A technique where the barber lifts sections of hair with a comb, then cuts along the comb with scissors. Gives a softer, more natural finish than clippers — the length varies slightly from strand to strand, blending better than a straight clipper line. Takes longer and requires skill. Used on the top, sides, and tapers when a natural look is wanted.",
+    "answer_el": "Τεχνική όπου ο μπαρμπέρης σηκώνει μαλλιά με χτένα και κόβει με ψαλίδι. Πιο απαλό, πιο φυσικό από την κουρευτική. Το μήκος ποικίλλει ελαφρώς. Χρειάζεται χρόνο και τέχνη. Στην κορυφή, στα πλαϊνά και σε tapers."
+  },
+  {
+    "id": "kb_line_up",
+    "category": "terminology",
+    "keywords_en": [
+      "line up",
+      "edge up",
+      "shape up",
+      "line-up"
+    ],
+    "keywords_el": [
+      "line up",
+      "γραμμή"
+    ],
+    "question_en": "What's a line-up?",
+    "question_el": "Τι είναι το line-up;",
+    "answer_en": "A line-up (also called edge-up or shape-up) is a clean, straight edge along your hairline — typically across the forehead, around the temples, and at the sideburns. Done with a trimmer or straight razor for the sharpest line. Refreshes a cut between full appointments, usually takes 10 minutes, often offered as a quick service.",
+    "answer_el": "Line-up (ή edge-up) = καθαρή ίσια γραμμή στα περιγράμματα — μέτωπο, κρόταφοι, φαβορίτες. Με τρίμερ ή ξυράφι. Φρεσκάρει κούρεμα ανάμεσα σε επισκέψεις, 10 λεπτά."
+  },
+  {
+    "id": "kb_tape_up_vs_line_up",
+    "category": "terminology",
+    "keywords_en": [
+      "tape up",
+      "taper vs line up",
+      "bald taper",
+      "no taper"
+    ],
+    "keywords_el": [
+      "tape up",
+      "γραμμή κορυφής"
+    ],
+    "question_en": "What's a \"tape up\"?",
+    "question_el": "Τι είναι το \"tape up\";",
+    "answer_en": "A tape-up is a squared-off hairline at the back of the neck (like tape applied cleanly), vs. a **blowout/taper** which leaves the natural rounded shape. Tape-ups look sharper for 1–2 weeks but grow out obvious. Tapers grow out more gracefully. Ask us which suits your head shape before you commit.",
+    "answer_el": "Tape-up = τετράγωνη γραμμή στον αυχένα (σαν κολλημένη ταινία). Το αντίθετο είναι **taper** που αφήνει φυσική καμπύλη. Το tape-up δείχνει πιο κοφτό 1-2 βδομάδες, μετά μεγαλώνει εμφανώς. Ρωτήστε μας τι ταιριάζει."
+  },
+  {
+    "id": "kb_hair_washing_water",
+    "category": "scalp_health",
+    "keywords_en": [
+      "water temperature",
+      "hot water hair",
+      "cold water hair"
+    ],
+    "keywords_el": [
+      "θερμοκρασία νερού",
+      "ζεστό κρύο νερό"
+    ],
+    "question_en": "Should I wash my hair with hot or cold water?",
+    "question_el": "Ζεστό ή κρύο νερό για τα μαλλιά;",
+    "answer_en": "Warm to open the cuticle and let shampoo work, then finish with **30 seconds of cold water** to close the cuticle back. Cold makes a visible difference in shine and reduces frizz. Hot water strips oils and dries the scalp — avoid scalding-hot shower water on hair.",
+    "answer_el": "Ζεστό για να ανοίξει η κουτίκουλα και να δουλέψει το σαμπουάν, μετά **30 δευτερόλεπτα κρύο** για να κλείσει. Το κρύο κάνει ορατή διαφορά σε λάμψη. Το καυτό νερό αφαιρεί λιπαρότητα — αποφύγετε το."
+  },
+  {
+    "id": "kb_hat_hair",
+    "category": "styling",
+    "keywords_en": [
+      "hat hair",
+      "helmet hair",
+      "cap flattens hair"
+    ],
+    "keywords_el": [
+      "καπέλο μαλλί",
+      "πλακώνει"
+    ],
+    "question_en": "How do I avoid hat hair?",
+    "question_el": "Πώς να αποφύγω το πλακωμένο μαλλί από καπέλο;",
+    "answer_en": "Put your hat on **after** the hair is dry and styled, not while damp. At the end of the day, a quick spray of water + shake = 80% recovered. If hats are non-negotiable, keep a shorter cut — longer hair always loses shape under a hat.",
+    "answer_el": "Φορέστε καπέλο **μετά** το στέγνωμα και styling, όχι σε νωπό. Στο τέλος της μέρας, ψεκασμός με νερό + ανακάτεμα = 80% επανέφερε. Αν τα καπέλα είναι σίγουρα, κρατήστε πιο κοντό κούρεμα."
+  },
+  {
+    "id": "kb_grey_hair_care",
+    "category": "hair_types",
+    "keywords_en": [
+      "grey hair",
+      "gray hair",
+      "silver",
+      "salt and pepper"
+    ],
+    "keywords_el": [
+      "γκρίζα μαλλιά",
+      "ασημί"
+    ],
+    "question_en": "My hair is going grey — how do I keep it looking good?",
+    "question_el": "Τα μαλλιά γκριζάρουν — πώς τα κρατώ ωραία;",
+    "answer_en": "Grey hair is coarser and drier than pigmented hair — use a hydrating conditioner every wash. A **purple shampoo** once a week neutralizes yellowing. Keep the cut tidy — grey hair shows imperfections more. Salt-and-pepper beards especially reward regular trims. Many men look better grey than they did with their original color — lean in.",
+    "answer_el": "Τα γκρίζα μαλλιά είναι πιο τραχιά και ξηρά — μαλακτική κάθε λούσιμο. **Μωβ σαμπουάν** μία φορά τη βδομάδα εξουδετερώνει το κιτρίνισμα. Κρατήστε το κούρεμα τακτικό. Πολλοί άντρες δείχνουν καλύτερα γκρίζοι — αγκαλιάστε το."
+  },
+  {
+    "id": "kb_first_shave",
+    "category": "beards",
+    "keywords_en": [
+      "first shave",
+      "how to shave",
+      "never shaved"
+    ],
+    "keywords_el": [
+      "πρώτο ξύρισμα",
+      "πώς να ξυριστώ"
+    ],
+    "question_en": "I'm going to shave for the first time — any advice?",
+    "question_el": "Πρώτο μου ξύρισμα — συμβουλές;",
+    "answer_en": "Three rules: (1) **Warm water first**, soften the hair 2 minutes. (2) **With the grain, not against**, find your growth direction, usually downward on cheeks, up on the neck. (3) **Light passes, sharp blade**, never press. Apply a good shaving cream (not soap), rinse the blade between strokes. Aftershave with witch hazel if you have sensitive skin. First time is easier with us, we do it for £5.",
+    "answer_el": "Τρεις κανόνες: (1) **Ζεστό νερό πρώτα**, μαλακώστε 2'. (2) **Με τη φορά τριχοφυΐας**, όχι αντίθετα. (3) **Απαλά, με αιχμηρή λεπίδα**, μην πιέζετε. Καλή κρέμα ξυρίσματος. Αν έχετε ευαίσθητο δέρμα, witch hazel μετά. Πιο εύκολο αν το κάνουμε εμείς, £5."
+  },
+  {
+    "id": "kb_shave_bumps",
+    "category": "beards",
+    "keywords_en": [
+      "razor burn",
+      "ingrown hairs",
+      "shave bumps",
+      "rash"
+    ],
+    "keywords_el": [
+      "ερεθισμός ξυρίσματος",
+      "σπυράκια"
+    ],
+    "question_en": "How do I prevent razor burn and ingrown hairs?",
+    "question_el": "Πώς αποτρέπω τον ερεθισμό και τα σπυράκια;",
+    "answer_en": "Five fixes: (1) **Sharp blade** — change it every 3–5 shaves. (2) **Shave with the grain** — against = ingrowns. (3) **Exfoliate weekly** — scrub gently, frees buried hairs. (4) **Alcohol-free aftershave** — alcohol burns raw skin. (5) **Straight razor every 2 weeks** — a proper professional shave lifts ingrowns out. If bumps persist, consider an electric trimmer instead of blade-shaving.",
+    "answer_el": "Πέντε λύσεις: (1) **Αιχμηρή λεπίδα** — αλλαγή κάθε 3-5 ξυρίσματα. (2) **Με τη φορά**, όχι αντίθετα. (3) **Απολέπιση εβδομαδιαία**. (4) **Aftershave χωρίς οινόπνευμα**. (5) **Ξυράφι κάθε 2 βδομάδες** — σηκώνει τα σπυράκια. Αν επιμένουν, τρίμερ αντί για λεπίδα."
+  },
+  {
+    "id": "kb_dry_scalp_vs_dandruff",
+    "category": "scalp_health",
+    "keywords_en": [
+      "dry scalp vs dandruff",
+      "difference",
+      "white flakes"
+    ],
+    "keywords_el": [
+      "ξηρό τριχωτό πιτυρίδα"
+    ],
+    "question_en": "Dry scalp or dandruff — how do I tell?",
+    "question_el": "Ξηρό τριχωτό ή πιτυρίδα — πώς ξεχωρίζω;",
+    "answer_en": "**Dandruff** — flakes are yellowish, oily, larger; scalp itches even when not dry; often worse in winter. **Dry scalp** — flakes are small, white, dry-feeling; skin is tight; usually from over-washing or cold weather. Dandruff needs a medicated shampoo (pyrithione zinc / ketoconazole). Dry scalp needs moisture (hydrating shampoo, less washing).",
+    "answer_el": "**Πιτυρίδα** — νιφάδες κιτρινωπές, λιπαρές, μεγαλύτερες, φαγούρα ακόμα και σε μη-ξηρό. **Ξηρό τριχωτό** — νιφάδες μικρές, λευκές, ξηρές, τεντωμένο δέρμα, συχνά από πολύ λούσιμο. Η πιτυρίδα θέλει ειδικό σαμπουάν. Το ξηρό θέλει υγρασία."
+  },
+  {
+    "id": "kb_hair_gel_vs_pomade",
+    "category": "products",
+    "keywords_en": [
+      "hair gel",
+      "gel vs pomade",
+      "should I use gel"
+    ],
+    "keywords_el": [
+      "gel μαλλιά"
+    ],
+    "question_en": "Should I use hair gel?",
+    "question_el": "Να χρησιμοποιώ gel;",
+    "answer_en": "Honest answer: gel is for 1995. Dries crunchy, flakes, doesn't move with you. Water-based pomade gives the same hold with shine and stays flexible. If you love the stiff-wet look, pick a hair wax or a strong-hold pomade instead. We don't stock gel — there's a reason.",
+    "answer_el": "Ειλικρινά: το gel είναι από το 1995. Στεγνώνει σκληρό, νιφαδίζει, δεν κουνιέται. Η πομάδα νερού δίνει το ίδιο κράτημα με γυαλάδα και παραμένει εύπλαστο. Αν αγαπάτε την στιφή όψη, διαλέξτε wax. Δεν έχουμε gel — για λόγο."
+  },
+  {
+    "id": "kb_classic_vs_modern",
+    "category": "trends",
+    "keywords_en": [
+      "classic vs modern",
+      "old school",
+      "traditional cut"
+    ],
+    "keywords_el": [
+      "κλασικό μοντέρνο"
+    ],
+    "question_en": "What's the difference between a classic and a modern cut?",
+    "question_el": "Ποια η διαφορά κλασικού και μοντέρνου;",
+    "answer_en": "**Classic** — natural transitions, hair combed rather than styled, respects the head's shape. Pompadour, ivy league, regular men's cut. Timeless. **Modern** — sharper contrasts, stronger geometry, more product. Skin fades, textured crops, dropped undercut. More effort daily but photographs well. We do both — tell us which world you live in.",
+    "answer_el": "**Κλασικό** — φυσικές μεταβάσεις, χτενισμένα, σέβεται το σχήμα. Pompadour, ivy league, τυπικό. **Μοντέρνο** — κοφτές αντιθέσεις, γεωμετρία, προϊόν. Skin fades, crops, undercut. Φαίνεται καλύτερο σε φωτογραφία. Κάνουμε και τα δύο."
+  },
+  {
+    "id": "kb_should_wash_before",
+    "category": "etiquette",
+    "keywords_en": [
+      "wash hair before",
+      "clean hair barber",
+      "shower before appointment"
+    ],
+    "keywords_el": [
+      "λούσιμο πριν μπαρμπέρη"
+    ],
+    "question_en": "Should I wash my hair before coming in?",
+    "question_el": "Να λουστώ πριν έρθω;",
+    "answer_en": "Clean-ish is fine — we'll wash it if we need to. Don't apply heavy product right before (makes scissoring harder). If you've been at the beach or gym, a quick rinse helps. One thing to avoid: arriving with wet hair — damp hair cuts differently than dry, and we need to know where it'll sit.",
+    "answer_el": "Σχετικά καθαρό είναι εντάξει — αν χρειαστεί, λούζουμε εμείς. Μη βάλετε βαρύ προϊόν πριν. Αν ήσασταν στη θάλασσα ή γυμναστήριο, γρήγορο ξέβγαλμα βοηθά. Αποφύγετε να έρθετε με βρεγμένα μαλλιά — κόβουν διαφορετικά."
+  },
+  {
+    "id": "kb_talk_during_cut",
+    "category": "etiquette",
+    "keywords_en": [
+      "quiet barber",
+      "don't want to talk",
+      "small talk"
+    ],
+    "keywords_el": [
+      "σιωπή κούρεμα",
+      "δεν θέλω να μιλήσω"
+    ],
+    "question_en": "Do I have to talk during the haircut?",
+    "question_el": "Πρέπει να μιλάω κατά το κούρεμα;",
+    "answer_en": "No — and saying so is fine. \"I'm going to zone out for a bit, thanks\" is a perfectly normal thing to say. We'll quietly do our job. Some clients read, some doze off, some just listen to the shop. Pick whatever mode you want; we'll match it.",
+    "answer_el": "Όχι — και είναι εντελώς εντάξει να το πείτε. \"Θα κάτσω ήσυχα\" είναι απόλυτα φυσιολογικό. Κάνουμε τη δουλειά μας αθόρυβα. Κάποιοι διαβάζουν, κάποιοι μισοκοιμούνται. Διαλέξτε το mode σας."
+  },
+  {
+    "id": "kb_what_to_wear",
+    "category": "etiquette",
+    "keywords_en": [
+      "what to wear",
+      "collar shirt",
+      "dress code barber"
+    ],
+    "keywords_el": [
+      "τι να φορέσω"
+    ],
+    "question_en": "What should I wear to a barber appointment?",
+    "question_el": "Τι να φορέσω;",
+    "answer_en": "Avoid white (clippings show) and high-collared shirts (hair gets trapped). A t-shirt, henley, or open-collar shirt is perfect. We use a cape so your clothes are protected, but hair finds its way. If you're coming straight from somewhere formal, just let us know — we'll be extra careful.",
+    "answer_el": "Αποφύγετε λευκό (φαίνονται οι τρίχες) και ψηλό γιακά (κολλάνε μαλλιά). T-shirt, henley ή ανοιχτό πουκάμισο. Χρησιμοποιούμε κάπα, αλλά οι τρίχες βρίσκουν τρόπο. Αν έρχεστε από κάπου επίσημα, πείτε μας."
+  },
+  {
+    "id": "kb_gift_card",
+    "category": "booking",
+    "keywords_en": [
+      "gift certificate",
+      "buy gift",
+      "surprise gift"
+    ],
+    "keywords_el": [
+      "δωροεπιταγή",
+      "δώρο"
+    ],
+    "question_en": "Can I buy a gift voucher for someone?",
+    "question_el": "Μπορώ να αγοράσω δωροεπιταγή;",
+    "answer_en": "Yes. Vouchers come in £30, £50, and £100 denominations (or custom amounts, just ask us). Delivered as a printable PDF to their email or yours to print and give in person. Never expire. The £50 covers a cut + beard; £100 is the full grooming experience with a take-home product.",
+    "answer_el": "Ναι. Δωροεπιταγές σε £30, £50 και £100 (ή προσαρμοσμένα ποσά, απλώς ρωτήστε μας). Παραδίδονται ως εκτυπώσιμο PDF στο email τους ή στο δικό σας για εκτύπωση και παράδοση από κοντά. Δε λήγουν ποτέ. Τα £50 καλύπτουν κούρεμα + μούσι. Τα £100 είναι η πλήρης εμπειρία grooming με ένα προϊόν για το σπίτι."
+  },
+  {
+    "id": "kb_cancel_reschedule",
+    "category": "booking",
+    "keywords_en": [
+      "cancel appointment",
+      "reschedule",
+      "move appointment",
+      "change booking"
+    ],
+    "keywords_el": [
+      "ακύρωση",
+      "αλλαγή ραντεβού"
+    ],
+    "question_en": "How do I cancel or reschedule?",
+    "question_el": "Πώς ακυρώνω ή αλλάζω ραντεβού;",
+    "answer_en": "Reply to the confirmation email we sent when you booked — tell us the new day/time. Or call us. Please give us at least 4 hours' notice when you can; slots fill up and someone else could use your time. No fees for cancellation.",
+    "answer_el": "Απαντήστε στο email επιβεβαίωσης — πείτε τη νέα μέρα/ώρα. Ή πάρτε μας τηλέφωνο. Παρακαλούμε 4 ώρες πριν όποτε γίνεται. Δεν υπάρχει χρέωση ακύρωσης."
+  },
+  {
+    "id": "kb_hair_thinning_scissors",
+    "category": "styling",
+    "keywords_en": [
+      "thinning scissors",
+      "texturizing",
+      "less volume"
+    ],
+    "keywords_el": [
+      "ψαλίδι αραίωσης"
+    ],
+    "question_en": "Should I ask for thinning scissors?",
+    "question_el": "Να ζητήσω ψαλίδι αραίωσης;",
+    "answer_en": "Depends on your hair. **Very thick hair** — yes, thinning scissors (or point-cutting) remove bulk and make styling easier. **Fine or thinning hair** — absolutely not, makes the problem worse. A good barber will know without asking, but if your hair has felt like a helmet after every cut, mention it.",
+    "answer_el": "Εξαρτάται. **Πολύ πυκνό μαλλί** — ναι, αραιωτικό ψαλίδι ή point-cutting αφαιρεί όγκο. **Λεπτό ή αραιωμένο** — σίγουρα όχι, θα χειροτερέψει. Καλός μπαρμπέρης το ξέρει, αν νιώθετε σαν κράνος μετά από κάθε κούρεμα, πείτε το."
+  },
+  {
+    "id": "kb_color_dye",
+    "category": "styling",
+    "keywords_en": [
+      "dye hair",
+      "color hair",
+      "hair dye men"
+    ],
+    "keywords_el": [
+      "βαφή μαλλιών"
+    ],
+    "question_en": "Do you do hair coloring?",
+    "question_el": "Κάνετε βαφή μαλλιών;",
+    "answer_en": "We focus on cuts, beards, and grooming — we don't do traditional coloring in-house. If you're covering greys we can point you to a good colorist down the street. Consider whether you actually need it — grey ages slower than badly-dyed hair, and a great haircut does more than color ever could.",
+    "answer_el": "Επικεντρωνόμαστε σε κούρεμα, μούσι και grooming — δεν κάνουμε βαφή. Αν καλύπτετε γκρίζα, μπορούμε να σας συστήσουμε. Σκεφτείτε αν το χρειάζεστε — το γκρίζο γερνά πιο αργά από κακή βαφή."
+  },
+  {
+    "id": "kb_parking_nearby",
+    "category": "etiquette",
+    "keywords_en": [
+      "parking",
+      "park car",
+      "where to park"
+    ],
+    "keywords_el": [
+      "παρκάρω",
+      "πάρκινγκ"
+    ],
+    "question_en": "Is there parking near the shop?",
+    "question_el": "Υπάρχει πάρκινγκ κοντά;",
+    "answer_en": "Street parking is available on the side streets around the shop; sometimes takes a few minutes to find a spot on busy evenings. There's a public lot 3 minutes' walk away. If you're visiting by scooter or bike, there's a rack outside.",
+    "answer_el": "Παρκάρισμα στους παράλληλους δρόμους γύρω από το μαγαζί — ενίοτε χρειάζονται λίγα λεπτά αναζήτηση τα βράδια. Δημόσιο πάρκινγκ 3 λεπτά περπάτημα. Για σκούτερ/ποδήλατο, υπάρχει θέση έξω."
+  },
+  {
+    "id": "kb_apprentice_master",
+    "category": "etiquette",
+    "keywords_en": [
+      "which barber",
+      "who is best",
+      "apprentice",
+      "senior barber"
+    ],
+    "keywords_el": [
+      "ποιος μπαρμπέρης",
+      "καλύτερος"
+    ],
+    "question_en": "Are all your barbers the same level?",
+    "question_el": "Είναι όλοι οι μπαρμπέρηδες ίδιου επιπέδου;",
+    "answer_en": "No — and we're upfront about it. Senior barbers have 10+ years of experience and charge normal prices; apprentices are developing and their cuts are offered at reduced rates. If you want a specific cut or haven't come before, we recommend starting with a senior barber. You'll see experience levels on each profile when you book.",
+    "answer_el": "Όχι — και το λέμε ανοιχτά. Οι senior έχουν 10+ χρόνια εμπειρία, τυπικές τιμές. Οι μαθητευόμενοι εξελίσσονται, μειωμένες τιμές. Αν θέλετε συγκεκριμένο κούρεμα, ξεκινήστε με senior. Θα δείτε το επίπεδο εμπειρίας στις κρατήσεις."
+  },
+  {
+    "id": "kb_hair_goes_where",
+    "category": "terminology",
+    "keywords_en": [
+      "cowlick",
+      "whorl",
+      "hair direction",
+      "part side"
+    ],
+    "keywords_el": [
+      "cowlick",
+      "γυρίζει"
+    ],
+    "question_en": "What's a cowlick and how do I deal with it?",
+    "question_el": "Τι είναι το cowlick (στρίβιμο) και πώς το φροντίζω;",
+    "answer_en": "A cowlick is a patch where hair grows in a different direction from the rest — usually at the crown. Fighting it with product just makes it worse. Better options: (1) **Cut with the cowlick** — shorter length nearby lets it lie naturally. (2) **Part on the other side** — often the cowlick disappears when hair parts with it, not against. (3) **Blow-dry against the grain first** to train it, then with the grain to set.",
+    "answer_el": "Cowlick = σημείο όπου οι τρίχες φυτρώνουν άλλη κατεύθυνση, συνήθως στην κορυφή. Να το πολεμάτε με προϊόν το χειροτερεύει. Επιλογές: (1) κοντύτερο εκεί κοντά. (2) χωρίζεις από την άλλη πλευρά. (3) στεγνώνεις αντίθετα πρώτα για να εκπαιδεύσεις."
+  },
+  {
+    "id": "kb_oily_hair",
+    "category": "scalp_health",
+    "keywords_en": [
+      "oily hair",
+      "greasy by afternoon",
+      "hair gets greasy fast"
+    ],
+    "keywords_el": [
+      "λιπαρά μαλλιά γρήγορα"
+    ],
+    "question_en": "My hair gets greasy by the afternoon — why?",
+    "question_el": "Τα μαλλιά μου λιπαίνονται ως το απόγευμα — γιατί;",
+    "answer_en": "Usually one of: (1) **Over-washing** — scalp overproduces oil to compensate. (2) **Touching your hair** — oils from hands transfer. (3) **Conditioner on roots** — only apply conditioner mid-length to ends. (4) **Hormones or diet** — less fixable. Try shampooing every 2–3 days with a clarifying shampoo once a week. Dry shampoo between washes helps.",
+    "answer_el": "Συνήθως: (1) **Υπερ-λούσιμο** — το τριχωτό υπερπαράγει λάδι. (2) **Αγγίζετε τα μαλλιά**. (3) **Μαλακτική στις ρίζες** — μόνο στις άκρες. (4) **Ορμόνες/διατροφή**. Λούσιμο κάθε 2-3 μέρες + καθαριστικό σαμπουάν εβδομαδιαία. Dry shampoo ενδιάμεσα."
+  },
+  {
+    "id": "kb_beard_softer",
+    "category": "beards",
+    "keywords_en": [
+      "soften beard",
+      "stiff beard",
+      "wire beard"
+    ],
+    "keywords_el": [
+      "μαλακό μούσι",
+      "σκληρό μούσι"
+    ],
+    "question_en": "How do I make my beard softer?",
+    "question_el": "Πώς μαλακώνω το μούσι μου;",
+    "answer_en": "Three moves: (1) **Beard wash twice a week** (not regular shampoo — too harsh). (2) **Beard oil every morning** on damp skin under the beard. (3) **Brush it daily** with a boar-bristle brush — distributes natural oils through every hair and trains it to lie flat. Noticeable difference in 2 weeks.",
+    "answer_el": "Τρία βήματα: (1) **Σαπούνι μουσιού 2 φορές τη βδομάδα** (όχι κοινό σαμπουάν). (2) **Λάδι μουσιού κάθε πρωί** σε νωπό δέρμα κάτω. (3) **Βούρτσα καθημερινή** — απλώνει τα φυσικά λίπη και εκπαιδεύει την τρίχα. Ορατή διαφορά σε 2 βδομάδες."
+  },
+  {
+    "id": "kb_hair_loss_teenager",
+    "category": "scalp_health",
+    "keywords_en": [
+      "young hair loss",
+      "early hair loss",
+      "20s losing hair"
+    ],
+    "keywords_el": [
+      "τριχόπτωση νέος",
+      "νωρίς"
+    ],
+    "question_en": "I'm in my 20s and losing hair — is it normal?",
+    "question_el": "Είμαι στα 20 μου και χάνω μαλλιά — φυσιολογικό;",
+    "answer_en": "Male pattern baldness can start as early as 17. It's genetic and not your fault. See a dermatologist sooner rather than later — early treatment (minoxidil + finasteride) preserves more hair than late treatment grows back. Meanwhile, keep the cut short and confident. Long hair trying to hide loss always fails.",
+    "answer_el": "Η αρρενική φαλάκρα μπορεί να ξεκινήσει από τα 17. Είναι γενετικό, όχι δικό σας λάθος. Δερματολόγο νωρίς — η έγκαιρη θεραπεία (minoxidil + finasteride) κρατά περισσότερα από ό,τι ξαναφυτρώνει η αργοπορημένη. Στο μεταξύ, κοντό και σίγουρο κούρεμα."
+  },
+  {
+    "id": "kb_humidity_hair",
+    "category": "styling",
+    "keywords_en": [
+      "humid weather",
+      "humidity frizz",
+      "summer hair"
+    ],
+    "keywords_el": [
+      "υγρασία μαλλιά",
+      "καλοκαίρι"
+    ],
+    "question_en": "How do I manage my hair in humid weather?",
+    "question_el": "Πώς διαχειρίζομαι τα μαλλιά στην υγρασία;",
+    "answer_en": "Humidity = frizz. Fight it with: (1) **Anti-humidity product** — most modern creams list it. (2) **Cold rinse** at the end of every shower — closes the cuticle. (3) **Matte products over shiny** — matte reads drier and better in humidity. (4) **Shorter cuts** — less hair to frizz. Salt spray actually helps in humidity because it embraces the texture rather than fighting it.",
+    "answer_el": "Υγρασία = φριζάρισμα. Αντιμετώπιση: (1) **Κρέμα κατά υγρασίας**. (2) **Κρύο ξέβγαλμα** στο τέλος. (3) **Ματ προϊόντα** πάνω από γυαλιστερά. (4) **Πιο κοντό** — λιγότερη τρίχα να φριζάρει. Το αλατόνερο βοηθά — αγκαλιάζει την υφή."
+  },
+  {
+    "id": "kb_clipper_haircut_at_home",
+    "category": "grooming_frequency",
+    "keywords_en": [
+      "cut at home",
+      "self haircut",
+      "home clippers",
+      "diy"
+    ],
+    "keywords_el": [
+      "κούρεμα σπίτι",
+      "μόνος μου"
+    ],
+    "question_en": "Can I cut my own hair at home between visits?",
+    "question_el": "Μπορώ να κουρεύω μόνος μου ανάμεσα;",
+    "answer_en": "For a buzz cut, yes — buy decent clippers, pick a number one above what a barber uses (your angle won't be as consistent), and go slow. For anything with shape (taper, fade, textured top): **no**, you'll need us to fix it. Trimming a neckline with a trimmer between visits is fine — everything else is how bad haircuts happen.",
+    "answer_el": "Για buzz cut ναι — καλές κουρευτικές, πάρτε ένα νούμερο πάνω από του μπαρμπέρη (δε θα είναι σταθερή η γωνία), αργά. Για οτιδήποτε με σχήμα (taper, fade) **όχι** — θα χρειαστείτε εμάς για διόρθωση. Λαιμός με τρίμερ εντάξει."
+  },
+  {
+    "id": "kb_photo_reference",
+    "category": "etiquette",
+    "keywords_en": [
+      "show photo",
+      "bring picture",
+      "instagram reference"
+    ],
+    "keywords_el": [
+      "φωτογραφία",
+      "δείξω εικόνα"
+    ],
+    "question_en": "Can I show a photo of the cut I want?",
+    "question_el": "Μπορώ να δείξω φωτογραφία;",
+    "answer_en": "Please do. A photo saves 10 minutes of guessing. Ideally, bring 2–3 photos showing the cut from different angles — the back is what you never see in the mirror but everyone else does. Know that someone else's cut on their head may not land identically on yours — we'll talk about what's achievable before starting.",
+    "answer_el": "Παρακαλούμε. Μια φωτογραφία γλιτώνει 10' γκανιάρισμα. Ιδανικά 2-3 από διαφορετικές γωνίες — το πίσω μέρος που ποτέ δε βλέπετε στον καθρέφτη. Το ίδιο κούρεμα σε άλλο κεφάλι μπορεί να μη ταιριάζει απόλυτα — θα το συζητήσουμε πριν."
+  },
+  {
+    "id": "kb_head_shape",
+    "category": "haircuts",
+    "keywords_en": [
+      "head shape",
+      "round face",
+      "oval face",
+      "which cut for face"
+    ],
+    "keywords_el": [
+      "σχήμα κεφαλιού",
+      "πρόσωπο"
+    ],
+    "question_en": "Does my face shape affect the cut?",
+    "question_el": "Επηρεάζει το σχήμα προσώπου το κούρεμα;",
+    "answer_en": "Yes, meaningfully. **Round** — height on top and short sides elongate. **Oval** — most cuts work. **Square** — softer textures reduce angular hardness. **Heart-shaped** — volume at the sides, less on top. **Long** — add width, not height. We'll look at your face shape and recommend before starting. If you've always liked your cut, your barber already knew this intuitively.",
+    "answer_el": "Ναι, σημαντικά. **Στρογγυλό** — ύψος κορυφής και κοντά πλαϊνά επιμηκύνουν. **Ωοειδές** — όλα δουλεύουν. **Τετράγωνο** — μαλακότερες υφές μαλακώνουν. **Καρδιόσχημο** — όγκος πλαϊνά. **Μακρύ** — πλάτος, όχι ύψος. Θα δούμε το σχήμα και θα προτείνουμε."
+  },
+  {
+    "id": "kb_cold_towel_why",
+    "category": "terminology",
+    "keywords_en": [
+      "hot towel",
+      "cold towel",
+      "what is hot towel treatment"
+    ],
+    "keywords_el": [
+      "ζεστή πετσέτα",
+      "κρύα πετσέτα"
+    ],
+    "question_en": "Why do you use hot and cold towels?",
+    "question_el": "Γιατί χρησιμοποιείτε ζεστές και κρύες πετσέτες;",
+    "answer_en": "**Hot towel** — opens pores, softens hairs and skin, lifts ingrowns. Used before shaves and between passes. **Cold towel** — closes pores, tightens skin, reduces irritation. Used after the shave. The combination is what makes a barbershop shave different from a home shave — skin looks and feels noticeably better the next day.",
+    "answer_el": "**Ζεστή πετσέτα** — ανοίγει τους πόρους, μαλακώνει τρίχες και δέρμα, σηκώνει σπυράκια. Πριν το ξύρισμα. **Κρύα πετσέτα** — κλείνει πόρους, σφίγγει δέρμα. Μετά. Ο συνδυασμός κάνει το ξύρισμα μπαρμπέρη διαφορετικό — το δέρμα φαίνεται αισθητά καλύτερα την επόμενη μέρα."
+  },
+  {
+    "id": "kb_between_washes",
+    "category": "styling",
+    "keywords_en": [
+      "day 2 hair",
+      "second day",
+      "without washing",
+      "refresh hair"
+    ],
+    "keywords_el": [
+      "δεύτερη μέρα",
+      "ανανέωση χωρίς λούσιμο"
+    ],
+    "question_en": "How do I refresh my hair on day 2 without washing?",
+    "question_el": "Πώς ανανεώνω τα μαλλιά τη 2η μέρα χωρίς λούσιμο;",
+    "answer_en": "Spray bottle of water + a drop of conditioner mixed in. Mist the hair, comb, add a tiny bit of product, air dry. Works better than dry shampoo for most men and keeps the shape the cut gave you. Dry shampoo at the roots on day 3 if it's getting oily.",
+    "answer_el": "Μπουκάλι ψεκασμού με νερό + σταγόνα μαλακτική. Ψεκάστε, χτένα, λίγο προϊόν, στεγνώστε στον αέρα. Δουλεύει καλύτερα από dry shampoo για τους περισσότερους άντρες και κρατά το σχήμα του κουρέματος. Dry shampoo στις ρίζες την 3η μέρα αν λιπαίνουν."
+  },
+  {
+    "id": "kb_style_for_work",
+    "category": "haircuts",
+    "keywords_en": [
+      "professional hair",
+      "work appropriate",
+      "office cut"
+    ],
+    "keywords_el": [
+      "επαγγελματικό κούρεμα",
+      "δουλειά"
+    ],
+    "question_en": "What cut works for a professional office?",
+    "question_el": "Ποιο κούρεμα ταιριάζει σε επαγγελματικό γραφείο;",
+    "answer_en": "Safe choices: **classic taper** (conservative, works everywhere), **crew cut** (low effort, universally acceptable), **short side-part** (the closest thing to a corporate uniform). Avoid skin fades if the office is conservative — they read casual. Keep top length under 10cm. Whatever you pick, keep it freshly cut (every 3 weeks for short styles).",
+    "answer_el": "Ασφαλείς επιλογές: **κλασικό taper** (συντηρητικό, παντού), **crew cut** (χαμηλή προσπάθεια), **κοντή χωρίστρα**. Αποφύγετε skin fades αν το γραφείο είναι συντηρητικό. Κορυφή κάτω από 10cm. Ό,τι κι αν διαλέξετε, φρέσκο κάθε 3 βδομάδες."
+  },
+  {
+    "id": "kb_style_wedding",
+    "category": "haircuts",
+    "keywords_en": [
+      "wedding hair",
+      "special occasion",
+      "event cut"
+    ],
+    "keywords_el": [
+      "γάμος",
+      "ειδική περίσταση"
+    ],
+    "question_en": "I have a wedding — when should I get my hair cut?",
+    "question_el": "Έχω γάμο — πότε να κουρευτώ;",
+    "answer_en": "**5–7 days before.** Never the day of — fresh cuts look too stiff in photos, and you don't want to find out a bad cut didn't settle in time. Book early; Saturdays in wedding season fill up weeks ahead. If it's your wedding, book us for **the morning of** for a shave + beard tidy — totally fine, that takes 20 minutes and settles.",
+    "answer_el": "**5-7 μέρες πριν.** Ποτέ την ίδια μέρα — φρέσκο κούρεμα δείχνει στριμμένο σε φωτογραφίες. Κλείστε νωρίς. Αν είναι δικός σας γάμος, κλείστε εμάς **το πρωί** για ξύρισμα + μούσι — εντάξει, 20 λεπτά."
+  },
+  {
+    "id": "kb_aftershave_alcohol",
+    "category": "beards",
+    "keywords_en": [
+      "aftershave",
+      "alcohol aftershave",
+      "witch hazel"
+    ],
+    "keywords_el": [
+      "aftershave",
+      "οινόπνευμα"
+    ],
+    "question_en": "Should my aftershave have alcohol in it?",
+    "question_el": "Να έχει οινόπνευμα το aftershave;",
+    "answer_en": "Old school: yes, alcohol disinfects and tightens. Modern view: **alcohol-free is better for most skin**. It stings less, doesn't dry the skin out, and still closes pores thanks to witch hazel or aloe. Alcohol-based is fine for oily skin; skip it on dry or sensitive skin.",
+    "answer_el": "Παλιό σχολείο: ναι, οινόπνευμα απολυμαίνει και σφίγγει. Μοντέρνα οπτική: **χωρίς οινόπνευμα καλύτερο για τα περισσότερα δέρματα**. Δεν τσούζει, δε στεγνώνει, κλείνει πόρους με witch hazel/aloe. Με οινόπνευμα εντάξει για λιπαρό δέρμα. Όχι σε ξηρό."
+  },
+  {
+    "id": "kb_natural_part",
+    "category": "styling",
+    "keywords_en": [
+      "natural part",
+      "which side part",
+      "hair part"
+    ],
+    "keywords_el": [
+      "φυσική χωρίστρα"
+    ],
+    "question_en": "Which side should my hair part on?",
+    "question_el": "Από ποια πλευρά πρέπει να είναι η χωρίστρα;",
+    "answer_en": "There's a natural one — find it: hair, clean and damp, push it straight back with a comb, then shake your head side to side gently. It'll fall on one side naturally. Fighting your natural part means daily battle; going with it means hair that behaves.",
+    "answer_el": "Υπάρχει φυσική — βρείτε την: μαλλιά καθαρά και νωπά, χτενίστε ευθεία πίσω, τινάξτε το κεφάλι απαλά. Θα πέσουν από μία πλευρά φυσικά. Να πολεμάτε τη φυσική χωρίστρα = καθημερινή μάχη. Να τη σέβεστε = μαλλί που υπακούει."
+  },
+  {
+    "id": "kb_cape_allergies",
+    "category": "etiquette",
+    "keywords_en": [
+      "allergic to product",
+      "sensitive skin",
+      "allergies"
+    ],
+    "keywords_el": [
+      "αλλεργία προϊόν",
+      "ευαίσθητο δέρμα"
+    ],
+    "question_en": "I have allergies or sensitive skin — what should I do?",
+    "question_el": "Έχω αλλεργίες / ευαίσθητο δέρμα — τι να κάνω;",
+    "answer_en": "Tell us when you book, not when you sit down. We can prep the station, use an unscented shampoo, skip aftershaves with alcohol, and patch-test anything new before applying. Bring your own product if there's something specific that works for you — we won't be offended.",
+    "answer_el": "Πείτε το όταν κλείνετε, όχι όταν καθίσετε. Μπορούμε να προετοιμάσουμε, χωρίς άρωμα σαμπουάν, χωρίς οινόπνευμα aftershave, δοκιμή σε σημείο. Φέρτε δικό σας προϊόν αν κάτι συγκεκριμένο δουλεύει — δε θα παρεξηγηθούμε."
+  },
+  {
+    "id": "kb_music_shop",
+    "category": "etiquette",
+    "keywords_en": [
+      "music in shop",
+      "playing music",
+      "shop playlist"
+    ],
+    "keywords_el": [
+      "μουσική μαγαζί"
+    ],
+    "question_en": "What kind of music do you play?",
+    "question_el": "Τι μουσική παίζει στο μαγαζί;",
+    "answer_en": "Mostly jazz, vinyl-era soul, classic rock — stuff that rewards lingering. If you'd rather listen to your own music, bring headphones — we don't mind. No judgment on podcast people either.",
+    "answer_el": "Κυρίως jazz, soul βινυλίου, κλασικό rock — μουσική που σε κρατά. Αν προτιμάτε δικά σας, φέρτε ακουστικά — δε μας πειράζει. Καμία κρίση για podcast-ακόυστες."
+  },
+  {
+    "id": "kb_student_discount",
+    "category": "booking",
+    "keywords_en": [
+      "student discount",
+      "discount",
+      "cheaper",
+      "deals"
+    ],
+    "keywords_el": [
+      "φοιτητικό",
+      "έκπτωση"
+    ],
+    "question_en": "Do you offer student discounts?",
+    "question_el": "Υπάρχει φοιτητική έκπτωση;",
+    "answer_en": "Check our current offers on the shop page — discount programs change seasonally. For recurring clients, we run a loyalty stamp (every 5th cut is on us). Present a valid student ID and we usually find a way to help.",
+    "answer_el": "Κοιτάξτε τις τρέχουσες προσφορές στη σελίδα. Τα προγράμματα αλλάζουν εποχιακά. Για τακτικούς πελάτες τρέχουμε σφραγίδες πιστότητας (το 5ο κούρεμα δωρεάν). Με φοιτητική ταυτότητα συνήθως βρίσκουμε τρόπο."
+  },
+  {
+    "id": "kb_blow_dry_every_day",
+    "category": "styling",
+    "keywords_en": [
+      "blow dry every day",
+      "should I blow dry",
+      "air dry"
+    ],
+    "keywords_el": [
+      "πιστολάκι κάθε μέρα"
+    ],
+    "question_en": "Is it OK to blow-dry every day?",
+    "question_el": "Είναι εντάξει κάθε μέρα πιστολάκι;",
+    "answer_en": "Medium heat is fine daily — it's just air. High heat held in one spot damages hair. Use a heat protectant on damp hair if you style with heat tools. Air-drying is always gentler — save the blow-dry for the days you need the shape and speed.",
+    "answer_el": "Μέτρια θερμοκρασία εντάξει καθημερινά — είναι απλά αέρας. Υψηλή θερμοκρασία στο ίδιο σημείο βλάπτει. Heat protectant σε νωπό αν χρησιμοποιείτε εργαλεία θερμότητας. Στέγνωμα στον αέρα πάντα πιο απαλό — κρατήστε το πιστολάκι για μέρες που χρειάζεστε σχήμα και ταχύτητα."
+  }
+]

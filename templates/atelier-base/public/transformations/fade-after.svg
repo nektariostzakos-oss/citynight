@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#1c1814"/>
+      <stop offset="60%" stop-color="#0f0c09"/>
+      <stop offset="100%" stop-color="#050403"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e3c88a"/>
+      <stop offset="55%" stop-color="#c9a961"/>
+      <stop offset="100%" stop-color="#8a6f33"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <text x="400" y="80" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="18" letter-spacing="6" fill="#c9a961">AFTER</text>
+  <ellipse cx="400" cy="560" rx="170" ry="14" fill="#000" opacity="0.55"/>
+  <!-- Shoulders -->
+  <path d="M 240,560 Q 240,470 320,460 L 480,460 Q 560,470 560,560 Z" fill="url(#gold)" opacity="0.85"/>
+  <!-- Neck -->
+  <rect x="370" y="410" width="60" height="60" fill="url(#gold)" opacity="0.85"/>
+  <!-- Head: face oval -->
+  <ellipse cx="400" cy="290" rx="105" ry="135" fill="url(#gold)"/>
+  <!-- Skin fade: thin clean cap on top, tight against the skull, with razor-line hairline -->
+  <path d="M 305,225 Q 320,170 400,160 Q 480,170 495,225 L 490,250 Q 480,235 470,238 L 460,232 Q 450,238 440,232 L 430,235 Q 420,232 410,235 L 400,232 Q 390,235 380,232 L 370,235 Q 360,232 350,238 L 340,232 Q 330,238 320,235 L 310,250 Z" fill="url(#gold)"/>
+  <path d="M 305,225 Q 320,170 400,160 Q 480,170 495,225" stroke="#0a0806" stroke-width="2" fill="none" opacity="0.45"/>
+  <!-- Subtle clean-line at the fade transition -->
+  <path d="M 305,250 L 495,250" stroke="#0a0806" stroke-width="1.5" fill="none" opacity="0.3"/>
+</svg>

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "signature-massage",
+    "name": "Signature massage",
+    "desc": "A full-body release, with pressure tuned exactly to you.",
+    "duration": 60,
+    "price": 75,
+    "bufferMinutes": 15,
+    "category": "Massage",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "deep-tissue",
+    "name": "Deep tissue therapy",
+    "desc": "Focused work for knots, tension and tired, overworked muscles.",
+    "duration": 60,
+    "price": 85,
+    "bufferMinutes": 15,
+    "category": "Massage",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "aromatherapy-facial",
+    "name": "Aromatherapy facial",
+    "desc": "A deep cleanse and botanical mask for calm, clear skin.",
+    "duration": 60,
+    "price": 70,
+    "bufferMinutes": 10,
+    "category": "Facial",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "hot-stone",
+    "name": "Hot stone ritual",
+    "desc": "Warm basalt stones melt tension from the very first minute.",
+    "duration": 75,
+    "price": 95,
+    "bufferMinutes": 15,
+    "category": "Massage",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "body-scrub-wrap",
+    "name": "Body scrub & wrap",
+    "desc": "Exfoliation and a nourishing wrap that leaves skin glowing.",
+    "duration": 75,
+    "price": 80,
+    "bufferMinutes": 15,
+    "category": "Body",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "couples-retreat",
+    "name": "Couples retreat",
+    "desc": "Two therapists, one quiet room, ninety unhurried minutes.",
+    "duration": 90,
+    "price": 180,
+    "bufferMinutes": 15,
+    "category": "Body",
+    "enabled": true,
+    "order": 6
+  }
+]

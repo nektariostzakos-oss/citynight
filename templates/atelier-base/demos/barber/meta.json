@@ -1,0 +1,63 @@
+{
+  "id": "barber",
+  "name": "Classic Barber",
+  "industry": "Barber shop",
+  "tagline": "Classic grooming, modern rhythm.",
+  "description": "Premium barber shop template: hair services, beard care, grooming product shop, gallery, gift vouchers and a bilingual blog. Dark gold-on-black aesthetic, tuned for conversion.",
+  "cover": "/demos/barber/cover.svg?v=3",
+  "accentColor": "#c9a961",
+  "theme": {
+    "background": "#0a0806",
+    "foreground": "#f5efe6",
+    "primary": "#c9a961",
+    "primaryAccent": "#d4b878",
+    "surface": "rgba(255, 255, 255, 0.03)",
+    "surfaceStrong": "rgba(255, 255, 255, 0.06)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "borderStrong": "rgba(255, 255, 255, 0.18)",
+    "muted": "rgba(245, 239, 230, 0.65)",
+    "muted2": "rgba(245, 239, 230, 0.45)"
+  },
+  "typography": {
+    "headingFont": "playfair",
+    "bodyFont": "geist"
+  },
+  "bookingMode": "appointment",
+  "industryId": "barber",
+  "branding": {
+    "wordmark": "",
+    "tagline_en": "",
+    "tagline_el": "",
+    "logoUrl": "",
+    "logoUrlDark": "",
+    "faviconUrl": ""
+  },
+  "nav": {
+    "links": [
+      { "id": "home", "label_en": "Home", "label_el": "Αρχική", "href": "/", "enabled": true },
+      { "id": "services", "label_en": "Services", "label_el": "Υπηρεσίες", "href": "/services", "enabled": true },
+      { "id": "shop", "label_en": "Shop", "label_el": "Κατάστημα", "href": "/shop", "enabled": true },
+      { "id": "gallery", "label_en": "Gallery", "label_el": "Γκαλερί", "href": "/gallery", "enabled": true },
+      { "id": "team", "label_en": "Team", "label_el": "Ομάδα", "href": "/about", "enabled": true },
+      { "id": "contact", "label_en": "Contact", "label_el": "Επικοινωνία", "href": "/contact", "enabled": true },
+      { "id": "blog", "label_en": "Blog", "label_el": "Blog", "href": "/blog", "enabled": true }
+    ],
+    "bookLabel_en": "Book a chair",
+    "bookLabel_el": "Κλείσε καρέκλα",
+    "bookHref": "/book"
+  },
+  "features": [
+    "Online booking with slot conflicts",
+    "Products shop · 5 categories, 15 items",
+    "Gift vouchers (€30 / €50 / €100)",
+    "Bilingual EN/EL",
+    "6 demo blog posts across 6 categories",
+    "Dark gold-on-black theme"
+  ],
+  "stats": {
+    "services": 8,
+    "products": 15,
+    "posts": 6,
+    "categories": 6
+  }
+}

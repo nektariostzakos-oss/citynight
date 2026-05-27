@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <linearGradient id="goldD" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a07a32"/>
+      <stop offset="55%" stop-color="#856423"/>
+      <stop offset="100%" stop-color="#5c4412"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(18 40)" fill="none" stroke="url(#goldD)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="-12" cy="-10" r="6"/>
+    <circle cx="-12" cy="10"  r="6"/>
+    <path d="M-8 -8 L22 6"/>
+    <path d="M-8  8 L22 -6"/>
+    <circle cx="24" cy="0" r="1.8" fill="url(#goldD)" stroke="none"/>
+  </g>
+  <text x="70" y="44" font-family="Georgia, 'Playfair Display', serif" font-size="30" letter-spacing="6" fill="#1a1511">OAKLINE</text>
+  <text x="71" y="62" font-family="Georgia, serif" font-size="9" letter-spacing="4" fill="#856423">SCISSORS · LONDON</text>
+</svg>

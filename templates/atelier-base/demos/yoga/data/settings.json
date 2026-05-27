@@ -1,0 +1,96 @@
+{
+  "onboarded": true,
+  "template": "template5",
+  "industryId": "yoga",
+  "demoShowcase": true,
+  "bookingMode": "appointment",
+  "enabledLanguages": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it"
+  ],
+  "business": {
+    "name": "Marigold Yoga",
+    "streetAddress": "8 Pelham Crescent",
+    "city": "London",
+    "postalCode": "SW7 2NR",
+    "country": "GB",
+    "phone": "+44 20 7946 0450",
+    "email": "hello@marigold-yoga.com",
+    "latitude": 51.4938,
+    "longitude": -0.1722,
+    "hours": [
+      {
+        "day": "mon",
+        "open": "07:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "tue",
+        "open": "07:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "wed",
+        "open": "07:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "thu",
+        "open": "07:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "fri",
+        "open": "07:00",
+        "close": "20:00",
+        "closed": false
+      },
+      {
+        "day": "sat",
+        "open": "08:00",
+        "close": "17:00",
+        "closed": false
+      },
+      {
+        "day": "sun",
+        "open": "08:00",
+        "close": "16:00",
+        "closed": false
+      }
+    ],
+    "timezone": "Europe/London",
+    "social": {
+      "instagram": "https://instagram.com/marigoldyoga"
+    },
+    "priceRange": "££",
+    "bookingRules": {
+      "leadTimeMinutes": 60,
+      "cancellationWindowHours": 12,
+      "depositPercent": 0,
+      "noShowFeePercent": 50
+    }
+  },
+  "branding": {
+    "wordmark": "MARIGOLD",
+    "tagline_en": "Move slow, breathe deep."
+  },
+  "theme": {
+    "background": "#f4ebd8",
+    "foreground": "#2c2114",
+    "primary": "#d9851d",
+    "primaryAccent": "#b16c12",
+    "surface": "#fcf5e4",
+    "surfaceStrong": "#ece0c5",
+    "border": "#ddcca6",
+    "borderStrong": "#c6b07f",
+    "muted": "#6a5c44",
+    "muted2": "#9b8a6c"
+  }
+}

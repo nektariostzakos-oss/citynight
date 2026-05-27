@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a1d15"/><stop offset="100%" stop-color="#0e0905"/></linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8d2c4"/><stop offset="100%" stop-color="#5a564d"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="530" rx="210" ry="14" fill="#000" opacity="0.55"/>
+  <!-- base -->
+  <rect x="350" y="460" width="100" height="80" fill="url(#chrome)" stroke="#2a2620"/>
+  <!-- chrome pole -->
+  <rect x="380" y="350" width="40" height="120" fill="url(#chrome)"/>
+  <!-- seat -->
+  <rect x="280" y="300" width="240" height="80" rx="14" fill="url(#leather)" stroke="#0a0603"/>
+  <path d="M290 320 L510 320" stroke="#3a2820" stroke-width="2"/>
+  <!-- backrest -->
+  <rect x="280" y="120" width="240" height="190" rx="22" fill="url(#leather)" stroke="#0a0603"/>
+  <path d="M300 140 Q300 270 300 290" stroke="#3a2820" stroke-width="1" fill="none"/>
+  <path d="M400 140 Q400 270 400 290" stroke="#3a2820" stroke-width="1" fill="none"/>
+  <path d="M500 140 Q500 270 500 290" stroke="#3a2820" stroke-width="1" fill="none"/>
+  <!-- arms -->
+  <rect x="230" y="290" width="60" height="28" rx="6" fill="url(#leather)"/>
+  <rect x="510" y="290" width="60" height="28" rx="6" fill="url(#leather)"/>
+  </svg>

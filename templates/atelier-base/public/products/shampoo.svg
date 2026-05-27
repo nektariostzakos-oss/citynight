@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e3c88a"/><stop offset="55%" stop-color="#c9a961"/><stop offset="100%" stop-color="#8a6f33"/></linearGradient>
+    <linearGradient id="bottle" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a241e"/><stop offset="100%" stop-color="#0a0806"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="525" rx="110" ry="9" fill="#000" opacity="0.55"/>
+  <!-- tall cylindrical bottle -->
+  <rect x="330" y="230" width="140" height="280" rx="14" fill="url(#bottle)" stroke="#3a332a" stroke-width="2"/>
+  <!-- shoulders -->
+  <path d="M330 250 Q400 210 470 250 L470 270 L330 270 Z" fill="url(#bottle)" stroke="#3a332a" stroke-width="2"/>
+  <!-- pump neck -->
+  <rect x="385" y="175" width="30" height="55" fill="url(#bottle)" stroke="#3a332a" stroke-width="2"/>
+  <!-- pump top -->
+  <rect x="370" y="155" width="60" height="25" rx="4" fill="url(#gold)"/>
+  <!-- nozzle -->
+  <path d="M430 165 Q455 165 455 175 L430 175 Z" fill="url(#gold)"/>
+  <!-- label -->
+  <rect x="336" y="300" width="128" height="170" fill="#0a0806" stroke="#c9a961" opacity="0.9"/>
+  <line x1="360" y1="355" x2="440" y2="355" stroke="#c9a961" stroke-width="0.5"/>
+  </svg>

@@ -1,0 +1,36 @@
+{
+  "t6_hero": {
+    "sub_en": "Maison Loré is an editorial hair salon in Mayfair. Soft, lived-in colour, an unhurried chair, and a stylist who actually listens. By appointment only.",
+    "issueLabel_en": "Issue 04 · Spring"
+  },
+  "t6_stylists": {
+    "eyebrow_en": "The atelier",
+    "title_en": "A small team. One unhurried chair at a time.",
+    "p1_en": "Maison Loré is a three-stylist atelier in Mayfair. Léa, Hugo and Sofia each take one guest at a time, with an hour or more set aside for every appointment.",
+    "p2_en": "We do not double-book and we do not rush. Espresso when you arrive, a real consultation before the foils go on, and as much time at the chair as your hair needs.",
+    "cta_en": "Book a chair"
+  },
+  "t6_about_story": {
+    "p1_en": "Maison Loré opened in 2021 because its founder, Léa Moreau, wanted to build the salon she could never quite find: editorial training, salon-grade product, an unhurried chair, and a real conversation before any major change."
+  },
+  "t6_contact": {
+    "details": [
+      {
+        "label_en": "Salon",
+        "value_en": "24 Mount Street, Mayfair, London W1K 2RR"
+      },
+      {
+        "label_en": "Phone",
+        "value_en": "+44 20 7946 0512"
+      },
+      {
+        "label_en": "Email",
+        "value_en": "hello@maisonlore.studio"
+      },
+      {
+        "label_en": "Instagram",
+        "value_en": "@maisonlore.studio"
+      }
+    ]
+  }
+}

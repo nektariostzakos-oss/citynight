@@ -1,0 +1,68 @@
+[
+  {
+    "id": "vinyasa-flow",
+    "name": "Vinyasa flow",
+    "desc": "A flowing, breath-led class that builds gentle heat. Options for every body.",
+    "duration": 60,
+    "price": 16,
+    "bufferMinutes": 10,
+    "category": "Flow",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "slow-flow",
+    "name": "Slow flow",
+    "desc": "Half the pace, twice the detail. Time to feel each shape land.",
+    "duration": 60,
+    "price": 16,
+    "bufferMinutes": 10,
+    "category": "Flow",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "yin-restore",
+    "name": "Yin & restore",
+    "desc": "Long, supported holds and deep stillness. The softest hour of the week.",
+    "duration": 75,
+    "price": 16,
+    "bufferMinutes": 10,
+    "category": "Restore",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "strong-flow",
+    "name": "Strong flow",
+    "desc": "A spirited, sweatier practice for when the body wants to work.",
+    "duration": 60,
+    "price": 18,
+    "bufferMinutes": 10,
+    "category": "Flow",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "morning-mobility",
+    "name": "Morning mobility",
+    "desc": "Wake the joints, free the spine, and start the day a little looser.",
+    "duration": 45,
+    "price": 14,
+    "bufferMinutes": 10,
+    "category": "Mobility",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "beginners-course",
+    "name": "Beginners course",
+    "desc": "Four weeks, right from the very beginning. No experience needed.",
+    "duration": 60,
+    "price": 60,
+    "bufferMinutes": 10,
+    "category": "Beginner",
+    "enabled": true,
+    "order": 6
+  }
+]

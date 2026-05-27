@@ -1,0 +1,156 @@
+[
+  {
+    "id": "r_demo5_0001",
+    "name": "Maya W.",
+    "rating": 5,
+    "title": "I never thought yoga was for me",
+    "body": "Six months in and it is the calmest hour of my week. Not once have I been made to feel like a beginner.",
+    "source": "booking",
+    "bookingId": "b_demo5_0001",
+    "status": "approved",
+    "createdAt": "2026-03-21T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0002",
+    "name": "Isla E.",
+    "rating": 5,
+    "title": "The warmest little studio",
+    "body": "Small classes, real teachers, and everyone genuinely knows your name. A proper community.",
+    "source": "booking",
+    "bookingId": "b_demo5_0010",
+    "status": "approved",
+    "createdAt": "2026-03-25T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0003",
+    "name": "Ella H.",
+    "rating": 4,
+    "title": "Booked online in a minute",
+    "body": "Easy booking, a friendly reminder the morning of, and a warm welcome at the door.",
+    "source": "booking",
+    "bookingId": "b_demo5_0018",
+    "status": "approved",
+    "createdAt": "2026-03-30T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0004",
+    "name": "Daniel H.",
+    "rating": 5,
+    "title": "Every body really is welcome",
+    "body": "Stiff hips, zero experience and total nerves. There was a gentle option for all of it.",
+    "source": "booking",
+    "bookingId": "b_demo5_0029",
+    "status": "approved",
+    "createdAt": "2026-04-03T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0005",
+    "name": "Daniel H.",
+    "rating": 5,
+    "title": "My Sunday reset",
+    "body": "The yin and restore class is something else. I leave feeling like a different person.",
+    "source": "booking",
+    "bookingId": "b_demo5_0037",
+    "status": "approved",
+    "createdAt": "2026-04-07T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0006",
+    "name": "Leo W.",
+    "rating": 5,
+    "title": "Sienna is a wonderful teacher",
+    "body": "Patient, funny and never pushy. The beginners course was the best decision I made all year.",
+    "source": "booking",
+    "bookingId": "b_demo5_0045",
+    "status": "approved",
+    "createdAt": "2026-04-12T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0007",
+    "name": "James H.",
+    "rating": 5,
+    "title": "No mirrors, no competition",
+    "body": "Exactly what was promised. Just a warm room and real space to breathe.",
+    "source": "booking",
+    "bookingId": "b_demo5_0053",
+    "status": "approved",
+    "createdAt": "2026-04-15T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0008",
+    "name": "Noah H.",
+    "rating": 5,
+    "title": "I never thought yoga was for me",
+    "body": "Six months in and it is the calmest hour of my week. Not once have I been made to feel like a beginner.",
+    "source": "booking",
+    "bookingId": "b_demo5_0065",
+    "status": "approved",
+    "createdAt": "2026-04-21T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0009",
+    "name": "Leah A.",
+    "rating": 5,
+    "title": "The warmest little studio",
+    "body": "Small classes, real teachers, and everyone genuinely knows your name. A proper community.",
+    "source": "booking",
+    "bookingId": "b_demo5_0073",
+    "status": "approved",
+    "createdAt": "2026-04-26T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0010",
+    "name": "Clara S.",
+    "rating": 4,
+    "title": "Booked online in a minute",
+    "body": "Easy booking, a friendly reminder the morning of, and a warm welcome at the door.",
+    "source": "booking",
+    "bookingId": "b_demo5_0082",
+    "status": "pending",
+    "createdAt": "2026-04-30T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0011",
+    "name": "Iris H.",
+    "rating": 5,
+    "title": "Every body really is welcome",
+    "body": "Stiff hips, zero experience and total nerves. There was a gentle option for all of it.",
+    "source": "booking",
+    "bookingId": "b_demo5_0091",
+    "status": "approved",
+    "createdAt": "2026-05-04T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0012",
+    "name": "Noah T.",
+    "rating": 5,
+    "title": "My Sunday reset",
+    "body": "The yin and restore class is something else. I leave feeling like a different person.",
+    "source": "booking",
+    "bookingId": "b_demo5_0100",
+    "status": "approved",
+    "createdAt": "2026-05-08T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0013",
+    "name": "Leah A.",
+    "rating": 4,
+    "title": "Sienna is a wonderful teacher",
+    "body": "Patient, funny and never pushy. The beginners course was the best decision I made all year.",
+    "source": "booking",
+    "bookingId": "b_demo5_0108",
+    "status": "approved",
+    "createdAt": "2026-05-11T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo5_0014",
+    "name": "Olivia B.",
+    "rating": 5,
+    "title": "No mirrors, no competition",
+    "body": "Exactly what was promised. Just a warm room and real space to breathe.",
+    "source": "booking",
+    "bookingId": "b_demo5_0117",
+    "status": "approved",
+    "createdAt": "2026-05-15T15:00:00.000Z"
+  }
+]

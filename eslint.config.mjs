@@ -26,6 +26,9 @@ export default [
       'scripts/seed/node_modules/**',
       'db/migrations/**',
       'next-env.d.ts',
+      // Vendored Atelier template — its own Next 16 / React 19 sub-app. Built
+      // and linted under its own pipeline; we do not co-mingle with citynight.
+      'templates/atelier-base/**',
     ],
   },
 

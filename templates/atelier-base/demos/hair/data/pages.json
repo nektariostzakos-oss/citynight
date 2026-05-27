@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pg_demo6_1",
+    "slug": "spring-summer-balayage",
+    "title_en": "The quiet balayage looks defining this season",
+    "title_el": "The quiet balayage looks defining this season",
+    "excerpt_en": "Soft, sun-kissed and grown-out by design. The shapes our regulars are asking for right now.",
+    "excerpt_el": "Soft, sun-kissed and grown-out by design. The shapes our regulars are asking for right now.",
+    "body_en": "<p>This season's balayage is quieter than the bold sun-streaks of a few years ago. Clients are asking for soft, lived-in dimension that grows out beautifully — colour you can put off touching for four months and still look intentional.</p><p>The technique itself is the same. The difference is restraint. Fewer, softer pieces, lower contrast, and root colour that meets the highlights mid-shaft rather than at the scalp.</p>",
+    "body_el": "<p>This season's balayage is quieter than the bold sun-streaks of a few years ago. Clients are asking for soft, lived-in dimension that grows out beautifully — colour you can put off touching for four months and still look intentional.</p><p>The technique itself is the same. The difference is restraint. Fewer, softer pieces, lower contrast, and root colour that meets the highlights mid-shaft rather than at the scalp.</p>",
+    "image": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "balayage",
+      "colour"
+    ],
+    "category": "Trends",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-05-14T06:00:00.000Z",
+    "updatedAt": "2026-05-14T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo6_2",
+    "slug": "maintain-salon-colour-at-home",
+    "title_en": "How to maintain salon colour at home",
+    "title_el": "How to maintain salon colour at home",
+    "excerpt_en": "The right shampoo, the right water temperature, and the bottle we never travel without.",
+    "excerpt_el": "The right shampoo, the right water temperature, and the bottle we never travel without.",
+    "body_en": "<p>Three small changes will keep a £180 balayage looking fresh for months. Wash less often. Wash in cooler water. And use a colour-safe shampoo with a sulphate-light formula.</p><p>Anyone who tells you weekly Olaplex is optional has never tried a month without it. The bonds in colour-treated hair need rebuilding.</p>",
+    "body_el": "<p>Three small changes will keep a £180 balayage looking fresh for months. Wash less often. Wash in cooler water. And use a colour-safe shampoo with a sulphate-light formula.</p><p>Anyone who tells you weekly Olaplex is optional has never tried a month without it. The bonds in colour-treated hair need rebuilding.</p>",
+    "image": "https://images.unsplash.com/photo-1591343395082-e120087004b4?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "care",
+      "colour"
+    ],
+    "category": "Care",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-04-20T06:00:00.000Z",
+    "updatedAt": "2026-04-20T06:00:00.000Z"
+  },
+  {
+    "id": "pg_demo6_3",
+    "slug": "consultation-first-every-time",
+    "title_en": "Why every visit starts with a consultation",
+    "title_el": "Why every visit starts with a consultation",
+    "excerpt_en": "A few quiet minutes before any colour or cut. The single biggest reason guests come back.",
+    "excerpt_el": "A few quiet minutes before any colour or cut. The single biggest reason guests come back.",
+    "body_en": "<p>We start every visit with a consultation. Not a script, not an upsell — five minutes of real conversation about what you want, what your hair is doing, and what we think will actually suit you.</p><p>Half the time we end up doing something different from what was booked. Better to find out at the chair, with coffee in hand, than under the dryer.</p>",
+    "body_el": "<p>We start every visit with a consultation. Not a script, not an upsell — five minutes of real conversation about what you want, what your hair is doing, and what we think will actually suit you.</p><p>Half the time we end up doing something different from what was booked. Better to find out at the chair, with coffee in hand, than under the dryer.</p>",
+    "image": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=1200&q=80&auto=format&fit=crop",
+    "tags": [
+      "salon",
+      "consultation"
+    ],
+    "category": "The salon",
+    "kind": "post",
+    "published": true,
+    "publishedAt": "2026-03-19T07:00:00.000Z",
+    "updatedAt": "2026-03-19T07:00:00.000Z"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cpn_demo6_1",
+    "code": "FIRSTCUT",
+    "kind": "percent",
+    "value": 20,
+    "maxUses": 250,
+    "uses": 73,
+    "minTotal": 0,
+    "expiresAt": "2026-11-27T21:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-03-10T10:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo6_2",
+    "code": "NEWCOLOUR",
+    "kind": "percent",
+    "value": 25,
+    "maxUses": 150,
+    "uses": 50,
+    "minTotal": 0,
+    "expiresAt": "2026-07-26T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-04-09T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo6_3",
+    "code": "SHELFTEN",
+    "kind": "fixed",
+    "value": 10,
+    "maxUses": 200,
+    "uses": 6,
+    "minTotal": 50,
+    "expiresAt": "2026-09-06T20:59:00.000Z",
+    "appliesTo": "shop",
+    "active": true,
+    "createdAt": "2026-03-19T10:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo6_4",
+    "code": "BRIDAL",
+    "kind": "percent",
+    "value": 15,
+    "maxUses": 100,
+    "uses": 21,
+    "minTotal": 0,
+    "expiresAt": "2026-12-04T21:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-03-14T10:00:00.000Z"
+  }
+]

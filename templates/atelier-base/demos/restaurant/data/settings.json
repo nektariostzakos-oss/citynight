@@ -1,0 +1,95 @@
+{
+  "smtp": { "host": "", "port": 587, "user": "", "pass": "", "from": "", "secure": "tls" },
+  "branding": {
+    "logoUrl": "/brand/restaurant-logo-light.svg",
+    "logoUrlDark": "/brand/restaurant-logo-dark.svg",
+    "faviconUrl": "/brand/restaurant-favicon.svg",
+    "wordmark": "LEMONI",
+    "tagline_en": "Taverna · Naxos",
+    "tagline_el": "Ταβέρνα · Νάξος"
+  },
+  "business": {
+    "name": "Lemoni Taverna",
+    "streetAddress": "Plateia Mantos 4",
+    "city": "Naxos Town",
+    "postalCode": "84300",
+    "country": "GR",
+    "phone": "+30 22850 24160",
+    "email": "hello@lemoni-taverna.gr",
+    "latitude": 37.1036,
+    "longitude": 25.3768,
+    "hours": [
+      { "day": "mon", "open": "00:00", "close": "00:00", "closed": true },
+      { "day": "tue", "open": "18:30", "close": "23:30", "closed": false },
+      { "day": "wed", "open": "18:30", "close": "23:30", "closed": false },
+      { "day": "thu", "open": "18:30", "close": "23:30", "closed": false },
+      { "day": "fri", "open": "13:00", "close": "16:00", "closed": false, "open2": "18:30", "close2": "00:30" },
+      { "day": "sat", "open": "13:00", "close": "16:00", "closed": false, "open2": "18:30", "close2": "00:30" },
+      { "day": "sun", "open": "13:00", "close": "23:30", "closed": false }
+    ],
+    "timezone": "Europe/Athens",
+    "social": {
+      "instagram": "https://instagram.com/lemoni.taverna",
+      "facebook": "https://facebook.com/lemoni.taverna",
+      "whatsapp": "+302285024160",
+      "tiktok": ""
+    },
+    "priceRange": "€€",
+    "foundedYear": "1978",
+    "reviewUrl": "https://www.google.com/search?q=Lemoni+Taverna+Naxos+reviews",
+    "bookingRules": {
+      "leadTimeMinutes": 60,
+      "cancellationWindowHours": 6,
+      "depositPercent": 0,
+      "noShowFeePercent": 0
+    }
+  },
+  "nav": {
+    "links": [
+      { "id": "home",       "label_en": "Home",     "label_el": "Αρχική",       "href": "/",          "enabled": true },
+      { "id": "menu",       "label_en": "Menu",     "label_el": "Μενού",        "href": "/menu",      "enabled": true },
+      { "id": "experiences","label_en": "Tastings", "label_el": "Δοκιμαστικά",  "href": "/experiences","enabled": true },
+      { "id": "wine",       "label_en": "Wine",     "label_el": "Κρασιά",       "href": "/shop",      "enabled": true },
+      { "id": "gallery",    "label_en": "Gallery",  "label_el": "Γκαλερί",      "href": "/gallery",   "enabled": true },
+      { "id": "team",       "label_en": "About",    "label_el": "Σχετικά",       "href": "/about",     "enabled": true },
+      { "id": "contact",    "label_en": "Contact",  "label_el": "Επικοινωνία",  "href": "/contact",   "enabled": true },
+      { "id": "blog",       "label_en": "Notebook", "label_el": "Σημειωματάριο","href": "/blog",      "enabled": true }
+    ],
+    "bookLabel_en": "Reserve a table",
+    "bookLabel_el": "Κράτηση τραπεζιού",
+    "bookHref": "/book"
+  },
+  "templates": {
+    "confirmation": {
+      "subject_en": "{business} — your reservation is confirmed",
+      "subject_el": "{business} — η κράτησή σας επιβεβαιώθηκε",
+      "body_en": "Γεια — Hi {name},\n\nWe've reserved a table for you:\n\n· Party of {party}\n· {date} at {time}\n\nWe hold the table for 15 minutes past the booked time. If you're running late, a quick call lets us hold longer: {phone}.\n\nLooking forward,\n{business}",
+      "body_el": "Γεια σου {name},\n\nΚρατήσαμε το τραπέζι σας:\n\n· Παρέα {party} ατόμων\n· {date} στις {time}\n\nΚρατάμε το τραπέζι 15 λεπτά μετά την προγραμματισμένη ώρα. Αν αργήσετε, ένα τηλεφώνημα στο {phone} και το κρατάμε περισσότερο.\n\nΣας περιμένουμε,\n{business}"
+    },
+    "reminder": {
+      "subject_en": "Reminder · Your table at {business} tonight",
+      "subject_el": "Υπενθύμιση · Το τραπέζι σας στο {business} απόψε",
+      "body_en": "Hi {name},\n\nA quick reminder — your table at {business} is in about 8 hours.\n\n· Party of {party}\n· {date} at {time}\n\nNeed to change anything? Reply to this email or call {phone}.\n\nSee you tonight,\n{business}",
+      "body_el": "Γεια σου {name},\n\nΥπενθύμιση: το τραπέζι σας στο {business} είναι σε περίπου 8 ώρες.\n\n· Παρέα {party} ατόμων\n· {date} στις {time}\n\nΑν χρειαστεί αλλαγή, απαντήστε στο email ή τηλεφωνήστε στο {phone}.\n\nΤα λέμε απόψε,\n{business}"
+    }
+  },
+  "analytics": { "ga4": "", "gtm": "", "metaPixel": "" },
+  "payments": { "stripeSecretKey": "", "stripePublishableKey": "", "currency": "eur" },
+  "onboarded": true,
+  "enabledLanguages": ["en", "el"],
+  "bookingMode": "reservation",
+  "industryId": "restaurant",
+  "theme": {
+    "background": "#0f0b07",
+    "foreground": "#f3ebdc",
+    "primary": "#c08a3a",
+    "primaryAccent": "#d6a55a",
+    "surface": "rgba(255, 255, 255, 0.03)",
+    "surfaceStrong": "rgba(255, 255, 255, 0.06)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "borderStrong": "rgba(255, 255, 255, 0.18)",
+    "muted": "rgba(243, 235, 220, 0.65)",
+    "muted2": "rgba(243, 235, 220, 0.45)"
+  },
+  "typography": { "headingFont": "fraunces", "bodyFont": "inter" }
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e3c88a"/><stop offset="100%" stop-color="#8a6f33"/></linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a2c1a"/><stop offset="100%" stop-color="#120a04"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2520"/><stop offset="100%" stop-color="#0a0806"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="530" rx="260" ry="12" fill="#000" opacity="0.55"/>
+  <!-- flat lay arrangement: bottle, tin, brush -->
+  <!-- bottle -->
+  <rect x="180" y="260" width="90" height="270" rx="10" fill="url(#amber)" stroke="#3a332a" stroke-width="2"/>
+  <rect x="200" y="200" width="50" height="65" fill="url(#amber)" stroke="#3a332a" stroke-width="2"/>
+  <rect x="195" y="185" width="60" height="18" fill="url(#gold)"/>
+  <!-- round tin -->
+  <ellipse cx="400" cy="400" rx="80" ry="12" fill="url(#gold)"/>
+  <rect x="320" y="400" width="160" height="70" fill="url(#gold)"/>
+  <ellipse cx="400" cy="470" rx="80" ry="12" fill="#8a6f33"/>
+  <!-- brush -->
+  <rect x="540" y="370" width="70" height="160" rx="6" fill="url(#glass)" stroke="#2a2520"/>
+  <rect x="536" y="355" width="78" height="18" fill="url(#gold)"/>
+  <ellipse cx="575" cy="320" rx="55" ry="45" fill="#6a6050"/>
+  </svg>

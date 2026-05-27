@@ -1,0 +1,20 @@
+[
+  {
+    "id": "tr_demo3_1",
+    "title_en": "From tension to calm",
+    "title_el": "From tension to calm",
+    "caption_en": "Signature massage, 60 minutes",
+    "caption_el": "Signature massage, 60 minutes",
+    "before": "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&q=80&auto=format&fit=crop",
+    "after": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80&auto=format&fit=crop"
+  },
+  {
+    "id": "tr_demo3_2",
+    "title_en": "A proper reset",
+    "title_el": "A proper reset",
+    "caption_en": "Hot stone ritual, 75 minutes",
+    "caption_el": "Hot stone ritual, 75 minutes",
+    "before": "https://images.unsplash.com/photo-1620733723572-11c53f73a416?w=800&q=80&auto=format&fit=crop",
+    "after": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80&auto=format&fit=crop"
+  }
+]

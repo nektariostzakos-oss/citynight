@@ -1,0 +1,72 @@
+[
+  {
+    "id": "w_demo3_0001",
+    "name": "Amelia Jones",
+    "phone": "+44 7132 163725",
+    "email": "amelia.jones8@icloud.com",
+    "serviceId": "hot-stone",
+    "serviceName": "Hot stone ritual",
+    "barberId": "elena",
+    "preferredDate": "2026-05-26",
+    "preferredTime": "10:00",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "status": "converted",
+    "createdAt": "2026-05-13T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo3_0002",
+    "name": "Grace Clarke",
+    "phone": "+44 7333 558337",
+    "email": "grace.clarke6@outlook.com",
+    "serviceId": "aromatherapy-facial",
+    "serviceName": "Aromatherapy facial",
+    "barberId": "any",
+    "preferredDate": "2026-06-10",
+    "preferredTime": "16:00",
+    "notes": "Always books the last slot of the day.",
+    "status": "contacted",
+    "createdAt": "2026-05-19T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo3_0003",
+    "name": "Lena Harris",
+    "phone": "+44 7499 978870",
+    "email": "lena.harris39@icloud.com",
+    "serviceId": "couples-retreat",
+    "serviceName": "Couples retreat",
+    "barberId": "any",
+    "preferredDate": "2026-06-08",
+    "preferredTime": "10:00",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "status": "waiting",
+    "createdAt": "2026-05-22T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo3_0004",
+    "name": "Clara Clarke",
+    "phone": "+44 7236 889645",
+    "email": "clara.clarke87@yahoo.co.uk",
+    "serviceId": "aromatherapy-facial",
+    "serviceName": "Aromatherapy facial",
+    "barberId": "any",
+    "preferredDate": "2026-06-03",
+    "preferredTime": "10:00",
+    "notes": "Gift membership from her partner.",
+    "status": "waiting",
+    "createdAt": "2026-05-22T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo3_0005",
+    "name": "Sophie King",
+    "phone": "+44 7339 962039",
+    "email": "sophie.king59@gmail.com",
+    "serviceId": "deep-tissue",
+    "serviceName": "Deep tissue therapy",
+    "barberId": "sofia",
+    "preferredDate": "2026-05-25",
+    "preferredTime": "10:00",
+    "notes": "Prefers Elena for deep tissue.",
+    "status": "converted",
+    "createdAt": "2026-05-13T09:00:00.000Z"
+  }
+]

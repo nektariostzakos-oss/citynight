@@ -1,0 +1,159 @@
+[
+  {
+    "id": "gc_001",
+    "code": "GC-7HMK-PQR2",
+    "amount": 100,
+    "balance": 100,
+    "buyerName": "Sarah Martin",
+    "buyerEmail": "sarah.martin@gmail.com",
+    "recipient": "Marco, birthday gift",
+    "orderId": "o_oakline_gc_marco",
+    "issuedAt": "2026-05-12T14:23:00.000Z",
+    "status": "active",
+    "redemptions": []
+  },
+  {
+    "id": "gc_002",
+    "code": "GC-K3DV-9XBY",
+    "amount": 100,
+    "balance": 30,
+    "buyerName": "Jennifer Cole",
+    "buyerEmail": "jen.cole@outlook.com",
+    "recipient": "David",
+    "orderId": "o_oakline_gc_david",
+    "issuedAt": "2026-04-22T10:15:00.000Z",
+    "status": "active",
+    "redemptions": [
+      { "at": "2026-04-30T17:30:00.000Z", "amount": 70, "note": "Cut + Beard combo · Cal" }
+    ]
+  },
+  {
+    "id": "gc_003",
+    "code": "GC-MZ4N-8FRT",
+    "amount": 50,
+    "balance": 0,
+    "buyerName": "Ricardo Foster",
+    "buyerEmail": "rfoster.uk@gmail.com",
+    "recipient": "Self, anniversary",
+    "orderId": "o_oakline_gc_rfoster",
+    "issuedAt": "2026-04-08T12:00:00.000Z",
+    "status": "redeemed",
+    "redemptions": [
+      { "at": "2026-04-18T16:00:00.000Z", "amount": 50, "note": "Signature Cut · Elliott · paid in full from card" }
+    ]
+  },
+  {
+    "id": "gc_004",
+    "code": "GC-W2PD-XHN5",
+    "amount": 200,
+    "balance": 200,
+    "buyerName": "Anthony Reyes",
+    "buyerEmail": "anthony.reyes@yahoo.com",
+    "recipient": "Mum's birthday, for Dad",
+    "orderId": "o_oakline_gc_dad",
+    "issuedAt": "2026-05-08T09:45:00.000Z",
+    "status": "active",
+    "redemptions": []
+  },
+  {
+    "id": "gc_005",
+    "code": "GC-J9QT-4HMV",
+    "amount": 100,
+    "balance": 5,
+    "buyerName": "Devon Hughes",
+    "buyerEmail": "devon.h@icloud.com",
+    "recipient": "Father-in-law",
+    "orderId": "o_oakline_gc_fil",
+    "issuedAt": "2026-03-04T11:30:00.000Z",
+    "status": "active",
+    "redemptions": [
+      { "at": "2026-03-15T15:00:00.000Z", "amount": 45, "note": "Signature Cut · Reuben" },
+      { "at": "2026-04-12T14:30:00.000Z", "amount": 50, "note": "Skin Fade · Elliott" }
+    ]
+  },
+  {
+    "id": "gc_006",
+    "code": "GC-T6BX-Y2KL",
+    "amount": 50,
+    "balance": 50,
+    "buyerName": "Khalid Brooks",
+    "buyerEmail": "khalid.brooks@gmail.com",
+    "recipient": "Brother",
+    "orderId": "o_oakline_gc_brother",
+    "issuedAt": "2026-05-05T17:20:00.000Z",
+    "status": "active",
+    "redemptions": []
+  },
+  {
+    "id": "gc_007",
+    "code": "GC-3NPV-WQ7H",
+    "amount": 250,
+    "balance": 80,
+    "buyerName": "Elliott Vance",
+    "buyerEmail": "elliott@oakline.studio",
+    "recipient": "Wedding party, Fulham · 4 grooms",
+    "issuedAt": "2026-03-22T16:45:00.000Z",
+    "status": "active",
+    "redemptions": [
+      { "at": "2026-04-12T13:00:00.000Z", "amount": 88, "note": "The Cranley · groom" },
+      { "at": "2026-04-12T13:00:00.000Z", "amount": 75, "note": "Cut + Beard · best man" }
+    ]
+  },
+  {
+    "id": "gc_008",
+    "code": "GC-P8KQ-2MNR",
+    "amount": 100,
+    "balance": 0,
+    "buyerName": "Tomas Ortiz",
+    "buyerEmail": "tomas.ortiz.uk@gmail.com",
+    "recipient": "Birthday gift, Dan",
+    "orderId": "o_oakline_gc_dan",
+    "issuedAt": "2026-02-14T09:00:00.000Z",
+    "status": "redeemed",
+    "redemptions": [
+      { "at": "2026-03-02T18:00:00.000Z", "amount": 55, "note": "Hot Towel Shave · Reuben" },
+      { "at": "2026-03-02T18:00:00.000Z", "amount": 45, "note": "Signature Cut · same visit · Cal" }
+    ]
+  },
+  {
+    "id": "gc_009",
+    "code": "GC-V4HW-T8GL",
+    "amount": 50,
+    "balance": 50,
+    "buyerName": "Wesley Bell",
+    "buyerEmail": "wes.bell@proton.me",
+    "recipient": "Father's Day, Dad",
+    "orderId": "o_oakline_gc_fathersday",
+    "issuedAt": "2026-05-14T19:30:00.000Z",
+    "status": "active",
+    "redemptions": []
+  },
+  {
+    "id": "gc_010",
+    "code": "GC-R5LM-9BTC",
+    "amount": 150,
+    "balance": 5,
+    "buyerName": "Carlos Morales",
+    "buyerEmail": "carlos.m@yahoo.com",
+    "recipient": "Self, wife bought it as surprise",
+    "orderId": "o_oakline_gc_surprise",
+    "issuedAt": "2025-12-20T10:00:00.000Z",
+    "status": "active",
+    "redemptions": [
+      { "at": "2026-01-08T17:00:00.000Z", "amount": 70, "note": "Cut + Beard · Cal" },
+      { "at": "2026-02-19T16:30:00.000Z", "amount": 75, "note": "The Cranley partial · Elliott" }
+    ]
+  },
+  {
+    "id": "gc_011",
+    "code": "GC-Y2KW-MP4D",
+    "amount": 75,
+    "balance": 0,
+    "buyerName": "Bryan Bennett",
+    "buyerEmail": "b.bennett@hotmail.com",
+    "recipient": "Coworker leaving",
+    "issuedAt": "2025-10-15T11:00:00.000Z",
+    "status": "expired",
+    "redemptions": []
+  }
+]

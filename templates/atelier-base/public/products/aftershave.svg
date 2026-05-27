@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e3c88a"/><stop offset="55%" stop-color="#c9a961"/><stop offset="100%" stop-color="#8a6f33"/></linearGradient>
+    <linearGradient id="jar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2f2a24"/><stop offset="100%" stop-color="#151210"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="500" rx="170" ry="13" fill="#000" opacity="0.55"/>
+  <!-- squat balm jar body -->
+  <rect x="288" y="330" width="224" height="160" rx="14" fill="url(#jar)" stroke="#3a332a" stroke-width="2"/>
+  <!-- gold screw lid -->
+  <rect x="276" y="262" width="248" height="80" rx="12" fill="url(#gold)"/>
+  <rect x="282" y="266" width="236" height="5" rx="2" fill="#f4e2b3" opacity="0.7"/>
+  <!-- lid knurling -->
+  <g stroke="#8a6f33" stroke-width="1.5" opacity="0.5">
+    <line x1="312" y1="278" x2="312" y2="326"/>
+    <line x1="356" y1="278" x2="356" y2="326"/>
+    <line x1="400" y1="278" x2="400" y2="326"/>
+    <line x1="444" y1="278" x2="444" y2="326"/>
+    <line x1="488" y1="278" x2="488" y2="326"/>
+  </g>
+  <!-- label -->
+  <rect x="318" y="368" width="164" height="86" fill="#0a0806" stroke="#c9a961" stroke-width="1" opacity="0.9"/>
+</svg>

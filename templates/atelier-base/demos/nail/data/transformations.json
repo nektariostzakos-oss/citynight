@@ -1,0 +1,20 @@
+[
+  {
+    "id": "tr_demo2_1",
+    "title_en": "Soft French overlay",
+    "title_el": "Soft French overlay",
+    "caption_en": "BIAB, three weeks' wear",
+    "caption_el": "BIAB, three weeks' wear",
+    "before": "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80&auto=format&fit=crop",
+    "after": "https://images.unsplash.com/photo-1630843599725-32ead7671867?w=800&q=80&auto=format&fit=crop"
+  },
+  {
+    "id": "tr_demo2_2",
+    "title_en": "Chrome ombre set",
+    "title_el": "Chrome ombre set",
+    "caption_en": "90 minutes, hand-painted",
+    "caption_el": "90 minutes, hand-painted",
+    "before": "https://images.unsplash.com/photo-1641814250010-9887d86eedfd?w=800&q=80&auto=format&fit=crop",
+    "after": "https://images.unsplash.com/photo-1637264718120-e70224dc0662?w=800&q=80&auto=format&fit=crop"
+  }
+]

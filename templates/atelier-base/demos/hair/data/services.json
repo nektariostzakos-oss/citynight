@@ -1,0 +1,68 @@
+[
+  {
+    "id": "cut-finish",
+    "name": "Cut & finish",
+    "desc": "A bespoke cut shaped to your hair and your life. Wash, cut, blow-dry.",
+    "duration": 60,
+    "price": 80,
+    "bufferMinutes": 15,
+    "category": "Cut",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "colour-service",
+    "name": "Colour service",
+    "desc": "Single-process colour, root touch-up or full coverage. Salon-grade product only.",
+    "duration": 90,
+    "price": 120,
+    "bufferMinutes": 15,
+    "category": "Colour",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "balayage",
+    "name": "Balayage",
+    "desc": "Hand-painted highlights for soft, sun-kissed dimension that grows out beautifully.",
+    "duration": 150,
+    "price": 180,
+    "bufferMinutes": 20,
+    "category": "Colour",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "bridal-styling",
+    "name": "Bridal styling",
+    "desc": "Trial and on-the-day styling for brides and the wedding party.",
+    "duration": 120,
+    "price": 200,
+    "bufferMinutes": 15,
+    "category": "Bridal",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "treatments",
+    "name": "Treatments",
+    "desc": "Olaplex, glossing and deep-conditioning rituals for damaged or coloured hair.",
+    "duration": 45,
+    "price": 60,
+    "bufferMinutes": 10,
+    "category": "Treatment",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "consultation",
+    "name": "Consultation",
+    "desc": "A no-obligation consultation before any major change. Always free.",
+    "duration": 30,
+    "price": 0,
+    "bufferMinutes": 10,
+    "category": "Consultation",
+    "enabled": true,
+    "order": 6
+  }
+]

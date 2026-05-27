@@ -1,0 +1,302 @@
+[
+  {
+    "id": "c_demo3_0001",
+    "name": "Isla Green",
+    "email": "isla.green19@hotmail.co.uk",
+    "phone": "+44 7289 617215",
+    "notes": "Prefers Elena for deep tissue.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2026-01-20T10:00:00.000Z",
+    "birthday": "1974-01-27",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_demo3_0002",
+    "name": "Anna Clarke",
+    "email": "anna.clarke7@hotmail.co.uk",
+    "phone": "+44 7430 395315",
+    "notes": "Allergic to nut oils, note for therapists.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-06-19T09:00:00.000Z",
+    "birthday": "1985-11-25",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo3_0003",
+    "name": "Tara Bell",
+    "email": "tara.bell26@outlook.com",
+    "phone": "+44 7567 851185",
+    "notes": "Gift membership from her partner.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2026-03-16T10:00:00.000Z",
+    "birthday": "1985-01-28",
+    "loyaltyPoints": 12
+  },
+  {
+    "id": "c_demo3_0004",
+    "name": "Oliver Hall",
+    "email": "oliver.hall24@outlook.com",
+    "phone": "+44 7752 822560",
+    "notes": "Prefers Elena for deep tissue.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-07-10T09:00:00.000Z",
+    "birthday": "1987-10-19",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo3_0005",
+    "name": "Ava Morgan",
+    "email": "ava.morgan66@yahoo.co.uk",
+    "phone": "+44 7437 591956",
+    "notes": "Travels in from Surrey.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2026-03-21T10:00:00.000Z",
+    "birthday": "1992-09-28",
+    "loyaltyPoints": 11
+  },
+  {
+    "id": "c_demo3_0006",
+    "name": "Clara Clarke",
+    "email": "clara.clarke87@yahoo.co.uk",
+    "phone": "+44 7236 889645",
+    "notes": "Books the hot stone every month.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-12-02T10:00:00.000Z",
+    "birthday": "1985-04-04",
+    "loyaltyPoints": 13
+  },
+  {
+    "id": "c_demo3_0007",
+    "name": "Grace Clarke",
+    "email": "grace.clarke6@outlook.com",
+    "phone": "+44 7333 558337",
+    "notes": "Allergic to nut oils, note for therapists.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2026-01-10T10:00:00.000Z",
+    "birthday": "1979-02-08",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_demo3_0008",
+    "name": "Adam Wood",
+    "email": "adam.wood86@gmail.com",
+    "phone": "+44 7577 442012",
+    "notes": "Prefers Elena for deep tissue.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2026-02-18T10:00:00.000Z",
+    "birthday": "1975-11-11",
+    "loyaltyPoints": 10
+  },
+  {
+    "id": "c_demo3_0009",
+    "name": "Ruby Brown",
+    "email": "ruby.brown26@yahoo.co.uk",
+    "phone": "+44 7635 843871",
+    "notes": "Gift membership from her partner.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-11-04T10:00:00.000Z",
+    "birthday": "1994-05-02",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo3_0010",
+    "name": "Lara Cooper",
+    "email": "lara.cooper12@outlook.com",
+    "phone": "+44 7260 314465",
+    "notes": "Allergic to nut oils, note for therapists.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2026-02-08T10:00:00.000Z",
+    "birthday": "1997-01-23",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_demo3_0011",
+    "name": "Sophie King",
+    "email": "sophie.king59@gmail.com",
+    "phone": "+44 7339 962039",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-08-30T09:00:00.000Z",
+    "birthday": "1990-09-11",
+    "loyaltyPoints": 10
+  },
+  {
+    "id": "c_demo3_0012",
+    "name": "Mia Scott",
+    "email": "mia.scott60@gmail.com",
+    "phone": "+44 7443 654165",
+    "notes": "Books the hot stone every month.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-10-08T09:00:00.000Z",
+    "birthday": "1998-04-25",
+    "loyaltyPoints": 12
+  },
+  {
+    "id": "c_demo3_0013",
+    "name": "Isla Baker",
+    "email": "isla.baker77@hotmail.co.uk",
+    "phone": "+44 7281 184144",
+    "notes": "Gift membership from her partner.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-08-28T09:00:00.000Z",
+    "birthday": "1977-04-20",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo3_0014",
+    "name": "Lucy Hunt",
+    "email": "lucy.hunt7@gmail.com",
+    "phone": "+44 7273 738637",
+    "notes": "Allergic to nut oils, note for therapists.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-04-12T09:00:00.000Z",
+    "birthday": "1987-08-04",
+    "loyaltyPoints": 7
+  },
+  {
+    "id": "c_demo3_0015",
+    "name": "Noah Harris",
+    "email": "noah.harris21@hotmail.co.uk",
+    "phone": "+44 7499 405812",
+    "notes": "Always books the last slot of the day.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-08-31T09:00:00.000Z",
+    "birthday": "1974-09-28",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_demo3_0016",
+    "name": "Leo Lewis",
+    "email": "leo.lewis24@outlook.com",
+    "phone": "+44 7558 837244",
+    "notes": "Prefers a quiet room, lights low.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-01-17T10:00:00.000Z",
+    "birthday": "1987-12-23",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo3_0017",
+    "name": "Hannah Lewis",
+    "email": "hannah.lewis70@icloud.com",
+    "phone": "+44 7440 503038",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-08-07T09:00:00.000Z",
+    "birthday": "1987-12-07",
+    "loyaltyPoints": 8
+  },
+  {
+    "id": "c_demo3_0018",
+    "name": "Amelia Walker",
+    "email": "amelia.walker33@hotmail.co.uk",
+    "phone": "+44 7763 589547",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-06-23T09:00:00.000Z",
+    "birthday": "1985-08-21",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo3_0019",
+    "name": "Amelia Jones",
+    "email": "amelia.jones8@icloud.com",
+    "phone": "+44 7132 163725",
+    "notes": "Prefers a quiet room, lights low.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-10-22T09:00:00.000Z",
+    "birthday": "1991-12-15",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo3_0020",
+    "name": "Emma Lewis",
+    "email": "emma.lewis51@yahoo.co.uk",
+    "phone": "+44 7636 299000",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-08-12T09:00:00.000Z",
+    "birthday": "1996-07-02",
+    "loyaltyPoints": 13
+  },
+  {
+    "id": "c_demo3_0021",
+    "name": "Ella Wright",
+    "email": "ella.wright24@yahoo.co.uk",
+    "phone": "+44 7687 805644",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-09-18T09:00:00.000Z",
+    "birthday": "1996-06-18",
+    "loyaltyPoints": 11
+  },
+  {
+    "id": "c_demo3_0022",
+    "name": "Eva Jones",
+    "email": "eva.jones20@icloud.com",
+    "phone": "+44 7860 965415",
+    "notes": "Sensitive lower back, deep tissue focus.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-11-23T10:00:00.000Z",
+    "birthday": "1991-09-08",
+    "loyaltyPoints": 7
+  }
+]

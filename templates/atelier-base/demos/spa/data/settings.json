@@ -1,0 +1,96 @@
+{
+  "onboarded": true,
+  "template": "template3",
+  "industryId": "spa",
+  "demoShowcase": true,
+  "bookingMode": "appointment",
+  "enabledLanguages": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it"
+  ],
+  "business": {
+    "name": "Aurelia Day Spa",
+    "streetAddress": "12 Lavender Walk",
+    "city": "London",
+    "postalCode": "SW3 4NB",
+    "country": "GB",
+    "phone": "+44 20 7946 0100",
+    "email": "hello@aureliadayspa.com",
+    "latitude": 51.4875,
+    "longitude": -0.1687,
+    "hours": [
+      {
+        "day": "mon",
+        "open": "09:00",
+        "close": "19:00",
+        "closed": false
+      },
+      {
+        "day": "tue",
+        "open": "09:00",
+        "close": "19:00",
+        "closed": false
+      },
+      {
+        "day": "wed",
+        "open": "09:00",
+        "close": "19:00",
+        "closed": false
+      },
+      {
+        "day": "thu",
+        "open": "09:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "fri",
+        "open": "09:00",
+        "close": "21:00",
+        "closed": false
+      },
+      {
+        "day": "sat",
+        "open": "09:00",
+        "close": "18:00",
+        "closed": false
+      },
+      {
+        "day": "sun",
+        "open": "10:00",
+        "close": "16:00",
+        "closed": false
+      }
+    ],
+    "timezone": "Europe/London",
+    "social": {
+      "instagram": "https://instagram.com/aureliadayspa"
+    },
+    "priceRange": "£££",
+    "bookingRules": {
+      "leadTimeMinutes": 120,
+      "cancellationWindowHours": 24,
+      "depositPercent": 0,
+      "noShowFeePercent": 50
+    }
+  },
+  "branding": {
+    "wordmark": "AURELIA",
+    "tagline_en": "A calmer kind of hour."
+  },
+  "theme": {
+    "background": "#f6f3ec",
+    "foreground": "#23271f",
+    "primary": "#7c8a66",
+    "primaryAccent": "#5e6b4c",
+    "surface": "#ffffff",
+    "surfaceStrong": "#ece9de",
+    "border": "#e2ddcd",
+    "borderStrong": "#d2ccba",
+    "muted": "#5d6053",
+    "muted2": "#8b8a7c"
+  }
+}

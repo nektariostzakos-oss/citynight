@@ -1,0 +1,301 @@
+[
+  {
+    "id": "c_demo6_0001",
+    "name": "Hannah Hall",
+    "email": "hannah.hall70@hotmail.co.uk",
+    "phone": "+44 7932 730475",
+    "notes": "Loves a soft balayage refresh every 12 weeks.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2026-03-17T10:00:00.000Z",
+    "birthday": "1997-07-02",
+    "loyaltyPoints": 2
+  },
+  {
+    "id": "c_demo6_0002",
+    "name": "Olivia Baker",
+    "email": "olivia.baker85@hotmail.co.uk",
+    "phone": "+44 7751 482648",
+    "notes": "Sensitive scalp, use the gentle wash.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2026-02-25T10:00:00.000Z",
+    "birthday": "1992-10-04",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo6_0003",
+    "name": "Mia Ward",
+    "email": "mia.ward42@gmail.com",
+    "phone": "+44 7627 159133",
+    "notes": "Books early-morning slots only.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2026-05-01T09:00:00.000Z",
+    "birthday": "1988-10-14",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo6_0004",
+    "name": "Lucy Scott",
+    "email": "lucy.scott79@icloud.com",
+    "phone": "+44 7410 455248",
+    "notes": "Sensitive scalp, use the gentle wash.",
+    "tags": [
+      "VIP",
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-10-06T09:00:00.000Z",
+    "birthday": "1982-05-24",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_demo6_0005",
+    "name": "Isla Hughes",
+    "email": "isla.hughes76@yahoo.co.uk",
+    "phone": "+44 7607 369963",
+    "notes": "Prefers Léa for any major change.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-06-18T09:00:00.000Z",
+    "birthday": "1975-08-11",
+    "loyaltyPoints": 12
+  },
+  {
+    "id": "c_demo6_0006",
+    "name": "Sophie Cole",
+    "email": "sophie.cole75@outlook.com",
+    "phone": "+44 7526 307958",
+    "notes": "Sensitive scalp, use the gentle wash.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2026-03-25T10:00:00.000Z",
+    "birthday": "1986-01-24",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo6_0007",
+    "name": "Leah Wood",
+    "email": "leah.wood30@yahoo.co.uk",
+    "phone": "+44 7303 476029",
+    "notes": "Loves a soft balayage refresh every 12 weeks.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-07-16T09:00:00.000Z",
+    "birthday": "1979-12-10",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_demo6_0008",
+    "name": "Freya Young",
+    "email": "freya.young71@icloud.com",
+    "phone": "+44 7499 813089",
+    "notes": "Allergic to fragrance, request the unscented finishing serum.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-09-29T09:00:00.000Z",
+    "birthday": "1978-07-25",
+    "loyaltyPoints": 11
+  },
+  {
+    "id": "c_demo6_0009",
+    "name": "Mia Hughes",
+    "email": "mia.hughes79@gmail.com",
+    "phone": "+44 7557 832953",
+    "notes": "Loves a soft balayage refresh every 12 weeks.",
+    "tags": [
+      "new",
+      "rebooked"
+    ],
+    "createdAt": "2025-08-04T09:00:00.000Z",
+    "birthday": "1983-12-04",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_demo6_0010",
+    "name": "Maya Wright",
+    "email": "maya.wright10@icloud.com",
+    "phone": "+44 7886 298249",
+    "notes": "Books early-morning slots only.",
+    "tags": [
+      "VIP",
+      "regular"
+    ],
+    "createdAt": "2025-09-12T09:00:00.000Z",
+    "birthday": "1990-01-12",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_demo6_0011",
+    "name": "Ruby Hunt",
+    "email": "ruby.hunt14@outlook.com",
+    "phone": "+44 7142 238442",
+    "notes": "Prefers Léa for any major change.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2026-01-29T10:00:00.000Z",
+    "birthday": "1979-04-03",
+    "loyaltyPoints": 10
+  },
+  {
+    "id": "c_demo6_0012",
+    "name": "Lara Walker",
+    "email": "lara.walker3@gmail.com",
+    "phone": "+44 7687 781276",
+    "notes": "Bridal trial booked for July.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2026-04-04T09:00:00.000Z",
+    "birthday": "1988-07-05",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_demo6_0013",
+    "name": "Leo Lewis",
+    "email": "leo.lewis54@outlook.com",
+    "phone": "+44 7549 241295",
+    "notes": "Bridal trial booked for July.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2026-03-13T10:00:00.000Z",
+    "birthday": "1996-07-11",
+    "loyaltyPoints": 12
+  },
+  {
+    "id": "c_demo6_0014",
+    "name": "Hannah Evans",
+    "email": "hannah.evans79@yahoo.co.uk",
+    "phone": "+44 7623 507607",
+    "notes": "Patch-tested, cleared for colour.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2026-04-17T09:00:00.000Z",
+    "birthday": "1986-05-10",
+    "loyaltyPoints": 13
+  },
+  {
+    "id": "c_demo6_0015",
+    "name": "Eva Brown",
+    "email": "eva.brown7@gmail.com",
+    "phone": "+44 7797 852064",
+    "notes": "Patch-tested, cleared for colour.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-07-29T09:00:00.000Z",
+    "birthday": "1972-02-09",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_demo6_0016",
+    "name": "Anna Ward",
+    "email": "anna.ward9@gmail.com",
+    "phone": "+44 7565 944781",
+    "notes": "Patch-tested, cleared for colour.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-12-18T10:00:00.000Z",
+    "birthday": "1983-10-27",
+    "loyaltyPoints": 10
+  },
+  {
+    "id": "c_demo6_0017",
+    "name": "Leo Shaw",
+    "email": "leo.shaw13@hotmail.co.uk",
+    "phone": "+44 7264 972562",
+    "notes": "Allergic to fragrance, request the unscented finishing serum.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-12-25T10:00:00.000Z",
+    "birthday": "1991-09-18",
+    "loyaltyPoints": 11
+  },
+  {
+    "id": "c_demo6_0018",
+    "name": "Emma Harris",
+    "email": "emma.harris4@hotmail.co.uk",
+    "phone": "+44 7218 713755",
+    "notes": "Sensitive scalp, use the gentle wash.",
+    "tags": [
+      "new"
+    ],
+    "createdAt": "2025-10-15T09:00:00.000Z",
+    "birthday": "1981-08-01",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_demo6_0019",
+    "name": "Zoe Wood",
+    "email": "zoe.wood40@hotmail.co.uk",
+    "phone": "+44 7732 886412",
+    "notes": "Prefers Léa for any major change.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-01-05T10:00:00.000Z",
+    "birthday": "1977-07-25",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_demo6_0020",
+    "name": "Olivia Morgan",
+    "email": "olivia.morgan55@icloud.com",
+    "phone": "+44 7676 461727",
+    "notes": "Travels in from outside the city.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2025-09-13T09:00:00.000Z",
+    "birthday": "1986-09-06",
+    "loyaltyPoints": 11
+  },
+  {
+    "id": "c_demo6_0021",
+    "name": "James Hughes",
+    "email": "james.hughes74@outlook.com",
+    "phone": "+44 7900 777814",
+    "notes": "Travels in from outside the city.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2026-04-13T09:00:00.000Z",
+    "birthday": "1986-07-19",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_demo6_0022",
+    "name": "James Scott",
+    "email": "james.scott59@outlook.com",
+    "phone": "+44 7205 606144",
+    "notes": "Patch-tested, cleared for colour.",
+    "tags": [
+      "regular"
+    ],
+    "createdAt": "2025-11-21T10:00:00.000Z",
+    "birthday": "1970-08-19",
+    "loyaltyPoints": 8
+  }
+]

@@ -1,0 +1,94 @@
+{
+  "smtp": { "host": "", "port": 587, "user": "", "pass": "", "from": "", "secure": "tls" },
+  "branding": {
+    "logoUrl": "/brand/oakline-logo-light.svg",
+    "logoUrlDark": "/brand/oakline-logo-dark.svg",
+    "faviconUrl": "/brand/oakline-favicon.svg",
+    "wordmark": "OAKLINE",
+    "tagline_en": "Scissors · London",
+    "tagline_el": "Ψαλίδι · Λονδίνο"
+  },
+  "business": {
+    "name": "Oakline Scissors",
+    "streetAddress": "47 Cranley Mews",
+    "city": "London",
+    "postalCode": "SW7 3BY",
+    "country": "GB",
+    "phone": "+44 20 7946 0412",
+    "email": "hello@oakline.studio",
+    "latitude": 51.4935,
+    "longitude": -0.1781,
+    "hours": [
+      { "day": "mon", "open": "10:00", "close": "17:00", "closed": false },
+      { "day": "tue", "open": "10:00", "close": "14:00", "closed": false, "open2": "17:00", "close2": "21:00" },
+      { "day": "wed", "open": "10:00", "close": "17:00", "closed": false },
+      { "day": "thu", "open": "10:00", "close": "14:00", "closed": false, "open2": "17:00", "close2": "21:00" },
+      { "day": "fri", "open": "10:00", "close": "21:00", "closed": false },
+      { "day": "sat", "open": "10:00", "close": "21:00", "closed": false },
+      { "day": "sun", "open": "00:00", "close": "00:00", "closed": true }
+    ],
+    "timezone": "Europe/London",
+    "social": {
+      "instagram": "https://instagram.com/oakline.scissors",
+      "facebook": "https://facebook.com/oakline.scissors",
+      "whatsapp": "+442079460412",
+      "tiktok": "https://tiktok.com/@oakline.scissors"
+    },
+    "priceRange": "£££",
+    "foundedYear": "2016",
+    "reviewUrl": "https://www.google.com/search?q=Oakline+Scissors+London+reviews",
+    "bookingRules": {
+      "leadTimeMinutes": 45,
+      "cancellationWindowHours": 4,
+      "depositPercent": 0,
+      "noShowFeePercent": 50
+    }
+  },
+  "nav": {
+    "links": [
+      { "id": "home", "label_en": "Home", "label_el": "Αρχική", "href": "/", "enabled": true },
+      { "id": "services", "label_en": "Services", "label_el": "Υπηρεσίες", "href": "/services", "enabled": true },
+      { "id": "shop", "label_en": "Shop", "label_el": "Κατάστημα", "href": "/shop", "enabled": true },
+      { "id": "gallery", "label_en": "Gallery", "label_el": "Γκαλερί", "href": "/gallery", "enabled": true },
+      { "id": "team", "label_en": "Team", "label_el": "Ομάδα", "href": "/about", "enabled": true },
+      { "id": "contact", "label_en": "Contact", "label_el": "Επικοινωνία", "href": "/contact", "enabled": true },
+      { "id": "blog", "label_en": "Blog", "label_el": "Blog", "href": "/blog", "enabled": true }
+    ],
+    "bookLabel_en": "Book a chair",
+    "bookLabel_el": "Κλείσε καρέκλα",
+    "bookHref": "/book"
+  },
+  "templates": {
+    "confirmation": {
+      "subject_en": "{business} — your booking is confirmed",
+      "subject_el": "{business} — το ραντεβού σας επιβεβαιώθηκε",
+      "body_en": "Hi {name},\n\nYour booking is confirmed:\n\n· {service} (£{price})\n· With {barber}\n· On {date} at {time}\n\nWe'll send a reminder 8 hours before. Need to reschedule or cancel? Reply to this email or call us at {phone}.\n\nSee you soon,\n{business}",
+      "body_el": "Γεια σου {name},\n\nΤο ραντεβού σου επιβεβαιώθηκε:\n\n· {service} (£{price})\n· Με τον/την {barber}\n· Στις {date} και ώρα {time}\n\nΘα σου στείλουμε υπενθύμιση 8 ώρες πριν. Αν χρειαστεί να αλλάξεις ή να ακυρώσεις, απάντησε σε αυτό το email ή πάρε μας τηλέφωνο στο {phone}.\n\nΘα σε δούμε σύντομα,\n{business}"
+    },
+    "reminder": {
+      "subject_en": "Reminder · Your {business} appointment in 8 hours",
+      "subject_el": "Υπενθύμιση · Το ραντεβού σου στο {business} σε 8 ώρες",
+      "body_en": "Hi {name},\n\nA quick reminder — your {business} appointment is in about 8 hours.\n\n· {service}\n· With {barber}\n· {date} at {time}\n\nNeed to reschedule or cancel? Reply to this email or call us at {phone}.\n\nSee you soon,\n{business}",
+      "body_el": "Γεια σου {name},\n\nΥπενθύμιση: το ραντεβού σου στο {business} είναι σε περίπου 8 ώρες.\n\n· {service}\n· Με τον/την {barber}\n· {date} στις {time}\n\nΑν χρειαστεί να αλλάξεις ή να ακυρώσεις, απάντησε σε αυτό το email ή πάρε μας τηλέφωνο στο {phone}.\n\nΤα λέμε σύντομα,\n{business}"
+    }
+  },
+  "analytics": { "ga4": "", "gtm": "", "metaPixel": "" },
+  "payments": { "stripeSecretKey": "", "stripePublishableKey": "", "currency": "gbp" },
+  "onboarded": true,
+  "enabledLanguages": ["en", "de"],
+  "bookingMode": "appointment",
+  "industryId": "barber",
+  "theme": {
+    "background": "#0a0806",
+    "foreground": "#f5efe6",
+    "primary": "#c9a961",
+    "primaryAccent": "#d4b878",
+    "surface": "rgba(255, 255, 255, 0.03)",
+    "surfaceStrong": "rgba(255, 255, 255, 0.06)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "borderStrong": "rgba(255, 255, 255, 0.18)",
+    "muted": "rgba(245, 239, 230, 0.65)",
+    "muted2": "rgba(245, 239, 230, 0.45)"
+  },
+  "typography": { "headingFont": "playfair", "bodyFont": "geist" }
+}

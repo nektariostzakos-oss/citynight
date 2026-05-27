@@ -1,0 +1,52 @@
+[
+  {
+    "id": "amelie",
+    "name": "Amelie Rousseau",
+    "role": "Lead Nail Artist & Owner",
+    "bio": "Trained in Paris, Amelie opened Maison Lune to give every set the time it deserves. Specialises in hand-painted detail and glazed finishes.",
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Hand-painted art",
+      "BIAB overlays",
+      "Glazed nude"
+    ],
+    "enabled": true,
+    "workDays": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "10:00",
+    "endTime": "18:00",
+    "breakStart": "13:00",
+    "breakEnd": "13:45",
+    "order": 1
+  },
+  {
+    "id": "noor",
+    "name": "Noor Haddad",
+    "role": "Nail Artist",
+    "bio": "A steady hand for gel extensions and clean French work. Noor keeps the studio running calm and unhurried, one client at a time.",
+    "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80&auto=format&fit=crop",
+    "specialties": [
+      "Gel extensions",
+      "Soft French",
+      "Luxury pedicure"
+    ],
+    "enabled": true,
+    "workDays": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "startTime": "11:00",
+    "endTime": "20:00",
+    "breakStart": "15:00",
+    "breakEnd": "15:45",
+    "order": 2
+  }
+]

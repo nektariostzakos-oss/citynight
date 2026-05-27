@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cat_demo2_0",
+    "name": "Care",
+    "slug": "care",
+    "order": 0
+  },
+  {
+    "id": "cat_demo2_1",
+    "name": "Trends",
+    "slug": "trends",
+    "order": 1
+  },
+  {
+    "id": "cat_demo2_2",
+    "name": "Studio",
+    "slug": "studio",
+    "order": 2
+  }
+]

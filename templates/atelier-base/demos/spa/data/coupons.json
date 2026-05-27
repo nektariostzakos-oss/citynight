@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cpn_demo3_1",
+    "code": "FIRSTVISIT",
+    "kind": "percent",
+    "value": 15,
+    "maxUses": 300,
+    "uses": 23,
+    "minTotal": 0,
+    "expiresAt": "2026-08-06T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-04-28T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo3_2",
+    "code": "CALM20",
+    "kind": "percent",
+    "value": 20,
+    "maxUses": 150,
+    "uses": 34,
+    "minTotal": 0,
+    "expiresAt": "2026-10-17T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-03-31T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo3_3",
+    "code": "HOMEFIVE",
+    "kind": "fixed",
+    "value": 5,
+    "maxUses": 200,
+    "uses": 30,
+    "minTotal": 35,
+    "expiresAt": "2026-12-02T21:59:00.000Z",
+    "appliesTo": "shop",
+    "active": true,
+    "createdAt": "2026-04-22T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo3_4",
+    "code": "RETREAT25",
+    "kind": "percent",
+    "value": 25,
+    "maxUses": 100,
+    "uses": 35,
+    "minTotal": 120,
+    "expiresAt": "2026-11-05T21:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-04-25T09:00:00.000Z"
+  }
+]

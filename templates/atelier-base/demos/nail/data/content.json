@@ -1,0 +1,29 @@
+{
+  "t2_artist": {
+    "eyebrow_en": "Meet your artist",
+    "title_en": "Hi, I'm Mara.",
+    "p1_en": "I trained in London and have spent nine years learning what makes a set last: clean prep, the right product, and a shape that suits your hands, not a passing trend.",
+    "p2_en": "The studio is a quiet one. One client at a time, good coffee, and nails you will keep catching yourself looking at.",
+    "cta_en": "Book with Mara"
+  },
+  "t2_contact": {
+    "details": [
+      {
+        "label_en": "Studio",
+        "value_en": "47 Cranley Mews, London SW7"
+      },
+      {
+        "label_en": "Phone",
+        "value_en": "+44 20 7946 0827"
+      },
+      {
+        "label_en": "Email",
+        "value_en": "hello@maisonlune.studio"
+      },
+      {
+        "label_en": "Instagram",
+        "value_en": "@maisonlune.studio"
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "t5_hero": {
+    "sub_en": "Marigold is a warm, unintimidating yoga studio for every body and every level. Roll out a mat, slow right down, and book your first class online.",
+    "badge_en": "30+ classes a week"
+  },
+  "t5_teacher": {
+    "eyebrow_en": "Meet your teachers",
+    "title_en": "Led by Sienna and the Marigold team.",
+    "p1_en": "Sienna founded Marigold after years of practising in rooms that felt like competitions. She wanted the opposite: a warm space, patient teaching, and absolutely no mirrors.",
+    "p2_en": "Every Marigold teacher is 500-hour trained, but more importantly they teach the room in front of them. You will be offered options every class, and resting is always allowed.",
+    "cta_en": "Book with the team"
+  },
+  "t5_about_story": {
+    "p1_en": "Marigold opened because its founder wanted somewhere unintimidating to practise: no mirrors, no competition, no perfect bodies up on the wall. Just a warm room and patient teaching."
+  },
+  "t5_contact": {
+    "details": [
+      {
+        "label_en": "Studio",
+        "value_en": "8 Pelham Crescent, London SW7"
+      },
+      {
+        "label_en": "Phone",
+        "value_en": "+44 20 7946 0450"
+      },
+      {
+        "label_en": "Email",
+        "value_en": "hello@marigold-yoga.com"
+      },
+      {
+        "label_en": "Instagram",
+        "value_en": "@marigoldyoga"
+      }
+    ]
+  }
+}

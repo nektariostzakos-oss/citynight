@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a2a1c"/><stop offset="100%" stop-color="#0e0805"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- flowing hair strands as curved paths -->
+  <g fill="none" stroke="url(#hair)" stroke-width="3" opacity="0.8">
+    <path d="M100 100 Q250 180 200 500" />
+    <path d="M150 80 Q300 200 260 520" />
+    <path d="M220 60 Q350 200 320 520" />
+    <path d="M300 50 Q400 200 380 520" />
+    <path d="M380 50 Q450 200 440 520" />
+    <path d="M460 50 Q500 200 500 520" />
+    <path d="M540 60 Q560 200 560 520" />
+    <path d="M620 80 Q620 200 620 510" />
+    <path d="M700 110 Q680 200 680 500" />
+  </g>
+  <!-- gold highlight strands -->
+  <g fill="none" stroke="#c9a961" stroke-width="1.2" opacity="0.6">
+    <path d="M260 70 Q370 210 340 520" />
+    <path d="M440 60 Q480 200 470 520" />
+    <path d="M580 80 Q600 200 600 510" />
+  </g>
+  </svg>

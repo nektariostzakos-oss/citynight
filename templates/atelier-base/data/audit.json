@@ -1,0 +1,174 @@
+[
+  {
+    "id": "a_mp76qesk_rbf4v1",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "booking.cancel",
+    "target": "client-request",
+    "meta": {
+      "hours": 6,
+      "refund": "full"
+    },
+    "createdAt": "2026-04-18T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_7hl2u0",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "service.update",
+    "target": "Boulevard Package",
+    "meta": {
+      "duration": 90
+    },
+    "createdAt": "2026-04-20T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_dpw95c",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "booking.create",
+    "target": "online",
+    "meta": {
+      "service": "Boulevard Package",
+      "barber": "marcus"
+    },
+    "createdAt": "2026-04-20T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_9iuq5q",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "service.update",
+    "target": "Skin Fade",
+    "meta": {
+      "price": 55,
+      "prevPrice": 50
+    },
+    "createdAt": "2026-04-24T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_akn2qf",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "staff.update",
+    "target": "diego",
+    "meta": {
+      "startTime": "11:00"
+    },
+    "createdAt": "2026-04-24T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_7trz5q",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "review.approve",
+    "target": "Stefan K.",
+    "meta": {
+      "rating": 5
+    },
+    "createdAt": "2026-04-24T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_jcouay",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "settings.update",
+    "target": "hours",
+    "meta": {
+      "day": "thu",
+      "close": "20:00"
+    },
+    "createdAt": "2026-04-25T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_kuu0uu",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "booking.complete",
+    "target": "walk-in",
+    "meta": {
+      "service": "Signature Cut"
+    },
+    "createdAt": "2026-04-29T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_zylnrl",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "settings.update",
+    "target": "smtp",
+    "meta": {
+      "provider": "brevo"
+    },
+    "createdAt": "2026-04-29T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_4wfscw",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "review.approve",
+    "target": "Anthony R.",
+    "meta": {
+      "rating": 5
+    },
+    "createdAt": "2026-05-01T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_27edcj",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "settings.update",
+    "target": "payments",
+    "meta": {
+      "currency": "USD"
+    },
+    "createdAt": "2026-05-02T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_13y17q",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "product.update",
+    "target": "signature-pomade",
+    "meta": {
+      "stock": 38
+    },
+    "createdAt": "2026-05-03T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_hmniab",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "coupon.create",
+    "target": "VEGAS25",
+    "meta": {
+      "discount": 25,
+      "type": "percent"
+    },
+    "createdAt": "2026-05-03T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_niw6vg",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "client.update",
+    "target": "wedding-party referral",
+    "meta": {
+      "tags": [
+        "wedding-party"
+      ]
+    },
+    "createdAt": "2026-05-04T12:00:00.000Z"
+  },
+  {
+    "id": "a_mp76qesk_30r7yi",
+    "userId": "u_op_marcus",
+    "userEmail": "admin@boulevardbarber.co",
+    "action": "settings.update",
+    "target": "branding",
+    "meta": {
+      "wordmark": "BOULEVARD"
+    },
+    "createdAt": "2026-05-08T12:00:00.000Z"
+  }
+]

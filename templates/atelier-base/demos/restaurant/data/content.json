@@ -1,0 +1,330 @@
+{
+  "page_home": {
+    "bgImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=70",
+    "bgOpacity": 46
+  },
+  "hero": {
+    "pill_en": "Tonight · 18:30 – 23:30 · Naxos Town",
+    "pill_el": "Απόψε · 18:30 – 23:30 · Χώρα Νάξου",
+    "title_en": "An island taverna,",
+    "title_el": "Μια ταβέρνα του νησιού,",
+    "titleAccent_en": "the modern way.",
+    "titleAccent_el": "με τον σύγχρονο τρόπο.",
+    "subtitle_en": "Slow-cooked Cycladic dishes, Naxian wines, and a courtyard that has been feeding the neighbourhood since 1978. Booking recommended on Fridays, Saturdays, and through August.",
+    "subtitle_el": "Κυκλαδίτικα πιάτα που σιγομαγειρεύονται, νάξια κρασιά και μια αυλή που ταΐζει τη γειτονιά από το 1978. Συνιστάται κράτηση τις Παρασκευές, τα Σάββατα και όλο τον Αύγουστο.",
+    "meta1_en": "★ 4.8 / 612 Google reviews",
+    "meta1_el": "★ 4.8 / 612 κριτικές Google",
+    "meta2_en": "Open tonight · 18:30 – 23:30",
+    "meta2_el": "Ανοιχτά απόψε · 18:30 – 23:30",
+    "bgImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=70",
+    "bgVideo": "",
+    "bgVideoPoster": "",
+    "sideImage": "https://images.unsplash.com/photo-1577303935007-0d306ee638cf?w=900&q=70",
+    "sideRole_en": "Chef · Owner, second generation",
+    "sideRole_el": "Σεφ · Ιδιοκτήτρια, δεύτερη γενιά",
+    "sideName": "Eleni Vlachou",
+    "bgOpacity": 50,
+    "overlayStrength": 40
+  },
+  "info": {
+    "items": [
+      { "label_en": "Open tonight",  "label_el": "Απόψε ανοιχτά",  "value_en": "18:30 – 23:30",        "value_el": "18:30 – 23:30" },
+      { "label_en": "Address",       "label_el": "Διεύθυνση",      "value_en": "Plateia Mantos 4, Naxos Town", "value_el": "Πλατεία Μαντώς 4, Χώρα Νάξου" },
+      { "label_en": "Phone",         "label_el": "Τηλέφωνο",       "value_en": "+30 22850 24160",      "value_el": "+30 22850 24160" },
+      { "label_en": "Reservations",  "label_el": "Κρατήσεις",      "value_en": "Recommended Fri–Sun",  "value_el": "Συνιστώνται Παρ–Κυρ" }
+    ]
+  },
+  "services": {
+    "eyebrow_en": "Tastings & private dining",
+    "eyebrow_el": "Δοκιμαστικά & ιδιωτικά",
+    "title_en": "More than a table.",
+    "title_el": "Κάτι παραπάνω από ένα τραπέζι.",
+    "items": [
+      {
+        "id": "svc-1",
+        "name_en": "Lemoni Tasting Menu",
+        "name_el": "Δοκιμαστικό Μενού Lemoni",
+        "price": 58,
+        "duration": 120,
+        "desc_en": "Seven courses, the kitchen's choice, paired with three Naxian wines. Available Wednesday through Sunday, booked 24h ahead.",
+        "desc_el": "Επτά πιάτα, επιλογή της κουζίνας, σε συνδυασμό με τρία νάξια κρασιά. Διαθέσιμο Τετάρτη με Κυριακή, κράτηση 24 ώρες νωρίτερα."
+      },
+      {
+        "id": "svc-2",
+        "name_en": "Chef's Table",
+        "name_el": "Τραπέζι του Σεφ",
+        "price": 78,
+        "duration": 150,
+        "desc_en": "Six-seat counter facing the open kitchen. Nine courses, wine pairings, no menu — you eat what's been picked from the market that morning.",
+        "desc_el": "Πάγκος έξι θέσεων μπροστά στην ανοιχτή κουζίνα. Εννέα πιάτα, με συνδυασμούς κρασιού, χωρίς μενού — τρώτε ό,τι αγοράστηκε από την αγορά εκείνο το πρωί."
+      },
+      {
+        "id": "svc-3",
+        "name_en": "Private Courtyard",
+        "name_el": "Ιδιωτική Αυλή",
+        "price": 280,
+        "duration": 240,
+        "desc_en": "The full courtyard, up to 24 guests, set menu and reserved staff. Best for birthdays, baptisms, and small weddings.",
+        "desc_el": "Όλη η αυλή, έως 24 άτομα, σταθερό μενού και ξεχωριστή ομάδα σερβιτόρων. Ιδανικό για γενέθλια, βαπτίσεις και μικρούς γάμους."
+      },
+      {
+        "id": "svc-4",
+        "name_en": "Cooking Lesson + Lunch",
+        "name_el": "Μάθημα Μαγειρικής + Μεσημεριανό",
+        "price": 95,
+        "duration": 180,
+        "desc_en": "Two hours in the kitchen with Eleni, then sit down to eat what you made. Wine included. Tuesday and Thursday mornings.",
+        "desc_el": "Δύο ώρες στην κουζίνα με την Ελένη, μετά καθίστε να φάτε ό,τι μαγειρέψατε. Κρασί συμπεριλαμβάνεται. Τρίτη και Πέμπτη πρωί."
+      }
+    ]
+  },
+  "gallery_strip": {
+    "eyebrow_en": "On the plate",
+    "eyebrow_el": "Στο πιάτο",
+    "title_en": "Sea-salt, slow heat, time.",
+    "title_el": "Θαλασσινό αλάτι, αργή θερμοκρασία, χρόνος.",
+    "images": [
+      { "src": "https://images.unsplash.com/photo-1432139509613-5c4255815697?w=900&q=70" },
+      { "src": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=900&q=70" },
+      { "src": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=900&q=70" },
+      { "src": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&q=70" },
+      { "src": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=900&q=70" }
+    ]
+  },
+  "gallery": {
+    "items": [
+      { "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=70", "tag": "Courtyard", "big": true },
+      { "src": "https://images.unsplash.com/photo-1432139509613-5c4255815697?w=900&q=70",  "tag": "Plates",   "big": false },
+      { "src": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=900&q=70", "tag": "Plates",   "big": false },
+      { "src": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=70",   "tag": "Wine",     "big": false },
+      { "src": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&q=70", "tag": "Plates",   "big": false },
+      { "src": "https://images.unsplash.com/photo-1502301103665-0b95cc738daf?w=900&q=70", "tag": "Kitchen",  "big": false },
+      { "src": "https://images.unsplash.com/photo-1559847844-5315695dadae?w=900&q=70",   "tag": "Plates",   "big": false },
+      { "src": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=900&q=70",   "tag": "Plates",   "big": false },
+      { "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=70", "tag": "Courtyard","big": false }
+    ]
+  },
+  "about": {
+    "eyebrow_en": "Our story",
+    "eyebrow_el": "Η ιστορία μας",
+    "title_en": "Three tables in 1978. Twenty-four today.",
+    "title_el": "Τρία τραπέζια το 1978. Είκοσι τέσσερα σήμερα.",
+    "p1_en": "Lemoni opened in the summer of 1978 with three tables, a wood-fired oven, and a recipe book that lived in Yiayia Mantos' head. The street was quieter then; the lemon tree in the courtyard was barely taller than the front door.",
+    "p1_el": "Το Lemoni άνοιξε το καλοκαίρι του 1978 με τρία τραπέζια, έναν ξυλόφουρνο και ένα βιβλίο συνταγών που ζούσε στο μυαλό της Γιαγιάς Μαντώς. Ο δρόμος ήταν πιο ήσυχος τότε· η λεμονιά στην αυλή ήταν μόλις ψηλότερη από την πόρτα.",
+    "p2_en": "Today the lemon tree is taller than the building. Eleni, second generation, runs the kitchen with the same recipes plus a few she brought back from a decade cooking in Athens. Her brother Giannis runs the front. The wood-fired oven from 1978 still does the bread every morning.",
+    "p2_el": "Σήμερα η λεμονιά είναι ψηλότερη από το κτίριο. Η Ελένη, δεύτερη γενιά, διευθύνει την κουζίνα με τις ίδιες συνταγές συν μερικές που έφερε μαζί της από μια δεκαετία στην Αθήνα. Ο αδελφός της, Γιάννης, διευθύνει την αίθουσα. Ο ξυλόφουρνος του 1978 ψήνει ακόμα το ψωμί κάθε πρωί.",
+    "p3_en": "Our cooking is Cycladic — fish from the morning's catch, lamb from a Filoti shepherd, vegetables from the gardens up the road. Slow heat, sea salt, time. We don't move fast and we don't ask you to either.",
+    "p3_el": "Η κουζίνα μας είναι κυκλαδίτικη — ψάρι από την πρωινή ψαριά, αρνί από έναν βοσκό στο Φιλώτι, λαχανικά από τους κήπους πιο πάνω. Αργή θερμοκρασία, θαλασσινό αλάτι, χρόνος. Δεν βιαζόμαστε και δεν σας ζητάμε να βιαστείτε.",
+    "image": "https://images.unsplash.com/photo-1502301103665-0b95cc738daf?w=1200&q=70"
+  },
+  "team": {
+    "eyebrow_en": "The family",
+    "eyebrow_el": "Η οικογένεια",
+    "title_en": "Second generation in the kitchen.",
+    "title_el": "Δεύτερη γενιά στην κουζίνα.",
+    "members": [
+      {
+        "name_en": "Eleni Vlachou",
+        "name_el": "Ελένη Βλάχου",
+        "role_en": "Chef · Owner",
+        "role_el": "Σεφ · Ιδιοκτήτρια",
+        "years_en": "Since 2012",
+        "years_el": "Από το 2012",
+        "slug": "eleni",
+        "image": "https://images.unsplash.com/photo-1577303935007-0d306ee638cf?w=600&q=70"
+      },
+      {
+        "name_en": "Giannis Vlachos",
+        "name_el": "Γιάννης Βλάχος",
+        "role_en": "Front of House",
+        "role_el": "Υπεύθυνος αίθουσας",
+        "years_en": "Since 2010",
+        "years_el": "Από το 2010",
+        "slug": "giannis",
+        "image": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=70"
+      },
+      {
+        "name_en": "Despoina Maragoudaki",
+        "name_el": "Δέσποινα Μαραγουδάκη",
+        "role_en": "Sous Chef · Pastry",
+        "role_el": "Sous Chef · Ζαχαροπλαστική",
+        "years_en": "Since 2019",
+        "years_el": "Από το 2019",
+        "slug": "despoina",
+        "image": "https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=70"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow_en": "Good to know",
+    "eyebrow_el": "Καλό να ξέρετε",
+    "title_en": "Before you arrive.",
+    "title_el": "Πριν έρθετε.",
+    "items": [
+      {
+        "q_en": "Do I need a reservation?",
+        "q_el": "Χρειάζομαι κράτηση;",
+        "a_en": "Recommended on Fridays, Saturdays, and through August. Walk-ins welcome any other night if a table is free — we usually keep two open for spontaneity.",
+        "a_el": "Συνιστάται τις Παρασκευές, τα Σάββατα και όλον τον Αύγουστο. Όσοι περνούν χωρίς κράτηση εξυπηρετούνται όποτε υπάρχει ελεύθερο τραπέζι — συνήθως κρατάμε δύο για όσους έρχονται αυθόρμητα."
+      },
+      {
+        "q_en": "Where exactly are you?",
+        "q_el": "Πού ακριβώς βρίσκεστε;",
+        "a_en": "Plateia Mantos 4, two streets up from the harbour in Naxos Town. A five-minute walk from the ferry pier. The lemon tree at the entrance is hard to miss.",
+        "a_el": "Πλατεία Μαντώς 4, δύο δρόμους πάνω από το λιμάνι στη Χώρα της Νάξου. Πέντε λεπτά με τα πόδια από το λιμάνι των φέρρυ. Η λεμονιά στην είσοδο δεν ξεφεύγει."
+      },
+      {
+        "q_en": "Do you have vegetarian / vegan / gluten-free options?",
+        "q_el": "Έχετε επιλογές για χορτοφάγους / vegan / χωρίς γλουτένη;",
+        "a_en": "Yes — about a third of the menu is vegetarian, six dishes are vegan, and our pastry chef bakes a gluten-free bread daily. Mention any dietary requirements when you book and we'll adjust the tasting menu.",
+        "a_el": "Ναι — περίπου το ένα τρίτο του μενού είναι χορτοφαγικό, έξι πιάτα είναι vegan και η ζαχαροπλάστιδά μας ψήνει ψωμί χωρίς γλουτένη καθημερινά. Αναφέρετε διατροφικούς περιορισμούς στην κράτηση και θα προσαρμόσουμε το δοκιμαστικό μενού."
+      },
+      {
+        "q_en": "Can children come?",
+        "q_el": "Έρχονται και παιδιά;",
+        "a_en": "Of course. The courtyard is loud and friendly. We have a short kids' menu and a stack of paper and crayons behind the bar.",
+        "a_el": "Φυσικά. Η αυλή είναι ζωηρή και φιλική. Έχουμε ένα μικρό παιδικό μενού και ένα σωρό χαρτιά και κηρομπογιές πίσω από το μπαρ."
+      },
+      {
+        "q_en": "What's your cancellation policy?",
+        "q_el": "Ποια είναι η πολιτική ακύρωσης;",
+        "a_en": "Free cancellation up to 6 hours before your reservation. After that we hold the table for 15 minutes past your slot, then release it. No deposits for standard tables; private courtyard bookings hold a card on file.",
+        "a_el": "Δωρεάν ακύρωση έως 6 ώρες πριν την κράτηση. Μετά κρατάμε το τραπέζι 15 λεπτά μετά την ώρα σας και μετά το αποδεσμεύουμε. Χωρίς προκαταβολή για τα κανονικά τραπέζια· οι κρατήσεις της ιδιωτικής αυλής κρατούν κάρτα."
+      },
+      {
+        "q_en": "Do you take card?",
+        "q_el": "Δέχεστε κάρτα;",
+        "a_en": "Card (Visa, Mastercard, Amex), cash (€), and contactless. Service charge is included on the bill — tips appreciated but never expected.",
+        "a_el": "Κάρτα (Visa, Mastercard, Amex), μετρητά (€) και ανέπαφες πληρωμές. Το σέρβις περιλαμβάνεται στον λογαριασμό — τα φιλοδωρήματα εκτιμώνται αλλά δεν είναι ποτέ υποχρεωτικά."
+      }
+    ]
+  },
+  "contact": {
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=70",
+    "blocks": [
+      {
+        "label_en": "Address",
+        "label_el": "Διεύθυνση",
+        "value_en": "Plateia Mantos 4\nNaxos Town\nNaxos 84300, Greece",
+        "value_el": "Πλατεία Μαντώς 4\nΧώρα Νάξου\nΝάξος 84300, Ελλάδα"
+      },
+      { "label_en": "Phone", "label_el": "Τηλέφωνο", "value_en": "+30 22850 24160",         "value_el": "+30 22850 24160" },
+      { "label_en": "Email", "label_el": "Email",    "value_en": "hello@lemoni-taverna.gr",  "value_el": "hello@lemoni-taverna.gr" },
+      {
+        "label_en": "Hours",
+        "label_el": "Ώρες",
+        "value_en": "Mon · Closed\nTue–Thu · 18:30–23:30\nFri–Sat · 13:00–16:00, 18:30–00:30\nSun · 13:00–23:30",
+        "value_el": "Δευ · Κλειστά\nΤρι–Πεμ · 18:30–23:30\nΠαρ–Σαβ · 13:00–16:00, 18:30–00:30\nΚυρ · 13:00–23:30"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow_en": "From the table",
+    "eyebrow_el": "Από το τραπέζι",
+    "title_en": "What our regulars say.",
+    "title_el": "Τι λένε οι σταθεροί μας πελάτες.",
+    "items": [
+      {
+        "quote_en": "We come back to Naxos for two things — the beach in Plaka and dinner at Lemoni. Eleni's slow-cooked lamb is the reason we extend the trip every year.",
+        "quote_el": "Επιστρέφουμε στη Νάξο για δύο πράγματα — την παραλία της Πλάκας και το δείπνο στο Lemoni. Το σιγομαγειρεμένο αρνί της Ελένης είναι ο λόγος που παρατείνουμε το ταξίδι κάθε χρόνο.",
+        "name": "Sandra & Thomas H.",
+        "role_en": "Returning since 2015",
+        "role_el": "Επιστρέφουν από το 2015"
+      },
+      {
+        "quote_en": "Did the chef's table for our anniversary. Nine courses, all unannounced, all extraordinary. The Naxian potato gratin alone was worth the trip.",
+        "quote_el": "Κάναμε το τραπέζι του σεφ για την επέτειό μας. Εννέα πιάτα, όλα έκπληξη, όλα ξεχωριστά. Μόνο το γκρατέν από νάξιες πατάτες άξιζε το ταξίδι.",
+        "name": "Marco D.",
+        "role_en": "First visit · Milan",
+        "role_el": "Πρώτη επίσκεψη · Μιλάνο"
+      },
+      {
+        "quote_en": "Brought my parents for their golden anniversary. Giannis seated us under the lemon tree without me asking. Eleni came out after dessert. Felt like family.",
+        "quote_el": "Έφερα τους γονείς μου για τη χρυσή επέτειό τους. Ο Γιάννης μας έβαλε κάτω από τη λεμονιά χωρίς να ζητήσω. Η Ελένη βγήκε μετά το επιδόρπιο. Νιώσαμε σαν οικογένεια.",
+        "name": "Anna P.",
+        "role_en": "Family · Athens",
+        "role_el": "Οικογένεια · Αθήνα"
+      },
+      {
+        "quote_en": "The wine list is short but everything is Naxian. Ask Giannis to pick — he sent us a Mantilaria we still order shipped to Berlin.",
+        "quote_el": "Η λίστα κρασιών είναι μικρή αλλά όλα τα κρασιά είναι νάξια. Ζητήστε από τον Γιάννη να επιλέξει — μας έφερε ένα Μαντηλαριά που ακόμα παραγγέλνουμε στο Βερολίνο.",
+        "name": "Lukas R.",
+        "role_en": "Wine club · Berlin",
+        "role_el": "Wine club · Βερολίνο"
+      },
+      {
+        "quote_en": "The cooking class is the best thing we did all week. Two hours, four dishes, and we left with a recipe card for the lemon-and-honey cake.",
+        "quote_el": "Το μάθημα μαγειρικής ήταν το καλύτερο που κάναμε όλη την εβδομάδα. Δύο ώρες, τέσσερα πιάτα, και φύγαμε με τη συνταγή για το κέικ με λεμόνι και μέλι.",
+        "name": "Hannah K.",
+        "role_en": "Visitor · Stockholm",
+        "role_el": "Επισκέπτρια · Στοκχόλμη"
+      },
+      {
+        "quote_en": "Vegetarian friendly without making a fuss about it. Half the menu just is. Eleni even adjusted the tasting menu when I called the day before.",
+        "quote_el": "Φιλικό προς χορτοφάγους χωρίς να γίνεται θέμα. Τα μισά πιάτα είναι ήδη χορτοφαγικά. Η Ελένη προσάρμοσε το δοκιμαστικό μενού όταν τηλεφώνησα την προηγουμένη.",
+        "name": "Priya N.",
+        "role_en": "Visitor · London",
+        "role_el": "Επισκέπτρια · Λονδίνο"
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow_en": "Take a table",
+    "eyebrow_el": "Πιάσε τραπέζι",
+    "title_en": "A seat under the lemon tree.",
+    "title_el": "Μια θέση κάτω από τη λεμονιά.",
+    "subtitle_en": "Pick a date, pick a time. Confirmation lands instantly; we'll send a reminder 8 hours before. If you want the courtyard table specifically, ask in the notes.",
+    "subtitle_el": "Διαλέξτε ημερομηνία και ώρα. Η επιβεβαίωση φτάνει αμέσως· θα στείλουμε υπενθύμιση 8 ώρες πριν. Αν θέλετε συγκεκριμένα το τραπέζι στην αυλή, σημειώστε το.",
+    "bgImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=70"
+  },
+  "page_services": {
+    "eyebrow_en": "Tastings & private dining",
+    "eyebrow_el": "Δοκιμαστικά & ιδιωτικά",
+    "title_en": "Four ways to eat at Lemoni.",
+    "title_el": "Τέσσερις τρόποι να φάτε στο Lemoni.",
+    "sub_en": "Beyond the regular dinner table. Reserved separately — drop us a note in the booking step.",
+    "sub_el": "Πέρα από το κανονικό τραπέζι. Κρατούνται ξεχωριστά — σημειώστε το στο βήμα της κράτησης."
+  },
+  "page_gallery": {
+    "eyebrow_en": "Gallery",
+    "eyebrow_el": "Γκαλερί",
+    "title_en": "Inside the courtyard. On the plate.",
+    "title_el": "Μέσα στην αυλή. Στο πιάτο.",
+    "sub_en": "The room, the team, the work that comes out of the kitchen most nights of the week.",
+    "sub_el": "Ο χώρος, η ομάδα, η δουλειά που βγαίνει από την κουζίνα τα περισσότερα βράδια της εβδομάδας."
+  },
+  "page_team": {
+    "eyebrow_en": "About",
+    "eyebrow_el": "Σχετικά",
+    "title_en": "A family taverna with one rule: take the time.",
+    "title_el": "Μια οικογενειακή ταβέρνα με έναν κανόνα: πάρε τον χρόνο σου.",
+    "sub_en": "Eleni, Giannis, and Despoina. Three pairs of hands, one kitchen, one courtyard.",
+    "sub_el": "Η Ελένη, ο Γιάννης και η Δέσποινα. Τρία ζευγάρια χέρια, μία κουζίνα, μία αυλή."
+  },
+  "page_contact": {
+    "eyebrow_en": "Contact",
+    "eyebrow_el": "Επικοινωνία",
+    "title_en": "Find us in Naxos Town.",
+    "title_el": "Βρείτε μας στη Χώρα της Νάξου.",
+    "sub_en": "Two streets up from the harbour, on the small plateia with the lemon tree.",
+    "sub_el": "Δύο δρόμους πάνω από το λιμάνι, στη μικρή πλατεία με τη λεμονιά."
+  },
+  "page_book": {
+    "eyebrow_en": "Reserve a table",
+    "eyebrow_el": "Κράτηση τραπεζιού",
+    "title_en": "Pick a date, pick a time.",
+    "title_el": "Επιλέξτε ημερομηνία και ώρα.",
+    "sub_en": "Takes 30 seconds. We'll email a confirmation and a reminder 8 hours before your reservation.",
+    "sub_el": "Παίρνει 30 δευτερόλεπτα. Στέλνουμε email με επιβεβαίωση και υπενθύμιση 8 ώρες πριν την κράτηση."
+  },
+  "footer": {
+    "lede_en": "An island taverna, the modern way. Slow-cooked Cycladic dishes, Naxian wines, and a courtyard that has been feeding the neighbourhood since 1978.",
+    "lede_el": "Μια ταβέρνα του νησιού, με τον σύγχρονο τρόπο. Κυκλαδίτικα πιάτα που σιγομαγειρεύονται, νάξια κρασιά και μια αυλή που ταΐζει τη γειτονιά από το 1978.",
+    "cta_en": "Take a seat under the lemon tree.",
+    "cta_el": "Καθίστε κάτω από τη λεμονιά.",
+    "copy_en": "© {year} {business}",
+    "copy_el": "© {year} {business}",
+    "tagline_en": "Established {founded}",
+    "tagline_el": "Από το {founded}"
+  }
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%"><stop offset="0%" stop-color="#1c1814"/><stop offset="60%" stop-color="#0f0c09"/><stop offset="100%" stop-color="#050403"/></radialGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8e4da"/><stop offset="100%" stop-color="#5a564d"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e3c88a"/><stop offset="100%" stop-color="#8a6f33"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="530" rx="220" ry="12" fill="#000" opacity="0.55"/>
+  <!-- scissors: two blades crossing at a pivot -->
+  <g transform="translate(400 320) rotate(-8)">
+    <!-- blade 1 -->
+    <path d="M-20 -10 L240 -40 L260 -30 L260 -10 L-15 8 Z" fill="url(#steel)" stroke="#2a2620" stroke-width="1"/>
+    <!-- blade 2 -->
+    <path d="M-20 10 L240 40 L260 30 L260 10 L-15 -8 Z" fill="url(#steel)" stroke="#2a2620" stroke-width="1"/>
+    <!-- pivot -->
+    <circle cx="0" cy="0" r="8" fill="url(#gold)" stroke="#2a2620"/>
+    <!-- finger rings -->
+    <circle cx="-80" cy="-50" r="36" fill="none" stroke="url(#gold)" stroke-width="8"/>
+    <circle cx="-80" cy="50" r="36" fill="none" stroke="url(#gold)" stroke-width="8"/>
+    <!-- arms to rings -->
+    <line x1="-15" y1="-5" x2="-55" y2="-30" stroke="url(#gold)" stroke-width="6"/>
+    <line x1="-15" y1="5" x2="-55" y2="30" stroke="url(#gold)" stroke-width="6"/>
+  </g>
+  </svg>

@@ -1,0 +1,334 @@
+[
+  {
+    "id": "c_mp76qes5_dyw6c1",
+    "name": "Owen Rivera",
+    "email": "owen.rivera87@hotmail.com",
+    "phone": "+1 702 803 1778",
+    "notes": "Prefers afternoon slots, dinner reservation at 7pm Fridays.",
+    "tags": [
+      "rebooked",
+      "VIP"
+    ],
+    "createdAt": "2026-05-04T12:00:00.000Z",
+    "birthday": "1972-05-12",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_mp76qes6_kh69dt",
+    "name": "Bryan Fisher",
+    "email": "bryan.fisher6@outlook.com",
+    "phone": "+1 702 254 9087",
+    "notes": "Likes a #2 fade with scissor work on top.",
+    "tags": [],
+    "createdAt": "2025-09-06T12:00:00.000Z",
+    "birthday": "1987-07-22",
+    "preferredStaffId": "diego",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_mp76qes6_l79kdf",
+    "name": "Cole Mason",
+    "email": "cole.mason55@gmail.com",
+    "phone": "+1 702 180 9453",
+    "notes": "Brings his son for kids cut every 4 weeks.",
+    "tags": [],
+    "createdAt": "2025-05-24T12:00:00.000Z",
+    "birthday": "1974-06-10",
+    "preferredStaffId": "marcus",
+    "loyaltyPoints": 2
+  },
+  {
+    "id": "c_mp76qes6_cznzr1",
+    "name": "Stefan Wright",
+    "email": "stefan.wright47@proton.me",
+    "phone": "+1 702 348 9466",
+    "notes": "Brings his son for kids cut every 4 weeks.",
+    "tags": [],
+    "createdAt": "2025-12-11T12:00:00.000Z",
+    "birthday": "1975-07-16",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_9lgnlp",
+    "name": "Cole Rivera",
+    "email": "cole.rivera10@gmail.com",
+    "phone": "+1 702 456 7927",
+    "notes": "Brings his son for kids cut every 4 weeks.",
+    "tags": [
+      "rebooked",
+      "VIP"
+    ],
+    "createdAt": "2025-05-10T12:00:00.000Z",
+    "birthday": "1987-09-08",
+    "preferredStaffId": "diego",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_zohlqn",
+    "name": "Jordan Brooks",
+    "email": "jordan.brooks97@hotmail.com",
+    "phone": "+1 702 788 1720",
+    "notes": "Likes a #2 fade with scissor work on top.",
+    "tags": [
+      "wedding-party",
+      "tourist"
+    ],
+    "createdAt": "2025-12-28T12:00:00.000Z",
+    "birthday": "2000-12-12",
+    "preferredStaffId": "marcus",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_mp76qes6_dt7q1u",
+    "name": "Carlos Williams",
+    "email": "carlos.williams73@proton.me",
+    "phone": "+1 702 243 2183",
+    "notes": "Wedding party referral from Bellagio concierge.",
+    "tags": [],
+    "createdAt": "2026-03-23T12:00:00.000Z",
+    "birthday": "2009-05-05",
+    "preferredStaffId": "jamal",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_luw6ko",
+    "name": "Mason Wells",
+    "email": "mason.wells79@icloud.com",
+    "phone": "+1 702 479 2742",
+    "notes": "Prefers afternoon slots, dinner reservation at 7pm Fridays.",
+    "tags": [
+      "patch-tested",
+      "VIP"
+    ],
+    "createdAt": "2025-02-21T12:00:00.000Z",
+    "birthday": "2004-05-18",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_6n5huj",
+    "name": "Hassan Sanders",
+    "email": "hassan.sanders51@hotmail.com",
+    "phone": "+1 702 923 6897",
+    "notes": "Mojave-dry skin — sensitive to alcohol-based aftershave.",
+    "tags": [
+      "tourist"
+    ],
+    "createdAt": "2025-06-03T12:00:00.000Z",
+    "birthday": "1999-06-07",
+    "preferredStaffId": "tre",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_mp76qes6_sg7slp",
+    "name": "Bryan Stewart",
+    "email": "bryan.stewart34@yahoo.com",
+    "phone": "+1 702 676 6560",
+    "notes": "Allergic to citrus oils in beard products.",
+    "tags": [],
+    "createdAt": "2025-07-08T12:00:00.000Z",
+    "birthday": "1987-03-28",
+    "loyaltyPoints": 3
+  },
+  {
+    "id": "c_mp76qes6_9814lw",
+    "name": "Hassan Bryant",
+    "email": "hassan.bryant16@icloud.com",
+    "phone": "+1 702 157 4659",
+    "notes": "Prefers afternoon slots, dinner reservation at 7pm Fridays.",
+    "tags": [
+      "patch-tested",
+      "VIP"
+    ],
+    "createdAt": "2025-03-09T12:00:00.000Z",
+    "birthday": "2006-03-25",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_mp76qes6_lph776",
+    "name": "Cole Ortiz",
+    "email": "cole.ortiz12@hotmail.com",
+    "phone": "+1 702 227 8762",
+    "notes": "Mojave-dry skin — sensitive to alcohol-based aftershave.",
+    "tags": [
+      "wedding-party",
+      "VIP"
+    ],
+    "createdAt": "2025-06-24T12:00:00.000Z",
+    "birthday": "1970-03-10",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_mp76qes6_yp2py0",
+    "name": "Marco Morales",
+    "email": "marco.morales51@gmail.com",
+    "phone": "+1 702 709 8298",
+    "notes": "Prefers afternoon slots, dinner reservation at 7pm Fridays.",
+    "tags": [
+      "wedding-party",
+      "regular"
+    ],
+    "createdAt": "2025-01-30T12:00:00.000Z",
+    "birthday": "1992-07-11",
+    "preferredStaffId": "marcus",
+    "loyaltyPoints": 9
+  },
+  {
+    "id": "c_mp76qes6_4qp49z",
+    "name": "Trent Bryant",
+    "email": "trent.bryant3@icloud.com",
+    "phone": "+1 702 181 6484",
+    "notes": "Likes a #2 fade with scissor work on top.",
+    "tags": [
+      "VIP",
+      "tourist"
+    ],
+    "createdAt": "2025-04-12T12:00:00.000Z",
+    "birthday": "1991-04-08",
+    "loyaltyPoints": 8
+  },
+  {
+    "id": "c_mp76qes6_fqpavh",
+    "name": "Daryl Jenkins",
+    "email": "daryl.jenkins4@yahoo.com",
+    "phone": "+1 702 454 7319",
+    "notes": "Loyalty: 3 visits in last 60 days.",
+    "tags": [
+      "tourist",
+      "patch-tested"
+    ],
+    "createdAt": "2025-11-14T12:00:00.000Z",
+    "birthday": "2006-02-14",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_n3z6yh",
+    "name": "Daryl Green",
+    "email": "daryl.green9@proton.me",
+    "phone": "+1 702 202 1279",
+    "notes": "Likes a #2 fade with scissor work on top.",
+    "tags": [],
+    "createdAt": "2026-02-11T12:00:00.000Z",
+    "birthday": "1979-04-28",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_mp76qes6_2i367b",
+    "name": "Zach Bryant",
+    "email": "zach.bryant62@proton.me",
+    "phone": "+1 702 189 9083",
+    "notes": "Loyalty: 3 visits in last 60 days.",
+    "tags": [],
+    "createdAt": "2025-07-18T12:00:00.000Z",
+    "birthday": "1989-04-22",
+    "preferredStaffId": "diego",
+    "loyaltyPoints": 2
+  },
+  {
+    "id": "c_mp76qes6_ghk8dc",
+    "name": "Brett Green",
+    "email": "brett.green15@hotmail.com",
+    "phone": "+1 702 436 7993",
+    "notes": "Tips well, always books with Marcus.",
+    "tags": [
+      "regular",
+      "rebooked"
+    ],
+    "createdAt": "2026-03-09T12:00:00.000Z",
+    "birthday": "1990-04-02",
+    "preferredStaffId": "marcus",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_3nnm8i",
+    "name": "Trent Cooper",
+    "email": "trent.cooper29@icloud.com",
+    "phone": "+1 702 275 7379",
+    "notes": "Wedding party referral from Bellagio concierge.",
+    "tags": [
+      "tourist",
+      "patch-tested"
+    ],
+    "createdAt": "2025-07-18T12:00:00.000Z",
+    "birthday": "1988-01-03",
+    "loyaltyPoints": 1
+  },
+  {
+    "id": "c_mp76qes6_072jjn",
+    "name": "Wesley Green",
+    "email": "wesley.green37@proton.me",
+    "phone": "+1 702 586 2058",
+    "notes": "Mojave-dry skin — sensitive to alcohol-based aftershave.",
+    "tags": [
+      "tourist"
+    ],
+    "createdAt": "2025-02-22T12:00:00.000Z",
+    "birthday": "1980-06-12",
+    "preferredStaffId": "tre",
+    "loyaltyPoints": 2
+  },
+  {
+    "id": "c_mp76qes6_wxlz7x",
+    "name": "Zach Bell",
+    "email": "zach.bell53@gmail.com",
+    "phone": "+1 702 637 6006",
+    "notes": "",
+    "tags": [
+      "rebooked"
+    ],
+    "createdAt": "2026-01-24T12:00:00.000Z",
+    "birthday": "1981-02-17",
+    "preferredStaffId": "marcus",
+    "loyaltyPoints": 5
+  },
+  {
+    "id": "c_mp76qes6_kp0ver",
+    "name": "Carlos Reed",
+    "email": "carlos.reed86@hotmail.com",
+    "phone": "+1 702 438 1059",
+    "notes": "Allergic to citrus oils in beard products.",
+    "tags": [
+      "regular",
+      "wedding-party"
+    ],
+    "createdAt": "2025-09-11T12:00:00.000Z",
+    "birthday": "1982-11-28",
+    "preferredStaffId": "diego",
+    "loyaltyPoints": 0
+  },
+  {
+    "id": "c_mp76qes6_bqwmw7",
+    "name": "Ricardo Cooper",
+    "email": "ricardo.cooper36@hotmail.com",
+    "phone": "+1 702 270 6560",
+    "notes": "Tips well, always books with Marcus.",
+    "tags": [],
+    "createdAt": "2025-09-05T12:00:00.000Z",
+    "birthday": "1972-08-02",
+    "loyaltyPoints": 4
+  },
+  {
+    "id": "c_mp76qes6_dvwya5",
+    "name": "Hassan Hayes",
+    "email": "hassan.hayes25@hotmail.com",
+    "phone": "+1 702 166 7894",
+    "notes": "Tourist — first-time visitor from Chicago.",
+    "tags": [],
+    "createdAt": "2025-12-29T12:00:00.000Z",
+    "birthday": "1979-03-22",
+    "loyaltyPoints": 6
+  },
+  {
+    "id": "c_mp76qes6_use13l",
+    "name": "Ethan Morales",
+    "email": "ethan.morales51@proton.me",
+    "phone": "+1 702 343 8670",
+    "notes": "Loyalty: 3 visits in last 60 days.",
+    "tags": [
+      "wedding-party",
+      "regular"
+    ],
+    "createdAt": "2026-02-27T12:00:00.000Z",
+    "birthday": "1993-10-02",
+    "loyaltyPoints": 3
+  }
+]

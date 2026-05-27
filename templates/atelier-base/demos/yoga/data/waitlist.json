@@ -1,0 +1,72 @@
+[
+  {
+    "id": "w_demo5_0001",
+    "name": "Leah Allen",
+    "phone": "+44 7758 370469",
+    "email": "leah.allen35@yahoo.co.uk",
+    "serviceId": "yin-restore",
+    "serviceName": "Yin & restore",
+    "barberId": "any",
+    "preferredDate": "2026-06-03",
+    "preferredTime": "18:00",
+    "notes": "Travels in from across the city.",
+    "status": "converted",
+    "createdAt": "2026-05-18T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo5_0002",
+    "name": "Isla Evans",
+    "phone": "+44 7989 211646",
+    "email": "isla.evans42@hotmail.co.uk",
+    "serviceId": "morning-mobility",
+    "serviceName": "Morning mobility",
+    "barberId": "sienna",
+    "preferredDate": "2026-06-01",
+    "preferredTime": "10:00",
+    "notes": "New to yoga, gentle encouragement.",
+    "status": "waiting",
+    "createdAt": "2026-05-16T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo5_0003",
+    "name": "Ruby Wilson",
+    "phone": "+44 7122 277842",
+    "email": "ruby.wilson79@hotmail.co.uk",
+    "serviceId": "morning-mobility",
+    "serviceName": "Morning mobility",
+    "barberId": "any",
+    "preferredDate": "2026-05-27",
+    "preferredTime": "13:00",
+    "notes": "Books the Sunday slot every week.",
+    "status": "contacted",
+    "createdAt": "2026-05-19T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo5_0004",
+    "name": "Lucy Lewis",
+    "phone": "+44 7180 840467",
+    "email": "lucy.lewis61@outlook.com",
+    "serviceId": "yin-restore",
+    "serviceName": "Yin & restore",
+    "barberId": "any",
+    "preferredDate": "2026-06-07",
+    "preferredTime": "13:00",
+    "notes": "Prefers Sienna for slower classes.",
+    "status": "waiting",
+    "createdAt": "2026-05-19T09:00:00.000Z"
+  },
+  {
+    "id": "w_demo5_0005",
+    "name": "Isla Evans",
+    "phone": "+44 7989 211646",
+    "email": "isla.evans42@hotmail.co.uk",
+    "serviceId": "vinyasa-flow",
+    "serviceName": "Vinyasa flow",
+    "barberId": "any",
+    "preferredDate": "2026-06-08",
+    "preferredTime": "18:00",
+    "notes": "Working through the beginners course.",
+    "status": "converted",
+    "createdAt": "2026-05-15T09:00:00.000Z"
+  }
+]

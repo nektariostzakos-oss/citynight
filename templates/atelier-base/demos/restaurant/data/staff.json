@@ -1,0 +1,59 @@
+[
+  {
+    "id": "eleni",
+    "name": "Eleni Vlachou",
+    "role": "Chef · Owner",
+    "bio": "Second-generation owner. Trained at Le Monde in Athens, ran the kitchen at Aleria in Metaxourgeio for six years, then came home to Naxos in 2012 to take over Lemoni from her mother. The wood-fired oven hasn't changed since 1978; everything else has.",
+    "photo": "https://images.unsplash.com/photo-1577303935007-0d306ee638cf?w=600&q=70",
+    "specialties": [
+      "Cycladic slow-cooking",
+      "Tasting menus",
+      "Whole-fish work"
+    ],
+    "enabled": true,
+    "workDays": [2, 3, 4, 5, 6, 0],
+    "startTime": "11:00",
+    "endTime": "23:30",
+    "breakStart": "16:00",
+    "breakEnd": "18:00",
+    "order": 1
+  },
+  {
+    "id": "giannis",
+    "name": "Giannis Vlachos",
+    "role": "Front of House",
+    "bio": "Eleni's older brother. Ran a small bar in Plaka for a decade before returning to the family taverna. Knows the room, the wine list, and every regular by name. The reason your table is always set right.",
+    "photo": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=70",
+    "specialties": [
+      "Wine pairings",
+      "Private events",
+      "Front-of-house service"
+    ],
+    "enabled": true,
+    "workDays": [2, 3, 4, 5, 6, 0],
+    "startTime": "17:30",
+    "endTime": "00:30",
+    "breakStart": "",
+    "breakEnd": "",
+    "order": 2
+  },
+  {
+    "id": "despoina",
+    "name": "Despoina Maragoudaki",
+    "role": "Sous Chef · Pastry",
+    "bio": "Apprenticed in the kitchen at Funky Gourmet, joined Lemoni in 2019. Runs the pastry section and bakes the gluten-free bread that arrives at every table. Her honey-and-walnut tart is on the spring menu every year.",
+    "photo": "https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=70",
+    "specialties": [
+      "Pastry",
+      "Bread baking",
+      "Plating"
+    ],
+    "enabled": true,
+    "workDays": [2, 3, 4, 5, 6, 0],
+    "startTime": "08:00",
+    "endTime": "16:00",
+    "breakStart": "12:00",
+    "breakEnd": "12:30",
+    "order": 3
+  }
+]

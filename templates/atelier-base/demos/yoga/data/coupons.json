@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cpn_demo5_1",
+    "code": "FIRSTFLOW",
+    "kind": "percent",
+    "value": 50,
+    "maxUses": 300,
+    "uses": 74,
+    "minTotal": 0,
+    "expiresAt": "2026-11-27T21:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-03-15T10:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo5_2",
+    "code": "NEWMAT",
+    "kind": "percent",
+    "value": 20,
+    "maxUses": 150,
+    "uses": 0,
+    "minTotal": 0,
+    "expiresAt": "2026-08-05T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-04-10T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo5_3",
+    "code": "SHOPFIVE",
+    "kind": "fixed",
+    "value": 5,
+    "maxUses": 200,
+    "uses": 31,
+    "minTotal": 30,
+    "expiresAt": "2026-10-23T20:59:00.000Z",
+    "appliesTo": "shop",
+    "active": true,
+    "createdAt": "2026-04-26T09:00:00.000Z"
+  },
+  {
+    "id": "cpn_demo5_4",
+    "code": "BRINGAFRIEND",
+    "kind": "percent",
+    "value": 25,
+    "maxUses": 120,
+    "uses": 15,
+    "minTotal": 0,
+    "expiresAt": "2026-08-19T20:59:00.000Z",
+    "appliesTo": "bookings",
+    "active": true,
+    "createdAt": "2026-03-20T10:00:00.000Z"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "tr_demo6_1",
+    "title_en": "Sharp to soft",
+    "title_el": "Sharp to soft",
+    "caption_en": "Sharp bob to a soft, layered cut",
+    "caption_el": "Sharp bob to a soft, layered cut",
+    "before": "https://images.unsplash.com/photo-1554519515-242161756769?w=800&q=80&auto=format&fit=crop",
+    "after": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=800&q=80&auto=format&fit=crop"
+  },
+  {
+    "id": "tr_demo6_2",
+    "title_en": "Brassy to tonal",
+    "title_el": "Brassy to tonal",
+    "caption_en": "From brassy ends to a clean tonal blonde",
+    "caption_el": "From brassy ends to a clean tonal blonde",
+    "before": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=800&q=80&auto=format&fit=crop",
+    "after": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80&auto=format&fit=crop"
+  }
+]

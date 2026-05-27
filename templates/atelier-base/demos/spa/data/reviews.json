@@ -1,0 +1,156 @@
+[
+  {
+    "id": "r_demo3_0001",
+    "name": "Ella B.",
+    "rating": 5,
+    "title": "The quietest hour of my month",
+    "body": "I left feeling like the week had been lifted off my shoulders. Elena listens and the pressure was perfect.",
+    "source": "booking",
+    "bookingId": "b_demo3_0001",
+    "status": "pending",
+    "createdAt": "2026-03-21T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0002",
+    "name": "Amelia J.",
+    "rating": 4,
+    "title": "The hot stone ritual is something else",
+    "body": "Warm towels, a spotless room, and a therapist who genuinely cares. Pure calm.",
+    "source": "booking",
+    "bookingId": "b_demo3_0009",
+    "status": "approved",
+    "createdAt": "2026-03-25T16:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0003",
+    "name": "Mia S.",
+    "rating": 5,
+    "title": "Booked at midnight, reminded the morning of",
+    "body": "The whole thing was effortless. I have already booked the next one.",
+    "source": "booking",
+    "bookingId": "b_demo3_0016",
+    "status": "approved",
+    "createdAt": "2026-03-29T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0004",
+    "name": "Amelia J.",
+    "rating": 5,
+    "title": "A proper reset",
+    "body": "Unhurried from start to finish. The botanical products smell incredible.",
+    "source": "booking",
+    "bookingId": "b_demo3_0023",
+    "status": "approved",
+    "createdAt": "2026-04-02T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0005",
+    "name": "Lucy H.",
+    "rating": 5,
+    "title": "Sofia's facial was wonderful",
+    "body": "My skin has not looked this clear in months. Calm, careful and kind.",
+    "source": "booking",
+    "bookingId": "b_demo3_0031",
+    "status": "approved",
+    "createdAt": "2026-04-06T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0006",
+    "name": "Adam W.",
+    "rating": 5,
+    "title": "Exactly what I needed",
+    "body": "No rushing, no upsell. Just an hour that was entirely mine.",
+    "source": "booking",
+    "bookingId": "b_demo3_0038",
+    "status": "approved",
+    "createdAt": "2026-04-09T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0007",
+    "name": "Anna C.",
+    "rating": 5,
+    "title": "We will be back",
+    "body": "We did the couples retreat for our anniversary. Ninety minutes of complete quiet.",
+    "source": "booking",
+    "bookingId": "b_demo3_0048",
+    "status": "approved",
+    "createdAt": "2026-04-14T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0008",
+    "name": "Ava M.",
+    "rating": 5,
+    "title": "The quietest hour of my month",
+    "body": "I left feeling like the week had been lifted off my shoulders. Elena listens and the pressure was perfect.",
+    "source": "booking",
+    "bookingId": "b_demo3_0056",
+    "status": "approved",
+    "createdAt": "2026-04-18T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0009",
+    "name": "Ava M.",
+    "rating": 5,
+    "title": "The hot stone ritual is something else",
+    "body": "Warm towels, a spotless room, and a therapist who genuinely cares. Pure calm.",
+    "source": "booking",
+    "bookingId": "b_demo3_0063",
+    "status": "approved",
+    "createdAt": "2026-04-20T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0010",
+    "name": "Clara C.",
+    "rating": 5,
+    "title": "Booked at midnight, reminded the morning of",
+    "body": "The whole thing was effortless. I have already booked the next one.",
+    "source": "booking",
+    "bookingId": "b_demo3_0072",
+    "status": "approved",
+    "createdAt": "2026-04-25T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0011",
+    "name": "Ava M.",
+    "rating": 5,
+    "title": "A proper reset",
+    "body": "Unhurried from start to finish. The botanical products smell incredible.",
+    "source": "booking",
+    "bookingId": "b_demo3_0081",
+    "status": "pending",
+    "createdAt": "2026-05-01T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0012",
+    "name": "Amelia J.",
+    "rating": 4,
+    "title": "Sofia's facial was wonderful",
+    "body": "My skin has not looked this clear in months. Calm, careful and kind.",
+    "source": "booking",
+    "bookingId": "b_demo3_0091",
+    "status": "approved",
+    "createdAt": "2026-05-06T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0013",
+    "name": "Lara C.",
+    "rating": 4,
+    "title": "Exactly what I needed",
+    "body": "No rushing, no upsell. Just an hour that was entirely mine.",
+    "source": "booking",
+    "bookingId": "b_demo3_0099",
+    "status": "approved",
+    "createdAt": "2026-05-11T15:00:00.000Z"
+  },
+  {
+    "id": "r_demo3_0014",
+    "name": "Leo L.",
+    "rating": 5,
+    "title": "We will be back",
+    "body": "We did the couples retreat for our anniversary. Ninety minutes of complete quiet.",
+    "source": "booking",
+    "bookingId": "b_demo3_0106",
+    "status": "approved",
+    "createdAt": "2026-05-14T15:00:00.000Z"
+  }
+]

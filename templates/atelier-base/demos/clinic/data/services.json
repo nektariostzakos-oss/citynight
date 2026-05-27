@@ -1,0 +1,68 @@
+[
+  {
+    "id": "anti-wrinkle",
+    "name": "Anti-wrinkle treatment",
+    "desc": "Smooths fine lines with precise, conservative dosing.",
+    "duration": 30,
+    "price": 180,
+    "bufferMinutes": 15,
+    "category": "Injectables",
+    "enabled": true,
+    "order": 1
+  },
+  {
+    "id": "dermal-filler",
+    "name": "Dermal filler",
+    "desc": "Restores volume and definition, naturally and subtly.",
+    "duration": 45,
+    "price": 290,
+    "bufferMinutes": 15,
+    "category": "Injectables",
+    "enabled": true,
+    "order": 2
+  },
+  {
+    "id": "hydrafacial",
+    "name": "Signature HydraFacial",
+    "desc": "A deep cleanse, exfoliation and hydration in one session.",
+    "duration": 60,
+    "price": 140,
+    "bufferMinutes": 10,
+    "category": "Skin",
+    "enabled": true,
+    "order": 3
+  },
+  {
+    "id": "microneedling",
+    "name": "Medical microneedling",
+    "desc": "Stimulates collagen for firmer, smoother, even-toned skin.",
+    "duration": 60,
+    "price": 210,
+    "bufferMinutes": 15,
+    "category": "Skin",
+    "enabled": true,
+    "order": 4
+  },
+  {
+    "id": "laser-hair",
+    "name": "Laser hair removal",
+    "desc": "Comfortable, effective reduction across any area.",
+    "duration": 30,
+    "price": 90,
+    "bufferMinutes": 10,
+    "category": "Laser",
+    "enabled": true,
+    "order": 5
+  },
+  {
+    "id": "skin-consultation",
+    "name": "Skin consultation",
+    "desc": "A thorough assessment and a plan built around your skin.",
+    "duration": 30,
+    "price": 45,
+    "bufferMinutes": 10,
+    "category": "Consultation",
+    "enabled": true,
+    "order": 6
+  }
+]

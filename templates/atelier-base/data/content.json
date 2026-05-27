@@ -1,0 +1,378 @@
+{
+  "page_home": {
+    "bgImage": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920&q=72&auto=format&fit=crop",
+    "bgOpacity": 42
+  },
+  "hero": {
+    "pill_en": "Open today in South Kensington",
+    "pill_el": "Ανοιχτά σήμερα στο South Kensington",
+    "title_en": "Sharp cuts.",
+    "title_el": "Κουρέματα ακριβείας.",
+    "titleAccent_en": "Old-school care.",
+    "titleAccent_el": "Φροντίδα παλιάς σχολής.",
+    "subtitle_en": "Classic cuts, skin fades, and hot-towel shaves on a quiet Kensington mews. Book online in under a minute, or walk in when a chair is free.",
+    "subtitle_el": "Κλασικά κουρέματα, skin fades και ξυρίσματα με ζεστή πετσέτα σε ένα ήσυχο mews του Kensington. Κλείσε ραντεβού online σε λιγότερο από ένα λεπτό ή πέρασε όποτε υπάρχει ελεύθερη καρέκλα.",
+    "meta1_en": "★★★★★ 4.9 / 380 Google reviews",
+    "meta1_el": "★★★★★ 4.9 / 380 κριτικές Google",
+    "meta2_en": "Open today · 10:00–17:00",
+    "meta2_el": "Ανοιχτά σήμερα · 10:00–17:00",
+    "bgImage": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920&q=72&auto=format&fit=crop",
+    "bgVideo": "",
+    "bgVideoPoster": "",
+    "sideImage": "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80&auto=format&fit=crop",
+    "sideRole_en": "Master barber & owner",
+    "sideRole_el": "Master barber & ιδιοκτήτης",
+    "sideName": "Elliott Vance",
+    "bgOpacity": 53,
+    "overlayStrength": 40
+  },
+  "info": {
+    "items": [
+      {
+        "label_en": "Open today",
+        "label_el": "Ανοιχτά σήμερα",
+        "value_en": "10:00 – 17:00",
+        "value_el": "10:00 – 17:00"
+      },
+      {
+        "label_en": "Address",
+        "label_el": "Διεύθυνση",
+        "value_en": "47 Cranley Mews, SW7",
+        "value_el": "47 Cranley Mews, SW7"
+      },
+      {
+        "label_en": "Phone",
+        "label_el": "Τηλέφωνο",
+        "value_en": "+44 20 7946 0412",
+        "value_el": "+44 20 7946 0412"
+      },
+      {
+        "label_en": "Walk-ins",
+        "label_el": "Χωρίς ραντεβού",
+        "value_en": "When a chair is free",
+        "value_el": "Όποτε υπάρχει ελεύθερη καρέκλα"
+      }
+    ]
+  },
+  "services": {
+    "eyebrow_en": "The menu",
+    "eyebrow_el": "Ο κατάλογος",
+    "title_en": "Cuts, beards, the full ritual.",
+    "title_el": "Κουρέματα, γένια, όλο το τελετουργικό.",
+    "items": [
+      {
+        "id": "svc-1",
+        "name_en": "Signature Cut",
+        "name_el": "Signature Cut",
+        "price": 45,
+        "duration": 45,
+        "desc_en": "Consultation, scissor or clipper cut, hot-towel finish.",
+        "desc_el": "Συμβουλευτική, κούρεμα με ψαλίδι ή μηχανή, φινίρισμα με ζεστή πετσέτα."
+      },
+      {
+        "id": "svc-2",
+        "name_en": "Skin Fade",
+        "name_el": "Skin Fade",
+        "price": 55,
+        "duration": 50,
+        "desc_en": "Bald-fade transitions, razor-clean edges.",
+        "desc_el": "Σβησίματα bald-fade, καθαρές γραμμές με ξυράφι."
+      },
+      {
+        "id": "svc-3",
+        "name_en": "Beard Sculpt",
+        "name_el": "Διαμόρφωση Γενιών",
+        "price": 30,
+        "duration": 30,
+        "desc_en": "Shape, line-up, hot-oil finish.",
+        "desc_el": "Σχήμα, γραμμές, φινίρισμα με ζεστό λάδι."
+      },
+      {
+        "id": "svc-4",
+        "name_en": "Hot Towel Shave",
+        "name_el": "Ξύρισμα με Ζεστή Πετσέτα",
+        "price": 55,
+        "duration": 45,
+        "desc_en": "Straight razor, two hot towels, post-shave balm.",
+        "desc_el": "Ξυράφι, δύο ζεστές πετσέτες, βάλσαμο μετά το ξύρισμα."
+      },
+      {
+        "id": "svc-5",
+        "name_en": "Cut + Beard",
+        "name_el": "Κούρεμα + Γένια",
+        "price": 70,
+        "duration": 75,
+        "desc_en": "Full cut with beard sculpt. Most-booked combo.",
+        "desc_el": "Πλήρες κούρεμα με διαμόρφωση γενιών. Ο πιο δημοφιλής συνδυασμός."
+      },
+      {
+        "id": "svc-6",
+        "name_en": "The Cranley",
+        "name_el": "The Cranley",
+        "price": 95,
+        "duration": 90,
+        "desc_en": "Cut, beard, scalp massage, hot-towel shave.",
+        "desc_el": "Κούρεμα, γένια, μασάζ κεφαλιού, ξύρισμα με ζεστή πετσέτα."
+      }
+    ]
+  },
+  "gallery_strip": {
+    "eyebrow_en": "Inside the shop",
+    "eyebrow_el": "Μέσα στο κουρείο",
+    "title_en": "Where good cuts happen.",
+    "title_el": "Εκεί που γίνονται τα καλά κουρέματα.",
+    "images": [
+      { "src": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=1200&q=80&auto=format&fit=crop" },
+      { "src": "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1200&q=80&auto=format&fit=crop" },
+      { "src": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&auto=format&fit=crop" },
+      { "src": "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80&auto=format&fit=crop" },
+      { "src": "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1200&q=80&auto=format&fit=crop" }
+    ]
+  },
+  "gallery": {
+    "items": [
+      { "src": "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1600&q=80&auto=format&fit=crop", "tag": "Cuts", "big": true },
+      { "src": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=1200&q=80&auto=format&fit=crop", "tag": "Beards", "big": false },
+      { "src": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&auto=format&fit=crop", "tag": "Shop", "big": false },
+      { "src": "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80&auto=format&fit=crop", "tag": "Cuts", "big": false },
+      { "src": "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1200&q=80&auto=format&fit=crop", "tag": "Cuts", "big": false },
+      { "src": "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=1200&q=80&auto=format&fit=crop", "tag": "Shop", "big": false },
+      { "src": "https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=1200&q=80&auto=format&fit=crop", "tag": "Beards", "big": false },
+      { "src": "https://images.unsplash.com/photo-1567894340315-735d7c361db0?w=1200&q=80&auto=format&fit=crop", "tag": "Cuts", "big": false },
+      { "src": "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&q=80&auto=format&fit=crop", "tag": "Shop", "big": false }
+    ]
+  },
+  "about": {
+    "eyebrow_en": "Our story",
+    "eyebrow_el": "Η ιστορία μας",
+    "title_en": "A barbershop, the old way. No fuss.",
+    "title_el": "Ένα κουρείο, με τον παλιό τρόπο. Χωρίς φασαρία.",
+    "p1_en": "Oakline opened on Cranley Mews in 2016 with two chairs and one idea: take the time, do the work properly. South Kensington has plenty of places that rush you through. We are not one of them.",
+    "p1_el": "Το Oakline άνοιξε στο Cranley Mews το 2016 με δύο καρέκλες και μία ιδέα: να αφιερώνουμε χρόνο, να κάνουμε τη δουλειά σωστά. Το South Kensington έχει πολλά μέρη που σε βιάζουν. Εμείς δεν είμαστε ένα από αυτά.",
+    "p2_en": "Eight years later we have three chairs and a regular clientele of locals, students, and people who walk an extra ten minutes for a cut that holds. The philosophy hasn't moved. Listen first, cut second, send people back out looking like themselves on a good day.",
+    "p2_el": "Οκτώ χρόνια μετά έχουμε τρεις καρέκλες και σταθερούς πελάτες: κατοίκους της γειτονιάς, φοιτητές και ανθρώπους που περπατούν δέκα λεπτά παραπάνω για ένα κούρεμα που κρατάει. Η φιλοσοφία δεν άλλαξε. Πρώτα ακούμε, μετά κουρεύουμε, και σε στέλνουμε πίσω έξω να μοιάζεις με τον εαυτό σου σε μια καλή μέρα.",
+    "p3_en": "We work on classic cuts, skin fades, full beard sculpting, and the kind of hot-towel shave you book the day before. Walk in any afternoon when a chair is free.",
+    "p3_el": "Δουλεύουμε κλασικά κουρέματα, skin fades, πλήρη διαμόρφωση γενιών και το είδος του ξυρίσματος με ζεστή πετσέτα που το κλείνεις από την προηγούμενη μέρα. Πέρασε όποιο απόγευμα υπάρχει ελεύθερη καρέκλα.",
+    "image": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&auto=format&fit=crop"
+  },
+  "team": {
+    "eyebrow_en": "The team",
+    "eyebrow_el": "Η ομάδα",
+    "title_en": "Three chairs. Three perspectives.",
+    "title_el": "Τρεις καρέκλες. Τρεις οπτικές.",
+    "members": [
+      {
+        "name_en": "Elliott Vance",
+        "name_el": "Elliott Vance",
+        "role_en": "Master Barber · Owner",
+        "role_el": "Master Barber · Ιδιοκτήτης",
+        "years_en": "15 years",
+        "years_el": "15 χρόνια",
+        "slug": "marcus",
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80&auto=format&fit=crop"
+      },
+      {
+        "name_en": "Reuben Okafor",
+        "name_el": "Reuben Okafor",
+        "role_en": "Senior Barber",
+        "role_el": "Senior Barber",
+        "years_en": "8 years",
+        "years_el": "8 χρόνια",
+        "slug": "jamal",
+        "image": "https://images.unsplash.com/photo-1488161628813-04466f872be2?w=900&q=80&auto=format&fit=crop"
+      },
+      {
+        "name_en": "Cal Brennan",
+        "name_el": "Cal Brennan",
+        "role_en": "Barber",
+        "role_el": "Barber",
+        "years_en": "5 years",
+        "years_el": "5 χρόνια",
+        "slug": "diego",
+        "image": "https://images.unsplash.com/photo-1583864697784-a0efc8379f70?w=900&q=80&auto=format&fit=crop"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow_en": "Questions",
+    "eyebrow_el": "Ερωτήσεις",
+    "title_en": "Good to know.",
+    "title_el": "Καλό να ξέρεις.",
+    "items": [
+      {
+        "q_en": "Do I need an appointment?",
+        "q_el": "Χρειάζομαι ραντεβού;",
+        "a_en": "Book online for a guaranteed time. Chairs fill up fast, especially Fridays and Saturdays. Walk-ins are welcome any time a chair is free.",
+        "a_el": "Κλείσε online για εγγυημένη ώρα. Οι καρέκλες γεμίζουν γρήγορα, ειδικά Παρασκευή και Σάββατο. Όσοι περνούν χωρίς ραντεβού εξυπηρετούνται όποτε υπάρχει ελεύθερη καρέκλα."
+      },
+      {
+        "q_en": "Where exactly are you?",
+        "q_el": "Πού ακριβώς βρίσκεστε;",
+        "a_en": "47 Cranley Mews, South Kensington, SW7 3BY. A five-minute walk from Gloucester Road and South Kensington tube. Metered parking on Old Brompton Road.",
+        "a_el": "47 Cranley Mews, South Kensington, SW7 3BY. Πέντε λεπτά με τα πόδια από τους σταθμούς Gloucester Road και South Kensington. Στάθμευση με παρκόμετρο στην Old Brompton Road."
+      },
+      {
+        "q_en": "What's your cancellation policy?",
+        "q_el": "Ποια είναι η πολιτική ακύρωσης;",
+        "a_en": "Free cancellation up to 4 hours before your slot. After that we charge 50% of the service price. No-shows are billed in full.",
+        "a_el": "Δωρεάν ακύρωση έως 4 ώρες πριν το ραντεβού σου. Μετά από αυτό χρεώνουμε το 50% της τιμής της υπηρεσίας. Η μη εμφάνιση χρεώνεται πλήρως."
+      },
+      {
+        "q_en": "Do you take card?",
+        "q_el": "Δέχεστε κάρτα;",
+        "a_en": "Card, cash, Apple Pay and Google Pay. Tips are appreciated but never expected.",
+        "a_el": "Κάρτα, μετρητά, Apple Pay και Google Pay. Τα φιλοδωρήματα εκτιμώνται αλλά δεν είναι ποτέ υποχρεωτικά."
+      },
+      {
+        "q_en": "Can I bring my kid?",
+        "q_el": "Μπορώ να φέρω το παιδί μου;",
+        "a_en": "Of course. Cuts for kids 12 and under are £25. Our team is patient and there's a basket of books behind the front desk.",
+        "a_el": "Φυσικά. Τα κουρέματα για παιδιά έως 12 ετών κοστίζουν £25. Η ομάδα μας έχει υπομονή και υπάρχει ένα καλάθι με βιβλία πίσω από το γραφείο υποδοχής."
+      },
+      {
+        "q_en": "Do you do wedding-party grooming?",
+        "q_el": "Κάνετε grooming για γαμήλιες παρέες;",
+        "a_en": "Yes. Groom and groomsmen packages, in-shop before the day. Email hello@oakline.studio at least a week ahead and we'll set aside the chairs.",
+        "a_el": "Ναι. Πακέτα για γαμπρό και κουμπάρους, στο κουρείο πριν την ημέρα. Στείλε email στο hello@oakline.studio τουλάχιστον μία εβδομάδα νωρίτερα και θα κρατήσουμε τις καρέκλες."
+      }
+    ]
+  },
+  "contact": {
+    "image": "https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=1400&q=80&auto=format&fit=crop",
+    "blocks": [
+      {
+        "label_en": "Address",
+        "label_el": "Διεύθυνση",
+        "value_en": "47 Cranley Mews\nSouth Kensington\nLondon SW7 3BY",
+        "value_el": "47 Cranley Mews\nSouth Kensington\nΛονδίνο SW7 3BY"
+      },
+      {
+        "label_en": "Phone",
+        "label_el": "Τηλέφωνο",
+        "value_en": "+44 20 7946 0412",
+        "value_el": "+44 20 7946 0412"
+      },
+      {
+        "label_en": "Email",
+        "label_el": "Email",
+        "value_en": "hello@oakline.studio",
+        "value_el": "hello@oakline.studio"
+      },
+      {
+        "label_en": "Hours",
+        "label_el": "Ώρες",
+        "value_en": "Mon · 10:00–17:00\nTue · 10:00–14:00, 17:00–21:00\nWed · 10:00–17:00\nThu · 10:00–14:00, 17:00–21:00\nFri–Sat · 10:00–21:00\nSun · Closed",
+        "value_el": "Δευ · 10:00–17:00\nΤρι · 10:00–14:00, 17:00–21:00\nΤετ · 10:00–17:00\nΠεμ · 10:00–14:00, 17:00–21:00\nΠαρ–Σαβ · 10:00–21:00\nΚυρ · Κλειστά"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow_en": "From the chair",
+    "eyebrow_el": "Από την καρέκλα",
+    "title_en": "What our regulars say.",
+    "title_el": "Τι λένε οι σταθεροί μας πελάτες.",
+    "items": [
+      {
+        "quote_en": "Best skin fade in Kensington, easily. Elliott takes his time and the finish lasts three weeks.",
+        "quote_el": "Σαφώς το καλύτερο skin fade στο Kensington. Ο Elliott αφιερώνει χρόνο και το αποτέλεσμα κρατάει τρεις εβδομάδες.",
+        "name": "Anthony R.",
+        "role_en": "Regular since 2021",
+        "role_el": "Σταθερός πελάτης από το 2021"
+      },
+      {
+        "quote_en": "The hot-towel shave was the most relaxing 45 minutes of my month. Worth the trip across town.",
+        "quote_el": "Το ξύρισμα με ζεστή πετσέτα ήταν τα πιο χαλαρωτικά 45 λεπτά του μήνα μου. Αξίζει η διαδρομή ως την άλλη άκρη της πόλης.",
+        "name": "Stefan K.",
+        "role_en": "Visitor from Berlin",
+        "role_el": "Επισκέπτης από το Βερολίνο"
+      },
+      {
+        "quote_en": "Booked online in 30 seconds. Walked out 75 minutes later looking sharper than I have in years.",
+        "quote_el": "Έκλεισα online σε 30 δευτερόλεπτα. Βγήκα 75 λεπτά μετά πιο φρεσκαρισμένος από χρόνια.",
+        "name": "Daryl M.",
+        "role_en": "Wedding party · Fulham",
+        "role_el": "Γαμήλια παρέα · Fulham"
+      },
+      {
+        "quote_en": "Reuben nails the beard shape every time. The hot-oil finish makes a real difference.",
+        "quote_el": "Ο Reuben πετυχαίνει το σχήμα των γενιών κάθε φορά. Το φινίρισμα με ζεστό λάδι κάνει πραγματική διαφορά.",
+        "name": "Carlos D.",
+        "role_en": "Regular since 2022",
+        "role_el": "Σταθερός πελάτης από το 2022"
+      },
+      {
+        "quote_en": "Brought my son in for his first real haircut. Cal kept him calm for the whole 30 minutes. He asked when we could come back.",
+        "quote_el": "Έφερα τον γιο μου για το πρώτο του πραγματικό κούρεμα. Ο Cal τον κράτησε ήρεμο και τα 30 λεπτά. Ρώτησε πότε μπορούμε να ξαναπάμε.",
+        "name": "Michelle V.",
+        "role_en": "First-time mum · Chelsea",
+        "role_el": "Μαμά για πρώτη φορά · Chelsea"
+      },
+      {
+        "quote_en": "Walked from Earl's Court on a recommendation. Worth it. Cal cut my curls instead of thinning them out. Finally a barber who gets textured hair.",
+        "quote_el": "Ήρθα με τα πόδια από το Earl's Court μετά από σύσταση. Άξιζε. Ο Cal έκοψε τις μπούκλες μου αντί να τις αραιώσει. Επιτέλους ένας κουρέας που καταλαβαίνει τα σγουρά μαλλιά.",
+        "name": "Andre B.",
+        "role_en": "New regular · Earl's Court",
+        "role_el": "Νέος σταθερός πελάτης · Earl's Court"
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow_en": "Take a seat",
+    "eyebrow_el": "Κάθισε στην καρέκλα",
+    "title_en": "The next chair has your name on it.",
+    "title_el": "Η επόμενη καρέκλα έχει το όνομά σου.",
+    "subtitle_en": "Book in under a minute. Choose your service, your barber, and the time that works. We'll handle the rest.",
+    "subtitle_el": "Κλείσε σε λιγότερο από ένα λεπτό. Διάλεξε υπηρεσία, κουρέα και την ώρα που σε βολεύει. Εμείς αναλαμβάνουμε τα υπόλοιπα.",
+    "bgImage": "/uploads/mp78uaqo_a14443ab3b30.webp"
+  },
+  "page_services": {
+    "eyebrow_en": "The menu",
+    "eyebrow_el": "Ο κατάλογος",
+    "title_en": "Cuts, beards, and the full ritual.",
+    "title_el": "Κουρέματα, γένια και όλο το τελετουργικό.",
+    "sub_en": "Honest pricing, real-time slots. Add a beard sculpt or hot shave to any cut at the chair.",
+    "sub_el": "Τίμιες τιμές, ραντεβού σε πραγματικό χρόνο. Πρόσθεσε διαμόρφωση γενιών ή ξύρισμα σε οποιοδήποτε κούρεμα, εκεί στην καρέκλα."
+  },
+  "page_gallery": {
+    "eyebrow_en": "Gallery",
+    "eyebrow_el": "Γκαλερί",
+    "title_en": "Inside the shop. On the chair.",
+    "title_el": "Μέσα στο κουρείο. Πάνω στην καρέκλα.",
+    "sub_en": "The room, the team, and the work that walks back out onto the mews.",
+    "sub_el": "Ο χώρος, η ομάδα και η δουλειά που βγαίνει ξανά έξω στο mews."
+  },
+  "page_team": {
+    "eyebrow_en": "Our team",
+    "eyebrow_el": "Η ομάδα μας",
+    "title_en": "Three barbers. One standard.",
+    "title_el": "Τρεις κουρείς. Ένα στάνταρ.",
+    "sub_en": "Elliott, Reuben, and Cal. Each runs their own chair and their own book of regulars.",
+    "sub_el": "Ο Elliott, ο Reuben και ο Cal. Ο καθένας έχει τη δική του καρέκλα και τους δικούς του σταθερούς πελάτες."
+  },
+  "page_contact": {
+    "eyebrow_en": "Contact",
+    "eyebrow_el": "Επικοινωνία",
+    "title_en": "Find us on the mews.",
+    "title_el": "Βρες μας στο mews.",
+    "sub_en": "A quiet turning off Old Brompton Road, five minutes from South Kensington tube.",
+    "sub_el": "Ένα ήσυχο στενό λίγο πριν την Old Brompton Road, πέντε λεπτά από τον σταθμό South Kensington."
+  },
+  "page_book": {
+    "eyebrow_en": "Booking",
+    "eyebrow_el": "Κράτηση",
+    "title_en": "Pick a chair, pick a time.",
+    "title_el": "Διάλεξε καρέκλα, διάλεξε ώρα.",
+    "sub_en": "Takes about a minute. You'll get a confirmation and a reminder 8 hours before your appointment.",
+    "sub_el": "Παίρνει περίπου ένα λεπτό. Θα λάβεις επιβεβαίωση και υπενθύμιση 8 ώρες πριν το ραντεβού σου."
+  },
+  "footer": {
+    "lede_en": "Classic cuts, skin fades, and the kind of hot-towel shave you book the day before. Walk-ins welcome whenever a chair is open.",
+    "lede_el": "Κλασικά κουρέματα, skin fades και το ξύρισμα με ζεστή πετσέτα που το κλείνεις από την προηγουμένη. Όσοι περνούν χωρίς ραντεβού είναι ευπρόσδεκτοι όποτε υπάρχει ελεύθερη καρέκλα.",
+    "cta_en": "Take a seat.",
+    "cta_el": "Κάθισε στην καρέκλα.",
+    "copy_en": "© 2026 Oakline Scissors · London",
+    "copy_el": "© 2026 Oakline Scissors · Λονδίνο",
+    "tagline_en": "Sharp since 2016.",
+    "tagline_el": "Ακρίβεια από το 2016."
+  }
+}

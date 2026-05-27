@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#1c1814"/>
+      <stop offset="60%" stop-color="#0f0c09"/>
+      <stop offset="100%" stop-color="#050403"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e3c88a"/>
+      <stop offset="55%" stop-color="#c9a961"/>
+      <stop offset="100%" stop-color="#8a6f33"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2520"/>
+      <stop offset="100%" stop-color="#0a0806"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="400" cy="510" rx="175" ry="14" fill="#000" opacity="0.55"/>
+  <!-- pomade jar: squat cylinder with gold lid -->
+  <rect x="275" y="300" width="250" height="200" rx="14" fill="url(#glass)" stroke="#3a332a" stroke-width="2"/>
+  <rect x="265" y="250" width="270" height="60" rx="10" fill="url(#gold)"/>
+  <rect x="270" y="252" width="260" height="6" rx="3" fill="#f4e2b3" opacity="0.8"/>
+  </svg>

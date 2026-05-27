@@ -1,0 +1,6 @@
+[
+  { "id": "cat_kitchen",  "name": "From the kitchen", "slug": "from-the-kitchen", "order": 0 },
+  { "id": "cat_market",   "name": "At the market",    "slug": "at-the-market",    "order": 1 },
+  { "id": "cat_wine",     "name": "Wine notebook",    "slug": "wine-notebook",    "order": 2 },
+  { "id": "cat_island",   "name": "Island life",      "slug": "island-life",      "order": 3 }
+]
