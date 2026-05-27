@@ -174,6 +174,7 @@ function venueEntries(venues: VenueRow[]): MetadataRoute.Sitemap {
 // (per-locale articles aren't hreflang-aliased yet — that comes when we
 // generate parallel translations).
 type ArticleRow = { citySlug: string; locale: string; slug: string; publishedAt: number | null };
+type ArticleAreaRow = { citySlug: string; areaSlug: string; locale: string };
 
 function loadArticleRows(): ArticleRow[] {
   return db.$client.prepare(`
@@ -183,6 +184,22 @@ function loadArticleRows(): ArticleRow[] {
      WHERE a.status = 'published'
        AND c.is_published = 1
   `).all() as ArticleRow[];
+}
+
+/** Per-(city, area, locale) combinations that have at least one
+ * published article featuring a venue in that area. Same derivation as
+ * lib/articles/areas.ts:listAreasForCity but DISTINCT across locales. */
+function loadAreaRows(): ArticleAreaRow[] {
+  return db.$client.prepare(`
+    SELECT DISTINCT c.slug AS citySlug, ar.slug AS areaSlug, art.locale
+      FROM articles art
+      JOIN cities c ON c.id = art.city_id
+      JOIN article_venues av ON av.article_id = art.id
+      JOIN venues v ON v.id = av.venue_id
+      JOIN areas ar ON ar.id = v.area_id
+     WHERE art.status = 'published'
+       AND c.is_published = 1
+  `).all() as ArticleAreaRow[];
 }
 
 function articleEntries(): MetadataRoute.Sitemap {
@@ -199,6 +216,16 @@ function articleEntries(): MetadataRoute.Sitemap {
         alternates: { languages: alternatesAt(`/cities/${c.slug}`) },
       });
     }
+  }
+  // Neighborhood pages — only emit for (city, area, locale) tuples that
+  // actually have articles, so we don't index empty area shells.
+  for (const a of loadAreaRows()) {
+    entries.push({
+      url: `${SITE_URL}/${a.locale}/cities/${a.citySlug}/area/${a.areaSlug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    });
   }
   // Article detail pages — single locale per row.
   for (const a of loadArticleRows()) {

@@ -13,7 +13,7 @@ import type { Metadata } from 'next';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { publicMetadata } from '@/lib/seo';
 import { getCityBySlug } from '@/lib/queries';
-import { listArticlesByCity, type Article } from '@/lib/articles';
+import { listArticlesByCity, listAreasForCity, type Article } from '@/lib/articles';
 
 export const revalidate = 1800;
 
@@ -40,6 +40,7 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
 
   const articles = listArticlesByCity(cityRow.id, { locale, status: 'published' });
   const grouped = groupByVertical(articles);
+  const areas = listAreasForCity(cityRow.id, locale);
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
@@ -63,6 +64,29 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
         </p>
       ) : (
         <div className="space-y-16">
+          {areas.length > 0 && (
+            <section>
+              <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+                {locale === 'el' ? 'Γειτονιές' : 'Neighborhoods'}
+              </h2>
+              <ul className="flex flex-wrap gap-2">
+                {areas.map((a) => (
+                  <li key={a.id}>
+                    <Link
+                      href={`/${locale}/cities/${city}/area/${a.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-2 text-sm transition hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-2)]"
+                    >
+                      <span className="font-medium text-[var(--color-fg-0)]">{a.name}</span>
+                      <span className="text-xs text-[var(--color-fg-2)]">
+                        {a.articleCount} {a.articleCount === 1 ? (locale === 'el' ? 'άρθρο' : 'article') : (locale === 'el' ? 'άρθρα' : 'articles')}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {(['nightlife', 'food', 'stay'] as const).map((v) => {
             const items = grouped[v];
             if (!items?.length) return null;
