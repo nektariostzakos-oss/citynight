@@ -13,7 +13,7 @@ import type { Metadata } from 'next';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { publicMetadata } from '@/lib/seo';
 import { getCityBySlug } from '@/lib/queries';
-import { listArticlesByCity, listAreasForCity, type Article } from '@/lib/articles';
+import { listArticlesByCity, listAreasForCity, listCategoriesForCity, type Article } from '@/lib/articles';
 import { CityWeatherStrip } from '@/components/city-weather-strip';
 
 export const revalidate = 1800;
@@ -42,6 +42,7 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
   const articles = listArticlesByCity(cityRow.id, { locale, status: 'published' });
   const grouped = groupByVertical(articles);
   const areas = listAreasForCity(cityRow.id, locale);
+  const categories = listCategoriesForCity(cityRow.id, locale);
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
@@ -62,53 +63,125 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
         </div>
       </header>
 
-      {articles.length === 0 ? (
-        <p className="text-[var(--color-fg-2)]">
-          {locale === 'el' ? 'Δεν υπάρχουν ακόμα άρθρα.' : 'No articles yet — check back soon.'}
-        </p>
-      ) : (
-        <div className="space-y-16">
-          {areas.length > 0 && (
-            <section>
-              <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
-                {locale === 'el' ? 'Γειτονιές' : 'Neighborhoods'}
-              </h2>
-              <ul className="flex flex-wrap gap-2">
-                {areas.map((a) => (
-                  <li key={a.id}>
-                    <Link
-                      href={`/${locale}/cities/${city}/area/${a.slug}`}
-                      className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-2 text-sm transition hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-2)]"
-                    >
-                      <span className="font-medium text-[var(--color-fg-0)]">{a.name}</span>
-                      <span className="text-xs text-[var(--color-fg-2)]">
-                        {a.articleCount} {a.articleCount === 1 ? (locale === 'el' ? 'άρθρο' : 'article') : (locale === 'el' ? 'άρθρα' : 'articles')}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+      <div className="space-y-16">
+        {/* Browse by interest — three vertical chips, always visible.
+            Every city surfaces all three categories so visitors who land
+            here automatically see what we cover, even before articles
+            exist. Chips anchor-link to the matching section below. */}
+        <section>
+          <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+            {locale === 'el' ? 'Κατηγορίες' : 'Browse by interest'}
+          </h2>
+          <ul className="flex flex-wrap gap-2">
+            {(['nightlife', 'food', 'stay'] as const).map((v) => {
+              const n = grouped[v]?.length ?? 0;
+              const dot = VERTICAL_DOT[v];
+              return (
+                <li key={v}>
+                  <Link
+                    href={`#${v}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-2 text-sm transition hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-2)]"
+                  >
+                    <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${dot}`} />
+                    <span className="font-medium text-[var(--color-fg-0)]">{VERTICAL_LABELS[locale]?.[v] ?? v}</span>
+                    <span className="text-xs text-[var(--color-fg-2)]">
+                      {n} {n === 1 ? (locale === 'el' ? 'άρθρο' : 'article') : (locale === 'el' ? 'άρθρα' : 'articles')}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
 
-          {(['nightlife', 'food', 'stay'] as const).map((v) => {
-            const items = grouped[v];
-            if (!items?.length) return null;
-            return (
-              <section key={v}>
-                <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
-                  {VERTICAL_LABELS[locale]?.[v] ?? v}
-                </h2>
+        {/* Phase K.5 — leaf-category chip row. Every city surfaces the
+            full category catalogue (rooftop bar, night club, taverna,
+            boutique hotel, etc.) regardless of how many articles are
+            seeded. Each chip anchor-links to its parent vertical's
+            section so a click always lands somewhere useful. */}
+        {categories.length > 0 && (
+          <section>
+            <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+              {locale === 'el' ? 'Τι ψάχνεις' : 'Categories'}
+            </h2>
+            <ul className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    href={cat.vertical ? `#${cat.vertical}` : '#'}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/70 px-4 py-2 text-sm text-[var(--color-fg-1)] backdrop-blur transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+                  >
+                    {cat.vertical && (
+                      <span
+                        aria-hidden
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          cat.vertical === 'nightlife' ? 'bg-[var(--color-accent-pink)]' :
+                          cat.vertical === 'food'      ? 'bg-[var(--color-accent-amber)]' :
+                                                         'bg-[var(--color-accent-violet)]'
+                        }`}
+                      />
+                    )}
+                    <span className="text-[var(--color-fg-0)]">{cat.name}</span>
+                    {cat.articleCount > 0 && (
+                      <span className="text-xs text-[var(--color-fg-2)]">{cat.articleCount}</span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {areas.length > 0 && (
+          <section>
+            <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+              {locale === 'el' ? 'Γειτονιές' : 'Neighborhoods'}
+            </h2>
+            <ul className="flex flex-wrap gap-2">
+              {areas.map((a) => (
+                <li key={a.id}>
+                  <Link
+                    href={`/${locale}/cities/${city}/area/${a.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-2 text-sm transition hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-2)]"
+                  >
+                    <span className="font-medium text-[var(--color-fg-0)]">{a.name}</span>
+                    <span className="text-xs text-[var(--color-fg-2)]">
+                      {a.articleCount} {a.articleCount === 1 ? (locale === 'el' ? 'άρθρο' : 'article') : (locale === 'el' ? 'άρθρα' : 'articles')}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Vertical sections — always rendered so each interest gets a
+            visible landing surface. Empty verticals show a friendly
+            placeholder rather than disappearing. */}
+        {(['nightlife', 'food', 'stay'] as const).map((v) => {
+          const items = grouped[v] ?? [];
+          return (
+            <section key={v} id={v}>
+              <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+                {VERTICAL_LABELS[locale]?.[v] ?? v}
+              </h2>
+              {items.length === 0 ? (
+                <p className="text-sm text-[var(--color-fg-2)]">
+                  {locale === 'el'
+                    ? `Άρθρα ${(VERTICAL_LABELS_GENITIVE.el?.[v] ?? '').toLowerCase()} έρχονται σύντομα.`
+                    : `${VERTICAL_LABELS.en?.[v]} guides coming soon.`}
+                </p>
+              ) : (
                 <ul className="grid gap-6 md:grid-cols-2">
                   {items.map((a) => (
                     <ArticleCard key={a.id} article={a} locale={locale} citySlug={city} />
                   ))}
                 </ul>
-              </section>
-            );
-          })}
-        </div>
-      )}
+              )}
+            </section>
+          );
+        })}
+      </div>
     </article>
   );
 }
@@ -124,6 +197,18 @@ function groupByVertical(articles: Article[]) {
 const VERTICAL_LABELS: Record<string, Record<'nightlife' | 'food' | 'stay', string>> = {
   el: { nightlife: 'Νυχτερινή ζωή', food: 'Φαγητό', stay: 'Διαμονή' },
   en: { nightlife: 'Nightlife', food: 'Food', stay: 'Stay' },
+};
+
+// Greek-genitive labels for the "X coming soon" placeholder.
+// English just borrows the base label ("Nightlife guides coming soon").
+const VERTICAL_LABELS_GENITIVE: Record<string, Record<'nightlife' | 'food' | 'stay', string>> = {
+  el: { nightlife: 'νυχτερινής ζωής', food: 'φαγητού', stay: 'διαμονής' },
+};
+
+const VERTICAL_DOT: Record<'nightlife' | 'food' | 'stay', string> = {
+  nightlife: 'bg-[var(--color-accent-pink)]',
+  food:      'bg-[var(--color-accent-amber)]',
+  stay:      'bg-[var(--color-accent-violet)]',
 };
 
 function ArticleCard({ article, locale, citySlug }: { article: Article; locale: string; citySlug: string }) {
