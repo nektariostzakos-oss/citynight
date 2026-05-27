@@ -11,7 +11,7 @@ export const metadata: Metadata = privateMetadata({ title: 'Sign in — citynigh
 const COPY: Record<Locale, { h1: string; sub: string; errors: Record<string, string> }> = {
   en: {
     h1: 'Sign in',
-    sub: 'Continue with Google or get a one-time email link. No password.',
+    sub: 'Continue with Google, or sign in with your email and password. New? Switch to "Create account" below.',
     errors: {
       state_mismatch: 'Sign-in session expired. Please try again.',
       missing_flow_cookies: 'Sign-in session expired. Please try again.',
@@ -22,7 +22,7 @@ const COPY: Record<Locale, { h1: string; sub: string; errors: Record<string, str
   },
   el: {
     h1: 'Σύνδεση',
-    sub: 'Συνέχισε με Google ή πάρε σύνδεσμο μιας χρήσης στο email. Χωρίς κωδικό.',
+    sub: 'Συνέχισε με Google ή με email + κωδικό. Νέος; Διάλεξε «Δημιουργία λογαριασμού» παρακάτω.',
     errors: {
       state_mismatch: 'Η σύνδεση έληξε. Δοκίμασε ξανά.',
       missing_flow_cookies: 'Η σύνδεση έληξε. Δοκίμασε ξανά.',
@@ -95,7 +95,7 @@ export default async function SignInPage({
 
       <div className="mt-8 space-y-5">
         {googleEnabled && <GoogleSignInButton locale={locale} next={next} />}
-        <SignInForm locale={locale} />
+        <SignInForm locale={locale} next={next} />
       </div>
     </section>
   );

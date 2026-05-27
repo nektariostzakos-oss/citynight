@@ -183,3 +183,291 @@ html.theme-ready, html.theme-ready body { transition: background-color .25s ease
 /* In light theme, soften the doorway grid + grain so they don't dominate */
 :root.theme-light .cn-grid  { opacity: 0.15; }
 :root.theme-light .cn-grain { opacity: 0.05; mix-blend-mode: multiply; }
+
+/* ============================================================================
+   PER-VENUE DESIGN SYSTEM. Every venue page sets a set of --venue-* custom
+   properties on its <article> via lib/venue-style.ts. The utilities below
+   consume those vars so a single set of components renders dozens of designs.
+   Body text NEVER inherits --venue-accent (§13 — neon as accent only).
+   ============================================================================ */
+
+.venue-root {
+  max-width: var(--venue-page-max);
+  margin-inline: auto;
+}
+
+.venue-h1 {
+  font-family: var(--font-display);
+  font-weight: var(--venue-display-weight);
+  letter-spacing: var(--venue-display-tracking);
+  text-transform: var(--venue-display-transform);
+  line-height: var(--venue-display-leading);
+  font-size: var(--venue-display-size-mobile);
+}
+@media (min-width: 768px) {
+  .venue-h1 { font-size: var(--venue-display-size); }
+}
+
+.venue-h2 {
+  font-family: var(--font-display);
+  font-weight: var(--venue-display-weight);
+  letter-spacing: var(--venue-display-tracking);
+  text-transform: var(--venue-display-transform);
+  line-height: 1.1;
+  font-size: var(--venue-h2-size-mobile);
+}
+@media (min-width: 768px) {
+  .venue-h2 { font-size: var(--venue-h2-size); }
+}
+
+.venue-body {
+  font-weight: var(--venue-body-weight);
+  letter-spacing: var(--venue-body-tracking);
+  font-size: var(--venue-body-size);
+  line-height: var(--venue-body-leading);
+  color: var(--color-fg-1);
+  max-width: var(--venue-body-max);
+}
+
+.venue-section + .venue-section { margin-top: var(--venue-section-gap); }
+
+/* Accent-tinted surfaces — panels, borders, focus halos. The tint is subtle
+   so the dark base still dominates and body text stays readable. */
+.venue-panel {
+  background:
+    linear-gradient(0deg, var(--venue-bg-tint), var(--venue-bg-tint)),
+    var(--color-bg-1);
+  border: 1px solid color-mix(in oklab, var(--venue-accent) 22%, transparent);
+  border-radius: var(--radius-lg);
+}
+.venue-panel-flat {
+  background: color-mix(in oklab, var(--venue-accent) 6%, var(--color-bg-1));
+  border-radius: var(--radius-lg);
+}
+
+.venue-chip {
+  display: inline-flex; align-items: center; gap: 0.4em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--venue-accent);
+  border: 1px solid color-mix(in oklab, var(--venue-accent) 45%, transparent);
+  background: color-mix(in oklab, var(--venue-accent) 8%, transparent);
+}
+
+.venue-link {
+  color: var(--venue-accent);
+  text-underline-offset: 4px;
+  transition: opacity var(--venue-motion-ms) ease;
+}
+.venue-link:hover { opacity: 0.82; text-decoration: underline; }
+
+.venue-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: var(--venue-accent);
+  color: var(--color-bg-0);
+  box-shadow: 0 8px 28px -10px var(--venue-glow);
+  transition: transform var(--venue-motion-ms) ease, box-shadow var(--venue-motion-ms) ease;
+}
+.venue-cta:hover { transform: translateY(-1px); box-shadow: 0 14px 36px -8px var(--venue-glow); }
+
+.venue-cta-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--venue-accent);
+  border: 1px solid color-mix(in oklab, var(--venue-accent) 55%, transparent);
+  transition: background var(--venue-motion-ms) ease;
+}
+.venue-cta-ghost:hover { background: color-mix(in oklab, var(--venue-accent) 10%, transparent); }
+
+/* Hero — gradient scrim shared by full-bleed + layered layouts. */
+.venue-hero-scrim {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 35%,
+    color-mix(in oklab, var(--color-bg-0) 70%, transparent) 70%,
+    var(--color-bg-0) 100%
+  );
+}
+
+/* Marquee — animates only when motion isn't subtle. */
+@keyframes venue-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.venue-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: venue-marquee 28s linear infinite;
+}
+.venue-motion-subtle .venue-marquee-track { animation-duration: 60s; }
+.venue-motion-kinetic .venue-marquee-track { animation-duration: 14s; }
+
+/* Drop-cap for editorial body — first letter scales up + colors with accent. */
+.venue-dropcap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 4.2em;
+  line-height: 0.85;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--venue-accent);
+}
+
+/* Numeric/stat treatment for hours table. */
+.venue-stat {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+/* Hairline rule that picks up the venue accent. */
+.venue-rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--venue-accent) 55%, transparent),
+    transparent
+  );
+}
+
+/* Reduced motion: kill the marquee animation regardless of motion mode. */
+@media (prefers-reduced-motion: reduce) {
+  .venue-marquee-track { animation: none !important; }
+}
+
+/* ============================================================================
+   SAAS SITE RENDERER (Phase G3). Each customer's website lives at
+   /sites/[slug]/* and is themed via inline --site-* CSS vars set on the
+   layout root. The classes below are PRIVATE to the site renderer; they
+   never apply to citynight directory pages.
+   ============================================================================ */
+
+.site-root {
+  font-family: var(--font-site-body, 'Inter', system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-h1, .site-h2, .site-h3, .site-display {
+  font-family: var(--font-site-display, 'Fraunces', Georgia, serif);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--site-fg);
+}
+.site-h1 { font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 1.04; }
+.site-h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.1; }
+.site-h3 { font-size: clamp(1.25rem, 2.4vw, 1.5rem); line-height: 1.2; }
+
+.site-body { color: var(--site-muted); line-height: 1.65; }
+
+.site-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--site-primary);
+  font-weight: 600;
+}
+
+.site-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: var(--site-primary);
+  color: var(--site-bg);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.site-cta:hover { transform: translateY(-1px); box-shadow: 0 14px 36px -10px color-mix(in oklab, var(--site-primary) 50%, transparent); }
+
+.site-cta-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.3rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: var(--site-fg);
+  border: 1px solid var(--site-border-strong);
+  transition: border-color 200ms ease, color 200ms ease;
+}
+.site-cta-ghost:hover { border-color: var(--site-primary); color: var(--site-primary); }
+
+.site-panel {
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
+  border-radius: 1rem;
+}
+.site-panel-strong {
+  background: var(--site-surface-strong);
+  border: 1px solid var(--site-border-strong);
+  border-radius: 1rem;
+}
+
+.site-link { color: var(--site-primary); transition: opacity 180ms ease; }
+.site-link:hover { opacity: 0.82; text-decoration: underline; text-underline-offset: 4px; }
+
+.site-rule {
+  height: 1px;
+  background: linear-gradient(to right, color-mix(in oklab, var(--site-primary) 60%, transparent), transparent);
+}
+
+.site-nav-link {
+  font-size: 0.92rem;
+  color: var(--site-muted);
+  transition: color 180ms ease;
+}
+.site-nav-link:hover, .site-nav-link[aria-current="page"] { color: var(--site-fg); }
+
+.site-stat { font-variant-numeric: tabular-nums; letter-spacing: 0; }
+
+/* ============================================================================
+   "Each venue page IS a website, not a directory listing."
+   When a `.venue-as-website` element is anywhere in the body, hide the
+   global citynight site header + footer. The venue article renders its own
+   slim "← back to citynight" strip + "powered by citynight" footer so the
+   directory branding is downplayed and the venue's design owns the page.
+   CSS :has() — Chrome 105+, Safari 15.4+, Firefox 121+ (all browsers we
+   care about for nightlife / tourism audiences).
+   ============================================================================ */
+body:has(.venue-as-website) [data-site-chrome] {
+  display: none !important;
+}
+
+/* Slim "back to citynight" strip at the top of the venue article. */
+.venue-back-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fg-2);
+  border-bottom: 1px solid var(--color-bg-2);
+  background: color-mix(in oklab, var(--color-bg-0) 88%, transparent);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.venue-back-strip a:hover { color: var(--venue-accent, var(--color-accent-pink)); }
+
+/* Slim footer at the bottom of the venue article. */
+.venue-mini-footer {
+  margin-top: 5rem;
+  padding: 2rem 0 1rem;
+  border-top: 1px solid var(--color-bg-2);
+  color: var(--color-fg-3);
+  font-size: 0.78rem;
+}
+.venue-mini-footer a { color: var(--color-fg-1); }
+.venue-mini-footer a:hover { color: var(--venue-accent, var(--color-accent-pink)); }

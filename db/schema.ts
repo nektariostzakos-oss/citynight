@@ -66,6 +66,21 @@ export const venues = sqliteTable('venues', {
   rating: real(), reviewCount: integer('review_count'), businessStatus: text('business_status'),
   isPermanentlyClosed: integer('is_permanently_closed', { mode: 'boolean' }).notNull().default(false),
   seedPhotoRefs: text('seed_photo_refs', { mode: 'json' }),
+  // Per-venue design — JSON blob shaped by lib/design-system.ts (DesignParams).
+  // NULL means "use defaultDesignParams() at render time"; Phase C backfills.
+  // designParamsLocked=1 means a Featured owner picked their own combo and
+  // the AI design writer must not overwrite this row.
+  designParams: text('design_params'),
+  designParamsLocked: integer('design_params_locked', { mode: 'boolean' }).notNull().default(false),
+  // Mini-site content surface (Phase F1). Owner-edited via the dashboard.
+  aboutText: text('about_text'),
+  reservationUrl: text('reservation_url'),
+  reservationEmail: text('reservation_email'),
+  reservationPhone: text('reservation_phone'),
+  reservationNotes: text('reservation_notes'),
+  // Custom domain (Phase D). When set, middleware rewrites requests with
+  // Host=<custom_domain> to this venue's canonical citynight URL.
+  customDomain: text('custom_domain'),
   lastSyncedAt: ts('last_synced_at'),
   createdAt: ts('created_at').default(now),
   publishedAt: ts('published_at'),
@@ -176,6 +191,163 @@ export const events = sqliteTable('events', {
   type: text({ enum: ['view', 'directions', 'phone', 'link'] }).notNull(),
   at: ts('at').default(now),
 }, (t) => [index('events_venue_at').on(t.venueId, t.at)]);
+
+export const venueMenuSections = sqliteTable('venue_menu_sections', {
+  id: uuid().primaryKey(),
+  venueId: text('venue_id').notNull().references(() => venues.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+  description: text(),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
+}, (t) => [index('venue_menu_sections_venue_sort').on(t.venueId, t.sortOrder)]);
+
+export const venueMenuItems = sqliteTable('venue_menu_items', {
+  id: uuid().primaryKey(),
+  sectionId: text('section_id').notNull().references(() => venueMenuSections.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+  description: text(),
+  price: text(),
+  isPopular: integer('is_popular', { mode: 'boolean' }).notNull().default(false),
+  isVegetarian: integer('is_vegetarian', { mode: 'boolean' }).notNull().default(false),
+  isVegan: integer('is_vegan', { mode: 'boolean' }).notNull().default(false),
+  isGlutenFree: integer('is_gluten_free', { mode: 'boolean' }).notNull().default(false),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
+}, (t) => [index('venue_menu_items_section_sort').on(t.sectionId, t.sortOrder)]);
+
+export const venueMessages = sqliteTable('venue_messages', {
+  id: uuid().primaryKey(),
+  venueId: text('venue_id').notNull().references(() => venues.id, { onDelete: 'cascade' }),
+  kind: text({ enum: ['reservation', 'contact'] }).notNull(),
+  fromName: text('from_name'),
+  fromEmail: text('from_email'),
+  fromPhone: text('from_phone'),
+  partySize: integer('party_size'),
+  desiredAt: ts('desired_at'),
+  body: text(),
+  forwardedAt: ts('forwarded_at'),
+  readAt: ts('read_at'),
+  createdAt: ts('created_at').default(now),
+}, (t) => [index('venue_messages_venue_created').on(t.venueId, t.createdAt)]);
+
+// ── SaaS tenant model (Phase G1) ─────────────────────────────────────────
+// Each `sites` row is a paying customer's website. Parallel to `venues` —
+// they don't share rows; a customer can have one of each.
+export const sites = sqliteTable('sites', {
+  id: uuid().primaryKey(),
+  slug: text().notNull().unique(),
+  ownerId: text('owner_id').notNull().references(() => users.id),
+  name: text().notNull(),
+  vertical: text({ enum: ['restaurant', 'bar', 'rooftop', 'nightclub', 'beach_club', 'hotel', 'cafe', 'salon', 'other'] }).notNull(),
+  templateId: text('template_id').notNull(),
+  city: text(),
+  country: text().notNull().default('GR'),
+  address: text(),
+  phone: text(),
+  contactEmail: text('contact_email'),
+  hours: text(), // JSON
+  aboutText: text('about_text'),
+  reservationUrl: text('reservation_url'),
+  reservationEmail: text('reservation_email'),
+  reservationPhone: text('reservation_phone'),
+  reservationNotes: text('reservation_notes'),
+  designParams: text('design_params'),
+  designParamsLocked: integer('design_params_locked', { mode: 'boolean' }).notNull().default(false),
+  wordmark: text(),
+  tagline: text(),
+  logoUrl: text('logo_url'),
+  faviconUrl: text('favicon_url'),
+  customDomain: text('custom_domain'),
+  saasStatus: text('saas_status', { enum: ['trialing', 'active', 'past_due', 'canceled', 'paused', 'zip_only'] }).notNull().default('trialing'),
+  stripeCustomerId: text('stripe_customer_id'),
+  stripeSubscriptionId: text('stripe_subscription_id').unique(),
+  currentPeriodEnd: ts('current_period_end'),
+  zipPurchasedAt: ts('zip_purchased_at'),
+  zipStripeSessionId: text('zip_stripe_session_id').unique(),
+  status: text({ enum: ['draft', 'published', 'suspended'] }).notNull().default('draft'),
+  // Phase H1 — original venues.id when migrated from a directory listing.
+  // The redirect handler (Phase H2) uses this to map old /greece/... URLs.
+  legacyVenueId: text('legacy_venue_id'),
+  createdAt: ts('created_at').default(now),
+  publishedAt: ts('published_at'),
+  suspendedAt: ts('suspended_at'),
+}, (t) => [
+  index('sites_owner').on(t.ownerId),
+  index('sites_status').on(t.status),
+  index('sites_saas_status').on(t.saasStatus),
+]);
+
+export const siteMenuSections = sqliteTable('site_menu_sections', {
+  id: uuid().primaryKey(),
+  siteId: text('site_id').notNull().references(() => sites.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+  description: text(),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
+}, (t) => [index('site_menu_sections_site_sort').on(t.siteId, t.sortOrder)]);
+
+export const siteMenuItems = sqliteTable('site_menu_items', {
+  id: uuid().primaryKey(),
+  sectionId: text('section_id').notNull().references(() => siteMenuSections.id, { onDelete: 'cascade' }),
+  name: text().notNull(),
+  description: text(),
+  price: text(),
+  isPopular: integer('is_popular', { mode: 'boolean' }).notNull().default(false),
+  isVegetarian: integer('is_vegetarian', { mode: 'boolean' }).notNull().default(false),
+  isVegan: integer('is_vegan', { mode: 'boolean' }).notNull().default(false),
+  isGlutenFree: integer('is_gluten_free', { mode: 'boolean' }).notNull().default(false),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
+}, (t) => [index('site_menu_items_section_sort').on(t.sectionId, t.sortOrder)]);
+
+export const siteMessages = sqliteTable('site_messages', {
+  id: uuid().primaryKey(),
+  siteId: text('site_id').notNull().references(() => sites.id, { onDelete: 'cascade' }),
+  kind: text({ enum: ['reservation', 'contact'] }).notNull(),
+  fromName: text('from_name'),
+  fromEmail: text('from_email'),
+  fromPhone: text('from_phone'),
+  partySize: integer('party_size'),
+  desiredAt: ts('desired_at'),
+  body: text(),
+  forwardedAt: ts('forwarded_at'),
+  readAt: ts('read_at'),
+  createdAt: ts('created_at').default(now),
+}, (t) => [index('site_messages_site_created').on(t.siteId, t.createdAt)]);
+
+export const sitePhotos = sqliteTable('site_photos', {
+  id: uuid().primaryKey(),
+  siteId: text('site_id').notNull().references(() => sites.id, { onDelete: 'cascade' }),
+  url: text().notNull(),
+  storageKey: text('storage_key'),
+  attributionText: text('attribution_text'),
+  isPrimary: integer('is_primary', { mode: 'boolean' }).notNull().default(false),
+  sortOrder: integer('sort_order').notNull().default(0),
+  createdAt: ts('created_at').default(now),
+}, (t) => [index('site_photos_site_sort').on(t.siteId, t.sortOrder)]);
+
+export const sitePages = sqliteTable('site_pages', {
+  id: uuid().primaryKey(),
+  siteId: text('site_id').notNull().references(() => sites.id, { onDelete: 'cascade' }),
+  slug: text().notNull(),
+  kind: text({ enum: ['post', 'page'] }).notNull().default('post'),
+  title: text().notNull(),
+  excerpt: text(),
+  body: text(),
+  coverUrl: text('cover_url'),
+  category: text(),
+  published: integer({ mode: 'boolean' }).notNull().default(false),
+  publishedAt: ts('published_at'),
+  createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
+}, (t) => [
+  uniqueIndex('site_pages_site_slug').on(t.siteId, t.slug),
+  index('site_pages_site_published').on(t.siteId, t.published, t.publishedAt),
+]);
 
 export const eventsDaily = sqliteTable('events_daily', {
   venueId: text('venue_id').notNull().references(() => venues.id, { onDelete: 'cascade' }),

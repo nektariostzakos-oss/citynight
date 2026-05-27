@@ -407,7 +407,7 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
           {cities.slice(0, 6).map((city, idx) => (
             <li key={city.id}>
               <Link
-                href={`/${locale}/greece/${city.slug}`}
+                href={`/${locale}/cities/${city.slug}`}
                 className="group relative block aspect-[4/5] overflow-hidden rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] transition hover:-translate-y-0.5 hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.4)]"
               >
                 {city.heroPhotoUrl ? (
@@ -469,7 +469,7 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
             return (
               <Link
                 key={cat.id}
-                href={`/${locale}/greece/athens/${cat.slug}`}
+                href={`/${locale}/cities/athens`}
                 className={`group inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/70 px-4 py-2 text-sm text-[var(--color-fg-1)] backdrop-blur transition ${hover}`}
               >
                 <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} aria-hidden />
@@ -488,7 +488,7 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
           {neighborhoodPreview.map((n, i) => (
             <li key={`${n.citySlug}-${n.slug}`}>
               <Link
-                href={`/${locale}/greece/${n.citySlug}/${n.slug}`}
+                href={`/${locale}/cities/${n.citySlug}`}
                 className="group relative block h-full overflow-hidden rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/70 p-4 backdrop-blur transition hover:-translate-y-0.5 hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-1)]"
               >
                 {/* Accent corner glow on hover */}
@@ -551,7 +551,7 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
             return (
               <li key={g.slug}>
                 <Link
-                  href={`/${locale}/greece/${g.slug}`}
+                  href={`/${locale}/cities/${g.slug}`}
                   className="group relative block aspect-[16/10] overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]"
                 >
                   {city?.heroPhotoUrl ? (

@@ -6,6 +6,48 @@
 
 ---
 
+## ⚠️ Direction shift (Phase H, 2026-05) — read this first
+
+The original product was a **directory** (sections 1–17 below). It has been
+**replaced by a website-builder SaaS**: every business gets a free,
+ready-made website, not a directory listing.
+
+**Single canonical URL shape** — `/{locale}/cities/{city-slug}/{business-slug}`.
+The old `/{locale}/greece/{city}/{bucket}/{venue}` tree is gone (only redirect stubs remain).
+
+**Single product, three price points:**
+- **Free hosted** — site lives at `citynight.gr/{locale}/cities/{city}/{name}`. Anyone can claim. Forever-free.
+- **Custom domain** — €19/month. Owner points their own `.gr`/`.com` at the same site (CNAME via Cloudflare; SSL automatic).
+- **Self-host ZIP** — €190 one-time. Owner downloads the full Atelier project pre-filled with their data and runs it themselves.
+
+**The discovery surface** (`/{locale}/cities/{city}`) lists every business's
+website — it's the citynight homepage / city pages — but each card opens a
+**full website**, not a listing.
+
+**Data model** — `sites` table (with `site_menu_*`, `site_photos`, `site_messages`, `site_pages`)
+replaces the old `venues` + mini-site tables for new flow. The original
+`venues` rows are mirrored 1:1 into `sites` via `sites.legacy_venue_id`
+(Phase H1 migration, `scripts/migrate/venues-to-sites.mjs`). Old `/greece/...`
+URLs 308-redirect to the canonical new URL via `lib/legacy-redirect.ts`.
+
+**Stripe wiring** — two products: `STRIPE_PRICE_SITE_MONTHLY` (€19/mo
+subscription unlocking custom domain) and `STRIPE_PRICE_SITE_ZIP` (€190
+one-time unlocking ZIP download). Webhook at `/api/stripe/webhook` flips
+`sites.stripe_subscription_id` / `sites.zip_purchased_at`.
+
+**Tenant management** — `/{locale}/dashboard/sites/{siteId}` lets the
+owner edit business info, about, photos, menu, reservation, and (if paid)
+custom domain. Site renderer lives at `/{locale}/cities/{city}/{slug}/{layout,page,menu,about,book,gallery,contact}`.
+
+**Integrity rules from §6 still apply** — AI never writes facts; photos
+respect the CHECK constraint; sites cannot be deleted (URL persists).
+
+Sections 1–17 below describe the original directory architecture and are
+kept for historical context. Where they conflict with this header, this
+header wins.
+
+---
+
 ## 1. Project
 
 **citynight.gr** — Greece-wide **nightlife** guide + venue directory. Multilingual public content for tourists, built with AI but grounded in real data. Goal: heavy **organic** traffic on a high-authority domain; money pages rank fast. After a one-time data fill, the site **self-maintains** (owner claims + weekly sync) — no ongoing manual content work.

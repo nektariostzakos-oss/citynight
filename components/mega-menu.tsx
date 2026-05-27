@@ -312,7 +312,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity }: {
           {popular.map((city) => (
             <li key={city.id}>
               <Link
-                href={`/${locale}/greece/${city.slug}`}
+                href={`/${locale}/cities/${city.slug}`}
                 className="flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
               >
                 <span>{city.name}</span>
@@ -447,7 +447,7 @@ function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, ki
           {nearest.slice(0, 5).map((city) => (
             <li key={city.id}>
               <Link
-                href={kindHref ? `/${locale}/greece/${city.slug}?kind=${kindHref.split('=')[1]}` : `/${locale}/greece/${city.slug}`}
+                href={`/${locale}/cities/${city.slug}`}
                 className="flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-0)] transition hover:bg-[var(--color-bg-2)]"
               >
                 <span className="font-medium">{city.name}</span>

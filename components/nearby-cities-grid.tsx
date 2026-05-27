@@ -82,7 +82,7 @@ export function NearbyCitiesGrid({
         {ordered.map((city) => (
           <li key={city.id} id={`region-${city.region?.replace(/\s+/g, '-').toLowerCase() ?? 'unknown'}`}>
             <Link
-              href={`/${locale}/greece/${city.slug}${linkSuffix}`}
+              href={`/${locale}/cities/${city.slug}`}
               className="group relative block aspect-[5/6] overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]"
             >
               {city.heroPhotoUrl ? (

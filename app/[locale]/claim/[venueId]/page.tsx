@@ -141,7 +141,10 @@ export default async function ClaimPage({ params }: { params: Promise<{ locale: 
         <div className="mt-6 rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] p-5">
           <p className="text-[var(--color-fg-1)]">{c.lead}</p>
           <div className="mt-5">
-            <SignInForm locale={locale} purpose="claim" venueId={venue.id} />
+            {/* Legacy venue claim — Phase H moved claim to /[locale]/claim/site/[siteId].
+                The form now just signs the user in; if/when they reach a site they
+                own, the new claim CTA handles ownership transfer. */}
+            <SignInForm locale={locale} />
           </div>
           <p className="mt-3 text-xs text-[var(--color-fg-3)]">{c.verify}</p>
         </div>

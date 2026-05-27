@@ -347,7 +347,7 @@ export function MobileMenu({
                     {previewItems.map((item) => (
                       <li key={item.slug}>
                         <Link
-                          href={`/${locale}/greece/${item.slug}`}
+                          href={`/${locale}/cities/${item.slug}`}
                           onClick={() => setOpen(false)}
                           className="flex items-center justify-between gap-3 px-4 py-3 transition active:bg-[var(--color-bg-2)] hover:bg-[var(--color-bg-2)]"
                         >

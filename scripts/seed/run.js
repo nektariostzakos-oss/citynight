@@ -13,6 +13,7 @@ import { photos } from './stages/photos.js';
 import { gate } from './stages/gate.js';
 import { cityPhotos } from './stages/city-photos.js';
 import { demoVenuePhotos } from './stages/demo-venue-photos.js';
+import { design } from './stages/design.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
@@ -49,6 +50,8 @@ async function main() {
   if (stage === 'enrich' || stage === 'all') await enrich(ctx);
   if (stage === 'photos' || stage === 'all') await photos(ctx);
   if (stage === 'gate'   || stage === 'all') await gate(ctx);
+  // design runs after gate so we only generate design_params for published venues.
+  if (stage === 'design' || stage === 'all') await design(ctx);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

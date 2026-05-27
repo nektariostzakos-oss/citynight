@@ -118,7 +118,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const c = COPY[locale];
 
   return (
-    <footer className="relative isolate overflow-hidden border-t border-[var(--color-bg-2)] bg-[var(--color-bg-0)]">
+    <footer data-site-chrome="footer" className="relative isolate overflow-hidden border-t border-[var(--color-bg-2)] bg-[var(--color-bg-0)]">
       {/* Neon-haze background blobs */}
       <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[var(--color-accent-pink)]/12 blur-[120px]" aria-hidden />
       <div className="pointer-events-none absolute -bottom-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-[var(--color-accent-cyan)]/10 blur-[140px]" aria-hidden />

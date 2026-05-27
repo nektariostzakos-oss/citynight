@@ -41,12 +41,19 @@ export function requireSameOrigin(req: NextRequest): Response | null {
     });
   }
 
-  const expected = siteOrigin() ?? new URL(req.url).origin;
-  if (origin !== expected) {
-    return new Response(JSON.stringify({ ok: false, error: 'bad_origin' }), {
-      status: 403,
-      headers: { 'content-type': 'application/json' },
-    });
-  }
-  return null;
+  // Same-origin (the request landed on this server, posting back at it) is
+  // by definition not a CSRF. Accept it regardless of NEXT_PUBLIC_SITE_URL.
+  // This is the path that handles localhost dev when the env var still
+  // points at the production hostname, plus custom-domain SaaS sites whose
+  // host won't match citynight.gr but is still served by us.
+  const requestOrigin = new URL(req.url).origin;
+  if (origin === requestOrigin) return null;
+
+  const expected = siteOrigin();
+  if (expected && origin === expected) return null;
+
+  return new Response(JSON.stringify({ ok: false, error: 'bad_origin' }), {
+    status: 403,
+    headers: { 'content-type': 'application/json' },
+  });
 }

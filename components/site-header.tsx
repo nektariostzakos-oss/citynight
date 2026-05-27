@@ -6,20 +6,36 @@ import { LangDropdown } from './lang-dropdown';
 import { ThemeToggle } from './theme-toggle';
 import { MegaMenu } from './mega-menu';
 import { MoonIcon } from './nav-icons';
+import { getCurrentUser } from '@/lib/auth/session';
+import { AccountMenu } from './account-menu';
 
-// App-feel header. Desktop = futuristic mega menu (MegaMenu component handles
-// the hover/click panels). Mobile = small hamburger that opens the animated
-// drawer in MobileMenu.
+// App-feel header. Logo + mega-menu + utilities on the right. The right
+// side adapts to auth state: signed-in users get an account dropdown
+// (Dashboard / Sign out); visitors get Sign in + Make a site.
 
-export function SiteHeader({
+const AUTH_LABELS: Record<Locale, {
+  signIn: string;
+  makeASite: string;
+}> = {
+  en: { signIn: 'Sign in',   makeASite: 'Make a site' },
+  el: { signIn: 'Είσοδος',   makeASite: 'Φτιάξε site' },
+  de: { signIn: 'Anmelden',  makeASite: 'Site erstellen' },
+  fr: { signIn: 'Connexion', makeASite: 'Créer un site' },
+  it: { signIn: 'Accedi',    makeASite: 'Crea un sito' },
+};
+
+export async function SiteHeader({
   locale,
   popularCities = [],
 }: {
   locale: Locale;
   popularCities?: PopularCity[];
 }) {
+  const user = await getCurrentUser();
+  const t = AUTH_LABELS[locale];
+
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-bg-2)]/80 bg-[color-mix(in_oklab,var(--color-bg-0)_75%,transparent)] backdrop-blur-xl">
+    <header data-site-chrome="header" className="sticky top-0 z-40 border-b border-[var(--color-bg-2)]/80 bg-[color-mix(in_oklab,var(--color-bg-0)_75%,transparent)] backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         {/* Logo */}
         <Link href={`/${locale}`} className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
@@ -35,13 +51,39 @@ export function SiteHeader({
         {/* Desktop mega menu — hover panels for Cities / Nightlife / Food / Stay */}
         <MegaMenu locale={locale} />
 
-        {/* Right side: search trigger + theme toggle + language + mobile menu */}
+        {/* Right side: search + theme + lang + auth + mobile menu */}
         <div className="flex items-center gap-2">
           <SearchBox locale={locale} />
           <ThemeToggle />
           <div className="hidden md:block">
             <LangDropdown current={locale} />
           </div>
+
+          {/* Auth — signed-in users get a dropdown; visitors get inline links. */}
+          {user ? (
+            <AccountMenu
+              locale={locale}
+              email={user.email}
+              name={user.name}
+              role={user.role}
+            />
+          ) : (
+            <div className="hidden items-center gap-2 md:flex">
+              <Link
+                href={`/${locale}/sign-in`}
+                className="rounded-md px-3 py-1.5 text-sm font-semibold text-[var(--color-fg-1)] hover:text-[var(--color-fg-0)]"
+              >
+                {t.signIn}
+              </Link>
+              <Link
+                href={`/${locale}/sites/new`}
+                className="rounded-md bg-[var(--color-accent-pink)] px-3 py-1.5 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] hover:brightness-110"
+              >
+                {t.makeASite}
+              </Link>
+            </div>
+          )}
+
           <MobileMenu locale={locale} popularCities={popularCities} />
         </div>
       </div>

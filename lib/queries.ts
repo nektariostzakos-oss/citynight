@@ -252,7 +252,7 @@ export function getVenueByCityArea(citySlug: string, areaOrCategorySlug: string,
     SELECT v.id, v.slug, v.name, v.description, v.address, v.phone, v.website,
            v.opening_hours AS openingHours, v.price_level AS priceLevel,
            v.lat, v.lng, v.rating, v.review_count AS reviewCount, v.tier,
-           v.claim, v.status,
+           v.claim, v.status, v.design_params AS designParams,
            c.slug AS citySlug, ${localizedName('city', 'c', locale)} AS cityName,
            a.slug AS areaSlug, ${localizedName('area', 'a', locale)} AS areaName,
            cat.slug AS categorySlug, ${localizedName('category', 'cat', locale)} AS categoryName,
@@ -290,6 +290,7 @@ export function getVenueByCityArea(citySlug: string, areaOrCategorySlug: string,
         tier: 'free' | 'featured';
         claim: 'unclaimed' | 'pending' | 'verified';
         status: 'draft' | 'pending' | 'published' | 'closed' | 'rejected';
+        designParams: string | null;
         citySlug: string;
         cityName: string;
         areaSlug: string | null;

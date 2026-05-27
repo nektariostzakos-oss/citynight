@@ -17,3 +17,7 @@ export function stripe(): Stripe {
 
 export const PRICE_FEATURED_MONTHLY = process.env.STRIPE_PRICE_FEATURED_MONTHLY ?? '';
 export const PRICE_AD_SECTION_MONTHLY = process.env.STRIPE_PRICE_AD_SECTION_MONTHLY ?? '';
+
+// SaaS site plans (Phase G1)
+export const PRICE_SITE_MONTHLY = process.env.STRIPE_PRICE_SITE_MONTHLY ?? '';     // €19/mo recurring
+export const PRICE_SITE_ZIP     = process.env.STRIPE_PRICE_SITE_ZIP     ?? '';     // €190 one-time

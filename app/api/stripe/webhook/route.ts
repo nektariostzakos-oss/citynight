@@ -13,6 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 import { stripe } from '@/lib/stripe';
 import { db } from '@/db';
+import { activateSiteSubscription, recordZipPurchase } from '@/lib/sites';
 
 export const runtime = 'nodejs';
 
@@ -117,11 +118,34 @@ export async function POST(req: NextRequest) {
         id: string;
         customer: string;
         subscription: string;
-        metadata?: { venueId?: string; userId?: string; adCampaignId?: string; plan?: string };
+        metadata?: { venueId?: string; userId?: string; adCampaignId?: string; siteId?: string; plan?: string };
       };
+      const customerId = typeof s.customer === 'string' ? s.customer : String(s.customer);
+
+      // SaaS one-time ZIP purchase — payment mode, no subscription.
+      if (s.metadata?.plan === 'site-zip' && s.metadata.siteId) {
+        recordZipPurchase({
+          siteId: s.metadata.siteId,
+          customerId,
+          sessionId: s.id,
+        });
+        break;
+      }
+
       if (!s.subscription) break;
       const sub = await stripe().subscriptions.retrieve(s.subscription);
-      const customerId = typeof s.customer === 'string' ? s.customer : String(s.customer);
+
+      // SaaS monthly subscription — activate the site.
+      if (s.metadata?.plan === 'site-monthly' && s.metadata.siteId) {
+        activateSiteSubscription({
+          siteId: s.metadata.siteId,
+          customerId,
+          subscriptionId: sub.id,
+          status: mapStatus(sub.status),
+          currentPeriodEnd: currentPeriodEndFor(sub),
+        });
+        break;
+      }
 
       if (s.metadata?.plan === 'ad-section' && s.metadata.adCampaignId) {
         upsertAdCampaignSubscription({
@@ -145,7 +169,17 @@ export async function POST(req: NextRequest) {
     case 'customer.subscription.updated':
     case 'customer.subscription.deleted': {
       const sub = event.data.object as Stripe.Subscription;
-      const meta = sub.metadata as { venueId?: string; userId?: string; adCampaignId?: string; plan?: string } | undefined;
+      const meta = sub.metadata as { venueId?: string; userId?: string; adCampaignId?: string; siteId?: string; plan?: string } | undefined;
+      if (meta?.plan === 'site-monthly' && meta.siteId) {
+        activateSiteSubscription({
+          siteId: meta.siteId,
+          customerId: typeof sub.customer === 'string' ? sub.customer : String(sub.customer),
+          subscriptionId: sub.id,
+          status: mapStatus(sub.status),
+          currentPeriodEnd: currentPeriodEndFor(sub),
+        });
+        break;
+      }
       if (meta?.plan === 'ad-section' && meta.adCampaignId) {
         upsertAdCampaignSubscription({
           adCampaignId: meta.adCampaignId,

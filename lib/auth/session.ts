@@ -61,11 +61,12 @@ export async function getCurrentUser(): Promise<AuthedUser | null> {
 
   const hash = sha256(raw);
   const row = dbh().prepare(`
-    SELECT u.id, u.email, u.name, u.role, u.locale, s.expires_at
+    SELECT u.id AS user_id, u.email, u.name, u.role, u.locale,
+           s.id AS session_id, s.expires_at
       FROM sessions s JOIN users u ON u.id = s.user_id
      WHERE s.id = ?
   `).get(hash) as
-    | { id: string; email: string; name: string | null; role: 'owner' | 'admin'; locale: string | null; expires_at: number }
+    | { user_id: string; email: string; name: string | null; role: 'owner' | 'admin'; locale: string | null; session_id: string; expires_at: number }
     | undefined;
 
   if (!row) return null;
@@ -77,9 +78,9 @@ export async function getCurrentUser(): Promise<AuthedUser | null> {
 
   // Defense in depth — the row id IS the hash already; this is a no-op cost but
   // it keeps the timing-safe pattern available for callers.
-  if (!timingSafeEqualHex(hash, row.id ?? hash)) return null;
+  if (!timingSafeEqualHex(hash, row.session_id)) return null;
 
-  return { id: row.id, email: row.email, name: row.name, role: row.role, locale: row.locale };
+  return { id: row.user_id, email: row.email, name: row.name, role: row.role, locale: row.locale };
 }
 
 export async function requireUser(): Promise<AuthedUser> {
