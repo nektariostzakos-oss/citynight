@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { isLocale, type Locale } from '@/lib/i18n';
 import {
   listCitiesWithHero,
+  listAreasForNearby,
   siteStats,
 } from '@/lib/queries';
 import { listPublishedArticles } from '@/lib/articles';
@@ -222,6 +223,10 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
   const cities = listCitiesWithHero(null, locale);
   const stats = siteStats();
   const guides = getAllCityGuides();
+  // Areas with coords (own or parent-city fallback) — fed to the hero
+  // "Κοντά σου τώρα" panel so it can list the 4 nearest neighborhoods
+  // client-side. Same source as the mega-menu's Popular areas column.
+  const nearbyAreas = listAreasForNearby(locale);
   // Phase K.3 — Latest articles surface across all cities for the homepage.
   // Cross-locale: each row is the article in its own locale (en/el/...); the
   // homepage filters to the visitor's current locale via listPublishedArticles.
@@ -309,9 +314,13 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
               copy={{ pickCity: c.heroCtaPickCity, nearestGuide: c.heroCtaNearestGuide }}
             />
 
-            {/* GPS-aware "near you" panel — hidden until location resolves */}
+            {/* GPS-aware "Near you" panel — hidden until location
+                resolves. Once GPS is on, shows the nearest city as a
+                primary tile with vertical chips, then the 4 nearest
+                neighborhoods (deep-linking to area guides), then a
+                mini-row of the next cities. */}
             <div className="mt-8 md:mt-10">
-              <HeroNearestPanel locale={locale} />
+              <HeroNearestPanel locale={locale} areas={nearbyAreas} />
             </div>
           </div>
 

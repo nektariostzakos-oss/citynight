@@ -168,6 +168,35 @@ export function getCityBySlug(slug: string, locale: Locale = 'en'): City | null 
   return row ?? null;
 }
 
+// All seeded areas with coords (own or parent-city fallback) + parent
+// city slug/name. Used by the hero "Κοντά σου τώρα" panel so the client
+// can sort neighborhoods by visitor distance — same source the mega-
+// menu's Popular areas column uses.
+export type AreaForNearby = {
+  slug: string;
+  name: string;
+  lat: number;
+  lng: number;
+  cityName: string;
+  citySlug: string;
+};
+
+export function listAreasForNearby(locale: Locale = 'en'): AreaForNearby[] {
+  return sqlite().prepare(`
+    SELECT a.slug,
+           ${localizedName('area', 'a', locale)} AS name,
+           COALESCE(a.lat, c.lat) AS lat,
+           COALESCE(a.lng, c.lng) AS lng,
+           ${localizedName('city', 'c', locale)} AS cityName,
+           c.slug AS citySlug
+      FROM areas a
+      JOIN cities c ON c.id = a.city_id
+     WHERE COALESCE(a.lat, c.lat) IS NOT NULL
+       AND COALESCE(a.lng, c.lng) IS NOT NULL
+       AND c.is_published = 1
+  `).all() as AreaForNearby[];
+}
+
 // Single city's hero photo URL. Used only by the city-page micro cover —
 // every other surface (homepage tiles, near-you grid, doorway) renders
 // cities as text-only "app buttons" so the city page is the only place
