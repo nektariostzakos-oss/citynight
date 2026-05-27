@@ -160,6 +160,15 @@ export function GeoEnhancer({
   const [isIos, setIsIos] = useState(false);
   useEffect(() => { setIsIos(isIOS()); }, []);
 
+  // Hydration guard. The found/CTA panels render based on client-only
+  // state (visitor location, sessionStorage flags). SSR resolves all of
+  // these to false, but on hydration the client might immediately see a
+  // truthy state, causing a React hydration mismatch. Gate every panel
+  // behind a post-mount flag so SSR always renders nothing and the
+  // panels appear strictly after hydration.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   // Per-tab "already redirected once" flag. Once the visitor has been auto-
   // redirected from the doorway in this tab, suppress the panel even if they
   // navigate back to the doorway and we lock precise again. They explicitly
@@ -255,6 +264,11 @@ export function GeoEnhancer({
     !hasPrecise &&
     !dismissedCta &&
     (isIos || (error !== null && ACTIONABLE_ERRORS.has(error)));
+
+  // Skip the entire panel surface during SSR + first hydration pass.
+  // Panels are interactive UI for an already-loaded visitor — they don't
+  // need to be in the initial HTML.
+  if (!mounted) return null;
 
   return (
     <>

@@ -198,10 +198,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         {/* LINK GRID */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <FooterColumn heading={c.exploreHeading} accent="cyan">
-            <FooterLink href={`/${locale}/greece`} icon={<MapPinIcon />}>{c.linkCities}</FooterLink>
-            <FooterLink href={`/${locale}/greece?kind=nightlife`} icon={<MoonIcon />}>{c.linkNightlife}</FooterLink>
-            <FooterLink href={`/${locale}/greece?kind=food`} icon={<ForkKnifeIcon />}>{c.linkFood}</FooterLink>
-            <FooterLink href={`/${locale}/greece?kind=stay`} icon={<BedIcon />}>{c.linkStay}</FooterLink>
+            <FooterLink href={`/${locale}`} icon={<MapPinIcon />}>{c.linkCities}</FooterLink>
+            <FooterLink href={`/${locale}#nightlife`} icon={<MoonIcon />}>{c.linkNightlife}</FooterLink>
+            <FooterLink href={`/${locale}#food`} icon={<ForkKnifeIcon />}>{c.linkFood}</FooterLink>
+            <FooterLink href={`/${locale}#stay`} icon={<BedIcon />}>{c.linkStay}</FooterLink>
             <FooterLink href={`/${locale}/guides`}>{c.linkGuides}</FooterLink>
           </FooterColumn>
 
