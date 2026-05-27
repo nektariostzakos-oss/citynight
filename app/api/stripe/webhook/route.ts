@@ -16,6 +16,7 @@ import { db } from '@/db';
 import { activateSiteSubscription, recordZipPurchase } from '@/lib/sites';
 import { syncAccountReadiness } from '@/lib/stripe-connect';
 import { markDepositPaid, updateBookingStatus } from '@/lib/booking';
+import { updateOrderStatus as updateShopOrderStatus } from '@/lib/shop';
 
 export const runtime = 'nodejs';
 
@@ -218,6 +219,16 @@ export async function POST(req: NextRequest) {
         const updated = markDepositPaid(meta.siteId, meta.bookingId, pi.amount, pi.id);
         if (updated && updated.status === 'pending') {
           updateBookingStatus(meta.siteId, meta.bookingId, 'confirmed');
+        }
+      } else if (meta.kind === 'shop-order' && meta.siteId && meta.orderId) {
+        // Phase I.6b — shop order paid. Flip status 'pending' → 'paid'.
+        // updateOrderStatus is state-machine guarded; if the order is
+        // already past 'pending' (e.g. cancelled before payment), the
+        // method throws and we swallow — Stripe webhook only needs 2xx.
+        try {
+          updateShopOrderStatus(meta.siteId, meta.orderId, 'paid');
+        } catch {
+          // Already cancelled / refunded — leave as is.
         }
       }
       break;
