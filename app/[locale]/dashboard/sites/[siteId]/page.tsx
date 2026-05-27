@@ -20,6 +20,9 @@ import { VenueReservationEditor, type VenueReservationEditorLabels } from '@/com
 import { VenueMenuEditor, type VenueMenuEditorLabels, type MenuEditorSection } from '@/components/venue-menu-editor';
 import { VenuePhotoUploader, type VenuePhotoUploaderLabels } from '@/components/venue-photo-uploader';
 import { VenueDomainEditor, type VenueDomainEditorLabels } from '@/components/venue-domain-editor';
+import { SiteConnectButton } from '@/components/site-connect-button';
+import { SiteBookingsPanel } from '@/components/site-bookings-panel';
+import { listEnabledServices } from '@/lib/booking';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = privateMetadata({ title: 'Site dashboard — citynight' });
@@ -74,6 +77,11 @@ export default async function SiteDashboard({
   // gates ZIP download. Neither blocks the free hosted site or its editors.
   const hasMonthlySubscription =
     !!v.stripeCustomerId && (v.saasStatus === 'active' || v.saasStatus === 'trialing');
+
+  // Phase I.5e — Bookings panel + Stripe Connect onboarding render only
+  // for sites that have any services defined (salons / barbers / spas).
+  const hasBookableServices = listEnabledServices(siteId).length > 0;
+
   const t = LABELS[locale];
 
   return (
@@ -189,6 +197,21 @@ export default async function SiteDashboard({
           )}
         </div>
 
+        {/* Stripe Connect onboarding — every site needs it to accept
+            booking deposits / orders / memberships through the marketplace. */}
+        <div className="border-t border-[var(--color-bg-2)] pt-10">
+          <SiteConnectButton siteId={siteId} labels={t.connect} />
+        </div>
+
+        {/* Bookings — only rendered for sites that have any services
+            defined. Restaurants / bars / hotels without a services
+            catalogue don't see this section. */}
+        {hasBookableServices && (
+          <div className="border-t border-[var(--color-bg-2)] pt-10">
+            <SiteBookingsPanel siteId={siteId} labels={t.bookings} />
+          </div>
+        )}
+
         {/* Atelier ZIP — gated on €190 one-time purchase (Phase H4). */}
         <div className="border-t border-[var(--color-bg-2)] pt-10">
           <section>
@@ -236,6 +259,15 @@ type DashboardLabels = {
   zipBody: string;
   zipBuyCta: string;
   zipDownload: string;
+  connect: {
+    heading: string; body: string; cta: string; resumeCta: string;
+    busy: string; ready: string; needsAttention: string; notStarted: string;
+  };
+  bookings: {
+    heading: string; body: string; empty: string; loadError: string;
+    columnWhen: string; columnCustomer: string; columnStatus: string; columnActions: string;
+    markCompleted: string; markNoShow: string; cancel: string; showCancelled: string;
+  };
 };
 
 const EN_LABELS: DashboardLabels = {
@@ -301,6 +333,25 @@ const EN_LABELS: DashboardLabels = {
   zipBody: 'Buy the full Next.js project pre-filled with your business info. Install on your own Hostinger; no monthly fee. €190 one-time.',
   zipBuyCta: 'Buy ZIP (€190)',
   zipDownload: 'Download ZIP',
+  connect: {
+    heading: 'Stripe Connect',
+    body: 'Connect your own Stripe account to accept booking deposits, orders and memberships. citynight takes a 5% platform fee; the rest lands on your Stripe.',
+    cta: 'Connect Stripe',
+    resumeCta: 'Update Stripe details',
+    busy: 'Opening Stripe…',
+    ready: 'Ready to accept payments',
+    needsAttention: 'Onboarding incomplete',
+    notStarted: 'Not connected',
+  },
+  bookings: {
+    heading: 'Bookings',
+    body: 'Incoming bookings sorted by upcoming first.',
+    empty: 'No bookings yet.',
+    loadError: 'Could not load bookings.',
+    columnWhen: 'When', columnCustomer: 'Customer', columnStatus: 'Status', columnActions: 'Actions',
+    markCompleted: 'Complete', markNoShow: 'No-show', cancel: 'Cancel',
+    showCancelled: 'Show cancelled',
+  },
 };
 
 const EL_LABELS: DashboardLabels = {
@@ -366,6 +417,25 @@ const EL_LABELS: DashboardLabels = {
   zipBody: 'Αγόρασε το πλήρες Next.js project συμπληρωμένο με τα στοιχεία σου. Εγκατάσταση στο δικό σου Hostinger, χωρίς μηνιαία χρέωση. €190 μια φορά.',
   zipBuyCta: 'Αγόρασε το ZIP (€190)',
   zipDownload: 'Κατέβασε το ZIP',
+  connect: {
+    heading: 'Stripe Connect',
+    body: 'Σύνδεσε τον δικό σου λογαριασμό Stripe για προκαταβολές κρατήσεων, παραγγελίες και συνδρομές. Το citynight κρατά 5% προμήθεια· τα υπόλοιπα πάνε στο Stripe σου.',
+    cta: 'Σύνδεση με Stripe',
+    resumeCta: 'Ενημέρωση στοιχείων Stripe',
+    busy: 'Άνοιγμα Stripe…',
+    ready: 'Έτοιμο για πληρωμές',
+    needsAttention: 'Ημιτελής σύνδεση',
+    notStarted: 'Μη συνδεδεμένο',
+  },
+  bookings: {
+    heading: 'Κρατήσεις',
+    body: 'Εισερχόμενες κρατήσεις, ταξινομημένες με τις προσεχείς πρώτα.',
+    empty: 'Δεν υπάρχουν ακόμα κρατήσεις.',
+    loadError: 'Αδυναμία φόρτωσης κρατήσεων.',
+    columnWhen: 'Πότε', columnCustomer: 'Πελάτης', columnStatus: 'Κατάσταση', columnActions: 'Ενέργειες',
+    markCompleted: 'Ολοκλήρωση', markNoShow: 'Δεν εμφανίστηκε', cancel: 'Ακύρωση',
+    showCancelled: 'Εμφάνιση ακυρωμένων',
+  },
 };
 
 // Other locales fall back to English for v1 — the signup wizard nudges
