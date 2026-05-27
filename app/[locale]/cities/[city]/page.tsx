@@ -46,14 +46,18 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
   const heroPhotoUrl = getCityHeroPhotoUrl(cityRow.id);
 
   return (
-    <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
-      <header className="relative mb-12 overflow-hidden rounded-2xl border border-[var(--color-bg-2)] md:mb-16">
+    <>
+      {/* Full-bleed micro cover. Sits flush under the sticky site header
+          with no top padding; photo covers edge-to-edge. The inner
+          content stays constrained at max-w-5xl so text doesn't sprawl
+          on wide screens. */}
+      <header className="relative w-full overflow-hidden border-b border-[var(--color-bg-2)]">
         {heroPhotoUrl ? (
           <Image
             src={heroPhotoUrl}
             alt=""
             fill
-            sizes="(min-width: 1024px) 960px, 100vw"
+            sizes="100vw"
             priority
             className="object-cover city-hero-crop"
           />
@@ -64,7 +68,7 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
           aria-hidden
           className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-0)]/92 via-[var(--color-bg-0)]/80 to-[var(--color-bg-0)]/55"
         />
-        <div className="relative px-6 py-8 md:px-10 md:py-12">
+        <div className="relative mx-auto max-w-5xl px-6 py-10 md:py-14">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-fg-2)]">
             {locale === 'el' ? 'Οδηγός πόλης' : 'City guide'}
           </p>
@@ -81,6 +85,8 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
           </div>
         </div>
       </header>
+
+      <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
 
       <div className="space-y-16">
         {/* Browse by interest — three vertical chips, always visible.
@@ -202,6 +208,7 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
         })}
       </div>
     </article>
+    </>
   );
 }
 
