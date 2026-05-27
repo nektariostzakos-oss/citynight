@@ -22,7 +22,10 @@ import { VenuePhotoUploader, type VenuePhotoUploaderLabels } from '@/components/
 import { VenueDomainEditor, type VenueDomainEditorLabels } from '@/components/venue-domain-editor';
 import { SiteConnectButton } from '@/components/site-connect-button';
 import { SiteBookingsPanel } from '@/components/site-bookings-panel';
+import { SiteProductsPanel } from '@/components/site-products-panel';
+import { SiteOrdersPanel } from '@/components/site-orders-panel';
 import { listEnabledServices } from '@/lib/booking';
+import { listProducts } from '@/lib/shop';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = privateMetadata({ title: 'Site dashboard — citynight' });
@@ -81,6 +84,11 @@ export default async function SiteDashboard({
   // Phase I.5e — Bookings panel + Stripe Connect onboarding render only
   // for sites that have any services defined (salons / barbers / spas).
   const hasBookableServices = listEnabledServices(siteId).length > 0;
+
+  // Phase I.6d — Products + Orders panels render once the owner has any
+  // products at all (enabled OR disabled). Orders surface independently
+  // — they exist even if all products are later disabled / deleted.
+  const hasAnyProducts = listProducts(siteId).length > 0;
 
   const t = LABELS[locale];
 
@@ -212,6 +220,23 @@ export default async function SiteDashboard({
           </div>
         )}
 
+        {/* Products — owner-only CRUD. The empty-state surface in
+            SiteProductsPanel handles "no products yet" without needing
+            a server-side guard. Render unconditionally so owners can
+            add their first product from the dashboard. */}
+        <div className="border-t border-[var(--color-bg-2)] pt-10">
+          <SiteProductsPanel siteId={siteId} labels={t.products} />
+        </div>
+
+        {/* Orders — render once the site has *any* product (current or
+            historical). A site that's never sold anything doesn't need
+            the orders surface. */}
+        {hasAnyProducts && (
+          <div className="border-t border-[var(--color-bg-2)] pt-10">
+            <SiteOrdersPanel siteId={siteId} labels={t.orders} />
+          </div>
+        )}
+
         {/* Atelier ZIP — gated on €190 one-time purchase (Phase H4). */}
         <div className="border-t border-[var(--color-bg-2)] pt-10">
           <section>
@@ -267,6 +292,20 @@ type DashboardLabels = {
     heading: string; body: string; empty: string; loadError: string;
     columnWhen: string; columnCustomer: string; columnStatus: string; columnActions: string;
     markCompleted: string; markNoShow: string; cancel: string; showCancelled: string;
+  };
+  products: {
+    heading: string; body: string; empty: string; loadError: string; addCta: string;
+    columnName: string; columnPrice: string; columnStock: string;
+    columnEnabled: string; columnActions: string;
+    edit: string; remove: string; unlimited: string;
+    saving: string; saved: string;
+  };
+  orders: {
+    heading: string; body: string; empty: string; loadError: string;
+    columnWhen: string; columnCustomer: string; columnTotal: string;
+    columnStatus: string; columnActions: string;
+    markShipped: string; markDelivered: string; cancel: string; refund: string;
+    showCancelled: string;
   };
 };
 
@@ -352,6 +391,28 @@ const EN_LABELS: DashboardLabels = {
     markCompleted: 'Complete', markNoShow: 'No-show', cancel: 'Cancel',
     showCancelled: 'Show cancelled',
   },
+  products: {
+    heading: 'Products',
+    body: 'Your shop catalogue. Stock blank = unlimited. Disabled products hide from the public shop but stay in this list.',
+    empty: 'No products yet. Add your first one.',
+    loadError: 'Could not load products.',
+    addCta: 'Add product',
+    columnName: 'Product', columnPrice: 'Price', columnStock: 'Stock',
+    columnEnabled: 'Live', columnActions: 'Actions',
+    edit: 'Edit', remove: 'Remove', unlimited: 'unlimited',
+    saving: 'Saving…', saved: 'Save',
+  },
+  orders: {
+    heading: 'Orders',
+    body: 'Incoming shop orders, newest first.',
+    empty: 'No orders yet.',
+    loadError: 'Could not load orders.',
+    columnWhen: 'When', columnCustomer: 'Customer', columnTotal: 'Total',
+    columnStatus: 'Status', columnActions: 'Actions',
+    markShipped: 'Mark shipped', markDelivered: 'Mark delivered',
+    cancel: 'Cancel', refund: 'Refund',
+    showCancelled: 'Show cancelled',
+  },
 };
 
 const EL_LABELS: DashboardLabels = {
@@ -434,6 +495,28 @@ const EL_LABELS: DashboardLabels = {
     loadError: 'Αδυναμία φόρτωσης κρατήσεων.',
     columnWhen: 'Πότε', columnCustomer: 'Πελάτης', columnStatus: 'Κατάσταση', columnActions: 'Ενέργειες',
     markCompleted: 'Ολοκλήρωση', markNoShow: 'Δεν εμφανίστηκε', cancel: 'Ακύρωση',
+    showCancelled: 'Εμφάνιση ακυρωμένων',
+  },
+  products: {
+    heading: 'Προϊόντα',
+    body: 'Ο κατάλογος του shop σου. Κενό stock = απεριόριστο. Απενεργοποιημένα προϊόντα κρύβονται από το δημόσιο shop αλλά μένουν εδώ.',
+    empty: 'Δεν υπάρχουν προϊόντα. Πρόσθεσε το πρώτο.',
+    loadError: 'Αδυναμία φόρτωσης προϊόντων.',
+    addCta: 'Νέο προϊόν',
+    columnName: 'Προϊόν', columnPrice: 'Τιμή', columnStock: 'Stock',
+    columnEnabled: 'Ενεργό', columnActions: 'Ενέργειες',
+    edit: 'Επεξεργασία', remove: 'Διαγραφή', unlimited: 'απεριόριστο',
+    saving: 'Αποθηκεύεται…', saved: 'Αποθήκευση',
+  },
+  orders: {
+    heading: 'Παραγγελίες',
+    body: 'Εισερχόμενες παραγγελίες, νεότερες πρώτα.',
+    empty: 'Δεν υπάρχουν ακόμα παραγγελίες.',
+    loadError: 'Αδυναμία φόρτωσης παραγγελιών.',
+    columnWhen: 'Πότε', columnCustomer: 'Πελάτης', columnTotal: 'Σύνολο',
+    columnStatus: 'Κατάσταση', columnActions: 'Ενέργειες',
+    markShipped: 'Αποστολή', markDelivered: 'Παράδοση',
+    cancel: 'Ακύρωση', refund: 'Επιστροφή',
     showCancelled: 'Εμφάνιση ακυρωμένων',
   },
 };
