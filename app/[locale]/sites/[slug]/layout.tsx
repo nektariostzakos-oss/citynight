@@ -5,7 +5,7 @@
 
 import { notFound, permanentRedirect } from 'next/navigation';
 import { Fraunces, Inter } from 'next/font/google';
-import { getPublishedSiteByCityAndSlug, getPublishedSiteBySlug, getSiteAvailability } from '@/lib/site-queries';
+import { getPublishedSiteBySlug, getSiteAvailability } from '@/lib/site-queries';
 import { siteStyleVars, themeForTemplate } from '@/lib/site-theme';
 import { SiteHeader } from '@/components/site-render/site-header';
 import { SiteFooter } from '@/components/site-render/site-footer';
@@ -30,26 +30,20 @@ export default async function SiteLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string; city: string; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
 
-  // Look up site by (city, slug). Two failure modes:
-  //   • Slug doesn't exist anywhere → 404
-  //   • Slug exists but in a different city → redirect to its canonical city
-  let site = getPublishedSiteByCityAndSlug(city, slug);
-  if (!site) {
-    const orphan = getPublishedSiteBySlug(slug);
-    if (orphan?.citySlug && orphan.citySlug !== city) {
-      permanentRedirect(`/${locale}/cities/${orphan.citySlug}/${slug}`);
-    }
-    notFound();
-  }
+  // Phase K.1 — sites are looked up by slug alone (UNIQUE on sites.slug).
+  // The old "wrong-city redirect" branch is gone because the URL no longer
+  // carries a city segment.
+  const site = getPublishedSiteBySlug(slug);
+  if (!site) notFound();
 
   const theme = themeForTemplate(site.templateId);
   const availability = getSiteAvailability(site.id);
-  const basePath = `/${locale}/cities/${city}/${slug}`;
+  const basePath = `/${locale}/sites/${slug}`;
   const displayVar =
     theme.fontHeading === 'fraunces' ? fraunces.variable :
     theme.fontHeading === 'inter'    ? inter.variable    :
@@ -65,8 +59,8 @@ export default async function SiteLayout({
           context. Mirrors the old directory chrome but on the new URLs. */}
       <CitynightStrip
         locale={locale as Locale}
-        citySlug={site.citySlug ?? city}
-        cityName={site.city ?? city}
+        citySlug={site.citySlug ?? ''}
+        cityName={site.city ?? ''}
         siteId={site.id}
         unclaimed={!site.isClaimed}
       />

@@ -1,29 +1,29 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug, getSiteMenu, type SiteMenuSection } from '@/lib/site-queries';
+import { getPublishedSiteBySlug, getSiteMenu, type SiteMenuSection } from '@/lib/site-queries';
 import { publicMetadata, jsonLdProps } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
 
 export const revalidate = 1800;
 
-type Params = Promise<{ locale: string; city: string; slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) return {};
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/menu` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/menu` },
     title: `Menu — ${site.name}`,
     description: `${site.name}${site.city ? `, ${site.city}` : ''}.`,
   });
 }
 
 export default async function SiteMenuPage({ params }: { params: Params }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) notFound();
   const sections = getSiteMenu(site.id);
   if (!sections.length) notFound();

@@ -1,29 +1,29 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug } from '@/lib/site-queries';
+import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { publicMetadata } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
 
 export const revalidate = 1800;
 
-type Params = Promise<{ locale: string; city: string; slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site?.aboutText) return { robots: { index: false, follow: true } };
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/about` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/about` },
     title: `About — ${site.name}`,
     description: site.aboutText.slice(0, 160),
   });
 }
 
 export default async function SiteAboutPage({ params }: { params: Params }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site?.aboutText) notFound();
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">

@@ -3,33 +3,33 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug } from '@/lib/site-queries';
+import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { publicMetadata, jsonLdProps } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
 import { getPostBySlug } from '@/lib/blog/posts';
 
 export const revalidate = 600;
 
-type Params = Promise<{ locale: string; city: string; slug: string; postSlug: string }>;
+type Params = Promise<{ locale: string; slug: string; postSlug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug, postSlug } = await params;
+  const { locale, slug, postSlug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) return {};
   const post = getPostBySlug(site.id, postSlug);
   if (!post) return {};
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/blog/${postSlug}` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/blog/${postSlug}` },
     title: `${post.title} — ${site.name}`,
     description: post.excerpt ?? `Read ${post.title} on the ${site.name} journal.`,
   });
 }
 
 export default async function SiteBlogPost({ params }: { params: Params }) {
-  const { locale, city, slug, postSlug } = await params;
+  const { locale, slug, postSlug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) notFound();
   const post = getPostBySlug(site.id, postSlug);
   if (!post) notFound();
@@ -46,7 +46,7 @@ export default async function SiteBlogPost({ params }: { params: Params }) {
       }])} />
 
       <nav className="mb-6 text-sm">
-        <Link href={`/${locale}/cities/${city}/${slug}/blog`} style={{ color: 'var(--site-muted)' }}>
+        <Link href={`/${locale}/sites/${slug}/blog`} style={{ color: 'var(--site-muted)' }}>
           ← Journal
         </Link>
       </nav>

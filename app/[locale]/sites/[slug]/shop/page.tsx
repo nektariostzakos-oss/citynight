@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug } from '@/lib/site-queries';
+import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { publicMetadata } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
 import { listEnabledProducts } from '@/lib/shop';
@@ -8,24 +8,24 @@ import { ShopFlow } from '@/components/shop-flow';
 
 export const revalidate = 1800;
 
-type Params = Promise<{ locale: string; city: string; slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) return {};
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/shop` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/shop` },
     title: `Shop — ${site.name}`,
     description: `Shop at ${site.name}${site.city ? `, ${site.city}` : ''}.`,
   });
 }
 
 export default async function SiteShopPage({ params }: { params: Params }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) notFound();
 
   const products = listEnabledProducts(site.id).map((p) => ({

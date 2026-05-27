@@ -141,7 +141,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
     // (per-venue pages were killed in J.4).
     ...results.cities.map<Row>((h) => ({
       kind: 'city',
-      href: `/${locale}/${h.slug}`,
+      href: `/${locale}/cities/${h.slug}`,
       label: h.name,
       sub: h.region,
     })),
@@ -157,7 +157,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
     })),
     ...results.venues.map<Row>((h) => ({
       kind: 'venue',
-      href: `/${locale}/${h.citySlug}`,
+      href: `/${locale}/cities/${h.citySlug}`,
       label: h.name,
       sub: h.snippet,
     })),

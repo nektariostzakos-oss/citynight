@@ -35,7 +35,7 @@ export function HeroNearestPanel({ locale }: { locale: Locale }) {
         {nearestCities.slice(0, 4).map((city) => (
           <li key={city.id}>
             <Link
-              href={`/${locale}/${city.slug}`}
+              href={`/${locale}/cities/${city.slug}`}
               className="group relative flex flex-col gap-1 rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-0)]/60 p-3 transition hover:border-[var(--color-accent-pink)] hover:bg-[var(--color-bg-0)]/90"
             >
               <p className="font-display text-lg font-semibold leading-none text-[var(--color-fg-0)] group-hover:text-[var(--color-accent-pink)]">{city.name}</p>

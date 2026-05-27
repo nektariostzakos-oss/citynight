@@ -1,135 +1,131 @@
-// New city discovery page — replaces the old /greece/{city} surface
-// (Phase H3). Lists every SaaS site in this city. Visitors click into
-// a site and they're on a full website, not a directory listing.
+// Phase K.1 — city article guide moved to /{locale}/cities/{city}.
+//
+// URL: /{locale}/cities/{city}  e.g. /el/cities/athens
+//
+// Replaces the old SaaS "businesses in this city" listing that lived
+// here (Phase H3). SaaS site pages moved to /sites/{slug}. The old
+// /{locale}/{city} URL 301-redirects to this one.
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
-import { isLocale, LOCALES, type Locale } from '@/lib/i18n';
-import { getCityBySlugForDiscovery, listSitesInCity, countSitesInCity } from '@/lib/city-sites';
-import { SiteCard } from '@/components/site-card';
+import { isLocale, type Locale } from '@/lib/i18n';
 import { publicMetadata } from '@/lib/seo';
+import { getCityBySlug } from '@/lib/queries';
+import { listArticlesByCity, type Article } from '@/lib/articles';
 
-export const revalidate = 3600;
-
-const COPY: Record<Locale, {
-  meta: (c: string) => string;
-  metaDesc: (c: string, n: number) => string;
-  heading: (c: string) => string;
-  sub: (c: string, n: number) => string;
-  noneYet: (c: string) => string;
-  ownerCta: string;
-  ownerCtaSub: string;
-  ownerCtaLink: string;
-}> = {
-  el: {
-    meta: (c) => `${c} — websites επιχειρήσεων στο citynight`,
-    metaDesc: (c, n) => `Έτοιμα websites επιχειρήσεων στο ${c}. ${n} ενεργές παρουσιάσεις.`,
-    heading: (c) => `Επιχειρήσεις στο ${c}`,
-    sub: (c, n) => `${n} ${n === 1 ? 'website' : 'websites'} στο ${c}. Κάθε καρτέλα ανοίγει την πλήρη ιστοσελίδα.`,
-    noneYet: (c) => `Δεν υπάρχουν ακόμα websites στο ${c}.`,
-    ownerCta: 'Είσαι ιδιοκτήτης;',
-    ownerCtaSub: 'Στήσε το δικό σου website σε 60 δευτερόλεπτα. Δωρεάν για πάντα. €19/μήνα μόνο αν θες δικό σου domain.',
-    ownerCtaLink: 'Φτιάξε το δικό σου →',
-  },
-  en: {
-    meta: (c) => `${c} — business websites on citynight`,
-    metaDesc: (c, n) => `Ready-made business websites in ${c}. ${n} live presences.`,
-    heading: (c) => `Businesses in ${c}`,
-    sub: (c, n) => `${n} ${n === 1 ? 'website' : 'websites'} in ${c}. Each card opens the full site.`,
-    noneYet: (c) => `No websites in ${c} yet.`,
-    ownerCta: 'Own a business?',
-    ownerCtaSub: 'Get your own website in 60 seconds. Free forever. €19/mo only if you bring your own domain.',
-    ownerCtaLink: 'Make yours →',
-  },
-  de: {
-    meta: (c) => `${c} — Geschäftswebsites auf citynight`,
-    metaDesc: (c, n) => `Fertige Geschäfts-Websites in ${c}. ${n} aktive Auftritte.`,
-    heading: (c) => `Geschäfte in ${c}`,
-    sub: (c, n) => `${n} ${n === 1 ? 'Website' : 'Websites'} in ${c}.`,
-    noneYet: (c) => `Noch keine Websites in ${c}.`,
-    ownerCta: 'Inhaber?', ownerCtaSub: 'Eigene Website in 60 Sekunden. Kostenlos.', ownerCtaLink: 'Erstellen →',
-  },
-  fr: {
-    meta: (c) => `${c} — sites d'entreprises sur citynight`,
-    metaDesc: (c, n) => `Sites d'entreprises clés en main à ${c}. ${n} présences actives.`,
-    heading: (c) => `Entreprises à ${c}`,
-    sub: (c, n) => `${n} ${n === 1 ? 'site' : 'sites'} à ${c}.`,
-    noneYet: (c) => `Aucun site à ${c} pour le moment.`,
-    ownerCta: 'Propriétaire ?', ownerCtaSub: 'Votre site en 60 secondes. Gratuit.', ownerCtaLink: 'Créer →',
-  },
-  it: {
-    meta: (c) => `${c} — siti aziendali su citynight`,
-    metaDesc: (c, n) => `Siti aziendali pronti a ${c}. ${n} presenze attive.`,
-    heading: (c) => `Attività a ${c}`,
-    sub: (c, n) => `${n} ${n === 1 ? 'sito' : 'siti'} a ${c}.`,
-    noneYet: (c) => `Nessun sito a ${c} ancora.`,
-    ownerCta: 'Sei proprietario?', ownerCtaSub: 'Il tuo sito in 60 secondi. Gratis.', ownerCtaLink: 'Crea →',
-  },
-};
+export const revalidate = 1800;
 
 type Params = Promise<{ locale: string; city: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale, city } = await params;
   if (!isLocale(locale)) return {};
-  const cityRow = getCityBySlugForDiscovery(city);
+  const cityRow = getCityBySlug(city, locale as Locale);
   if (!cityRow) return {};
-  const t = COPY[locale];
-  const n = countSitesInCity(cityRow.slug, cityRow.name);
-  const paths: Partial<Record<Locale, string>> = {};
-  for (const l of LOCALES) paths[l] = `/${l}/cities/${city}`;
   return publicMetadata({
-    locale, paths,
-    title: t.meta(cityRow.name),
-    description: t.metaDesc(cityRow.name, n).slice(0, 160),
+    locale,
+    paths: { el: `/el/cities/${city}`, en: `/en/cities/${city}` },
+    title: `${cityRow.name} — citynight.gr`,
+    description: `City guide for ${cityRow.name}: ranked picks for nightlife, food and stay.`,
   });
 }
 
-export default async function CityDiscoveryPage({ params }: { params: Params }) {
+export default async function CityArticlesIndex({ params }: { params: Params }) {
   const { locale, city } = await params;
   if (!isLocale(locale)) notFound();
-  const cityRow = getCityBySlugForDiscovery(city);
+  const cityRow = getCityBySlug(city, locale as Locale);
   if (!cityRow) notFound();
-  const sites = listSitesInCity(cityRow.slug, cityRow.name);
-  const t = COPY[locale];
+
+  const articles = listArticlesByCity(cityRow.id, { locale, status: 'published' });
+  const grouped = groupByVertical(articles);
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 py-12 md:py-16">
-      <header className="mb-12">
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--color-fg-2)]">
-          {cityRow.region ?? 'Greece'}
+    <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
+      <header className="mb-12 md:mb-16">
+        <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-fg-2)]">
+          {locale === 'el' ? 'Οδηγός πόλης' : 'City guide'}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-[var(--color-fg-0)] md:text-5xl">
-          {t.heading(cityRow.name)}
+        <h1 className="mt-4 font-display text-4xl font-semibold text-[var(--color-fg-0)] md:text-6xl">
+          {cityRow.name}
         </h1>
-        <p className="mt-3 max-w-2xl text-lg text-[var(--color-fg-1)]">
-          {t.sub(cityRow.name, sites.length)}
+        <p className="mt-4 max-w-2xl text-base text-[var(--color-fg-1)] md:text-lg">
+          {locale === 'el'
+            ? `Όλα τα άρθρα μας για ${cityRow.name} — επιλεγμένα και κατατασσόμενα από εμάς.`
+            : `Every guide we've published for ${cityRow.name} — picked and ranked by us.`}
         </p>
       </header>
 
-      {sites.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-[var(--color-bg-3)] p-8 text-center text-[var(--color-fg-2)]">
-          {t.noneYet(cityRow.name)}
+      {articles.length === 0 ? (
+        <p className="text-[var(--color-fg-2)]">
+          {locale === 'el' ? 'Δεν υπάρχουν ακόμα άρθρα.' : 'No articles yet — check back soon.'}
         </p>
       ) : (
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sites.map((s) => (
-            <li key={s.id}><SiteCard site={s} locale={locale} citySlug={cityRow.slug} /></li>
-          ))}
-        </ul>
+        <div className="space-y-16">
+          {(['nightlife', 'food', 'stay'] as const).map((v) => {
+            const items = grouped[v];
+            if (!items?.length) return null;
+            return (
+              <section key={v}>
+                <h2 className="mb-6 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+                  {VERTICAL_LABELS[locale]?.[v] ?? v}
+                </h2>
+                <ul className="grid gap-6 md:grid-cols-2">
+                  {items.map((a) => (
+                    <ArticleCard key={a.id} article={a} locale={locale} citySlug={city} />
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
       )}
+    </article>
+  );
+}
 
-      <section className="mt-20 rounded-2xl border border-[var(--color-accent-pink)]/30 bg-[var(--color-bg-1)] p-8 text-center">
-        <p className="font-display text-xl font-semibold text-[var(--color-fg-0)]">{t.ownerCta}</p>
-        <p className="mx-auto mt-3 max-w-2xl text-[var(--color-fg-1)]">{t.ownerCtaSub}</p>
-        <Link
-          href={`/${locale}/sites`}
-          className="mt-6 inline-flex items-center gap-2 rounded-md bg-[var(--color-accent-pink)] px-5 py-2.5 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)]"
-        >
-          {t.ownerCtaLink}
-        </Link>
-      </section>
-    </main>
+// ─── helpers ────────────────────────────────────────────────────────
+
+function groupByVertical(articles: Article[]) {
+  const out: Record<Article['vertical'], Article[]> = { nightlife: [], food: [], stay: [] };
+  for (const a of articles) out[a.vertical].push(a);
+  return out;
+}
+
+const VERTICAL_LABELS: Record<string, Record<'nightlife' | 'food' | 'stay', string>> = {
+  el: { nightlife: 'Νυχτερινή ζωή', food: 'Φαγητό', stay: 'Διαμονή' },
+  en: { nightlife: 'Nightlife', food: 'Food', stay: 'Stay' },
+};
+
+function ArticleCard({ article, locale, citySlug }: { article: Article; locale: string; citySlug: string }) {
+  return (
+    <li>
+      <Link
+        href={`/${locale}/cities/${citySlug}/${article.slug}`}
+        className="group block overflow-hidden rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] transition hover:border-[var(--color-accent-cyan)]"
+      >
+        {article.coverUrl && (
+          <div className="relative aspect-[16/9] w-full overflow-hidden">
+            <Image
+              src={article.coverUrl}
+              alt={article.title}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover transition group-hover:scale-105"
+            />
+          </div>
+        )}
+        <div className="p-6">
+          <p className="text-xs uppercase tracking-wide text-[var(--color-fg-2)]">{article.vertical}</p>
+          <h3 className="mt-2 font-display text-xl font-semibold text-[var(--color-fg-0)] md:text-2xl">
+            {article.title}
+          </h3>
+          {article.subtitle && (
+            <p className="mt-3 text-sm text-[var(--color-fg-1)]">{article.subtitle}</p>
+          )}
+        </div>
+      </Link>
+    </li>
   );
 }

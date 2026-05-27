@@ -192,18 +192,18 @@ function articleEntries(): MetadataRoute.Sitemap {
   for (const l of LOCALES) {
     for (const c of cities) {
       entries.push({
-        url: `${SITE_URL}/${l}/${c.slug}`,
+        url: `${SITE_URL}/${l}/cities/${c.slug}`,
         lastModified: tsToDate(c.createdAt),
         changeFrequency: 'daily',
         priority: 0.8,
-        alternates: { languages: alternatesAt(`/${c.slug}`) },
+        alternates: { languages: alternatesAt(`/cities/${c.slug}`) },
       });
     }
   }
   // Article detail pages — single locale per row.
   for (const a of loadArticleRows()) {
     entries.push({
-      url: `${SITE_URL}/${a.locale}/${a.citySlug}/${a.slug}`,
+      url: `${SITE_URL}/${a.locale}/cities/${a.citySlug}/${a.slug}`,
       lastModified: tsToDate(a.publishedAt),
       changeFrequency: 'weekly',
       priority: 0.7,

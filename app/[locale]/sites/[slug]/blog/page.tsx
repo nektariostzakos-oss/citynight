@@ -3,31 +3,31 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug } from '@/lib/site-queries';
+import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { publicMetadata } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
 import { listPublishedPosts } from '@/lib/blog/posts';
 
 export const revalidate = 600;
 
-type Params = Promise<{ locale: string; city: string; slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) return {};
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/blog` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/blog` },
     title: `Journal — ${site.name}`,
     description: `Latest posts from ${site.name}.`,
   });
 }
 
 export default async function SiteBlogIndex({ params }: { params: Params }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) notFound();
 
   const posts = listPublishedPosts(site.id);
@@ -45,7 +45,7 @@ export default async function SiteBlogIndex({ params }: { params: Params }) {
         <ul className="space-y-6">
           {posts.map((p) => (
             <li key={p.id} className="site-panel p-5">
-              <Link href={`/${locale}/cities/${city}/${slug}/blog/${p.slug}`} className="block">
+              <Link href={`/${locale}/sites/${slug}/blog/${p.slug}`} className="block">
                 {p.category && (
                   <span className="site-eyebrow">{p.category}</span>
                 )}

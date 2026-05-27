@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug } from '@/lib/site-queries';
+import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { publicMetadata, jsonLdProps } from '@/lib/seo';
 import { SiteContactForm } from '@/components/site-render/site-contact-form';
 import { isLocale } from '@/lib/i18n';
@@ -9,24 +9,24 @@ import { BookingFlow } from '@/components/booking-flow';
 
 export const revalidate = 1800;
 
-type Params = Promise<{ locale: string; city: string; slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) return {};
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/book` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/book` },
     title: `Reserve — ${site.name}`,
     description: `Reserve a table at ${site.name}${site.city ? `, ${site.city}` : ''}.`,
   });
 }
 
 export default async function SiteBookPage({ params }: { params: Params }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) notFound();
 
   // Sites with at least one enabled service get the booking calendar flow.
@@ -49,7 +49,7 @@ export default async function SiteBookPage({ params }: { params: Params }) {
         name: `Reserve at ${site.name}`,
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: site.reservationUrl ?? `${base}/${locale}/cities/${city}/${slug}/book`,
+          urlTemplate: site.reservationUrl ?? `${base}/${locale}/sites/${slug}/book`,
           inLanguage: locale,
         },
         ...(site.reservationEmail ? { recipient: { '@type': 'Organization', name: site.name, email: site.reservationEmail } } : {}),

@@ -1,29 +1,29 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { getPublishedSiteByCityAndSlug, getSitePhotos } from '@/lib/site-queries';
+import { getPublishedSiteBySlug, getSitePhotos } from '@/lib/site-queries';
 import { publicMetadata } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
 
 export const revalidate = 1800;
-type Params = Promise<{ locale: string; city: string; slug: string }>;
+type Params = Promise<{ locale: string; slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) return {};
   return publicMetadata({
-    locale, paths: { [locale]: `/${locale}/cities/${city}/${slug}/gallery` },
+    locale, paths: { [locale]: `/${locale}/sites/${slug}/gallery` },
     title: `Gallery — ${site.name}`,
     description: `Photos of ${site.name}${site.city ? `, ${site.city}` : ''}.`,
   });
 }
 
 export default async function SiteGalleryPage({ params }: { params: Params }) {
-  const { locale, city, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const site = getPublishedSiteByCityAndSlug(city, slug);
+  const site = getPublishedSiteBySlug(slug);
   if (!site) notFound();
   const photos = getSitePhotos(site.id);
   if (!photos.length) notFound();
