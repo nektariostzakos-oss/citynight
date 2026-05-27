@@ -1,4 +1,8 @@
-// Custom-domain rewrite middleware (Phase D).
+// Custom-domain rewrite proxy (Phase D).
+//
+// Next 16 renamed the `middleware` file convention to `proxy`. Same
+// runtime semantics — exported function intercepts requests before
+// they hit the matched route segments.
 //
 // When a request arrives with Host = an owner-configured custom_domain
 // (e.g. edenrestaurant.gr), we look the venue up and rewrite to its
@@ -17,11 +21,9 @@ export const config = {
   matcher: ['/((?!_next/|api/|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.[a-zA-Z0-9]+$).*)'],
 };
 
-export const runtime = 'nodejs';
-
 const DEFAULT_LOCALE = 'el'; // matches lib/i18n.ts DEFAULT_LOCALE
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const rawHost = req.headers.get('host');
   const host = rawHost ? normaliseHost(rawHost) : null;
   if (!host || isCitynightHost(host)) return NextResponse.next();
