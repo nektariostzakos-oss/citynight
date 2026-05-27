@@ -1438,3 +1438,30 @@ The architectural gap: Atelier has one admin per business in one JSON file tree;
 ---
 
 **Summary:** Porting effort is 2–3 FTE-months. Critical path: data layer (JSON → SQL) + Stripe (per-site) + auth (password → magic-link) + testing. These must work before integrating UI components.
+
+---
+
+## Status — Phase I final landing (closed 2026-05-27)
+
+| Sub-phase | What shipped |
+|-----------|--------------|
+| I.1 | Next 15→16 upgrade; `middleware.ts` → `proxy.ts`; archiver pinned to v7 |
+| I.2 | Inventory + locked product decisions (saved to memory: Resend, Stripe Connect, full v1 scope, one default template per industry, Hostinger uploads, memberships+deposits standard, atelier-level analytics) |
+| I.3 | Migrations 0034–0039 — 14 new tables: services/staff/junction, bookings/availability_rules/holidays, products/coupons/gift_cards/orders, clients/memberships/reviews, blog_categories, site_events/_daily. Plus stripe Connect columns on `sites`. |
+| I.4 | Auth unification — `requireSiteOwner(siteId)` helper; atelier's own auth NOT ported (citynight session is canonical) |
+| I.5 | Booking engine end-to-end: lib (services/staff/holidays/bookings/availability/tz) + 6 API routes + Stripe Connect onboarding & deposit PaymentIntents + booking UI + dashboard. Browser-verified on oakline-barber-demo. |
+| I.6 | Shop engine end-to-end: lib (products/coupons/gift-cards/orders) + 7 API routes + checkout UI with Stripe Elements + dashboard products+orders panels |
+| I.7 | CRM: clients (with GDPR soft-delete + auto-upsert from bookings/orders + rollups) + reviews (HMAC-signed post-visit links) + dashboards + public `/review/{token}` page |
+| I.8 | Blog (uses existing `site_pages` + `site_blog_categories`) + public listing/detail + dashboard CRUD |
+| I.9 | Industry templates — **hybrid approach**: 6 new industry palettes (barber/hair/clinic/nail/spa/yoga) + `BookingHome` booking-led layout. Full 6-template atelier port deferred as paid upsell. |
+| I.10 | Cron jobs: `booking-reminders.mjs` (every 5min), `review-requests.mjs` (hourly). Migration 0040 adds `reminded_at` + `review_requested_at`. CRON.md + this doc updated. |
+
+**Smoke-test coverage:** 15 cases in `pnpm test:integrity` — booking engine (5), shop engine (5), CRM (5).
+
+**Deferred to a future phase / paid upsell:**
+- 6 full atelier template variants (the 1300-LOC-each `template{2..6}` directories) — the hybrid in I.9 ships the same surface result for v1
+- Marketing automations (bulk email campaigns, automated reminders, segment targeting). The cron job layer is in place; the campaign/segment tables aren't
+- Per-service `deposit_percent` column — deposits are accepted per-booking via the API, but no UI for owners to set service-level defaults yet
+- Stock alert cron + low-stock owner notification
+
+**Original 2–3 FTE-months estimate retired:** the hybrid choices kept the critical path tight.

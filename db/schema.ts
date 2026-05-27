@@ -504,6 +504,10 @@ export const siteBookings = sqliteTable('site_bookings', {
   walkIn: integer('walk_in', { mode: 'boolean' }).notNull().default(false),
   lang: text().notNull().default('en'),
 
+  // Phase I.10 — cron-tracking timestamps
+  remindedAt: ts('reminded_at'),
+  reviewRequestedAt: ts('review_requested_at'),
+
   createdAt: ts('created_at').default(now),
   updatedAt: ts('updated_at').default(now),
 }, (t) => [

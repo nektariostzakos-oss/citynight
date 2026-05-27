@@ -15,6 +15,10 @@ HOME=/home/uXXX
 ANTHROPIC_API_KEY=...
 GOOGLE_PLACES_API_KEY=...
 STRIPE_SECRET_KEY=...
+EMAIL_API_KEY=...
+EMAIL_FROM="citynight.gr <hello@citynight.gr>"
+REVIEW_TOKEN_SECRET=...
+NEXT_PUBLIC_SITE_URL=https://citynight.gr
 
 # Hourly: roll up raw `events` rows into `events_daily`.
 5 * * * *  cd ~/domains/citynight.gr/public_html && node scripts/cron/rollup-analytics.js >> ~/logs/rollup.log 2>&1
@@ -36,6 +40,13 @@ STRIPE_SECRET_KEY=...
 
 # Every 5 minutes: uptime sentinel. Emails ALERT_EMAIL on first failure.
 */5 * * * *  /home/uXXX/domains/citynight.gr/public_html/scripts/cron/uptime-check.sh >> ~/logs/uptime.log 2>&1
+
+# Phase I.10 — atelier-flavoured customer-loop jobs.
+# Every 5 minutes: booking reminders (8h before slot, ±5min window).
+*/5 * * * *  cd ~/domains/citynight.gr/public_html && node scripts/cron/booking-reminders.mjs >> ~/logs/booking-reminders.log 2>&1
+
+# Hourly at :15: post-visit review-request mailer (2–24h after completion).
+15 * * * *  cd ~/domains/citynight.gr/public_html && node scripts/cron/review-requests.mjs >> ~/logs/review-requests.log 2>&1
 
 # Daily 04:00: verify the most recent gzipped backup actually restores.
 0 4 * * *  DATABASE_PATH=/home/uXXX/persistent/citynight.sqlite /home/uXXX/domains/citynight.gr/public_html/scripts/cron/backup-verify.sh >> ~/logs/backup-verify.log 2>&1
