@@ -8,11 +8,11 @@ import {
   siteStats,
 } from '@/lib/queries';
 import { listPublishedArticles } from '@/lib/articles';
-import { SearchBox } from '@/components/search-box';
 import { AdSlot } from '@/components/ad-slot';
 import { getAllCityGuides } from '@/content/cities';
 import { HeroLiveStatus } from '@/components/hero-live-status';
 import { HeroNearestPanel } from '@/components/hero-nearest-panel';
+import { SmartDestinations } from '@/components/smart-destinations';
 import {
   publicMetadata, localizedPaths, jsonLdProps,
   organizationJsonLd, websiteJsonLd, breadcrumbJsonLd,
@@ -60,12 +60,15 @@ const TILE_LOCALE: Record<Locale, { region: Record<string, string>; comingSoon: 
 // "All cities" CTA below the hero already serve.
 
 // Tagline appended below the hero subtitle — short, futuristic, action-y.
+// Niche, conversion-leaning tagline — leads with what makes the site
+// different (locals + AI cross-check) and ends with the "no clickbait"
+// promise instead of a generic "curated by people" line.
 const HERO_TAGLINE: Record<Locale, (cities: number) => string> = {
-  en: (n) => `${n} cities · 5 languages · curated by people who know the streets`,
-  el: (n) => `${n} πόλεις · 5 γλώσσες · επιμελημένα από ανθρώπους που ξέρουν`,
-  de: (n) => `${n} Städte · 5 Sprachen · kuratiert von Leuten vor Ort`,
-  fr: (n) => `${n} villes · 5 langues · sélectionnées par des connaisseurs`,
-  it: (n) => `${n} città · 5 lingue · selezionate da chi conosce le strade`,
+  en: (n) => `${n} cities · 3 verticals · 5 languages · zero clickbait`,
+  el: (n) => `${n} πόλεις · 3 κατηγορίες · 5 γλώσσες · χωρίς clickbait`,
+  de: (n) => `${n} Städte · 3 Verticals · 5 Sprachen · null Clickbait`,
+  fr: (n) => `${n} villes · 3 verticals · 5 langues · zéro clickbait`,
+  it: (n) => `${n} città · 3 verticals · 5 lingue · zero clickbait`,
 };
 
 const COPY: Record<Locale, {
@@ -76,6 +79,10 @@ const COPY: Record<Locale, {
   citiesHeading: string;
   citiesSub: string;
   citiesCta: string;
+  citiesNearbyHeading: string;        // template — must include {city}
+  citiesNearbyHeadingNoCity: string;
+  citiesNearbySub: string;
+  citiesLivePill: string;
   latestArticlesHeading: string;
   latestArticlesSub: string;
   ownersHeading: string;
@@ -92,10 +99,14 @@ const COPY: Record<Locale, {
     heroKicker: 'Greece · nightlife guide',
     heroTitle: 'Where Greece',
     heroTitleAccent: 'goes out',
-    heroSub: 'Clubs, rooftops, bouzoukia, beach clubs — curated, in your language, grounded in real venues.',
+    heroSub: 'The Greece locals actually go out to. AI-checked, human-curated guides for nightlife, food and stay — across every city worth knowing.',
     citiesHeading: 'Top destinations',
     citiesSub: 'Each city is a guide — neighborhoods, scenes, and the venues that define them.',
     citiesCta: 'All cities →',
+    citiesNearbyHeading: 'Closest to {city}',
+    citiesNearbyHeadingNoCity: 'Closest to you right now',
+    citiesNearbySub: 'Cities sorted by live distance from your current location.',
+    citiesLivePill: 'live',
     latestArticlesHeading: 'Latest guides',
     latestArticlesSub: 'Fresh ranked picks across every city.',
     ownersHeading: 'Run a venue?',
@@ -109,10 +120,14 @@ const COPY: Record<Locale, {
     heroKicker: 'Ελλάδα · οδηγός νυχτερινής ζωής',
     heroTitle: 'Πού βγαίνει',
     heroTitleAccent: 'η Ελλάδα',
-    heroSub: 'Κλαμπ, ταράτσες, μπουζούκια, beach club — επιμελημένο, στη γλώσσα σου, βασισμένο σε πραγματικά μαγαζιά.',
+    heroSub: 'Η Ελλάδα όπως βγαίνουν οι ντόπιοι. Οδηγοί νυχτερινής ζωής, φαγητού και διαμονής — διασταυρωμένοι με AI, επιμελημένοι από ανθρώπους.',
     citiesHeading: 'Κορυφαίοι προορισμοί',
     citiesSub: 'Κάθε πόλη είναι οδηγός — γειτονιές, σκηνές, και τα μαγαζιά που την ορίζουν.',
     citiesCta: 'Όλες οι πόλεις →',
+    citiesNearbyHeading: 'Πιο κοντά στο {city}',
+    citiesNearbyHeadingNoCity: 'Πιο κοντά σου τώρα',
+    citiesNearbySub: 'Πόλεις ταξινομημένες με ζωντανή απόσταση από την τοποθεσία σου.',
+    citiesLivePill: 'live',
     latestArticlesHeading: 'Πρόσφατοι οδηγοί',
     latestArticlesSub: 'Φρέσκα ranked picks από κάθε πόλη.',
     ownersHeading: 'Έχεις μαγαζί;',
@@ -126,10 +141,14 @@ const COPY: Record<Locale, {
     heroKicker: 'Griechenland · Nightlife-Guide',
     heroTitle: 'Wo Griechenland',
     heroTitleAccent: 'feiert',
-    heroSub: 'Clubs, Rooftops, Bouzoukia, Beachclubs — kuratiert, in Ihrer Sprache, basierend auf echten Locations.',
+    heroSub: 'Griechenland, wie die Einheimischen feiern. KI-geprüft, von Menschen kuratiert — Nightlife, Essen und Übernachten in jeder Stadt, die zählt.',
     citiesHeading: 'Top-Destinationen',
     citiesSub: 'Jede Stadt ist ein Guide — Viertel, Szenen und die Locations, die sie prägen.',
     citiesCta: 'Alle Städte →',
+    citiesNearbyHeading: 'Am nächsten an {city}',
+    citiesNearbyHeadingNoCity: 'Am nächsten zu Ihnen',
+    citiesNearbySub: 'Städte sortiert nach Live-Entfernung zu Ihrem Standort.',
+    citiesLivePill: 'live',
     latestArticlesHeading: 'Neueste Guides',
     latestArticlesSub: 'Frische Ranglisten aus jeder Stadt.',
     ownersHeading: 'Lokal-Inhaber?',
@@ -143,10 +162,14 @@ const COPY: Record<Locale, {
     heroKicker: 'Grèce · guide nocturne',
     heroTitle: 'Où la Grèce',
     heroTitleAccent: 'sort',
-    heroSub: 'Clubs, rooftops, bouzoukia, beach clubs — sélectionné, dans votre langue, ancré sur de vrais lieux.',
+    heroSub: 'La Grèce comme la vivent les locaux. Sorties, restos et hôtels — vérifiés par IA, sélectionnés par des humains.',
     citiesHeading: 'Destinations phares',
     citiesSub: 'Chaque ville est un guide — quartiers, scènes, lieux qui la définissent.',
     citiesCta: 'Toutes les villes →',
+    citiesNearbyHeading: 'Au plus près de {city}',
+    citiesNearbyHeadingNoCity: 'Au plus près de vous',
+    citiesNearbySub: 'Villes triées par distance en direct depuis votre position.',
+    citiesLivePill: 'live',
     latestArticlesHeading: 'Derniers guides',
     latestArticlesSub: 'Nouveaux classements pour chaque ville.',
     ownersHeading: 'Propriétaire ?',
@@ -160,10 +183,14 @@ const COPY: Record<Locale, {
     heroKicker: 'Grecia · guida notturna',
     heroTitle: 'Dove la Grecia',
     heroTitleAccent: 'esce',
-    heroSub: 'Club, rooftop, bouzoukia, beach club — selezionati, nella tua lingua, basati su locali veri.',
+    heroSub: 'La Grecia che vivono i locali. Vita notturna, ristoranti e alloggi — verificati con AI, selezionati da chi sa.',
     citiesHeading: 'Destinazioni top',
     citiesSub: 'Ogni città è una guida — quartieri, scene e i locali che la definiscono.',
     citiesCta: 'Tutte le città →',
+    citiesNearbyHeading: 'Più vicino a {city}',
+    citiesNearbyHeadingNoCity: 'Più vicino a te ora',
+    citiesNearbySub: 'Città ordinate per distanza live dalla tua posizione.',
+    citiesLivePill: 'live',
     latestArticlesHeading: 'Ultime guide',
     latestArticlesSub: 'Nuove classifiche da ogni città.',
     ownersHeading: 'Hai un locale?',
@@ -205,14 +232,13 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         ])}
       />
 
-      {/* HERO — futuristic, dynamic, useful.
-          Layered: animated photo cycle → glow blobs → faint grid pattern →
-          dark gradient overlay → kinetic title + live status + smart search +
-          GPS-aware "near you" panel + quick-action chips.
-          All client-side enhancements are progressive — the SSR markup still
-          shows the first photo + title for crawlers and JS-off visitors. */}
+      {/* HERO — typographic centerpiece. Search was removed (the global
+          header carries it) and the heroKicker eyebrow was folded into
+          the live pill so the chrome above the H1 is a single strip,
+          not two competing labels. Mobile gets shorter padding + a
+          full-width CTA so the H1 + sub + CTA all fit one viewport. */}
       <section className="relative isolate overflow-hidden">
-        <div className="relative min-h-[100vh] w-full">
+        <div className="relative min-h-[85svh] w-full md:min-h-[100vh]">
           {/* 1. Static gradient backdrop. The cycling city-photo hero was
               removed — cities now render as text-only app buttons everywhere
               except inside their own page header. */}
@@ -239,45 +265,42 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg-0)]/40 via-[var(--color-bg-0)]/65 to-[var(--color-bg-0)]" aria-hidden />
 
           {/* 5. Content */}
-          <div className="relative z-10 mx-auto flex min-h-[100vh] max-w-6xl flex-col justify-center px-6 py-24">
-            <div className="flex items-center gap-3">
+          <div className="relative z-10 mx-auto flex min-h-[85svh] max-w-6xl flex-col justify-center px-6 py-16 md:min-h-[100vh] md:py-24">
+            {/* Single live-status pill — replaces the old two-piece
+                "[Live · 16:52 · Open now]   GREECE · NIGHTLIFE GUIDE"
+                row, which read as two competing labels on mobile. */}
+            <div>
               <HeroLiveStatus locale={locale} />
-              <span className="hidden text-[10px] uppercase tracking-[0.25em] text-[var(--color-fg-3)] sm:inline">
-                {c.heroKicker}
-              </span>
             </div>
 
-            <h1 className="mt-7 font-display text-[3.5rem] font-semibold leading-[0.92] tracking-tight sm:text-7xl md:text-[7.5rem] lg:text-[8.5rem]">
+            <h1 className="mt-6 font-display text-5xl font-semibold leading-[0.92] tracking-tight sm:text-7xl md:mt-7 md:text-[7.5rem] lg:text-[8.5rem]">
               <span className="block">{c.heroTitle}</span>
               <span className="block bg-gradient-to-r from-[var(--color-accent-pink)] via-[var(--color-accent-pink)] to-[var(--color-accent-violet)] bg-clip-text text-transparent">
                 {c.heroTitleAccent}.
               </span>
             </h1>
 
-            <p className="mt-7 max-w-2xl text-balance text-base text-[var(--color-fg-1)] sm:text-lg md:text-xl">
+            <p className="mt-6 max-w-2xl text-balance text-base text-[var(--color-fg-1)] sm:text-lg md:mt-7 md:text-xl">
               {c.heroSub}
             </p>
             <p className="mt-3 text-xs text-[var(--color-fg-3)] sm:text-sm">
               {HERO_TAGLINE[locale](stats.cities)}
             </p>
 
-            {/* Smart search — wide, prominent */}
-            <div className="mt-10 w-full max-w-2xl">
-              <SearchBox locale={locale} />
-            </div>
-
-            {/* Single CTA — anchor-scroll to the cities grid below. */}
-            <nav aria-label="Primary call to action" className="mt-5 flex flex-wrap gap-2">
+            {/* Primary CTA — full-width on mobile so it's the obvious next
+                tap; auto-width and inline on desktop. Search was removed
+                from the hero; the global header carries it now. */}
+            <nav aria-label="Primary call to action" className="mt-8 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               <Link
                 href="#cities"
-                className="inline-flex items-center gap-1 rounded-full bg-[var(--color-accent-pink)] px-5 py-2 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] transition hover:brightness-110"
+                className="inline-flex w-full items-center justify-center gap-1 rounded-full bg-[var(--color-accent-pink)] px-5 py-3 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] transition hover:brightness-110 sm:w-auto sm:py-2"
               >
                 {c.citiesCta}
               </Link>
             </nav>
 
             {/* GPS-aware "near you" panel — hidden until location resolves */}
-            <div className="mt-10">
+            <div className="mt-8 md:mt-10">
               <HeroNearestPanel locale={locale} />
             </div>
           </div>
@@ -302,57 +325,26 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         </div>
       </section>
 
-      {/* CITIES — top destinations grid with neon hover glow + ranking pill. */}
-      <section id="cities" className="mx-auto w-full max-w-6xl px-6 py-16 scroll-mt-20">
-        <div>
-          <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.citiesHeading}</h2>
-          <p className="mt-2 text-[var(--color-fg-2)]">{c.citiesSub}</p>
-        </div>
-
-        {/* Phase K.12 — city images removed everywhere. Each city is now a
-            compact "app button": text-only chip with rank, name, region and
-            article count. Tile glows on hover; the actual city photo only
-            appears inside the city page header (micro cover). */}
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {cities.slice(0, 6).map((city, idx) => (
-            <li key={city.id}>
-              <Link
-                href={`/${locale}/cities/${city.slug}`}
-                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-5 py-4 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.45)]"
-              >
-                {/* Rank chip — keeps the futuristic "app launcher" feel */}
-                <span
-                  aria-hidden
-                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-0)] font-mono text-[11px] font-bold tracking-tight text-[var(--color-fg-1)] transition group-hover:border-[var(--color-accent-pink)] group-hover:text-[var(--color-accent-pink)]"
-                >
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-
-                <div className="min-w-0 flex-1">
-                  {city.region && (
-                    <p className="truncate text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
-                      {TILE_LOCALE[locale].region[city.region] ?? city.region}
-                    </p>
-                  )}
-                  <p className="truncate font-display text-lg font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-pink)]">
-                    {city.name}
-                  </p>
-                  <p className="mt-0.5 truncate text-xs text-[var(--color-fg-2)]">
-                    {city.articleCount > 0 ? `${city.articleCount} ${c.statsArticles}` : TILE_LOCALE[locale].comingSoon}
-                  </p>
-                </div>
-
-                <span
-                  aria-hidden
-                  className="text-[var(--color-fg-3)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-accent-pink)]"
-                >
-                  →
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* CITIES — server renders the canonical top 6 (by article count
+          desc → alphabetical). Once GPS resolves, the client re-orders
+          the same set by live distance and flips the heading to
+          "Closest to {visitor city}" + adds a distance chip per tile. */}
+      <SmartDestinations
+        cities={cities}
+        locale={locale}
+        serverTop={cities.slice(0, 6).map((_, i) => i)}
+        copy={{
+          headingDefault: c.citiesHeading,
+          headingNearby: c.citiesNearbyHeading,
+          headingNearbyNoCity: c.citiesNearbyHeadingNoCity,
+          subDefault: c.citiesSub,
+          subNearby: c.citiesNearbySub,
+          comingSoon: TILE_LOCALE[locale].comingSoon,
+          articlesLabel: c.statsArticles,
+          livePill: c.citiesLivePill,
+          regionLabels: TILE_LOCALE[locale].region,
+        }}
+      />
 
       {/* Phase K.3 — homepage trim. The old Categories chip row,
           Neighborhoods cross-city preview, and Top Venues grid are gone
