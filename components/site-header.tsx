@@ -4,10 +4,14 @@ import { SearchBox } from './search-box';
 import { MobileMenu, type PopularCity } from './mobile-menu';
 import { LangDropdown } from './lang-dropdown';
 import { ThemeToggle } from './theme-toggle';
-import { MegaMenu } from './mega-menu';
+import { MegaMenu, type MegaMenuPulse } from './mega-menu';
 import { MoonIcon } from './nav-icons';
 import { getCurrentUser } from '@/lib/auth/session';
 import { AccountMenu } from './account-menu';
+import { getCityWeather, weatherLabel } from '@/lib/weather';
+import { listPublishedArticles } from '@/lib/articles';
+import { formatAthensTime } from '@/lib/format-date';
+import { db } from '@/db';
 
 // App-feel header. Logo + mega-menu + utilities on the right. The right
 // side adapts to auth state: signed-in users get an account dropdown
@@ -34,6 +38,12 @@ export async function SiteHeader({
   const user = await getCurrentUser();
   const t = AUTH_LABELS[locale];
 
+  // Phase K.7 — live signals piped to the mega-menu so the dropdown
+  // shows "TONIGHT IN GREECE · 23:00 · 22° clear" + a freshest-article
+  // card. All three reads are cheap (Athens weather is in-process
+  // cached 15min; the article query is one indexed row).
+  const pulse = await loadMegaMenuPulse(locale);
+
   return (
     <header data-site-chrome="header" className="sticky top-0 z-40 border-b border-[var(--color-bg-2)]/80 bg-[color-mix(in_oklab,var(--color-bg-0)_75%,transparent)] backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
@@ -48,8 +58,9 @@ export async function SiteHeader({
           </span>
         </Link>
 
-        {/* Desktop mega menu — hover panels for Cities / Nightlife / Food / Stay */}
-        <MegaMenu locale={locale} />
+        {/* Desktop mega menu — Cities dropdown with live tonight strip
+            (Athens time + weather) and the freshest article card. */}
+        <MegaMenu locale={locale} pulse={pulse} />
 
         {/* Right side: search + theme + lang + auth + mobile menu */}
         <div className="flex items-center gap-2">
@@ -86,4 +97,42 @@ export async function SiteHeader({
       </div>
     </header>
   );
+}
+
+// ─── live pulse loader ────────────────────────────────────────────────
+
+async function loadMegaMenuPulse(locale: Locale): Promise<MegaMenuPulse> {
+  // Athens coords (national pulse — citynight is Greek-only). One cached
+  // Open-Meteo fetch per 15 minutes, shared across every visitor.
+  const weather = await getCityWeather(37.9838, 23.7275);
+  const w = weather
+    ? {
+        tempC: Math.round(weather.temperatureC),
+        emoji: weatherLabel(weather.weatherCode, locale).emoji,
+        label: weatherLabel(weather.weatherCode, locale).text,
+      }
+    : null;
+
+  // Freshest published article for the locale + the city it belongs to.
+  const [latest] = listPublishedArticles(locale, { limit: 1 });
+  let latestArticle: MegaMenuPulse['latestArticle'] = null;
+  if (latest) {
+    const city = db.$client.prepare(
+      `SELECT slug, name FROM cities WHERE id = ?`,
+    ).get(latest.cityId) as { slug: string; name: string } | undefined;
+    if (city) {
+      latestArticle = {
+        title: latest.title,
+        url: `/${locale}/cities/${city.slug}/${latest.slug}`,
+        cityName: city.name,
+        coverUrl: latest.coverUrl,
+      };
+    }
+  }
+
+  return {
+    athensTime: formatAthensTime(new Date(), locale),
+    weather: w,
+    latestArticle,
+  };
 }

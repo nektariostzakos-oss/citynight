@@ -1,12 +1,28 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Locale } from '@/lib/i18n';
 import { useNearbyCities, type CityWithDistance } from './nearby-cities-context';
 import { useVisitorLocation } from './visitor-location-provider';
 import { formatDistanceKm } from '@/lib/geo-distance';
 import { MoonIcon, ForkKnifeIcon, BedIcon, MapPinIcon } from './nav-icons';
+
+// Phase K.7 — live pulse data piped from the server component
+// (site-header.tsx) into the dropdown. Athens timezone for the clock,
+// Athens-area weather for the strip, and the single freshest published
+// article for the "Just published" card.
+export type MegaMenuPulse = {
+  athensTime: string;
+  weather: { tempC: number; emoji: string; label: string } | null;
+  latestArticle: {
+    title: string;
+    url: string;
+    cityName: string;
+    coverUrl: string | null;
+  } | null;
+};
 
 // Futuristic mega menu: hover (desktop) / click (mobile) opens a full-width
 // glassmorphic panel below the header. The Cities panel groups cities by
@@ -79,6 +95,11 @@ type CopyShape = {
   preciseLoading: string;    // shown while waiting on permission / GPS fix
   preciseDeniedNote: string; // shown once after the user denies the permission
   preciseActive: string;     // little "✓ precise" chip when source='precise'
+  // Phase K.7 — smart mega-menu strings
+  tonightInGreece: string;
+  filterPlaceholder: string;
+  filterEmpty: string;
+  justPublished: string;
 };
 
 const COMMON_COPY: Record<Locale, CopyShape> = {
@@ -94,6 +115,10 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     preciseLoading: 'Getting GPS fix…',
     preciseDeniedNote: 'Location permission denied — using IP only.',
     preciseActive: '✓ Precise',
+    tonightInGreece: 'Tonight in Greece',
+    filterPlaceholder: 'Filter cities…',
+    filterEmpty: 'No cities match.',
+    justPublished: 'Just published',
   },
   el: {
     nearYou: (c) => c ? `Κοντά σου · ${c}` : 'Κοντά σου',
@@ -107,6 +132,10 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     preciseLoading: 'Λαμβάνουμε GPS…',
     preciseDeniedNote: 'Άρνηση πρόσβασης — χρησιμοποιούμε IP μόνο.',
     preciseActive: '✓ Ακριβής',
+    tonightInGreece: 'Απόψε στην Ελλάδα',
+    filterPlaceholder: 'Φίλτρο πόλεων…',
+    filterEmpty: 'Καμία πόλη δεν ταιριάζει.',
+    justPublished: 'Μόλις δημοσιεύτηκε',
   },
   de: {
     nearYou: (c) => c ? `In deiner Nähe · ${c}` : 'In deiner Nähe',
@@ -120,6 +149,10 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     preciseLoading: 'GPS wird abgefragt…',
     preciseDeniedNote: 'Standortzugriff verweigert — nur IP.',
     preciseActive: '✓ Genau',
+    tonightInGreece: 'Heute in Griechenland',
+    filterPlaceholder: 'Städte filtern…',
+    filterEmpty: 'Keine Städte gefunden.',
+    justPublished: 'Gerade veröffentlicht',
   },
   fr: {
     nearYou: (c) => c ? `Près de vous · ${c}` : 'Près de vous',
@@ -133,6 +166,10 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     preciseLoading: 'Acquisition GPS…',
     preciseDeniedNote: 'Permission refusée — IP uniquement.',
     preciseActive: '✓ Précis',
+    tonightInGreece: 'Ce soir en Grèce',
+    filterPlaceholder: 'Filtrer les villes…',
+    filterEmpty: 'Aucune ville trouvée.',
+    justPublished: 'Vient de paraître',
   },
   it: {
     nearYou: (c) => c ? `Vicino a te · ${c}` : 'Vicino a te',
@@ -146,6 +183,10 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     preciseLoading: 'GPS in corso…',
     preciseDeniedNote: 'Permesso negato — solo IP.',
     preciseActive: '✓ Preciso',
+    tonightInGreece: 'Stasera in Grecia',
+    filterPlaceholder: 'Filtra città…',
+    filterEmpty: 'Nessuna città trovata.',
+    justPublished: 'Appena pubblicato',
   },
 };
 
@@ -192,7 +233,7 @@ function localLabel(locale: Locale, key: Vertical): string {
   return labels[key][locale];
 }
 
-export function MegaMenu({ locale }: { locale: Locale }) {
+export function MegaMenu({ locale, pulse }: { locale: Locale; pulse?: MegaMenuPulse }) {
   const [open, setOpen] = useState<Vertical | null>(null);
   const closeTimer = useRef<number | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
@@ -241,6 +282,15 @@ export function MegaMenu({ locale }: { locale: Locale }) {
                 >
                   <span className={`${isOpen ? ACCENT[n.accent].text : 'text-[var(--color-fg-2)]'}`}>{n.icon}</span>
                   <span>{n.label}</span>
+                  {/* Live pulse — animated ping next to the label so
+                      the nav reads "alive". Hidden when the dropdown
+                      is open (the strip inside takes over the live cue). */}
+                  {!isOpen && (
+                    <span aria-hidden className="relative ml-0.5 inline-flex h-1.5 w-1.5">
+                      <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${ACCENT[n.accent].text.replace('text-', 'bg-')} opacity-70`} />
+                      <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${ACCENT[n.accent].text.replace('text-', 'bg-')}`} />
+                    </span>
+                  )}
                 </button>
               </li>
             );
@@ -255,7 +305,7 @@ export function MegaMenu({ locale }: { locale: Locale }) {
           onMouseEnter={() => open && hoverOpen(open)}
         >
           <div className="overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[color-mix(in_oklab,var(--color-bg-1)_92%,transparent)] shadow-2xl backdrop-blur-2xl">
-            {open === 'cities'    && <CitiesPanel    locale={locale} c={c} cities={sortedAllCities} nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} />}
+            {open === 'cities'    && <CitiesPanel    locale={locale} c={c} cities={sortedAllCities} nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} pulse={pulse} />}
             {open === 'nightlife' && <VerticalPanel  locale={locale} c={c} kind="nightlife" accent="pink"   nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} />}
             {open === 'food'      && <VerticalPanel  locale={locale} c={c} kind="food"      accent="cyan"   nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} />}
             {open === 'stay'      && <VerticalPanel  locale={locale} c={c} kind="stay"      accent="violet" nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} />}
@@ -275,81 +325,213 @@ const POPULAR_CITY_SLUGS = [
   'heraklion', 'corfu', 'chania', 'nafplio', 'paros',
 ];
 
-function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity }: {
+function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pulse }: {
   locale: Locale;
   c: CopyShape;
   cities: CityWithDistance[];
   nearest: CityWithDistance[];
   hasLocation: boolean;
   visitorCity: string | null;
+  pulse?: MegaMenuPulse;
 }) {
+  // Phase K.7 — smart filter. Type to narrow the cities list to a
+  // single match-as-you-type column. When the filter is empty, the
+  // panel shows the rich 3-column layout (Near you / Popular /
+  // Regions). When filtering, we collapse to a single result column
+  // so visitors can find any of the ~20 cities in one keystroke.
+  const [filter, setFilter] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Reset filter when the dropdown closes/reopens. (The parent
+  // unmounts/remounts CitiesPanel on each open, so this just runs
+  // once per mount — autofocus the input on open.)
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (!filter.trim()) return [];
+    const q = filter.trim().toLowerCase();
+    return cities.filter((city) => city.name.toLowerCase().includes(q) || city.slug.includes(q)).slice(0, 12);
+  }, [cities, filter]);
+
   const bySlug = new Map(cities.map((city) => [city.slug, city]));
   const popular = POPULAR_CITY_SLUGS.map((slug) => bySlug.get(slug)).filter(Boolean) as CityWithDistance[];
 
-  // Regions list for the right-rail CTA — count cities per region for the badge.
-  const regionCounts = new Map<string, number>();
-  for (const city of cities) {
-    const r = city.region ?? 'Other';
-    regionCounts.set(r, (regionCounts.get(r) ?? 0) + 1);
-  }
-  const regionOrder = ['South Aegean', 'Crete', 'Ionian Islands', 'Attica', 'Peloponnese', 'Central Macedonia', 'North Aegean', 'Epirus', 'Thessaly'];
-  const topRegions = regionOrder.filter((r) => regionCounts.has(r)).slice(0, 6);
-
   return (
-    <div className="grid gap-6 p-6 md:grid-cols-3">
-      {/* Left: Near you */}
-      <div className="md:col-span-1">
-        <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} accent="cyan" />
+    <div className="relative">
+      {/* Neon edge — subtle gradient strip across the top of the panel. */}
+      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-cyan)]/60 to-transparent" />
+
+      {/* ── Live status strip — Tonight in Greece · 23:00 · 22° Clear ─ */}
+      <PulseStrip pulse={pulse} locale={locale} />
+
+      {/* ── Smart filter input ────────────────────────────────────── */}
+      <div className="border-b border-[var(--color-bg-2)]/60 px-6 py-3">
+        <div className="relative">
+          <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-fg-3)]">⌕</span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder={COMMON_COPY[locale].filterPlaceholder ?? 'Filter…'}
+            className="w-full rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-0)]/50 py-2 pl-9 pr-3 text-sm text-[var(--color-fg-0)] placeholder:text-[var(--color-fg-3)] focus:border-[var(--color-accent-cyan)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-cyan)]/20"
+            aria-label={COMMON_COPY[locale].filterPlaceholder ?? 'Filter cities'}
+          />
+        </div>
       </div>
 
-      {/* Middle: Popular cities */}
-      <div className="md:col-span-1">
-        <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
-          {COMMON_COPY[locale].popular}
-        </p>
-        <ul className="mt-2 space-y-1">
-          {popular.map((city) => (
-            <li key={city.id}>
-              <Link
-                href={`/${locale}/cities/${city.slug}`}
-                className="flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
-              >
-                <span>{city.name}</span>
-                {hasLocation && Number.isFinite(city.distanceKm) && (
-                  <span className="text-[10px] text-[var(--color-fg-3)]">{formatDistanceKm(city.distanceKm)}</span>
-                )}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* ── Body ─────────────────────────────────────────────────── */}
+      {filtered.length > 0 ? (
+        <FilteredCitiesGrid locale={locale} cities={filtered} hasLocation={hasLocation} />
+      ) : (
+        <div className="grid gap-6 p-6 md:grid-cols-3">
+          <div className="md:col-span-1">
+            <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} accent="cyan" />
+          </div>
 
-      {/* Right: Regions CTA */}
-      <div className="md:col-span-1">
-        <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
-          {COMMON_COPY[locale].byRegion}
-        </p>
-        <ul className="mt-2 space-y-1">
-          {topRegions.map((region) => (
-            <li key={region}>
+          <div className="md:col-span-1">
+            <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+              {COMMON_COPY[locale].popular}
+            </p>
+            <ul className="mt-2 space-y-1">
+              {popular.map((city) => (
+                <li key={city.id}>
+                  <Link
+                    href={`/${locale}/cities/${city.slug}`}
+                    className="group flex items-center justify-between rounded px-2 py-1.5 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <span aria-hidden className="h-1 w-1 rounded-full bg-[var(--color-accent-cyan)]/40 transition group-hover:bg-[var(--color-accent-cyan)]" />
+                      {city.name}
+                    </span>
+                    {hasLocation && Number.isFinite(city.distanceKm) && (
+                      <span className="text-[10px] text-[var(--color-fg-3)]">{formatDistanceKm(city.distanceKm)}</span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-1">
+            {pulse?.latestArticle ? (
+              <LatestArticleCard locale={locale} article={pulse.latestArticle} />
+            ) : (
               <Link
-                href={`/${locale}#region-${region.replace(/\s+/g, '-').toLowerCase()}`}
-                className="flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
+                href={`/${locale}`}
+                className="block rounded-lg border border-dashed border-[var(--color-bg-3)] p-4 text-center text-sm text-[var(--color-fg-2)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
               >
-                <span>{c.regions[region] ?? region}</span>
-                <span className="text-[10px] text-[var(--color-fg-3)]">{regionCounts.get(region)}</span>
+                {COMMON_COPY[locale].viewAllN(cities.length)} →
               </Link>
-            </li>
-          ))}
-        </ul>
-        <Link
-          href={`/${locale}`}
-          className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-accent-cyan)] hover:underline"
-        >
-          {COMMON_COPY[locale].viewAllN(cities.length)} →
-        </Link>
-      </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
+
+// ─── Live pulse strip ───────────────────────────────────────────────
+
+function PulseStrip({ pulse, locale }: { pulse?: MegaMenuPulse; locale: Locale }) {
+  if (!pulse) return null;
+  return (
+    <div className="flex items-center gap-3 border-b border-[var(--color-bg-2)]/60 px-6 py-3 text-xs">
+      <span className="relative inline-flex h-2 w-2 shrink-0" aria-hidden>
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent-cyan)]" />
+      </span>
+      <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent-cyan)]">
+        {COMMON_COPY[locale].tonightInGreece ?? 'Tonight in Greece'}
+      </span>
+      <span aria-hidden className="text-[var(--color-fg-3)]">·</span>
+      <span className="font-mono tabular-nums text-[var(--color-fg-0)]" suppressHydrationWarning>
+        {pulse.athensTime}
+      </span>
+      {pulse.weather && (
+        <>
+          <span aria-hidden className="text-[var(--color-fg-3)]">·</span>
+          <span className="inline-flex items-center gap-1.5">
+            <span aria-hidden>{pulse.weather.emoji}</span>
+            <span className="tabular-nums text-[var(--color-fg-0)]">{pulse.weather.tempC}°</span>
+            <span className="text-[var(--color-fg-2)]">{pulse.weather.label}</span>
+          </span>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─── Filtered single-column result ──────────────────────────────────
+
+function FilteredCitiesGrid({ locale, cities, hasLocation }: {
+  locale: Locale;
+  cities: CityWithDistance[];
+  hasLocation: boolean;
+}) {
+  if (cities.length === 0) {
+    return (
+      <div className="p-6 text-sm text-[var(--color-fg-2)]">
+        {COMMON_COPY[locale].filterEmpty ?? 'No cities match.'}
+      </div>
+    );
+  }
+  return (
+    <ul className="grid gap-1 p-3 md:grid-cols-2 lg:grid-cols-3">
+      {cities.map((city) => (
+        <li key={city.id}>
+          <Link
+            href={`/${locale}/cities/${city.slug}`}
+            className="group flex items-center justify-between rounded-lg px-3 py-2 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
+          >
+            <span className="inline-flex items-center gap-2">
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]/40 transition group-hover:bg-[var(--color-accent-cyan)]" />
+              {city.name}
+            </span>
+            {hasLocation && Number.isFinite(city.distanceKm) && (
+              <span className="text-[10px] text-[var(--color-fg-3)]">{formatDistanceKm(city.distanceKm)}</span>
+            )}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// ─── Latest article card ────────────────────────────────────────────
+
+function LatestArticleCard({ locale, article }: {
+  locale: Locale;
+  article: NonNullable<MegaMenuPulse['latestArticle']>;
+}) {
+  return (
+    <Link
+      href={article.url}
+      className="group relative block overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] transition hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.35)]"
+    >
+      {article.coverUrl && (
+        <div className="relative aspect-[16/9] w-full overflow-hidden">
+          <Image
+            src={article.coverUrl}
+            alt={article.title}
+            fill
+            sizes="(min-width:1024px) 25vw, 100vw"
+            className="object-cover transition duration-700 group-hover:scale-105"
+          />
+        </div>
+      )}
+      <div className="p-3">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent-pink)]">
+          {COMMON_COPY[locale].justPublished ?? 'Just published'}
+        </p>
+        <p className="mt-1.5 line-clamp-2 text-sm font-medium text-[var(--color-fg-0)] group-hover:text-[var(--color-accent-pink)]">
+          {article.title}
+        </p>
+        <p className="mt-1 text-[10px] text-[var(--color-fg-3)]">{article.cityName}</p>
+      </div>
+    </Link>
   );
 }
 
