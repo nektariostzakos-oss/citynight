@@ -2,12 +2,19 @@
 //
 // Input shape (JSON):
 //   { serviceId, staffId, date: "YYYY-MM-DD", time: "HH:MM",
-//     customerName, customerEmail?, customerPhone?, customerNotes?, lang? }
+//     customerName, customerEmail?, customerPhone?, customerNotes?, lang?,
+//     depositPercent? }
 //
 // `serviceId` / `staffId` accept either DB id or slug. The endpoint pulls
 // price + duration + buffer from the service row at booking time so the
 // caller can't lie about price. Collision detection is transactional
 // inside lib/booking/createBooking.
+//
+// Deposits (I.5c): when `depositPercent` is set (1..100), the booking is
+// created in status='pending' with the percent recorded; the front-end
+// then calls POST /booking/[bookingId]/deposit to mint a Stripe Connect
+// PaymentIntent. The webhook flips status → confirmed on
+// payment_intent.succeeded.
 //
 // CSRF: same-origin check (proxy.ts puts citynight + custom domains in
 // the trusted-origin set). Rate-limit: 5 attempts / hour / IP — booking
@@ -49,6 +56,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const customerPhone = strOrNull(body.customerPhone, 30);
   const customerNotes = strOrNull(body.customerNotes, 500);
   const lang = strOrNull(body.lang, 2);
+  const depositPercent = intInRange(body.depositPercent, 1, 100);
 
   if (!serviceRef || !staffRef || !date || !time || !customerName) {
     return NextResponse.json({ error: 'missing_required' }, { status: 400 });
@@ -83,6 +91,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     customerPhone: customerPhone ?? undefined,
     customerNotes: customerNotes ?? undefined,
     priceCents: service.priceCents,
+    depositPercent: depositPercent ?? undefined,
     lang: lang ?? undefined,
   };
 
@@ -113,4 +122,11 @@ function strOrNull(v: unknown, maxLen: number): string | null {
   const t = v.trim();
   if (!t || t.length > maxLen) return null;
   return t;
+}
+
+function intInRange(v: unknown, min: number, max: number): number | null {
+  if (typeof v !== 'number' || !Number.isFinite(v)) return null;
+  const n = Math.floor(v);
+  if (n < min || n > max) return null;
+  return n;
 }

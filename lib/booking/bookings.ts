@@ -190,6 +190,11 @@ export function createBooking(siteId: string, input: NewBookingInput): SiteBooki
       }
     }
 
+    // A booking that requires a deposit starts in 'pending' and flips to
+    // 'confirmed' on payment_intent.succeeded (see app/api/stripe/webhook).
+    // No deposit → 'confirmed' immediately, as before.
+    const initialStatus: BookingStatus = (input.depositPercent && input.depositPercent > 0) ? 'pending' : 'confirmed';
+
     const id = crypto.randomUUID();
     conn.prepare(`
       INSERT INTO site_bookings (
@@ -207,7 +212,7 @@ export function createBooking(siteId: string, input: NewBookingInput): SiteBooki
         ?, ?,
         ?, ?, ?,
         ?, ?,
-        'confirmed', ?, ?, ?
+        ?, ?, ?, ?
       )
     `).run(
       id, siteId, input.serviceId, input.staffId, input.clientId ?? null,
@@ -216,7 +221,7 @@ export function createBooking(siteId: string, input: NewBookingInput): SiteBooki
       input.priceCents, input.currency ?? 'EUR',
       input.depositPercent ?? null, input.depositPaidCents ?? null, input.depositStripePaymentIntentId ?? null,
       input.membershipId ?? null, input.discountPercent ?? null,
-      input.customerNotes ?? null, input.walkIn ? 1 : 0, input.lang ?? 'en',
+      initialStatus, input.customerNotes ?? null, input.walkIn ? 1 : 0, input.lang ?? 'en',
     );
 
     return id;

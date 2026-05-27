@@ -14,6 +14,8 @@ import type Stripe from 'stripe';
 import { stripe } from '@/lib/stripe';
 import { db } from '@/db';
 import { activateSiteSubscription, recordZipPurchase } from '@/lib/sites';
+import { syncAccountReadiness } from '@/lib/stripe-connect';
+import { markDepositPaid, updateBookingStatus } from '@/lib/booking';
 
 export const runtime = 'nodejs';
 
@@ -195,6 +197,28 @@ export async function POST(req: NextRequest) {
           status: mapStatus(sub.status),
           currentPeriodEnd: currentPeriodEndFor(sub),
         });
+      }
+      break;
+    }
+    case 'account.updated': {
+      // Stripe Connect onboarding state changes. We only act on accounts
+      // whose metadata.siteId matches a site row; everything else is
+      // someone else's account on the same platform and 200-OK'd.
+      syncAccountReadiness(event.data.object as Stripe.Account);
+      break;
+    }
+    case 'payment_intent.succeeded': {
+      // Phase I.5c — booking deposit captured. Look up the booking by the
+      // metadata.bookingId field set when the PaymentIntent was created,
+      // mark the deposit paid, and flip the booking to confirmed if it
+      // was sitting in 'pending'.
+      const pi = event.data.object as Stripe.PaymentIntent;
+      const meta = (pi.metadata ?? {}) as Record<string, string>;
+      if (meta.kind === 'booking-deposit' && meta.siteId && meta.bookingId) {
+        const updated = markDepositPaid(meta.siteId, meta.bookingId, pi.amount, pi.id);
+        if (updated && updated.status === 'pending') {
+          updateBookingStatus(meta.siteId, meta.bookingId, 'confirmed');
+        }
       }
       break;
     }
