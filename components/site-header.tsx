@@ -142,10 +142,39 @@ async function loadMegaMenuPulse(locale: Locale): Promise<MegaMenuPulse> {
        AND c.is_published = 1
   `).all() as MegaMenuPulse['areas'];
 
+  // Phase K.10 — headline destinations strip. Pre-fetch current weather
+  // for 5 iconic cities in parallel. Each call is 15-min in-process
+  // cached + Next ISR cached, so this resolves to ~ 0 ms on warm cache.
+  const destinationSlugs = ['athens', 'mykonos', 'santorini', 'thessaloniki', 'rhodes'];
+  const destinationRows = db.$client.prepare(
+    `SELECT slug, name, lat, lng FROM cities WHERE slug IN (${destinationSlugs.map(() => '?').join(',')}) AND is_published = 1`,
+  ).all(...destinationSlugs) as Array<{ slug: string; name: string; lat: number | null; lng: number | null }>;
+
+  const destinations = await Promise.all(
+    destinationRows.map(async (row) => {
+      const wx = row.lat != null && row.lng != null
+        ? await getCityWeather(row.lat, row.lng)
+        : null;
+      return {
+        citySlug: row.slug,
+        cityName: row.name,
+        tempC: wx ? Math.round(wx.temperatureC) : null,
+        emoji: wx ? weatherLabel(wx.weatherCode, locale).emoji : null,
+      };
+    }),
+  );
+
+  // Preserve the requested display order (Athens, Mykonos, Santorini, …)
+  // regardless of DB row order.
+  const orderedDestinations = destinationSlugs
+    .map((slug) => destinations.find((d) => d.citySlug === slug))
+    .filter((d): d is MegaMenuPulse['destinations'][number] => !!d);
+
   return {
     athensTime: formatAthensTime(new Date(), locale),
     weather: w,
     latestArticle,
     areas,
+    destinations: orderedDestinations,
   };
 }

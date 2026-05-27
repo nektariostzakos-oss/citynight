@@ -33,6 +33,17 @@ export type MegaMenuPulse = {
     cityName: string;
     citySlug: string;
   }>;
+  /** Pre-fetched current weather for headline destinations. Surfaces
+   * in the menu's third column as a "Live across Greece" strip when
+   * there's no fresh article to feature. Each row is 15-min cached
+   * server-side via getCityWeather; the parallel fetch is one
+   * round-trip per ISR window across all visitors. */
+  destinations: Array<{
+    citySlug: string;
+    cityName: string;
+    tempC: number | null;
+    emoji: string | null;
+  }>;
 };
 
 // Futuristic mega menu: hover (desktop) / click (mobile) opens a full-width
@@ -113,6 +124,7 @@ type CopyShape = {
   justPublished: string;
   popularAreas: string;
   areasEmpty: string;
+  liveAcrossGreece: string;
 };
 
 const COMMON_COPY: Record<Locale, CopyShape> = {
@@ -134,6 +146,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     justPublished: 'Just published',
     popularAreas: 'Popular areas',
     areasEmpty: 'No neighborhoods seeded yet.',
+    liveAcrossGreece: 'Live across Greece',
   },
   el: {
     nearYou: (c) => c ? `Κοντά σου · ${c}` : 'Κοντά σου',
@@ -153,6 +166,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     justPublished: 'Μόλις δημοσιεύτηκε',
     popularAreas: 'Δημοφιλείς περιοχές',
     areasEmpty: 'Δεν υπάρχουν ακόμα γειτονιές.',
+    liveAcrossGreece: 'Live από όλη την Ελλάδα',
   },
   de: {
     nearYou: (c) => c ? `In deiner Nähe · ${c}` : 'In deiner Nähe',
@@ -172,6 +186,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     justPublished: 'Gerade veröffentlicht',
     popularAreas: 'Beliebte Viertel',
     areasEmpty: 'Noch keine Viertel.',
+    liveAcrossGreece: 'Live aus ganz Griechenland',
   },
   fr: {
     nearYou: (c) => c ? `Près de vous · ${c}` : 'Près de vous',
@@ -191,6 +206,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     justPublished: 'Vient de paraître',
     popularAreas: 'Quartiers populaires',
     areasEmpty: 'Aucun quartier encore.',
+    liveAcrossGreece: 'En direct de toute la Grèce',
   },
   it: {
     nearYou: (c) => c ? `Vicino a te · ${c}` : 'Vicino a te',
@@ -210,6 +226,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     justPublished: 'Appena pubblicato',
     popularAreas: 'Zone popolari',
     areasEmpty: 'Nessun quartiere ancora.',
+    liveAcrossGreece: 'Live da tutta la Grecia',
   },
 };
 
@@ -422,12 +439,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pul
             {pulse?.latestArticle ? (
               <LatestArticleCard locale={locale} article={pulse.latestArticle} />
             ) : (
-              <Link
-                href={`/${locale}`}
-                className="block rounded-lg border border-dashed border-[var(--color-bg-3)] p-4 text-center text-sm text-[var(--color-fg-2)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
-              >
-                {COMMON_COPY[locale].viewAllN(cities.length)} →
-              </Link>
+              <LiveDestinations locale={locale} c={c} destinations={pulse?.destinations ?? []} />
             )}
           </div>
         </div>
@@ -560,6 +572,49 @@ function PopularAreas({ locale, c, areas }: {
         </ul>
       )}
     </>
+  );
+}
+
+// ─── Live destinations — multi-city weather strip ─────────────────
+
+function LiveDestinations({ locale, c, destinations }: {
+  locale: Locale;
+  c: CopyShape;
+  destinations: NonNullable<MegaMenuPulse['destinations']>;
+}) {
+  if (destinations.length === 0) return null;
+  return (
+    <div>
+      <p className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+        <span className="relative inline-flex h-1.5 w-1.5" aria-hidden>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-violet)] opacity-70" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-violet)]" />
+        </span>
+        {c.liveAcrossGreece}
+      </p>
+      <ul className="mt-2 space-y-1">
+        {destinations.map((d) => (
+          <li key={d.citySlug}>
+            <Link
+              href={`/${locale}/cities/${d.citySlug}`}
+              className="group flex items-center justify-between gap-3 rounded px-2 py-1.5 text-sm transition hover:bg-[var(--color-bg-2)]"
+            >
+              <span className="truncate font-medium text-[var(--color-fg-0)] group-hover:text-[var(--color-accent-violet)]">
+                {d.cityName}
+              </span>
+              {d.tempC !== null ? (
+                <span className="inline-flex shrink-0 items-center gap-1.5 text-[var(--color-fg-2)]">
+                  <span aria-hidden className="text-base leading-none">{d.emoji}</span>
+                  <span className="tabular-nums text-[var(--color-fg-1)]">{d.tempC}°</span>
+                </span>
+              ) : (
+                <span className="text-[10px] text-[var(--color-fg-3)]">—</span>
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

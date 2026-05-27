@@ -26,7 +26,7 @@ export type CityWithDistance = CityForNearby & { distanceKm: number };
 type Ctx = {
   hasLocation: boolean;
   visitor: { city: string | null; countryCode: string | null } | null;
-  nearestCities: CityWithDistance[]; // top 6, ordered by distance
+  nearestCities: CityWithDistance[]; // top 10, ordered by distance
   sortedAllCities: CityWithDistance[]; // full list ordered by distance (Infinity at end)
 };
 
@@ -47,7 +47,7 @@ export function NearbyCitiesProvider({ children, cities }: { children: React.Rea
     return {
       hasLocation: true,
       visitor: { city: visitor.city, countryCode: visitor.countryCode },
-      nearestCities: sorted.filter((c) => Number.isFinite(c.distanceKm)).slice(0, 6),
+      nearestCities: sorted.filter((c) => Number.isFinite(c.distanceKm)).slice(0, 10),
       sortedAllCities: sorted,
     };
   }, [visitor, cities]);
