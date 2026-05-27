@@ -180,7 +180,10 @@ export function GeoEnhancer({
     try { sessionStorage.setItem(REDIRECT_FLAG, slug); } catch { /* ignore */ }
     setAlreadyRedirected(true);
     if (autoTimerRef.current) clearInterval(autoTimerRef.current);
-    const url = `/${locale}/greece/${slug}`;
+    // Phase J.3 — point at the canonical article-led URL. The legacy
+    // /greece/{slug} 301-redirects to /{slug}; targeting the new URL
+    // directly avoids the extra redirect hop on the doorway path.
+    const url = `/${locale}/${slug}`;
     try {
       router.push(url);
       // Belt-and-braces: if router.push doesn't navigate within 500ms
