@@ -717,3 +717,49 @@ export const siteEventsDaily = sqliteTable('site_events_daily', {
   type: text().notNull(),
   count: integer().notNull().default(0),
 }, (t) => [uniqueIndex('site_events_daily_pk').on(t.siteId, t.day, t.type)]);
+
+// ────────────────────────────────────────────────────────────────────────
+// Phase J.1 — editorial articles (city guides). AI-generated listicles
+// grounded in seeded venue facts.
+
+export const articles = sqliteTable('articles', {
+  id: uuid().primaryKey(),
+  cityId: text('city_id').notNull().references(() => cities.id, { onDelete: 'cascade' }),
+  categoryId: text('category_id').references(() => categories.id, { onDelete: 'set null' }),
+  vertical: text({ enum: ['nightlife', 'food', 'stay'] }).notNull(),
+  locale: text().notNull().default('el'),
+  slug: text().notNull(),
+  title: text().notNull(),
+  subtitle: text(),
+  intro: text(),
+  outro: text(),
+  coverUrl: text('cover_url'),
+  coverAttribution: text('cover_attribution'),
+  source: text({ enum: ['ai', 'editor'] }).notNull().default('ai'),
+  status: text({ enum: ['draft', 'published', 'archived'] }).notNull().default('draft'),
+  generatedAt: ts('generated_at'),
+  publishedAt: ts('published_at'),
+  viewCount: integer('view_count').notNull().default(0),
+  promptMeta: text('prompt_meta'), // JSON
+  createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
+}, (t) => [
+  uniqueIndex('articles_locale_slug').on(t.locale, t.slug),
+  index('articles_city_published').on(t.cityId, t.status, t.publishedAt),
+  index('articles_vertical_status').on(t.vertical, t.status),
+]);
+
+export const articleVenues = sqliteTable('article_venues', {
+  id: uuid().primaryKey(),
+  articleId: text('article_id').notNull().references(() => articles.id, { onDelete: 'cascade' }),
+  venueId: text('venue_id').notNull().references(() => venues.id, { onDelete: 'cascade' }),
+  rank: integer().notNull(),
+  headline: text(),
+  blurb: text().notNull(),
+  photoUrl: text('photo_url'),
+  photoAttribution: text('photo_attribution'),
+  createdAt: ts('created_at').default(now),
+}, (t) => [
+  uniqueIndex('article_venues_rank').on(t.articleId, t.rank),
+  index('article_venues_venue').on(t.venueId),
+]);

@@ -16,7 +16,7 @@
     "db:migrate": "tsx db/migrate.ts",
     "db:studio": "drizzle-kit studio",
     "test:seo": "node scripts/tests/seo-smoke.mjs",
-    "test:integrity": "node scripts/seed/tests/enrichment-writer.test.js && node scripts/seed/tests/design-writer.test.js && node scripts/tests/owner-edit.test.mjs && node scripts/tests/photos-check.test.mjs && node scripts/tests/gates.test.mjs && node scripts/tests/booking-engine.test.mjs && node scripts/tests/shop-engine.test.mjs && node scripts/tests/crm-engine.test.mjs",
+    "test:integrity": "node scripts/seed/tests/enrichment-writer.test.js && node scripts/seed/tests/design-writer.test.js && node scripts/tests/owner-edit.test.mjs && node scripts/tests/photos-check.test.mjs && node scripts/tests/gates.test.mjs && node scripts/tests/booking-engine.test.mjs && node scripts/tests/shop-engine.test.mjs && node scripts/tests/crm-engine.test.mjs && node scripts/tests/articles-engine.test.mjs",
     "test:e2e": "playwright test",
     "test:lighthouse": "node scripts/tests/lighthouse.mjs",
     "test:crawl": "node scripts/tests/crawl-reachable.mjs",
