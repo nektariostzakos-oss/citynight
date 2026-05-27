@@ -44,8 +44,11 @@ type Props = {
 
 const ANY_STAFF: Staff = { id: '__any', slug: '__any', name: 'First available', role: null, bio: null, photoUrl: null, specialties: [] };
 
-function formatMoney(cents: number, currency = 'EUR'): string {
-  return new Intl.NumberFormat(undefined, { style: 'currency', currency, maximumFractionDigits: 0 }).format(cents / 100);
+// Locale is threaded through so SSR + client agree on number formatting.
+// `Intl.NumberFormat(undefined, ...)` reads the runtime locale, which differs
+// between Node (server) and the browser → hydration mismatch.
+function formatMoney(cents: number, currency: string, locale: string): string {
+  return new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: 0 }).format(cents / 100);
 }
 
 function todayIso(): string {
@@ -166,7 +169,7 @@ export function BookingFlow({ siteId, siteName, initialServices, locale, currenc
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="site-display text-lg font-semibold" style={{ color: 'var(--site-fg)' }}>{s.name}</span>
-                  <span className="text-sm" style={{ color: 'var(--site-primary)' }}>{formatMoney(s.priceCents, currency)}</span>
+                  <span className="text-sm" style={{ color: 'var(--site-primary)' }}>{formatMoney(s.priceCents, currency, locale)}</span>
                 </div>
                 <div className="mt-1 text-xs" style={{ color: 'var(--site-muted)' }}>{s.durationMinutes} min{s.category ? ` · ${s.category}` : ''}</div>
                 {s.description && <p className="mt-3 site-body text-sm">{s.description}</p>}
