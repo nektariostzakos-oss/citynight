@@ -26,6 +26,7 @@ import { SiteProductsPanel } from '@/components/site-products-panel';
 import { SiteOrdersPanel } from '@/components/site-orders-panel';
 import { SiteClientsPanel } from '@/components/site-clients-panel';
 import { SiteReviewsPanel } from '@/components/site-reviews-panel';
+import { SiteBlogPanel } from '@/components/site-blog-panel';
 import { listEnabledServices } from '@/lib/booking';
 import { listProducts } from '@/lib/shop';
 import { listClients } from '@/lib/crm';
@@ -259,6 +260,12 @@ export default async function SiteDashboard({
           </>
         )}
 
+        {/* Blog — Phase I.8. Always available; empty state is the
+            "write your first post" CTA. */}
+        <div className="border-t border-[var(--color-bg-2)] pt-10">
+          <SiteBlogPanel siteId={siteId} labels={t.blog} />
+        </div>
+
         {/* Atelier ZIP — gated on €190 one-time purchase (Phase H4). */}
         <div className="border-t border-[var(--color-bg-2)] pt-10">
           <section>
@@ -339,6 +346,13 @@ type DashboardLabels = {
     heading: string; body: string; empty: string; loadError: string;
     filterAll: string; filterPending: string; filterApproved: string; filterRejected: string;
     approve: string; reject: string; reply: string;
+  };
+  blog: {
+    heading: string; body: string; empty: string; loadError: string;
+    addCta: string;
+    columnTitle: string; columnCategory: string; columnStatus: string; columnActions: string;
+    edit: string; remove: string; draft: string; published: string;
+    saving: string; save: string; publish: string; unpublish: string;
   };
 };
 
@@ -463,6 +477,16 @@ const EN_LABELS: DashboardLabels = {
     filterAll: 'All', filterPending: 'Pending', filterApproved: 'Approved', filterRejected: 'Rejected',
     approve: 'Approve', reject: 'Reject', reply: 'Add reply',
   },
+  blog: {
+    heading: 'Journal',
+    body: 'Posts shown on /blog. Drafts stay hidden from the public until you publish.',
+    empty: 'No posts yet. Write your first one.',
+    loadError: 'Could not load posts.',
+    addCta: 'New post',
+    columnTitle: 'Title', columnCategory: 'Category', columnStatus: 'Status', columnActions: 'Actions',
+    edit: 'Edit', remove: 'Remove', draft: 'Draft', published: 'Published',
+    saving: 'Saving…', save: 'Save', publish: 'Publish', unpublish: 'Unpublish',
+  },
 };
 
 const EL_LABELS: DashboardLabels = {
@@ -585,6 +609,16 @@ const EL_LABELS: DashboardLabels = {
     loadError: 'Αδυναμία φόρτωσης κριτικών.',
     filterAll: 'Όλες', filterPending: 'Εκκρεμείς', filterApproved: 'Εγκεκριμένες', filterRejected: 'Απορρίφθηκαν',
     approve: 'Έγκριση', reject: 'Απόρριψη', reply: 'Απάντηση',
+  },
+  blog: {
+    heading: 'Ημερολόγιο',
+    body: 'Άρθρα που εμφανίζονται στο /blog. Τα προσχέδια κρύβονται μέχρι να τα δημοσιεύσεις.',
+    empty: 'Δεν υπάρχουν άρθρα. Γράψε το πρώτο.',
+    loadError: 'Αδυναμία φόρτωσης άρθρων.',
+    addCta: 'Νέο άρθρο',
+    columnTitle: 'Τίτλος', columnCategory: 'Κατηγορία', columnStatus: 'Κατάσταση', columnActions: 'Ενέργειες',
+    edit: 'Επεξεργασία', remove: 'Διαγραφή', draft: 'Προσχέδιο', published: 'Δημοσιευμένο',
+    saving: 'Αποθήκευση…', save: 'Αποθήκευση', publish: 'Δημοσίευση', unpublish: 'Απόσυρση',
   },
 };
 
