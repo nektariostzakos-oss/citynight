@@ -12,6 +12,7 @@ import { AdSlot } from '@/components/ad-slot';
 import { getAllCityGuides } from '@/content/cities';
 import { HeroLiveStatus } from '@/components/hero-live-status';
 import { HeroNearestPanel } from '@/components/hero-nearest-panel';
+import { HeroSmartCTA } from '@/components/hero-smart-cta';
 import { SmartDestinations } from '@/components/smart-destinations';
 import {
   publicMetadata, localizedPaths, jsonLdProps,
@@ -83,6 +84,8 @@ const COPY: Record<Locale, {
   citiesNearbyHeadingNoCity: string;
   citiesNearbySub: string;
   citiesLivePill: string;
+  heroCtaPickCity: string;
+  heroCtaNearestGuide: string;        // template — must include {city}
   latestArticlesHeading: string;
   latestArticlesSub: string;
   ownersHeading: string;
@@ -107,6 +110,8 @@ const COPY: Record<Locale, {
     citiesNearbyHeadingNoCity: 'Closest to you right now',
     citiesNearbySub: 'Cities sorted by live distance from your current location.',
     citiesLivePill: 'live',
+    heroCtaPickCity: 'Pick a city',
+    heroCtaNearestGuide: 'Open the {city} guide',
     latestArticlesHeading: 'Latest guides',
     latestArticlesSub: 'Fresh ranked picks across every city.',
     ownersHeading: 'Run a venue?',
@@ -128,6 +133,8 @@ const COPY: Record<Locale, {
     citiesNearbyHeadingNoCity: 'Πιο κοντά σου τώρα',
     citiesNearbySub: 'Πόλεις ταξινομημένες με ζωντανή απόσταση από την τοποθεσία σου.',
     citiesLivePill: 'live',
+    heroCtaPickCity: 'Διάλεξε πόλη',
+    heroCtaNearestGuide: 'Δες τον οδηγό για το {city}',
     latestArticlesHeading: 'Πρόσφατοι οδηγοί',
     latestArticlesSub: 'Φρέσκα ranked picks από κάθε πόλη.',
     ownersHeading: 'Έχεις μαγαζί;',
@@ -149,6 +156,8 @@ const COPY: Record<Locale, {
     citiesNearbyHeadingNoCity: 'Am nächsten zu Ihnen',
     citiesNearbySub: 'Städte sortiert nach Live-Entfernung zu Ihrem Standort.',
     citiesLivePill: 'live',
+    heroCtaPickCity: 'Stadt wählen',
+    heroCtaNearestGuide: 'Guide für {city} öffnen',
     latestArticlesHeading: 'Neueste Guides',
     latestArticlesSub: 'Frische Ranglisten aus jeder Stadt.',
     ownersHeading: 'Lokal-Inhaber?',
@@ -170,6 +179,8 @@ const COPY: Record<Locale, {
     citiesNearbyHeadingNoCity: 'Au plus près de vous',
     citiesNearbySub: 'Villes triées par distance en direct depuis votre position.',
     citiesLivePill: 'live',
+    heroCtaPickCity: 'Choisir une ville',
+    heroCtaNearestGuide: 'Ouvrir le guide de {city}',
     latestArticlesHeading: 'Derniers guides',
     latestArticlesSub: 'Nouveaux classements pour chaque ville.',
     ownersHeading: 'Propriétaire ?',
@@ -191,6 +202,8 @@ const COPY: Record<Locale, {
     citiesNearbyHeadingNoCity: 'Più vicino a te ora',
     citiesNearbySub: 'Città ordinate per distanza live dalla tua posizione.',
     citiesLivePill: 'live',
+    heroCtaPickCity: 'Scegli una città',
+    heroCtaNearestGuide: 'Apri la guida di {city}',
     latestArticlesHeading: 'Ultime guide',
     latestArticlesSub: 'Nuove classifiche da ogni città.',
     ownersHeading: 'Hai un locale?',
@@ -287,17 +300,14 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
               {HERO_TAGLINE[locale](stats.cities)}
             </p>
 
-            {/* Primary CTA — full-width on mobile so it's the obvious next
-                tap; auto-width and inline on desktop. Search was removed
-                from the hero; the global header carries it now. */}
-            <nav aria-label="Primary call to action" className="mt-8 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-              <Link
-                href="#cities"
-                className="inline-flex w-full items-center justify-center gap-1 rounded-full bg-[var(--color-accent-pink)] px-5 py-3 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] transition hover:brightness-110 sm:w-auto sm:py-2"
-              >
-                {c.citiesCta}
-              </Link>
-            </nav>
+            {/* Smart CTA — rewrites to "Δες τον οδηγό για το {city}"
+                once GPS resolves and links straight to that city's
+                guide. Falls back to "Διάλεξε πόλη" → #cities anchor
+                when no GPS yet. */}
+            <HeroSmartCTA
+              locale={locale}
+              copy={{ pickCity: c.heroCtaPickCity, nearestGuide: c.heroCtaNearestGuide }}
+            />
 
             {/* GPS-aware "near you" panel — hidden until location resolves */}
             <div className="mt-8 md:mt-10">
