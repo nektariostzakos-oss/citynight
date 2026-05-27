@@ -130,9 +130,22 @@ async function loadMegaMenuPulse(locale: Locale): Promise<MegaMenuPulse> {
     }
   }
 
+  // Phase K.9 — all seeded areas with coords + parent city. Sent down so
+  // the menu's "Popular areas" column can sort by visitor distance
+  // client-side using useVisitorLocation.
+  const areas = db.$client.prepare(`
+    SELECT a.slug, a.name, a.lat, a.lng,
+           c.name AS cityName, c.slug AS citySlug
+      FROM areas a
+      JOIN cities c ON c.id = a.city_id
+     WHERE a.lat IS NOT NULL AND a.lng IS NOT NULL
+       AND c.is_published = 1
+  `).all() as MegaMenuPulse['areas'];
+
   return {
     athensTime: formatAthensTime(new Date(), locale),
     weather: w,
     latestArticle,
+    areas,
   };
 }

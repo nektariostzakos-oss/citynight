@@ -6,7 +6,7 @@ import Image from 'next/image';
 import type { Locale } from '@/lib/i18n';
 import { useNearbyCities, type CityWithDistance } from './nearby-cities-context';
 import { useVisitorLocation } from './visitor-location-provider';
-import { formatDistanceKm } from '@/lib/geo-distance';
+import { formatDistanceKm, haversineKm } from '@/lib/geo-distance';
 import { MoonIcon, ForkKnifeIcon, BedIcon, MapPinIcon } from './nav-icons';
 
 // Phase K.7 — live pulse data piped from the server component
@@ -22,6 +22,17 @@ export type MegaMenuPulse = {
     cityName: string;
     coverUrl: string | null;
   } | null;
+  /** All seeded areas (neighborhoods) with coords + parent city info.
+   * Used by the menu's "Popular areas" column to sort by distance from
+   * the visitor's GPS position client-side. */
+  areas: Array<{
+    slug: string;
+    name: string;
+    lat: number;
+    lng: number;
+    cityName: string;
+    citySlug: string;
+  }>;
 };
 
 // Futuristic mega menu: hover (desktop) / click (mobile) opens a full-width
@@ -100,6 +111,8 @@ type CopyShape = {
   filterPlaceholder: string;
   filterEmpty: string;
   justPublished: string;
+  popularAreas: string;
+  areasEmpty: string;
 };
 
 const COMMON_COPY: Record<Locale, CopyShape> = {
@@ -119,6 +132,8 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     filterPlaceholder: 'Filter cities…',
     filterEmpty: 'No cities match.',
     justPublished: 'Just published',
+    popularAreas: 'Popular areas',
+    areasEmpty: 'No neighborhoods seeded yet.',
   },
   el: {
     nearYou: (c) => c ? `Κοντά σου · ${c}` : 'Κοντά σου',
@@ -136,6 +151,8 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     filterPlaceholder: 'Φίλτρο πόλεων…',
     filterEmpty: 'Καμία πόλη δεν ταιριάζει.',
     justPublished: 'Μόλις δημοσιεύτηκε',
+    popularAreas: 'Δημοφιλείς περιοχές',
+    areasEmpty: 'Δεν υπάρχουν ακόμα γειτονιές.',
   },
   de: {
     nearYou: (c) => c ? `In deiner Nähe · ${c}` : 'In deiner Nähe',
@@ -153,6 +170,8 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     filterPlaceholder: 'Städte filtern…',
     filterEmpty: 'Keine Städte gefunden.',
     justPublished: 'Gerade veröffentlicht',
+    popularAreas: 'Beliebte Viertel',
+    areasEmpty: 'Noch keine Viertel.',
   },
   fr: {
     nearYou: (c) => c ? `Près de vous · ${c}` : 'Près de vous',
@@ -170,6 +189,8 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     filterPlaceholder: 'Filtrer les villes…',
     filterEmpty: 'Aucune ville trouvée.',
     justPublished: 'Vient de paraître',
+    popularAreas: 'Quartiers populaires',
+    areasEmpty: 'Aucun quartier encore.',
   },
   it: {
     nearYou: (c) => c ? `Vicino a te · ${c}` : 'Vicino a te',
@@ -187,6 +208,8 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     filterPlaceholder: 'Filtra città…',
     filterEmpty: 'Nessuna città trovata.',
     justPublished: 'Appena pubblicato',
+    popularAreas: 'Zone popolari',
+    areasEmpty: 'Nessun quartiere ancora.',
   },
 };
 
@@ -392,27 +415,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pul
           </div>
 
           <div className="md:col-span-1">
-            <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
-              {COMMON_COPY[locale].popular}
-            </p>
-            <ul className="mt-2 space-y-1">
-              {popular.map((city) => (
-                <li key={city.id}>
-                  <Link
-                    href={`/${locale}/cities/${city.slug}`}
-                    className="group flex items-center justify-between rounded px-2 py-1.5 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <span aria-hidden className="h-1 w-1 rounded-full bg-[var(--color-accent-cyan)]/40 transition group-hover:bg-[var(--color-accent-cyan)]" />
-                      {city.name}
-                    </span>
-                    {hasLocation && Number.isFinite(city.distanceKm) && (
-                      <span className="text-[10px] text-[var(--color-fg-3)]">{formatDistanceKm(city.distanceKm)}</span>
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <PopularAreas locale={locale} c={c} areas={pulse?.areas ?? []} />
           </div>
 
           <div className="md:col-span-1">
@@ -497,6 +500,66 @@ function FilteredCitiesGrid({ locale, cities, hasLocation }: {
         </li>
       ))}
     </ul>
+  );
+}
+
+// ─── Popular areas — neighborhoods sorted by visitor distance ─────
+
+function PopularAreas({ locale, c, areas }: {
+  locale: Locale;
+  c: CopyShape;
+  areas: NonNullable<MegaMenuPulse['areas']>;
+}) {
+  const { visitor } = useVisitorLocation();
+  const hasGps = visitor.source === 'precise' && visitor.lat != null && visitor.lng != null;
+
+  // Compute distances client-side using haversine. Falls back to
+  // alphabetical when no GPS lock yet.
+  const sorted = useMemo(() => {
+    if (!areas.length) return [];
+    if (hasGps && visitor.lat != null && visitor.lng != null) {
+      const vLat = visitor.lat;
+      const vLng = visitor.lng;
+      return [...areas]
+        .map((a) => ({ ...a, distanceKm: haversineKm({ lat: vLat, lng: vLng }, { lat: a.lat, lng: a.lng }) }))
+        .sort((a, b) => a.distanceKm - b.distanceKm)
+        .slice(0, 10);
+    }
+    return [...areas].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 10);
+  }, [areas, hasGps, visitor.lat, visitor.lng]);
+
+  return (
+    <>
+      <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+        {c.popularAreas}
+      </p>
+      {sorted.length === 0 ? (
+        <p className="mt-2 text-xs text-[var(--color-fg-3)]">{c.areasEmpty}</p>
+      ) : (
+        <ul className="mt-2 space-y-1">
+          {sorted.map((a) => (
+            <li key={`${a.citySlug}-${a.slug}`}>
+              <Link
+                href={`/${locale}/cities/${a.citySlug}/area/${a.slug}`}
+                className="group flex items-center justify-between gap-2 rounded px-2 py-1.5 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
+              >
+                <span className="inline-flex min-w-0 flex-col">
+                  <span className="truncate font-medium text-[var(--color-fg-0)]">{a.name}</span>
+                  <span className="truncate text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+                    {a.cityName}
+                  </span>
+                </span>
+                {'distanceKm' in a && (
+                  <span className="shrink-0 text-[10px] text-[var(--color-fg-3)]">
+                    {formatDistanceKm((a as { distanceKm: number }).distanceKm)}
+                  </span>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 
@@ -625,7 +688,7 @@ function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, ki
       </div>
       {hasLocation && nearest.length > 0 ? (
         <ul className="mt-2 space-y-1">
-          {nearest.slice(0, 5).map((city) => (
+          {nearest.slice(0, 10).map((city) => (
             <li key={city.id}>
               <Link
                 href={`/${locale}/cities/${city.slug}`}
