@@ -169,17 +169,17 @@ export function MobileMenu({
   const previewIsNear = hasLocation && nearestCities.length > 0;
   // Range filtering: when the visitor has expanded their range, draw from the
   // full sorted-by-distance list and keep entries within the active radius.
-  // Default tier (idx 0) shows only the 4 closest.
+  // Phase K.10 — every menu section caps at 10 entries.
   const radiusKm = rangeIdx === 0 ? null : RANGE_TIERS_KM[rangeIdx - 1] ?? null;
   const previewItems = previewIsNear
     ? (radiusKm === null
-        ? nearestCities.slice(0, 4)
-        : sortedAllCities.filter((x) => Number.isFinite(x.distanceKm) && x.distanceKm <= radiusKm).slice(0, 6)
+        ? nearestCities.slice(0, 10)
+        : sortedAllCities.filter((x) => Number.isFinite(x.distanceKm) && x.distanceKm <= radiusKm).slice(0, 10)
       ).map((x) => ({
         slug: x.slug, name: x.name, region: x.region,
         distanceKm: Number.isFinite(x.distanceKm) ? x.distanceKm : null,
       }))
-    : popularCities.slice(0, 4).map((x) => ({
+    : popularCities.slice(0, 10).map((x) => ({
         slug: x.slug, name: x.name, region: x.region, distanceKm: null,
       }));
   // Next radius tier the chip will jump to. Wraps back to 0 (closest) after

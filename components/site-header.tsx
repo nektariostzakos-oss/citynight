@@ -145,7 +145,10 @@ async function loadMegaMenuPulse(locale: Locale): Promise<MegaMenuPulse> {
   // Phase K.10 — headline destinations strip. Pre-fetch current weather
   // for 5 iconic cities in parallel. Each call is 15-min in-process
   // cached + Next ISR cached, so this resolves to ~ 0 ms on warm cache.
-  const destinationSlugs = ['athens', 'mykonos', 'santorini', 'thessaloniki', 'rhodes'];
+  const destinationSlugs = [
+    'athens', 'mykonos', 'santorini', 'thessaloniki', 'rhodes',
+    'heraklion', 'corfu', 'chania', 'nafplio', 'paros',
+  ];
   const destinationRows = db.$client.prepare(
     `SELECT slug, name, lat, lng FROM cities WHERE slug IN (${destinationSlugs.map(() => '?').join(',')}) AND is_published = 1`,
   ).all(...destinationSlugs) as Array<{ slug: string; name: string; lat: number | null; lng: number | null }>;

@@ -392,7 +392,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pul
   const filtered = useMemo(() => {
     if (!filter.trim()) return [];
     const q = filter.trim().toLowerCase();
-    return cities.filter((city) => city.name.toLowerCase().includes(q) || city.slug.includes(q)).slice(0, 12);
+    return cities.filter((city) => city.name.toLowerCase().includes(q) || city.slug.includes(q)).slice(0, 10);
   }, [cities, filter]);
 
   const bySlug = new Map(cities.map((city) => [city.slug, city]));
