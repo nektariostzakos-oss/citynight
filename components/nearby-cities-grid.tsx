@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useNearbyCities } from './nearby-cities-context';
 import { useVisitorLocation } from './visitor-location-provider';
 import { formatDistanceKm } from '@/lib/geo-distance';
@@ -78,31 +77,41 @@ export function NearbyCitiesGrid({
         </div>
       )}
 
-      <ul id="all" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Phase K.12 — city photos removed. Each tile is a compact "app
+          button" panel: rank-less, photo-less, with name + region + count
+          + (when GPS is on) live distance chip. */}
+      <ul id="all" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {ordered.map((city) => (
           <li key={city.id} id={`region-${city.region?.replace(/\s+/g, '-').toLowerCase() ?? 'unknown'}`}>
             <Link
               href={`/${locale}/cities/${city.slug}`}
-              className="group relative block aspect-[5/6] overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]"
+              className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-5 py-4 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-cyan)] hover:shadow-[0_14px_48px_-20px_rgba(0,212,255,0.45)]"
             >
-              {city.heroPhotoUrl ? (
-                <Image src={city.heroPhotoUrl} alt={city.name} fill sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="object-cover transition duration-500 group-hover:scale-105 city-hero-crop" />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-0)] via-[var(--color-bg-0)]/30 to-transparent" aria-hidden />
-              {hasLocation && 'distanceKm' in city && Number.isFinite((city as { distanceKm: number }).distanceKm) && (
-                <span className="absolute right-3 top-3 rounded-full border border-[var(--color-accent-cyan)]/40 bg-[var(--color-bg-0)]/70 px-2 py-0.5 text-[10px] font-medium text-[var(--color-accent-cyan)] backdrop-blur">
-                  {formatDistanceKm((city as { distanceKm: number }).distanceKm)}
-                </span>
-              )}
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                {city.region && <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-2)]">{REGION_LABEL[locale][city.region] ?? city.region}</p>}
-                <p className="mt-1 font-display text-2xl font-semibold text-[var(--color-fg-0)]">{city.name}</p>
-                <p className="mt-1 text-xs text-[var(--color-fg-2)]">
+              <div className="min-w-0 flex-1">
+                {city.region && (
+                  <p className="truncate text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+                    {REGION_LABEL[locale][city.region] ?? city.region}
+                  </p>
+                )}
+                <p className="truncate font-display text-lg font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-cyan)]">
+                  {city.name}
+                </p>
+                <p className="mt-0.5 truncate text-xs text-[var(--color-fg-2)]">
                   {city.venueCount > 0 ? `${city.venueCount} ${city.countLabel}` : city.emptyLabel}
                 </p>
               </div>
+
+              {hasLocation && 'distanceKm' in city && Number.isFinite((city as { distanceKm: number }).distanceKm) && (
+                <span className="shrink-0 rounded-full border border-[var(--color-accent-cyan)]/40 bg-[var(--color-bg-0)]/70 px-2 py-0.5 text-[10px] font-medium text-[var(--color-accent-cyan)] backdrop-blur">
+                  {formatDistanceKm((city as { distanceKm: number }).distanceKm)}
+                </span>
+              )}
+              <span
+                aria-hidden
+                className="shrink-0 text-[var(--color-fg-3)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-accent-cyan)]"
+              >
+                →
+              </span>
             </Link>
           </li>
         ))}

@@ -1,12 +1,11 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import {
   LOCALES, LOCALE_LABELS, DEFAULT_LOCALE,
   localeFromAcceptLanguage, type Locale,
 } from '@/lib/i18n';
-import { listCitiesWithHero, siteStats } from '@/lib/queries';
+import { siteStats } from '@/lib/queries';
 import { LocaleAutoRedirect, StayHereLink } from '@/components/locale-auto-redirect';
 import { HeroVideoBg } from '@/components/hero-video-bg';
 import {
@@ -120,9 +119,7 @@ export default async function RootPage() {
   const suggested: Locale = localeFromAcceptLanguage(h.get('accept-language'));
   const c = COPY[suggested];
 
-  const cities = listCitiesWithHero();
   const stats = siteStats();
-  const heroBackdrop = cities.find((x) => x.heroPhotoUrl)?.heroPhotoUrl ?? null;
 
   return (
     <>
@@ -136,17 +133,9 @@ export default async function RootPage() {
 
       <main className="relative isolate h-[100svh] w-full overflow-hidden bg-[var(--color-bg-0)]">
         {/* ──────────────── BACKDROP LAYERS ──────────────── */}
-        {heroBackdrop && (
-          <Image
-            src={heroBackdrop}
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            fetchPriority="high"
-            className="object-cover opacity-50"
-          />
-        )}
+        {/* Phase K.12 — city photo backdrop removed. The doorway is now
+            purely typographic + atmospheric (grid, aurora, scan, grain).
+            City photos only appear inside each city page header. */}
         {process.env.NEXT_PUBLIC_HERO_YOUTUBE_ID && (
           <HeroVideoBg videoId={process.env.NEXT_PUBLIC_HERO_YOUTUBE_ID} />
         )}

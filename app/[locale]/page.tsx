@@ -11,7 +11,6 @@ import { listPublishedArticles } from '@/lib/articles';
 import { SearchBox } from '@/components/search-box';
 import { AdSlot } from '@/components/ad-slot';
 import { getAllCityGuides } from '@/content/cities';
-import { HeroPhotoCycle } from '@/components/hero-photo-cycle';
 import { HeroLiveStatus } from '@/components/hero-live-status';
 import { HeroNearestPanel } from '@/components/hero-nearest-panel';
 import {
@@ -192,16 +191,6 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
   const citySlugById = new Map(cities.map((cc) => [cc.id, cc.slug]));
   const c = COPY[locale];
 
-  // Hero photo cycle: pick the first 5 cities that actually have a hero photo,
-  // bias toward iconic destinations (Athens, Mykonos, Santorini, Patmos,
-  // Loutraki for the Greek visitor). cities is already locale-sorted by name,
-  // but we want a deliberate visual sequence so the iconic ones come first.
-  const HERO_PRIORITY = ['athens', 'mykonos', 'santorini', 'rhodes', 'corfu', 'thessaloniki', 'patmos', 'naxos', 'paros'];
-  const heroByPriority = HERO_PRIORITY
-    .map((slug) => cities.find((cc) => cc.slug === slug))
-    .filter((cc) => cc && cc.heroPhotoUrl) as typeof cities;
-  const heroPhotos = heroByPriority.slice(0, 5).map((cc) => ({ url: cc.heroPhotoUrl as string, alt: cc.name }));
-
   const breadcrumbName: Record<Locale, string> = { en: 'Home', el: 'Αρχική', de: 'Start', fr: 'Accueil', it: 'Home' };
 
   return (
@@ -224,12 +213,10 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
           shows the first photo + title for crawlers and JS-off visitors. */}
       <section className="relative isolate overflow-hidden">
         <div className="relative min-h-[100vh] w-full">
-          {/* 1. Crossfading hero backdrop */}
-          {heroPhotos.length > 0 ? (
-            <HeroPhotoCycle photos={heroPhotos} />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
-          )}
+          {/* 1. Static gradient backdrop. The cycling city-photo hero was
+              removed — cities now render as text-only app buttons everywhere
+              except inside their own page header. */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
 
           {/* 2. Neon glow blobs — purely decorative, pulse softly */}
           <div className="pointer-events-none absolute -top-40 left-1/3 h-[42rem] w-[42rem] rounded-full bg-[var(--color-accent-pink)]/18 blur-[140px]" aria-hidden />
@@ -322,43 +309,45 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
           <p className="mt-2 text-[var(--color-fg-2)]">{c.citiesSub}</p>
         </div>
 
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Phase K.12 — city images removed everywhere. Each city is now a
+            compact "app button": text-only chip with rank, name, region and
+            article count. Tile glows on hover; the actual city photo only
+            appears inside the city page header (micro cover). */}
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {cities.slice(0, 6).map((city, idx) => (
             <li key={city.id}>
               <Link
                 href={`/${locale}/cities/${city.slug}`}
-                className="group relative block aspect-[4/5] overflow-hidden rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] transition hover:-translate-y-0.5 hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.4)]"
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-5 py-4 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.45)]"
               >
-                {city.heroPhotoUrl ? (
-                  <Image
-                    src={city.heroPhotoUrl}
-                    alt={city.name}
-                    fill
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                    className="object-cover transition duration-700 group-hover:scale-110 city-hero-crop"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-0)] via-[var(--color-bg-0)]/30 to-transparent" aria-hidden />
-
-                {/* Rank chip — cycles colors */}
+                {/* Rank chip — keeps the futuristic "app launcher" feel */}
                 <span
                   aria-hidden
-                  className={`absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-0)]/75 font-mono text-[11px] font-bold text-[var(--color-fg-1)] backdrop-blur`}
+                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-0)] font-mono text-[11px] font-bold tracking-tight text-[var(--color-fg-1)] transition group-hover:border-[var(--color-accent-pink)] group-hover:text-[var(--color-accent-pink)]"
                 >
                   {String(idx + 1).padStart(2, '0')}
                 </span>
 
-                <div className="absolute inset-x-0 bottom-0 p-5">
+                <div className="min-w-0 flex-1">
                   {city.region && (
-                    <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-2)]">{TILE_LOCALE[locale].region[city.region] ?? city.region}</p>
+                    <p className="truncate text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+                      {TILE_LOCALE[locale].region[city.region] ?? city.region}
+                    </p>
                   )}
-                  <p className="mt-1 font-display text-2xl font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-pink)]">{city.name}</p>
-                  <p className="mt-1 text-xs text-[var(--color-fg-2)]">
+                  <p className="truncate font-display text-lg font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-pink)]">
+                    {city.name}
+                  </p>
+                  <p className="mt-0.5 truncate text-xs text-[var(--color-fg-2)]">
                     {city.venueCount > 0 ? `${city.venueCount} ${c.statsVenues}` : TILE_LOCALE[locale].comingSoon}
                   </p>
                 </div>
+
+                <span
+                  aria-hidden
+                  className="text-[var(--color-fg-3)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-accent-pink)]"
+                >
+                  →
+                </span>
               </Link>
             </li>
           ))}
@@ -428,19 +417,11 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
               <li key={g.slug}>
                 <Link
                   href={`/${locale}/cities/${g.slug}`}
-                  className="group relative block aspect-[16/10] overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]"
+                  className="group relative block overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-cyan)] hover:shadow-[0_14px_48px_-20px_rgba(0,212,255,0.4)]"
                 >
-                  {city?.heroPhotoUrl ? (
-                    <Image src={city.heroPhotoUrl} alt={city.name} fill sizes="(min-width:768px) 33vw, 100vw" className="object-cover transition group-hover:scale-105 city-hero-crop" />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-0)] via-[var(--color-bg-0)]/40 to-transparent" aria-hidden />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-2)]">{TILE_LOCALE[locale].guidePrefix} · {g.season}</p>
-                    <p className="mt-1 font-display text-xl font-semibold text-[var(--color-fg-0)]">{city?.name ?? g.slug}</p>
-                    <p className="mt-2 line-clamp-2 text-xs text-[var(--color-fg-1)]">{g.intro[locale].slice(0, 130)}…</p>
-                  </div>
+                  <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-2)]">{TILE_LOCALE[locale].guidePrefix} · {g.season}</p>
+                  <p className="mt-1 font-display text-xl font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-cyan)]">{city?.name ?? g.slug}</p>
+                  <p className="mt-2 line-clamp-2 text-xs text-[var(--color-fg-1)]">{g.intro[locale].slice(0, 130)}…</p>
                 </Link>
               </li>
             );

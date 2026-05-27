@@ -12,7 +12,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { publicMetadata } from '@/lib/seo';
-import { getCityBySlug } from '@/lib/queries';
+import { getCityBySlug, getCityHeroPhotoUrl } from '@/lib/queries';
 import { listArticlesByCity, listAreasForCity, listCategoriesForCity, type Article } from '@/lib/articles';
 import { CityWeatherStrip } from '@/components/city-weather-strip';
 
@@ -43,23 +43,42 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
   const grouped = groupByVertical(articles);
   const areas = listAreasForCity(cityRow.id, locale);
   const categories = listCategoriesForCity(cityRow.id, locale);
+  const heroPhotoUrl = getCityHeroPhotoUrl(cityRow.id);
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
-      <header className="mb-12 md:mb-16">
-        <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-fg-2)]">
-          {locale === 'el' ? 'Οδηγός πόλης' : 'City guide'}
-        </p>
-        <h1 className="mt-4 font-display text-4xl font-semibold text-[var(--color-fg-0)] md:text-6xl">
-          {cityRow.name}
-        </h1>
-        <p className="mt-4 max-w-2xl text-base text-[var(--color-fg-1)] md:text-lg">
-          {locale === 'el'
-            ? `Όλα τα άρθρα μας για ${cityRow.name} — επιλεγμένα και κατατασσόμενα από εμάς.`
-            : `Every guide we've published for ${cityRow.name} — picked and ranked by us.`}
-        </p>
-        <div className="mt-6">
-          <CityWeatherStrip lat={cityRow.lat} lng={cityRow.lng} locale={locale} />
+      <header className="relative mb-12 overflow-hidden rounded-2xl border border-[var(--color-bg-2)] md:mb-16">
+        {heroPhotoUrl ? (
+          <Image
+            src={heroPhotoUrl}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 960px, 100vw"
+            priority
+            className="object-cover city-hero-crop"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
+        )}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-0)]/92 via-[var(--color-bg-0)]/80 to-[var(--color-bg-0)]/55"
+        />
+        <div className="relative px-6 py-8 md:px-10 md:py-12">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-fg-2)]">
+            {locale === 'el' ? 'Οδηγός πόλης' : 'City guide'}
+          </p>
+          <h1 className="mt-4 font-display text-4xl font-semibold text-[var(--color-fg-0)] md:text-6xl">
+            {cityRow.name}
+          </h1>
+          <p className="mt-4 max-w-2xl text-base text-[var(--color-fg-1)] md:text-lg">
+            {locale === 'el'
+              ? `Όλα τα άρθρα μας για ${cityRow.name} — επιλεγμένα και κατατασσόμενα από εμάς.`
+              : `Every guide we've published for ${cityRow.name} — picked and ranked by us.`}
+          </p>
+          <div className="mt-6">
+            <CityWeatherStrip lat={cityRow.lat} lng={cityRow.lng} locale={locale} />
+          </div>
         </div>
       </header>
 

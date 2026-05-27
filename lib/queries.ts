@@ -163,6 +163,20 @@ export function getCityBySlug(slug: string, locale: Locale = 'en'): City | null 
   return row ?? null;
 }
 
+// Single city's hero photo URL. Used only by the city-page micro cover —
+// every other surface (homepage tiles, near-you grid, doorway) renders
+// cities as text-only "app buttons" so the city page is the only place
+// where a city photo appears.
+export function getCityHeroPhotoUrl(cityId: string): string | null {
+  const row = sqlite().prepare(`
+    SELECT url FROM photos
+     WHERE city_id = ? AND subject_type = 'location'
+     ORDER BY is_primary DESC, sort_order ASC
+     LIMIT 1
+  `).get(cityId) as { url: string } | undefined;
+  return row?.url ?? null;
+}
+
 export function listCategories(locale: Locale = 'en'): Category[] {
   return sqlite().prepare(
     `SELECT cat.id, cat.slug, ${localizedName('category', 'cat', locale)} AS name FROM categories cat ORDER BY name`
