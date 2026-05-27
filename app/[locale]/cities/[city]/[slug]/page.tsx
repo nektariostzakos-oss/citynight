@@ -7,6 +7,8 @@ import type { Metadata } from 'next';
 import { getPublishedSiteByCityAndSlug, getSiteMenu, getSitePhotos } from '@/lib/site-queries';
 import { publicMetadata } from '@/lib/seo';
 import { isLocale } from '@/lib/i18n';
+import { isBookingLedTemplate } from '@/lib/site-theme';
+import { BookingHome } from '@/components/site-render/booking-home';
 
 export const revalidate = 1800;
 
@@ -30,10 +32,30 @@ export default async function SiteHomePage({ params }: { params: Params }) {
   if (!isLocale(locale)) notFound();
   const site = getPublishedSiteByCityAndSlug(city, slug);
   if (!site) notFound();
-  const menu = getSiteMenu(site.id);
   const photos = getSitePhotos(site.id);
-  const heroPhoto = photos.find((p) => p.isPrimary) ?? photos[0];
   const base = `/${locale}/cities/${city}/${slug}`;
+
+  // Phase I.9 — dispatch on the site's template. Booking-led industries
+  // (barber/hair/clinic/nail/spa/yoga) lead with Services + Staff +
+  // Reviews; hospitality verticals (restaurant/bar/...) keep the existing
+  // Menu + Photos + Reservation flow below.
+  if (isBookingLedTemplate(site.templateId)) {
+    return (
+      <BookingHome
+        site={{
+          id: site.id, name: site.name,
+          city: site.city, country: site.country,
+          tagline: site.tagline, aboutText: site.aboutText,
+        }}
+        photos={photos}
+        locale={locale}
+        base={base}
+      />
+    );
+  }
+
+  const menu = getSiteMenu(site.id);
+  const heroPhoto = photos.find((p) => p.isPrimary) ?? photos[0];
 
   return (
     <>
