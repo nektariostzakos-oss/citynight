@@ -12,6 +12,9 @@ next-env.d.ts
 .env.local
 .env.*.local
 
+# owner-uploaded photos (local dev only — prod lives OUTSIDE deploy)
+uploads/
+
 # sqlite (db lives OUTSIDE deploy on Hostinger; never commit)
 *.sqlite
 *.sqlite-journal
@@ -37,3 +40,11 @@ pnpm-debug.log*
 
 # coverage
 coverage
+
+# vendored Atelier sub-app — keep source, exclude build + deps
+templates/atelier-base/node_modules
+templates/atelier-base/.next*
+templates/atelier-base/*.tsbuildinfo
+
+# stray local junk
+*.jar
