@@ -4,6 +4,8 @@ import { getPublishedSiteByCityAndSlug } from '@/lib/site-queries';
 import { publicMetadata, jsonLdProps } from '@/lib/seo';
 import { SiteContactForm } from '@/components/site-render/site-contact-form';
 import { isLocale } from '@/lib/i18n';
+import { listEnabledServices } from '@/lib/booking';
+import { BookingFlow } from '@/components/booking-flow';
 
 export const revalidate = 1800;
 
@@ -27,6 +29,16 @@ export default async function SiteBookPage({ params }: { params: Params }) {
   const site = getPublishedSiteByCityAndSlug(city, slug);
   if (!site) notFound();
 
+  // Sites with at least one enabled service get the booking calendar flow.
+  // The rest (restaurants / bars / hotels without a services catalogue) keep
+  // the existing reservation-channels page below.
+  const services = listEnabledServices(site.id).map((s) => ({
+    id: s.id, slug: s.slug, name: s.name,
+    description: s.description, category: s.category,
+    durationMinutes: s.durationMinutes, priceCents: s.priceCents,
+  }));
+  const hasBookableServices = services.length > 0;
+
   const phoneToCall = site.reservationPhone ?? site.phone;
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://citynight.gr';
 
@@ -45,28 +57,38 @@ export default async function SiteBookPage({ params }: { params: Params }) {
 
       <header className="mb-10">
         <p className="site-eyebrow">{site.city ?? ''}</p>
-        <h1 className="site-h1 mt-3">Reserve a table</h1>
+        <h1 className="site-h1 mt-3">{hasBookableServices ? `Book at ${site.name}` : 'Reserve a table'}</h1>
         {site.reservationNotes && <p className="site-body mt-5 max-w-2xl whitespace-pre-line">{site.reservationNotes}</p>}
       </header>
 
-      {(site.reservationUrl || phoneToCall || site.reservationEmail) && (
-        <div className="grid gap-3 mb-12">
-          {site.reservationUrl && (
-            <Channel href={site.reservationUrl} external title={`Book at ${site.name}`} hint="Opens the venue's booking page." />
+      {hasBookableServices ? (
+        <BookingFlow
+          siteId={site.id}
+          siteName={site.name}
+          initialServices={services}
+          locale={locale}
+        />
+      ) : (
+        <>
+          {(site.reservationUrl || phoneToCall || site.reservationEmail) && (
+            <div className="grid gap-3 mb-12">
+              {site.reservationUrl && (
+                <Channel href={site.reservationUrl} external title={`Book at ${site.name}`} hint="Opens the venue's booking page." />
+              )}
+              {site.reservationEmail && (
+                <Channel
+                  href={`mailto:${site.reservationEmail}?subject=${encodeURIComponent(`Reservation — ${site.name}`)}`}
+                  title={`Email ${site.name}`} hint="Direct to the reservations inbox."
+                />
+              )}
+              {phoneToCall && (
+                <Channel href={`tel:${phoneToCall.replace(/\s/g, '')}`} title={`Call · ${phoneToCall}`} hint="Speak to us directly." />
+              )}
+            </div>
           )}
-          {site.reservationEmail && (
-            <Channel
-              href={`mailto:${site.reservationEmail}?subject=${encodeURIComponent(`Reservation — ${site.name}`)}`}
-              title={`Email ${site.name}`} hint="Direct to the reservations inbox."
-            />
-          )}
-          {phoneToCall && (
-            <Channel href={`tel:${phoneToCall.replace(/\s/g, '')}`} title={`Call · ${phoneToCall}`} hint="Speak to us directly." />
-          )}
-        </div>
+          <SiteContactForm siteId={site.id} siteName={site.name} />
+        </>
       )}
-
-      <SiteContactForm siteId={site.id} siteName={site.name} />
     </article>
   );
 }
