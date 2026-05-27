@@ -242,7 +242,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           'consider enabling generateSitemaps() segmentation.',
       );
     }
-    return [...coreEntries(), ...articleEntries(), ...venueEntries(loadVenues())];
+    // Phase J.4 — venue + bucket URLs are killed. Articles are now the
+    // primary indexed surface. The /greece/{city} entries stay in
+    // coreEntries() for a transition period — they 301-redirect to
+    // /{city} so Google passes link equity to the canonical URLs.
+    return [...coreEntries(), ...articleEntries()];
   } catch (err) {
     // Don't break the build if the DB isn't ready yet — fall back to the
     // static surfaces. Real data appears on the next revalidation once

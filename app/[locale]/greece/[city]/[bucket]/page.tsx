@@ -1,6 +1,7 @@
-// Phase H3 — old /greece/{city}/{bucket} URL collapses upward to
-// /cities/{city}. The new discovery model is one page per city, with
-// filtering/categorisation visual rather than URL-based.
+// Phase J.4 — old /greece/{city}/{bucket} URL collapses upward to
+// the city's article index at /{city}. Buckets (category listings) no
+// longer exist as a URL surface; the article-led model exposes
+// categories via individual articles ("Top 10 Rooftop Bars in {city}").
 
 import { permanentRedirect } from 'next/navigation';
 import { isLocale } from '@/lib/i18n';
@@ -12,5 +13,5 @@ export default async function CityBucketRedirect({
 }) {
   const { locale, city } = await params;
   const safeLocale = isLocale(locale) ? locale : 'el';
-  permanentRedirect(`/${safeLocale}/cities/${city}`);
+  permanentRedirect(`/${safeLocale}/${city}`);
 }
