@@ -32,7 +32,9 @@
     { "id": "cat_bouzoukia",    "slug": "bouzoukia",    "includedType": null,           "textQuery": "μπουζούκια",
       "keywords": ["μπουζούκια","μπουζουκια","πίστα","σκυλάδικο","skyladiko","bouzoukia"] },
     { "id": "cat_beach_club",   "slug": "beach-club",   "includedType": null,           "textQuery": "beach bar",
-      "keywords": ["beach bar","beach club","παραλία","beach"] }
+      "keywords": ["beach bar","beach club","παραλία","beach"] },
+    { "id": "cat_strip_club",   "slug": "strip-club",   "includedType": "strip_club",   "textQuery": "strip club",
+      "keywords": ["strip club","strippers","striptease","νυχτερινό σόου"] }
   ],
   "locales": ["en","el","de","fr","it"],
   "enrichModel": "claude-haiku-4-5",

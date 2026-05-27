@@ -61,7 +61,7 @@ const tasks = [];
 if (opts.all) {
   // Every published city × top nightlife categories by default.
   const cities = db.prepare(\`SELECT id, slug FROM cities WHERE is_published = 1\`).all();
-  const cats = ['night-club','rooftop-bar','bar','live-music','beach-club','bouzoukia'];
+  const cats = ['night-club','rooftop-bar','bar','live-music','beach-club','bouzoukia','strip-club'];
   for (const c of cities) {
     for (const catSlug of cats) {
       const cat = db.prepare(\`SELECT id FROM categories WHERE slug = ?\`).get(catSlug);
