@@ -267,38 +267,23 @@ export function MobileMenu({
               </div>
 
               {/* Verticals — 2×2 grid of large tiles. One accent per tile.  */}
+              {/* Phase K.3 — drop the Nightlife/Food/Stay tiles. The
+                  vertical filters live inside each city's article guide
+                  now (e.g. /cities/athens groups articles by vertical).
+                  The mobile menu surfaces only the cities entry; the
+                  popular-cities list below already gives one-tap access
+                  to every city. */}
               <section aria-label={c.cities}>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-fg-3)]">
                   {c.cities}
                 </p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid">
                   <Tile
                     href={`/${locale}`}
                     onClick={() => setOpen(false)}
                     icon={<MapPinIcon className="h-5 w-5" />}
                     label={c.cities}
                     accent="cyan"
-                  />
-                  <Tile
-                    href={`/${locale}#nightlife`}
-                    onClick={() => setOpen(false)}
-                    icon={<MoonIcon className="h-5 w-5" />}
-                    label={c.nightlife}
-                    accent="pink"
-                  />
-                  <Tile
-                    href={`/${locale}#food`}
-                    onClick={() => setOpen(false)}
-                    icon={<ForkKnifeIcon className="h-5 w-5" />}
-                    label={c.food}
-                    accent="amber"
-                  />
-                  <Tile
-                    href={`/${locale}#stay`}
-                    onClick={() => setOpen(false)}
-                    icon={<BedIcon className="h-5 w-5" />}
-                    label={c.stay}
-                    accent="violet"
                   />
                 </div>
               </section>

@@ -34,7 +34,7 @@ export function HeroLiveStatus({ locale }: { locale: Locale }) {
   useEffect(() => {
     function tick() {
       const fmt = new Intl.DateTimeFormat(locale === 'el' ? 'el-GR' : locale, {
-        timeZone: 'Europe/Athens', hour: '2-digit', minute: '2-digit',
+        timeZone: 'Europe/Athens', hour: '2-digit', minute: '2-digit', hour12: false,
       });
       const parts = fmt.formatToParts(new Date());
       const hh = parts.find((p) => p.type === 'hour')?.value ?? '00';

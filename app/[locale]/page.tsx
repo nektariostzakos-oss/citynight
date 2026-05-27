@@ -5,11 +5,9 @@ import type { Metadata } from 'next';
 import { isLocale, type Locale } from '@/lib/i18n';
 import {
   listCitiesWithHero,
-  listCategories,
-  listTopVenuesAcrossCountry,
   siteStats,
 } from '@/lib/queries';
-import { VenueCard } from '@/components/venue-card';
+import { listPublishedArticles } from '@/lib/articles';
 import { SearchBox } from '@/components/search-box';
 import { AdSlot } from '@/components/ad-slot';
 import { getAllCityGuides } from '@/content/cities';
@@ -108,6 +106,8 @@ const COPY: Record<Locale, {
   citiesCta: string;
   venuesHeading: string;
   venuesSub: string;
+  latestArticlesHeading: string;
+  latestArticlesSub: string;
   categoriesHeading: string;
   categoriesSub: string;
   ownersHeading: string;
@@ -132,6 +132,8 @@ const COPY: Record<Locale, {
     citiesCta: 'All cities →',
     venuesHeading: 'Top venues right now',
     venuesSub: 'Featured first, then by reviews.',
+    latestArticlesHeading: 'Latest guides',
+    latestArticlesSub: 'Fresh ranked picks across every city.',
     categoriesHeading: 'By the kind of night you want',
     categoriesSub: 'Cross any city by category.',
     ownersHeading: 'Own a venue?',
@@ -153,6 +155,8 @@ const COPY: Record<Locale, {
     citiesCta: 'Όλες οι πόλεις →',
     venuesHeading: 'Κορυφαία μαγαζιά τώρα',
     venuesSub: 'Featured πρώτα, μετά κατά reviews.',
+    latestArticlesHeading: 'Πρόσφατοι οδηγοί',
+    latestArticlesSub: 'Φρέσκα ranked picks από κάθε πόλη.',
     categoriesHeading: 'Ανάλογα με τη βραδιά που θες',
     categoriesSub: 'Κάθε πόλη, ανά κατηγορία.',
     ownersHeading: 'Έχεις μαγαζί;',
@@ -174,6 +178,8 @@ const COPY: Record<Locale, {
     citiesCta: 'Alle Städte →',
     venuesHeading: 'Top-Locations gerade jetzt',
     venuesSub: 'Featured zuerst, dann nach Bewertungen.',
+    latestArticlesHeading: 'Neueste Guides',
+    latestArticlesSub: 'Frische Ranglisten aus jeder Stadt.',
     categoriesHeading: 'Nach Art der Nacht',
     categoriesSub: 'Jede Stadt, nach Kategorie.',
     ownersHeading: 'Lokal-Inhaber?',
@@ -195,6 +201,8 @@ const COPY: Record<Locale, {
     citiesCta: 'Toutes les villes →',
     venuesHeading: 'Lieux phares du moment',
     venuesSub: 'Featured d’abord, puis par avis.',
+    latestArticlesHeading: 'Derniers guides',
+    latestArticlesSub: 'Nouveaux classements pour chaque ville.',
     categoriesHeading: 'Selon le type de soirée',
     categoriesSub: 'Chaque ville, par catégorie.',
     ownersHeading: 'Propriétaire ?',
@@ -216,6 +224,8 @@ const COPY: Record<Locale, {
     citiesCta: 'Tutte le città →',
     venuesHeading: 'Locali top in questo momento',
     venuesSub: 'Featured prima, poi per recensioni.',
+    latestArticlesHeading: 'Ultime guide',
+    latestArticlesSub: 'Nuove classifiche da ogni città.',
     categoriesHeading: 'Per tipo di serata',
     categoriesSub: 'Ogni città, per categoria.',
     ownersHeading: 'Hai un locale?',
@@ -234,23 +244,15 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
   if (!isLocale(locale)) notFound();
 
   const cities = listCitiesWithHero(null, locale);
-  const topVenues = listTopVenuesAcrossCountry(locale, 9);
-  const categories = listCategories(locale);
   const stats = siteStats();
   const guides = getAllCityGuides();
-  // Flatten the first two neighborhoods of each guide for the "Find your street" preview.
-  // Build a slug → localized city name lookup so the neighborhood preview chip
-  // shows "Αίγινα" not "AEGINA". `cities` already carries the locale-mapped name.
+  // Phase K.3 — Latest articles surface across all cities for the homepage.
+  // Cross-locale: each row is the article in its own locale (en/el/...); the
+  // homepage filters to the visitor's current locale via listPublishedArticles.
+  const latestArticles = listPublishedArticles(locale, { limit: 6 });
   const cityNameBySlug = new Map(cities.map((cc) => [cc.slug, cc.name]));
-  const neighborhoodPreview = guides.flatMap((g) =>
-    g.neighborhoods.slice(0, 2).map((n) => ({
-      citySlug: g.slug,
-      cityName: cityNameBySlug.get(g.slug) ?? g.slug,
-      slug: n.slug,
-      name: n.name[locale],
-      blurb: n.blurb[locale],
-    }))
-  ).slice(0, 8);
+  // cityId → citySlug lookup so article cards can build /cities/{slug}/... URLs.
+  const citySlugById = new Map(cities.map((cc) => [cc.id, cc.slug]));
   const c = COPY[locale];
 
   // Hero photo cycle: pick the first 5 cities that actually have a hero photo,
@@ -446,92 +448,49 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         </ul>
       </section>
 
-      {/* CATEGORIES — neon "command palette" feel.
-          Each chip carries a colored accent dot + hover glow. */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-8">
-        <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">{c.categoriesHeading}</h2>
-        <p className="mt-2 text-sm text-[var(--color-fg-2)]">{c.categoriesSub}</p>
-        <nav aria-label="Categories" className="mt-6 flex flex-wrap gap-2">
-          {categories.map((cat, i) => {
-            // Cycle through accent colours so the row reads as a kinetic palette.
-            const accents = ['pink', 'cyan', 'violet', 'amber'] as const;
-            const a = accents[i % accents.length];
-            const dot =
-              a === 'pink'   ? 'bg-[var(--color-accent-pink)]'   :
-              a === 'cyan'   ? 'bg-[var(--color-accent-cyan)]'   :
-              a === 'violet' ? 'bg-[var(--color-accent-violet)]' :
-                               'bg-[var(--color-accent-amber)]';
-            const hover =
-              a === 'pink'   ? 'hover:border-[var(--color-accent-pink)] hover:text-[var(--color-accent-pink)]'     :
-              a === 'cyan'   ? 'hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]'     :
-              a === 'violet' ? 'hover:border-[var(--color-accent-violet)] hover:text-[var(--color-accent-violet)]' :
-                               'hover:border-[var(--color-accent-amber)] hover:text-[var(--color-accent-amber)]';
-            return (
-              <Link
-                key={cat.id}
-                href={`/${locale}/cities/athens`}
-                className={`group inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/70 px-4 py-2 text-sm text-[var(--color-fg-1)] backdrop-blur transition ${hover}`}
-              >
-                <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} aria-hidden />
-                {cat.name}
-              </Link>
-            );
-          })}
-        </nav>
-      </section>
-
-      {/* NEIGHBORHOODS PREVIEW — glassmorphic cards with corner accent. */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-12">
-        <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">{c.neighborhoodsHeading}</h2>
-        <p className="mt-2 text-sm text-[var(--color-fg-2)]">{c.neighborhoodsSub}</p>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {neighborhoodPreview.map((n, i) => (
-            <li key={`${n.citySlug}-${n.slug}`}>
-              <Link
-                href={`/${locale}/cities/${n.citySlug}`}
-                className="group relative block h-full overflow-hidden rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/70 p-4 backdrop-blur transition hover:-translate-y-0.5 hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-1)]"
-              >
-                {/* Accent corner glow on hover */}
-                <span
-                  className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[var(--color-accent-cyan)]/0 blur-2xl transition group-hover:bg-[var(--color-accent-cyan)]/30"
-                  aria-hidden
-                />
-                <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
-                  <span aria-hidden className="font-mono text-[var(--color-accent-cyan)]/80">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="text-[var(--color-fg-3)]">·</span>
-                  {n.cityName}
-                </p>
-                <p className="mt-1.5 font-display text-base font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-cyan)]">{n.name}</p>
-                <p className="mt-2 line-clamp-2 text-xs leading-snug text-[var(--color-fg-2)]">{n.blurb}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <div className="mx-auto max-w-6xl px-6 py-4">
-        <AdSlot id="home-mid" scope="site" />
-      </div>
-
-      {/* TOP VENUES — hidden when there are no published venues so the
-          homepage doesn't show an empty "Top venues" heading. */}
-      {topVenues.length > 0 && (
+      {/* Phase K.3 — homepage trim. The old Categories chip row,
+          Neighborhoods cross-city preview, and Top Venues grid are gone
+          (category and venue pages no longer exist; neighborhoods now
+          live inside each city's article guide via K.2). In their place:
+          a Latest Articles section that pulls across-locale and links
+          straight to /cities/{city}/{slug}. */}
+      {latestArticles.length > 0 && (
         <section className="mx-auto w-full max-w-6xl px-6 py-16">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.venuesHeading}</h2>
-              <p className="mt-2 text-[var(--color-fg-2)]">{c.venuesSub}</p>
+              <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.latestArticlesHeading}</h2>
+              <p className="mt-2 text-[var(--color-fg-2)]">{c.latestArticlesSub}</p>
             </div>
           </div>
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {topVenues.map((v) => (
-              <li key={v.id}>
-                <VenueCard venue={v} locale={locale} />
+            {latestArticles.map((a) => (
+              <li key={a.id}>
+                <Link
+                  href={`/${locale}/cities/${citySlugById.get(a.cityId) ?? ''}/${a.slug}`}
+                  className="group block overflow-hidden rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] transition hover:border-[var(--color-accent-cyan)]"
+                >
+                  {a.coverUrl && (
+                    <div className="relative aspect-[16/9] w-full overflow-hidden">
+                      <Image src={a.coverUrl} alt={a.title} fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover transition group-hover:scale-105" />
+                    </div>
+                  )}
+                  <div className="p-5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-fg-3)]">
+                      {a.vertical} · {cityNameBySlug.get(citySlugById.get(a.cityId) ?? '') ?? ''}
+                    </p>
+                    <p className="mt-2 font-display text-lg font-semibold text-[var(--color-fg-0)]">{a.title}</p>
+                    {a.subtitle && <p className="mt-2 text-sm text-[var(--color-fg-2)]">{a.subtitle}</p>}
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
         </section>
       )}
+
+      <div className="mx-auto max-w-6xl px-6 py-4">
+        <AdSlot id="home-mid" scope="site" />
+      </div>
 
       {/* EDITORIAL GUIDES TEASE */}
       <section className="mx-auto w-full max-w-6xl px-6 py-12">

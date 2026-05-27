@@ -4,6 +4,7 @@
 // Searchable table with rollups (bookings count, total spent, last visit).
 
 import { useEffect, useState, useTransition } from 'react';
+import { formatAthensDate } from '@/lib/format-date';
 
 type Client = {
   id: string;
@@ -101,7 +102,7 @@ export function SiteClientsPanel({ siteId, labels }: { siteId: string; labels: L
                     <td className="px-4 py-3 text-right text-[var(--color-fg-1)]">{c.totalBookings}</td>
                     <td className="px-4 py-3 text-right text-[var(--color-fg-1)]">{(c.totalSpentCents / 100).toFixed(2)} €</td>
                     <td className="px-4 py-3 text-[var(--color-fg-2)]">
-                      {c.lastBookedAt ? new Date(c.lastBookedAt * 1000).toLocaleDateString() : '—'}
+                      {c.lastBookedAt ? formatAthensDate(c.lastBookedAt) : '—'}
                     </td>
                   </tr>
                 ))}

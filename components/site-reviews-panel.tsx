@@ -3,6 +3,7 @@
 // Phase I.7 — owner dashboard review moderation queue.
 
 import { useEffect, useState, useTransition } from 'react';
+import { formatAthensDate } from '@/lib/format-date';
 
 type Review = {
   id: string;
@@ -130,7 +131,7 @@ function ReviewCard({ review, disabled, onApprove, onReject, onReply, labels }: 
           <span className="text-[var(--color-accent-cyan)]">{'★'.repeat(review.rating)}<span className="text-[var(--color-bg-3)]">{'★'.repeat(5 - review.rating)}</span></span>
           <span className="text-sm font-semibold text-[var(--color-fg-0)]">{review.authorName ?? 'Anonymous'}</span>
         </div>
-        <span className="text-xs text-[var(--color-fg-2)]">{new Date(review.createdAt * 1000).toLocaleDateString()}</span>
+        <span className="text-xs text-[var(--color-fg-2)]">{formatAthensDate(review.createdAt)}</span>
       </header>
       {review.title && <h3 className="text-sm font-semibold text-[var(--color-fg-0)]">{review.title}</h3>}
       {review.body && <p className="mt-2 text-sm text-[var(--color-fg-1)]">{review.body}</p>}

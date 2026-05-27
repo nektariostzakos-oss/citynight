@@ -171,16 +171,15 @@ const CATEGORY_SETS: Record<Exclude<Vertical, 'cities'>, { slug: string; label: 
 };
 
 function items(locale: Locale): ItemDef[] {
-  const t = VERTICAL_COPY[locale];
+  // Phase K.3 — top nav collapses to a single Cities dropdown. The old
+  // Nightlife / Food / Stay verticals listed categories (rooftop-bar,
+  // nightclub, etc.), which no longer have their own URLs in the
+  // article-led model — verticals are filters surfaced inside each
+  // city's article guide instead.
   const base: ItemDef[] = [
-    { key: 'cities',    label: 'Cities',    icon: <MapPinIcon />,    accent: 'cyan' },
-    { key: 'nightlife', label: 'Nightlife', icon: <MoonIcon />,      accent: 'pink' },
-    { key: 'food',      label: 'Food',      icon: <ForkKnifeIcon />, accent: 'cyan' },
-    { key: 'stay',      label: 'Stay',      icon: <BedIcon />,       accent: 'violet' },
+    { key: 'cities', label: 'Cities', icon: <MapPinIcon />, accent: 'cyan' },
   ];
   return base.map((i) => ({ ...i, label: localLabel(locale, i.key) }));
-
-  void t; // silence unused — copy is consumed inside the panel
 }
 
 function localLabel(locale: Locale, key: Vertical): string {

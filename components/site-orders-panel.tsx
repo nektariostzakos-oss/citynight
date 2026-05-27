@@ -7,6 +7,7 @@
 // guarded (terminal statuses can't downgrade).
 
 import { useEffect, useState, useTransition } from 'react';
+import { formatAthensDate } from '@/lib/format-date';
 
 type Order = {
   id: string;
@@ -114,7 +115,7 @@ export function SiteOrdersPanel({ siteId, labels }: { siteId: string; labels: La
               <tbody className="divide-y divide-[var(--color-bg-2)]">
                 {rows.map((o) => (
                   <tr key={o.id}>
-                    <td className="px-4 py-3 text-[var(--color-fg-1)]">{new Date(o.createdAt * 1000).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 text-[var(--color-fg-1)]">{formatAthensDate(o.createdAt)}</td>
                     <td className="px-4 py-3 text-[var(--color-fg-1)]">
                       <div>{o.customerName}</div>
                       <div className="text-xs text-[var(--color-fg-2)]">{o.customerEmail ?? o.customerPhone ?? ''}</div>
