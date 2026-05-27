@@ -334,7 +334,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity }: {
           {topRegions.map((region) => (
             <li key={region}>
               <Link
-                href={`/${locale}/greece#region-${region.replace(/\s+/g, '-').toLowerCase()}`}
+                href={`/${locale}#region-${region.replace(/\s+/g, '-').toLowerCase()}`}
                 className="flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
               >
                 <span>{c.regions[region] ?? region}</span>
@@ -344,7 +344,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity }: {
           ))}
         </ul>
         <Link
-          href={`/${locale}/greece`}
+          href={`/${locale}`}
           className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-accent-cyan)] hover:underline"
         >
           {COMMON_COPY[locale].viewAllN(cities.length)} →
@@ -368,7 +368,7 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
     <div className="grid gap-6 p-6 md:grid-cols-3">
       {/* Left: Near you */}
       <div className="md:col-span-1">
-        <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} accent={accent} kindHref={`/${locale}/greece?kind=${kind}`} />
+        <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} accent={accent} kindHref={`/${locale}#${kind}`} />
       </div>
 
       {/* Middle: categories */}
@@ -378,7 +378,7 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
           {cats.map((cat) => (
             <li key={cat.slug}>
               <Link
-                href={`/${locale}/greece?kind=${kind}`}
+                href={`/${locale}#${kind}`}
                 className={`flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:${ACCENT[accent].text}`}
               >
                 <span>{cat.label[locale]}</span>
@@ -392,7 +392,7 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
       {/* Right: hero / CTA */}
       <div className="md:col-span-1">
         <Link
-          href={`/${locale}/greece?kind=${kind}`}
+          href={`/${locale}#${kind}`}
           className={`flex h-full flex-col justify-between rounded-xl border ${ACCENT[accent].border} bg-[var(--color-bg-2)]/50 p-4 transition hover:bg-[var(--color-bg-2)]`}
         >
           <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-bg-1)] ${ACCENT[accent].text} ${ACCENT[accent].ring}`}>

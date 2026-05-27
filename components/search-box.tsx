@@ -133,21 +133,21 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
 
   // Flatten visible results into a single navigable list.
   const rows: Row[] = [
+    // Phase J.5 — search results updated for the article-led model.
+    // Cities link to /{locale}/{city} (the article index). Categories no
+    // longer have a standalone URL — they're filters surfaced via
+    // articles per city, so we fall their target back to the locale
+    // root. Venue rows now point at the venue's city article index
+    // (per-venue pages were killed in J.4).
     ...results.cities.map<Row>((h) => ({
       kind: 'city',
-      href: `/${locale}/greece/${h.slug}`,
+      href: `/${locale}/${h.slug}`,
       label: h.name,
       sub: h.region,
     })),
     ...results.categories.map<Row>((h) => ({
       kind: 'category',
-      // Categories aren't a standalone URL — link to the Greece index filtered by kind
-      // when the category's parent_id maps to a vertical, else fall back to /greece.
-      href:
-        h.parentId === 'parent_nightlife' ? `/${locale}/greece?kind=nightlife`
-        : h.parentId === 'parent_food'    ? `/${locale}/greece?kind=food`
-        : h.parentId === 'parent_stay'    ? `/${locale}/greece?kind=stay`
-        : `/${locale}/greece`,
+      href: `/${locale}`,
       label: h.name,
       sub:
         h.parentId === 'parent_nightlife' ? 'Nightlife'
@@ -157,9 +157,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
     })),
     ...results.venues.map<Row>((h) => ({
       kind: 'venue',
-      href: h.areaSlug && h.slug
-        ? `/${locale}/greece/${h.citySlug}/${h.areaSlug}/${h.slug}`
-        : `/${locale}/greece/${h.citySlug}`,
+      href: `/${locale}/${h.citySlug}`,
       label: h.name,
       sub: h.snippet,
     })),

@@ -68,18 +68,15 @@ export async function SiteHeader({
               role={user.role}
             />
           ) : (
-            <div className="hidden items-center gap-2 md:flex">
+            // Phase J.5 — SaaS "Make a site" CTA moved out of the header.
+            // /for-owners is reachable from the footer; the editorial nav
+            // reserves the prominent slot for the article-led product.
+            <div className="hidden items-center md:flex">
               <Link
                 href={`/${locale}/sign-in`}
                 className="rounded-md px-3 py-1.5 text-sm font-semibold text-[var(--color-fg-1)] hover:text-[var(--color-fg-0)]"
               >
                 {t.signIn}
-              </Link>
-              <Link
-                href={`/${locale}/sites/new`}
-                className="rounded-md bg-[var(--color-accent-pink)] px-3 py-1.5 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] hover:brightness-110"
-              >
-                {t.makeASite}
               </Link>
             </div>
           )}

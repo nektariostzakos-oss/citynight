@@ -273,28 +273,28 @@ export function MobileMenu({
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   <Tile
-                    href={`/${locale}/greece`}
+                    href={`/${locale}`}
                     onClick={() => setOpen(false)}
                     icon={<MapPinIcon className="h-5 w-5" />}
                     label={c.cities}
                     accent="cyan"
                   />
                   <Tile
-                    href={`/${locale}/greece?kind=nightlife`}
+                    href={`/${locale}#nightlife`}
                     onClick={() => setOpen(false)}
                     icon={<MoonIcon className="h-5 w-5" />}
                     label={c.nightlife}
                     accent="pink"
                   />
                   <Tile
-                    href={`/${locale}/greece?kind=food`}
+                    href={`/${locale}#food`}
                     onClick={() => setOpen(false)}
                     icon={<ForkKnifeIcon className="h-5 w-5" />}
                     label={c.food}
                     accent="amber"
                   />
                   <Tile
-                    href={`/${locale}/greece?kind=stay`}
+                    href={`/${locale}#stay`}
                     onClick={() => setOpen(false)}
                     icon={<BedIcon className="h-5 w-5" />}
                     label={c.stay}
