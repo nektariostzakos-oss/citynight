@@ -14,6 +14,7 @@ import { isLocale, type Locale } from '@/lib/i18n';
 import { publicMetadata } from '@/lib/seo';
 import { getCityBySlug } from '@/lib/queries';
 import { listArticlesByCity, listAreasForCity, type Article } from '@/lib/articles';
+import { CityWeatherStrip } from '@/components/city-weather-strip';
 
 export const revalidate = 1800;
 
@@ -56,6 +57,9 @@ export default async function CityArticlesIndex({ params }: { params: Params }) 
             ? `Όλα τα άρθρα μας για ${cityRow.name} — επιλεγμένα και κατατασσόμενα από εμάς.`
             : `Every guide we've published for ${cityRow.name} — picked and ranked by us.`}
         </p>
+        <div className="mt-6">
+          <CityWeatherStrip lat={cityRow.lat} lng={cityRow.lng} locale={locale} />
+        </div>
       </header>
 
       {articles.length === 0 ? (
