@@ -1,5 +1,7 @@
 # Locked decisions
 
+> Superseded on 2026-09-17: this file describes the original directory product (CLAUDE.md sections 1 to 17). Since Phase H (2026-05) the product is the website-builder SaaS described in the CLAUDE.md header, which wins where the two disagree. Kept as history until it is rewritten for Phase H.
+
 Every locked choice from `CLAUDE.md`, with the one-line reason it was picked.
 
 ## Stack
