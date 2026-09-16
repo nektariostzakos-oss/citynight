@@ -44,7 +44,7 @@ export function SiteReviewsPanel({ siteId, labels }: { siteId: string; labels: L
       .then((d: { reviews: Review[] }) => { setRows(d.reviews); setError(null); })
       .catch(() => setError('load'));
   }
-  useEffect(() => { load(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [filter, siteId]);
+  useEffect(() => { load(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [filter, siteId]);
 
   function action(reviewId: string, action: 'approve' | 'reject') {
     startTransition(async () => {

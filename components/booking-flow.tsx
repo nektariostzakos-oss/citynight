@@ -139,7 +139,7 @@ export function BookingFlow({ siteId, siteName, initialServices, locale, currenc
   if (step === 'confirm' && bookingId) {
     return (
       <div className="site-panel p-8">
-        <h2 className="site-h2 mb-3">You're booked.</h2>
+        <h2 className="site-h2 mb-3">You&apos;re booked.</h2>
         <p className="site-body mb-6">{siteName} will see you {date} at {time}{staff && staff.id !== '__any' ? ` with ${staff.name}` : ''}.</p>
         <p className="text-sm" style={{ color: 'var(--site-muted)' }}>Reference: {bookingId}</p>
       </div>

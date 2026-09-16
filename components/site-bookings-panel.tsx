@@ -61,7 +61,7 @@ export function SiteBookingsPanel({ siteId, labels }: { siteId: string; labels: 
       .catch(() => setError('load'));
   }
 
-  useEffect(() => { load(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [showCancelled, siteId]);
+  useEffect(() => { load(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [showCancelled, siteId]);
 
   function patch(id: string, to: Booking['status']) {
     startTransition(async () => {

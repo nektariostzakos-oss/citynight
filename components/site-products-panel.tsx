@@ -65,7 +65,7 @@ export function SiteProductsPanel({ siteId, labels }: { siteId: string; labels: 
       .then((d: { products: Product[] }) => { setRows(d.products); setError(null); })
       .catch(() => setError('load'));
   }
-  useEffect(() => { load(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [siteId]);
+  useEffect(() => { load(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [siteId]);
 
   function remove(productId: string) {
     if (!confirm('Delete this product? This cannot be undone.')) return;

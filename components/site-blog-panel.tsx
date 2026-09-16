@@ -55,7 +55,7 @@ export function SiteBlogPanel({ siteId, labels }: { siteId: string; labels: Labe
       .then((d: { posts: Post[] }) => { setRows(d.posts); setError(null); })
       .catch(() => setError('load'));
   }
-  useEffect(() => { load(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [siteId]);
+  useEffect(() => { load(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [siteId]);
 
   function remove(postId: string) {
     if (!confirm('Delete this post? This cannot be undone.')) return;

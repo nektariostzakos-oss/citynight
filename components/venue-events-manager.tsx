@@ -67,7 +67,7 @@ export function VenueEventsManager({ venueId, locale }: { venueId: string; local
     }
   }
 
-  useEffect(() => { refresh(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [venueId]);
+  useEffect(() => { refresh(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [venueId]);
 
   async function onCreate(e: React.FormEvent) {
     e.preventDefault();

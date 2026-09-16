@@ -45,7 +45,7 @@ export function SiteClientsPanel({ siteId, labels }: { siteId: string; labels: L
       .then((d: { clients: Client[] }) => { setRows(d.clients); setError(null); })
       .catch(() => setError('load'));
   }
-  useEffect(() => { load(''); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [siteId]);
+  useEffect(() => { load(''); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [siteId]);
 
   function onSearch(q: string) {
     setSearch(q);

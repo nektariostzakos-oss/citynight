@@ -71,7 +71,7 @@ export function SiteOrdersPanel({ siteId, labels }: { siteId: string; labels: La
       })
       .catch(() => setError('load'));
   }
-  useEffect(() => { load(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [includeCancelled, siteId]);
+  useEffect(() => { load(); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [includeCancelled, siteId]);
 
   function patch(id: string, to: Order['status']) {
     startTransition(async () => {

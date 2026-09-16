@@ -1,18 +1,14 @@
-// ESLint 9 flat config. Replaces the deprecated `next lint` interactive setup
-// (gone in Next 16). Wraps the existing Next + Core-Web-Vitals presets via the
-// FlatCompat shim so we don't have to hand-roll plugin loading.
+// ESLint 9 flat config. eslint-config-next 16 ships native flat configs, so the
+// Next and Core Web Vitals presets are spread in directly. The FlatCompat shim
+// that wrapped them before crashes with eslint-config-next 16 (its legacy
+// loader fails while validating the flat presets), so `npm run lint` stopped
+// before it linted a single file.
 //
-// Run with `npm run lint` (next.js-aware) — passes silently when clean,
-// exits non-zero on errors so CI / pre-commit can rely on it.
+// Run with `npm run lint`: passes silently when clean, exits non-zero on
+// errors so CI and hooks can rely on it.
 
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FlatCompat } from '@eslint/eslintrc';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({ baseDirectory: __dirname });
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import nextTypeScript from 'eslint-config-next/typescript';
 
 export default [
   // Ignore generated / vendor output. ESLint 9 takes globalIgnores from a
@@ -26,13 +22,28 @@ export default [
       'scripts/seed/node_modules/**',
       'db/migrations/**',
       'next-env.d.ts',
-      // Vendored Atelier template — its own Next 16 / React 19 sub-app. Built
+      // Vendored Atelier template: its own Next 16 / React 19 sub-app. Built
       // and linted under its own pipeline; we do not co-mingle with citynight.
       'templates/atelier-base/**',
     ],
   },
 
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...nextCoreWebVitals,
+  ...nextTypeScript,
+
+  {
+    // eslint-config-next registers the react-hooks plugin only for these
+    // extensions. An unscoped override would also reach .cjs files, where
+    // ESLint stops with "could not find plugin react-hooks".
+    files: ['**/*.{js,jsx,mjs,ts,tsx,mts,cts}'],
+    rules: {
+      // react-hooks v7 flags effects that set state right after mount or on a
+      // prop change: reading browser-only state (geolocation, theme, locale,
+      // storage, the clock) or resetting UI on navigation. Rewriting them is
+      // its own task, so they stay visible as warnings, not failures.
+      'react-hooks/set-state-in-effect': 'warn',
+    },
+  },
 
   {
     // Project-wide tweaks. The Next presets are strict-leaning; relax a few
@@ -49,7 +60,7 @@ export default [
     },
   },
 
-  // Scripts directory is plain ESM Node — no JSX, no Next constraints.
+  // Scripts directory is plain ESM Node: no JSX, no Next constraints.
   {
     files: ['scripts/**/*.{js,mjs,cjs}'],
     rules: {
@@ -59,7 +70,7 @@ export default [
   },
 
   // Hostinger's Node bootstrapper expects a CommonJS server.js at the project
-  // root — require() is the contract there, not a smell.
+  // root: require() is the contract there, not a smell.
   {
     files: ['server.js'],
     rules: {
