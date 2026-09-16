@@ -77,3 +77,22 @@ See `CRON.md` for the exact crontab lines.
    sqlite3 "$DATABASE_PATH" ".restore '/tmp/restore.sqlite'"
    pnpm restart   # or hPanel restart
    ```
+
+## 8. Process budget on the shared account (2026-09-04)
+
+Hostinger's "Max Processes" gauge is CloudLinux NPROC: every THREAD of every site on
+the account counts against one cap of 200. Keep this app at one instance and:
+
+- **Build**: `npm run build` now runs `scripts/hostinger-build.mjs` (migrations, then
+  `next build` with `TOKIO_WORKER_THREADS=2 RAYON_NUM_THREADS=2 UV_THREADPOOL_SIZE=2`), and
+  `next.config.mjs` sets `experimental.cpus: 1`. Without both, one on-host build forked ~23
+  worker processes (~230 tasks) and 503-ed every site on the account.
+- **Start**: prefer `scripts/start-next.cjs` as the hPanel entry file (or `node server.js`);
+  both set `UV_THREADPOOL_SIZE=2` before Next loads. If the entry stays
+  `node_modules/next/dist/bin/next start`, add `UV_THREADPOOL_SIZE=2` as an hPanel env var.
+- **hPanel env**: `NODE_OPTIONS=--v8-pool-size=1 --max-old-space-size=512`,
+  `UV_THREADPOOL_SIZE=2`, `NEXT_TELEMETRY_DISABLED=1`, `UPLOADS_PATH=/home/uXXX/persistent/uploads`
+  (uploads inside the deploy dir are wiped on redeploy).
+- **Cron**: one line, see docs/CRON.md (`scripts/cron/tick.mjs`).
+- **Images**: the optimizer is off (`images.unoptimized`); the old `hostname: **` allowlist was
+  an open image proxy and a sharp encode per foreign URL.

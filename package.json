@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm run db:migrate && next build",
+    "build": "node scripts/hostinger-build.mjs",
     "//build:analyze": "run with `ANALYZE=1 npm run build` (bash) or `$env:ANALYZE='1'; npm run build` (PowerShell)",
     "start": "next start",
     "lint": "eslint .",
@@ -16,12 +16,13 @@
     "db:migrate": "tsx db/migrate.ts",
     "db:studio": "drizzle-kit studio",
     "test:seo": "node scripts/tests/seo-smoke.mjs",
-    "test:integrity": "node scripts/seed/tests/enrichment-writer.test.js && node scripts/seed/tests/design-writer.test.js && node scripts/tests/owner-edit.test.mjs && node scripts/tests/photos-check.test.mjs && node scripts/tests/gates.test.mjs && node scripts/tests/booking-engine.test.mjs && node scripts/tests/shop-engine.test.mjs && node scripts/tests/crm-engine.test.mjs && node scripts/tests/articles-engine.test.mjs",
+    "test:integrity": "node scripts/seed/tests/enrichment-writer.test.js && node scripts/seed/tests/design-writer.test.js && node scripts/tests/owner-edit.test.mjs && node scripts/tests/photos-check.test.mjs && node scripts/tests/gates.test.mjs && node scripts/tests/booking-engine.test.mjs && node scripts/tests/shop-engine.test.mjs && node scripts/tests/crm-engine.test.mjs",
     "test:e2e": "playwright test",
     "test:lighthouse": "node scripts/tests/lighthouse.mjs",
     "test:crawl": "node scripts/tests/crawl-reachable.mjs",
     "translations:audit": "node scripts/translations/audit.mjs",
-    "translations:backfill": "node scripts/translations/backfill.js"
+    "translations:backfill": "node scripts/translations/backfill.js",
+    "start:hostinger": "node scripts/start-next.cjs"
   },
   "dependencies": {
     "@next/mdx": "^16.2.6",

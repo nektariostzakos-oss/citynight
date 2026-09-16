@@ -7,6 +7,7 @@ import { MegaMenu, type MegaMenuPulse } from './mega-menu';
 import { MoonIcon } from './nav-icons';
 import { getCurrentUser } from '@/lib/auth/session';
 import { AccountMenu } from './account-menu';
+import { TodayNameDay } from './today-name-day';
 import { getCityWeather, weatherLabel } from '@/lib/weather';
 import { listPublishedArticles } from '@/lib/articles';
 import { formatAthensTime } from '@/lib/format-date';
@@ -66,6 +67,13 @@ export async function SiteHeader({
             mega-menu (filter input + nearest cities + areas) instead of
             a separate global search box. */}
         <div className="flex items-center gap-2">
+          {/* Σήμερα γιορτάζει chip — Greek name-day calendar. Renders
+              only on days with an entry, so it doesn't clutter the
+              header most weekdays. Hidden on the smallest screens
+              (auth + lang dropdown take priority on phone). */}
+          <div className="hidden lg:block">
+            <TodayNameDay locale={locale} variant="compact" />
+          </div>
           <ThemeToggle />
           <div className="hidden md:block">
             <LangDropdown current={locale} />

@@ -5,6 +5,15 @@
 // Locally and in CI we keep using `pnpm start` (= `next start`); this file
 // only matters on Hostinger.
 
+// Hostinger's "Max Processes" gauge is CloudLinux NPROC: it counts every
+// THREAD in the account, shared by every site on it. libuv sizes its pool on
+// first use and reads UV_THREADPOOL_SIZE then, so these must be the first
+// statements. V8's own pool (--v8-pool-size) is fixed before any JS runs and
+// belongs in the hPanel NODE_OPTIONS field (docs/DEPLOYMENT.md).
+if (!process.env.UV_THREADPOOL_SIZE) process.env.UV_THREADPOOL_SIZE = '2';
+if (!process.env.VIPS_CONCURRENCY) process.env.VIPS_CONCURRENCY = '1';
+process.env.NEXT_TELEMETRY_DISABLED = '1';
+
 const next = require('next');
 const http = require('http');
 

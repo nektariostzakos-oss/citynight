@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import { getCityWeather, weatherLabel, windCompass } from '@/lib/weather';
+import { ipKey, rateLimit429 } from '@/lib/rate-limit';
 
 // GET /api/weather?lat=37.98&lng=23.72&locale=el
 //
@@ -17,7 +18,12 @@ export const revalidate = 900;
 
 const ATHENS = { lat: 37.9838, lng: 23.7275 };
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
+  // `revalidate` does nothing for a handler that reads req.url, so every hit
+  // reaches the in-process weather cache (keyed at 0.01 degrees, so random
+  // coordinates mean a fresh Open-Meteo call each). Per-IP throttle.
+  const limited = rateLimit429(`weather:${ipKey(req)}`, { max: 30, windowMs: 60_000 });
+  if (limited) return limited;
   const url = new URL(req.url);
   const latRaw = Number(url.searchParams.get('lat'));
   const lngRaw = Number(url.searchParams.get('lng'));

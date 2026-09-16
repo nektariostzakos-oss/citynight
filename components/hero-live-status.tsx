@@ -24,6 +24,9 @@ type WeatherSnap = {
   emoji: string;
   label: string;
   tempC: number;
+  /** WMO code so the message picker can branch on rain/storm/etc.
+   *  See lib/weather.ts for the code → label mapping. */
+  weatherCode: number;
 };
 
 export function HeroLiveStatus({ locale }: { locale: Locale }) {
@@ -58,8 +61,11 @@ export function HeroLiveStatus({ locale }: { locale: Locale }) {
       10,
     );
     const athensDow = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Athens', weekday: 'short' }).format(now);
-    return friendlyMessage(athensHour, athensDow, t);
-  }, [now, t]);
+    // Weather + city are smart inputs ([[project-smart-homepage-tagline]]).
+    // Severe weather overrides time-of-day; the message picker decides
+    // which dimension wins for the current moment.
+    return friendlyMessage(athensHour, athensDow, weather?.weatherCode ?? null, weather?.tempC ?? null, visitor.city, t);
+  }, [now, t, weather?.weatherCode, weather?.tempC, visitor.city]);
 
   // ─── ticking clock ───────────────────────────────────────────────
   useEffect(() => {
@@ -79,7 +85,7 @@ export function HeroLiveStatus({ locale }: { locale: Locale }) {
     fetch(`/api/weather${query}`, { signal: ac.signal })
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
-        if (j && j.ok) setWeather({ emoji: j.emoji, label: j.label, tempC: j.tempC });
+        if (j && j.ok) setWeather({ emoji: j.emoji, label: j.label, tempC: j.tempC, weatherCode: j.weatherCode });
       })
       .catch(() => { /* swallow — UI just hides the weather chunk */ });
     return () => ac.abort();
@@ -141,6 +147,17 @@ type Tone = {
   friNight: string;
   satNight: string;
   sunMorning: string;
+  // Weather-condition overrides (any time of day). Picked when the
+  // current Open-Meteo code maps to that bucket; takes precedence over
+  // the time-of-day default because a thunderstorm is a bigger plan
+  // disruptor than the hour.
+  storm: string;            // WMO 95, 96, 99 — thunder/hail
+  heavyRain: string;        // 65, 81, 82
+  drizzle: string;          // 51–63, 80 (in afternoon/evening only)
+  fog: string;              // 45, 48
+  snow: string;             // 71–75
+  heatWave: string;         // tempC >= 32 in 12–22 window
+  coldNight: string;        // tempC <= 7 in 20+ window
 };
 
 const TONE: Record<Locale, Tone> = {
@@ -156,6 +173,13 @@ const TONE: Record<Locale, Tone> = {
     friNight: 'Friday energy — pick a city',
     satNight: 'Saturday peak — make it count',
     sunMorning: 'Sunday slow-roll',
+    storm: 'Storm out — covered bars only',
+    heavyRain: 'Rain hard — find an indoor table',
+    drizzle: 'Drizzle — pubs feel right',
+    fog: 'Fog over the city — wine bars open',
+    snow: 'Snow falling — warm fires inside',
+    heatWave: 'Heat wave — beach bars till sunset',
+    coldNight: 'Cold night — cocktail bar weather',
   },
   el: {
     live: 'Live',
@@ -169,6 +193,13 @@ const TONE: Record<Locale, Tone> = {
     friNight: 'Παρασκευή — διάλεξε πόλη',
     satNight: 'Σάββατο peak — βγες σωστά',
     sunMorning: 'Κυριακάτικη χαλάρα',
+    storm: 'Καταιγίδα — μόνο στεγασμένα μπαρ',
+    heavyRain: 'Βρέχει δυνατά — βρες τραπέζι μέσα',
+    drizzle: 'Ψιλόβροχο — pubs έχουν νόημα',
+    fog: 'Ομίχλη πάνω από την πόλη — wine bars',
+    snow: 'Χιόνι — τζάκι και ζεστό ποτό',
+    heatWave: 'Καύσωνας — beach bars μέχρι το σούρουπο',
+    coldNight: 'Κρύα νύχτα — cocktail bar καιρός',
   },
   de: {
     live: 'Live',
@@ -182,6 +213,13 @@ const TONE: Record<Locale, Tone> = {
     friNight: 'Freitagsenergie — Stadt wählen',
     satNight: 'Samstagspeak — macht was draus',
     sunMorning: 'Sonntags-Slow-Mode',
+    storm: 'Gewitter — nur überdachte Bars',
+    heavyRain: 'Starkregen — drinnen bleiben',
+    drizzle: 'Nieselregen — Pubs passen jetzt',
+    fog: 'Nebel — Weinbar-Wetter',
+    snow: 'Schnee — Kamin und Drink',
+    heatWave: 'Hitze — Beach Bars bis Sonnenuntergang',
+    coldNight: 'Kalte Nacht — Cocktailbar-Wetter',
   },
   fr: {
     live: 'Live',
@@ -195,6 +233,13 @@ const TONE: Record<Locale, Tone> = {
     friNight: 'Énergie du vendredi — choisis',
     satNight: 'Samedi peak — saisis-le',
     sunMorning: 'Dimanche tranquille',
+    storm: 'Orage — bars couverts uniquement',
+    heavyRain: 'Pluie battante — table à l\'intérieur',
+    drizzle: 'Bruine — les pubs vont bien',
+    fog: 'Brouillard — soirée bar à vin',
+    snow: 'Neige — cheminée et verre chaud',
+    heatWave: 'Canicule — beach bars jusqu\'au coucher',
+    coldNight: 'Nuit froide — temps à cocktails',
   },
   it: {
     live: 'Live',
@@ -208,21 +253,68 @@ const TONE: Record<Locale, Tone> = {
     friNight: 'Energia del venerdì — scegli',
     satNight: 'Sabato peak — vivilo',
     sunMorning: 'Domenica slow',
+    storm: 'Temporale — solo locali al coperto',
+    heavyRain: 'Pioggia forte — tavolo al chiuso',
+    drizzle: 'Pioviggine — i pub vanno bene',
+    fog: 'Nebbia — serata da wine bar',
+    snow: 'Neve — camino e drink caldo',
+    heatWave: 'Ondata di caldo — beach bar fino al tramonto',
+    coldNight: 'Notte fredda — tempo da cocktail bar',
   },
 };
 
-function friendlyMessage(hour: number, dow: string, t: Tone): string {
-  // Day-of-week overrides only apply inside their natural window so we
-  // don't say "Friday energy" at 09:00.
-  if (dow === 'Sun' && hour >= 7 && hour < 12) return t.sunMorning;
-  if (dow === 'Fri' && hour >= 20 && hour <= 23) return t.friNight;
-  if (dow === 'Sat' && hour >= 20 && hour <= 23) return t.satNight;
+// WMO weather-code buckets (see lib/weather.ts for the full mapping).
+const STORM_CODES = new Set([95, 96, 99]);
+const HEAVY_RAIN_CODES = new Set([65, 81, 82]);
+const DRIZZLE_CODES = new Set([51, 53, 55, 61, 63, 80]);
+const FOG_CODES = new Set([45, 48]);
+const SNOW_CODES = new Set([71, 73, 75, 77, 85, 86]);
 
-  if (hour >= 23 || hour < 2) return t.peak;
-  if (hour >= 2 && hour < 5)  return t.late;
-  if (hour >= 5 && hour < 7)  return t.dawn;
-  if (hour >= 7 && hour < 11) return t.morning;
-  if (hour >= 11 && hour < 17) return t.openNow;
-  if (hour >= 17 && hour < 20) return t.prePeak;
-  return t.prime;                                 // 20 – 22
+function friendlyMessage(
+  hour: number,
+  dow: string,
+  weatherCode: number | null,
+  tempC: number | null,
+  cityName: string | null,
+  t: Tone,
+): string {
+  // Severe weather overrides time-of-day. A thunderstorm is a bigger plan
+  // disruptor than which hour it is — we want to redirect visitors to
+  // covered spots immediately. Drizzle is gentler: only override during
+  // afternoon/evening "going out" hours, not during morning coffee.
+  if (weatherCode != null) {
+    if (STORM_CODES.has(weatherCode)) return appendCity(t.storm, cityName);
+    if (HEAVY_RAIN_CODES.has(weatherCode)) return appendCity(t.heavyRain, cityName);
+    if (SNOW_CODES.has(weatherCode)) return appendCity(t.snow, cityName);
+    if (FOG_CODES.has(weatherCode) && hour >= 18) return appendCity(t.fog, cityName);
+    if (DRIZZLE_CODES.has(weatherCode) && hour >= 15) return appendCity(t.drizzle, cityName);
+  }
+
+  // Temperature extremes nudge the message too.
+  if (tempC != null) {
+    if (tempC >= 32 && hour >= 12 && hour < 22) return appendCity(t.heatWave, cityName);
+    if (tempC <= 7 && (hour >= 20 || hour < 2)) return appendCity(t.coldNight, cityName);
+  }
+
+  // Day-of-week overrides — only inside their natural window.
+  if (dow === 'Sun' && hour >= 7 && hour < 12) return appendCity(t.sunMorning, cityName);
+  if (dow === 'Fri' && hour >= 20 && hour <= 23) return appendCity(t.friNight, cityName);
+  if (dow === 'Sat' && hour >= 20 && hour <= 23) return appendCity(t.satNight, cityName);
+
+  // Default by-hour bucket.
+  if (hour >= 23 || hour < 2) return appendCity(t.peak, cityName);
+  if (hour >= 2 && hour < 5)  return appendCity(t.late, cityName);
+  if (hour >= 5 && hour < 7)  return appendCity(t.dawn, cityName);
+  if (hour >= 7 && hour < 11) return appendCity(t.morning, cityName);
+  if (hour >= 11 && hour < 17) return appendCity(t.openNow, cityName);
+  if (hour >= 17 && hour < 20) return appendCity(t.prePeak, cityName);
+  return appendCity(t.prime, cityName);          // 20 – 22
+}
+
+/** Tag the message with the visitor's city when GPS resolved it. Kept
+ *  as a simple " · {city}" suffix so we don't have to worry about Greek
+ *  preposition / gender agreement (στην/στο/στη) per city name. */
+function appendCity(msg: string, city: string | null): string {
+  if (!city) return msg;
+  return `${msg} · ${city}`;
 }

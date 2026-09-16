@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { SearchBox } from './search-box';
 import Image from 'next/image';
 import type { Locale } from '@/lib/i18n';
 import { useNearbyCities, type CityWithDistance } from './nearby-cities-context';
@@ -335,6 +336,12 @@ export function MegaMenu({ locale, pulse }: { locale: Locale; pulse?: MegaMenuPu
               </li>
             );
           })}
+          {/* Search — text-only trigger, opens full-screen search modal
+              (lives in components/search-box.tsx). The modal is a portal
+              over the page; clicking the trigger / pressing ⌘K opens it. */}
+          <li>
+            <SearchBox locale={locale} variant="menu" />
+          </li>
         </ul>
 
         {/* Panel */}

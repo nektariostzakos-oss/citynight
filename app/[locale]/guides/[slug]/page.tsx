@@ -75,8 +75,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) return {};
   const guide = readGuide(locale, slug);
   if (!guide) return {};
-  const paths: Partial<Record<Locale, string>> = {};
-  for (const l of LOCALES) paths[l] = `/${l}/guides/${slug}`;
+  // Only emit hreflang for locales whose MDX file actually exists — otherwise
+  // we'd advertise translated URLs that fall back to English content (duplicate
+  // content). Always include the current locale; check disk for the rest.
+  const paths: Partial<Record<Locale, string>> = { [locale]: `/${locale}/guides/${slug}` };
+  for (const l of LOCALES) {
+    if (l === locale) continue;
+    const p = path.join(process.cwd(), 'content', 'guides', l, `${slug}.mdx`);
+    if (fs.existsSync(p)) paths[l] = `/${l}/guides/${slug}`;
+  }
   return publicMetadata({
     locale,
     paths,

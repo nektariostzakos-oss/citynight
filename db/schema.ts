@@ -9,6 +9,18 @@ export const cities = sqliteTable('cities', {
   id: uuid().primaryKey(), slug: text().notNull().unique(), name: text().notNull(),
   region: text(), lat: real(), lng: real(), heroPhotoId: text('hero_photo_id'),
   isPublished: integer('is_published', { mode: 'boolean' }).notNull().default(false),
+  // Structured facts powering the magazine guide header (migration 0044).
+  // Editor-populated once from verified sources; no AI writes here.
+  population: integer(),
+  terrain: text(), // enum-by-convention: seaside / mountain / island / island_capital / mainland_city / wine_region
+  distanceKm: integer('distance_km'),
+  distanceDriveMinutes: integer('distance_drive_minutes'),
+  nearestAirportCode: text('nearest_airport_code'),
+  nearestAirportName: text('nearest_airport_name'),
+  airportDriveMinutes: integer('airport_drive_minutes'),
+  portName: text('port_name'),
+  languagePrimary: text('language_primary').notNull().default('el'),
+  currency: text().notNull().default('EUR'),
   createdAt: ts('created_at').default(now),
 });
 
@@ -741,6 +753,12 @@ export const articles = sqliteTable('articles', {
   publishedAt: ts('published_at'),
   viewCount: integer('view_count').notNull().default(0),
   promptMeta: text('prompt_meta'), // JSON
+  // Per-article structured fields (migration 0044). Same shape on every
+  // guide — that's the consistency contract. Editor sets once per article.
+  tagline: text(),                                      // one-line hook under hero
+  knownFor: text('known_for'),                          // JSON array of tags in this locale
+  bestMonths: text('best_months'),                      // JSON array of month numbers (1..12)
+  typicalVisitLength: text('typical_visit_length'),     // day_trip / weekend / week / multi_day
   createdAt: ts('created_at').default(now),
   updatedAt: ts('updated_at').default(now),
 }, (t) => [
@@ -749,17 +767,43 @@ export const articles = sqliteTable('articles', {
   index('articles_vertical_status').on(t.vertical, t.status),
 ]);
 
-export const articleVenues = sqliteTable('article_venues', {
+// Verified business cards inside guides (migration 0045). See
+// [[project-guide-businesses-verified]]. FB verification is enforced at
+// write time by lib/fb-verify.ts — broken URLs are rejected on save.
+export const guideBusinesses = sqliteTable('guide_businesses', {
   id: uuid().primaryKey(),
   articleId: text('article_id').notNull().references(() => articles.id, { onDelete: 'cascade' }),
-  venueId: text('venue_id').notNull().references(() => venues.id, { onDelete: 'cascade' }),
-  rank: integer().notNull(),
-  headline: text(),
+  name: text().notNull(),
+  address: text(),
+  lat: real(),
+  lng: real(),
+  googleMapsUrl: text('google_maps_url').notNull(),
+  // Places-API authority (migration 0046). When set, the front-end uses
+  // destination_place_id in the directions deep link — the most precise
+  // way to open Google Maps Directions to a specific business.
+  googlePlaceId: text('google_place_id'),
+  placesVerifiedAt: ts('places_verified_at'),
+  fbUrl: text('fb_url').notNull(),
+  fbVerifiedStatus: text('fb_verified_status', { enum: ['pending','verified','not_found','blocked','error'] }).notNull().default('pending'),
+  fbVerifiedAt: ts('fb_verified_at'),
+  fbPageTitle: text('fb_page_title'),
+  // Display data (migration 0047). Cover photo + rating come from Places;
+  // sectionKind places the card inside the right H2 of the body markdown.
+  coverPhotoUrl: text('cover_photo_url'),
+  coverPhotoAttribution: text('cover_photo_attribution'),
+  rating: real(),
+  reviewCount: integer('review_count'),
+  sectionKind: text('section_kind', { enum: ['seafront','casino','beach','spa','seafood','taverna','modern','other','tail'] }).notNull().default('tail'),
+  // Mobile-useful fields (migration 0048). All from Places.
+  phone: text(),                                  // tap-to-call link on mobile
+  priceLevel: integer('price_level'),             // 0..4 → "€" through "€€€€€"
+  openingHours: text('opening_hours'),            // JSON: { periods: [...] }
+  extraPhotos: text('extra_photos'),              // JSON: [{ url, attribution }]
   blurb: text().notNull(),
-  photoUrl: text('photo_url'),
-  photoAttribution: text('photo_attribution'),
+  sortOrder: integer('sort_order').notNull().default(0),
   createdAt: ts('created_at').default(now),
+  updatedAt: ts('updated_at').default(now),
 }, (t) => [
-  uniqueIndex('article_venues_rank').on(t.articleId, t.rank),
-  index('article_venues_venue').on(t.venueId),
+  index('guide_businesses_article').on(t.articleId, t.sortOrder),
 ]);
+

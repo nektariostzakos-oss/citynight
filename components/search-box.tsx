@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import type { Locale } from '@/lib/i18n';
 import { SearchIcon, CloseIcon, MapPinIcon } from './nav-icons';
@@ -69,6 +70,34 @@ type Row =
   | { kind: 'category'; href: string; label: string; sub: string | null }
   | { kind: 'venue'; href: string; label: string; sub: string };
 
+/**
+ * Render an FTS5 snippet safely. `searchVenues` asks SQLite to wrap matches in
+ * the control characters U+0001 / U+0002 instead of `<mark>` tags, so the text
+ * (a venue description any owner can edit, or scraped from Places) is emitted
+ * as plain React text and only the markers become elements. This replaced a
+ * `dangerouslySetInnerHTML` that rendered the description as HTML: a stored
+ * `<script>` in one description ran for every visitor who searched.
+ */
+function renderSnippet(snippet: string): ReactNode[] {
+  const out: ReactNode[] = [];
+  const parts = snippet.split('\u0001');
+  parts.forEach((part, i) => {
+    if (i === 0) {
+      if (part) out.push(part);
+      return;
+    }
+    const end = part.indexOf('\u0002');
+    if (end === -1) {
+      out.push(<mark key={`m${i}`}>{part}</mark>);
+      return;
+    }
+    out.push(<mark key={`m${i}`}>{part.slice(0, end)}</mark>);
+    const rest = part.slice(end + 1);
+    if (rest) out.push(rest);
+  });
+  return out;
+}
+
 function loadRecent(): string[] {
   if (typeof window === 'undefined') return [];
   try {
@@ -86,7 +115,16 @@ function pushRecent(q: string) {
   window.localStorage.setItem(RECENT_KEY, JSON.stringify(cur.slice(0, MAX_RECENT)));
 }
 
-export function SearchBox({ locale, citySlug }: { locale: Locale; citySlug?: string }) {
+type Variant = 'default' | 'menu';
+
+export function SearchBox({ locale, citySlug, variant = 'default' }: {
+  locale: Locale; citySlug?: string;
+  /** 'default' = the rounded pill with icon + ⌘K hint (current behavior).
+   *  'menu'    = text-only trigger that sits inside the header mega-menu
+   *              alongside Cities. No icon, no ⌘K chip, matches the
+   *              pill-item styling so it reads as a nav item. */
+  variant?: Variant;
+}) {
   const [open, setOpen] = useState(false);
   const c = COPY[locale];
 
@@ -104,16 +142,27 @@ export function SearchBox({ locale, citySlug }: { locale: Locale; citySlug?: str
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label={c.trigger}
-        className="group inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/60 px-3 py-1.5 text-xs text-[var(--color-fg-2)] backdrop-blur transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
-      >
-        <SearchIcon className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">{c.trigger}</span>
-        <span className="hidden md:inline rounded border border-[var(--color-bg-3)] px-1.5 py-0.5 text-[10px] tracking-wider text-[var(--color-fg-3)] group-hover:border-[var(--color-accent-cyan)]/40">⌘K</span>
-      </button>
+      {variant === 'menu' ? (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label={c.trigger}
+          className="rounded-full px-3 py-1.5 text-sm font-medium text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-fg-0)]"
+        >
+          {c.trigger}
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label={c.trigger}
+          className="group inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/60 px-3 py-1.5 text-xs text-[var(--color-fg-2)] backdrop-blur transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+        >
+          <SearchIcon className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">{c.trigger}</span>
+          <span className="hidden md:inline rounded border border-[var(--color-bg-3)] px-1.5 py-0.5 text-[10px] tracking-wider text-[var(--color-fg-3)] group-hover:border-[var(--color-accent-cyan)]/40">⌘K</span>
+        </button>
+      )}
       {open && <SearchModal locale={locale} citySlug={citySlug} onClose={() => setOpen(false)} />}
     </>
   );
@@ -127,9 +176,19 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
   const [loading, setLoading] = useState(false);
   const [recent, setRecent] = useState<string[]>([]);
   const [active, setActive] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const debounce = useRef<number | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+
+  // Portal target = document.body. Bypasses the stacking context that
+  // `backdrop-filter` ancestors (the site header has backdrop-blur-xl)
+  // would otherwise impose on `position: fixed` children — per CSS spec
+  // a `backdrop-filter` other than `none` creates a new containing
+  // block for fixed-positioned descendants, which would trap the modal
+  // inside the header's box. Portaling to body lets `inset-0` mean the
+  // actual viewport again.
+  useEffect(() => { setMounted(true); }, []);
 
   // Flatten visible results into a single navigable list.
   const rows: Row[] = [
@@ -228,21 +287,36 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
   const hasQuery = q.trim().length > 0;
   const hasResults = rows.length > 0;
 
-  return (
+  if (!mounted) return null;
+  const modal = (
     <div
       role="dialog"
       aria-modal="true"
       aria-label={c.trigger}
-      className="fixed inset-0 z-[100] flex items-start justify-center bg-[var(--color-bg-0)]/80 backdrop-blur-md"
+      className="fixed inset-0 z-[100] flex flex-col bg-[var(--color-bg-0)]"
       onClick={onClose}
     >
+      {/* Top bar — flush close button. shrink-0 so the flex layout
+          puts the input directly under it and the results scroll
+          fills the rest. */}
+      <div className="flex shrink-0 items-center justify-end px-6 pt-5 md:px-10">
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] p-2 text-[var(--color-fg-2)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-fg-0)]"
+          aria-label="Close"
+        >
+          <CloseIcon className="h-5 w-5" />
+        </button>
+      </div>
+
+      {/* Hero input — large, centered, takes the eye. */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="mt-[8vh] w-[min(720px,92vw)] overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] shadow-2xl"
+        className="mx-auto mt-8 w-full max-w-3xl shrink-0 px-6 md:mt-14 md:px-10"
       >
-        {/* Input bar */}
-        <div className="flex items-center gap-3 border-b border-[var(--color-bg-2)] px-4 py-3">
-          <SearchIcon className="h-5 w-5 text-[var(--color-fg-2)]" />
+        <div className="flex items-center gap-4 border-b border-[var(--color-bg-2)] pb-4">
+          <SearchIcon className="h-7 w-7 text-[var(--color-fg-2)] md:h-8 md:w-8" />
           <input
             ref={inputRef}
             type="search"
@@ -250,24 +324,20 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKey}
             placeholder={c.placeholder}
-            className="flex-1 bg-transparent text-base text-[var(--color-fg-0)] placeholder:text-[var(--color-fg-3)] focus:outline-none"
+            className="flex-1 bg-transparent font-display text-2xl text-[var(--color-fg-0)] placeholder:text-[var(--color-fg-3)] focus:outline-none md:text-4xl"
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
           />
           {loading && <span className="h-3 w-3 animate-pulse rounded-full bg-[var(--color-accent-cyan)]" aria-hidden />}
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-md p-1 text-[var(--color-fg-2)] hover:bg-[var(--color-bg-2)] hover:text-[var(--color-fg-0)]"
-            aria-label="Close"
-          >
-            <CloseIcon className="h-5 w-5" />
-          </button>
         </div>
+      </div>
 
-        {/* Body */}
-        <div className="max-h-[60vh] overflow-y-auto">
+      {/* Results body — fills remaining viewport, scrolls if long. */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="mx-auto mt-4 w-full max-w-3xl flex-1 overflow-y-auto px-6 md:px-10"
+      >
           {!hasQuery && recent.length > 0 && (
             <div className="px-2 py-3">
               <p className="px-3 pb-2 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">{c.recent}</p>
@@ -309,19 +379,23 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
               onPick={go}
             />
           )}
-        </div>
+      </div>
 
-        {/* Footer hint bar */}
-        <div className="flex items-center justify-between gap-4 border-t border-[var(--color-bg-2)] bg-[var(--color-bg-0)]/40 px-4 py-2 text-[11px] text-[var(--color-fg-3)]">
-          <span className="flex items-center gap-3">
-            <Kbd>↑</Kbd><Kbd>↓</Kbd> {c.navHint}
-            <span className="ml-2 inline-flex items-center gap-1"><Kbd>↵</Kbd> {c.openHint}</span>
-          </span>
-          <span className="flex items-center gap-1"><Kbd>esc</Kbd> close</span>
-        </div>
+      {/* Footer hint bar — flex item, sits naturally at bottom because
+          the results body has flex-1 above it. */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="flex shrink-0 items-center justify-between gap-4 border-t border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-6 py-3 text-[11px] text-[var(--color-fg-3)] md:px-10"
+      >
+        <span className="flex items-center gap-3">
+          <Kbd>↑</Kbd><Kbd>↓</Kbd> {c.navHint}
+          <span className="ml-2 inline-flex items-center gap-1"><Kbd>↵</Kbd> {c.openHint}</span>
+        </span>
+        <span className="flex items-center gap-1"><Kbd>esc</Kbd> close</span>
       </div>
     </div>
   );
+  return createPortal(modal, document.body);
 }
 
 function Kbd({ children }: { children: React.ReactNode }) {
@@ -395,12 +469,11 @@ function ResultGroups({
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium">{row.label}</span>
                     {row.sub && (
-                      <span
-                        className="mt-0.5 block truncate text-xs text-[var(--color-fg-2)]"
-                        // venue snippet contains FTS5 `<mark>` highlights
-                        dangerouslySetInnerHTML={row.kind === 'venue' ? { __html: row.sub } : undefined}
-                      >
-                        {row.kind === 'venue' ? null : row.sub}
+                      <span className="mt-0.5 block truncate text-xs text-[var(--color-fg-2)]">
+                        {/* Venue snippets carry FTS5 highlight markers (U+0001 / U+0002), rendered as
+                            <mark> through React, so the description text, which any owner
+                            can edit, is never injected as HTML. */}
+                        {row.kind === 'venue' ? renderSnippet(row.sub) : row.sub}
                       </span>
                     )}
                   </span>

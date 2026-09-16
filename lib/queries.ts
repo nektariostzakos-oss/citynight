@@ -12,6 +12,18 @@ export type City = {
   region: string | null;
   lat: number | null;
   lng: number | null;
+  // Magazine-guide structured facts (migration 0044). Same fields on
+  // every guide for visual consistency.
+  population: number | null;
+  terrain: string | null;
+  distanceKm: number | null;
+  distanceDriveMinutes: number | null;
+  nearestAirportCode: string | null;
+  nearestAirportName: string | null;
+  airportDriveMinutes: number | null;
+  portName: string | null;
+  languagePrimary: string;
+  currency: string;
 };
 
 export type Category = { id: string; slug: string; name: string };
@@ -162,7 +174,17 @@ export function getCategoryIdBySlug(slug: string | null): string | null {
 
 export function getCityBySlug(slug: string, locale: Locale = 'en'): City | null {
   const row = sqlite().prepare(`
-    SELECT c.id, c.slug, ${localizedName('city', 'c', locale)} AS name, c.region, c.lat, c.lng
+    SELECT c.id, c.slug, ${localizedName('city', 'c', locale)} AS name,
+           c.region, c.lat, c.lng,
+           c.population, c.terrain,
+           c.distance_km AS distanceKm,
+           c.distance_drive_minutes AS distanceDriveMinutes,
+           c.nearest_airport_code AS nearestAirportCode,
+           c.nearest_airport_name AS nearestAirportName,
+           c.airport_drive_minutes AS airportDriveMinutes,
+           c.port_name AS portName,
+           c.language_primary AS languagePrimary,
+           c.currency
       FROM cities c WHERE c.slug = ? AND c.is_published = 1
   `).get(slug) as City | undefined;
   return row ?? null;
@@ -209,6 +231,20 @@ export function getCityHeroPhotoUrl(cityId: string): string | null {
      LIMIT 1
   `).get(cityId) as { url: string } | undefined;
   return row?.url ?? null;
+}
+
+export type CityPhoto = { id: string; url: string; attribution: string | null };
+
+/** All location-scope photos for a city, hero first. The magazine guide
+ *  uses photos[0] as the full-bleed hero and the rest as supporting
+ *  shots placed within the article body. */
+export function getCityPhotos(cityId: string): CityPhoto[] {
+  return sqlite().prepare(`
+    SELECT id, url, attribution_text AS attribution
+      FROM photos
+     WHERE city_id = ? AND subject_type = 'location'
+     ORDER BY is_primary DESC, sort_order ASC, created_at ASC
+  `).all(cityId) as CityPhoto[];
 }
 
 export function listCategories(locale: Locale = 'en'): Category[] {
@@ -479,7 +515,7 @@ export function searchVenues(query: string, opts: { cityId?: string; locale: Loc
     SELECT f.venue_id AS venueId,
            f.city_id AS cityId,
            f.name,
-           snippet(venues_fts, 1, '<mark>', '</mark>', '…', 12) AS snippet,
+           snippet(venues_fts, 1, char(1), char(2), '…', 12) AS snippet,
            c.slug AS citySlug, a.slug AS areaSlug, v.slug AS slug
       FROM venues_fts f
       JOIN venues v ON v.id = f.venue_id

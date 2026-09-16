@@ -1,5 +1,7 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import type { MetadataRoute } from 'next';
-import { LOCALES, HREFLANG } from '@/lib/i18n';
+import { LOCALES, HREFLANG, type Locale } from '@/lib/i18n';
 import { db } from '@/db';
 import { SITE_URL } from '@/lib/seo';
 
@@ -174,7 +176,6 @@ function venueEntries(venues: VenueRow[]): MetadataRoute.Sitemap {
 // (per-locale articles aren't hreflang-aliased yet — that comes when we
 // generate parallel translations).
 type ArticleRow = { citySlug: string; locale: string; slug: string; publishedAt: number | null };
-type ArticleAreaRow = { citySlug: string; areaSlug: string; locale: string };
 
 function loadArticleRows(): ArticleRow[] {
   return db.$client.prepare(`
@@ -184,22 +185,6 @@ function loadArticleRows(): ArticleRow[] {
      WHERE a.status = 'published'
        AND c.is_published = 1
   `).all() as ArticleRow[];
-}
-
-/** Per-(city, area, locale) combinations that have at least one
- * published article featuring a venue in that area. Same derivation as
- * lib/articles/areas.ts:listAreasForCity but DISTINCT across locales. */
-function loadAreaRows(): ArticleAreaRow[] {
-  return db.$client.prepare(`
-    SELECT DISTINCT c.slug AS citySlug, ar.slug AS areaSlug, art.locale
-      FROM articles art
-      JOIN cities c ON c.id = art.city_id
-      JOIN article_venues av ON av.article_id = art.id
-      JOIN venues v ON v.id = av.venue_id
-      JOIN areas ar ON ar.id = v.area_id
-     WHERE art.status = 'published'
-       AND c.is_published = 1
-  `).all() as ArticleAreaRow[];
 }
 
 function articleEntries(): MetadataRoute.Sitemap {
@@ -217,23 +202,64 @@ function articleEntries(): MetadataRoute.Sitemap {
       });
     }
   }
-  // Neighborhood pages — only emit for (city, area, locale) tuples that
-  // actually have articles, so we don't index empty area shells.
-  for (const a of loadAreaRows()) {
-    entries.push({
-      url: `${SITE_URL}/${a.locale}/cities/${a.citySlug}/area/${a.areaSlug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    });
-  }
-  // Article detail pages — single locale per row.
+  // Article (guide) detail pages — single locale per row. Neighborhood
+  // sub-routes were derived from venue picks (now removed) — see
+  // [[project-guides-only]].
   for (const a of loadArticleRows()) {
     entries.push({
       url: `${SITE_URL}/${a.locale}/cities/${a.citySlug}/${a.slug}`,
       lastModified: tsToDate(a.publishedAt),
       changeFrequency: 'weekly',
       priority: 0.7,
+    });
+  }
+  return entries;
+}
+
+/** Reads content/guides/{locale}/{slug}.mdx and emits one entry per locale-slug
+ *  the file actually exists in. Slugs that exist in multiple locales get
+ *  hreflang alternates between those locales only — we don't claim an `el`
+ *  alternate when only `en` content exists (that would surface English copy
+ *  under /el and trigger duplicate-content flags). lastModified = mtime. */
+function loadGuides(): { locale: Locale; slug: string; mtime: Date }[] {
+  const root = path.join(process.cwd(), 'content', 'guides');
+  if (!fs.existsSync(root)) return [];
+  const out: { locale: Locale; slug: string; mtime: Date }[] = [];
+  for (const l of LOCALES) {
+    const dir = path.join(root, l);
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir)) {
+      if (!f.endsWith('.mdx') || f.startsWith('_')) continue;
+      const slug = f.slice(0, -4);
+      const stat = fs.statSync(path.join(dir, f));
+      out.push({ locale: l, slug, mtime: stat.mtime });
+    }
+  }
+  return out;
+}
+
+function guideEntries(): MetadataRoute.Sitemap {
+  const rows = loadGuides();
+  if (rows.length === 0) return [];
+  // Index pages first, then per-locale guide details with hreflang only for
+  // locales that actually have an MDX file under that slug.
+  const localesBySlug = new Map<string, Set<Locale>>();
+  for (const r of rows) {
+    let set = localesBySlug.get(r.slug);
+    if (!set) { set = new Set(); localesBySlug.set(r.slug, set); }
+    set.add(r.locale);
+  }
+  const entries: MetadataRoute.Sitemap = [];
+  for (const r of rows) {
+    const locales = localesBySlug.get(r.slug)!;
+    const languages: Record<string, string> = {};
+    for (const l of locales) languages[HREFLANG[l]] = `${SITE_URL}/${l}/guides/${r.slug}`;
+    entries.push({
+      url: `${SITE_URL}/${r.locale}/guides/${r.slug}`,
+      lastModified: r.mtime,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages },
     });
   }
   return entries;
@@ -273,7 +299,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // primary indexed surface. The /greece/{city} entries stay in
     // coreEntries() for a transition period — they 301-redirect to
     // /{city} so Google passes link equity to the canonical URLs.
-    return [...coreEntries(), ...articleEntries()];
+    return [...coreEntries(), ...articleEntries(), ...guideEntries()];
   } catch (err) {
     // Don't break the build if the DB isn't ready yet — fall back to the
     // static surfaces. Real data appears on the next revalidation once

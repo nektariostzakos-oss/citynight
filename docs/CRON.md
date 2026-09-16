@@ -8,6 +8,45 @@ Each entry assumes:
 ## Crontab
 
 ```cron
+# Globals (Hostinger crontab honours these; the tick passes them to every job).
+DATABASE_PATH=/home/uXXX/persistent/citynight.sqlite
+PATH=/usr/local/bin:/usr/bin:/bin
+HOME=/home/uXXX
+ANTHROPIC_API_KEY=...
+GOOGLE_PLACES_API_KEY=...
+STRIPE_SECRET_KEY=...
+EMAIL_API_KEY=...
+EMAIL_FROM="citynight.gr <hello@citynight.gr>"
+REVIEW_TOKEN_SECRET=...
+NEXT_PUBLIC_SITE_URL=https://citynight.gr
+
+# ONE entry. scripts/cron/tick.mjs runs whichever jobs are due on the old
+# schedule, one at a time, each with its own ~/logs/<job>.log and a hard
+# timeout, under a lock so ticks never overlap.
+*/5 * * * *  cd ~/domains/citynight.gr/public_html && node scripts/cron/tick.mjs >> ~/logs/tick.log 2>&1
+```
+
+## Why one tick instead of eleven lines
+
+Hostinger's "Max Processes" gauge is CloudLinux NPROC: it counts every thread in
+the account and is shared by every site on it. The old crontab launched up to
+three Node processes in the same minute (about 30-36 tasks at :15) plus bash and
+curl chains, with no lock and no timeout, so one slow Places or Resend call
+stacked overlapping runs on top of the live server. The tick keeps the cron
+footprint at one child process at a time and gives each child a small thread
+pool (`UV_THREADPOOL_SIZE=1`).
+
+Schedule kept as before: booking reminders every 5 min, uptime sentinel every
+5 min (set `CITYNIGHT_TICK_UPTIME=0` once an external monitor exists),
+notify-published every 15 min, rollup hourly at :05, review requests hourly at
+:15, backup 03:00, backup verify 04:00, reconcile 04:30, Places sync Monday
+04:00, weekly digest Sunday 09:00, translation backfill Wednesday 02:00.
+Logs rotate at 5 MB (`<job>.log` -> `<job>.log.1`).
+
+### Retired crontab (reference)
+
+```cron
+# RETIRED 2026-09-04: replaced by the single tick entry above.
 # Globals (Hostinger crontab honours these).
 DATABASE_PATH=/home/uXXX/persistent/citynight.sqlite
 PATH=/usr/local/bin:/usr/bin:/bin

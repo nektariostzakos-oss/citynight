@@ -16,9 +16,14 @@ const FIELD_MASK = [
   'places.regularOpeningHours',
   'places.priceLevel',
   'places.websiteUri',
+  'places.googleMapsUri',
   'places.rating',
   'places.userRatingCount',
   'places.photos',
+  // Latest-review proxy for "still operating right now" — Places returns
+  // the most recent + most relevant reviews here; we read the newest
+  // publishTime to filter out dead venues with stale OPERATIONAL status.
+  'places.reviews',
   'nextPageToken',
 ].join(',');
 

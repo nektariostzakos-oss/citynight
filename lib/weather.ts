@@ -31,6 +31,13 @@ export type CityWeather = {
   isDay: boolean;
   /** ISO timestamp of the Open-Meteo "current" observation. */
   observedAt: string;
+  /** Today's sunrise/sunset in the city's timezone (ISO local).
+   *  Used by the guide page's live panel for "Δύση ηλίου σε 3h 14min". */
+  sunriseIso: string | null;
+  sunsetIso: string | null;
+  /** Today's daily high/low temperatures in °C. */
+  tempMaxC: number | null;
+  tempMinC: number | null;
 };
 
 type CacheEntry = { value: CityWeather; expires: number };
@@ -59,6 +66,7 @@ export async function getCityWeather(lat: number, lng: number): Promise<CityWeat
 
   const url = `${OPEN_METEO}?latitude=${lat}&longitude=${lng}` +
     `&current=temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,is_day` +
+    `&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min&forecast_days=1` +
     `&wind_speed_unit=kmh&timezone=Europe%2FAthens`;
 
   const controller = new AbortController();
@@ -81,8 +89,15 @@ export async function getCityWeather(lat: number, lng: number): Promise<CityWeat
         weather_code?: number;
         is_day?: number;
       };
+      daily?: {
+        sunrise?: string[];
+        sunset?: string[];
+        temperature_2m_max?: number[];
+        temperature_2m_min?: number[];
+      };
     };
     const c = json.current;
+    const d = json.daily;
     if (!c || typeof c.temperature_2m !== 'number') throw new Error('no current');
     parsed = {
       temperatureC: c.temperature_2m,
@@ -92,6 +107,10 @@ export async function getCityWeather(lat: number, lng: number): Promise<CityWeat
       weatherCode: c.weather_code ?? 0,
       isDay: c.is_day === 1,
       observedAt: c.time ?? new Date().toISOString(),
+      sunriseIso: d?.sunrise?.[0] ?? null,
+      sunsetIso: d?.sunset?.[0] ?? null,
+      tempMaxC: typeof d?.temperature_2m_max?.[0] === 'number' ? d.temperature_2m_max[0] : null,
+      tempMinC: typeof d?.temperature_2m_min?.[0] === 'number' ? d.temperature_2m_min[0] : null,
     };
     cache.set(key, { value: parsed, expires: now + CACHE_TTL_MS });
   } catch (err) {
@@ -101,6 +120,38 @@ export async function getCityWeather(lat: number, lng: number): Promise<CityWeat
     clearTimeout(timeout);
   }
   return parsed;
+}
+
+// ─── Sea-surface temperature (Open-Meteo Marine API) ────────────────
+//
+// Only meaningful for coastal cities; inland coords get null. Marine API
+// returns null silently in that case. Cached separately because the
+// endpoint URL differs.
+
+const OPEN_METEO_MARINE = 'https://marine-api.open-meteo.com/v1/marine';
+const seaCache = new Map<string, { value: number | null; expires: number }>();
+
+export async function getSeaTemperature(lat: number, lng: number): Promise<number | null> {
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  const key = cacheKey(lat, lng);
+  const now = Date.now();
+  const hit = seaCache.get(key);
+  if (hit && hit.expires > now) return hit.value;
+
+  const url = `${OPEN_METEO_MARINE}?latitude=${lat}&longitude=${lng}&current=sea_surface_temperature&timezone=Europe%2FAthens`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 4000);
+  let value: number | null = null;
+  try {
+    const res = await fetch(url, { signal: controller.signal, next: { revalidate: 1800 } });
+    if (!res.ok) throw new Error(`marine ${res.status}`);
+    const json = await res.json() as { current?: { sea_surface_temperature?: number | null } };
+    const t = json.current?.sea_surface_temperature;
+    if (typeof t === 'number' && Number.isFinite(t)) value = t;
+  } catch { /* swallow — inland coords legitimately return errors */ }
+  finally { clearTimeout(timer); }
+  seaCache.set(key, { value, expires: now + CACHE_TTL_MS });
+  return value;
 }
 
 // ─── WMO weather code → label + emoji ────────────────────────────────

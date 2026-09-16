@@ -1,13 +1,13 @@
-// Article repository — reads + transactional inserts.
+// Article repository — reads + inserts for editorial city guides.
 //
-// `articles` rows are the listicles ("Top 10 Rooftop Bars in Athens").
-// `article_venues` rows pin which directory venues appear at which rank
-// inside an article, with an AI-written blurb per venue. A JOIN at read
-// time gives each card its facts from `venues`.
+// citynight articles are pure editorial long-form ("Nightlife in Loutraki —
+// the honest guide"). The body lives in `intro` / `outro` markdown columns;
+// FAQs are extracted at render time from `## Question?` blocks or
+// `> **Q?**` blockquotes inside `intro`.
 //
-// §6 integrity rule still holds: nothing in this module writes venue
-// columns. AI prose lives in blurb/headline; venue facts come from the
-// venues row joined in.
+// We used to support a listicle format with ranked venue picks. That was
+// dropped — see [[project-guides-only]] in memory and migration 0043. No
+// per-venue picks, no ItemList schema, no "Top N" pages.
 
 import 'server-only';
 import { db } from '@/db';
@@ -30,28 +30,23 @@ export type Article = {
   generatedAt: number | null;
   publishedAt: number | null;
   viewCount: number;
+  // Structured magazine-guide fields (migration 0044). See seed script for
+  // the locked taxonomy. Same shape on every guide for layout consistency.
+  tagline: string | null;
+  knownFor: string[];                            // parsed from JSON; [] when null
+  bestMonths: number[];                          // parsed from JSON; [] when null
+  typicalVisitLength: 'day_trip' | 'weekend' | 'week' | 'multi_day' | null;
   createdAt: number;
   updatedAt: number;
 };
 
-export type ArticleVenuePick = {
-  id: string;
-  articleId: string;
-  venueId: string;
-  rank: number;
-  headline: string | null;
-  blurb: string;
-  photoUrl: string | null;
-  photoAttribution: string | null;
-  // Joined from venues — present on the read-with-venues path.
-  venueName?: string;
-  venueSlug?: string | null;
-  venueAddress?: string | null;
-  venueAreaName?: string | null;
-  venueRating?: number | null;
-  venueReviewCount?: number | null;
-  venuePriceLevel?: number | null;
-};
+function parseJsonArray<T>(raw: unknown): T[] {
+  if (raw == null) return [];
+  try {
+    const parsed = JSON.parse(String(raw));
+    return Array.isArray(parsed) ? (parsed as T[]) : [];
+  } catch { return []; }
+}
 
 const dbh = () => db.$client;
 
@@ -59,6 +54,7 @@ const SELECT_ARTICLE = `
   SELECT id, city_id, category_id, vertical, locale, slug,
          title, subtitle, intro, outro, cover_url, cover_attribution,
          source, status, generated_at, published_at, view_count,
+         tagline, known_for, best_months, typical_visit_length,
          created_at, updated_at
     FROM articles
 `;
@@ -82,6 +78,10 @@ function articleRow(r: Record<string, unknown>): Article {
     generatedAt: r.generated_at !== null ? Number(r.generated_at) : null,
     publishedAt: r.published_at !== null ? Number(r.published_at) : null,
     viewCount: Number(r.view_count),
+    tagline: (r.tagline as string | null) ?? null,
+    knownFor: parseJsonArray<string>(r.known_for),
+    bestMonths: parseJsonArray<number>(r.best_months),
+    typicalVisitLength: (r.typical_visit_length as Article['typicalVisitLength']) ?? null,
     createdAt: Number(r.created_at),
     updatedAt: Number(r.updated_at),
   };
@@ -133,42 +133,106 @@ export function listPublishedArticles(
   `).all(...args, limit) as Record<string, unknown>[]).map(articleRow);
 }
 
-/**
- * Return the article's venue picks joined with the underlying venue
- * facts (name, slug, address, area, rating, price). Ordered by rank.
- */
-export function getArticleVenues(articleId: string): ArticleVenuePick[] {
-  const rows = dbh().prepare(`
-    SELECT av.id, av.article_id, av.venue_id, av.rank, av.headline, av.blurb,
-           av.photo_url, av.photo_attribution,
-           v.name AS venue_name, v.slug AS venue_slug, v.address AS venue_address,
-           v.rating AS venue_rating, v.review_count AS venue_review_count,
-           v.price_level AS venue_price_level,
-           a.name AS venue_area_name
-      FROM article_venues av
-      JOIN venues v ON v.id = av.venue_id
-      LEFT JOIN areas a ON a.id = v.area_id
-     WHERE av.article_id = ?
-     ORDER BY av.rank ASC
-  `).all(articleId) as Record<string, unknown>[];
+// ─── guide_businesses ─────────────────────────────────────────────────
+//
+// Verified business cards displayed on the guide page. See
+// [[project-guide-businesses-verified]]. The verifier lives in
+// lib/fb-verify.ts and is called BEFORE inserting a row — anything that
+// lands here is at least once-verified, so reads can trust the URL.
 
-  return rows.map((r) => ({
-    id: String(r.id),
-    articleId: String(r.article_id),
-    venueId: String(r.venue_id),
-    rank: Number(r.rank),
-    headline: (r.headline as string | null) ?? null,
-    blurb: String(r.blurb),
-    photoUrl: (r.photo_url as string | null) ?? null,
-    photoAttribution: (r.photo_attribution as string | null) ?? null,
-    venueName: String(r.venue_name),
-    venueSlug: (r.venue_slug as string | null) ?? null,
-    venueAddress: (r.venue_address as string | null) ?? null,
-    venueAreaName: (r.venue_area_name as string | null) ?? null,
-    venueRating: r.venue_rating !== null ? Number(r.venue_rating) : null,
-    venueReviewCount: r.venue_review_count !== null ? Number(r.venue_review_count) : null,
-    venuePriceLevel: r.venue_price_level !== null ? Number(r.venue_price_level) : null,
-  }));
+export type GuideBusiness = {
+  id: string;
+  articleId: string;
+  name: string;
+  address: string | null;
+  lat: number | null;
+  lng: number | null;
+  googleMapsUrl: string;
+  /** Places-API canonical place id (when verified via Places). The card
+   *  uses this to build a `destination_place_id` deep link — the most
+   *  precise way to open Google Maps Directions to the actual business. */
+  googlePlaceId: string | null;
+  placesVerifiedAt: number | null;
+  fbUrl: string;
+  fbVerifiedStatus: 'pending' | 'verified' | 'not_found' | 'blocked' | 'error';
+  fbVerifiedAt: number | null;
+  fbPageTitle: string | null;
+  /** Places-fetched hero photo (highest-rank photo for the business). */
+  coverPhotoUrl: string | null;
+  coverPhotoAttribution: string | null;
+  rating: number | null;
+  reviewCount: number | null;
+  /** Editorial bucket — the page render maps (locale, kind) → H2 slug so
+   *  the card lands inside the right section of the article body. */
+  sectionKind: 'seafront' | 'casino' | 'beach' | 'spa' | 'seafood' | 'taverna' | 'modern' | 'other' | 'tail';
+  /** Mobile-useful fields, all from Places. */
+  phone: string | null;
+  priceLevel: number | null;              // 0..4
+  openingHours: { periods?: OpeningPeriod[] } | null;
+  extraPhotos: { url: string; attribution: string | null }[];
+  blurb: string;
+  sortOrder: number;
+};
+
+/** Places "openingHours.periods" shape we use for the open-now chip.
+ *  open + close are { day: 0..6, hour, minute } in the venue's local TZ
+ *  (Europe/Athens for our market). A 24h-open period omits `close`. */
+export type OpeningPeriod = {
+  open: { day: number; hour: number; minute: number };
+  close?: { day: number; hour: number; minute: number };
+};
+
+/** Verified business cards for an article, sorted by editor order.
+ *  Verification anchor is Places: any row with places_verified_at set
+ *  is renderable (the seed pipeline only inserts after Places confirms
+ *  location, photos and recent reviews). The FB check is best-effort
+ *  context — `fb_verified_status` records whether the FB page itself
+ *  was reachable, but a 'pending' value (FB rate-limited or no slug
+ *  match) does NOT block the card. See run-city.mjs insert() — that's
+ *  where the Places-anchored contract is enforced. */
+export function listGuideBusinesses(articleId: string): GuideBusiness[] {
+  const rows = dbh().prepare(`
+    SELECT id, article_id AS articleId, name, address, lat, lng,
+           google_maps_url AS googleMapsUrl,
+           google_place_id AS googlePlaceId,
+           places_verified_at AS placesVerifiedAt,
+           fb_url AS fbUrl,
+           fb_verified_status AS fbVerifiedStatus,
+           fb_verified_at AS fbVerifiedAt,
+           fb_page_title AS fbPageTitle,
+           cover_photo_url AS coverPhotoUrl,
+           cover_photo_attribution AS coverPhotoAttribution,
+           rating, review_count AS reviewCount,
+           section_kind AS sectionKind,
+           phone, price_level AS priceLevel,
+           opening_hours AS openingHoursRaw,
+           extra_photos AS extraPhotosRaw,
+           blurb,
+           sort_order AS sortOrder
+      FROM guide_businesses
+     WHERE article_id = ?
+       AND places_verified_at IS NOT NULL
+     ORDER BY sort_order ASC, name ASC
+  `).all(articleId) as Array<Omit<GuideBusiness, 'openingHours' | 'extraPhotos'> & {
+    openingHoursRaw: string | null; extraPhotosRaw: string | null;
+  }>;
+  // Parse JSON columns into typed shapes; bad/missing JSON → null/[]
+  // so a malformed row never crashes the render path.
+  return rows.map((r) => {
+    let openingHours: GuideBusiness['openingHours'] = null;
+    if (r.openingHoursRaw) {
+      try { openingHours = JSON.parse(r.openingHoursRaw); } catch { /* keep null */ }
+    }
+    let extraPhotos: GuideBusiness['extraPhotos'] = [];
+    if (r.extraPhotosRaw) {
+      try {
+        const parsed = JSON.parse(r.extraPhotosRaw);
+        if (Array.isArray(parsed)) extraPhotos = parsed;
+      } catch { /* keep [] */ }
+    }
+    const { openingHoursRaw: _o, extraPhotosRaw: _e, ...rest } = r;
+    return { ...rest, openingHours, extraPhotos };
+  });
 }
 
 // ─── writes ───────────────────────────────────────────────────────────
@@ -190,35 +254,15 @@ export type ArticleInput = {
   promptMeta?: Record<string, unknown> | null;
 };
 
-export type VenuePickInput = {
-  venueId: string;
-  rank: number;
-  headline?: string | null;
-  blurb: string;
-  photoUrl?: string | null;
-  photoAttribution?: string | null;
-};
-
-/**
- * Insert an article + its venue picks transactionally. The picks share
- * the article's auto-generated id; partial-state can't leak through if
- * one of the venue inserts fails.
- */
-export function createArticleWithPicks(
-  article: ArticleInput,
-  picks: VenuePickInput[],
-): Article {
-  if (picks.length === 0) throw new Error('article_needs_picks');
-  if (picks.length > 50) throw new Error('too_many_picks');
-
-  const conn = dbh();
+/** Insert a guide article. Throws `article_conflict` if (locale, slug)
+ *  already exists — caller can DELETE first to overwrite. */
+export function createArticle(input: ArticleInput): Article {
   const id = crypto.randomUUID();
-  const status = article.status ?? 'draft';
-  const generatedAt = article.source === 'ai' ? Math.floor(Date.now() / 1000) : null;
+  const status = input.status ?? 'draft';
+  const generatedAt = input.source === 'ai' ? Math.floor(Date.now() / 1000) : null;
   const publishedAt = status === 'published' ? Math.floor(Date.now() / 1000) : null;
-
-  const tx = conn.transaction(() => {
-    conn.prepare(`
+  try {
+    dbh().prepare(`
       INSERT INTO articles (
         id, city_id, category_id, vertical, locale, slug,
         title, subtitle, intro, outro,
@@ -227,49 +271,17 @@ export function createArticleWithPicks(
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id,
-      article.cityId, article.categoryId ?? null,
-      article.vertical, article.locale, article.slug,
-      article.title, article.subtitle ?? null,
-      article.intro ?? null, article.outro ?? null,
-      article.coverUrl ?? null, article.coverAttribution ?? null,
-      article.source ?? 'ai', status, generatedAt, publishedAt,
-      article.promptMeta ? JSON.stringify(article.promptMeta) : null,
+      input.cityId, input.categoryId ?? null,
+      input.vertical, input.locale, input.slug,
+      input.title, input.subtitle ?? null,
+      input.intro ?? null, input.outro ?? null,
+      input.coverUrl ?? null, input.coverAttribution ?? null,
+      input.source ?? 'editor', status, generatedAt, publishedAt,
+      input.promptMeta ? JSON.stringify(input.promptMeta) : null,
     );
-
-    const insertPick = conn.prepare(`
-      INSERT INTO article_venues (
-        id, article_id, venue_id, rank, headline, blurb,
-        photo_url, photo_attribution
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-    for (const pick of picks) {
-      insertPick.run(
-        crypto.randomUUID(), id, pick.venueId, pick.rank,
-        pick.headline ?? null, pick.blurb,
-        pick.photoUrl ?? null, pick.photoAttribution ?? null,
-      );
-    }
-  });
-
-  try { tx(); }
-  catch (err) {
-    if (err instanceof Error && /UNIQUE/.test(err.message)) {
-      // Either (locale, slug) collision on articles or (article_id, rank)
-      // collision on article_venues. Caller can rename slug or de-dup picks.
-      throw new Error('article_conflict');
-    }
+  } catch (err) {
+    if (err instanceof Error && /UNIQUE/.test(err.message)) throw new Error('article_conflict');
     throw err;
   }
   return getArticle(id)!;
-}
-
-export function publishArticle(id: string): Article | null {
-  dbh().prepare(`
-    UPDATE articles
-       SET status = 'published',
-           published_at = COALESCE(published_at, unixepoch()),
-           updated_at = unixepoch()
-     WHERE id = ?
-  `).run(id);
-  return getArticle(id);
 }

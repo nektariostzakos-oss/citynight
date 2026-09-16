@@ -13,6 +13,15 @@ const nextConfig = {
   experimental: {
     // ISR cache lives in .next/cache and must persist between requests on Hostinger.
     // No worker queues; revalidation is on schedule + on owner edits.
+    //
+    // Build-time only. `next build` runs ON the Hostinger host (docs/DEPLOYMENT.md):
+    // Next forks (logical CPUs - 1) static-generation worker processes by default,
+    // ~23 on that node, ~10 threads each, against the account's 200 "Max Processes"
+    // cap, which is CloudLinux NPROC and counts every thread of every site on the
+    // account. One worker keeps a deploy from 503-ing everything; the build is
+    // slower and nobody is waiting on it. scripts/hostinger-build.mjs caps
+    // Turbopack/swc the same way.
+    cpus: 1,
   },
   // Normalize trailing slashes: /en/greece/athens/  → /en/greece/athens.
   // Next 15 default is `false` already; making it explicit + documented.
@@ -39,18 +48,20 @@ const nextConfig = {
   },
 
   images: {
-    // Google Places photo URLs are short-lived; we cache them in DB and serve directly.
-    // Allow common Google photo CDN hostnames.
-    remotePatterns: [
-      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
-      { protocol: 'https', hostname: 'places.googleapis.com' },
-      { protocol: 'https', hostname: 'maps.googleapis.com' },
-      { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'images.pexels.com' },
-      { protocol: 'https', hostname: 'upload.wikimedia.org' },
-      { protocol: 'https', hostname: 'picsum.photos' },
-      { protocol: 'https', hostname: 'fastly.picsum.photos' },
-    ],
+    // Guide business cards pull photos from each venue's own website or
+    // Facebook CDN. Hostnames are unpredictable (thousands of small-
+    // business sites + dozens of FB CDN buckets), so the allowlist used to be
+    // a wildcard (`hostname: '**'`). Two problems with that on this host:
+    //   1. `/_next/image?url=https://anything` was an OPEN image proxy: any
+    //      URL on the internet, fetched and re-encoded by our server on
+    //      demand, with the result written to .next/cache/images. Anyone
+    //      could use citynight.gr as a free resizer or fill the disk.
+    //   2. Every unique photo cost a sharp decode + WebP encode on a shared
+    //      Hostinger box whose CPU and thread budget every site shares.
+    // The seed pipeline only stores URLs it has byte-probed as images, so the
+    // browser can load them straight from the source; Cloudflare in front can
+    // Polish/resize at the edge if that is ever wanted. Optimizer off.
+    unoptimized: true,
   },
   async headers() {
     // ISR + Cloudflare caching contract — public routes carry explicit

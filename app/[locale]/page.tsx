@@ -12,6 +12,7 @@ import { listPublishedArticles } from '@/lib/articles';
 import { AdSlot } from '@/components/ad-slot';
 import { getAllCityGuides } from '@/content/cities';
 import { HeroLiveStatus } from '@/components/hero-live-status';
+import { TodayNameDay } from '@/components/today-name-day';
 import { HeroNearestPanel } from '@/components/hero-nearest-panel';
 import { HeroSmartCTA } from '@/components/hero-smart-cta';
 import { SmartDestinations } from '@/components/smart-destinations';
@@ -257,10 +258,23 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
           full-width CTA so the H1 + sub + CTA all fit one viewport. */}
       <section className="relative isolate overflow-hidden">
         <div className="relative min-h-[85svh] w-full md:min-h-[100vh]">
-          {/* 1. Static gradient backdrop. The cycling city-photo hero was
-              removed — cities now render as text-only app buttons everywhere
-              except inside their own page header. */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
+          {/* 1. Greek nightscape wallpaper — aerial Athens at night.
+              Pexels, free license. Sits below the gradient/glow/grid
+              layers so the existing typographic chrome reads on top of
+              the photo. The base color stays dark (--color-bg-0) so the
+              image fades cleanly into the page below the hero. */}
+          <Image
+            src="https://images.pexels.com/photos/14810349/pexels-photo-14810349.jpeg?auto=compress&cs=tinysrgb&w=2400"
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          {/* 1b. Gradient tint over the photo — keeps it dark enough for
+              white text without losing the lights. */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)]/55 via-[var(--color-bg-2)]/65 to-[var(--color-bg-0)]/75" />
 
           {/* 2. Neon glow blobs — purely decorative, pulse softly */}
           <div className="pointer-events-none absolute -top-40 left-1/3 h-[42rem] w-[42rem] rounded-full bg-[var(--color-accent-pink)]/18 blur-[140px]" aria-hidden />
@@ -287,8 +301,13 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
             {/* Single live-status pill — replaces the old two-piece
                 "[Live · 16:52 · Open now]   GREECE · NIGHTLIFE GUIDE"
                 row, which read as two competing labels on mobile. */}
-            <div>
+            <div className="flex flex-wrap items-start gap-3">
               <HeroLiveStatus locale={locale} />
+              {/* Σήμερα γιορτάζει — name-day card, server-rendered.
+                  Sits inline with the live pill so the two "alive"
+                  cues read as one row. Hidden silently on days with
+                  no entry. */}
+              <TodayNameDay locale={locale} variant="card" />
             </div>
 
             <h1 className="mt-6 font-display text-5xl font-semibold leading-[0.92] tracking-tight sm:text-7xl md:mt-7 md:text-[7.5rem] lg:text-[8.5rem]">

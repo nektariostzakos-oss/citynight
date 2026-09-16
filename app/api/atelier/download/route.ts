@@ -143,6 +143,18 @@ async function buildArchive(
   const excludeFiles = new Set([
     'tsconfig.tsbuildinfo',
     'CITYNIGHT_NOTES.md', // internal notes; not shipped to customers
+    // Runtime state of the vendored template, never customer content: the HMAC
+    // secrets every download used to share (secret.json regenerates on first
+    // use), the admin hash, client PII, bookings, orders, the mail and audit
+    // logs, install stats. Empty replacements are appended below.
+    'secret.json',
+    'users.json',
+    'clients.json',
+    'bookings.json',
+    'orders.json',
+    'emails.log.json',
+    'audit.json',
+    'install-stats.json',
   ]);
   // Only the matching restaurant demo ships; other verticals stay hidden.
   const allowedDemos = new Set<TemplateId | string>([templateId]);
@@ -183,8 +195,12 @@ async function buildArchive(
   });
 
   // Override: data/users.json stays empty so the first /admin/login forces
-  // the customer to create an admin account.
+  // the customer to create an admin account. The other runtime stores start
+  // empty too (the originals are excluded above).
   archive.append('[]\n', { name: 'data/users.json' });
+  for (const emptyList of ['clients', 'bookings', 'orders', 'emails.log', 'audit']) {
+    archive.append('[]\n', { name: `data/${emptyList}.json` });
+  }
 
   // Customer-facing readme at the ZIP root. Short, actionable, pre-filled.
   archive.append(buildReadme(templateId, venue), { name: 'README-FIRST.txt' });
