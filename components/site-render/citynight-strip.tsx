@@ -5,7 +5,7 @@
 
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
-import { MoonIcon } from '@/components/nav-icons';
+import { LogoMark } from '@/components/brand/logo';
 
 const BACK: Record<Locale, (city: string) => string> = {
   en: (c) => `← Back to ${c}`,
@@ -92,9 +92,8 @@ export function CitynightStrip({
           style={{ color: 'inherit' }}
           className="flex items-center gap-1.5 transition hover:!text-[var(--site-primary)]"
         >
-          <span aria-hidden className="grid h-4 w-4 place-items-center rounded bg-gradient-to-br from-[var(--color-accent-pink)] to-[var(--color-accent-violet)]">
-            <MoonIcon className="h-2.5 w-2.5 text-[var(--color-bg-0)]" />
-          </span>
+          {/* One-colour logo so it sits in any business palette. */}
+          <LogoMark drawing="small" mono className="h-4 w-4 shrink-0" />
           {BRAND_SUFFIX[locale]}
         </Link>
       </div>

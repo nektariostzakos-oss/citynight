@@ -5,7 +5,7 @@
 
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
-import { MoonIcon } from '@/components/nav-icons';
+import { LogoMark } from '@/components/brand/logo';
 
 type BackStripLabels = { back: (cityName: string) => string; brand: string };
 
@@ -25,9 +25,7 @@ export function VenueBackStrip({
     <div className="venue-back-strip">
       <Link href={`/${locale}/greece/${citySlug}`}>{t.back(cityName)}</Link>
       <Link href={`/${locale}`} className="flex items-center gap-1.5 text-[var(--color-fg-3)] hover:text-[var(--venue-accent,var(--color-accent-pink))]">
-        <span aria-hidden className="grid h-4 w-4 place-items-center rounded bg-gradient-to-br from-[var(--color-accent-pink)] to-[var(--color-accent-violet)]">
-          <MoonIcon className="h-2.5 w-2.5 text-[var(--color-bg-0)]" />
-        </span>
+        <LogoMark drawing="small" mono className="h-4 w-4 shrink-0" />
         {t.brand}
       </Link>
     </div>
@@ -74,9 +72,8 @@ export function VenueMiniFooter({
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="flex items-center gap-2">
           <span>{t.poweredBy}</span>
-          <Link href={`/${locale}`} className="font-display font-semibold text-[var(--color-fg-1)] hover:text-[var(--venue-accent,var(--color-accent-pink))]">
-            <span className="text-[var(--color-fg-0)]">city</span>
-            <span className="text-[var(--color-accent-pink)]">night</span>
+          <Link href={`/${locale}`} className="font-display font-semibold text-[var(--color-fg-0)] hover:text-[var(--venue-accent,var(--color-accent-pink))]">
+            citynight
           </Link>
         </p>
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-2">

@@ -78,8 +78,7 @@ export function SiteFooter({ slug, basePath, name, wordmark, tagline, city, addr
           <p>
             Powered by{' '}
             <Link href="/" className="site-link">
-              <span style={{ color: 'var(--site-fg)' }}>city</span>
-              <span style={{ color: 'var(--site-primary)' }}>night</span>
+              <span style={{ color: 'var(--site-fg)' }}>citynight</span>
             </Link>
           </p>
         </div>

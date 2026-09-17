@@ -22,6 +22,9 @@
   --color-accent-violet: #8b5cf6;
   --color-accent-amber: #ffb020;
 
+  /* Brand: the moon of the logo "Ζενίθ" (products/citynight/design/tokens.md, 2026-09-17). */
+  --color-brand-moon: #c9965f;
+
   /* State */
   --color-danger: #ff5c5c;
   --color-success: #2ed3a3;
@@ -56,6 +59,7 @@
   --color-fg-3: #8e8e98;
 
   --color-accent-cyan: #0099b8;          /* darkened from #00e5ff for AA on white */
+  --color-brand-moon: #80521f;           /* deeper bronze of the logo moon for contrast on white */
 
   --shadow-glow-pink:   0 0 0 1px rgba(255, 45, 149, 0.30), 0 8px 24px -10px rgba(255, 45, 149, 0.35);
   --shadow-glow-cyan:   0 0 0 1px rgba(0, 153, 184, 0.28), 0 8px 24px -10px rgba(0, 153, 184, 0.30);

@@ -111,7 +111,7 @@ function shell({ title, body }: { title: string; body: string }) {
   return `<!doctype html><html><body style="font-family:system-ui,sans-serif;background:#07070b;color:#f4f4f6;padding:40px 20px;margin:0">
     <div style="max-width:520px;margin:0 auto;background:#0d0d14;padding:32px;border-radius:12px;border:1px solid #1c1c29">
       <p style="margin:0 0 12px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#9a9aa6">
-        <span style="color:#f4f4f6">city</span><span style="color:#ff2d95">night</span>
+        <span style="color:#f4f4f6">citynight</span>
       </p>
       <h1 style="margin:0 0 16px;font-size:20px;color:#f4f4f6">${title}</h1>
       ${body}

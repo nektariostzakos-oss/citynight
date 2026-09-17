@@ -4,7 +4,7 @@ import { MobileMenu, type PopularCity } from './mobile-menu';
 import { LangDropdown } from './lang-dropdown';
 import { ThemeToggle } from './theme-toggle';
 import { MegaMenu, type MegaMenuPulse } from './mega-menu';
-import { MoonIcon } from './nav-icons';
+import { LiveLogo } from './brand/live-logo';
 import { getCurrentUser } from '@/lib/auth/session';
 import { AccountMenu } from './account-menu';
 import { TodayNameDay } from './today-name-day';
@@ -44,18 +44,19 @@ export async function SiteHeader({
   // cached 15min; the article query is one indexed row).
   const pulse = await loadMegaMenuPulse(locale);
 
+  // Today's sunrise and sunset in Athens for the logo moon (hollow by day).
+  // The pulse loader has just fetched Athens weather, so this read hits the
+  // in-process cache.
+  const athens = await getCityWeather(37.9838, 23.7275);
+  const sunrise = isoToMinutes(athens?.sunriseIso);
+  const sunset = isoToMinutes(athens?.sunsetIso);
+
   return (
     <header data-site-chrome="header" className="sticky top-0 z-40 border-b border-[var(--color-bg-2)]/80 bg-[color-mix(in_oklab,var(--color-bg-0)_75%,transparent)] backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
-        {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[var(--color-accent-pink)] to-[var(--color-accent-violet)] shadow-[var(--shadow-glow-pink)]">
-            <MoonIcon className="h-4 w-4 text-[var(--color-bg-0)]" />
-          </span>
-          <span>
-            <span className="text-[var(--color-fg-0)]">city</span>
-            <span className="text-[var(--color-accent-pink)]">night</span>
-          </span>
+        {/* Logo "Ζενίθ": the moon follows the time in Athens. */}
+        <Link href={`/${locale}`} aria-label="citynight" className="flex shrink-0 items-center py-2 text-[var(--color-fg-0)]">
+          <LiveLogo sunrise={sunrise} sunset={sunset} className="h-6 w-auto" />
         </Link>
 
         {/* Desktop mega menu — Cities dropdown with live tonight strip
@@ -106,6 +107,12 @@ export async function SiteHeader({
       </div>
     </header>
   );
+}
+
+/** "2026-09-17T07:08" (Open-Meteo local time) to minutes after midnight. */
+function isoToMinutes(iso: string | null | undefined): number | null {
+  const match = iso ? /T(\d{2}):(\d{2})/.exec(iso) : null;
+  return match ? Number(match[1]) * 60 + Number(match[2]) : null;
 }
 
 // ─── live pulse loader ────────────────────────────────────────────────

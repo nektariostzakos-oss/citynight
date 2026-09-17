@@ -5,10 +5,11 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { LOCALES, LOCALE_LABELS, type Locale } from '@/lib/i18n';
 import {
-  CloseIcon, MenuIcon, MoonIcon, ForkKnifeIcon, BedIcon,
+  CloseIcon, MenuIcon,
   MapPinIcon, StoreIcon,
 } from './nav-icons';
 import { useNearbyCities } from './nearby-cities-context';
+import { LogoLockup } from './brand/logo';
 import { formatDistanceKm } from '@/lib/geo-distance';
 
 // App-feel slide-in drawer. Solid panel (not glassy), single accent strip,
@@ -238,15 +239,10 @@ export function MobileMenu({
               <Link
                 href={`/${locale}`}
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight"
+                aria-label="citynight"
+                className="flex items-center py-2 text-[var(--color-fg-0)]"
               >
-                <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-[var(--color-accent-pink)] to-[var(--color-accent-violet)]">
-                  <MoonIcon className="h-3.5 w-3.5 text-[var(--color-bg-0)]" />
-                </span>
-                <span>
-                  <span className="text-[var(--color-fg-0)]">city</span>
-                  <span className="text-[var(--color-accent-pink)]">night</span>
-                </span>
+                <LogoLockup drawing="small" className="h-6 w-auto" />
               </Link>
               <button
                 type="button"

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
 import { MoonIcon, ForkKnifeIcon, BedIcon, MapPinIcon, StoreIcon } from './nav-icons';
+import { LogoLockup } from './brand/logo';
 
 // Futuristic footer:
 //   - Neon grid pattern background (pure CSS, no image)
@@ -146,11 +147,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         {/* HERO BRAND ROW */}
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            {/* HUGE wordmark with gradient */}
-            <p className="font-display text-6xl font-semibold tracking-tight md:text-7xl">
-              <span className="bg-gradient-to-r from-[var(--color-fg-0)] via-[var(--color-fg-1)] to-[var(--color-fg-2)] bg-clip-text text-transparent">city</span>
-              <span className="bg-gradient-to-br from-[var(--color-accent-pink)] via-[var(--color-accent-pink)] to-[var(--color-accent-violet)] bg-clip-text text-transparent">night</span>
-              <span className="text-[var(--color-fg-3)]">.gr</span>
+            {/* Logo "Ζενίθ" with the domain: the name in the text colour, .gr muted. */}
+            <p className="text-[var(--color-fg-0)]">
+              <LogoLockup
+                withDomain
+                label="citynight.gr"
+                domainColour="var(--color-fg-3)"
+                className="h-12 w-auto max-w-full sm:h-14 md:h-[68px]"
+              />
             </p>
 
             <p className="mt-5 max-w-md text-sm leading-relaxed text-[var(--color-fg-1)]">{c.manifesto}</p>

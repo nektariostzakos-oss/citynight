@@ -28,7 +28,8 @@ export const metadata: Metadata = {
   applicationName: 'citynight',
   formatDetection: { telephone: false, address: false, email: false },
   robots: { index: true, follow: true },
-  icons: { icon: '/favicon.ico' },
+  // Icons come from the file conventions: app/favicon.ico, app/icon.svg,
+  // app/apple-icon.png and app/manifest.ts (logo "Ζενίθ", 2026-09-17).
 };
 
 // `color-scheme: light dark` lets the browser pick form/scrollbar colours
