@@ -3,3 +3,9 @@ allowBuilds:
   esbuild: true
   sharp: true
   unrs-resolver: true
+# Flat node_modules like npm, no pnpm symlink tree. Hostinger Web Apps prune
+# node_modules to the traced packages when they copy a build to
+# hbuilds/versions/<id>/nodejs, and with the isolated linker the running
+# app could not resolve next's own dependency @swc/helpers (stderr.log,
+# 2026-09-17), so every request answered 500.
+nodeLinker: hoisted
