@@ -16,8 +16,8 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { isLocale, type Locale } from '@/lib/i18n';
-import { publicMetadata, jsonLdProps, articleJsonLd, breadcrumbJsonLd, faqJsonLd } from '@/lib/seo';
+import { isLocale, LOCALES, type Locale } from '@/lib/i18n';
+import { publicMetadata, jsonLdProps, articleJsonLd, breadcrumbJsonLd, faqJsonLd, guideItemListJsonLd } from '@/lib/seo';
 import { getCityBySlug, getCityPhotos, type City, type CityPhoto } from '@/lib/queries';
 import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { getArticleBySlug, listArticlesByCity, listGuideBusinesses, type Article, type GuideBusiness } from '@/lib/articles';
@@ -35,9 +35,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!isLocale(locale)) return {};
   const article = getArticleBySlug(locale, slug);
   if (!article) return {};
+  // Declare an alternate only for the locales this guide is actually written
+  // in. Claiming five languages for one piece of Greek copy is how a site
+  // teaches search engines to distrust its hreflang.
+  const paths: Partial<Record<Locale, string>> = {};
+  for (const l of LOCALES) {
+    if (getArticleBySlug(l, slug)) paths[l] = `/${l}/cities/${city}/${slug}`;
+  }
   return publicMetadata({
     locale,
-    paths: { [locale]: `/${locale}/cities/${city}/${slug}` },
+    paths,
     title: noEmDash(article.title),
     description: noEmDash(article.subtitle ?? article.tagline ?? article.intro?.slice(0, 160) ?? article.title),
     ogImage: article.coverUrl ?? undefined,
@@ -152,6 +159,31 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
             { name: noEmDash(article.title), path: articlePath },
           ]),
           faqJsonLd(faqs),
+          // The places themselves, with the facts the seed pipeline verified.
+          // This is the part an answer engine can quote without reading prose.
+          guideItemListJsonLd({
+            path: articlePath,
+            name: noEmDash(article.title),
+            vertical: article.vertical,
+            cityName: cityRow.name,
+            region: cityRow.region,
+            businesses: businesses.map((b) => ({
+              name: b.name,
+              blurb: noEmDash(b.blurb),
+              address: b.address,
+              lat: b.lat,
+              lng: b.lng,
+              phone: b.phone,
+              rating: b.rating,
+              reviewCount: b.reviewCount,
+              priceLevel: b.priceLevel,
+              openingHours: b.openingHours ? JSON.stringify(b.openingHours) : null,
+              coverPhotoUrl: b.coverPhotoUrl,
+              googleMapsUrl: b.googleMapsUrl,
+              fbUrl: b.fbUrl,
+              sectionKind: b.sectionKind,
+            })),
+          }),
         ])}
       />
 

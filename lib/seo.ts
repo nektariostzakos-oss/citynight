@@ -39,19 +39,35 @@ function joinUrl(pathSuffix: string): string {
 
 /** Build canonical + hreflang languages from a {locale: path} map.
  *  Canonical = English version. x-default also points at English. */
-export function alternatesFor(pathByLocale: Partial<Record<Locale, string>>): {
+/**
+ * Canonical and hreflang for one page.
+ *
+ * A page is its own canonical, in its own language. Pointing every locale at
+ * the English URL, which this did until 2026-09-19, tells Google that the
+ * Greek page is a duplicate and should not be indexed on its own: exactly the
+ * wrong instruction for a site whose readers search in Greek and whose only
+ * channel is organic. x-default still goes to English, which is what it is
+ * for: the page to serve when no declared language matches.
+ *
+ * `locale` is the page being rendered. The fallback chain only matters when a
+ * caller passes a map that has no entry for it.
+ */
+export function alternatesFor(
+  pathByLocale: Partial<Record<Locale, string>>,
+  locale: Locale,
+): {
   canonical: string;
   languages: Record<string, string>;
 } {
-  const canonicalLocale: Locale = 'en';
-  const fallbackPath = pathByLocale[canonicalLocale] ?? Object.values(pathByLocale)[0] ?? `/${canonicalLocale}`;
+  const ownPath = pathByLocale[locale] ?? pathByLocale.en ?? Object.values(pathByLocale)[0] ?? `/${locale}`;
+  const defaultPath = pathByLocale.en ?? ownPath;
   const languages: Record<string, string> = {};
   for (const l of LOCALES) {
     const p = pathByLocale[l];
     if (p) languages[HREFLANG[l]] = joinUrl(p);
   }
-  languages['x-default'] = joinUrl(fallbackPath);
-  return { canonical: joinUrl(fallbackPath), languages };
+  languages['x-default'] = joinUrl(defaultPath);
+  return { canonical: joinUrl(ownPath), languages };
 }
 
 /** Build a {locale: `/${locale}${suffix}`} map for a route that exists under
@@ -85,7 +101,7 @@ function absImage(src: string | null | undefined): string {
 }
 
 export function publicMetadata(input: PublicMetaInput): Metadata {
-  const alternates = alternatesFor(input.paths);
+  const alternates = alternatesFor(input.paths, input.locale);
   const image = absImage(input.ogImage);
   return {
     title: input.title,
@@ -418,4 +434,126 @@ export function venueJsonLd(v: {
         ? { '@type': 'AggregateRating', ratingValue: v.rating, reviewCount: v.reviewCount }
         : undefined,
   });
+}
+
+// ── Guide businesses ─────────────────────────────────────────────────────
+//
+// A city guide is a list of real places. Saying so in structured data is the
+// difference between a page a search engine has to read and a page an answer
+// engine can quote: every place arrives with its hours, its coordinates, its
+// phone, its price band and its rating, each one already verified against
+// Google Places by the seed pipeline.
+//
+// citynight.gr buys no traffic (record rule, 2026-09-19), so being the source
+// an engine cites is the whole channel.
+
+const GUIDE_SECTION_SCHEMA: Record<string, string> = {
+  casino: 'Casino',
+  spa: 'DaySpa',
+  seafood: 'Restaurant',
+  modern: 'Restaurant',
+  taverna: 'Restaurant',
+  seafront: 'LodgingBusiness',
+  boutique: 'LodgingBusiness',
+  club: 'NightClub',
+  bar: 'BarOrPub',
+};
+
+const VERTICAL_SCHEMA: Record<string, string> = {
+  nightlife: 'NightClub',
+  food: 'Restaurant',
+  stay: 'LodgingBusiness',
+};
+
+/** The section the editor filed a place under wins, because it is the more
+ *  specific claim. The guide's vertical is the fallback, and LocalBusiness is
+ *  the honest answer when neither says anything. */
+export function guideBusinessSchemaType(
+  vertical: string | null | undefined,
+  sectionKind: string | null | undefined,
+): string {
+  return (
+    (sectionKind ? GUIDE_SECTION_SCHEMA[sectionKind] : undefined) ??
+    (vertical ? VERTICAL_SCHEMA[vertical] : undefined) ??
+    'LocalBusiness'
+  );
+}
+
+export type GuideBusinessSeo = {
+  name: string;
+  blurb?: string | null;
+  address?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  phone?: string | null;
+  rating?: number | null;
+  reviewCount?: number | null;
+  priceLevel?: number | null;
+  /** Raw Google Places `regularOpeningHours` JSON, never AI. */
+  openingHours?: string | null;
+  coverPhotoUrl?: string | null;
+  googleMapsUrl?: string | null;
+  fbUrl?: string | null;
+  sectionKind?: string | null;
+};
+
+/**
+ * ItemList whose members are the places themselves, not links to them.
+ *
+ * The places have no page of their own here, so `url` points at the guide that
+ * carries them and `sameAs` carries the Google Maps and Facebook links, which
+ * is what ties our row to the real-world entity an engine already knows.
+ */
+export function guideItemListJsonLd(input: {
+  path: string;
+  name: string;
+  vertical?: string | null;
+  cityName: string;
+  region?: string | null;
+  businesses: GuideBusinessSeo[];
+}): Json | null {
+  if (!input.businesses.length) return null;
+  const url = joinUrl(input.path);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: input.name,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: input.businesses.length,
+    itemListElement: input.businesses.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: strip({
+        '@type': guideBusinessSchemaType(input.vertical, b.sectionKind),
+        name: b.name,
+        description: b.blurb ?? undefined,
+        url,
+        telephone: b.phone ?? undefined,
+        image: b.coverPhotoUrl ?? undefined,
+        sameAs: [b.googleMapsUrl, b.fbUrl].filter(Boolean).length
+          ? ([b.googleMapsUrl, b.fbUrl].filter(Boolean) as string[])
+          : undefined,
+        address: b.address
+          ? {
+              '@type': 'PostalAddress',
+              streetAddress: b.address,
+              addressLocality: input.cityName,
+              addressRegion: input.region ?? undefined,
+              addressCountry: 'GR',
+            }
+          : undefined,
+        geo:
+          b.lat != null && b.lng != null
+            ? { '@type': 'GeoCoordinates', latitude: b.lat, longitude: b.lng }
+            : undefined,
+        openingHoursSpecification: openingHoursSpec(b.openingHours),
+        priceRange: typeof b.priceLevel === 'number' ? PRICE_LEVEL_TO_RANGE[b.priceLevel] : undefined,
+        aggregateRating:
+          b.rating && b.reviewCount && b.reviewCount > 0
+            ? { '@type': 'AggregateRating', ratingValue: b.rating, reviewCount: b.reviewCount }
+            : undefined,
+      }),
+    })),
+  };
 }

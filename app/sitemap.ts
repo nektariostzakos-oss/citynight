@@ -202,15 +202,32 @@ function articleEntries(): MetadataRoute.Sitemap {
       });
     }
   }
-  // Article (guide) detail pages — single locale per row. Neighborhood
-  // sub-routes were derived from venue picks (now removed) — see
-  // [[project-guides-only]].
-  for (const a of loadArticleRows()) {
+  // Article (guide) detail pages. A guide written in two languages keeps the
+  // same slug, so the locales that actually exist are declared as hreflang
+  // alternates and nothing is claimed for a locale we have not written. A
+  // guide that exists in one language gets no alternates at all, which is the
+  // honest answer and keeps duplicate-content flags away.
+  const rows = loadArticleRows();
+  const localesBySlug = new Map<string, Set<string>>();
+  for (const a of rows) {
+    const key = `${a.citySlug}/${a.slug}`;
+    const set = localesBySlug.get(key) ?? new Set<string>();
+    set.add(a.locale);
+    localesBySlug.set(key, set);
+  }
+  for (const a of rows) {
+    const key = `${a.citySlug}/${a.slug}`;
+    const locales = localesBySlug.get(key) ?? new Set([a.locale]);
+    const languages: Record<string, string> = {};
+    for (const l of LOCALES) {
+      if (locales.has(l)) languages[HREFLANG[l]] = `${SITE_URL}/${l}/cities/${key}`;
+    }
     entries.push({
-      url: `${SITE_URL}/${a.locale}/cities/${a.citySlug}/${a.slug}`,
+      url: `${SITE_URL}/${a.locale}/cities/${key}`,
       lastModified: tsToDate(a.publishedAt),
       changeFrequency: 'weekly',
       priority: 0.7,
+      ...(Object.keys(languages).length > 1 ? { alternates: { languages } } : {}),
     });
   }
   return entries;

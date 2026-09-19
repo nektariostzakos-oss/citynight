@@ -43,6 +43,10 @@ const steps = [
   // tsx exports its CLI as "tsx/cli"; the file path tsx/dist/cli.mjs is not in
   // its package exports, so require.resolve on it throws ERR_PACKAGE_PATH_NOT_EXPORTED.
   ["db migrate", [require.resolve("tsx/cli"), "db/migrate.ts"]],
+  // The SQLite file lives outside the deploy path, so a push carries code and
+  // no content. This installs the tracked city guides before the build reads
+  // them, which is what makes a deploy ship a city that has something in it.
+  ["content seed", [require.resolve("tsx/cli"), "db/seed-city-guides.ts"]],
   ["next build", [require.resolve("next/dist/bin/next"), "build"]],
 ];
 
