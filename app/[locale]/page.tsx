@@ -1,51 +1,57 @@
+import { noEmDash } from '@/lib/article-md';
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { isLocale, type Locale } from '@/lib/i18n';
-import {
-  listCitiesWithHero,
-  listAreasForNearby,
-  siteStats,
-} from '@/lib/queries';
-import { listPublishedArticles } from '@/lib/articles';
+import { listCitiesWithHero, siteStats } from '@/lib/queries';
+import { listPublishedArticles, listGuideBusinesses } from '@/lib/articles';
 import { AdSlot } from '@/components/ad-slot';
 import { getAllCityGuides } from '@/content/cities';
 import { HeroLiveStatus } from '@/components/hero-live-status';
+import { HeroInstrument } from '@/components/hero-instrument';
 import { TodayNameDay } from '@/components/today-name-day';
-import { HeroNearestPanel } from '@/components/hero-nearest-panel';
-import { HeroSmartCTA } from '@/components/hero-smart-cta';
 import { SmartDestinations } from '@/components/smart-destinations';
+import { getCityWeather } from '@/lib/weather';
+import { athensClock, caps } from '@/components/instrument/night';
+import { todayWindows, type OpenWindow } from '@/components/instrument/hours';
 import {
   publicMetadata, localizedPaths, jsonLdProps,
   organizationJsonLd, websiteJsonLd, breadcrumbJsonLd,
 } from '@/lib/seo';
 
+// The home page opens on the instrument, the way the prototype does: the
+// statement, the live strip (time, how far the night has gone, what is open),
+// the dial beside the cities, then the guides. Every number is a reading, and
+// no reading is written that the data does not support.
+//
+// Direction A "Αντικύθηρα", products/citynight/design/tokens.md, 2026-09-17.
+
 export const revalidate = 1800;
 
+/** Athens. The editorial clock of the site: one sun for the whole page, named
+ *  where it is shown so a visitor in Corfu is never told the wrong sunset. */
+const ATHENS = { lat: 37.9838, lng: 23.7275 };
+
+/** How many published guides we read for the "open now" count. Each one is a
+ *  single indexed query and the page is ISR, so this stays cheap. */
+const GUIDES_SAMPLED = 8;
+
 const META: Record<Locale, { title: string; description: string }> = {
-  en: { title: 'citynight — Greece nightlife, food & stay guide', description: 'Greece-wide guide for nightlife, restaurants and hotels. Real venues, real photos, five languages.' },
-  el: { title: 'citynight — Οδηγός νυχτερινής ζωής, φαγητού & διαμονής στην Ελλάδα', description: 'Πανελλήνιος οδηγός για νυχτερινή ζωή, εστιατόρια και ξενοδοχεία. Πραγματικά μαγαζιά, πραγματικές φωτογραφίες, πέντε γλώσσες.' },
-  de: { title: 'citynight — Griechenland: Nightlife, Essen & Übernachten', description: 'Landesweiter Guide für Nachtleben, Restaurants und Hotels in Griechenland. Echte Locations, echte Fotos, fünf Sprachen.' },
-  fr: { title: 'citynight — Grèce : guide nightlife, cuisine & hébergement', description: 'Guide national pour la vie nocturne, les restaurants et les hôtels en Grèce. Vrais lieux, vraies photos, cinq langues.' },
-  it: { title: 'citynight — Grecia: guida nightlife, cucina & alloggi', description: 'Guida nazionale per vita notturna, ristoranti e hotel in Grecia. Locali veri, foto vere, cinque lingue.' },
+  en: { title: 'citynight: Greece nightlife, food & stay guide', description: 'Greece-wide guide for nightlife, restaurants and hotels. Real venues, real photos, five languages.' },
+  el: { title: 'citynight: Οδηγός νυχτερινής ζωής, φαγητού & διαμονής στην Ελλάδα', description: 'Πανελλήνιος οδηγός για νυχτερινή ζωή, εστιατόρια και ξενοδοχεία. Πραγματικά μαγαζιά, πραγματικές φωτογραφίες, πέντε γλώσσες.' },
+  de: { title: 'citynight: Griechenland: Nightlife, Essen & Übernachten', description: 'Landesweiter Guide für Nachtleben, Restaurants und Hotels in Griechenland. Echte Locations, echte Fotos, fünf Sprachen.' },
+  fr: { title: 'citynight: Grèce : guide nightlife, cuisine & hébergement', description: 'Guide national pour la vie nocturne, les restaurants et les hôtels en Grèce. Vrais lieux, vraies photos, cinq langues.' },
+  it: { title: 'citynight: Grecia: guida nightlife, cucina & alloggi', description: 'Guida nazionale per vita notturna, ristoranti e hotel in Grecia. Locali veri, foto vere, cinque lingue.' },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const m = META[locale];
-  return publicMetadata({
-    locale,
-    paths: localizedPaths(''),
-    title: m.title,
-    description: m.description,
-  });
+  return publicMetadata({ locale, paths: localizedPaths(''), title: m.title, description: m.description });
 }
 
-// Per-locale region labels + "Guide coming soon" tile copy. Shares the same
-// shape as the mega-menu/CityHero region maps so a translation update in one
-// place isn't out of sync with the others (keep these aligned by hand for now).
+// Region labels, shared in shape with the mega-menu and the cities grid.
 const TILE_LOCALE: Record<Locale, { region: Record<string, string>; comingSoon: string; guidePrefix: string }> = {
   en: { comingSoon: 'Guide coming soon', guidePrefix: 'Guide', region: { 'Attica': 'Attica', 'South Aegean': 'Cyclades & Dodecanese', 'North Aegean': 'North Aegean', 'Crete': 'Crete', 'Ionian Islands': 'Ionian', 'Central Macedonia': 'Macedonia', 'Western Macedonia': 'West Macedonia', 'East Macedonia & Thrace': 'East Macedonia & Thrace', 'Peloponnese': 'Peloponnese', 'Epirus': 'Epirus', 'Thessaly': 'Sporades & Thessaly', 'Central Greece': 'Central Greece' } },
   el: { comingSoon: 'Οδηγός έρχεται', guidePrefix: 'Οδηγός', region: { 'Attica': 'Αττική', 'South Aegean': 'Κυκλάδες & Δωδεκάνησα', 'North Aegean': 'Βόρειο Αιγαίο', 'Crete': 'Κρήτη', 'Ionian Islands': 'Ιόνιο', 'Central Macedonia': 'Μακεδονία', 'Western Macedonia': 'Δυτική Μακεδονία', 'East Macedonia & Thrace': 'Αν. Μακεδονία & Θράκη', 'Peloponnese': 'Πελοπόννησος', 'Epirus': 'Ήπειρος', 'Thessaly': 'Σποράδες & Θεσσαλία', 'Central Greece': 'Στερεά Ελλάδα' } },
@@ -54,194 +60,173 @@ const TILE_LOCALE: Record<Locale, { region: Record<string, string>; comingSoon: 
   it: { comingSoon: 'Guida in arrivo', guidePrefix: 'Guida', region: { 'Attica': 'Attica', 'South Aegean': 'Cicladi & Dodecaneso', 'North Aegean': 'Egeo Settentrionale', 'Crete': 'Creta', 'Ionian Islands': 'Isole Ionie', 'Central Macedonia': 'Macedonia', 'Western Macedonia': 'Macedonia Occidentale', 'East Macedonia & Thrace': 'Macedonia Orientale & Tracia', 'Peloponnese': 'Peloponneso', 'Epirus': 'Epiro', 'Thessaly': 'Sporadi & Tessaglia', 'Central Greece': 'Grecia centrale' } },
 };
 
-// Hero quick-action chips. Each routes to a vertical or category page.
-// Keep this list to 4 — more than that and the hero gets cluttered.
-// Phase K.6 — hero quick-action chips removed. They previously linked
-// to /greece?kind=X (a dead URL pattern; each landed on the same
-// vertical-filtered listing). In the article-led model the right
-// next-click is "open a city guide", which the cities grid + the
-// "All cities" CTA below the hero already serve.
-
-// Tagline appended below the hero subtitle — short, futuristic, action-y.
-// Niche, conversion-leaning tagline — leads with what makes the site
-// different (locals + AI cross-check) and ends with the "no clickbait"
-// promise instead of a generic "curated by people" line.
 const HERO_TAGLINE: Record<Locale, (cities: number) => string> = {
-  en: (n) => `${n} cities · 3 verticals · 5 languages · zero clickbait`,
-  el: (n) => `${n} πόλεις · 3 κατηγορίες · 5 γλώσσες · χωρίς clickbait`,
-  de: (n) => `${n} Städte · 3 Verticals · 5 Sprachen · null Clickbait`,
-  fr: (n) => `${n} villes · 3 verticals · 5 langues · zéro clickbait`,
-  it: (n) => `${n} città · 3 verticals · 5 lingue · zero clickbait`,
+  en: (n) => `${n} CITIES · 3 VERTICALS · 5 LANGUAGES · NO CLICKBAIT`,
+  el: (n) => `${n} ΠΟΛΕΙΣ · 3 ΚΑΤΗΓΟΡΙΕΣ · 5 ΓΛΩΣΣΕΣ · ΧΩΡΙΣ CLICKBAIT`,
+  de: (n) => `${n} STÄDTE · 3 VERTICALS · 5 SPRACHEN · KEIN CLICKBAIT`,
+  fr: (n) => `${n} VILLES · 3 VERTICALS · 5 LANGUES · ZÉRO CLICKBAIT`,
+  it: (n) => `${n} CITTÀ · 3 VERTICALS · 5 LINGUE · ZERO CLICKBAIT`,
 };
 
 const COPY: Record<Locale, {
-  heroKicker: string;
-  heroTitle: string;
-  heroTitleAccent: string;
-  heroSub: string;
-  citiesHeading: string;
-  citiesSub: string;
-  citiesCta: string;
-  citiesNearbyHeading: string;        // template — must include {city}
-  citiesNearbyHeadingNoCity: string;
-  citiesNearbySub: string;
+  heroTitle: string; heroSub: string;
+  citiesHeading: string; citiesSub: string;
+  citiesNearbyHeading: string; citiesNearbyHeadingNoCity: string; citiesNearbySub: string;
   citiesLivePill: string;
-  heroCtaPickCity: string;
-  heroCtaNearestGuide: string;        // template — must include {city}
-  latestArticlesHeading: string;
-  latestArticlesSub: string;
-  ownersHeading: string;
-  ownersBody: string;
-  ownersCta: string;
-  statsCities: string;
+  guidesHeading: string; guidesCount: (n: number) => string; bestMonths: string; yearRound: string;
+  latestHeading: string; latestSub: string;
+  ownersHeading: string; ownersBody: string; ownersCta: string;
   statsArticles: string;
-  statsNeighborhoods: string;
-  statsLocales: string;
-  guidesHeading: string;
-  guidesSub: string;
 }> = {
   en: {
-    heroKicker: 'Greece · nightlife guide',
-    heroTitle: 'Where Greece',
-    heroTitleAccent: 'goes out',
-    heroSub: 'The Greece locals actually go out to. AI-checked, human-curated guides for nightlife, food and stay — across every city worth knowing.',
-    citiesHeading: 'Top destinations',
-    citiesSub: 'Each city is a guide — neighborhoods, scenes, and the venues that define them.',
-    citiesCta: 'All cities →',
-    citiesNearbyHeading: 'Closest to {city}',
-    citiesNearbyHeadingNoCity: 'Closest to you right now',
-    citiesNearbySub: 'Cities sorted by live distance from your current location.',
+    heroTitle: 'Where Greece goes out.',
+    heroSub: 'Greece the way locals go out. Guides to nightlife, food and stay, cross-checked with AI and edited by people.',
+    citiesHeading: 'Top destinations', citiesSub: 'Every city is a guide: neighborhoods, scenes and the places that define them.',
+    citiesNearbyHeading: 'Closest to {city}', citiesNearbyHeadingNoCity: 'Closest to you right now',
+    citiesNearbySub: 'Cities sorted by live distance from your position.',
     citiesLivePill: 'live',
-    heroCtaPickCity: 'Pick a city',
-    heroCtaNearestGuide: 'Open the {city} guide',
-    latestArticlesHeading: 'Latest guides',
-    latestArticlesSub: 'Fresh ranked picks across every city.',
-    ownersHeading: 'Run a venue?',
-    ownersBody: 'Get your own website in 60 seconds — your photos, your menu, your bookings. Free hosted forever. €19/mo only if you want your own domain.',
-    ownersCta: 'Make your site →',
-    statsCities: 'cities', statsArticles: 'articles', statsNeighborhoods: 'neighborhoods', statsLocales: 'languages',
-    guidesHeading: 'Editorial guides',
-    guidesSub: 'Long-form, evergreen, written by people who know the cities.',
+    guidesHeading: 'Guides', guidesCount: (n) => `${n} GUIDES`, bestMonths: 'BEST MONTHS', yearRound: 'ALL YEAR',
+    latestHeading: 'Latest guides', latestSub: 'The newest ranked picks, city by city.',
+    ownersHeading: 'Run a place?',
+    ownersBody: 'Your own website in 60 seconds: your photos, your menu, your bookings. Free hosting forever. 19 euro a month only if you want your own domain.',
+    ownersCta: 'Make your site',
+    statsArticles: 'articles',
   },
   el: {
-    heroKicker: 'Ελλάδα · οδηγός νυχτερινής ζωής',
-    heroTitle: 'Πού βγαίνει',
-    heroTitleAccent: 'η Ελλάδα',
-    heroSub: 'Η Ελλάδα όπως βγαίνουν οι ντόπιοι. Οδηγοί νυχτερινής ζωής, φαγητού και διαμονής — διασταυρωμένοι με AI, επιμελημένοι από ανθρώπους.',
-    citiesHeading: 'Κορυφαίοι προορισμοί',
-    citiesSub: 'Κάθε πόλη είναι οδηγός — γειτονιές, σκηνές, και τα μαγαζιά που την ορίζουν.',
-    citiesCta: 'Όλες οι πόλεις →',
-    citiesNearbyHeading: 'Πιο κοντά στο {city}',
-    citiesNearbyHeadingNoCity: 'Πιο κοντά σου τώρα',
+    heroTitle: 'Πού βγαίνει η Ελλάδα.',
+    heroSub: 'Η Ελλάδα όπως βγαίνουν οι ντόπιοι. Οδηγοί νυχτερινής ζωής, φαγητού και διαμονής, διασταυρωμένοι με AI και επιμελημένοι από ανθρώπους.',
+    citiesHeading: 'Κορυφαίοι προορισμοί', citiesSub: 'Κάθε πόλη είναι οδηγός: γειτονιές, σκηνές και τα μαγαζιά που την ορίζουν.',
+    citiesNearbyHeading: 'Πιο κοντά στο {city}', citiesNearbyHeadingNoCity: 'Πιο κοντά σου τώρα',
     citiesNearbySub: 'Πόλεις ταξινομημένες με ζωντανή απόσταση από την τοποθεσία σου.',
     citiesLivePill: 'live',
-    heroCtaPickCity: 'Διάλεξε πόλη',
-    heroCtaNearestGuide: 'Δες τον οδηγό για το {city}',
-    latestArticlesHeading: 'Πρόσφατοι οδηγοί',
-    latestArticlesSub: 'Φρέσκα ranked picks από κάθε πόλη.',
+    guidesHeading: 'Οδηγοί', guidesCount: (n) => `${n} ΟΔΗΓΟΙ`, bestMonths: 'ΚΑΛΥΤΕΡΟΙ ΜΗΝΕΣ', yearRound: 'ΟΛΟ ΤΟΝ ΧΡΟΝΟ',
+    latestHeading: 'Πρόσφατοι οδηγοί', latestSub: 'Τα πιο πρόσφατα, πόλη πόλη.',
     ownersHeading: 'Έχεις μαγαζί;',
-    ownersBody: 'Έτοιμο website σε 60 δευτερόλεπτα — οι φωτογραφίες σου, το μενού σου, οι κρατήσεις σου. Δωρεάν για πάντα. €19/μήνα μόνο για δικό σου domain.',
-    ownersCta: 'Φτιάξε το site σου →',
-    statsCities: 'πόλεις', statsArticles: 'άρθρα', statsNeighborhoods: 'γειτονιές', statsLocales: 'γλώσσες',
-    guidesHeading: 'Editorial οδηγοί',
-    guidesSub: 'Μεγάλα κείμενα, evergreen, γραμμένα από ανθρώπους που ξέρουν.',
+    ownersBody: 'Έτοιμο website σε 60 δευτερόλεπτα: οι φωτογραφίες σου, το μενού σου, οι κρατήσεις σου. Δωρεάν για πάντα. 19 ευρώ τον μήνα μόνο αν θέλεις δικό σου domain.',
+    ownersCta: 'Φτιάξε το site σου',
+    statsArticles: 'άρθρα',
   },
   de: {
-    heroKicker: 'Griechenland · Nightlife-Guide',
-    heroTitle: 'Wo Griechenland',
-    heroTitleAccent: 'feiert',
-    heroSub: 'Griechenland, wie die Einheimischen feiern. KI-geprüft, von Menschen kuratiert — Nightlife, Essen und Übernachten in jeder Stadt, die zählt.',
-    citiesHeading: 'Top-Destinationen',
-    citiesSub: 'Jede Stadt ist ein Guide — Viertel, Szenen und die Locations, die sie prägen.',
-    citiesCta: 'Alle Städte →',
-    citiesNearbyHeading: 'Am nächsten an {city}',
-    citiesNearbyHeadingNoCity: 'Am nächsten zu Ihnen',
-    citiesNearbySub: 'Städte sortiert nach Live-Entfernung zu Ihrem Standort.',
+    heroTitle: 'Wo Griechenland feiert.',
+    heroSub: 'Griechenland, wie die Einheimischen ausgehen. Guides für Nachtleben, Essen und Übernachten, mit KI gegengeprüft und von Menschen redigiert.',
+    citiesHeading: 'Top-Destinationen', citiesSub: 'Jede Stadt ist ein Guide: Viertel, Szenen und die Orte, die sie prägen.',
+    citiesNearbyHeading: 'Am nächsten an {city}', citiesNearbyHeadingNoCity: 'Am nächsten zu Ihnen',
+    citiesNearbySub: 'Städte nach Live-Entfernung zu Ihrem Standort.',
     citiesLivePill: 'live',
-    heroCtaPickCity: 'Stadt wählen',
-    heroCtaNearestGuide: 'Guide für {city} öffnen',
-    latestArticlesHeading: 'Neueste Guides',
-    latestArticlesSub: 'Frische Ranglisten aus jeder Stadt.',
+    guidesHeading: 'Guides', guidesCount: (n) => `${n} GUIDES`, bestMonths: 'BESTE MONATE', yearRound: 'GANZJÄHRIG',
+    latestHeading: 'Neueste Guides', latestSub: 'Die frischesten Ranglisten, Stadt für Stadt.',
     ownersHeading: 'Lokal-Inhaber?',
-    ownersBody: 'Ihre eigene Website in 60 Sekunden — Fotos, Speisekarte, Buchungen. Dauerhaft kostenlos. €19/Monat nur für eigene Domain.',
-    ownersCta: 'Website erstellen →',
-    statsCities: 'Städte', statsArticles: 'Artikel', statsNeighborhoods: 'Viertel', statsLocales: 'Sprachen',
-    guidesHeading: 'Editorial-Guides',
-    guidesSub: 'Lang, evergreen, geschrieben von Menschen, die die Städte kennen.',
+    ownersBody: 'Ihre eigene Website in 60 Sekunden: Fotos, Speisekarte, Buchungen. Dauerhaft kostenlos. 19 Euro im Monat nur für die eigene Domain.',
+    ownersCta: 'Website erstellen',
+    statsArticles: 'Artikel',
   },
   fr: {
-    heroKicker: 'Grèce · guide nocturne',
-    heroTitle: 'Où la Grèce',
-    heroTitleAccent: 'sort',
-    heroSub: 'La Grèce comme la vivent les locaux. Sorties, restos et hôtels — vérifiés par IA, sélectionnés par des humains.',
-    citiesHeading: 'Destinations phares',
-    citiesSub: 'Chaque ville est un guide — quartiers, scènes, lieux qui la définissent.',
-    citiesCta: 'Toutes les villes →',
-    citiesNearbyHeading: 'Au plus près de {city}',
-    citiesNearbyHeadingNoCity: 'Au plus près de vous',
+    heroTitle: 'Là où la Grèce sort.',
+    heroSub: 'La Grèce comme la vivent les locaux. Des guides sorties, cuisine et hébergement, recoupés par IA et édités par des humains.',
+    citiesHeading: 'Destinations phares', citiesSub: 'Chaque ville est un guide : quartiers, scènes et lieux qui la définissent.',
+    citiesNearbyHeading: 'Au plus près de {city}', citiesNearbyHeadingNoCity: 'Au plus près de vous',
     citiesNearbySub: 'Villes triées par distance en direct depuis votre position.',
     citiesLivePill: 'live',
-    heroCtaPickCity: 'Choisir une ville',
-    heroCtaNearestGuide: 'Ouvrir le guide de {city}',
-    latestArticlesHeading: 'Derniers guides',
-    latestArticlesSub: 'Nouveaux classements pour chaque ville.',
-    ownersHeading: 'Propriétaire ?',
-    ownersBody: 'Votre propre site en 60 secondes — photos, menu, réservations. Gratuit pour toujours. €19/mois uniquement pour votre propre domaine.',
-    ownersCta: 'Créer mon site →',
-    statsCities: 'villes', statsArticles: 'articles', statsNeighborhoods: 'quartiers', statsLocales: 'langues',
-    guidesHeading: 'Guides éditoriaux',
-    guidesSub: 'Long format, intemporels, écrits par des gens qui connaissent.',
+    guidesHeading: 'Guides', guidesCount: (n) => `${n} GUIDES`, bestMonths: 'MEILLEURS MOIS', yearRound: "TOUTE L'ANNÉE",
+    latestHeading: 'Derniers guides', latestSub: 'Les classements les plus récents, ville par ville.',
+    ownersHeading: 'Vous tenez un lieu ?',
+    ownersBody: 'Votre site en 60 secondes : vos photos, votre carte, vos réservations. Gratuit pour toujours. 19 euros par mois uniquement pour votre propre domaine.',
+    ownersCta: 'Créer mon site',
+    statsArticles: 'articles',
   },
   it: {
-    heroKicker: 'Grecia · guida notturna',
-    heroTitle: 'Dove la Grecia',
-    heroTitleAccent: 'esce',
-    heroSub: 'La Grecia che vivono i locali. Vita notturna, ristoranti e alloggi — verificati con AI, selezionati da chi sa.',
-    citiesHeading: 'Destinazioni top',
-    citiesSub: 'Ogni città è una guida — quartieri, scene e i locali che la definiscono.',
-    citiesCta: 'Tutte le città →',
-    citiesNearbyHeading: 'Più vicino a {city}',
-    citiesNearbyHeadingNoCity: 'Più vicino a te ora',
+    heroTitle: 'Dove esce la Grecia.',
+    heroSub: 'La Grecia come la vivono i locali. Guide di vita notturna, cucina e alloggi, verificate con AI e curate da persone.',
+    citiesHeading: 'Destinazioni top', citiesSub: 'Ogni città è una guida: quartieri, scene e i locali che la definiscono.',
+    citiesNearbyHeading: 'Più vicino a {city}', citiesNearbyHeadingNoCity: 'Più vicino a te ora',
     citiesNearbySub: 'Città ordinate per distanza live dalla tua posizione.',
     citiesLivePill: 'live',
-    heroCtaPickCity: 'Scegli una città',
-    heroCtaNearestGuide: 'Apri la guida di {city}',
-    latestArticlesHeading: 'Ultime guide',
-    latestArticlesSub: 'Nuove classifiche da ogni città.',
+    guidesHeading: 'Guide', guidesCount: (n) => `${n} GUIDE`, bestMonths: 'MESI MIGLIORI', yearRound: 'TUTTO L’ANNO',
+    latestHeading: 'Ultime guide', latestSub: 'Le classifiche più recenti, città per città.',
     ownersHeading: 'Hai un locale?',
-    ownersBody: 'Il tuo sito in 60 secondi — foto, menu, prenotazioni. Gratis per sempre. €19/mese solo per il tuo dominio.',
-    ownersCta: 'Crea il tuo sito →',
-    statsCities: 'città', statsArticles: 'articoli', statsNeighborhoods: 'quartieri', statsLocales: 'lingue',
-    guidesHeading: 'Guide editoriali',
-    guidesSub: 'Lunghe, evergreen, scritte da chi conosce le città.',
+    ownersBody: 'Il tuo sito in 60 secondi: le tue foto, il tuo menu, le tue prenotazioni. Gratis per sempre. 19 euro al mese solo se vuoi il tuo dominio.',
+    ownersCta: 'Crea il tuo sito',
+    statsArticles: 'articoli',
   },
 };
+
+const WRAP = 'mx-auto w-full max-w-[1180px] px-5 md:px-8';
+
+const MONTH_INITIAL: Record<Locale, string[]> = {
+  el: ['Ι', 'Φ', 'Μ', 'Α', 'Μ', 'Ι', 'Ι', 'Α', 'Σ', 'Ο', 'Ν', 'Δ'],
+  en: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  de: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  fr: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  it: ['G', 'F', 'M', 'A', 'M', 'G', 'L', 'A', 'S', 'O', 'N', 'D'],
+};
+
+const MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+
+/** The season line in content/cities/*.json is written by hand in English
+ *  ("year-round", "May to October"). Parse the two shapes we actually use and
+ *  return null for anything else, so the bar is never guessed. */
+function seasonMonths(season: string | null | undefined): number[] | null {
+  if (!season) return null;
+  const s = season.toLowerCase().trim();
+  if (s.includes('year') || s.includes('all year')) return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const range = /^([a-z]+)\s*(?:to|–|—|-)\s*([a-z]+)$/.exec(s);
+  if (!range) return null;
+  const from = MONTH_NAMES.indexOf(range[1] ?? '') + 1;
+  const to = MONTH_NAMES.indexOf(range[2] ?? '') + 1;
+  if (from < 1 || to < 1) return null;
+  const out: number[] = [];
+  for (let m = from; ; m = (m % 12) + 1) {
+    out.push(m);
+    if (m === to || out.length > 12) break;
+  }
+  return out;
+}
+
+/** The opening sentence of a guide, used as the card's tagline. Curated copy
+ *  still carries em dashes in places; they read as colons until the copy is
+ *  fixed at the source (voice rules in products/citynight/design/tokens.md). */
+function tagline(intro: string): string {
+  const firstStop = intro.indexOf('. ');
+  const text = firstStop > 40 ? intro.slice(0, firstStop + 1) : intro.slice(0, 160);
+  return text.replace(/\s*[\u2014\u2013]\s*/g, ': ').trim();
+}
 
 export default async function LocaleHome({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
+  const c = COPY[locale];
   const cities = listCitiesWithHero(null, locale);
   const stats = siteStats();
   const guides = getAllCityGuides();
-  // Areas with coords (own or parent-city fallback) — fed to the hero
-  // "Κοντά σου τώρα" panel so it can list the 4 nearest neighborhoods
-  // client-side. Same source as the mega-menu's Popular areas column.
-  const nearbyAreas = listAreasForNearby(locale);
-  // Phase K.3 — Latest articles surface across all cities for the homepage.
-  // Cross-locale: each row is the article in its own locale (en/el/...); the
-  // homepage filters to the visitor's current locale via listPublishedArticles.
   const latestArticles = listPublishedArticles(locale, { limit: 6 });
-  const cityNameBySlug = new Map(cities.map((cc) => [cc.slug, cc.name]));
-  // cityId → citySlug lookup so article cards can build /cities/{slug}/... URLs.
+  const cityBySlug = new Map(cities.map((cc) => [cc.slug, cc]));
   const citySlugById = new Map(cities.map((cc) => [cc.id, cc.slug]));
-  const c = COPY[locale];
+
+  // The sun over Athens, from Open-Meteo (cached 15 minutes in-process).
+  const athens = await getCityWeather(ATHENS.lat, ATHENS.lng);
+
+  // Today's opening windows for every verified business in the newest guides.
+  // The browser recounts "open now" from these every minute, so the number on
+  // the page is never older than the clock.
+  const now = new Date();
+  const clock = athensClock(now);
+  const sampled = listPublishedArticles(locale, { limit: GUIDES_SAMPLED });
+  const windows: OpenWindow[][] = [];
+  for (const article of sampled) {
+    for (const business of listGuideBusinesses(article.id)) {
+      const w = todayWindows(business.openingHours?.periods, clock);
+      if (w.length > 0) windows.push(w);
+    }
+  }
 
   const breadcrumbName: Record<Locale, string> = { en: 'Home', el: 'Αρχική', de: 'Start', fr: 'Accueil', it: 'Home' };
+  const dateText = new Intl.DateTimeFormat(locale === 'el' ? 'el-GR' : locale, {
+    weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Athens',
+  }).format(now);
 
   return (
     <>
-      {/* JSON-LD: Organization + WebSite (with SearchAction) + Breadcrumb */}
       <script
         type="application/ld+json"
         {...jsonLdProps([
@@ -251,122 +236,54 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         ])}
       />
 
-      {/* HERO — typographic centerpiece. Search was removed (the global
-          header carries it) and the heroKicker eyebrow was folded into
-          the live pill so the chrome above the H1 is a single strip,
-          not two competing labels. Mobile gets shorter padding + a
-          full-width CTA so the H1 + sub + CTA all fit one viewport. */}
-      <section className="relative isolate overflow-hidden">
-        <div className="relative min-h-[85svh] w-full md:min-h-[100vh]">
-          {/* 1. Greek nightscape wallpaper — aerial Athens at night.
-              Pexels, free license. Sits below the gradient/glow/grid
-              layers so the existing typographic chrome reads on top of
-              the photo. The base color stays dark (--color-bg-0) so the
-              image fades cleanly into the page below the hero. */}
-          <Image
-            src="https://images.pexels.com/photos/14810349/pexels-photo-14810349.jpeg?auto=compress&cs=tinysrgb&w=2400"
-            alt=""
-            aria-hidden
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          {/* 1b. Gradient tint over the photo — keeps it dark enough for
-              white text without losing the lights. */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)]/55 via-[var(--color-bg-2)]/65 to-[var(--color-bg-0)]/75" />
+      {/* THE STATEMENT — date and name day as a readout, then the one line
+          the site is about, then what the site is made of. */}
+      <section className={`${WRAP} grid gap-[18px] pb-7 pt-10`}>
+        <p className="cn-readout flex flex-wrap items-center gap-x-2 text-[var(--color-muted)]">
+          <span>{caps(dateText)}</span>
+          <TodayNameDay locale={locale} variant="compact" />
+        </p>
 
-          {/* 2. Neon glow blobs — purely decorative, pulse softly */}
-          <div className="pointer-events-none absolute -top-40 left-1/3 h-[42rem] w-[42rem] rounded-full bg-[var(--color-accent-pink)]/18 blur-[140px]" aria-hidden />
-          <div className="pointer-events-none absolute -bottom-32 -right-32 h-[36rem] w-[36rem] rounded-full bg-[var(--color-accent-cyan)]/14 blur-[140px]" aria-hidden />
-          <div className="pointer-events-none absolute bottom-1/3 left-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-[var(--color-accent-violet)]/10 blur-[120px]" aria-hidden />
+        <h1 className="font-display text-[clamp(2.5rem,9vw,5.6rem)] font-semibold leading-none tracking-[-0.03em]">
+          {c.heroTitle}
+        </h1>
 
-          {/* 3. Faint hex/grid pattern for the futuristic edge */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.06]"
-            aria-hidden
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
-              backgroundSize: '64px 64px',
-              maskImage: 'radial-gradient(circle at center, black 30%, transparent 75%)',
-            }}
-          />
+        <p className="max-w-[52ch] text-[1.0625rem] leading-relaxed text-[var(--color-ink)] md:text-[1.25rem]">
+          {c.heroSub}
+        </p>
 
-          {/* 4. Dark gradient overlay for legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg-0)]/40 via-[var(--color-bg-0)]/65 to-[var(--color-bg-0)]" aria-hidden />
+        <HeroLiveStatus
+          locale={locale}
+          nowISO={now.toISOString()}
+          sunsetISO={athens?.sunsetIso ?? null}
+          sunriseISO={athens?.sunriseIso ?? null}
+          windows={windows}
+          total={windows.length}
+        />
 
-          {/* 5. Content */}
-          <div className="relative z-10 mx-auto flex min-h-[85svh] max-w-6xl flex-col justify-center px-6 py-16 md:min-h-[100vh] md:py-24">
-            {/* Single live-status pill — replaces the old two-piece
-                "[Live · 16:52 · Open now]   GREECE · NIGHTLIFE GUIDE"
-                row, which read as two competing labels on mobile. */}
-            <div className="flex flex-wrap items-start gap-3">
-              <HeroLiveStatus locale={locale} />
-              {/* Σήμερα γιορτάζει — name-day card, server-rendered.
-                  Sits inline with the live pill so the two "alive"
-                  cues read as one row. Hidden silently on days with
-                  no entry. */}
-              <TodayNameDay locale={locale} variant="card" />
-            </div>
-
-            <h1 className="mt-6 font-display text-5xl font-semibold leading-[0.92] tracking-tight sm:text-7xl md:mt-7 md:text-[7.5rem] lg:text-[8.5rem]">
-              <span className="block">{c.heroTitle}</span>
-              <span className="block bg-gradient-to-r from-[var(--color-accent-pink)] via-[var(--color-accent-pink)] to-[var(--color-accent-violet)] bg-clip-text text-transparent">
-                {c.heroTitleAccent}.
-              </span>
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-balance text-base text-[var(--color-fg-1)] sm:text-lg md:mt-7 md:text-xl">
-              {c.heroSub}
-            </p>
-            <p className="mt-3 text-xs text-[var(--color-fg-3)] sm:text-sm">
-              {HERO_TAGLINE[locale](stats.cities)}
-            </p>
-
-            {/* Smart CTA — rewrites to "Δες τον οδηγό για το {city}"
-                once GPS resolves and links straight to that city's
-                guide. Falls back to "Διάλεξε πόλη" → #cities anchor
-                when no GPS yet. */}
-            <HeroSmartCTA
-              locale={locale}
-              copy={{ pickCity: c.heroCtaPickCity, nearestGuide: c.heroCtaNearestGuide }}
-            />
-
-            {/* GPS-aware "Near you" panel — hidden until location
-                resolves. Once GPS is on, shows the nearest city as a
-                primary tile with vertical chips, then the 4 nearest
-                neighborhoods (deep-linking to area guides), then a
-                mini-row of the next cities. */}
-            <div className="mt-8 md:mt-10">
-              <HeroNearestPanel locale={locale} areas={nearbyAreas} />
-            </div>
-          </div>
-
-          {/* 6. Scroll affordance */}
-          <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2" aria-hidden>
-            <span className="block h-12 w-px animate-pulse bg-gradient-to-b from-[var(--color-accent-cyan)] to-transparent" />
-          </div>
-        </div>
+        <p className="cn-readout text-[var(--color-muted)]">{HERO_TAGLINE[locale](stats.cities)}</p>
       </section>
 
-      {/* STATS STRIP — futuristic "live system" panel.
-          Each metric has a colored accent + animated pulse dot. */}
-      <section className="relative border-y border-[var(--color-bg-2)] bg-[var(--color-bg-1)]/60 backdrop-blur">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-cyan)]/40 to-transparent" aria-hidden />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-pink)]/40 to-transparent" aria-hidden />
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
-          <Stat n={stats.cities}        label={c.statsCities}        accent="cyan" />
-          <Stat n={stats.articles}      label={c.statsArticles}      accent="pink" />
-          <Stat n={stats.neighborhoods} label={c.statsNeighborhoods} accent="violet" />
-          <Stat n={stats.locales}       label={c.statsLocales}       accent="amber" />
-        </div>
-      </section>
+      {/* THE INSTRUMENT — the dial, the readings, the cities next to it. */}
+      <div className={WRAP}>
+        <HeroInstrument
+          locale={locale}
+          nowISO={now.toISOString()}
+          sunsetISO={athens?.sunsetIso ?? null}
+          sunriseISO={athens?.sunriseIso ?? null}
+          windows={windows}
+          total={windows.length}
+          cities={cities.slice(0, 5).map((city) => ({
+            slug: city.slug,
+            name: city.name,
+            region: city.region ? (TILE_LOCALE[locale].region[city.region] ?? city.region) : null,
+            lat: city.lat,
+            lng: city.lng,
+          }))}
+          fallbackCitySlug={cities[0]?.slug ?? null}
+        />
+      </div>
 
-      {/* CITIES — server renders the canonical top 6 (by article count
-          desc → alphabetical). Once GPS resolves, the client re-orders
-          the same set by live distance and flips the heading to
-          "Closest to {visitor city}" + adds a distance chip per tile. */}
       <SmartDestinations
         cities={cities}
         locale={locale}
@@ -384,74 +301,54 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         }}
       />
 
-      {/* Phase K.3 — homepage trim. The old Categories chip row,
-          Neighborhoods cross-city preview, and Top Venues grid are gone
-          (category and venue pages no longer exist; neighborhoods now
-          live inside each city's article guide via K.2). In their place:
-          a Latest Articles section that pulls across-locale and links
-          straight to /cities/{city}/{slug}. */}
-      {latestArticles.length > 0 && (
-        <section className="mx-auto w-full max-w-6xl px-6 py-16">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.latestArticlesHeading}</h2>
-              <p className="mt-2 text-[var(--color-fg-2)]">{c.latestArticlesSub}</p>
-            </div>
-          </div>
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {latestArticles.map((a) => (
-              <li key={a.id}>
-                <Link
-                  href={`/${locale}/cities/${citySlugById.get(a.cityId) ?? ''}/${a.slug}`}
-                  className="group block overflow-hidden rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] transition hover:border-[var(--color-accent-cyan)]"
-                >
-                  {a.coverUrl && (
-                    <div className="relative aspect-[16/9] w-full overflow-hidden">
-                      <Image src={a.coverUrl} alt={a.title} fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover transition group-hover:scale-105" />
-                    </div>
-                  )}
-                  <div className="p-5">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-fg-3)]">
-                      {a.vertical} · {cityNameBySlug.get(citySlugById.get(a.cityId) ?? '') ?? ''}
-                    </p>
-                    <p className="mt-2 font-display text-lg font-semibold text-[var(--color-fg-0)]">{a.title}</p>
-                    {a.subtitle && <p className="mt-2 text-sm text-[var(--color-fg-2)]">{a.subtitle}</p>}
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <div className="mx-auto max-w-6xl px-6 py-4">
-        <AdSlot id="home-mid" scope="site" />
-      </div>
-
-      {/* EDITORIAL GUIDES TEASE */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-12">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">{c.guidesHeading}</h2>
-            <p className="mt-2 text-sm text-[var(--color-fg-2)]">{c.guidesSub}</p>
-          </div>
-          <Link href={`/${locale}/guides`} className="hidden text-sm text-[var(--color-accent-cyan)] hover:underline md:inline">
-            →
-          </Link>
+      {/* THE GUIDES — one card per city guide: what it is known for, and the
+          months the city is worth it. Both come from the curated content. */}
+      <section id="guides" className={`${WRAP} scroll-mt-20 py-9`} aria-labelledby="guides-heading">
+        <div className="mb-4 flex items-baseline justify-between gap-3">
+          <h2 id="guides-heading" className="font-display text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-tight tracking-[-0.015em]">
+            {c.guidesHeading}
+          </h2>
+          <span className="cn-readout text-[var(--color-muted)]">{c.guidesCount(guides.length)}</span>
         </div>
 
-        <ul className="mt-6 grid gap-4 md:grid-cols-3">
-          {guides.slice(0, 3).map((g) => {
-            const city = cities.find((c) => c.slug === g.slug);
+        <ul className="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+          {guides.slice(0, 6).map((guide) => {
+            const city = cityBySlug.get(guide.slug);
+            const months = seasonMonths(guide.season);
+            const knownFor = guide.bestFor[locale] ?? guide.bestFor.en ?? [];
             return (
-              <li key={g.slug}>
+              <li key={guide.slug}>
                 <Link
-                  href={`/${locale}/cities/${g.slug}`}
-                  className="group relative block overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-cyan)] hover:shadow-[0_14px_48px_-20px_rgba(0,212,255,0.4)]"
+                  href={`/${locale}/cities/${guide.slug}`}
+                  className="group grid h-full gap-2.5 rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] p-[18px] transition-colors duration-[var(--motion-fast)] hover:border-[var(--color-bronze)]"
                 >
-                  <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-2)]">{TILE_LOCALE[locale].guidePrefix} · {g.season}</p>
-                  <p className="mt-1 font-display text-xl font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-cyan)]">{city?.name ?? g.slug}</p>
-                  <p className="mt-2 line-clamp-2 text-xs text-[var(--color-fg-1)]">{g.intro[locale].slice(0, 130)}…</p>
+                  <span className="cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
+                    {TILE_LOCALE[locale].guidePrefix}
+                    {city?.region ? ` · ${TILE_LOCALE[locale].region[city.region] ?? city.region}` : ''}
+                  </span>
+                  <span className="font-display text-[19px] font-semibold leading-tight transition-colors duration-[var(--motion-fast)] group-hover:text-[var(--color-bronze)]">
+                    {city?.name ?? guide.slug}
+                  </span>
+                  <span className="line-clamp-3 text-[15px] text-[var(--color-muted)]">
+                    {tagline(guide.intro[locale])}
+                  </span>
+                  {knownFor.length > 0 && (
+                    <span className="flex flex-wrap gap-1.5">
+                      {knownFor.slice(0, 4).map((k) => (
+                        <span key={k} className="rounded-full border border-[var(--color-hair)] px-2.5 py-0.5 text-[13px] text-[var(--color-muted)]">
+                          {k}
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                  {months && (
+                    <>
+                      <span className="cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
+                        {months.length === 12 ? c.yearRound : c.bestMonths}
+                      </span>
+                      <MonthsBar months={months} locale={locale} />
+                    </>
+                  )}
                 </Link>
               </li>
             );
@@ -459,48 +356,81 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
         </ul>
       </section>
 
-      {/* OWNERS CTA */}
-      <section className="mx-auto w-full max-w-6xl px-6 pb-20">
-        <div className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-pink)]/40 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-1)] p-8 md:p-12">
-          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[var(--color-accent-pink)]/20 blur-3xl" aria-hidden />
-          <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[var(--color-accent-cyan)]/15 blur-3xl" aria-hidden />
-          <div className="relative">
-            <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{c.ownersHeading}</h2>
-            <p className="mt-3 max-w-xl text-[var(--color-fg-1)]">{c.ownersBody}</p>
-            <Link
-              href={`/${locale}/for-owners`}
-              className="mt-6 inline-flex items-center rounded-md bg-[var(--color-accent-pink)] px-5 py-2.5 text-sm font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] transition hover:brightness-110"
-            >
-              {c.ownersCta}
-            </Link>
+      {latestArticles.length > 0 && (
+        <section className={`${WRAP} py-9`} aria-labelledby="latest-heading">
+          <div className="mb-4 flex items-baseline justify-between gap-3">
+            <h2 id="latest-heading" className="font-display text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-tight tracking-[-0.015em]">
+              {c.latestHeading}
+            </h2>
+            <span className="cn-readout text-[var(--color-muted)]">{latestArticles.length}</span>
           </div>
+          <ul className="border-t border-[var(--color-hair)]">
+            {latestArticles.map((a) => {
+              const slug = citySlugById.get(a.cityId) ?? '';
+              return (
+                <li key={a.id}>
+                  <Link
+                    href={`/${locale}/cities/${slug}/${a.slug}`}
+                    className="flex min-h-16 items-center justify-between gap-4 border-b border-[var(--color-hair)] py-3.5 transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-bronze)]"
+                  >
+                    <span className="min-w-0">
+                      <span className="block font-semibold leading-tight">{noEmDash(a.title)}</span>
+                      <span className="cn-readout cn-readout-s block truncate text-[var(--color-muted)]">
+                        {caps(a.vertical)} · {caps(cityBySlug.get(slug)?.name ?? '')}
+                      </span>
+                    </span>
+                    <span aria-hidden className="cn-readout shrink-0 text-[var(--color-muted)]">→</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-4 text-[15px] text-[var(--color-muted)]">{c.latestSub}</p>
+        </section>
+      )}
+
+      <div className={`${WRAP} py-2`}>
+        <AdSlot id="home-mid" scope="site" />
+      </div>
+
+      {/* OWNERS — the one commercial line on the page. */}
+      <section className={`${WRAP} pb-16 pt-9`}>
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] p-[18px] md:p-7">
+          <h2 className="font-display text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-tight tracking-[-0.015em]">
+            {c.ownersHeading}
+          </h2>
+          <p className="mt-2.5 max-w-[52ch] text-[var(--color-muted)]">{c.ownersBody}</p>
+          <Link
+            href={`/${locale}/for-owners`}
+            className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-bronze)] px-[22px] font-semibold text-[var(--color-on-bronze)] transition-transform duration-[var(--motion-fast)] active:scale-[0.98]"
+          >
+            {c.ownersCta}
+          </Link>
         </div>
       </section>
     </>
   );
 }
 
-const STAT_ACCENT = {
-  cyan:   { dot: 'bg-[var(--color-accent-cyan)]',   num: 'text-[var(--color-accent-cyan)]',   ring: 'shadow-[var(--shadow-glow-cyan)]' },
-  pink:   { dot: 'bg-[var(--color-accent-pink)]',   num: 'text-[var(--color-accent-pink)]',   ring: 'shadow-[var(--shadow-glow-pink)]' },
-  violet: { dot: 'bg-[var(--color-accent-violet)]', num: 'text-[var(--color-accent-violet)]', ring: 'shadow-[var(--shadow-glow-violet)]' },
-  amber:  { dot: 'bg-[var(--color-accent-amber)]',  num: 'text-[var(--color-accent-amber)]',  ring: '' },
-} as const;
-
-function Stat({ n, label, accent = 'cyan' }: { n: number; label: string; accent?: keyof typeof STAT_ACCENT }) {
-  const a = STAT_ACCENT[accent];
+/** Twelve cells, the months the guide names filled in bronze. A reading, not
+ *  a decoration: the letters are the month initials in the page language. */
+function MonthsBar({ months, locale }: { months: number[]; locale: Locale }) {
+  const on = new Set(months);
+  const initials = MONTH_INITIAL[locale] ?? MONTH_INITIAL.en;
   return (
-    <div className="group relative">
-      <div className="flex items-center gap-2">
-        <span className={`relative inline-flex h-2 w-2 ${a.dot}`} aria-hidden>
-          <span className={`absolute inset-0 animate-ping rounded-full ${a.dot} opacity-60`} />
-          <span className={`relative inline-flex h-2 w-2 rounded-full ${a.dot} ${a.ring}`} />
+    <span className="grid w-full grid-cols-12 gap-[3px]" aria-hidden>
+      {initials.map((letter, i) => (
+        <span
+          key={`${letter}-${i}`}
+          className={`grid h-[22px] place-items-center rounded-[4px] border cn-readout cn-readout-s ${
+            on.has(i + 1)
+              ? 'border-[var(--color-bronze)] bg-[color-mix(in_srgb,var(--color-bronze)_22%,transparent)] text-[var(--color-ink)]'
+              : 'border-[var(--color-hair)] text-[var(--color-muted)]'
+          }`}
+        >
+          {letter}
         </span>
-        <p className={`font-display text-3xl font-bold tabular-nums tracking-tight md:text-5xl ${a.num}`}>
-          {n.toLocaleString()}
-        </p>
-      </div>
-      <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-[var(--color-fg-2)] sm:text-xs">{label}</p>
-    </div>
+      ))}
+    </span>
   );
 }

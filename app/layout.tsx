@@ -39,30 +39,93 @@ export const metadata: Metadata = {
   // app/apple-icon.png and app/manifest.ts (logo "Ζενίθ", 2026-09-17).
 };
 
-// `color-scheme: light dark` lets the browser pick form/scrollbar colours
-// based on the actual <html> class set by the no-flash script below.
+// Dark is the default and the operating system does not change it, so the
+// browser chrome gets one colour: the dark ground. The script below sets the
+// real `color-scheme` on <html> once the choice is known.
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)',  color: '#07070b' },
-    { media: '(prefers-color-scheme: light)', color: '#f7f7fa' },
-  ],
+  themeColor: '#0b0f14',
   colorScheme: 'light dark',
   width: 'device-width',
   initialScale: 1,
 };
 
-// Reads the persisted theme choice (or the OS preference) and applies the
-// `theme-light` class BEFORE the browser paints, so users never see a flash
-// of the wrong palette. `theme-ready` is added one frame later so subsequent
-// toggles cross-fade instead of snapping.
+// Reads the persisted theme choice and applies the `theme-light` class BEFORE
+// the browser paints, so users never see a flash of the wrong palette.
+// `theme-ready` is added one frame later so later toggles cross-fade instead
+// of snapping.
+//
+// Three choices are stored under `cn:theme`: 'dark', 'light' and 'sun'.
+// 'sun' follows Athens, the editorial timezone of the site: light between
+// sunrise and sunset, dark otherwise, and it flips itself at the crossing
+// without a reload. Sun times are computed here (the sunrise equation, NOAA,
+// accurate to about a minute) rather than fetched, because this runs before
+// first paint and must not wait on a network call. Nothing is stored unless
+// the visitor chooses: no stored choice follows the operating system.
+//
+// The resolver is exposed as `window.__cnTheme` so the toggle in
+// components/theme-toggle.tsx applies a choice without duplicating any of it:
+//   window.__cnTheme.get()            -> 'dark' | 'light' | 'sun' | null
+//   window.__cnTheme.apply('sun')     -> stores the choice, paints, returns 'dark' | 'light'
+//   window.__cnTheme.resolve('sun')   -> 'dark' | 'light', no side effects
 const NO_FLASH_SCRIPT = `
 (function(){
+  var LAT = 37.9838, LNG = 23.7275; // Athens
+  function sun(now){
+    var jd = now/86400000 + 2440587.5;
+    var n = Math.round(jd - 2451545.0 + LNG/360); // the transit nearest to now, at this longitude
+    var js = n - LNG/360;
+    var M = (357.5291 + 0.98560028*js) % 360, r = Math.PI/180;
+    var C = 1.9148*Math.sin(M*r) + 0.02*Math.sin(2*M*r) + 0.0003*Math.sin(3*M*r);
+    var L = (M + C + 180 + 102.9372) % 360;
+    var jt = 2451545.0 + js + 0.0053*Math.sin(M*r) - 0.0069*Math.sin(2*L*r);
+    var sd = Math.sin(L*r)*Math.sin(23.4397*r), cd = Math.cos(Math.asin(sd));
+    var cw = (Math.sin(-0.833*r) - Math.sin(LAT*r)*sd) / (Math.cos(LAT*r)*cd);
+    if (cw > 1 || cw < -1) return null; // never rises or never sets
+    var w = Math.acos(cw)/r/360;
+    var ms = function(j){ return (j - 2440587.5)*86400000; };
+    return { rise: ms(jt - w), set: ms(jt + w) };
+  }
+  function resolve(choice){
+    if (choice === 'light' || choice === 'dark') return choice;
+    if (choice === 'sun') {
+      var now = Date.now(), t = sun(now);
+      if (t) return (now >= t.rise && now < t.set) ? 'light' : 'dark';
+    }
+    return 'dark';
+  }
+  var timer = null;
+  function paint(choice){
+    var theme = resolve(choice);
+    var el = document.documentElement;
+    el.classList.toggle('theme-light', theme === 'light');
+    el.style.colorScheme = theme;
+    el.setAttribute('data-theme-choice', choice || 'dark');
+    if (timer) { clearTimeout(timer); timer = null; }
+    if (choice === 'sun') {
+      var now = Date.now(), t = sun(now);
+      if (t) {
+        var next = now < t.rise ? t.rise : (now < t.set ? t.set : t.rise + 86400000);
+        timer = setTimeout(function(){ paint('sun'); }, Math.max(60000, Math.min(next - now + 1000, 21600000)));
+      }
+    }
+    return theme;
+  }
+  function stored(){
+    try {
+      var v = localStorage.getItem('cn:theme');
+      return (v === 'light' || v === 'dark' || v === 'sun') ? v : null;
+    } catch(e) { return null; }
+  }
+  window.__cnTheme = {
+    get: stored,
+    resolve: resolve,
+    apply: function(choice){
+      try { localStorage.setItem('cn:theme', choice); } catch(e) {}
+      return paint(choice);
+    }
+  };
   try {
-    var stored = localStorage.getItem('cn:theme');
-    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-    var theme = stored || (prefersLight ? 'light' : 'dark');
-    if (theme === 'light') document.documentElement.classList.add('theme-light');
-    document.documentElement.style.colorScheme = theme;
+    paint(stored() || 'dark');
     requestAnimationFrame(function(){ document.documentElement.classList.add('theme-ready'); });
   } catch(e) {}
 })();
@@ -90,7 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_SCRIPT }} />
       </head>
-      <body className="min-h-screen bg-[var(--color-bg-0)] text-[var(--color-fg-0)] antialiased">
+      <body className="min-h-screen bg-[var(--color-ground)] text-[var(--color-ink)] antialiased">
         {children}
       </body>
     </html>

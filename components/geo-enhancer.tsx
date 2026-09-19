@@ -277,29 +277,22 @@ export function GeoEnhancer({
         <div
           role="status"
           aria-live="polite"
-          className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-3 rounded-2xl bg-[var(--color-bg-1)] p-4 shadow-[0_18px_60px_-12px_rgba(0,0,0,0.8)] ring-1 ring-[var(--color-accent-cyan)]/40 sm:left-4 sm:right-auto"
+          className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-3 rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] p-4 sm:left-4 sm:right-auto"
         >
           {/* Accent strip */}
-          <span
-            aria-hidden
-            className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-cyan)] to-transparent"
-          />
           <div className="flex items-start gap-3">
-            <span aria-hidden className="relative mt-0.5 inline-flex h-2.5 w-2.5 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent-cyan)]" />
-            </span>
+            <span aria-hidden className="mt-1.5 inline-flex h-2 w-2 shrink-0 rounded-full bg-[var(--color-bronze)]" />
             <div className="flex-1">
-              <p className="text-sm font-semibold text-[var(--color-fg-0)]">
+              <p className="text-sm font-semibold text-[var(--color-ink)]">
                 {c.foundYou(target.name)}
               </p>
               {(typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm)) || autoLeft > 0 ? (
-                <p className="mt-0.5 text-[11px] text-[var(--color-fg-2)]">
+                <p className="cn-readout-s cn-readout mt-1 text-[var(--color-muted)]">
                   {typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm)
                     ? formatDistanceKm(target.distanceKm)
                     : null}
                   {typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm) && autoLeft > 0 && (
-                    <span className="mx-1.5 text-[var(--color-fg-3)]">·</span>
+                    <span className="mx-1.5 text-[var(--color-faint)]">·</span>
                   )}
                   {autoLeft > 0 && c.goingIn(autoLeft)}
                 </p>
@@ -310,14 +303,14 @@ export function GeoEnhancer({
             <button
               type="button"
               onClick={goNow}
-              className="flex-1 rounded-full bg-[var(--color-accent-cyan)] px-4 py-2 text-sm font-semibold text-[var(--color-bg-0)] transition hover:brightness-110"
+              className="flex-1 min-h-11 rounded-[var(--radius-pill)] bg-[var(--color-bronze)] px-4 text-sm font-semibold text-[var(--color-on-bronze)] transition hover:brightness-110"
             >
               {c.takeMeThere}
             </button>
             <button
               type="button"
               onClick={cancelAuto}
-              className="rounded-full border border-[var(--color-bg-3)] px-3 py-2 text-xs font-semibold text-[var(--color-fg-1)] hover:border-[var(--color-fg-1)]"
+              className="min-h-11 rounded-[var(--radius-pill)] border border-[var(--color-hair)] px-4 text-sm font-semibold text-[var(--color-muted)] hover:text-[var(--color-ink)]"
             >
               {c.stayHere}
             </button>
@@ -330,19 +323,16 @@ export function GeoEnhancer({
         <div
           role="dialog"
           aria-label={c.near}
-          className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-2 rounded-2xl bg-[var(--color-bg-1)] p-3 shadow-[0_18px_60px_-12px_rgba(0,0,0,0.8)] ring-1 ring-[var(--color-bg-2)] sm:left-4 sm:right-auto"
+          className="fixed inset-x-4 bottom-4 z-40 mx-auto flex max-w-md flex-col gap-2 rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] p-3 sm:left-4 sm:right-auto"
         >
           <div className="flex items-center gap-3">
-            <span aria-hidden className="relative inline-flex h-2.5 w-2.5 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent-cyan)]" />
-            </span>
-            <p className="flex-1 text-sm leading-snug text-[var(--color-fg-1)]">{c.near}</p>
+            <span aria-hidden className="inline-flex h-2 w-2 shrink-0 rounded-full bg-[var(--color-bronze)]" />
+            <p className="flex-1 text-sm leading-snug text-[var(--color-muted)]">{c.near}</p>
             <button
               type="button"
               onClick={() => requestPreciseFromGesture()}
               disabled={preciseLoading || error === 'permission denied'}
-              className="shrink-0 rounded-full bg-[var(--color-accent-cyan)] px-3 py-1.5 text-xs font-semibold text-[var(--color-bg-0)] transition hover:brightness-110 disabled:opacity-60"
+              className="min-h-11 shrink-0 rounded-[var(--radius-pill)] bg-[var(--color-bronze)] px-4 text-sm font-semibold text-[var(--color-on-bronze)] transition hover:brightness-110 disabled:opacity-60"
             >
               {preciseLoading
                 ? c.finding
@@ -354,18 +344,18 @@ export function GeoEnhancer({
               type="button"
               onClick={() => setDismissedCta(true)}
               aria-label="Dismiss"
-              className="rounded-md p-1 text-[var(--color-fg-3)] hover:text-[var(--color-fg-1)]"
+              className="grid min-h-11 min-w-11 place-items-center rounded-[var(--radius-sm)] text-[var(--color-muted)] hover:text-[var(--color-ink)]"
             >
               ×
             </button>
           </div>
           {(error === 'permission denied') && (
-            <p className="pl-6 text-[11px] leading-snug text-[var(--color-fg-3)]">
+            <p className="pl-5 text-xs leading-snug text-[var(--color-muted)]">
               {c.denied} {c.iosSettingsHint}
             </p>
           )}
           {(error === 'position unavailable' || error === 'timeout' || error === 'precise lookup failed') && (
-            <p className="pl-6 text-[11px] leading-snug text-[var(--color-fg-3)]">
+            <p className="pl-5 text-xs leading-snug text-[var(--color-muted)]">
               {c.unavailable}
             </p>
           )}
@@ -375,7 +365,7 @@ export function GeoEnhancer({
       {/* ── Debug overlay (only with ?debug=geo) ───────────────────────── */}
       {debug && (
         <pre
-          className="fixed left-2 top-2 z-50 max-w-[92vw] overflow-x-auto whitespace-pre-wrap break-all rounded-md border border-[var(--color-bg-3)] bg-[var(--color-bg-0)]/95 p-2 text-[10px] leading-snug text-[var(--color-fg-1)]"
+          className="fixed left-2 top-2 z-50 max-w-[92vw] overflow-x-auto whitespace-pre-wrap break-all rounded-md border border-[var(--color-hair)] bg-[var(--color-ground)]/95 p-2 text-[10px] leading-snug text-[var(--color-muted)]"
         >
 {JSON.stringify({
   pathname,

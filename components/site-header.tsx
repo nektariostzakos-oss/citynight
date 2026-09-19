@@ -13,9 +13,13 @@ import { listPublishedArticles } from '@/lib/articles';
 import { formatAthensTime } from '@/lib/format-date';
 import { db } from '@/db';
 
-// App-feel header. Logo + mega-menu + utilities on the right. The right
-// side adapts to auth state: signed-in users get an account dropdown
-// (Dashboard / Sign out); visitors get Sign in + Make a site.
+// The chrome. One hairline under it, the ground colour behind it, no glass and
+// no glow: on this site depth comes from surfaces, not from blur. Logo left,
+// the Cities mega-menu next to it, the tools on the right. The right side
+// adapts to auth state: signed-in visitors get the account dropdown, everyone
+// else gets Sign in.
+//
+// Direction A "Αντικύθηρα", products/citynight/design/tokens.md.
 
 const AUTH_LABELS: Record<Locale, {
   signIn: string;
@@ -27,6 +31,9 @@ const AUTH_LABELS: Record<Locale, {
   fr: { signIn: 'Connexion', makeASite: 'Créer un site' },
   it: { signIn: 'Accedi',    makeASite: 'Crea un sito' },
 };
+
+/** The one container: 1180 px, 20 px gutter on phones, 32 px from 768 px. */
+export const WRAP = 'mx-auto w-full max-w-[1180px] px-5 md:px-8';
 
 export async function SiteHeader({
   locale,
@@ -52,10 +59,19 @@ export async function SiteHeader({
   const sunset = isoToMinutes(athens?.sunsetIso);
 
   return (
-    <header data-site-chrome="header" className="sticky top-0 z-40 border-b border-[var(--color-bg-2)]/80 bg-[color-mix(in_oklab,var(--color-bg-0)_75%,transparent)] backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
-        {/* Logo "Ζενίθ": the moon follows the time in Athens. */}
-        <Link href={`/${locale}`} aria-label="citynight" className="flex shrink-0 items-center py-2 text-[var(--color-fg-0)]">
+    <header
+      data-site-chrome="header"
+      className="sticky top-0 z-40 border-b border-[var(--color-hair)] bg-[var(--color-ground)]"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
+      <div className={`${WRAP} flex min-h-16 items-center justify-between gap-3`}>
+        {/* Logo "Ζενίθ": the moon follows the time in Athens and is hollow
+            between sunrise and sunset. Never redraw it by hand. */}
+        <Link
+          href={`/${locale}`}
+          aria-label="citynight"
+          className="flex min-h-11 shrink-0 items-center text-[var(--color-ink)]"
+        >
           <LiveLogo sunrise={sunrise} sunset={sunset} className="h-6 w-auto" />
         </Link>
 
@@ -75,7 +91,7 @@ export async function SiteHeader({
           <div className="hidden lg:block">
             <TodayNameDay locale={locale} variant="compact" />
           </div>
-          <ThemeToggle />
+          <ThemeToggle locale={locale} />
           <div className="hidden md:block">
             <LangDropdown current={locale} />
           </div>
@@ -95,7 +111,7 @@ export async function SiteHeader({
             <div className="hidden items-center md:flex">
               <Link
                 href={`/${locale}/sign-in`}
-                className="rounded-md px-3 py-1.5 text-sm font-semibold text-[var(--color-fg-1)] hover:text-[var(--color-fg-0)]"
+                className="inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-ink)]"
               >
                 {t.signIn}
               </Link>

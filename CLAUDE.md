@@ -301,6 +301,8 @@ Locale-prefixed routes `/{locale}/greece/{city}/...` + **hreflang** linking vers
 
 ## 13. Design
 
+> **Superseded on 2026-09-19:** the design is Direction A, "Αντικύθηρα" (approved by Nektarios). Neon is retired. Colour comes only from the semantic tokens in `app/globals.css`; bronze means "yours to act on" or time that has passed, verdigris means open now and nothing else. Every city and venue opens on an instrument that reads the night. Type is Commissioner for reading and Lilex for every readout. Full decision in `docs/DECISIONS.md`, design source in the record folder (`products/citynight/design/tokens.md` and `2026-09-17-antikythera-prototype.html`). The paragraph below is the original directory design, kept for history.
+
 Dark base + **neon as ACCENT only** (CTAs/highlights/hover) — never neon body text (readability/accessibility; content-heavy). Readable light-grey/white on dark. Mobile-first. Tailwind tokens defined at scaffold. Real design craft, not generic AI UI. Map: static thumbnail → interactive Google Map on click (cost control).
 
 ---

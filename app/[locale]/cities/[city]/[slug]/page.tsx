@@ -21,7 +21,7 @@ import { publicMetadata, jsonLdProps, articleJsonLd, breadcrumbJsonLd, faqJsonLd
 import { getCityBySlug, getCityPhotos, type City, type CityPhoto } from '@/lib/queries';
 import { getPublishedSiteBySlug } from '@/lib/site-queries';
 import { getArticleBySlug, listArticlesByCity, listGuideBusinesses, type Article, type GuideBusiness } from '@/lib/articles';
-import { renderMarkdown, extractFaqs, extractH2Headings, splitBodyByH2, sectionKindMatchesHeading } from '@/lib/article-md';
+import { renderMarkdown, extractFaqs, extractH2Headings, splitBodyByH2, sectionKindMatchesHeading, noEmDash } from '@/lib/article-md';
 import { CityLivePanel } from '@/components/city-live-panel';
 import { GuideToc } from '@/components/guide-toc';
 import { GuideBusinessCard } from '@/components/guide-business-card';
@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return publicMetadata({
     locale,
     paths: { [locale]: `/${locale}/cities/${city}/${slug}` },
-    title: article.title,
-    description: article.subtitle ?? article.tagline ?? article.intro?.slice(0, 160) ?? article.title,
+    title: noEmDash(article.title),
+    description: noEmDash(article.subtitle ?? article.tagline ?? article.intro?.slice(0, 160) ?? article.title),
     ogImage: article.coverUrl ?? undefined,
   });
 }
@@ -140,8 +140,8 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
           articleJsonLd({
             locale,
             path: articlePath,
-            headline: article.title,
-            description: article.subtitle ?? article.tagline ?? article.intro?.slice(0, 200) ?? null,
+            headline: noEmDash(article.title),
+            description: article.subtitle || article.tagline || article.intro ? noEmDash(article.subtitle ?? article.tagline ?? article.intro?.slice(0, 200)) : null,
             datePublished: published,
             dateModified: updated,
             image: heroPhoto?.url ?? article.coverUrl,
@@ -149,49 +149,58 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
           breadcrumbJsonLd([
             { name: t.home, path: `/${locale}` },
             { name: cityRow.name, path: cityPath },
-            { name: article.title, path: articlePath },
+            { name: noEmDash(article.title), path: articlePath },
           ]),
           faqJsonLd(faqs),
         ])}
       />
 
       {/* ── HERO ───────────────────────────────────────────────────── */}
-      <header className="relative isolate flex min-h-[80vh] w-full items-end overflow-hidden border-b border-[var(--color-bg-2)]">
+      {/* The box carries its own height before the photo loads, so nothing
+          under it moves after first paint. The photo carries width and
+          height for the same reason. */}
+      <header className="relative isolate flex min-h-[80vh] w-full items-end overflow-hidden border-b border-[var(--color-hair)] bg-[var(--color-raise)]">
         {heroPhoto ? (
           <Image
             src={heroPhoto.url}
             alt={cityRow.name}
-            fill
+            width={1920}
+            height={1280}
             sizes="100vw"
             priority
-            className="object-cover"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover"
           />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-bg-1)] via-[var(--color-bg-2)] to-[var(--color-bg-0)]" />
-        )}
-        {/* Dual gradient: vertical for legibility of bottom text, gentle
-            left for the eyebrow at the top corner. */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-0)] via-[var(--color-bg-0)]/55 to-transparent" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-0)]/35 via-transparent to-transparent" />
+        ) : null}
+        {/* One scrim, from nothing to the page ground, so the statement reads
+            in both themes without a second colour. */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(180deg, transparent 20%, color-mix(in srgb, var(--color-ground) 92%, transparent) 100%)' }}
+        />
 
         <div className="relative mx-auto w-full max-w-5xl px-6 pb-16 pt-32 md:px-10 md:pb-24">
           <nav className="text-sm">
-            <Link href={cityPath} className="text-[var(--color-fg-2)] hover:text-[var(--color-fg-0)]">
+            <Link href={cityPath} className="inline-flex min-h-[44px] items-center text-[var(--color-muted)] underline underline-offset-4 hover:text-[var(--color-ink)]">
               ← {cityRow.name}
             </Link>
           </nav>
-          <p className="mt-8 text-xs font-medium uppercase tracking-[0.25em] text-[var(--color-accent-cyan)]">
-            {t.eyebrow[article.vertical]}
+          <p className="cn-readout mt-6 text-[var(--color-muted)]">
+            {caps(t.eyebrow[article.vertical])}
           </p>
-          <h1 className="mt-3 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-[var(--color-fg-0)] md:text-7xl lg:text-8xl">
+          <h1
+            className="mt-3 text-[clamp(2.5rem,9vw,5.6rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--color-ink)]"
+            style={{ fontVariationSettings: '"FLAR" 100, "VOLM" 30' }}
+          >
             {cityRow.name}
           </h1>
-          <p className="mt-5 text-sm text-[var(--color-fg-1)] md:text-base">
-            {[cityRow.region, terrainLabel].filter(Boolean).join(' · ')}
+          <p className="cn-readout mt-5 text-[var(--color-muted)]">
+            {caps([cityRow.region, terrainLabel].filter(Boolean).join(' · '))}
           </p>
           {article.tagline && (
-            <p className="mt-6 max-w-2xl font-display text-xl leading-snug text-[var(--color-fg-0)]/90 md:text-2xl">
-              {article.tagline}
+            <p className="mt-6 max-w-2xl text-xl leading-snug text-[var(--color-ink)] md:text-2xl">
+              {noEmDash(article.tagline)}
             </p>
           )}
         </div>
@@ -200,15 +209,15 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
 
       {/* ── QUICK FACTS STRIP ─────────────────────────────────────── */}
       {facts.length > 0 && (
-        <section className="border-b border-[var(--color-bg-2)] bg-[var(--color-bg-1)]/60 backdrop-blur">
-          <ul className="mx-auto flex max-w-5xl flex-wrap items-stretch gap-y-3 px-6 py-4 text-sm md:px-10">
+        <section className="border-b border-[var(--color-hair)] bg-[var(--color-surface)]">
+          <ul className="mx-auto flex max-w-5xl flex-wrap items-stretch gap-y-3 px-6 py-4 md:px-10">
             {facts.map((f, i) => (
               <li
                 key={f.label}
-                className={`flex flex-col px-4 md:px-6 ${i > 0 ? 'border-l border-[var(--color-bg-2)]' : ''}`}
+                className={`flex flex-col px-4 md:px-6 ${i > 0 ? 'border-l border-[var(--color-hair)]' : ''}`}
               >
-                <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-fg-2)]">{f.label}</span>
-                <span className="mt-1 font-medium text-[var(--color-fg-0)]">{f.value}</span>
+                <span className="cn-readout cn-readout-s text-[var(--color-muted)]">{caps(f.label)}</span>
+                <span className="cn-readout cn-readout-l mt-1 text-[var(--color-ink)]">{caps(f.value)}</span>
               </li>
             ))}
           </ul>
@@ -221,12 +230,12 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
       {/* ── KNOWN FOR CHIPS (full-width strip above the two-col body) ── */}
       {article.knownFor.length > 0 && (
         <section className="mx-auto max-w-5xl px-6 pt-10 md:px-10">
-          <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--color-fg-2)]">{t.knownFor}</p>
+          <p className="cn-readout cn-readout-s mb-3 text-[var(--color-muted)]">{caps(t.knownFor)}</p>
           <ul className="flex flex-wrap gap-2">
             {article.knownFor.map((tag) => (
               <li
                 key={tag}
-                className="inline-flex items-center rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-1.5 text-sm font-medium text-[var(--color-fg-0)]"
+                className="inline-flex min-h-[44px] items-center rounded-full border border-[var(--color-hair)] px-4 text-[15px] font-semibold text-[var(--color-ink)]"
               >
                 {tag}
               </li>
@@ -237,7 +246,7 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
 
       {/* ── MAIN BODY ─ TOC sidebar + article column ─────────────── */}
       <div className="mx-auto grid max-w-5xl gap-10 px-6 pb-24 pt-12 md:px-10 lg:grid-cols-[220px_1fr]">
-        {/* Desktop sticky TOC, mobile collapsible — both rendered by GuideToc. */}
+        {/* Desktop sticky TOC, mobile collapsible: both rendered by GuideToc. */}
         <aside>
           <GuideToc items={tocItems} label={t.tocLabel} />
         </aside>
@@ -245,20 +254,23 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
         <article>
           {/* ── ARTICLE HEADING ─────────────────────────────────── */}
           <header className="mb-10">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-fg-2)]">
-              {verticalLabel} · {cityRow.name}
+            <p className="cn-readout text-[var(--color-muted)]">
+              {caps(`${verticalLabel} · ${cityRow.name}`)}
             </p>
-            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-[var(--color-fg-0)] md:text-4xl">
-              {article.title}
+            <h2
+              className="mt-3 text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-[1.1] tracking-[-0.015em] text-[var(--color-ink)]"
+              style={{ fontVariationSettings: '"FLAR" 100, "VOLM" 20' }}
+            >
+              {noEmDash(article.title)}
             </h2>
             {article.subtitle && (
-              <p className="mt-4 text-lg text-[var(--color-fg-1)]">{article.subtitle}</p>
+              <p className="mt-4 text-lg text-[var(--color-muted)]">{noEmDash(article.subtitle)}</p>
             )}
           </header>
 
           {/* ── INTRO LEAD ──────────────────────────────────────── */}
           {lead && (
-            <div className="prose-site mb-12 max-w-none border-l-2 border-[var(--color-accent-cyan)] pl-6 text-lg text-[var(--color-fg-1)] md:text-xl">
+            <div className="prose-site mb-12 max-w-none border-l border-[var(--color-bronze)] pl-6 text-lg text-[var(--color-ink)] md:text-xl">
               {renderMarkdown(lead)}
             </div>
           )}
@@ -274,9 +286,13 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
           {(() => {
             const sections = body ? splitBodyByH2(body) : [];
             const usedIds = new Set<string>();
+            // A business pins to the FIRST H2 its section_kind matches.
+            // Without the usedIds check here, one whose kind matched two
+            // headings would render under both. No guide in the database hits
+            // that today (checked 2026-09-19), so this is a guard, not a fix.
             const sectionsRendered = sections.map((sec) => {
               const inSection = businesses.filter(
-                (b) => sectionKindMatchesHeading(b.sectionKind, sec.label),
+                (b) => !usedIds.has(b.id) && sectionKindMatchesHeading(b.sectionKind, sec.label),
               );
               inSection.forEach((b) => usedIds.add(b.id));
               return { sec, inSection };
@@ -298,7 +314,7 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
                       <ul className="mt-8 space-y-6">
                         {inSection.map((b) => (
                           <li key={b.id}>
-                            <GuideBusinessCard business={b} locale={locale} />
+                            <GuideBusinessCard business={b} locale={locale} origin={{ lat: cityRow.lat, lng: cityRow.lng }} />
                           </li>
                         ))}
                       </ul>
@@ -310,14 +326,17 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
                 )}
                 {tail.length > 0 && (
                   <section>
-                    <h2 className="mt-12 mb-4 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+                    <h2
+                      className="mt-12 mb-4 text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-[1.1] tracking-[-0.015em] text-[var(--color-ink)]"
+                      style={{ fontVariationSettings: '"FLAR" 100, "VOLM" 20' }}
+                    >
                       {t.moreVerified}
                     </h2>
-                    <p className="mb-6 text-[var(--color-fg-1)]">{t.moreVerifiedHint}</p>
+                    <p className="mb-6 text-[var(--color-muted)]">{t.moreVerifiedHint}</p>
                     <ul className="space-y-6">
                       {tail.map((b) => (
                         <li key={b.id}>
-                          <GuideBusinessCard business={b} locale={locale} />
+                          <GuideBusinessCard business={b} locale={locale} origin={{ lat: cityRow.lat, lng: cityRow.lng }} />
                         </li>
                       ))}
                     </ul>
@@ -336,8 +355,11 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
 
           {/* ── RELATED GUIDES ──────────────────────────────────── */}
           {otherArticles.length > 0 && (
-            <section className="mt-20 border-t border-[var(--color-bg-2)] pt-10">
-              <h2 className="font-display text-xl font-semibold text-[var(--color-fg-0)]">
+            <section className="mt-20 border-t border-[var(--color-hair)] pt-10">
+              <h2
+                className="text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-[1.1] tracking-[-0.015em] text-[var(--color-ink)]"
+                style={{ fontVariationSettings: '"FLAR" 100, "VOLM" 20' }}
+              >
                 {t.moreFrom} {cityRow.name}
               </h2>
               <ul className="mt-6 grid gap-4 md:grid-cols-2">
@@ -345,10 +367,15 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
                   <li key={a.id}>
                     <Link
                       href={`/${locale}/cities/${city}/${a.slug}`}
-                      className="block rounded-xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] p-5 transition hover:border-[var(--color-accent-cyan)]"
+                      className="block min-h-[44px] rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] p-5 transition-colors duration-[var(--motion-fast)] ease-[var(--motion-ease)] hover:border-[var(--color-bronze)]"
                     >
-                      <p className="text-xs uppercase tracking-wide text-[var(--color-fg-2)]">{t.vertical[a.vertical]}</p>
-                      <p className="mt-1 font-display text-base font-semibold text-[var(--color-fg-0)]">{a.title}</p>
+                      <p className="cn-readout cn-readout-s text-[var(--color-muted)]">{caps(t.vertical[a.vertical])}</p>
+                      <p
+                        className="mt-1.5 text-[19px] font-semibold leading-[1.2] text-[var(--color-ink)]"
+                        style={{ fontVariationSettings: '"FLAR" 100, "VOLM" 20' }}
+                      >
+                        {noEmDash(a.title)}
+                      </p>
                     </Link>
                   </li>
                 ))}
@@ -363,16 +390,18 @@ function GuideRender({ article, cityRow, photos, businesses, locale, city }: {
 
 function WidePhoto({ photo, alt }: { photo: CityPhoto; alt: string }) {
   return (
-    <figure className="relative -mx-6 my-12 aspect-[21/9] overflow-hidden md:mx-0 md:rounded-2xl">
+    <figure className="relative -mx-6 my-12 aspect-[21/9] overflow-hidden bg-[var(--color-raise)] md:mx-0 md:rounded-[var(--radius-md)]">
       <Image
         src={photo.url}
         alt={alt}
-        fill
+        width={1536}
+        height={658}
         sizes="(min-width: 768px) 768px, 100vw"
-        className="object-cover"
+        loading="lazy"
+        className="h-full w-full object-cover"
       />
       {photo.attribution && (
-        <figcaption className="absolute bottom-2 right-3 text-[10px] text-white/70">
+        <figcaption className="cn-readout cn-readout-s absolute bottom-2 right-3 text-[var(--color-muted)]">
           {photo.attribution}
         </figcaption>
       )}
@@ -381,6 +410,11 @@ function WidePhoto({ photo, alt }: { photo: CityPhoto; alt: string }) {
 }
 
 // ─── helpers ────────────────────────────────────────────────────────────
+
+/** Greek capitals in a readout carry no accents (tokens.md, case rules). */
+function caps(value: string): string {
+  return value.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().normalize('NFC');
+}
 
 /** Split markdown into the lead (everything before the first H2) and the
  *  body (first H2 onward). Both trimmed. */
@@ -434,7 +468,7 @@ const LABELS = {
     knownFor: 'Γνωστό για',
     moreFrom: 'Περισσότερα για',
     moreVerified: 'Περισσότερα επαληθευμένα μαγαζιά',
-    moreVerifiedHint: 'Κι άλλα μαγαζιά που πέρασαν τους ίδιους ελέγχους — Google Places + πρόσφατες κριτικές.',
+    moreVerifiedHint: 'Κι άλλα μαγαζιά που πέρασαν τους ίδιους ελέγχους: Google Places + πρόσφατες κριτικές.',
     tocLabel: 'Σε αυτή τη σελίδα',
     pinned: 'Επαληθευμένα μαγαζιά',
     pinnedSlug: 'epalitheumena-magazia',
@@ -450,7 +484,7 @@ const LABELS = {
     knownFor: 'Known for',
     moreFrom: 'More from',
     moreVerified: 'More verified spots',
-    moreVerifiedHint: 'A few more venues that cleared the same checks — Google Places + recent reviews.',
+    moreVerifiedHint: 'A few more venues that cleared the same checks: Google Places + recent reviews.',
     tocLabel: 'On this page',
     pinned: 'Verified spots',
     pinnedSlug: 'verified-spots',

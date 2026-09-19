@@ -230,6 +230,22 @@ html.theme-ready, html.theme-ready body { transition: background-color .25s ease
 /* Tabular numerics for HUD stats */
 .cn-tab { font-variant-numeric: tabular-nums; }
 
+/* A reading: time, hours, distance, a count, a percentage. Lilex, tabular, and
+   in Greek it is set in capitals without accents (ΑΝΟΙΧΤΑ ΤΩΡΑ). One class so
+   every reading on the site matches, because the readings are the design.
+   Source: products/citynight/design/tokens.md, "readout 0.8125rem mono".
+   Never set it smaller than 12px: `.cn-readout-s` is the floor. */
+.cn-readout {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+.cn-readout-s { font-size: 0.75rem; }
+.cn-readout-l { font-size: 1rem; }
+
 /* In light theme, soften the doorway grid + grain so they don't dominate */
 :root.theme-light .cn-grid  { opacity: 0.15; }
 :root.theme-light .cn-grain { opacity: 0.05; mix-blend-mode: multiply; }

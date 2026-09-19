@@ -1,36 +1,66 @@
-// Verified business card displayed inside a guide. Mobile-first, photo-led,
-// with utility chips and tap-to-call.
+// A venue reading inside a guide. Direction A "Αντικύθηρα".
+// Prototype: products/citynight/design/2026-09-17-antikythera-prototype.html
+// Tokens:    products/citynight/design/tokens.md (2026-09-17).
 //
 //   ┌─────────────────────────────────────────┐
-//   │  [PHOTO GALLERY 16:9 — swipe-snap, 1-3]  │
-//   │                              ✓ Verified  │
+//   │  [PHOTO 16:9 — swipe-snap, 1-3]          │
+//   │                            ΕΠΑΛΗΘΕΥΜΕΝΟ  │
 //   ├─────────────────────────────────────────┤
-//   │  NAME                ★ 4.5 · 1,872 · €€  │
-//   │  • Ανοιχτό τώρα                          │
+//   │  NAME                      ★ 4,5 (1.872) │
+//   │  ● ΑΝΟΙΧΤΑ ΤΩΡΑ · ΩΣ 23:00                │
+//   │  Editor blurb                            │
+//   │  ΩΡΑΡΙΟ / ΑΠΟΣΤΑΣΗ / ΤΙΜΕΣ / ΤΗΛΕΦΩΝΟ    │
 //   │  Address line                            │
-//   │  Editor blurb (2-3 sentences)            │
-//   │  [📞 Κάλεσε] [🚗 Οδηγίες] [𝙛 FB] [📍 Maps]│
+//   │  [Κλήση] [Οδηγίες] [Facebook] [Χάρτης]   │
 //   │  [────── Google Maps iframe ──────]      │
 //   └─────────────────────────────────────────┘
 //
-// All facts (photos, rating, phone, hours, price, address) come from
-// Places — see [[project-guide-businesses-verified]]. Blurb is the only
-// editor copy. The "Ανοιχτό τώρα" chip is computed from openingHours
-// in lib/opening-hours.ts (server-rendered, so the chip is correct at
-// page-generation time and refreshes every ISR window).
+// All facts (photos, rating, phone, hours, price, address) come from Places
+// — see [[project-guide-businesses-verified]]. The blurb is the only editor
+// copy. The live state is computed in lib/opening-hours.ts (server-rendered,
+// so it is correct at page-generation time and refreshes every ISR window).
+//
+// Verdigris means one thing: open now. Closing soon and the arc of time that
+// has passed are bronze; closed and unknown are --color-closed. Every reading
+// is a .cn-readout, in Greek capitals without accents. Missing data shows as
+// missing and is never guessed.
 
 import Image from 'next/image';
+import { noEmDash } from '@/lib/article-md';
 import type { GuideBusiness } from '@/lib/articles';
 import type { Locale } from '@/lib/i18n';
-import { isOpenNow, formatPriceLevel } from '@/lib/opening-hours';
+import { formatOpenState, formatPriceLevel, openStateNow } from '@/lib/opening-hours';
+import { haversineKm } from '@/lib/geo-distance';
 
 type Props = {
   business: GuideBusiness;
   locale: Locale;
+  /** City centre, for the distance reading. Omitted or incomplete: the
+   *  reading shows as missing. */
+  origin?: { lat: number | null; lng: number | null } | null;
 };
 
-export function GuideBusinessCard({ business: b, locale }: Props) {
-  const t = LABELS[locale === 'el' ? 'el' : 'en'];
+/** Greek capitals in a readout carry no accents (tokens.md, case rules). */
+function caps(value: string): string {
+  return value.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().normalize('NFC');
+}
+
+/** Only 'open' is verdigris. Nothing else on the page may use it. */
+const TONE: Record<'open' | 'soon' | 'closed' | 'unknown', string> = {
+  open: 'var(--color-verdigris)',
+  soon: 'var(--color-bronze)',
+  closed: 'var(--color-closed)',
+  unknown: 'var(--color-closed)',
+};
+
+const PILL =
+  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 text-[15px] font-semibold ' +
+  'transition-transform duration-[var(--motion-fast)] ease-[var(--motion-ease)] active:scale-[0.98]';
+const PILL_GHOST = `${PILL} border border-[var(--color-hair)] text-[var(--color-ink)]`;
+
+export function GuideBusinessCard({ business: b, locale, origin }: Props) {
+  const lang: 'el' | 'en' = locale === 'el' ? 'el' : 'en';
+  const t = LABELS[lang];
 
   const embedSrc = b.lat != null && b.lng != null
     ? `https://www.google.com/maps?q=${b.lat},${b.lng}&z=17&output=embed`
@@ -42,51 +72,62 @@ export function GuideBusinessCard({ business: b, locale }: Props) {
       : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(b.name + ' ' + (b.address ?? ''))}`;
   const telUrl = b.phone ? `tel:${b.phone.replace(/\s+/g, '')}` : null;
 
-  // Photo gallery — cover first, then extras. Skip when there's only one
-  // photo (or none) so the layout stays consistent (single image vs scroll).
+  // Photo gallery — cover first, then extras. Attribution unchanged.
   const gallery = [
     ...(b.coverPhotoUrl ? [{ url: b.coverPhotoUrl, attribution: b.coverPhotoAttribution }] : []),
     ...(b.extraPhotos ?? []),
   ];
-  const open = isOpenNow(b.openingHours?.periods);
-  const price = formatPriceLevel(b.priceLevel, locale === 'el' ? 'el' : 'en');
+
+  const state = openStateNow(b.openingHours?.periods);
+  const reading = formatOpenState(state, lang);
+  const price = formatPriceLevel(b.priceLevel, lang);
+
+  const km = origin?.lat != null && origin.lng != null && b.lat != null && b.lng != null
+    ? haversineKm({ lat: b.lat, lng: b.lng }, { lat: origin.lat, lng: origin.lng })
+    : null;
+  const distance = km != null
+    ? `${new Intl.NumberFormat(lang === 'el' ? 'el-GR' : 'en-GB', { maximumFractionDigits: km < 10 ? 1 : 0 }).format(km)} ${t.kmUnit}`
+    : null;
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] transition hover:border-[var(--color-bg-3)]">
-      {/* ── Photo gallery (swipe-snap on mobile, single image otherwise) ─── */}
+    <article className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)]">
+      {/* ── Photos. Every image carries width and height, and each slide box
+             holds its aspect ratio, so nothing below moves after first paint. */}
       {gallery.length > 0 && (
         <div className="relative">
           {gallery.length === 1 ? (
-            <div className="relative aspect-[16/9] w-full overflow-hidden">
+            <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--color-raise)]">
               <Image
                 src={gallery[0]!.url}
                 alt={b.name}
-                fill
+                width={1280}
+                height={720}
                 sizes="(min-width: 768px) 768px, 100vw"
-                className="object-cover"
+                loading="lazy"
+                className="h-full w-full object-cover"
               />
               {gallery[0]!.attribution && (
-                <p className="absolute bottom-2 right-3 text-[10px] text-white/65">
+                <p className="cn-readout cn-readout-s absolute bottom-2 right-3 text-[var(--color-muted)]">
                   {gallery[0]!.attribution}
                 </p>
               )}
             </div>
           ) : (
             // Horizontal scroll-snap gallery — native + accessible, no JS.
-            // Each slide is 100% wide; the user swipes to the next photo.
             <ul className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
               {gallery.map((p, i) => (
-                <li key={i} className="relative aspect-[16/9] w-full shrink-0 snap-center">
+                <li key={i} className="relative aspect-[16/9] w-full shrink-0 snap-center bg-[var(--color-raise)]">
                   <Image
                     src={p.url}
-                    alt={`${b.name} — ${i + 1}/${gallery.length}`}
-                    fill
+                    alt={`${b.name} · ${i + 1}/${gallery.length}`}
+                    width={1280}
+                    height={720}
                     sizes="(min-width: 768px) 768px, 100vw"
-                    className="object-cover"
-                    priority={i === 0}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
                   />
                   {p.attribution && (
-                    <p className="absolute bottom-2 right-3 text-[10px] text-white/65">
+                    <p className="cn-readout cn-readout-s absolute bottom-2 right-3 text-[var(--color-muted)]">
                       {p.attribution}
                     </p>
                   )}
@@ -94,128 +135,96 @@ export function GuideBusinessCard({ business: b, locale }: Props) {
               ))}
             </ul>
           )}
-          {/* Photo count chip — only when there's more than 1, so visitors
-              know the gallery is swipeable. */}
           {gallery.length > 1 && (
-            <span className="pointer-events-none absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-black/55 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur">
-              <svg viewBox="0 0 16 16" aria-hidden className="h-3 w-3 fill-current">
-                <path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4zm2 0v8h8V4H4zm2 5l1.5-2 1.5 2 1-1.3L12 11H4l2-2z" />
-              </svg>
+            <span
+              className="cn-readout cn-readout-s pointer-events-none absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[var(--color-ink)]"
+              style={{ background: 'color-mix(in srgb, var(--color-ground) 72%, transparent)' }}
+            >
               {gallery.length}
             </span>
           )}
-          {/* Verified badge — top right of the gallery. */}
-          <span
-            title={b.fbPageTitle ? `${t.verifiedBy} ${b.fbPageTitle}` : t.verified}
-            className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-black/55 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-emerald-300 backdrop-blur"
-          >
-            <svg viewBox="0 0 16 16" aria-hidden className="h-3 w-3 fill-current">
-              <path d="M6.5 11.2 3.4 8.1l1.1-1.1 2 2 4.9-4.9 1.1 1.1z" />
-            </svg>
-            {t.verified}
-          </span>
+          <VerifiedMark label={t.verified} title={b.fbPageTitle ? `${t.verifiedBy} ${b.fbPageTitle}` : t.verified} floating />
         </div>
       )}
 
       <div className="p-5 md:p-6">
-        {/* ── Header: name + (no-photo verified badge fallback) ───── */}
-        <header className="flex items-start justify-between gap-3">
-          <h3 className="font-display text-xl font-semibold text-[var(--color-fg-0)] md:text-2xl">
+        {/* ── The statement: the name, and the rating as a readout ── */}
+        <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+          <h3
+            className="text-[22px] font-semibold leading-[1.15] tracking-[-0.015em] text-[var(--color-ink)] md:text-[26px]"
+            style={{ fontVariationSettings: '"FLAR" 100, "VOLM" 20' }}
+          >
             {b.name}
           </h3>
-          {gallery.length === 0 && (
-            <span
-              title={b.fbPageTitle ? `${t.verifiedBy} ${b.fbPageTitle}` : t.verified}
-              className="inline-flex shrink-0 items-center gap-1 rounded-full border border-emerald-700/40 bg-emerald-900/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-emerald-300"
-            >
-              <svg viewBox="0 0 16 16" aria-hidden className="h-3 w-3 fill-current">
-                <path d="M6.5 11.2 3.4 8.1l1.1-1.1 2 2 4.9-4.9 1.1 1.1z" />
-              </svg>
-              {t.verified}
+          {b.rating != null ? (
+            <span className="cn-readout text-[var(--color-muted)]">
+              <span className="text-[var(--color-bronze)]">★</span> {formatCount(b.rating, lang, 1)}
+              {b.reviewCount != null && b.reviewCount > 0 ? ` (${formatCount(b.reviewCount, lang)})` : ''}
             </span>
+          ) : (
+            gallery.length === 0 && <VerifiedMark label={t.verified} title={t.verified} />
           )}
         </header>
 
-        {/* ── Meta row: rating + price + address ──────────────────── */}
-        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
-          {b.rating != null && (
-            <span className="inline-flex items-center gap-1 tabular-nums text-[var(--color-fg-1)]">
-              <span className="text-[var(--color-accent-amber)]">★</span>
-              <span className="font-semibold text-[var(--color-fg-0)]">{b.rating.toFixed(1)}</span>
-              {b.reviewCount != null && b.reviewCount > 0 && (
-                <span className="text-[var(--color-fg-2)]">· {formatCount(b.reviewCount, locale)} {t.reviews}</span>
-              )}
-            </span>
+        {/* ── The live state. Verdigris only when it is open right now. ── */}
+        <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
+          <span
+            aria-hidden="true"
+            className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"
+            style={{ background: TONE[reading.tone] }}
+          />
+          <span className="cn-readout" style={{ color: TONE[reading.tone] }}>{caps(reading.label)}</span>
+          {reading.detail && (
+            <span className="cn-readout text-[var(--color-muted)]">· {caps(reading.detail)}</span>
           )}
-          {price && (
-            <span className="font-medium text-[var(--color-fg-1)]" title={t.priceTier}>{price}</span>
-          )}
-          {b.address && (
-            <span className="text-[var(--color-fg-2)]">{b.address}</span>
-          )}
-        </div>
+        </p>
 
-        {/* ── Open-now chip — only renders when computable. ─────── */}
-        {b.openingHours && (
-          <p className="mt-3 inline-flex items-center gap-1.5 text-xs">
-            <span aria-hidden className={`inline-block h-2 w-2 rounded-full ${open ? 'bg-emerald-400' : 'bg-[var(--color-fg-3)]'}`} />
-            <span className={open ? 'font-medium text-emerald-300' : 'text-[var(--color-fg-2)]'}>
-              {open ? t.openNow : t.closedNow}
-            </span>
+        {b.blurb && (
+          <p className="mt-4 max-w-[60ch] text-[16px] leading-[1.55] text-[var(--color-muted)] md:text-[17px]">
+            {noEmDash(b.blurb)}
           </p>
         )}
 
-        {/* ── Blurb ───────────────────────────────────────────────── */}
-        <p className="mt-4 text-sm leading-relaxed text-[var(--color-fg-1)] md:text-base">
-          {b.blurb}
-        </p>
+        {/* ── The readings. Missing data reads as missing. ── */}
+        <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-3 border-t border-[var(--color-hair)] pt-4 sm:grid-cols-4">
+          <Reading label={t.hours} value={caps(reading.detail ?? reading.label)} colour={TONE[reading.tone]} missing={t.notStated} />
+          <Reading label={t.distance} value={distance ? caps(distance) : null} missing={t.notStated} />
+          <Reading label={t.price} value={price} missing={t.notStated} />
+          <Reading label={t.phone} value={b.phone} missing={t.notStated} />
+        </dl>
 
-        {/* ── Action buttons (tap-to-call first on mobile) ───────── */}
-        <div className="mt-5 flex flex-wrap gap-2">
+        {b.address && <p className="mt-4 text-[15px] text-[var(--color-muted)]">{b.address}</p>}
+
+        {/* ── The actions. Bronze means yours to act on; 44 px targets. ── */}
+        <div className="mt-5 flex flex-wrap gap-2.5">
           {telUrl && (
             <a
               href={telUrl}
-              className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-medium text-emerald-300 transition hover:bg-emerald-500/20"
+              className={PILL}
+              style={{ background: 'var(--color-bronze)', color: 'var(--color-on-bronze)' }}
             >
-              <span aria-hidden>📞</span> {t.call}
+              {t.call}
             </a>
           )}
-          <a
-            href={directionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent-cyan)] bg-[var(--color-accent-cyan)]/10 px-3.5 py-1.5 text-xs font-medium text-[var(--color-accent-cyan)] transition hover:bg-[var(--color-accent-cyan)]/20"
-          >
-            <span aria-hidden>🚗</span> {t.directions}
+          <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className={PILL_GHOST}>
+            {t.directions}
           </a>
-          <a
-            href={b.fbUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-2)] px-3.5 py-1.5 text-xs font-medium text-[var(--color-fg-1)] transition hover:text-[var(--color-fg-0)]"
-          >
-            <span aria-hidden>𝙛</span> Facebook
+          <a href={b.fbUrl} target="_blank" rel="noopener noreferrer" className={PILL_GHOST}>
+            Facebook
           </a>
-          <a
-            href={b.googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-2)] px-3.5 py-1.5 text-xs font-medium text-[var(--color-fg-1)] transition hover:text-[var(--color-fg-0)]"
-          >
-            <span aria-hidden>📍</span> Google Maps
+          <a href={b.googleMapsUrl} target="_blank" rel="noopener noreferrer" className={PILL_GHOST}>
+            {t.maps}
           </a>
         </div>
 
-        {/* ── Map iframe (collapsible, compact 16:6 strip) ───────── */}
-        <details className="group mt-5 overflow-hidden rounded-xl border border-[var(--color-bg-2)]">
-          <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-2.5 text-xs font-medium text-[var(--color-fg-1)] hover:bg-[var(--color-bg-2)]/40">
-            <span className="inline-flex items-center gap-2">
-              <span aria-hidden>🗺</span>
-              <span>{t.showMap}</span>
-            </span>
-            <span aria-hidden className="text-[var(--color-fg-2)] group-open:rotate-90 transition">▸</span>
+        {/* ── Map, on demand. The box holds its ratio, so opening it pushes
+               only what is below it, never the page around it. ── */}
+        <details className="group mt-5 overflow-hidden rounded-[var(--radius-sm)] border border-[var(--color-hair)]">
+          <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between px-4 text-[15px] text-[var(--color-ink)]">
+            <span>{t.showMap}</span>
+            <span aria-hidden="true" className="text-[var(--color-muted)] transition group-open:rotate-90">▸</span>
           </summary>
-          <div className="relative aspect-[16/6] w-full">
+          <div className="relative aspect-[16/6] w-full border-t border-[var(--color-hair)]">
             <iframe
               src={embedSrc}
               loading="lazy"
@@ -230,30 +239,68 @@ export function GuideBusinessCard({ business: b, locale }: Props) {
   );
 }
 
-function formatCount(n: number, locale: Locale): string {
-  try { return new Intl.NumberFormat(locale === 'el' ? 'el-GR' : locale).format(n); }
-  catch { return String(n); }
+function Reading({
+  label, value, missing, colour,
+}: { label: string; value: string | null; missing: string; colour?: string }) {
+  return (
+    <div>
+      <dt className="cn-readout cn-readout-s text-[var(--color-muted)]">{label}</dt>
+      <dd
+        className="cn-readout cn-readout-l mt-1"
+        style={{ color: value ? (colour ?? 'var(--color-ink)') : 'var(--color-closed)' }}
+      >
+        {value ?? missing}
+      </dd>
+    </div>
+  );
+}
+
+/** Verified is a fact, not a live state: it stays hairline and bronze so the
+ *  one signal colour keeps meaning "open now". */
+function VerifiedMark({ label, title, floating }: { label: string; title: string; floating?: boolean }) {
+  return (
+    <span
+      title={title}
+      className={`cn-readout cn-readout-s inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-hair)] px-2.5 py-1 text-[var(--color-ink)] ${
+        floating ? 'absolute right-3 top-3' : ''
+      }`}
+      style={floating ? { background: 'color-mix(in srgb, var(--color-ground) 72%, transparent)' } : undefined}
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true" className="h-3 w-3 fill-[var(--color-bronze)]">
+        <path d="M6.5 11.2 3.4 8.1l1.1-1.1 2 2 4.9-4.9 1.1 1.1z" />
+      </svg>
+      {label}
+    </span>
+  );
+}
+
+function formatCount(n: number, lang: 'el' | 'en', decimals = 0): string {
+  try {
+    return new Intl.NumberFormat(lang === 'el' ? 'el-GR' : 'en-GB', {
+      minimumFractionDigits: decimals, maximumFractionDigits: decimals,
+    }).format(n);
+  } catch { return String(n); }
 }
 
 const LABELS: Record<'el' | 'en', {
   verified: string; verifiedBy: string;
-  directions: string; call: string;
+  directions: string; call: string; maps: string;
   onMap: string; showMap: string;
-  reviews: string; priceTier: string;
-  openNow: string; closedNow: string;
+  hours: string; distance: string; price: string; phone: string;
+  kmUnit: string; notStated: string;
 }> = {
   el: {
-    verified: 'Επαληθευμένο', verifiedBy: 'Επαληθεύτηκε μέσω',
-    directions: 'Οδηγίες', call: 'Κάλεσε',
+    verified: 'ΕΠΑΛΗΘΕΥΜΕΝΟ', verifiedBy: 'Επαληθεύτηκε μέσω',
+    directions: 'Οδηγίες', call: 'Κλήση', maps: 'Χάρτης',
     onMap: 'στον χάρτη', showMap: 'Δες στον χάρτη',
-    reviews: 'κριτικές', priceTier: 'Εύρος τιμής',
-    openNow: 'Ανοιχτό τώρα', closedNow: 'Κλειστό τώρα',
+    hours: 'ΩΡΑΡΙΟ', distance: 'ΑΠΟΣΤΑΣΗ', price: 'ΤΙΜΕΣ', phone: 'ΤΗΛΕΦΩΝΟ',
+    kmUnit: 'χλμ', notStated: 'ΔΕΝ ΕΧΕΙ ΔΗΛΩΘΕΙ',
   },
   en: {
-    verified: 'Verified', verifiedBy: 'Verified via',
-    directions: 'Directions', call: 'Call',
+    verified: 'VERIFIED', verifiedBy: 'Verified via',
+    directions: 'Directions', call: 'Call', maps: 'Maps',
     onMap: 'on map', showMap: 'Show on map',
-    reviews: 'reviews', priceTier: 'Price tier',
-    openNow: 'Open now', closedNow: 'Closed now',
+    hours: 'HOURS', distance: 'DISTANCE', price: 'PRICE', phone: 'PHONE',
+    kmUnit: 'km', notStated: 'NOT STATED',
   },
 };

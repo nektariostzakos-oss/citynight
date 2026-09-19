@@ -25,9 +25,9 @@ export function AdSlot({ id, scope }: { id: string; scope: 'site' | 'section' | 
       <div
         data-slot-id={id}
         data-slot-scope={scope}
-        className={`flex ${reservedHeight} w-full items-center justify-center rounded-md border border-dashed border-[var(--color-bg-3)] text-xs uppercase tracking-widest text-[var(--color-fg-3)]`}
+        className={`flex ${reservedHeight} cn-readout cn-readout-s w-full items-center justify-center rounded-[var(--radius-sm)] border border-dashed border-[var(--color-hair)] text-[var(--color-faint)]`}
       >
-        Ad slot · {scope}
+        AD SLOT · {scope.toUpperCase()}
       </div>
     );
   }

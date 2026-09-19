@@ -60,20 +60,21 @@ export function GuideToc({ items, label }: Props) {
         aria-label={label}
         className="hidden lg:block sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-4"
       >
-        <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--color-fg-2)]">
+        <p className="cn-readout cn-readout-s mb-3 text-[var(--color-muted)]">
           {label}
         </p>
-        <ul className="space-y-2 text-sm">
+        <ul className="space-y-1 text-sm">
           {items.map((it) => {
             const active = it.id === activeId;
             return (
               <li key={it.id}>
                 <a
                   href={`#${it.id}`}
-                  className={`block border-l-2 pl-3 leading-snug transition ${
+                  aria-current={active ? 'true' : undefined}
+                  className={`flex min-h-[44px] items-center border-l pl-3 leading-snug transition-colors duration-[var(--motion-fast)] ease-[var(--motion-ease)] ${
                     active
-                      ? 'border-[var(--color-accent-cyan)] text-[var(--color-fg-0)]'
-                      : 'border-transparent text-[var(--color-fg-2)] hover:border-[var(--color-bg-3)] hover:text-[var(--color-fg-1)]'
+                      ? 'border-[var(--color-bronze)] text-[var(--color-ink)]'
+                      : 'border-[var(--color-hair)] text-[var(--color-muted)] hover:text-[var(--color-ink)]'
                   }`}
                 >
                   {it.label}
@@ -85,18 +86,21 @@ export function GuideToc({ items, label }: Props) {
       </nav>
 
       {/* Mobile / tablet: collapsible details */}
-      <details className="mb-8 rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] lg:hidden">
-        <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium text-[var(--color-fg-0)]">
+      <details className="mb-8 rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] lg:hidden">
+        <summary className="flex min-h-[44px] cursor-pointer list-none items-center px-4 text-sm font-semibold text-[var(--color-ink)]">
           <span className="inline-flex items-center gap-2">
             <span aria-hidden>▸</span>
             <span>{label}</span>
-            <span className="text-xs text-[var(--color-fg-2)]">({items.length})</span>
+            <span className="cn-readout cn-readout-s text-[var(--color-muted)]">({items.length})</span>
           </span>
         </summary>
-        <ul className="space-y-2 border-t border-[var(--color-bg-2)] px-4 py-3 text-sm">
+        <ul className="border-t border-[var(--color-hair)] px-4 py-1 text-sm">
           {items.map((it) => (
             <li key={it.id}>
-              <a href={`#${it.id}`} className="block text-[var(--color-fg-1)] hover:text-[var(--color-accent-cyan)]">
+              <a
+                href={`#${it.id}`}
+                className="flex min-h-[44px] items-center text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] ease-[var(--motion-ease)] hover:text-[var(--color-ink)]"
+              >
                 {it.label}
               </a>
             </li>

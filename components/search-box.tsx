@@ -119,7 +119,7 @@ type Variant = 'default' | 'menu';
 
 export function SearchBox({ locale, citySlug, variant = 'default' }: {
   locale: Locale; citySlug?: string;
-  /** 'default' = the rounded pill with icon + ⌘K hint (current behavior).
+  /** 'default' = the rounded-[var(--radius-sm)] pill with icon + ⌘K hint (current behavior).
    *  'menu'    = text-only trigger that sits inside the header mega-menu
    *              alongside Cities. No icon, no ⌘K chip, matches the
    *              pill-item styling so it reads as a nav item. */
@@ -147,7 +147,7 @@ export function SearchBox({ locale, citySlug, variant = 'default' }: {
           type="button"
           onClick={() => setOpen(true)}
           aria-label={c.trigger}
-          className="rounded-full px-3 py-1.5 text-sm font-medium text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-fg-0)]"
+          className="inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-ink)]"
         >
           {c.trigger}
         </button>
@@ -156,11 +156,11 @@ export function SearchBox({ locale, citySlug, variant = 'default' }: {
           type="button"
           onClick={() => setOpen(true)}
           aria-label={c.trigger}
-          className="group inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/60 px-3 py-1.5 text-xs text-[var(--color-fg-2)] backdrop-blur transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+          className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-hair)] px-3 text-[15px] text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-bronze)]"
         >
           <SearchIcon className="h-3.5 w-3.5" />
           <span className="hidden sm:inline">{c.trigger}</span>
-          <span className="hidden md:inline rounded border border-[var(--color-bg-3)] px-1.5 py-0.5 text-[10px] tracking-wider text-[var(--color-fg-3)] group-hover:border-[var(--color-accent-cyan)]/40">⌘K</span>
+          <span className="hidden md:inline rounded-[var(--radius-sm)] border border-[var(--color-hair)] px-1.5 py-0.5 cn-readout cn-readout-s tracking-wider text-[var(--color-muted)] group-hover:border-[var(--color-bronze)]/40">⌘K</span>
         </button>
       )}
       {open && <SearchModal locale={locale} citySlug={citySlug} onClose={() => setOpen(false)} />}
@@ -182,7 +182,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
   const abortRef = useRef<AbortController | null>(null);
 
   // Portal target = document.body. Bypasses the stacking context that
-  // `backdrop-filter` ancestors (the site header has backdrop-blur-xl)
+  // `backdrop-filter` ancestors (the site header has)
   // would otherwise impose on `position: fixed` children — per CSS spec
   // a `backdrop-filter` other than `none` creates a new containing
   // block for fixed-positioned descendants, which would trap the modal
@@ -293,7 +293,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
       role="dialog"
       aria-modal="true"
       aria-label={c.trigger}
-      className="fixed inset-0 z-[100] flex flex-col bg-[var(--color-bg-0)]"
+      className="fixed inset-0 z-[100] flex flex-col bg-[var(--color-ground)]"
       onClick={onClose}
     >
       {/* Top bar — flush close button. shrink-0 so the flex layout
@@ -303,7 +303,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
         <button
           type="button"
           onClick={onClose}
-          className="rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] p-2 text-[var(--color-fg-2)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-fg-0)]"
+          className="rounded-full border border-[var(--color-hair)] bg-[var(--color-surface)] p-2 text-[var(--color-muted)] transition hover:border-[var(--color-bronze)] hover:text-[var(--color-ink)]"
           aria-label="Close"
         >
           <CloseIcon className="h-5 w-5" />
@@ -315,8 +315,8 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
         onClick={(e) => e.stopPropagation()}
         className="mx-auto mt-8 w-full max-w-3xl shrink-0 px-6 md:mt-14 md:px-10"
       >
-        <div className="flex items-center gap-4 border-b border-[var(--color-bg-2)] pb-4">
-          <SearchIcon className="h-7 w-7 text-[var(--color-fg-2)] md:h-8 md:w-8" />
+        <div className="flex items-center gap-4 border-b border-[var(--color-hair)] pb-4">
+          <SearchIcon className="h-7 w-7 text-[var(--color-muted)] md:h-8 md:w-8" />
           <input
             ref={inputRef}
             type="search"
@@ -324,12 +324,12 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKey}
             placeholder={c.placeholder}
-            className="flex-1 bg-transparent font-display text-2xl text-[var(--color-fg-0)] placeholder:text-[var(--color-fg-3)] focus:outline-none md:text-4xl"
+            className="flex-1 bg-transparent font-display text-2xl text-[var(--color-ink)] placeholder:text-[var(--color-muted)] focus:outline-none md:text-4xl"
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
           />
-          {loading && <span className="h-3 w-3 animate-pulse rounded-full bg-[var(--color-accent-cyan)]" aria-hidden />}
+          {loading && <span className="h-3 w-3 rounded-full bg-[var(--color-bronze)]" aria-hidden />}
         </div>
       </div>
 
@@ -340,16 +340,16 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
       >
           {!hasQuery && recent.length > 0 && (
             <div className="px-2 py-3">
-              <p className="px-3 pb-2 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">{c.recent}</p>
+              <p className="px-3 pb-2 cn-readout cn-readout-s uppercase text-[var(--color-muted)]">{c.recent}</p>
               <ul>
                 {recent.map((r) => (
                   <li key={r}>
                     <button
                       type="button"
                       onClick={() => setQ(r)}
-                      className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm text-[var(--color-fg-1)] hover:bg-[var(--color-bg-2)] hover:text-[var(--color-fg-0)]"
+                      className="flex min-h-11 w-full items-center gap-3 rounded-[var(--radius-sm)] px-3 text-left text-[15px] text-[var(--color-muted)] hover:bg-[var(--color-raise)] hover:text-[var(--color-ink)]"
                     >
-                      <SearchIcon className="h-3.5 w-3.5 text-[var(--color-fg-3)]" />
+                      <SearchIcon className="h-3.5 w-3.5 text-[var(--color-muted)]" />
                       {r}
                     </button>
                   </li>
@@ -359,13 +359,13 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
           )}
 
           {!hasQuery && recent.length === 0 && (
-            <p className="px-5 py-10 text-center text-sm text-[var(--color-fg-2)]">{c.emptyHint}</p>
+            <p className="px-5 py-10 text-center text-sm text-[var(--color-muted)]">{c.emptyHint}</p>
           )}
 
           {hasQuery && !hasResults && !loading && (
             <div className="px-5 py-10 text-center">
-              <p className="text-sm text-[var(--color-fg-1)]">{c.empty}</p>
-              <p className="mt-2 text-xs text-[var(--color-fg-3)]">{c.emptyHint}</p>
+              <p className="text-sm text-[var(--color-muted)]">{c.empty}</p>
+              <p className="mt-2 text-xs text-[var(--color-muted)]">{c.emptyHint}</p>
             </div>
           )}
 
@@ -385,7 +385,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
           the results body has flex-1 above it. */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="flex shrink-0 items-center justify-between gap-4 border-t border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-6 py-3 text-[11px] text-[var(--color-fg-3)] md:px-10"
+        className="flex shrink-0 items-center justify-between gap-4 border-t border-[var(--color-hair)] bg-[var(--color-surface)] px-6 py-3 cn-readout cn-readout-s text-[var(--color-muted)] md:px-10"
       >
         <span className="flex items-center gap-3">
           <Kbd>↑</Kbd><Kbd>↓</Kbd> {c.navHint}
@@ -400,7 +400,7 @@ function SearchModal({ locale, citySlug, onClose }: { locale: Locale; citySlug?:
 
 function Kbd({ children }: { children: React.ReactNode }) {
   return (
-    <kbd className="rounded border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-fg-2)]">
+    <kbd className="rounded-[var(--radius-sm)] border border-[var(--color-hair)] bg-[var(--color-surface)] px-1.5 py-0.5 cn-readout cn-readout-s text-[var(--color-muted)]">
       {children}
     </kbd>
   );
@@ -451,7 +451,7 @@ function ResultGroups({
     <div className="px-2 py-3">
       {sections.map((s) => (
         <div key={s.label} className="mb-3 last:mb-0">
-          <p className="px-3 pb-1 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">{s.label}</p>
+          <p className="px-3 pb-1 cn-readout cn-readout-s uppercase text-[var(--color-muted)]">{s.label}</p>
           <ul>
             {s.items.map(({ row, index }) => (
               <li key={index}>
@@ -459,17 +459,17 @@ function ResultGroups({
                   type="button"
                   onMouseEnter={() => setActive(index)}
                   onClick={() => onPick(row)}
-                  className={`flex w-full items-start gap-3 rounded-md px-3 py-2 text-left ${
+                  className={`flex min-h-11 w-full items-start gap-3 rounded-[var(--radius-sm)] px-3 py-2 text-left ${
                     active === index
-                      ? 'bg-[var(--color-bg-2)] text-[var(--color-fg-0)]'
-                      : 'text-[var(--color-fg-1)] hover:bg-[var(--color-bg-2)]/60'
+                      ? 'bg-[var(--color-raise)] text-[var(--color-ink)]'
+                      : 'text-[var(--color-muted)] hover:bg-[var(--color-raise)]/60'
                   }`}
                 >
                   <RowIcon kind={row.kind} />
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium">{row.label}</span>
                     {row.sub && (
-                      <span className="mt-0.5 block truncate text-xs text-[var(--color-fg-2)]">
+                      <span className="mt-0.5 block truncate text-xs text-[var(--color-muted)]">
                         {/* Venue snippets carry FTS5 highlight markers (U+0001 / U+0002), rendered as
                             <mark> through React, so the description text, which any owner
                             can edit, is never injected as HTML. */}
@@ -489,8 +489,8 @@ function ResultGroups({
 
 function RowIcon({ kind }: { kind: Row['kind'] }) {
   switch (kind) {
-    case 'city':     return <MapPinIcon className="mt-0.5 h-4 w-4 text-[var(--color-accent-cyan)]" />;
-    case 'category': return <SearchIcon className="mt-0.5 h-4 w-4 text-[var(--color-accent-violet)]" />;
-    case 'venue':    return <SearchIcon className="mt-0.5 h-4 w-4 text-[var(--color-accent-pink)]" />;
+    case 'city':     return <MapPinIcon className="mt-0.5 h-4 w-4 text-[var(--color-bronze)]" />;
+    case 'category': return <SearchIcon className="mt-0.5 h-4 w-4 text-[var(--color-bronze)]" />;
+    case 'venue':    return <SearchIcon className="mt-0.5 h-4 w-4 text-[var(--color-bronze)]" />;
   }
 }

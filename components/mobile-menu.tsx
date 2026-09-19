@@ -196,7 +196,7 @@ export function MobileMenu({
         aria-label={c.open}
         aria-expanded={open}
         aria-haspopup="dialog"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] text-[var(--color-fg-0)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)] md:hidden"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-hair)] text-[var(--color-ink)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-bronze)] md:hidden"
       >
         <MenuIcon />
       </button>
@@ -208,12 +208,11 @@ export function MobileMenu({
             type="button"
             onClick={() => setOpen(false)}
             aria-label={c.close}
-            className="absolute inset-0 bg-[var(--color-bg-0)]/85 backdrop-blur-md"
+            className="absolute inset-0 bg-[var(--color-ground)]/85"
           />
 
           {/* Panel — fully opaque so dark content behind never bleeds through.
-              Single top accent gradient bar carries the brand without
-              colouring every row.
+              A hairline on the left edge separates it, nothing else.
               touchstart/touchend track horizontal swipes — right-swipe of
               ≥80 px closes the drawer (mirrors native iOS/Android pattern). */}
           <div
@@ -226,21 +225,15 @@ export function MobileMenu({
               const dx = (e.changedTouches[0]?.clientX ?? start) - start;
               if (dx > 80) setOpen(false);
             }}
-            className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-[var(--color-bg-0)] shadow-[0_0_60px_-10px_rgba(0,0,0,0.9)] ring-1 ring-[var(--color-bg-2)]"
+            className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-[var(--color-ground)] border-l border-[var(--color-hair)]"
           >
-            {/* Accent strip */}
-            <div
-              aria-hidden
-              className="h-[3px] w-full bg-gradient-to-r from-[var(--color-accent-pink)] via-[var(--color-accent-violet)] to-[var(--color-accent-cyan)]"
-            />
-
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4">
               <Link
                 href={`/${locale}`}
                 onClick={() => setOpen(false)}
                 aria-label="citynight"
-                className="flex items-center py-2 text-[var(--color-fg-0)]"
+                className="flex items-center py-2 text-[var(--color-ink)]"
               >
                 <LogoLockup drawing="small" className="h-6 w-auto" />
               </Link>
@@ -248,7 +241,7 @@ export function MobileMenu({
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label={c.close}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-bg-3)] text-[var(--color-fg-0)] hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-hair)] text-[var(--color-ink)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-bronze)]"
               >
                 <CloseIcon />
               </button>
@@ -264,7 +257,7 @@ export function MobileMenu({
                   popular-cities list below already gives one-tap access
                   to every city. */}
               <section aria-label={c.cities}>
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-fg-3)]">
+                <p className="mb-2 cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
                   {c.cities}
                 </p>
                 <div className="grid">
@@ -285,10 +278,10 @@ export function MobileMenu({
               {previewItems.length > 0 && (
                 <section className="mt-6" aria-label={previewIsNear ? c.near : c.popular}>
                   <div className="mb-2 flex items-baseline justify-between gap-2">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-fg-3)]">
+                    <p className="cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
                       {previewIsNear ? c.near : c.popular}
                       {previewIsNear && radiusKm !== null && (
-                        <span className="ml-1.5 normal-case tracking-normal text-[var(--color-fg-2)]">
+                        <span className="ml-1.5 normal-case tracking-normal text-[var(--color-muted)]">
                           · ≤ {radiusKm} km
                         </span>
                       )}
@@ -298,7 +291,7 @@ export function MobileMenu({
                         <button
                           type="button"
                           onClick={() => setRangeIdx(nextRangeIdx)}
-                          className="rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-fg-1)] transition hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]"
+                          className="rounded-full border border-[var(--color-hair)] bg-[var(--color-surface)] px-2 py-0.5 cn-readout cn-readout-s font-semibold uppercase tracking-wider text-[var(--color-muted)] transition hover:border-[var(--color-bronze)] hover:text-[var(--color-bronze)]"
                           aria-label={nextRangeIdx === 0 ? c.rangeReset : c.rangeWider(RANGE_TIERS_KM[nextRangeIdx - 1]!)}
                         >
                           {nextRangeIdx === 0 ? c.rangeReset : c.rangeWider(RANGE_TIERS_KM[nextRangeIdx - 1]!)}
@@ -307,46 +300,46 @@ export function MobileMenu({
                       {previewIsNear && (
                         <span
                           aria-hidden
-                          className="inline-flex items-center gap-1 text-[10px] text-[var(--color-accent-cyan)]"
+                          className="inline-flex items-center gap-1 cn-readout cn-readout-s text-[var(--color-bronze)]"
                         >
                           <span className="relative inline-flex h-1.5 w-1.5">
-                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]" />
+                            <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-bronze)] opacity-70" />
+                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-bronze)]" />
                           </span>
                           GPS
                         </span>
                       )}
                     </div>
                   </div>
-                  <ul className="flex flex-col divide-y divide-[var(--color-bg-2)] overflow-hidden rounded-xl bg-[var(--color-bg-1)] ring-1 ring-[var(--color-bg-2)]">
+                  <ul className="flex flex-col divide-y divide-[var(--color-hair)] overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-surface)] ring-1 ring-[var(--color-raise)]">
                     {previewItems.map((item) => (
                       <li key={item.slug}>
                         <Link
                           href={`/${locale}/cities/${item.slug}`}
                           onClick={() => setOpen(false)}
-                          className="flex items-center justify-between gap-3 px-4 py-3 transition active:bg-[var(--color-bg-2)] hover:bg-[var(--color-bg-2)]"
+                          className="flex items-center justify-between gap-3 px-4 py-3 transition active:bg-[var(--color-raise)] hover:bg-[var(--color-raise)]"
                         >
                           <span className="flex min-w-0 items-center gap-3">
-                            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--color-bg-2)] text-[var(--color-accent-cyan)]">
+                            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-[var(--color-raise)] text-[var(--color-bronze)]">
                               <MapPinIcon className="h-4 w-4" />
                             </span>
                             <span className="min-w-0">
-                              <span className="block truncate font-semibold text-[var(--color-fg-0)]">
+                              <span className="block truncate font-semibold text-[var(--color-ink)]">
                                 {item.name}
                               </span>
                               {item.region && (
-                                <span className="block truncate text-[11px] text-[var(--color-fg-3)]">
+                                <span className="block truncate cn-readout cn-readout-s text-[var(--color-muted)]">
                                   {item.region}
                                 </span>
                               )}
                             </span>
                           </span>
                           {item.distanceKm !== null ? (
-                            <span className="shrink-0 rounded-full bg-[var(--color-bg-2)] px-2 py-0.5 text-[10px] font-semibold text-[var(--color-fg-1)]">
+                            <span className="shrink-0 rounded-full bg-[var(--color-raise)] px-2 py-0.5 cn-readout cn-readout-s font-semibold text-[var(--color-muted)]">
                               {formatDistanceKm(item.distanceKm)}
                             </span>
                           ) : (
-                            <span aria-hidden className="text-[var(--color-fg-3)]">→</span>
+                            <span aria-hidden className="text-[var(--color-muted)]">→</span>
                           )}
                         </Link>
                       </li>
@@ -357,7 +350,7 @@ export function MobileMenu({
 
               {/* Secondary nav rows */}
               <section className="mt-6" aria-label={c.guides}>
-                <ul className="flex flex-col divide-y divide-[var(--color-bg-2)] overflow-hidden rounded-xl bg-[var(--color-bg-1)] ring-1 ring-[var(--color-bg-2)]">
+                <ul className="flex flex-col divide-y divide-[var(--color-hair)] overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-surface)] ring-1 ring-[var(--color-raise)]">
                   <SecondaryRow
                     href={`/${locale}/guides`}
                     onClick={() => setOpen(false)}
@@ -382,7 +375,7 @@ export function MobileMenu({
 
               {/* Language picker */}
               <section className="mt-6" aria-label={c.language}>
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-fg-3)]">
+                <p className="mb-2 cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
                   {c.language}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -394,8 +387,8 @@ export function MobileMenu({
                       hrefLang={l}
                       className={
                         l === locale
-                          ? 'rounded-full bg-[var(--color-accent-cyan)] px-3 py-1.5 text-xs font-semibold text-[var(--color-bg-0)]'
-                          : 'rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-3 py-1.5 text-xs font-semibold text-[var(--color-fg-1)] hover:border-[var(--color-accent-cyan)] hover:text-[var(--color-accent-cyan)]'
+                          ? 'inline-flex min-h-11 items-center rounded-full bg-[var(--color-bronze)] px-4 text-[15px] font-semibold text-[var(--color-on-bronze)]'
+                          : 'inline-flex min-h-11 items-center rounded-full border border-[var(--color-hair)] px-4 text-[15px] font-semibold text-[var(--color-ink)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-bronze)]'
                       }
                     >
                       {LOCALE_LABELS[l]}
@@ -413,10 +406,10 @@ export function MobileMenu({
 }
 
 const TILE_ACCENT: Record<'pink' | 'cyan' | 'violet' | 'amber', { icon: string; ring: string; bar: string }> = {
-  pink:   { icon: 'text-[var(--color-accent-pink)]',   ring: 'ring-[var(--color-accent-pink)]/30',   bar: 'bg-[var(--color-accent-pink)]' },
-  cyan:   { icon: 'text-[var(--color-accent-cyan)]',   ring: 'ring-[var(--color-accent-cyan)]/30',   bar: 'bg-[var(--color-accent-cyan)]' },
-  violet: { icon: 'text-[var(--color-accent-violet)]', ring: 'ring-[var(--color-accent-violet)]/30', bar: 'bg-[var(--color-accent-violet)]' },
-  amber:  { icon: 'text-[var(--color-accent-amber)]',  ring: 'ring-[var(--color-accent-amber)]/30',  bar: 'bg-[var(--color-accent-amber)]' },
+  pink:   { icon: 'text-[var(--color-bronze)]',   ring: 'ring-[var(--color-bronze)]/30',   bar: 'bg-[var(--color-bronze)]' },
+  cyan:   { icon: 'text-[var(--color-bronze)]',   ring: 'ring-[var(--color-bronze)]/30',   bar: 'bg-[var(--color-bronze)]' },
+  violet: { icon: 'text-[var(--color-bronze)]', ring: 'ring-[var(--color-bronze)]/30', bar: 'bg-[var(--color-bronze)]' },
+  amber:  { icon: 'text-[var(--color-bronze)]',  ring: 'ring-[var(--color-bronze)]/30',  bar: 'bg-[var(--color-bronze)]' },
 };
 
 function Tile({
@@ -433,13 +426,13 @@ function Tile({
     <Link
       href={href}
       onClick={onClick}
-      className={`group relative flex flex-col gap-2 overflow-hidden rounded-xl bg-[var(--color-bg-1)] p-4 ring-1 ${a.ring} transition active:scale-[0.99] hover:bg-[var(--color-bg-2)]`}
+      className={`group relative flex flex-col gap-2 overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-surface)] p-4 ring-1 ${a.ring} transition active:scale-[0.99] hover:bg-[var(--color-raise)]`}
     >
       <span aria-hidden className={`absolute inset-x-0 top-0 h-[2px] opacity-70 ${a.bar}`} />
-      <span className={`flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--color-bg-2)] ${a.icon}`}>
+      <span className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--color-raise)] ${a.icon}`}>
         {icon}
       </span>
-      <span className="text-sm font-semibold text-[var(--color-fg-0)]">{label}</span>
+      <span className="text-sm font-semibold text-[var(--color-ink)]">{label}</span>
     </Link>
   );
 }
@@ -458,19 +451,19 @@ function SecondaryRow({
       <Link
         href={href}
         onClick={onClick}
-        className="flex items-center gap-3 px-4 py-3 text-sm font-semibold transition hover:bg-[var(--color-bg-2)] active:bg-[var(--color-bg-2)]"
+        className="flex items-center gap-3 px-4 py-3 text-sm font-semibold transition hover:bg-[var(--color-raise)] active:bg-[var(--color-raise)]"
       >
         <span
-          className={`grid h-7 w-7 place-items-center rounded-md bg-[var(--color-bg-2)] ${
-            accent ? 'text-[var(--color-accent-amber)]' : 'text-[var(--color-fg-1)]'
+          className={`grid h-7 w-7 place-items-center rounded-[var(--radius-sm)] bg-[var(--color-raise)] ${
+            accent ? 'text-[var(--color-bronze)]' : 'text-[var(--color-muted)]'
           }`}
         >
           {icon}
         </span>
-        <span className={accent ? 'text-[var(--color-accent-amber)]' : 'text-[var(--color-fg-0)]'}>
+        <span className={accent ? 'text-[var(--color-bronze)]' : 'text-[var(--color-ink)]'}>
           {label}
         </span>
-        <span aria-hidden className="ml-auto text-[var(--color-fg-3)]">→</span>
+        <span aria-hidden className="ml-auto text-[var(--color-muted)]">→</span>
       </Link>
     </li>
   );

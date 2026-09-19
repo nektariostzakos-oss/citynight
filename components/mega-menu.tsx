@@ -64,11 +64,14 @@ type Vertical = 'cities' | 'nightlife' | 'food' | 'stay';
 type ItemDef = { key: Vertical; label: string; icon: React.ReactNode; accent: AccentKey };
 type AccentKey = 'cyan' | 'pink' | 'amber' | 'violet';
 
+// One accent now. Bronze marks what can be acted on and what is selected;
+// depth comes from the surface, never from a glow. The four keys stay so the
+// item definitions below keep reading as a list of verticals.
 const ACCENT: Record<AccentKey, { ring: string; text: string; border: string }> = {
-  cyan:   { ring: 'shadow-[var(--shadow-glow-cyan)]',   text: 'text-[var(--color-accent-cyan)]',   border: 'border-[var(--color-accent-cyan)]/40' },
-  pink:   { ring: 'shadow-[var(--shadow-glow-pink)]',   text: 'text-[var(--color-accent-pink)]',   border: 'border-[var(--color-accent-pink)]/40' },
-  amber:  { ring: '',                                   text: 'text-[var(--color-accent-amber)]',  border: 'border-[var(--color-accent-amber)]/40' },
-  violet: { ring: 'shadow-[var(--shadow-glow-violet)]', text: 'text-[var(--color-accent-violet)]', border: 'border-[var(--color-accent-violet)]/40' },
+  cyan:   { ring: '', text: 'text-[var(--color-bronze)]', border: 'border-[var(--color-bronze)]' },
+  pink:   { ring: '', text: 'text-[var(--color-bronze)]', border: 'border-[var(--color-bronze)]' },
+  amber:  { ring: '', text: 'text-[var(--color-bronze)]', border: 'border-[var(--color-bronze)]' },
+  violet: { ring: '', text: 'text-[var(--color-bronze)]', border: 'border-[var(--color-bronze)]' },
 };
 
 const VERTICAL_COPY: Record<Locale, Record<Vertical, { tagline: string }>> = {
@@ -102,6 +105,10 @@ const VERTICAL_COPY: Record<Locale, Record<Vertical, { tagline: string }>> = {
     food:      { tagline: 'Taverne, mezedopoleia, cucina greca moderna.' },
     stay:      { tagline: 'Boutique, resort, ville di design.' },
   },
+};
+
+const GUIDES_LABEL: Record<Locale, string> = {
+  el: 'Οδηγοί', en: 'Guides', de: 'Guides', fr: 'Guides', it: 'Guide',
 };
 
 type CopyShape = {
@@ -139,7 +146,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     categoryHeading: 'Browse by category',
     preciseCta: 'Use precise location',
     preciseLoading: 'Getting GPS fix…',
-    preciseDeniedNote: 'Location permission denied — using IP only.',
+    preciseDeniedNote: 'Location permission denied: using IP only.',
     preciseActive: '✓ Precise',
     tonightInGreece: 'Tonight in Greece',
     filterPlaceholder: 'Filter cities…',
@@ -159,7 +166,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     categoryHeading: 'Ανά κατηγορία',
     preciseCta: 'Ακριβής τοποθεσία',
     preciseLoading: 'Λαμβάνουμε GPS…',
-    preciseDeniedNote: 'Άρνηση πρόσβασης — χρησιμοποιούμε IP μόνο.',
+    preciseDeniedNote: 'Άρνηση πρόσβασης: χρησιμοποιούμε IP μόνο.',
     preciseActive: '✓ Ακριβής',
     tonightInGreece: 'Απόψε στην Ελλάδα',
     filterPlaceholder: 'Φίλτρο πόλεων…',
@@ -179,7 +186,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     categoryHeading: 'Nach Kategorie',
     preciseCta: 'Genauer Standort',
     preciseLoading: 'GPS wird abgefragt…',
-    preciseDeniedNote: 'Standortzugriff verweigert — nur IP.',
+    preciseDeniedNote: 'Standortzugriff verweigert: nur IP.',
     preciseActive: '✓ Genau',
     tonightInGreece: 'Heute in Griechenland',
     filterPlaceholder: 'Städte filtern…',
@@ -199,7 +206,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     categoryHeading: 'Par catégorie',
     preciseCta: 'Position précise',
     preciseLoading: 'Acquisition GPS…',
-    preciseDeniedNote: 'Permission refusée — IP uniquement.',
+    preciseDeniedNote: 'Permission refusée: IP uniquement.',
     preciseActive: '✓ Précis',
     tonightInGreece: 'Ce soir en Grèce',
     filterPlaceholder: 'Filtrer les villes…',
@@ -219,7 +226,7 @@ const COMMON_COPY: Record<Locale, CopyShape> = {
     categoryHeading: 'Per categoria',
     preciseCta: 'Posizione precisa',
     preciseLoading: 'GPS in corso…',
-    preciseDeniedNote: 'Permesso negato — solo IP.',
+    preciseDeniedNote: 'Permesso negato: solo IP.',
     preciseActive: '✓ Preciso',
     tonightInGreece: 'Stasera in Grecia',
     filterPlaceholder: 'Filtra città…',
@@ -305,7 +312,7 @@ export function MegaMenu({ locale, pulse }: { locale: Locale; pulse?: MegaMenuPu
   return (
     <div ref={navRef} className="hidden flex-1 justify-center md:flex" onMouseLeave={hoverClose}>
       <nav aria-label="Primary" className="relative">
-        <ul className="flex items-center gap-1 rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)]/60 p-1 backdrop-blur-xl">
+        <ul className="flex items-center gap-1 rounded-full border border-[var(--color-hair)] bg-[var(--color-surface)]/60 p-1">
           {nav.map((n) => {
             const isOpen = open === n.key;
             return (
@@ -317,25 +324,32 @@ export function MegaMenu({ locale, pulse }: { locale: Locale; pulse?: MegaMenuPu
                   onClick={() => setOpen(isOpen ? null : n.key)}
                   aria-expanded={isOpen}
                   aria-haspopup="true"
-                  className={`group flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition ${
-                    isOpen ? `${ACCENT[n.accent].text} bg-[var(--color-bg-2)]` : 'text-[var(--color-fg-1)]'
+                  className={`group flex min-h-11 items-center gap-2 rounded-full px-3.5 text-[15px] font-semibold transition-colors duration-[var(--motion-fast)] ${
+                    isOpen ? `${ACCENT[n.accent].text} bg-[var(--color-raise)]` : 'text-[var(--color-muted)]'
                   }`}
                 >
-                  <span className={`${isOpen ? ACCENT[n.accent].text : 'text-[var(--color-fg-2)]'}`}>{n.icon}</span>
+                  <span className={`${isOpen ? ACCENT[n.accent].text : 'text-[var(--color-muted)]'}`}>{n.icon}</span>
                   <span>{n.label}</span>
                   {/* Live pulse — animated ping next to the label so
                       the nav reads "alive". Hidden when the dropdown
                       is open (the strip inside takes over the live cue). */}
                   {!isOpen && (
-                    <span aria-hidden className="relative ml-0.5 inline-flex h-1.5 w-1.5">
-                      <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${ACCENT[n.accent].text.replace('text-', 'bg-')} opacity-70`} />
-                      <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${ACCENT[n.accent].text.replace('text-', 'bg-')}`} />
-                    </span>
+                    <span aria-hidden className="ml-0.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-bronze)]" />
                   )}
                 </button>
               </li>
             );
           })}
+          {/* The guides, as in the prototype's nav. A plain link: there is a
+              page behind it, so it never opens a panel. */}
+          <li>
+            <Link
+              href={`/${locale}/guides`}
+              className="flex min-h-11 items-center rounded-full px-3.5 text-[15px] font-semibold text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] hover:text-[var(--color-ink)]"
+            >
+              {GUIDES_LABEL[locale] ?? GUIDES_LABEL.en}
+            </Link>
+          </li>
           {/* Search — text-only trigger, opens full-screen search modal
               (lives in components/search-box.tsx). The modal is a portal
               over the page; clicking the trigger / pressing ⌘K opens it. */}
@@ -351,7 +365,7 @@ export function MegaMenu({ locale, pulse }: { locale: Locale; pulse?: MegaMenuPu
           }`}
           onMouseEnter={() => open && hoverOpen(open)}
         >
-          <div className="overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[color-mix(in_oklab,var(--color-bg-1)_92%,transparent)] shadow-2xl backdrop-blur-2xl">
+          <div className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[color-mix(in_oklab,var(--color-surface)_92%,transparent)]">
             {open === 'cities'    && <CitiesPanel    locale={locale} c={c} cities={sortedAllCities} nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} pulse={pulse} />}
             {open === 'nightlife' && <VerticalPanel  locale={locale} c={c} kind="nightlife" accent="pink"   nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} />}
             {open === 'food'      && <VerticalPanel  locale={locale} c={c} kind="food"      accent="cyan"   nearest={nearestCities} hasLocation={hasLocation} visitorCity={visitor?.city ?? null} />}
@@ -407,23 +421,20 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pul
 
   return (
     <div className="relative">
-      {/* Neon edge — subtle gradient strip across the top of the panel. */}
-      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-cyan)]/60 to-transparent" />
-
       {/* ── Live status strip — Tonight in Greece · 23:00 · 22° Clear ─ */}
       <PulseStrip pulse={pulse} locale={locale} />
 
       {/* ── Smart filter input ────────────────────────────────────── */}
-      <div className="border-b border-[var(--color-bg-2)]/60 px-6 py-3">
+      <div className="border-b border-[var(--color-hair)] px-6 py-3">
         <div className="relative">
-          <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-fg-3)]">⌕</span>
+          <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">⌕</span>
           <input
             ref={inputRef}
             type="text"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder={COMMON_COPY[locale].filterPlaceholder ?? 'Filter…'}
-            className="w-full rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-0)]/50 py-2 pl-9 pr-3 text-sm text-[var(--color-fg-0)] placeholder:text-[var(--color-fg-3)] focus:border-[var(--color-accent-cyan)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-cyan)]/20"
+            className="min-h-11 w-full rounded-[var(--radius-sm)] border border-[var(--color-hair)] bg-[var(--color-ground)] pl-9 pr-3 text-[15px] text-[var(--color-ink)] placeholder:text-[var(--color-muted)] focus:border-[var(--color-bronze)]"
             aria-label={COMMON_COPY[locale].filterPlaceholder ?? 'Filter cities'}
           />
         </div>
@@ -435,7 +446,7 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pul
       ) : (
         <div className="grid gap-6 p-6 md:grid-cols-3">
           <div className="md:col-span-1">
-            <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} accent="cyan" />
+            <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} />
           </div>
 
           <div className="md:col-span-1">
@@ -460,25 +471,25 @@ function CitiesPanel({ locale, c, cities, nearest, hasLocation, visitorCity, pul
 function PulseStrip({ pulse, locale }: { pulse?: MegaMenuPulse; locale: Locale }) {
   if (!pulse) return null;
   return (
-    <div className="flex items-center gap-3 border-b border-[var(--color-bg-2)]/60 px-6 py-3 text-xs">
+    <div className="flex items-center gap-3 border-b border-[var(--color-hair)] px-6 py-3 text-xs">
       <span className="relative inline-flex h-2 w-2 shrink-0" aria-hidden>
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent-cyan)]" />
+        <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-bronze)] opacity-70" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-bronze)]" />
       </span>
-      <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent-cyan)]">
+      <span className="cn-readout cn-readout-s uppercase text-[var(--color-bronze)]">
         {COMMON_COPY[locale].tonightInGreece ?? 'Tonight in Greece'}
       </span>
-      <span aria-hidden className="text-[var(--color-fg-3)]">·</span>
-      <span className="font-mono tabular-nums text-[var(--color-fg-0)]" suppressHydrationWarning>
+      <span aria-hidden className="text-[var(--color-muted)]">·</span>
+      <span className="cn-readout text-[var(--color-ink)]" suppressHydrationWarning>
         {pulse.athensTime}
       </span>
       {pulse.weather && (
         <>
-          <span aria-hidden className="text-[var(--color-fg-3)]">·</span>
+          <span aria-hidden className="text-[var(--color-muted)]">·</span>
           <span className="inline-flex items-center gap-1.5">
             <span aria-hidden>{pulse.weather.emoji}</span>
-            <span className="tabular-nums text-[var(--color-fg-0)]">{pulse.weather.tempC}°</span>
-            <span className="text-[var(--color-fg-2)]">{pulse.weather.label}</span>
+            <span className="tabular-nums text-[var(--color-ink)]">{pulse.weather.tempC}°</span>
+            <span className="text-[var(--color-muted)]">{pulse.weather.label}</span>
           </span>
         </>
       )}
@@ -495,7 +506,7 @@ function FilteredCitiesGrid({ locale, cities, hasLocation }: {
 }) {
   if (cities.length === 0) {
     return (
-      <div className="p-6 text-sm text-[var(--color-fg-2)]">
+      <div className="p-6 text-sm text-[var(--color-muted)]">
         {COMMON_COPY[locale].filterEmpty ?? 'No cities match.'}
       </div>
     );
@@ -506,14 +517,14 @@ function FilteredCitiesGrid({ locale, cities, hasLocation }: {
         <li key={city.id}>
           <Link
             href={`/${locale}/cities/${city.slug}`}
-            className="group flex items-center justify-between rounded-lg px-3 py-2 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
+            className="group flex min-h-11 items-center justify-between rounded-[var(--radius-sm)] px-3 text-[15px] text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] hover:bg-[var(--color-raise)] hover:text-[var(--color-bronze)]"
           >
             <span className="inline-flex items-center gap-2">
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]/40 transition group-hover:bg-[var(--color-accent-cyan)]" />
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[var(--color-bronze)]/40 transition group-hover:bg-[var(--color-bronze)]" />
               {city.name}
             </span>
             {hasLocation && Number.isFinite(city.distanceKm) && (
-              <span className="text-[10px] text-[var(--color-fg-3)]">{formatDistanceKm(city.distanceKm)}</span>
+              <span className="cn-readout cn-readout-s text-[var(--color-muted)]">{formatDistanceKm(city.distanceKm)}</span>
             )}
           </Link>
         </li>
@@ -549,27 +560,29 @@ function PopularAreas({ locale, c, areas }: {
 
   return (
     <>
-      <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+      <p className="cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
         {c.popularAreas}
       </p>
       {sorted.length === 0 ? (
-        <p className="mt-2 text-xs text-[var(--color-fg-3)]">{c.areasEmpty}</p>
+        <p className="mt-2 text-xs text-[var(--color-muted)]">{c.areasEmpty}</p>
       ) : (
         <ul className="mt-2 space-y-1">
           {sorted.map((a) => (
             <li key={`${a.citySlug}-${a.slug}`}>
               <Link
-                href={`/${locale}/cities/${a.citySlug}/area/${a.slug}`}
-                className="group flex items-center justify-between gap-2 rounded px-2 py-1.5 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:text-[var(--color-accent-cyan)]"
+                // There is no area route after the editorial pivot; the
+                // guide of the city that covers the area is what exists.
+                href={`/${locale}/cities/${a.citySlug}`}
+                className="group flex min-h-11 items-center justify-between gap-2 rounded-[var(--radius-sm)] px-2 text-[15px] text-[var(--color-muted)] transition-colors duration-[var(--motion-fast)] hover:bg-[var(--color-raise)] hover:text-[var(--color-bronze)]"
               >
                 <span className="inline-flex min-w-0 flex-col">
-                  <span className="truncate font-medium text-[var(--color-fg-0)]">{a.name}</span>
-                  <span className="truncate text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+                  <span className="truncate font-medium text-[var(--color-ink)]">{a.name}</span>
+                  <span className="truncate cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
                     {a.cityName}
                   </span>
                 </span>
                 {'distanceKm' in a && (
-                  <span className="shrink-0 text-[10px] text-[var(--color-fg-3)]">
+                  <span className="shrink-0 cn-readout cn-readout-s text-[var(--color-muted)]">
                     {formatDistanceKm((a as { distanceKm: number }).distanceKm)}
                   </span>
                 )}
@@ -592,10 +605,10 @@ function LiveDestinations({ locale, c, destinations }: {
   if (destinations.length === 0) return null;
   return (
     <div>
-      <p className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+      <p className="flex items-center gap-2 cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
         <span className="relative inline-flex h-1.5 w-1.5" aria-hidden>
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent-violet)] opacity-70" />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-violet)]" />
+          <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-bronze)] opacity-70" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-bronze)]" />
         </span>
         {c.liveAcrossGreece}
       </p>
@@ -604,18 +617,18 @@ function LiveDestinations({ locale, c, destinations }: {
           <li key={d.citySlug}>
             <Link
               href={`/${locale}/cities/${d.citySlug}`}
-              className="group flex items-center justify-between gap-3 rounded px-2 py-1.5 text-sm transition hover:bg-[var(--color-bg-2)]"
+              className="group flex min-h-11 items-center justify-between gap-3 rounded-[var(--radius-sm)] px-2 text-[15px] transition-colors duration-[var(--motion-fast)] hover:bg-[var(--color-raise)]"
             >
-              <span className="truncate font-medium text-[var(--color-fg-0)] group-hover:text-[var(--color-accent-violet)]">
+              <span className="truncate font-medium text-[var(--color-ink)] group-hover:text-[var(--color-bronze)]">
                 {d.cityName}
               </span>
               {d.tempC !== null ? (
-                <span className="inline-flex shrink-0 items-center gap-1.5 text-[var(--color-fg-2)]">
+                <span className="inline-flex shrink-0 items-center gap-1.5 text-[var(--color-muted)]">
                   <span aria-hidden className="text-base leading-none">{d.emoji}</span>
-                  <span className="tabular-nums text-[var(--color-fg-1)]">{d.tempC}°</span>
+                  <span className="tabular-nums text-[var(--color-muted)]">{d.tempC}°</span>
                 </span>
               ) : (
-                <span className="text-[10px] text-[var(--color-fg-3)]">—</span>
+                <span className="cn-readout cn-readout-s text-[var(--color-muted)]">—</span>
               )}
             </Link>
           </li>
@@ -634,7 +647,7 @@ function LatestArticleCard({ locale, article }: {
   return (
     <Link
       href={article.url}
-      className="group relative block overflow-hidden rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] transition hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.35)]"
+      className="group relative block overflow-hidden rounded-[var(--radius-sm)] border border-[var(--color-hair)] bg-[var(--color-surface)] transition hover:border-[var(--color-bronze)]"
     >
       {article.coverUrl && (
         <div className="relative aspect-[16/9] w-full overflow-hidden">
@@ -648,13 +661,13 @@ function LatestArticleCard({ locale, article }: {
         </div>
       )}
       <div className="p-3">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent-pink)]">
+        <p className="cn-readout cn-readout-s uppercase text-[var(--color-bronze)]">
           {COMMON_COPY[locale].justPublished ?? 'Just published'}
         </p>
-        <p className="mt-1.5 line-clamp-2 text-sm font-medium text-[var(--color-fg-0)] group-hover:text-[var(--color-accent-pink)]">
+        <p className="mt-1.5 line-clamp-2 text-sm font-medium text-[var(--color-ink)] group-hover:text-[var(--color-bronze)]">
           {article.title}
         </p>
-        <p className="mt-1 text-[10px] text-[var(--color-fg-3)]">{article.cityName}</p>
+        <p className="mt-1 cn-readout cn-readout-s text-[var(--color-muted)]">{article.cityName}</p>
       </div>
     </Link>
   );
@@ -674,21 +687,21 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
     <div className="grid gap-6 p-6 md:grid-cols-3">
       {/* Left: Near you */}
       <div className="md:col-span-1">
-        <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} accent={accent} kindHref={`/${locale}#${kind}`} />
+        <NearYouStrip locale={locale} c={c} nearest={nearest} hasLocation={hasLocation} visitorCity={visitorCity} kindHref={`/${locale}#${kind}`} />
       </div>
 
       {/* Middle: categories */}
       <div className="md:col-span-1">
-        <p className="text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">{c.categoryHeading}</p>
+        <p className="cn-readout cn-readout-s uppercase text-[var(--color-muted)]">{c.categoryHeading}</p>
         <ul className="mt-2 space-y-1">
           {cats.map((cat) => (
             <li key={cat.slug}>
               <Link
                 href={`/${locale}#${kind}`}
-                className={`flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-1)] transition hover:bg-[var(--color-bg-2)] hover:${ACCENT[accent].text}`}
+                className={`flex items-center justify-between rounded-[var(--radius-sm)] px-1 py-1 text-sm text-[var(--color-muted)] transition hover:bg-[var(--color-raise)] hover:${ACCENT[accent].text}`}
               >
                 <span>{cat.label[locale]}</span>
-                <span className="text-[var(--color-fg-3)]">→</span>
+                <span className="text-[var(--color-muted)]">→</span>
               </Link>
             </li>
           ))}
@@ -699,15 +712,15 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
       <div className="md:col-span-1">
         <Link
           href={`/${locale}#${kind}`}
-          className={`flex h-full flex-col justify-between rounded-xl border ${ACCENT[accent].border} bg-[var(--color-bg-2)]/50 p-4 transition hover:bg-[var(--color-bg-2)]`}
+          className={`flex h-full flex-col justify-between rounded-[var(--radius-md)] border ${ACCENT[accent].border} bg-[var(--color-raise)]/50 p-4 transition hover:bg-[var(--color-raise)]`}
         >
-          <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-bg-1)] ${ACCENT[accent].text} ${ACCENT[accent].ring}`}>
+          <span className={`inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-hair)] ${ACCENT[accent].text}`}>
             {kind === 'nightlife' ? <MoonIcon /> : kind === 'food' ? <ForkKnifeIcon /> : <BedIcon />}
           </span>
           <div className="mt-3">
             <p className={`font-display text-lg font-semibold ${ACCENT[accent].text}`}>{localLabel(locale, kind)}</p>
-            <p className="mt-1 text-xs text-[var(--color-fg-2)]">{VERTICAL_COPY[locale][kind].tagline}</p>
-            <p className="mt-3 text-xs text-[var(--color-fg-3)]">{c.viewAll} →</p>
+            <p className="mt-1 text-xs text-[var(--color-muted)]">{VERTICAL_COPY[locale][kind].tagline}</p>
+            <p className="mt-3 text-xs text-[var(--color-muted)]">{c.viewAll} →</p>
           </div>
         </Link>
       </div>
@@ -715,16 +728,16 @@ function VerticalPanel({ locale, c, kind, accent, nearest, hasLocation, visitorC
   );
 }
 
-function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, kindHref }: {
+function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, kindHref }: {
   locale: Locale;
   c: CopyShape;
   nearest: CityWithDistance[];
   hasLocation: boolean;
   visitorCity: string | null;
-  accent: AccentKey;
   kindHref?: string;
 }) {
-  const dotClass = `bg-[var(--color-accent-${accent === 'amber' ? 'amber' : accent})]`;
+  // Bronze is the one accent: it marks what can be acted on.
+  const dotClass = 'bg-[var(--color-bronze)]';
   // Read source/loading/error from the provider directly so the strip can
   // show a status chip (precise active / acquiring GPS / denied) without
   // requiring action — the provider auto-prompts on load.
@@ -734,16 +747,16 @@ function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, ki
   return (
     <div>
       <div className="flex items-center justify-between gap-2">
-        <p className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
-          <span className={`inline-block h-1.5 w-1.5 animate-pulse rounded-full ${dotClass}`} aria-hidden />
+        <p className="flex items-center gap-2 cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
+          <span className={`inline-block h-1.5 w-1.5 rounded-full ${dotClass}`} aria-hidden />
           {c.nearYou(visitorCity)}
         </p>
         {isPrecise ? (
-          <span className="rounded-full border border-[var(--color-accent-cyan)]/40 bg-[var(--color-accent-cyan)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--color-accent-cyan)]">
+          <span className="rounded-full border border-[var(--color-bronze)]/40 bg-[var(--color-bronze)]/10 px-2 py-0.5 cn-readout cn-readout-s font-semibold text-[var(--color-bronze)]">
             {c.preciseActive}
           </span>
         ) : preciseLoading ? (
-          <span className="rounded-full border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-2 py-0.5 text-[10px] font-medium text-[var(--color-fg-2)]">
+          <span className="rounded-full border border-[var(--color-hair)] bg-[var(--color-surface)] px-2 py-0.5 cn-readout cn-readout-s font-medium text-[var(--color-muted)]">
             📍 {c.preciseLoading}
           </span>
         ) : null}
@@ -754,19 +767,19 @@ function NearYouStrip({ locale, c, nearest, hasLocation, visitorCity, accent, ki
             <li key={city.id}>
               <Link
                 href={`/${locale}/cities/${city.slug}`}
-                className="flex items-center justify-between rounded px-1 py-1 text-sm text-[var(--color-fg-0)] transition hover:bg-[var(--color-bg-2)]"
+                className="flex items-center justify-between rounded-[var(--radius-sm)] px-1 py-1 text-sm text-[var(--color-ink)] transition hover:bg-[var(--color-raise)]"
               >
                 <span className="font-medium">{city.name}</span>
-                <span className="text-[10px] text-[var(--color-fg-3)]">{formatDistanceKm(city.distanceKm)}</span>
+                <span className="cn-readout cn-readout-s text-[var(--color-muted)]">{formatDistanceKm(city.distanceKm)}</span>
               </Link>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="mt-2 text-xs text-[var(--color-fg-3)]">{c.enable}</p>
+        <p className="mt-2 text-xs text-[var(--color-muted)]">{c.enable}</p>
       )}
       {isDenied && (
-        <p className="mt-2 text-[10px] text-[var(--color-fg-3)]">{c.preciseDeniedNote}</p>
+        <p className="mt-2 cn-readout cn-readout-s text-[var(--color-muted)]">{c.preciseDeniedNote}</p>
       )}
     </div>
   );

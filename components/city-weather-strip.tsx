@@ -1,8 +1,10 @@
-// Phase K.4 — server-rendered weather + local-time strip for city pages.
+// The city's live strip: Athens clock, temperature, sky, wind. One line of
+// readings under the city name — Lilex, tabular, Greek capitals without
+// accents, the way every reading is written in Direction A "Αντικύθηρα".
 //
 // Pure server component (no client JS). The Open-Meteo fetch is cached
-// in-process AND wrapped in Next ISR so this strip is essentially free
-// after the first request per 15-minute window.
+// in-process AND wrapped in Next ISR, so the strip is essentially free after
+// the first request per 15-minute window. Data reads are unchanged.
 
 import { getCityWeather, weatherLabel, windCompass } from '@/lib/weather';
 import { formatAthensTime } from '@/lib/format-date';
@@ -13,44 +15,50 @@ type Props = {
   locale: string;
 };
 
+/** Greek capitals without accents, the readout case. */
+function up(s: string): string {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().normalize('NFC');
+}
+
 export async function CityWeatherStrip({ lat, lng, locale }: Props) {
   if (typeof lat !== 'number' || typeof lng !== 'number') return null;
   const weather = await getCityWeather(lat, lng);
-  // Show the time even if weather fetch failed — the local clock is
-  // still useful information ("23:00 in Athens").
+  // Show the time even if the weather fetch failed — the local clock is still
+  // the first reading of the night.
   const localTime = formatAthensTime(new Date(), locale);
+  const t = LABELS[locale === 'el' ? 'el' : 'en'];
 
   if (!weather) {
     return (
-      <div className="inline-flex items-center gap-3 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-2 text-sm text-[var(--color-fg-1)]">
-        <span className="font-mono tabular-nums">{localTime}</span>
-      </div>
+      <p className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-hair)] px-4 cn-readout text-[var(--color-muted)]">
+        <span className="text-[var(--color-ink)] tabular-nums" suppressHydrationWarning>{localTime}</span>
+        <span>{t.athens}</span>
+      </p>
     );
   }
 
-  const { emoji, text } = weatherLabel(weather.weatherCode, locale);
-  const wind = windCompass(weather.windDegrees, locale);
-  const temp = Math.round(weather.temperatureC);
-  const windKmh = Math.round(weather.windKmh);
+  const { text } = weatherLabel(weather.weatherCode, locale);
 
   return (
-    <div className="inline-flex flex-wrap items-center gap-x-4 gap-y-1 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-4 py-2 text-sm text-[var(--color-fg-1)]">
-      <span className="font-mono tabular-nums text-[var(--color-fg-0)]" suppressHydrationWarning>
-        {localTime}
+    <p className="inline-flex min-h-11 flex-wrap items-center gap-x-4 gap-y-1 rounded-full border border-[var(--color-hair)] px-4 py-2 cn-readout text-[var(--color-muted)]">
+      <span className="text-[var(--color-ink)] tabular-nums" suppressHydrationWarning>
+        {localTime} {t.athens}
       </span>
-      <span aria-hidden className="text-[var(--color-fg-3)]">·</span>
-      <span className="inline-flex items-center gap-1.5">
-        <span aria-hidden className="text-base leading-none">{emoji}</span>
-        <span className="font-semibold text-[var(--color-fg-0)] tabular-nums">{temp}°</span>
-        <span className="text-[var(--color-fg-2)]">{text}</span>
+      <span aria-hidden className="text-[var(--color-faint)]">·</span>
+      <span>
+        <span className="text-[var(--color-ink)] tabular-nums">{Math.round(weather.temperatureC)}°</span>{' '}
+        {up(text)}
       </span>
-      <span aria-hidden className="text-[var(--color-fg-3)]">·</span>
-      <span className="inline-flex items-center gap-1 text-[var(--color-fg-2)]">
-        <span aria-hidden>🍃</span>
-        <span className="tabular-nums">{windKmh}</span>
-        <span className="text-[10px] uppercase tracking-widest">km/h</span>
-        <span className="text-[var(--color-fg-3)]">{wind}</span>
+      <span aria-hidden className="text-[var(--color-faint)]">·</span>
+      <span>
+        {t.wind} <span className="text-[var(--color-ink)] tabular-nums">{Math.round(weather.windKmh)}</span>{' '}
+        {t.kmh} {up(windCompass(weather.windDegrees, locale))}
       </span>
-    </div>
+    </p>
   );
 }
+
+const LABELS: Record<'el' | 'en', { athens: string; wind: string; kmh: string }> = {
+  el: { athens: 'ΑΘΗΝΑ', wind: 'ΑΝΕΜΟΣ', kmh: 'ΧΛΜ/Ω' },
+  en: { athens: 'ATHENS', wind: 'WIND', kmh: 'KM/H' },
+};

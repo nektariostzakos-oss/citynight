@@ -72,35 +72,34 @@ export function LocaleAutoRedirect({
     <div
       role="status"
       aria-live="polite"
-      className="fixed inset-x-0 top-0 z-50 border-b border-[var(--color-accent-pink)]/40 bg-[var(--color-bg-0)]/90 backdrop-blur"
+      className="fixed inset-x-0 top-0 z-50 border-b border-[var(--color-hair)] bg-[var(--color-ground)]"
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-2.5 text-sm sm:flex-row">
-        <div className="flex items-center gap-3 text-[var(--color-fg-1)]">
+        <div className="flex items-center gap-3 text-[var(--color-muted)]">
           {/* Big animated countdown number */}
           <span
             aria-hidden
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-accent-pink)] bg-[var(--color-bg-1)] font-display text-lg font-semibold text-[var(--color-accent-pink)]"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-bronze)] bg-[var(--color-surface)] font-display text-lg font-semibold text-[var(--color-bronze)]"
           >
             {secondsLeft}
-            <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[var(--color-accent-pink)]/40" />
           </span>
           <p>
-            {t.redirecting} <span className="font-semibold text-[var(--color-fg-0)]">{label}</span>{' '}
-            <span className="text-[var(--color-fg-2)]">{t.in} {secondsLeft}{t.sec}</span>
+            {t.redirecting} <span className="font-semibold text-[var(--color-ink)]">{label}</span>{' '}
+            <span className="text-[var(--color-muted)]">{t.in} {secondsLeft}{t.sec}</span>
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <a
             href={`/${suggested}`}
-            className="rounded-md bg-[var(--color-accent-pink)] px-3 py-1.5 text-xs font-semibold text-[var(--color-bg-0)] shadow-[var(--shadow-glow-pink)] hover:brightness-110"
+            className="inline-flex min-h-11 items-center rounded-full bg-[var(--color-bronze)] px-4 text-[15px] font-semibold text-[var(--color-on-bronze)] transition-transform duration-[var(--motion-fast)] active:scale-[0.98]"
           >
             {t.goNow} →
           </a>
           <button
             type="button"
             onClick={() => { setCanceled(true); setStayCookie(); }}
-            className="rounded-md border border-[var(--color-bg-3)] px-3 py-1.5 text-xs font-semibold text-[var(--color-fg-1)] hover:border-[var(--color-fg-1)]"
+            className="rounded-[var(--radius-sm)] border border-[var(--color-hair)] px-3 py-1.5 text-xs font-semibold text-[var(--color-muted)] hover:border-[var(--color-muted)]"
           >
             {t.stay}
           </button>
@@ -120,7 +119,7 @@ export function StayHereLink({ label }: { label: string }) {
         document.cookie = `${COOKIE}=1; path=/; max-age=${maxAge}; SameSite=Lax`;
         window.location.reload();
       }}
-      className="text-xs text-[var(--color-fg-3)] underline-offset-4 hover:text-[var(--color-fg-1)] hover:underline"
+      className="text-xs text-[var(--color-muted)] underline-offset-4 hover:text-[var(--color-muted)] hover:underline"
     >
       {label}
     </button>

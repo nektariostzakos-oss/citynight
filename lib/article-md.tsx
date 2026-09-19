@@ -34,8 +34,25 @@ export function slugifyHeading(s: string): string {
   return out || 's';
 }
 
+/**
+ * Em dashes out of visible copy, in one place.
+ *
+ * The seeded guide articles were written with em dashes and the design does
+ * not use them (products/citynight/design/tokens.md, "Copy"). Rewriting the
+ * rows would lose the originals and would have to be redone on every seed, so
+ * the swap happens at render: " — " becomes ": ", which is how the same
+ * sentence would be punctuated in Greek anyway.
+ *
+ * Titles, taglines and subtitles come from the same rows and never pass
+ * through the markdown renderer, so pages call this on them directly.
+ */
+export function noEmDash(text: string | null | undefined): string {
+  return (text ?? '').replace(/\s*—\s*/g, ': ');
+}
+
 /** Inline parser: handles **bold**, *italic*, and [text](url). */
-function renderInline(text: string, keyPrefix: string): ReactNode[] {
+function renderInline(raw: string, keyPrefix: string): ReactNode[] {
+  const text = noEmDash(raw);
   const out: ReactNode[] = [];
   // Tokenize by [text](url), **bold**, *italic* in a single regex; anything
   // else stays as a literal string segment.
@@ -51,11 +68,11 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
       const isInternal = url.startsWith('/');
       out.push(
         isInternal
-          ? <Link key={key} href={url} className="text-[var(--color-accent-cyan)] underline-offset-2 hover:underline">{m[1]}</Link>
-          : <a key={key} href={url} rel="noopener noreferrer" target="_blank" className="text-[var(--color-accent-cyan)] underline-offset-2 hover:underline">{m[1]}</a>,
+          ? <Link key={key} href={url} className="text-[var(--color-bronze)] underline-offset-2 hover:underline">{m[1]}</Link>
+          : <a key={key} href={url} rel="noopener noreferrer" target="_blank" className="text-[var(--color-bronze)] underline-offset-2 hover:underline">{m[1]}</a>,
       );
     } else if (m[3]) {
-      out.push(<strong key={key} className="font-semibold text-[var(--color-fg-0)]">{m[3]}</strong>);
+      out.push(<strong key={key} className="font-semibold text-[var(--color-ink)]">{m[3]}</strong>);
     } else if (m[4]) {
       out.push(<em key={key}>{m[4]}</em>);
     }
@@ -134,7 +151,7 @@ export function renderMarkdown(src: string): ReactNode {
           case 'h2': {
             const id = slugifyHeading(b.text);
             return (
-              <h2 key={k} id={id} className="mt-12 mb-4 font-display text-2xl font-semibold text-[var(--color-fg-0)] md:text-3xl">
+              <h2 key={k} id={id} className="mt-12 mb-4 font-display text-2xl font-semibold text-[var(--color-ink)] md:text-3xl">
                 {renderInline(b.text, k)}
               </h2>
             );
@@ -142,20 +159,20 @@ export function renderMarkdown(src: string): ReactNode {
           case 'h3': {
             const id = slugifyHeading(b.text);
             return (
-              <h3 key={k} id={id} className="mt-8 mb-3 font-display text-lg font-semibold text-[var(--color-fg-0)] md:text-xl">
+              <h3 key={k} id={id} className="mt-8 mb-3 font-display text-lg font-semibold text-[var(--color-ink)] md:text-xl">
                 {renderInline(b.text, k)}
               </h3>
             );
           }
           case 'p':
             return (
-              <p key={k} className="mb-5 leading-relaxed text-base text-[var(--color-fg-1)] md:text-lg">
+              <p key={k} className="mb-5 leading-relaxed text-base text-[var(--color-ink)] md:text-lg">
                 {renderInline(b.text, k)}
               </p>
             );
           case 'ul':
             return (
-              <ul key={k} className="mb-5 list-disc space-y-2 pl-6 text-base text-[var(--color-fg-1)] md:text-lg">
+              <ul key={k} className="mb-5 list-disc space-y-2 pl-6 text-base text-[var(--color-ink)] md:text-lg">
                 {b.items.map((it, j) => (
                   <li key={`${k}-${j}`} className="leading-relaxed">{renderInline(it, `${k}-${j}`)}</li>
                 ))}
@@ -163,7 +180,7 @@ export function renderMarkdown(src: string): ReactNode {
             );
           case 'ol':
             return (
-              <ol key={k} className="mb-5 list-decimal space-y-2 pl-6 text-base text-[var(--color-fg-1)] md:text-lg">
+              <ol key={k} className="mb-5 list-decimal space-y-2 pl-6 text-base text-[var(--color-ink)] md:text-lg">
                 {b.items.map((it, j) => (
                   <li key={`${k}-${j}`} className="leading-relaxed">{renderInline(it, `${k}-${j}`)}</li>
                 ))}
@@ -171,7 +188,7 @@ export function renderMarkdown(src: string): ReactNode {
             );
           case 'quote':
             return (
-              <blockquote key={k} className="mb-5 border-l-2 border-[var(--color-accent-cyan)] pl-4 text-base italic text-[var(--color-fg-1)] md:text-lg">
+              <blockquote key={k} className="mb-5 border-l border-[var(--color-bronze)] pl-4 text-base italic text-[var(--color-muted)] md:text-lg">
                 {b.lines.map((line, j) => (
                   <Fragment key={`${k}-${j}`}>
                     {renderInline(line, `${k}-${j}`)}
@@ -197,7 +214,7 @@ export function extractH2Headings(src: string): { id: string; label: string }[] 
     const m = /^##\s+(.+?)\s*$/.exec(line);
     if (!m) continue;
     const text = m[1]!;
-    out.push({ id: slugifyHeading(text), label: text });
+    out.push({ id: slugifyHeading(text), label: noEmDash(text) });
   }
   return out;
 }

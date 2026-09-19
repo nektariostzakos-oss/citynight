@@ -82,24 +82,20 @@ export function SmartDestinations({
   const sub = gpsOn ? copy.subNearby : copy.subDefault;
 
   return (
-    <section id="cities" className="mx-auto w-full max-w-6xl px-6 py-16 scroll-mt-20">
+    <section id="cities" className="mx-auto w-full max-w-[1180px] scroll-mt-20 px-5 py-9 md:px-8">
       <div className="flex items-start gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl" suppressHydrationWarning>
+            <h2 className="font-display text-[clamp(1.5rem,4vw,2.2rem)] font-semibold leading-tight tracking-[-0.015em]" suppressHydrationWarning>
               {heading}
             </h2>
             {gpsOn && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-accent-cyan)]/40 bg-[var(--color-accent-cyan)]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-cyan)]">
-                <span aria-hidden className="relative inline-flex h-1.5 w-1.5">
-                  <span className="absolute inset-0 animate-ping rounded-full bg-[var(--color-accent-cyan)] opacity-70" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]" />
-                </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-bronze)] px-2.5 py-0.5 cn-readout cn-readout-s uppercase text-[var(--color-bronze)]">
                 {copy.livePill}
               </span>
             )}
           </div>
-          <p className="mt-2 text-[var(--color-fg-2)]" suppressHydrationWarning>{sub}</p>
+          <p className="mt-2 text-[var(--color-muted)]" suppressHydrationWarning>{sub}</p>
         </div>
       </div>
 
@@ -108,37 +104,37 @@ export function SmartDestinations({
           <li key={city.id}>
             <Link
               href={`/${locale}/cities/${city.slug}`}
-              className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] px-5 py-4 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-pink)] hover:shadow-[0_18px_60px_-20px_rgba(255,45,149,0.45)]"
+              className="group relative flex items-center gap-4 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-surface)] px-5 py-4 transition-colors duration-[var(--motion-fast)] hover:border-[var(--color-bronze)]"
             >
               <span
                 aria-hidden
-                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-bg-3)] bg-[var(--color-bg-0)] font-mono text-[11px] font-bold tracking-tight text-[var(--color-fg-1)] transition group-hover:border-[var(--color-accent-pink)] group-hover:text-[var(--color-accent-pink)]"
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-hair)] bg-[var(--color-ground)] cn-readout cn-readout-s font-bold tracking-tight text-[var(--color-muted)] transition group-hover:border-[var(--color-bronze)] group-hover:text-[var(--color-bronze)]"
               >
                 {String(idx + 1).padStart(2, '0')}
               </span>
 
               <div className="min-w-0 flex-1">
                 {city.region && (
-                  <p className="truncate text-[10px] uppercase tracking-widest text-[var(--color-fg-3)]">
+                  <p className="truncate cn-readout cn-readout-s uppercase text-[var(--color-muted)]">
                     {copy.regionLabels[city.region] ?? city.region}
                   </p>
                 )}
-                <p className="truncate font-display text-lg font-semibold text-[var(--color-fg-0)] transition group-hover:text-[var(--color-accent-pink)]">
+                <p className="truncate font-display text-lg font-semibold text-[var(--color-ink)] transition group-hover:text-[var(--color-bronze)]">
                   {city.name}
                 </p>
-                <p className="mt-0.5 truncate text-xs text-[var(--color-fg-2)]">
+                <p className="mt-0.5 truncate text-[13px] text-[var(--color-muted)]">
                   {city.articleCount > 0 ? `${city.articleCount} ${copy.articlesLabel}` : copy.comingSoon}
                 </p>
               </div>
 
               {city.distanceKm !== null && (
-                <span className="shrink-0 rounded-full border border-[var(--color-accent-cyan)]/40 bg-[var(--color-bg-0)]/70 px-2 py-0.5 text-[10px] font-medium text-[var(--color-accent-cyan)] backdrop-blur">
+                <span className="shrink-0 rounded-full border border-[var(--color-hair)] px-2.5 py-0.5 cn-readout cn-readout-s text-[var(--color-muted)]">
                   {formatDistanceKm(city.distanceKm)}
                 </span>
               )}
               <span
                 aria-hidden
-                className="text-[var(--color-fg-3)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-accent-pink)]"
+                className="text-[var(--color-muted)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-bronze)]"
               >
                 →
               </span>

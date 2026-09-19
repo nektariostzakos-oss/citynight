@@ -1,3 +1,4 @@
+import { noEmDash } from '@/lib/article-md';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import fs from 'node:fs';
@@ -11,33 +12,33 @@ export const revalidate = 86400;
 const COPY: Record<Locale, { metaTitle: string; metaDesc: string; h1: string; sub: string }> = {
   en: {
     metaTitle: 'Editorial guides to Greek nightlife, food & stay',
-    metaDesc: 'Long-form guides to Greek nightlife, restaurants and hotels — city scenes, neighborhoods, what to skip.',
+    metaDesc: 'Long-form guides to Greek nightlife, restaurants and hotels: city scenes, neighborhoods, what to skip.',
     h1: 'Guides',
-    sub: 'Long-form guides — city scenes, neighborhoods, the places worth going to and the ones you can skip.',
+    sub: 'Long-form guides: city scenes, neighborhoods, the places worth going to and the ones you can skip.',
   },
   el: {
     metaTitle: 'Επιμελημένοι οδηγοί για νυχτερινή ζωή, φαγητό & διαμονή στην Ελλάδα',
-    metaDesc: 'Αναλυτικοί οδηγοί για νυχτερινή ζωή, εστιατόρια και ξενοδοχεία στην Ελλάδα — σκηνές πόλεων, γειτονιές, τι να αποφύγεις.',
+    metaDesc: 'Αναλυτικοί οδηγοί για νυχτερινή ζωή, εστιατόρια και ξενοδοχεία στην Ελλάδα: σκηνές πόλεων, γειτονιές, τι να αποφύγεις.',
     h1: 'Οδηγοί',
-    sub: 'Αναλυτικοί οδηγοί — σκηνές πόλεων, γειτονιές, μέρη που αξίζουν και όσα μπορείς να προσπεράσεις.',
+    sub: 'Αναλυτικοί οδηγοί: σκηνές πόλεων, γειτονιές, μέρη που αξίζουν και όσα μπορείς να προσπεράσεις.',
   },
   de: {
     metaTitle: 'Redaktionelle Guides für Nightlife, Essen & Übernachten in Griechenland',
-    metaDesc: 'Ausführliche Guides für Nachtleben, Restaurants und Hotels in Griechenland — Szenen, Viertel, was man auslassen kann.',
+    metaDesc: 'Ausführliche Guides für Nachtleben, Restaurants und Hotels in Griechenland: Szenen, Viertel, was man auslassen kann.',
     h1: 'Guides',
-    sub: 'Ausführliche Guides — Szenen, Viertel, die wichtigen Orte und die, die du dir sparen kannst.',
+    sub: 'Ausführliche Guides: Szenen, Viertel, die wichtigen Orte und die, die du dir sparen kannst.',
   },
   fr: {
     metaTitle: 'Guides éditoriaux pour la vie nocturne, la cuisine & l\'hébergement en Grèce',
-    metaDesc: 'Guides longs pour la vie nocturne, les restaurants et les hôtels en Grèce — scènes, quartiers, ce qu\'on peut éviter.',
+    metaDesc: 'Guides longs pour la vie nocturne, les restaurants et les hôtels en Grèce: scènes, quartiers, ce qu\'on peut éviter.',
     h1: 'Guides',
-    sub: 'Guides longs — scènes des villes, quartiers, les lieux à voir et ceux qu\'on peut zapper.',
+    sub: 'Guides longs: scènes des villes, quartiers, les lieux à voir et ceux qu\'on peut zapper.',
   },
   it: {
     metaTitle: 'Guide editoriali alla vita notturna, cucina e alloggi in Grecia',
-    metaDesc: 'Guide lunghe alla vita notturna, ristoranti e hotel in Grecia — scene, quartieri, cosa saltare.',
+    metaDesc: 'Guide lunghe alla vita notturna, ristoranti e hotel in Grecia: scene, quartieri, cosa saltare.',
     h1: 'Guide',
-    sub: 'Guide lunghe — scene delle città, quartieri, posti che vale la pena e quelli da saltare.',
+    sub: 'Guide lunghe: scene delle città, quartieri, posti che vale la pena e quelli da saltare.',
   },
 };
 
@@ -86,7 +87,7 @@ export default async function GuidesIndex({ params }: { params: Promise<{ locale
               href={`/${locale}/guides/${g.slug}`}
               className="block rounded-lg border border-[var(--color-bg-3)] bg-[var(--color-bg-1)] p-4 hover:border-[var(--color-accent-cyan)]"
             >
-              <p className="font-display text-lg">{g.title}</p>
+              <p className="font-display text-lg">{noEmDash(g.title)}</p>
             </Link>
           </li>
         ))}

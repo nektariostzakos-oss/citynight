@@ -35,7 +35,12 @@ Every locked choice from `CLAUDE.md`, with the one-line reason it was picked.
 - **Owners can't delete pages** — preserves SEO asset and prevents competitor-deletion abuse.
 
 ## Design (§13)
-- **Dark base, neon ACCENT only** — readability for content-heavy pages; neon reserved for CTAs/highlights/hover.
+- **Superseded on 2026-09-19 by Direction A, "Αντικύθηρα"** (approved by Nektarios). Greece built the first known computer to read the sky; citynight reads the night. Every city and every venue opens on an instrument: how far the night has gone, what is open and for how long. Two colours and hairlines. Futurism comes from live readings, not effects.
+  - **Neon is retired.** Bronze `#c9965f` means "yours to act on" or time that has passed; verdigris `#6fd0bd` means one thing only, open now. Nothing else uses either. No glow, no glass, no grain.
+  - **Tokens are the only source of colour**, in `app/globals.css` under semantic names (`--color-ground`, `-surface`, `-raise`, `-ink`, `-muted`, `-faint`, `-hair`, `-bronze`, `-verdigris`, `-closed`). The old alias names stay mapped so nothing breaks, and new code never uses them.
+  - **Type:** Commissioner for reading, Lilex for every readout (time, hours, distance, counts, percentages) with tabular figures. Greek capitals without accents, letter-spacing 0.08em, never under 12 px.
+  - **Three themes:** dark (default), light (parchment), and one that follows the city's real sunset and sunrise. An explicit choice always wins and is remembered.
+  - Design source: `products/citynight/design/tokens.md` and the approved prototype `products/citynight/design/2026-09-17-antikythera-prototype.html` in the record folder.
 - **Mobile-first**, Tailwind tokens at scaffold time.
 - **Real craft, not generic AI UI**.
 

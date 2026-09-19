@@ -1,28 +1,49 @@
-// Live information panel on city guide pages. Renders weather, sun
-// times, sea temperature (seaside cities only), Google-Maps deep-link,
-// and nearby cities — everything a visitor needs to decide "go now / wait
-// / go elsewhere".
+// The city instrument. Direction A "Αντικύθηρα" — every city opens on a
+// reading of the night: how far it has gone, when the sun set and will rise,
+// how many places are open right now.
 //
-// Pure server component. All data ultimately comes from Open-Meteo (free,
-// no key) or our own DB. Cached via Next ISR on the page route + our
-// in-process caches in lib/weather.ts.
+// Pure server component. The dial is drawn from a timestamp passed in, so the
+// server and the client draw the same picture; the numbers are written out
+// beside it, which is also what a screen reader gets (the SVG itself is
+// labelled once and otherwise silent).
+//
+// Data is unchanged from the previous panel: Open-Meteo for weather, sun and
+// sea (lib/weather.ts, in-process cache + ISR), nearby cities from our own DB.
 
 import Link from 'next/link';
-import { getCityWeather, getSeaTemperature, weatherLabel, windCompass } from '@/lib/weather';
+import { getCityWeather, getSeaTemperature, weatherLabel } from '@/lib/weather';
 import { listNearbyCities, type City } from '@/lib/queries';
 import type { Locale } from '@/lib/i18n';
+import { stateColor, type VenueState } from '@/components/venue-card';
+import {
+  athensClock, hhmm, minutesFromISO, moonPhase, nightReading, sunTimes,
+} from '@/components/instrument/night';
+// The one dial of the product, built by the home stream. The live wrapper
+// re-renders it once a minute so the needle keeps real Athens time; nothing
+// here draws a second dial.
+import { NightDialLive } from '@/components/instrument/night-dial-live';
+
+/** One ring of the dial: a venue, its state, and today's opening windows. */
+export type DialRing = {
+  name: string;
+  state: VenueState;
+  hours: { open: string; close: string }[];
+};
 
 type Props = {
   city: City;
   locale: Locale;
+  /** Venues open right now, out of the verified venues we hold for the city. */
+  openNow?: number;
+  total?: number;
+  rings?: DialRing[];
+  /** Render timestamp. Passed in so every reading on the page agrees. */
+  now?: Date;
 };
 
-export async function CityLivePanel({ city, locale }: Props) {
+export async function CityLivePanel({ city, locale, openNow, total, rings = [], now = new Date() }: Props) {
   if (typeof city.lat !== 'number' || typeof city.lng !== 'number') return null;
 
-  // Fetch the three live signals in parallel. Sea temp is only fetched
-  // for seaside/island terrains — inland cities legitimately have no
-  // marine data, and the call would just return null after a 4s timeout.
   const wantSea = city.terrain === 'seaside' || city.terrain === 'island' || city.terrain === 'island_capital';
   const [weather, sea, nearby] = await Promise.all([
     getCityWeather(city.lat, city.lng),
@@ -31,176 +52,157 @@ export async function CityLivePanel({ city, locale }: Props) {
   ]);
 
   const t = LABELS[locale === 'el' ? 'el' : 'en'];
-  const sunsetText = formatSunEvent(weather?.sunsetIso, weather?.sunriseIso, t);
+  const clock = athensClock(now);
+  // A measured sunset always wins; the NOAA approximation only fills in when
+  // Open-Meteo is unreachable.
+  const approx = sunTimes(city.lat, city.lng, clock);
+  const set = minutesFromISO(weather?.sunsetIso) ?? approx?.set ?? null;
+  const rise = minutesFromISO(weather?.sunriseIso) ?? approx?.rise ?? null;
+  const night = set != null && rise != null ? nightReading(clock.min, set, rise) : null;
+  const moon = moonPhase(now);
+
+  const big = night
+    ? night.night ? t.nightPct(night.pct ?? 0) : t.sunsetIn(inWords(night.toSunset ?? 0, t))
+    : t.sunUnknown;
+  const label = [
+    `${city.name}, ${hhmm(clock.min)}.`,
+    night ? (night.night ? `${t.nightPct(night.pct ?? 0)}.` : `${t.sunsetIn(inWords(night.toSunset ?? 0, t))}.`) : '',
+    set != null && rise != null ? `${t.sunset} ${hhmm(set)}, ${t.sunrise} ${hhmm(rise)}.` : '',
+    openNow != null && total != null ? `${t.openNow} ${openNow}/${total}.` : '',
+  ].filter(Boolean).join(' ');
+
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${city.lat},${city.lng}&travelmode=driving`;
-  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${city.lat},${city.lng}`;
 
   return (
-    <section className="border-b border-[var(--color-bg-2)] bg-[var(--color-bg-1)]/40">
-      <div className="mx-auto max-w-5xl px-6 py-6 md:px-10 md:py-8">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {/* WEATHER */}
-          {weather && (
-            <Tile
-              icon={weatherLabel(weather.weatherCode, locale).emoji}
-              label={t.weather}
-              value={`${Math.round(weather.temperatureC)}°`}
-              hint={`${weatherLabel(weather.weatherCode, locale).text} · 🍃 ${Math.round(weather.windKmh)} km/h ${windCompass(weather.windDegrees, locale)}`}
-              extra={weather.tempMaxC != null && weather.tempMinC != null
-                ? `↑${Math.round(weather.tempMaxC)}° ↓${Math.round(weather.tempMinC)}°` : undefined}
-            />
-          )}
+    <section className="rounded-[20px] border border-[var(--color-hair)] bg-[var(--color-surface)] p-[18px]">
+      <NightDialLive
+        now={now}
+        sunsetISO={weather?.sunsetIso ?? undefined}
+        sunriseISO={weather?.sunriseIso ?? undefined}
+        rings={rings.map((r) => r.hours)}
+        size="l"
+        label={label}
+        sub={night?.night ? t.dialSubNight : set != null ? t.dialSubDay(hhmm(set)) : undefined}
+      />
 
-          {/* SUNSET / SUNRISE */}
-          {sunsetText && (
-            <Tile
-              icon={sunsetText.icon}
-              label={sunsetText.label}
-              value={sunsetText.time}
-              hint={sunsetText.in}
-            />
-          )}
+      <p className="mt-4 cn-readout cn-readout-s text-[var(--color-muted)]">{t.tonight}</p>
+      <p className="mt-2 text-[clamp(1.8rem,5vw,2.6rem)] leading-none font-semibold tabular-nums">{big}</p>
 
-          {/* SEA TEMP (seaside only) */}
-          {wantSea && (
-            <Tile
-              icon="🌊"
-              label={t.sea}
-              value={sea != null ? `${Math.round(sea)}°` : '—'}
-              hint={sea != null ? t.seaHint : t.seaUnavailable}
-              muted={sea == null}
-            />
-          )}
-
-          {/* DIRECTIONS */}
-          <a
-            href={directionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] p-4 transition hover:border-[var(--color-accent-cyan)]"
-          >
-            <span className="text-2xl leading-none">🚗</span>
-            <span className="mt-3 text-[10px] uppercase tracking-[0.15em] text-[var(--color-fg-2)]">{t.directions}</span>
-            <span className="mt-1 font-medium text-[var(--color-fg-0)] group-hover:text-[var(--color-accent-cyan)]">
-              {t.openInMaps}
-            </span>
-            <span className="mt-auto pt-2 text-xs text-[var(--color-fg-2)]">{t.directionsHint}</span>
-          </a>
-        </div>
-
-        {/* NEARBY CITIES */}
-        {nearby.length > 0 && (
-          <div className="mt-6">
-            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--color-fg-2)]">{t.alsoNearby}</p>
-            <ul className="flex flex-wrap gap-2">
-              {nearby.map((n) => (
-                <li key={n.id}>
-                  <Link
-                    href={`/${locale}/cities/${n.slug}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] px-3 py-1.5 text-sm transition hover:border-[var(--color-accent-cyan)] hover:bg-[var(--color-bg-2)]"
-                  >
-                    <span className="text-[var(--color-fg-0)]">{n.name}</span>
-                    <span className="text-xs text-[var(--color-fg-2)] tabular-nums">{Math.round(n.distanceKm)} km</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <dl className="mt-3.5 grid grid-cols-2 gap-x-[18px] gap-y-3 border-t border-[var(--color-hair)] pt-3.5">
+        <Reading label={t.sunset} value={set != null ? hhmm(set) : '—'} />
+        <Reading label={t.sunrise} value={rise != null ? hhmm(rise) : '—'} />
+        <Reading label={t.moon} value={`${Math.round(moon.illum * 100)}%`} />
+        {openNow != null && total != null && (
+          <Reading label={t.openNow} value={`${openNow} ${t.outOf} ${total}`} tone="open" />
         )}
+        {weather && (
+          <Reading label={t.weather} value={`${Math.round(weather.temperatureC)}°`} hint={weatherLabel(weather.weatherCode, locale).text} />
+        )}
+        {wantSea && (
+          <Reading label={t.sea} value={sea != null ? `${Math.round(sea)}°` : '—'} hint={sea == null ? t.noData : undefined} />
+        )}
+      </dl>
 
-        {/* MAP LINK — small, secondary */}
-        <p className="mt-4 text-xs text-[var(--color-fg-2)]">
-          <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:text-[var(--color-fg-0)] hover:underline">
-            {t.viewOnMap} →
-          </a>
-        </p>
-      </div>
+      {rings.length > 0 && (
+        <ul className="mt-3 grid gap-2 border-t border-[var(--color-hair)] pt-3 text-[14px]">
+          {rings.map((r, i) => (
+            <li key={`${r.name}-${i}`} className="grid grid-cols-[34px_1fr_auto] items-center gap-2.5">
+              <span className="cn-readout cn-readout-s text-[var(--color-muted)]">R{i + 1}</span>
+              <span className="truncate text-[var(--color-ink)]">{r.name}</span>
+              <span className={`cn-readout cn-readout-s ${stateColor(r.state.key)}`}>
+                {r.state.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <a
+        href={directionsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-hair)] px-5 text-[15px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-bronze)] hover:text-[var(--color-bronze)]"
+      >
+        {t.directions}
+      </a>
+
+      {nearby.length > 0 && (
+        <div className="mt-4 border-t border-[var(--color-hair)] pt-4">
+          <p className="cn-readout cn-readout-s text-[var(--color-muted)]">{t.alsoNearby}</p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {nearby.map((n) => (
+              <li key={n.id}>
+                <Link
+                  href={`/${locale}/cities/${n.slug}`}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-hair)] px-4 text-[15px] text-[var(--color-ink)] transition-colors hover:border-[var(--color-bronze)]"
+                >
+                  {n.name}
+                  <span className="cn-readout cn-readout-s text-[var(--color-muted)]">
+                    {Math.round(n.distanceKm)} {t.km}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }
 
-function Tile({ icon, label, value, hint, extra, muted }: {
-  icon: string; label: string; value: string; hint?: string; extra?: string; muted?: boolean;
-}) {
+function Reading({ label, value, hint, tone }: { label: string; value: string; hint?: string; tone?: 'open' }) {
   return (
-    <div className={`flex flex-col rounded-2xl border border-[var(--color-bg-2)] bg-[var(--color-bg-1)] p-4 ${muted ? 'opacity-60' : ''}`}>
-      <span className="text-2xl leading-none">{icon}</span>
-      <span className="mt-3 text-[10px] uppercase tracking-[0.15em] text-[var(--color-fg-2)]">{label}</span>
-      <span className="mt-1 font-display text-2xl font-semibold text-[var(--color-fg-0)] tabular-nums">{value}</span>
-      {hint && <span className="mt-1 text-xs text-[var(--color-fg-2)]">{hint}</span>}
-      {extra && <span className="mt-auto pt-2 text-xs text-[var(--color-fg-2)] tabular-nums">{extra}</span>}
+    <div>
+      <dt className="cn-readout cn-readout-s text-[var(--color-muted)]">{label}</dt>
+      <dd className={`mt-0.5 cn-readout cn-readout-l ${tone === 'open' ? 'text-[var(--color-verdigris)]' : 'text-[var(--color-ink)]'}`}>
+        {value}
+      </dd>
+      {hint && <dd className="text-[13px] text-[var(--color-muted)]">{hint}</dd>}
     </div>
   );
 }
 
-// ─── helpers ────────────────────────────────────────────────────────────
-
-/** Pick the next sun event (sunset if still ahead today, otherwise next
- *  sunrise). Returns label + clock time + relative hint ("σε 3h 14min"). */
-function formatSunEvent(
-  sunsetIso: string | null | undefined,
-  sunriseIso: string | null | undefined,
-  t: LabelPack,
-): { icon: string; label: string; time: string; in: string } | null {
-  if (!sunsetIso && !sunriseIso) return null;
-  const now = new Date();
-  const sunset = sunsetIso ? new Date(sunsetIso) : null;
-  const sunrise = sunriseIso ? new Date(sunriseIso) : null;
-
-  // After today's sunset → show tomorrow's sunrise (which Open-Meteo
-  // returns when forecast_days=2; we only fetch 1 day for now so we just
-  // fall back to "today's sunrise" — readable even if past).
-  if (sunset && sunset.getTime() > now.getTime()) {
-    return {
-      icon: '🌅',
-      label: t.sunset,
-      time: clock(sunset),
-      in: relative(sunset, now, t),
-    };
-  }
-  if (sunrise) {
-    return {
-      icon: '🌄',
-      label: t.sunrise,
-      time: clock(sunrise),
-      in: sunrise.getTime() > now.getTime() ? relative(sunrise, now, t) : t.alreadyPast,
-    };
-  }
-  return null;
-}
-
-function clock(d: Date): string {
-  return new Intl.DateTimeFormat('el-GR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Athens' }).format(d);
-}
-
-function relative(target: Date, now: Date, t: LabelPack): string {
-  const mins = Math.max(0, Math.round((target.getTime() - now.getTime()) / 60_000));
-  if (mins < 60) return `${t.in} ${mins} ${t.min}`;
-  const h = Math.floor(mins / 60); const m = mins % 60;
-  return `${t.in} ${h}${t.hour} ${m}${t.min}`;
+/** "2 ώρες 10′" — how long until the sun goes down. */
+function inWords(mins: number, t: LabelPack): string {
+  if (mins <= 0) return t.now;
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  const hours = h ? `${h} ${h === 1 ? t.hour : t.hours}` : '';
+  const minutes = m ? `${m}′` : '';
+  return [hours, minutes].filter(Boolean).join(' ');
 }
 
 type LabelPack = {
-  weather: string; sea: string; seaHint: string; seaUnavailable: string;
-  directions: string; openInMaps: string; directionsHint: string;
-  alsoNearby: string; viewOnMap: string;
-  sunset: string; sunrise: string;
-  in: string; min: string; hour: string; alreadyPast: string;
+  tonight: string; sunset: string; sunrise: string; moon: string;
+  openNow: string; outOf: string; weather: string; sea: string; noData: string;
+  directions: string; alsoNearby: string; km: string;
+  now: string; hour: string; hours: string; sunUnknown: string;
+  dialSubNight: string;
+  dialSubDay: (time: string) => string;
+  nightPct: (pct: number) => string;
+  sunsetIn: (words: string) => string;
 };
 
+// Readouts are Greek capitals without accents; the big line is a sentence.
 const LABELS: Record<'el' | 'en', LabelPack> = {
   el: {
-    weather: 'Καιρός', sea: 'Θάλασσα', seaHint: 'θερμοκρασία τώρα', seaUnavailable: 'χωρίς δεδομένα',
-    directions: 'Πώς πας', openInMaps: 'Άνοιξε στο Maps', directionsHint: 'οδηγίες με αυτοκίνητο',
-    alsoNearby: 'Επίσης κοντά', viewOnMap: 'Δες την περιοχή στον χάρτη',
-    sunset: 'Δύση ηλίου', sunrise: 'Ανατολή ηλίου',
-    in: 'σε', min: 'λ', hour: 'ω', alreadyPast: 'πέρασε',
+    tonight: 'ΑΠΟΨΕ ΕΔΩ', sunset: 'ΔΥΣΗ', sunrise: 'ΑΝΑΤΟΛΗ', moon: 'ΣΕΛΗΝΗ',
+    openNow: 'ΑΝΟΙΧΤΑ ΤΩΡΑ', outOf: 'από', weather: 'ΚΑΙΡΟΣ', sea: 'ΘΑΛΑΣΣΑ', noData: 'χωρίς δεδομένα',
+    directions: 'Οδηγίες προς την πόλη', alsoNearby: 'ΕΠΙΣΗΣ ΚΟΝΤΑ', km: 'ΧΛΜ',
+    now: 'τώρα', hour: 'ώρα', hours: 'ώρες', sunUnknown: 'ο ήλιος δεν υπολογίζεται εδώ',
+    nightPct: (pct) => `η νύχτα ${pct}%`,
+    sunsetIn: (words) => `δύση σε ${words}`,
+    dialSubNight: 'Η ΝΥΧΤΑ {pct}%',
+    dialSubDay: (time) => `ΔΥΣΗ ΣΤΙΣ ${time}`,
   },
   en: {
-    weather: 'Weather', sea: 'Sea', seaHint: 'temp right now', seaUnavailable: 'no data',
-    directions: 'Get there', openInMaps: 'Open in Maps', directionsHint: 'driving directions',
-    alsoNearby: 'Also nearby', viewOnMap: 'See the area on the map',
-    sunset: 'Sunset', sunrise: 'Sunrise',
-    in: 'in', min: 'min', hour: 'h', alreadyPast: 'already past',
+    tonight: 'TONIGHT HERE', sunset: 'SUNSET', sunrise: 'SUNRISE', moon: 'MOON',
+    openNow: 'OPEN NOW', outOf: 'of', weather: 'WEATHER', sea: 'SEA', noData: 'no data',
+    directions: 'Directions to the city', alsoNearby: 'ALSO NEARBY', km: 'KM',
+    now: 'now', hour: 'hour', hours: 'hours', sunUnknown: 'the sun cannot be computed here',
+    nightPct: (pct) => `the night ${pct}%`,
+    sunsetIn: (words) => `sunset in ${words}`,
+    dialSubNight: 'THE NIGHT {pct}%',
+    dialSubDay: (time) => `SUNSET AT ${time}`,
   },
 };
