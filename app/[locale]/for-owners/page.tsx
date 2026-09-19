@@ -1,9 +1,32 @@
+import type { Metadata } from 'next';
 import type { Locale } from '@/lib/i18n';
-import { isLocale } from '@/lib/i18n';
+import { isLocale, LOCALES } from '@/lib/i18n';
+import { publicMetadata } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
 export const revalidate = 86400;
+
+// Without this the page inherited the layout's metadata and told Google it was
+// a duplicate of the home page: canonical /el, not /el/for-owners (found live
+// 2026-09-19). It is the page that brings business owners in, so it is worth
+// its own entry in the index. The h1 and the lead are the copy the page already
+// shows, so the snippet matches what a visitor lands on.
+type Params = Promise<{ locale: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const c = COPY[locale as Locale];
+  const paths: Partial<Record<Locale, string>> = {};
+  for (const l of LOCALES) paths[l] = `/${l}/for-owners`;
+  return publicMetadata({
+    locale: locale as Locale,
+    paths,
+    title: c.h1(0),
+    description: c.lead,
+  });
+}
 
 type Copy = {
   kicker: string;
@@ -205,7 +228,7 @@ const COPY: Record<Locale, Copy> = {
   },
 };
 
-export default async function ForOwners({ params }: { params: Promise<{ locale: string }> }) {
+export default async function ForOwners({ params }: { params: Params }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const c = COPY[locale];
