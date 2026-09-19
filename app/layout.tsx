@@ -28,10 +28,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://citynight.gr';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'citynight — Greece nightlife guide',
+    default: 'citynight: Greece nightlife guide',
     template: '%s · citynight.gr',
   },
-  description: 'The nightlife guide for Greece — clubs, rooftops, bouzoukia, beach clubs. Real venues, real photos, curated.',
+  description: 'The nightlife guide for Greece: clubs, rooftops, bouzoukia, beach clubs. Real venues, real photos, curated.',
   applicationName: 'citynight',
   formatDetection: { telephone: false, address: false, email: false },
   robots: { index: true, follow: true },
@@ -142,7 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             here only if you actually see them in WebPageTest's waterfall. */}
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="" />
         <link rel="preconnect" href="https://lh3.googleusercontent.com" crossOrigin="" />
-        {/* Search-console verification — set the env on Hostinger to the
+        {/* Search-console verification: set the env on Hostinger to the
             content value GSC / Bing give you in the meta-tag verification
             flow. We render only when set; absent env = no tag. */}
         {process.env.GSC_VERIFICATION && (
