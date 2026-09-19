@@ -33,9 +33,13 @@ export function NightDialLive(props: NightDialProps) {
     const set = minutesFromISO(props.sunsetISO);
     const rise = minutesFromISO(props.sunriseISO);
     const pct = set != null && rise != null ? nightReading(clock.min, set, rise).pct : null;
-    sub = sub
-      .replace('{time}', hhmm(clock.min))
-      .replace('{pct}', pct == null ? '—' : String(pct));
+    // A caption that asks for the night percentage and cannot have it says
+    // nothing at all. A placeholder glyph in the middle of a reading looks
+    // like a number that failed to load, and the caller has no way to tell
+    // the difference.
+    sub = sub.includes('{pct}') && pct == null
+      ? undefined
+      : sub.replace('{time}', hhmm(clock.min)).replace('{pct}', String(pct));
   }
 
   return <NightDial {...props} now={now} sub={sub} />;

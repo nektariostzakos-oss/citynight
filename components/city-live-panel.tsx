@@ -89,8 +89,8 @@ export async function CityLivePanel({ city, locale, openNow, total, rings = [], 
       <p className="mt-2 text-[clamp(1.8rem,5vw,2.6rem)] leading-none font-semibold tabular-nums">{big}</p>
 
       <dl className="mt-3.5 grid grid-cols-2 gap-x-[18px] gap-y-3 border-t border-[var(--color-hair)] pt-3.5">
-        <Reading label={t.sunset} value={set != null ? hhmm(set) : '—'} />
-        <Reading label={t.sunrise} value={rise != null ? hhmm(rise) : '—'} />
+        <Reading label={t.sunset} value={set != null ? hhmm(set) : t.unknown} />
+        <Reading label={t.sunrise} value={rise != null ? hhmm(rise) : t.unknown} />
         <Reading label={t.moon} value={`${Math.round(moon.illum * 100)}%`} />
         {openNow != null && total != null && (
           <Reading label={t.openNow} value={`${openNow} ${t.outOf} ${total}`} tone="open" />
@@ -99,7 +99,7 @@ export async function CityLivePanel({ city, locale, openNow, total, rings = [], 
           <Reading label={t.weather} value={`${Math.round(weather.temperatureC)}°`} hint={weatherLabel(weather.weatherCode, locale).text} />
         )}
         {wantSea && (
-          <Reading label={t.sea} value={sea != null ? `${Math.round(sea)}°` : '—'} hint={sea == null ? t.noData : undefined} />
+          <Reading label={t.sea} value={sea != null ? `${Math.round(sea)}°` : t.unknown} hint={sea == null ? t.noData : undefined} />
         )}
       </dl>
 
@@ -174,7 +174,7 @@ function inWords(mins: number, t: LabelPack): string {
 
 type LabelPack = {
   tonight: string; sunset: string; sunrise: string; moon: string;
-  openNow: string; outOf: string; weather: string; sea: string; noData: string;
+  openNow: string; outOf: string; weather: string; sea: string; noData: string; unknown: string;
   directions: string; alsoNearby: string; km: string;
   now: string; hour: string; hours: string; sunUnknown: string;
   dialSubNight: string;
@@ -187,7 +187,7 @@ type LabelPack = {
 const LABELS: Record<'el' | 'en', LabelPack> = {
   el: {
     tonight: 'ΑΠΟΨΕ ΕΔΩ', sunset: 'ΔΥΣΗ', sunrise: 'ΑΝΑΤΟΛΗ', moon: 'ΣΕΛΗΝΗ',
-    openNow: 'ΑΝΟΙΧΤΑ ΤΩΡΑ', outOf: 'από', weather: 'ΚΑΙΡΟΣ', sea: 'ΘΑΛΑΣΣΑ', noData: 'χωρίς δεδομένα',
+    openNow: 'ΑΝΟΙΧΤΑ ΤΩΡΑ', outOf: 'από', weather: 'ΚΑΙΡΟΣ', sea: 'ΘΑΛΑΣΣΑ', noData: 'χωρίς δεδομένα', unknown: 'ΑΓΝΩΣΤΟ',
     directions: 'Οδηγίες προς την πόλη', alsoNearby: 'ΕΠΙΣΗΣ ΚΟΝΤΑ', km: 'ΧΛΜ',
     now: 'τώρα', hour: 'ώρα', hours: 'ώρες', sunUnknown: 'ο ήλιος δεν υπολογίζεται εδώ',
     nightPct: (pct) => `η νύχτα ${pct}%`,
@@ -197,7 +197,7 @@ const LABELS: Record<'el' | 'en', LabelPack> = {
   },
   en: {
     tonight: 'TONIGHT HERE', sunset: 'SUNSET', sunrise: 'SUNRISE', moon: 'MOON',
-    openNow: 'OPEN NOW', outOf: 'of', weather: 'WEATHER', sea: 'SEA', noData: 'no data',
+    openNow: 'OPEN NOW', outOf: 'of', weather: 'WEATHER', sea: 'SEA', noData: 'no data', unknown: 'UNKNOWN',
     directions: 'Directions to the city', alsoNearby: 'ALSO NEARBY', km: 'KM',
     now: 'now', hour: 'hour', hours: 'hours', sunUnknown: 'the sun cannot be computed here',
     nightPct: (pct) => `the night ${pct}%`,

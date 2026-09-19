@@ -51,7 +51,7 @@ const COPY: Record<Locale, {
   heading: string; headingNear: (city: string) => string;
   night: string; sunsetIn: string;
   sunset: string; sunrise: string; moon: string; openNow: string; of: string;
-  cities: string; sunsetAt: string; cta: (city: string) => string; ctaAll: string;
+  cities: string; sunsetAt: string; unknown: string; cta: (city: string) => string; ctaAll: string;
   hour: (n: number) => string; minute: (n: number) => string;
   dialLabel: (a: { time: string; night: string; sunset: string; sunrise: string; open: number; total: number }) => string;
 }> = {
@@ -60,7 +60,7 @@ const COPY: Record<Locale, {
     headingNear: (city) => `ΚΟΝΤΑ ΣΟΥ ΤΩΡΑ · ${city}`,
     night: 'η νύχτα', sunsetIn: 'δύση σε',
     sunset: 'ΔΥΣΗ', sunrise: 'ΑΝΑΤΟΛΗ', moon: 'ΣΕΛΗΝΗ', openNow: 'ΑΝΟΙΧΤΑ ΤΩΡΑ', of: 'ΑΠΟ',
-    cities: 'ΠΟΛΕΙΣ', sunsetAt: 'ΔΥΣΗ',
+    cities: 'ΠΟΛΕΙΣ', sunsetAt: 'ΔΥΣΗ', unknown: 'ΑΓΝΩΣΤΟ',
     cta: (city) => `Δες τον οδηγό: ${city}`, ctaAll: 'Δες όλες τις πόλεις',
     hour: (n) => (n === 1 ? '1 ώρα' : `${n} ώρες`), minute: (n) => `${n}′`,
     dialLabel: (a) => `Αθήνα, ${a.time}. ${a.night}. Δύση ${a.sunset}, ανατολή ${a.sunrise}. Ανοιχτά τώρα ${a.open} από ${a.total}.`,
@@ -70,7 +70,7 @@ const COPY: Record<Locale, {
     headingNear: (city) => `NEAR YOU NOW · ${city}`,
     night: 'the night', sunsetIn: 'sunset in',
     sunset: 'SUNSET', sunrise: 'SUNRISE', moon: 'MOON', openNow: 'OPEN NOW', of: 'OF',
-    cities: 'CITIES', sunsetAt: 'SUNSET',
+    cities: 'CITIES', sunsetAt: 'SUNSET', unknown: 'UNKNOWN',
     cta: (city) => `Open the ${city} guide`, ctaAll: 'See every city',
     hour: (n) => (n === 1 ? '1 hour' : `${n} hours`), minute: (n) => `${n} min`,
     dialLabel: (a) => `Athens, ${a.time}. ${a.night}. Sunset ${a.sunset}, sunrise ${a.sunrise}. Open now ${a.open} of ${a.total}.`,
@@ -80,7 +80,7 @@ const COPY: Record<Locale, {
     headingNear: (city) => `IN IHRER NÄHE · ${city}`,
     night: 'die Nacht', sunsetIn: 'Sonnenuntergang in',
     sunset: 'UNTERGANG', sunrise: 'AUFGANG', moon: 'MOND', openNow: 'JETZT OFFEN', of: 'VON',
-    cities: 'STÄDTE', sunsetAt: 'UNTERGANG',
+    cities: 'STÄDTE', sunsetAt: 'UNTERGANG', unknown: 'UNBEKANNT',
     cta: (city) => `Guide für ${city} öffnen`, ctaAll: 'Alle Städte ansehen',
     hour: (n) => (n === 1 ? '1 Stunde' : `${n} Stunden`), minute: (n) => `${n} Min`,
     dialLabel: (a) => `Athen, ${a.time}. ${a.night}. Untergang ${a.sunset}, Aufgang ${a.sunrise}. Jetzt offen ${a.open} von ${a.total}.`,
@@ -90,7 +90,7 @@ const COPY: Record<Locale, {
     headingNear: (city) => `PRÈS DE VOUS · ${city}`,
     night: 'la nuit', sunsetIn: 'coucher dans',
     sunset: 'COUCHER', sunrise: 'LEVER', moon: 'LUNE', openNow: 'OUVERT MAINTENANT', of: 'SUR',
-    cities: 'VILLES', sunsetAt: 'COUCHER',
+    cities: 'VILLES', sunsetAt: 'COUCHER', unknown: 'INCONNU',
     cta: (city) => `Ouvrir le guide de ${city}`, ctaAll: 'Voir toutes les villes',
     hour: (n) => (n === 1 ? '1 heure' : `${n} heures`), minute: (n) => `${n} min`,
     dialLabel: (a) => `Athènes, ${a.time}. ${a.night}. Coucher ${a.sunset}, lever ${a.sunrise}. Ouvert maintenant ${a.open} sur ${a.total}.`,
@@ -100,7 +100,7 @@ const COPY: Record<Locale, {
     headingNear: (city) => `VICINO A TE · ${city}`,
     night: 'la notte', sunsetIn: 'tramonto tra',
     sunset: 'TRAMONTO', sunrise: 'ALBA', moon: 'LUNA', openNow: 'APERTI ORA', of: 'SU',
-    cities: 'CITTÀ', sunsetAt: 'TRAMONTO',
+    cities: 'CITTÀ', sunsetAt: 'TRAMONTO', unknown: 'SCONOSCIUTO',
     cta: (city) => `Apri la guida di ${city}`, ctaAll: 'Vedi tutte le città',
     hour: (n) => (n === 1 ? '1 ora' : `${n} ore`), minute: (n) => `${n} min`,
     dialLabel: (a) => `Atene, ${a.time}. ${a.night}. Tramonto ${a.sunset}, alba ${a.sunrise}. Aperti ora ${a.open} su ${a.total}.`,
@@ -166,8 +166,8 @@ export function HeroInstrument({
         label={t.dialLabel({
           time: hhmm(clock.min),
           night: bigReading ?? '',
-          sunset: set != null ? hhmm(set) : '—',
-          sunrise: rise != null ? hhmm(rise) : '—',
+          sunset: set != null ? hhmm(set) : t.unknown,
+          sunrise: rise != null ? hhmm(rise) : t.unknown,
           open,
           total,
         })}
@@ -185,12 +185,12 @@ export function HeroInstrument({
         )}
 
         <dl className="grid grid-cols-2 gap-x-[18px] gap-y-3 border-t border-[var(--color-hair)] pt-3.5">
-          <Reading label={t.sunset} value={set != null ? hhmm(set) : '—'} />
-          <Reading label={t.sunrise} value={rise != null ? hhmm(rise) : '—'} />
+          <Reading label={t.sunset} value={set != null ? hhmm(set) : t.unknown} />
+          <Reading label={t.sunrise} value={rise != null ? hhmm(rise) : t.unknown} />
           <Reading label={t.moon} value={`${Math.round(moon.illum * 100)}%`} />
           <Reading
             label={t.openNow}
-            value={total > 0 ? `${open} ${t.of} ${total}` : '—'}
+            value={total > 0 ? `${open} ${t.of} ${total}` : t.unknown}
             tone={total > 0 && open > 0 ? 'open' : 'default'}
           />
         </dl>
@@ -216,7 +216,7 @@ export function HeroInstrument({
                       </span>
                     </span>
                     <span className="cn-readout shrink-0 text-[var(--color-muted)]">
-                      {sun ? `${t.sunsetAt} ${hhmm(sun.set)}` : '—'}
+                      {sun ? `${t.sunsetAt} ${hhmm(sun.set)}` : t.unknown}
                     </span>
                   </Link>
                 </li>
