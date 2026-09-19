@@ -1,19 +1,26 @@
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+import { Commissioner, Lilex } from 'next/font/google';
 import './globals.css';
 
-// next/font/google self-hosts the font + auto-emits `font-display: swap`
-// + preloads the LCP-critical files automatically. We constrain the variable
-// font to the three weights actually used in the codebase (medium 500 for
-// body chrome, semibold 600 for most display headings, bold 700 for stats
-// + emphasis). Subsets cover EN/DE/FR/IT (latin + latin-ext for ä/ö/é) and
-// EL (greek).
-const manrope = Manrope({
+// Two faces, both self-hosted by next/font/google with `font-display: swap`
+// and preloaded for the LCP. Commissioner (Kostas Bartsokas) carries the
+// statements and the reading; Lilex carries every readout, where digits have
+// to line up as they change. Subsets cover EN/DE/FR/IT (latin, latin-ext) and
+// EL (greek). Direction A "Αντικύθηρα", products/citynight/design/tokens.md.
+const commissioner = Commissioner({
   subsets: ['latin', 'latin-ext', 'greek'],
-  weight: ['500', '600', '700'],
+  weight: ['400', '500', '600'],
   display: 'swap',
   preload: true,
-  variable: '--font-display-loaded',
+  variable: '--font-body-loaded',
+});
+
+const lilex = Lilex({
+  subsets: ['latin', 'greek'],
+  weight: ['400', '500'],
+  display: 'swap',
+  preload: false,
+  variable: '--font-mono-loaded',
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://citynight.gr';
@@ -65,7 +72,7 @@ const NO_FLASH_SCRIPT = `
 // '/' (no prefix) still uses this layout for the soft-default landing surface.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={manrope.variable} suppressHydrationWarning>
+    <html lang="en" className={`${commissioner.variable} ${lilex.variable}`} suppressHydrationWarning>
       <head>
         {/* DNS + TLS warm-up for the two image CDNs we hit most often. Saves
             ~100ms on the first photo render on a fresh connection. Add more
