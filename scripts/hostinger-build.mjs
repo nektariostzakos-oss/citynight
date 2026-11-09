@@ -15,6 +15,7 @@
  * env value always wins over the defaults below.
  */
 import { spawnSync } from "node:child_process";
+import { rmSync } from "node:fs";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
@@ -39,6 +40,16 @@ const env = {
   UV_THREADPOOL_SIZE: process.env.UV_THREADPOOL_SIZE || "2",
 };
 
+// Bundler: webpack since 2026-11-09. Turbopack runs PostCSS and every webpack
+// loader in child node processes that it reaches over a 127.0.0.1 TCP port; the
+// Hostinger host refused loopback TCP that night, so every Turbopack build on
+// the account died with "node process exited before we could connect to it" on
+// globals.css and the old deployment kept serving. webpack runs loaders
+// in-process. CITYNIGHT_BUNDLER=turbopack brings Turbopack back for an experiment.
+const BUNDLER = process.env.CITYNIGHT_BUNDLER === "turbopack" ? "turbopack" : "webpack";
+// Output of the other bundler must not survive into this build.
+if (BUNDLER === "webpack") rmSync(".next", { recursive: true, force: true });
+
 const steps = [
   // tsx exports its CLI as "tsx/cli"; the file path tsx/dist/cli.mjs is not in
   // its package exports, so require.resolve on it throws ERR_PACKAGE_PATH_NOT_EXPORTED.
@@ -47,7 +58,7 @@ const steps = [
   // no content. This installs the tracked city guides before the build reads
   // them, which is what makes a deploy ship a city that has something in it.
   ["content seed", [require.resolve("tsx/cli"), "db/seed-city-guides.ts"]],
-  ["next build", [require.resolve("next/dist/bin/next"), "build"]],
+  [`next build (${BUNDLER})`, [require.resolve("next/dist/bin/next"), "build", ...(BUNDLER === "webpack" ? ["--webpack"] : [])]],
 ];
 
 for (const [label, args] of steps) {
