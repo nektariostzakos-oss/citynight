@@ -14,6 +14,7 @@ Every locked choice from `CLAUDE.md`, with the one-line reason it was picked.
 - **MDX/JSON for fully-static pages** (guides/legal) — version-controlled content, no DB hit.
 - **Own session auth, passwordless magic-link** — no third-party auth lock-in; SMS deferred (cost).
 - **Tailwind v4** — CSS-first config, faster, native @theme tokens.
+- **TypeScript 7 next to the TypeScript 6 API (2026-11-09)** — `pnpm typecheck` runs TypeScript 7 (`@typescript/native` = `typescript@7`), while the `typescript` name points at `@typescript/typescript6` because TS 7 ships no compiler API and typescript-eslint (peer `<6.1`) needs one; the setup the TypeScript team recommends in the 7.0 announcement. `next build` type-checks through the `typescript` package, so with this alias its own pass runs 6.0. Drop the alias once typescript-eslint supports TS 7.
 - **SQLite FTS5** — search without an external service; "good enough" for venue typeahead, biased to detected city + filtered by locale.
 - **Google Maps JS, lazy-loaded** — billed per load; static thumbnail until click.
 - **Hostinger cron tab** for sync/reconcile/backup/rollup — no worker queue runtime on Hostinger.
