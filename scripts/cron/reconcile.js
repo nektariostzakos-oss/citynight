@@ -29,7 +29,9 @@ function mapStatus(s) {
 async function main() {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) throw new Error('STRIPE_SECRET_KEY required');
-  const stripe = new Stripe(key, { apiVersion: '2025-09-30.clover' });
+  // Same pinned version as lib/stripe.ts, so the cron and the webhook read
+  // the same object shape.
+  const stripe = new Stripe(key, { apiVersion: '2026-10-28.endive' });
 
   const handle = db();
   const rows = handle.prepare(`SELECT id, venue_id, stripe_subscription_id, status FROM subscriptions`).all();
@@ -39,7 +41,9 @@ async function main() {
     try {
       const sub = await stripe.subscriptions.retrieve(r.stripe_subscription_id);
       const live = mapStatus(sub.status);
-      const periodEnd = sub.current_period_end ?? null;
+      // Since API 2025-04-30.basil current_period_end lives on the item, not
+      // on the Subscription (same read as app/api/stripe/webhook/route.ts).
+      const periodEnd = sub.items?.data?.[0]?.current_period_end ?? null;
       if (live !== r.status) {
         drift++;
         console.log(`drift ${r.stripe_subscription_id}: db=${r.status} live=${live}`);

@@ -11,7 +11,7 @@ export function stripe(): Stripe {
   if (_stripe) return _stripe;
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) throw new Error('STRIPE_SECRET_KEY required.');
-  _stripe = new Stripe(key, { apiVersion: '2026-04-22.dahlia' });
+  _stripe = new Stripe(key, { apiVersion: '2026-10-28.endive' });
   return _stripe;
 }
 

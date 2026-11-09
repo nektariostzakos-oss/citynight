@@ -24,9 +24,10 @@ function dbh() { return db.$client; }
 
 // As of Stripe API 2025-04-30.basil, current_period_end moved off the
 // Subscription object onto the per-item record. Read it from the first item.
+// Typed against the SDK (no cast) so a future API-version bump that moves
+// the field again fails the typecheck instead of silently writing null.
 function currentPeriodEndFor(sub: Stripe.Subscription): number | null {
-  const item = sub.items?.data?.[0] as { current_period_end?: number } | undefined;
-  return item?.current_period_end ?? null;
+  return sub.items?.data?.[0]?.current_period_end ?? null;
 }
 
 function upsertVenueSubscription(args: {
